@@ -4,8 +4,8 @@
 
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
     <!-- Commercial Brand Packages -->
-    <div class="service-card" style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
-      <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: auto;">
+    <div class="service-card" style="background: rgba(255,255,255,0.85); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: slideUp 1s ease forwards;">
+      <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover;">
       <div style="padding: 1rem 1.5rem;">
         <h3>Commercial Brand Packages<br/>(Video + Photo + Strategy)</h3>
         <p>Branded aerial and ground video production.<br/>Targeted social media ad integration (Meta, YouTube, TikTok).<br/>Lead generation, analytics, and A/B testing.</p>
@@ -14,8 +14,8 @@
     </div>
 
     <!-- Real Estate & Property Media -->
-    <div class="service-card" style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
-      <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: auto;">
+    <div class="service-card" style="background: rgba(255,255,255,0.85); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: slideUp 1.5s ease forwards;">
+      <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover;">
       <div style="padding: 1rem 1.5rem;">
         <h3>Real Estate & Property Media</h3>
         <p>Interior walkthroughs.<br/>High resolution listing photos + 3D tours.<br/>Cinematic videos for company websites.<br/>Social reels for agents.<br/>Reels for short-term rentals.</p>
@@ -24,8 +24,8 @@
     </div>
 
     <!-- Aerial Drone Photography -->
-    <div class="service-card" style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; text-align: center; transition: transform 0.3s, box-shadow 0.3s;">
-      <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: auto;">
+    <div class="service-card" style="background: rgba(255,255,255,0.85); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; animation: slideUp 2s ease forwards;">
+      <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover;">
       <div style="padding: 1rem 1.5rem;">
         <h3>Aerial Drone Photography & Videography</h3>
         <p>Cinematic commercials and promotional videos.<br/>Events and weddings.<br/>Commercial real estate and development.<br/>Mapping and surveying.</p>
@@ -44,6 +44,10 @@
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
