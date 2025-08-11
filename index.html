@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website with Sticky Header and Navigation</title>
+  <title>Website with Sleek Sticky Header</title>
   <style>
     /* Basic reset */
     * {
@@ -16,6 +16,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
+      color: #333;
     }
 
     /* Header styles */
@@ -24,21 +25,26 @@
       top: 0;
       left: 0;
       width: 100%;
-      background-color: #333;
+      background-color: rgba(0, 0, 0, 0.7); /* Transparent background */
       padding: 10px 20px;
       z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+      border-radius: 5px; /* Rounded corners */
+      transition: all 0.3s ease;
     }
 
     /* Logo styles */
     .logo img {
-      width: 150px;  /* Adjust this value as needed */
+      width: 150px;
       height: auto;
+      object-fit: contain;
+      padding: 0; /* Removed spacing around the logo */
     }
 
+    /* Hamburger Menu */
     .hamburger-menu {
       display: none;
       cursor: pointer;
@@ -53,24 +59,38 @@
       border-radius: 5px;
     }
 
+    /* Navigation Links */
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 30px;
+      font-size: 16px;
+      font-weight: 500;
     }
 
     .nav-links a {
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      transition: color 0.3s ease;
     }
 
+    .nav-links a:hover {
+      color: #e6550f; /* Hover color */
+    }
+
+    /* Contact Now Button */
     .cta-button {
       background-color: #e6550f;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 20px;
       text-decoration: none;
       border-radius: 5px;
       font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #d94e0f; /* Hover color */
     }
 
     /* Dropdown styles for mobile */
@@ -79,18 +99,25 @@
       position: absolute;
       top: 60px;
       left: 0;
-      background-color: #333;
+      background-color: rgba(0, 0, 0, 0.9);
       width: 100%;
       padding: 10px 0;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .nav-links-mobile a {
       display: block;
-      padding: 10px;
+      padding: 15px;
       color: white;
       text-decoration: none;
       font-size: 18px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .nav-links-mobile a:hover {
+      background-color: #444;
     }
 
     /* Mobile responsiveness */
