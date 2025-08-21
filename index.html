@@ -299,7 +299,159 @@
       title="Hilton Head Island Premier Locations"
     ></iframe>
   </div>
-</section><style>
+</section><!-- About & Let's Work Section with Premium Effects -->
+<section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
+
+  <!-- Left Card: About Us -->
+  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s;">
+    <div class="icon-accent">&#128247;</div> <!-- Camera Icon -->
+    <h2>About Us</h2>
+    <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
+    <a href="/about.html" class="cta-btn">Learn More</a>
+  </div>
+
+  <!-- Right Card: Let's Work / Contact -->
+  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s;">
+    <div class="icon-accent">&#128221;</div> <!-- Contact Icon -->
+    <h2>Let's Work Together</h2>
+    <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
+    <a href="/contact.html" class="cta-btn blue-btn">Contact Us</a>
+  </div>
+
+</section>
+
+<style>
+  /* Fade & Slide Animation Base with stagger delay */
+  .fade-slide {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay);
+  }
+
+  .fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Card Base Styles */
+  .card {
+    background-color: #222;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hover Lift + Shadow */
+  .card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+  }
+
+  /* Icon Accent Animation */
+  .icon-accent {
+    font-size: 2.5rem;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #e6550f;
+    opacity: 0.1;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+
+  .card:hover .icon-accent {
+    transform: translateX(-10px) translateY(-10px) rotate(10deg);
+    opacity: 0.2;
+  }
+
+  /* Gradient Sweep Overlay */
+  .animated-card::before {
+    content: '';
+    position: absolute;
+    top: -150%;
+    left: -50%;
+    width: 200%;
+    height: 300%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
+    transform: rotate(25deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+
+  .animated-card:hover::before {
+    animation: sweep 1s forwards;
+  }
+
+  @keyframes sweep {
+    0% { transform: translateX(-200%) rotate(25deg); }
+    100% { transform: translateX(200%) rotate(25deg); }
+  }
+
+  /* Headings and Text */
+  .card h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .card p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  /* Buttons */
+  .cta-btn {
+    display: inline-block;
+    background-color: #e6550f;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .blue-btn {
+    background-color: #0077ff;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    #about-letswork {
+      flex-direction: column;
+      padding: 60px 20px;
+      gap: 30px;
+    }
+
+    .card {
+      max-width: 100%;
+      padding: 30px;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-slide').forEach(card => {
+    observer.observe(card);
+  });
+</script>
+<style>
   /* Buttons Base */
   .cta-btn {
     display: inline-block;
