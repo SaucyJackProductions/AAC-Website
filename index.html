@@ -299,69 +299,8 @@
       title="Hilton Head Island Premier Locations"
     ></iframe>
   </div>
-</section><!-- About & Let's Work Section with Scroll Animations -->
-<section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
-
-  <!-- Left Card: About Us -->
-  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px;">
-    <h2>About Us</h2>
-    <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
-    <a href="/about.html" class="cta-btn">Learn More</a>
-  </div>
-
-  <!-- Right Card: Let's Work / Contact -->
-  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px;">
-    <h2>Let's Work Together</h2>
-    <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
-    <a href="/contact.html" class="cta-btn blue-btn">Contact Us</a>
-  </div>
-
-</section>
-
-<style>
-  /* Fade & Slide Animation Base */
-  .fade-slide {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  /* When the card becomes visible */
-  .fade-slide.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Card Base Styles */
-  .card {
-    background-color: #222;
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Card Hover Lift */
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 16px 30px rgba(0,0,0,0.6);
-  }
-
-  /* Card Headings and Text */
-  .card h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  .card p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-  }
-
-  /* Buttons */
+</section><style>
+  /* Buttons Base */
   .cta-btn {
     display: inline-block;
     background-color: #e6550f;
@@ -371,66 +310,63 @@
     font-weight: 600;
     text-decoration: none;
     border-radius: 5px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
 
   .blue-btn {
     background-color: #0077ff;
   }
 
-  .cta-btn:hover {
-    transform: translateY(-3px);
-  }
-
-  /* Animated Gradient Sweep */
-  .animated-card::before {
+  /* Hover Effects */
+  .cta-btn::before {
     content: '';
     position: absolute;
-    top: -150%;
+    top: -50%;
     left: -50%;
     width: 200%;
-    height: 300%;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
-    transform: rotate(25deg);
-    transition: all 0.5s ease;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
     pointer-events: none;
   }
 
-  .animated-card:hover::before {
-    animation: sweep 1s forwards;
+  .cta-btn:hover::before {
+    transform: scale(1);
   }
 
-  @keyframes sweep {
-    0% { transform: translateX(-200%) rotate(25deg); }
-    100% { transform: translateX(200%) rotate(25deg); }
+  .cta-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.3);
   }
 
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    #about-letswork {
-      flex-direction: column;
-      padding: 60px 20px;
-      gap: 30px;
-    }
+  .cta-btn:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
 
-    .card {
-      max-width: 100%;
-      padding: 30px;
-    }
+  /* Smooth Gradient Slide on Hover */
+  .cta-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+    transform: skewX(-25deg);
+    transition: all 0.6s ease;
+  }
+
+  .cta-btn:hover::after {
+    left: 125%;
   }
 </style>
-
-<script>
-  // Intersection Observer for scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 }); // Trigger when 20% of card is visible
-
-  document.querySelectorAll('.fade-slide').forEach(card => {
-    observer.observe(card);
-  });
-</script>
