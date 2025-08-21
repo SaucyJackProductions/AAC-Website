@@ -299,18 +299,18 @@
       title="Hilton Head Island Premier Locations"
     ></iframe>
   </div>
-</section><!-- About & Let's Work Section with Animated Cards -->
+</section><!-- About & Let's Work Section with Scroll Animations -->
 <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
 
   <!-- Left Card: About Us -->
-  <div class="card animated-card" style="flex: 1 1 400px; max-width: 600px;">
+  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px;">
     <h2>About Us</h2>
     <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
     <a href="/about.html" class="cta-btn">Learn More</a>
   </div>
 
   <!-- Right Card: Let's Work / Contact -->
-  <div class="card animated-card" style="flex: 1 1 400px; max-width: 600px;">
+  <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px;">
     <h2>Let's Work Together</h2>
     <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
     <a href="/contact.html" class="cta-btn blue-btn">Contact Us</a>
@@ -319,6 +319,19 @@
 </section>
 
 <style>
+  /* Fade & Slide Animation Base */
+  .fade-slide {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  /* When the card becomes visible */
+  .fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Card Base Styles */
   .card {
     background-color: #222;
@@ -407,4 +420,17 @@
   }
 </style>
 
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 }); // Trigger when 20% of card is visible
 
+  document.querySelectorAll('.fade-slide').forEach(card => {
+    observer.observe(card);
+  });
+</script>
