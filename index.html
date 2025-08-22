@@ -299,6 +299,18 @@
 </section>
 
 <style>
+/* Ensure service titles are visible */
+.service-card h3 {
+  color: #fff; /* White text for visibility */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5); /* subtle shadow for readability */
+}
+
+/* Make service descriptions brighter and readable */
+.service-card p {
+  color: #fff; /* White text */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* subtle shadow for contrast */
+}
+
 /* Card hover animations */
 .service-card:hover {
   transform: translateY(-10px) scale(1.03);
@@ -326,6 +338,7 @@
   100% { opacity: 1; transform: translateY(0); }
 }
 </style>
+
 
 <section style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
   <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
