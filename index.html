@@ -365,6 +365,7 @@
   </style>
 </body>
 </html>
+<!-- ===================== CONTACT CARD (Option A: Formspree) ===================== -->
 <section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center;">
   <form id="contactForm" novalidate
         style="width:100%; max-width: 880px; background:#151820; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden;">
@@ -468,11 +469,15 @@
     </div>
   </form>
 </section>
+
 <script>
   (function () {
     const form = document.getElementById('contactForm');
     const btn  = document.getElementById('submitBtn');
     const bar  = document.getElementById('formStatus');
+
+    // Replace with your Formspree endpoint (Project → Forms → form endpoint)
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXX';
 
     function showStatus(msg, ok=false){
       bar.style.display = 'block';
@@ -508,14 +513,16 @@
       };
 
       try {
-        // Change this URL depending on Option A or B below:
-        const res = await fetch('/api/contact', {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: JSON.stringify(payload)
         });
 
-        if (!res.ok) throw new Error('Network response was not ok');
+        if (!res.ok) throw new Error('Formspree error');
         showStatus('Thanks! We’ll get back to you ASAP.', true);
         form.reset();
       } catch (err) {
@@ -527,5 +534,7 @@
     });
   })();
 </script>
+<!-- =================== /CONTACT CARD (Option A: Formspree) =================== -->
+
 
 
