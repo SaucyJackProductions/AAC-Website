@@ -43,7 +43,7 @@
     /* Right-side actions (phone + CTA) */
     .header-actions {
       display: flex; align-items: center; gap: 16px;
-      margin-left: 16px; /* a little breathing room from nav */
+      margin-left: 16px;
     }
 
     /* Phone link */
@@ -154,6 +154,26 @@
       border-radius: 16px;
       box-shadow: 0 20px 60px rgba(0,0,0,.55);
     }
+
+    /* ==== Contact form readability polish (NEW) ==== */
+    #contact-card label { margin-bottom: 8px; display:block; }
+    #contact-card input, 
+    #contact-card select, 
+    #contact-card textarea {
+      border: 1px solid rgba(255,255,255,.16);
+      background:#11141a;
+      color:#fff;
+      border-radius:10px;
+    }
+    #contact-card textarea {
+      line-height: 1.5;
+      min-height: 180px;
+      padding:16px 18px;
+      resize: vertical;
+    }
+    @media (max-width: 768px) {
+      #contact-card form { padding-bottom: 8px; }
+    }
   </style>
 </head>
 <body>
@@ -175,7 +195,6 @@
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Services</a>
-      <!-- ✨ Changed this line -->
       <a href="#contact-card">Contact</a>
     </nav>
 
@@ -191,7 +210,6 @@
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Services</a>
-    <!-- ✨ And this line -->
     <a href="#contact-card">Contact</a>
   </div>
 
@@ -237,7 +255,7 @@
         <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🏡 Real Estate & Property Media</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4%;">
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
             Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>Cinematic videos for company websites.<br/>Social reels for agents.<br/>Reels for short-term rentals.
           </p>
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Case Study</a>
@@ -249,7 +267,7 @@
         <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🚁 Aerial Drone Photography & Videography</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4%;">
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
             Cinematic commercials and promotional videos.<br/>Events and weddings.<br/>Commercial real estate and development.<br/>Mapping and surveying.
           </p>
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Book a Consultation</a>
@@ -261,7 +279,7 @@
         <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🎉 Event Coverage (Luxury, Corporate, Wedding)</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4%;">
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
             Multi-camera setups, drone footage, printed albums, recap kits, and more.
           </p>
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Learn More</a>
@@ -273,19 +291,19 @@
         <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>📲 Social Media Content Creation & Management</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4%;">
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
             Reels, branded graphics, posting schedules, engagement tracking, and growth strategies.
           </p>
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Start Growing</a>
         </div>
       </div>
 
-      <!-- Product & E-Commerce (keep ecommerceproduct.png as requested) -->
+      <!-- Product & E-Commerce -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
         <img src="ecommerceproduct.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🛒 Product Photography & E-Commerce Media</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4%;">
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
             Studio and lifestyle shots, 360° product spins, influencer content, and website-ready media.
           </p>
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Portfolio</a>
@@ -311,7 +329,7 @@
   <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
     <!-- Left Card: About Us -->
     <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s;">
-      <div class="icon-accent">&#128247;</div> <!-- Camera Icon -->
+      <div class="icon-accent">&#128247;</div>
       <h2>About Us</h2>
       <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
       <a href="/about.html" class="cta-btn">Learn More</a>
@@ -319,7 +337,7 @@
 
     <!-- Right Card: Let's Work / Contact -->
     <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s;">
-      <div class="icon-accent">&#128221;</div> <!-- Contact Icon -->
+      <div class="icon-accent">&#128221;</div>
       <h2>Let's Work Together</h2>
       <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
       <a href="#contact-card" class="cta-btn blue-btn">Contact Us</a>
@@ -354,27 +372,26 @@
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
 
         <div style="grid-column: span 6;">
-          <label for="name" style="display:block; font-weight:600; margin-bottom:6px;">Full name *</label>
+          <label for="name">Full name *</label>
           <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+                 style="width:100%; padding:14px 16px;">
         </div>
 
         <div style="grid-column: span 6;">
-          <label for="email" style="display:block; font-weight:600; margin-bottom:6px;">Email *</label>
+          <label for="email">Email *</label>
           <input id="email" name="email" type="email" required placeholder="you@company.com"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+                 style="width:100%; padding:14px 16px;">
         </div>
 
         <div style="grid-column: span 6;">
-          <label for="phone" style="display:block; font-weight:600; margin-bottom:6px;">Phone</label>
+          <label for="phone">Phone</label>
           <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+                 style="width:100%; padding:14px 16px;">
         </div>
 
         <div style="grid-column: span 6;">
-          <label for="service" style="display:block; font-weight:600; margin-bottom:6px;">Service</label>
-          <select id="service" name="service"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+          <label for="service">Service</label>
+          <select id="service" name="service" style="width:100%; padding:14px 16px;">
             <option value="">Select a service</option>
             <option>Commercial Brand Package</option>
             <option>Real Estate & Property Media</option>
@@ -387,9 +404,8 @@
         </div>
 
         <div style="grid-column: span 6;">
-          <label for="budget" style="display:block; font-weight:600; margin-bottom:6px;">Budget</label>
-          <select id="budget" name="budget"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget" style="width:100%; padding:14px 16px;">
             <option value="">Not sure yet</option>
             <option>$500–$1,500</option>
             <option>$1,500–$3,000</option>
@@ -399,10 +415,11 @@
           </select>
         </div>
 
-        <div style="grid-column: span 12%;">
-          <label for="message" style="display:block; font-weight:600; margin-bottom:6px;">Tell us about your project *</label>
-          <textarea id="message" name="message" required rows="5" placeholder="Timeline, goals, links…"
-                    style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;"></textarea>
+        <!-- Tell us about your project (FIXED + POLISHED) -->
+        <div style="grid-column: span 12;">
+          <label for="message">Tell us about your project *</label>
+          <textarea id="message" name="message" required rows="6" placeholder="Timeline, goals, links…"
+                    style="width:100%;"></textarea>
         </div>
 
         <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
