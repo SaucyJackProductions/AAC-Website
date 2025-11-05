@@ -468,4 +468,64 @@
     </div>
   </form>
 </section>
+<script>
+  (function () {
+    const form = document.getElementById('contactForm');
+    const btn  = document.getElementById('submitBtn');
+    const bar  = document.getElementById('formStatus');
+
+    function showStatus(msg, ok=false){
+      bar.style.display = 'block';
+      bar.style.color = ok ? '#b3f7c8' : '#ffc8c8';
+      bar.textContent = msg;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot
+      if (form.website && form.website.value) return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      btn.disabled = true; btn.textContent = 'Sending…';
+      showStatus('Sending your message…');
+
+      const payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        service: form.service.value,
+        budget: form.budget.value,
+        message: form.message.value.trim(),
+        smsConsent: form.smsConsent.checked,
+        privacy: form.privacy.checked,
+        path: location.pathname,
+        ts: new Date().toISOString()
+      };
+
+      try {
+        // Change this URL depending on Option A or B below:
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Network response was not ok');
+        showStatus('Thanks! We’ll get back to you ASAP.', true);
+        form.reset();
+      } catch (err) {
+        showStatus('Oops—something went wrong. Email us at hello@yourdomain.com and we’ll jump on it.');
+        console.error(err);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Send inquiry';
+      }
+    });
+  })();
+</script>
+
 
