@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website with Sleek Sticky Header</title>
   <style>
     /* Basic reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
 
     /* Body */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding-top: 118px; /* prevent header overlap */
+      padding-top: 118px; /* Adjusted padding to prevent overlap */
     }
 
     /* Header styles */
@@ -35,7 +38,7 @@
     .hamburger-menu { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
     .hamburger-menu div { width: 30px; height: 4px; background-color: white; border-radius: 5px; }
 
-    /* Navigation Links */
+    /* Navigation Links (bigger text, as requested) */
     .nav-links { display: flex; gap: 25px; font-size: 32px; font-weight: 500; }
     .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
     .nav-links a:hover { color: #e6550f; }
@@ -43,7 +46,7 @@
     /* Right-side actions (phone + CTA) */
     .header-actions {
       display: flex; align-items: center; gap: 16px;
-      margin-left: 16px; /* a little breathing room from nav */
+      margin-left: 16px; /* breathing room from nav */
     }
 
     /* Phone link */
@@ -117,10 +120,10 @@
       <a href="#">Contact</a>
     </nav>
 
-    <!-- Phone + Get in touch -->
+    <!-- Phone + Get in touch (now scrolls to the form) -->
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
-      <a href="/get-in-touch.html" class="cta-button cta-get" aria-label="Go to Get in touch page">Get in touch</a>
+      <a href="#contact-card" class="cta-button cta-get" aria-label="Jump to Get in touch form">Get in touch</a>
     </div>
   </header>
 
@@ -141,8 +144,9 @@
     });
   </script>
 
-  <!-- =============== Services Section =============== -->
+  <!-- =============== Services Section (unchanged) =============== -->
   <section class="services" style="padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif;">
+    <!-- Headline & Subheading -->
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.5s ease-in-out;">
         Media Services Designed to Deliver Results
@@ -152,7 +156,9 @@
       </p>
     </div>
 
+    <!-- Service Cards Grid -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+      <!-- Card Template -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1s ease forwards;">
         <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -166,6 +172,7 @@
         </div>
       </div>
 
+      <!-- Real Estate -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1.5s ease forwards;">
         <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -177,6 +184,7 @@
         </div>
       </div>
 
+      <!-- Drone Photography -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2s ease forwards;">
         <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -188,6 +196,7 @@
         </div>
       </div>
 
+      <!-- Event Coverage -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2.5s ease forwards;">
         <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -199,6 +208,7 @@
         </div>
       </div>
 
+      <!-- Social Media -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3s ease forwards;">
         <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -210,6 +220,7 @@
         </div>
       </div>
 
+      <!-- Product & E-Commerce (keep this asset for future) -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
         <img src="ecommerceproduct.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -239,7 +250,6 @@
     @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
   </style>
 
-  <!-- Full-width video -->
   <section style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
       <iframe
@@ -277,19 +287,12 @@
     .fade-slide { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay); }
     .fade-slide.visible { opacity: 1; transform: translateY(0); }
 
-    /* Card Base Styles */
     .card { background-color: #222; border-radius: 12px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
-    /* Hover Lift + Shadow */
     .card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
 
-    /* Icon Accent Animation */
-    .icon-accent {
-      font-size: 2.5rem; position: absolute; top: 20px; right: 20px;
-      color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease;
-    }
+    .icon-accent { font-size: 2.5rem; position: absolute; top: 20px; right: 20px; color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease; }
     .card:hover .icon-accent { transform: translateX(-10px) translateY(-10px) rotate(10deg); opacity: 0.2; }
 
-    /* Gradient Sweep Overlay */
     .animated-card::before {
       content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 300%;
       background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
@@ -298,16 +301,13 @@
     .animated-card:hover::before { animation: sweep 1s forwards; }
     @keyframes sweep { 0% { transform: translateX(-200%) rotate(25deg); } 100% { transform: translateX(200%) rotate(25deg); } }
 
-    /* Headings and Text */
     .card h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; }
     .card p { font-size: 1.2rem; margin-bottom: 30px; }
 
-    /* Buttons */
-    .cta-btn { display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
+    .cta-btn { display: inline-block; background-color: #e6550f; color: #fff; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
     .blue-btn { background-color: #0077ff; }
     .cta-btn:hover { transform: translateY(-3px); }
 
-    /* Responsive Adjustments */
     @media (max-width: 768px) {
       #about-letswork { flex-direction: column; padding: 60px 20px; gap: 30px; }
       .card { max-width: 100%; padding: 30px; }
@@ -330,7 +330,7 @@
   </script>
 
   <style>
-    /* Buttons Base (about section) */
+    /* Buttons Base (for About cards) */
     .cta-btn {
       display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600;
       text-decoration: none; border-radius: 5px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
@@ -356,7 +356,7 @@
   </style>
 
   <!-- ===================== CONTACT CARD (Formspree) ===================== -->
-  <section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center;">
+  <section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center; scroll-margin-top: 130px;">
     <form id="contactForm" novalidate
           style="width:100%; max-width: 880px; background:#151820; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden;">
       <!-- Header -->
@@ -459,7 +459,6 @@
       </div>
     </form>
   </section>
-  <!-- =================== /CONTACT CARD (Formspree) =================== -->
 
   <script>
     (function () {
@@ -467,7 +466,7 @@
       const btn  = document.getElementById('submitBtn');
       const bar  = document.getElementById('formStatus');
 
-      // ✅ Your live Formspree endpoint
+      // Your Formspree endpoint:
       const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqagrqzr';
 
       function showStatus(msg, ok=false){
@@ -499,7 +498,6 @@
           message: form.message.value.trim(),
           smsConsent: form.smsConsent.checked,
           privacy: form.privacy.checked,
-          to: 'aboveallcinematics@gmail.com',   // (optional metadata; notifications are set in Formspree)
           path: location.pathname,
           ts: new Date().toISOString()
         };
@@ -526,11 +524,7 @@
       });
     })();
   </script>
-
-  <!-- Keep ecommerceproduct.png in the main code thread for future use -->
-  <link rel="preload" as="image" href="ecommerceproduct.png">
-  <div class="asset-stash" aria-hidden="true"><img src="ecommerceproduct.png" alt="" loading="lazy"></div>
-  <style>.asset-stash { display: none; }</style>
+  <!-- =================== /CONTACT CARD (Formspree) =================== -->
 
 </body>
 </html>
