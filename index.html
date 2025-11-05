@@ -365,3 +365,107 @@
   </style>
 </body>
 </html>
+<section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center;">
+  <form id="contactForm" novalidate
+        style="width:100%; max-width: 880px; background:#151820; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden;">
+    <!-- Header -->
+    <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
+      <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
+      <div>
+        <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
+        <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px;">
+          Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px;">
+      <!-- Honeypot -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
+
+      <div style="grid-column: span 6;">
+        <label for="name" style="display:block; font-weight:600; margin-bottom:6px;">Full name *</label>
+        <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
+               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+      </div>
+
+      <div style="grid-column: span 6;">
+        <label for="email" style="display:block; font-weight:600; margin-bottom:6px;">Email *</label>
+        <input id="email" name="email" type="email" required placeholder="you@company.com"
+               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+      </div>
+
+      <div style="grid-column: span 6;">
+        <label for="phone" style="display:block; font-weight:600; margin-bottom:6px;">Phone</label>
+        <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
+               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+      </div>
+
+      <div style="grid-column: span 6;">
+        <label for="service" style="display:block; font-weight:600; margin-bottom:6px;">Service</label>
+        <select id="service" name="service"
+                style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+          <option value="">Select a service</option>
+          <option>Commercial Brand Package</option>
+          <option>Real Estate & Property Media</option>
+          <option>Aerial Drone Photo/Video</option>
+          <option>Event Coverage</option>
+          <option>Social Media Content & Mgmt</option>
+          <option>Product Photography / E-Com</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div style="grid-column: span 6;">
+        <label for="budget" style="display:block; font-weight:600; margin-bottom:6px;">Budget</label>
+        <select id="budget" name="budget"
+                style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+          <option value="">Not sure yet</option>
+          <option>$500–$1,500</option>
+          <option>$1,500–$3,000</option>
+          <option>$3,000–$7,500</option>
+          <option>$7,500–$15,000</option>
+          <option>$15,000+</option>
+        </select>
+      </div>
+
+      <div style="grid-column: span 12;">
+        <label for="message" style="display:block; font-weight:600; margin-bottom:6px;">Tell us about your project *</label>
+        <textarea id="message" name="message" required rows="5" placeholder="Timeline, goals, links…"
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;"></textarea>
+      </div>
+
+      <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
+        <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
+        <label for="smsConsent" style="color:#cfd3dc;">
+          I agree to be contacted by phone or SMS about my inquiry.
+        </label>
+      </div>
+
+      <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
+        <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
+        <label for="privacy" style="color:#cfd3dc;">
+          I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.
+        </label>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <button id="submitBtn" type="submit"
+              style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
+        Send inquiry
+      </button>
+      <a href="mailto:hello@yourdomain.com"
+         style="color:#cfd3dc; text-decoration:none;">Or email us directly → hello@yourdomain.com</a>
+      <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px;">Secure • We never sell your data</span>
+    </div>
+
+    <!-- Status Bar -->
+    <div id="formStatus" aria-live="polite"
+         style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc;">
+    </div>
+  </form>
+</section>
+
