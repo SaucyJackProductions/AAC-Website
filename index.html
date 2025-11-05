@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Website with Sleek Sticky Header</title>
   <style>
     /* Basic reset */
@@ -13,7 +13,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding-top: 118px; /* Adjusted padding to prevent overlap */
+      padding-top: 118px; /* prevent header overlap */
     }
 
     /* Header styles */
@@ -141,9 +141,8 @@
     });
   </script>
 
-  <!-- =============== Services Section (unchanged) =============== -->
+  <!-- =============== Services Section =============== -->
   <section class="services" style="padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif;">
-    <!-- Headline & Subheading -->
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.5s ease-in-out;">
         Media Services Designed to Deliver Results
@@ -153,9 +152,7 @@
       </p>
     </div>
 
-    <!-- Service Cards Grid -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-      <!-- Card Template -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1s ease forwards;">
         <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -169,7 +166,6 @@
         </div>
       </div>
 
-      <!-- Real Estate -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1.5s ease forwards;">
         <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -181,7 +177,6 @@
         </div>
       </div>
 
-      <!-- Drone Photography -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2s ease forwards;">
         <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -193,7 +188,6 @@
         </div>
       </div>
 
-      <!-- Event Coverage -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2.5s ease forwards;">
         <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -205,7 +199,6 @@
         </div>
       </div>
 
-      <!-- Social Media -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3s ease forwards;">
         <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -217,7 +210,6 @@
         </div>
       </div>
 
-      <!-- Product & E-Commerce -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
         <img src="ecommerceproduct.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -247,6 +239,7 @@
     @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
   </style>
 
+  <!-- Full-width video -->
   <section style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
       <iframe
@@ -337,14 +330,13 @@
   </script>
 
   <style>
-    /* Buttons Base */
+    /* Buttons Base (about section) */
     .cta-btn {
       display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600;
       text-decoration: none; border-radius: 5px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;
     }
     .blue-btn { background-color: #0077ff; }
 
-    /* Hover Effects */
     .cta-btn::before {
       content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
       background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
@@ -354,7 +346,6 @@
     .cta-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.3); }
     .cta-btn:active { transform: translateY(0) scale(0.98); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-    /* Smooth Gradient Slide on Hover */
     .cta-btn span { position: relative; z-index: 1; }
     .cta-btn::after {
       content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
@@ -363,178 +354,183 @@
     }
     .cta-btn:hover::after { left: 125%; }
   </style>
+
+  <!-- ===================== CONTACT CARD (Formspree) ===================== -->
+  <section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center;">
+    <form id="contactForm" novalidate
+          style="width:100%; max-width: 880px; background:#151820; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden;">
+      <!-- Header -->
+      <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
+        <div>
+          <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
+          <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px;">
+            Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px;">
+        <!-- Honeypot -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
+
+        <div style="grid-column: span 6;">
+          <label for="name" style="display:block; font-weight:600; margin-bottom:6px;">Full name *</label>
+          <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+        </div>
+
+        <div style="grid-column: span 6;">
+          <label for="email" style="display:block; font-weight:600; margin-bottom:6px;">Email *</label>
+          <input id="email" name="email" type="email" required placeholder="you@company.com"
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+        </div>
+
+        <div style="grid-column: span 6;">
+          <label for="phone" style="display:block; font-weight:600; margin-bottom:6px;">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+        </div>
+
+        <div style="grid-column: span 6;">
+          <label for="service" style="display:block; font-weight:600; margin-bottom:6px;">Service</label>
+          <select id="service" name="service"
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+            <option value="">Select a service</option>
+            <option>Commercial Brand Package</option>
+            <option>Real Estate & Property Media</option>
+            <option>Aerial Drone Photo/Video</option>
+            <option>Event Coverage</option>
+            <option>Social Media Content & Mgmt</option>
+            <option>Product Photography / E-Com</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div style="grid-column: span 6;">
+          <label for="budget" style="display:block; font-weight:600; margin-bottom:6px;">Budget</label>
+          <select id="budget" name="budget"
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+            <option value="">Not sure yet</option>
+            <option>$500–$1,500</option>
+            <option>$1,500–$3,000</option>
+            <option>$3,000–$7,500</option>
+            <option>$7,500–$15,000</option>
+            <option>$15,000+</option>
+          </select>
+        </div>
+
+        <div style="grid-column: span 12;">
+          <label for="message" style="display:block; font-weight:600; margin-bottom:6px;">Tell us about your project *</label>
+          <textarea id="message" name="message" required rows="5" placeholder="Timeline, goals, links…"
+                    style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;"></textarea>
+        </div>
+
+        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
+          <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
+          <label for="smsConsent" style="color:#cfd3dc;">
+            I agree to be contacted by phone or SMS about my inquiry.
+          </label>
+        </div>
+
+        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
+          <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
+          <label for="privacy" style="color:#cfd3dc;">
+            I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.
+          </label>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button id="submitBtn" type="submit"
+                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
+          Send inquiry
+        </button>
+        <a href="mailto:aboveallcinematics@gmail.com"
+           style="color:#cfd3dc; text-decoration:none;">Or email us directly → aboveallcinematics@gmail.com</a>
+        <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px;">Secure • We never sell your data</span>
+      </div>
+
+      <!-- Status Bar -->
+      <div id="formStatus" aria-live="polite"
+           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc;">
+      </div>
+    </form>
+  </section>
+  <!-- =================== /CONTACT CARD (Formspree) =================== -->
+
+  <script>
+    (function () {
+      const form = document.getElementById('contactForm');
+      const btn  = document.getElementById('submitBtn');
+      const bar  = document.getElementById('formStatus');
+
+      // ✅ Your live Formspree endpoint
+      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqagrqzr';
+
+      function showStatus(msg, ok=false){
+        bar.style.display = 'block';
+        bar.style.color = ok ? '#b3f7c8' : '#ffc8c8';
+        bar.textContent = msg;
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Honeypot
+        if (form.website && form.website.value) return;
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        btn.disabled = true; btn.textContent = 'Sending…';
+        showStatus('Sending your message…');
+
+        const payload = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          service: form.service.value,
+          budget: form.budget.value,
+          message: form.message.value.trim(),
+          smsConsent: form.smsConsent.checked,
+          privacy: form.privacy.checked,
+          to: 'aboveallcinematics@gmail.com',   // (optional metadata; notifications are set in Formspree)
+          path: location.pathname,
+          ts: new Date().toISOString()
+        };
+
+        try {
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error('Formspree error');
+          showStatus('Thanks! We’ll get back to you ASAP.', true);
+          form.reset();
+        } catch (err) {
+          showStatus('Oops—something went wrong. Email us at aboveallcinematics@gmail.com and we’ll jump on it.');
+          console.error(err);
+        } finally {
+          btn.disabled = false; btn.textContent = 'Send inquiry';
+        }
+      });
+    })();
+  </script>
+
+  <!-- Keep ecommerceproduct.png in the main code thread for future use -->
+  <link rel="preload" as="image" href="ecommerceproduct.png">
+  <div class="asset-stash" aria-hidden="true"><img src="ecommerceproduct.png" alt="" loading="lazy"></div>
+  <style>.asset-stash { display: none; }</style>
+
 </body>
 </html>
-<!-- ===================== CONTACT CARD (Option A: Formspree) ===================== -->
-<section id="contact-card" style="padding: 80px 20px; background:#0f1115; color:#fff; display:flex; justify-content:center;">
-  <form id="contactForm" novalidate
-        style="width:100%; max-width: 880px; background:#151820; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:hidden;">
-    <!-- Header -->
-    <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
-      <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
-      <div>
-        <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-        <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px;">
-          Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
-        </p>
-      </div>
-    </div>
-
-    <!-- Body -->
-    <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px;">
-      <!-- Honeypot -->
-      <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
-
-      <div style="grid-column: span 6;">
-        <label for="name" style="display:block; font-weight:600; margin-bottom:6px;">Full name *</label>
-        <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-      </div>
-
-      <div style="grid-column: span 6;">
-        <label for="email" style="display:block; font-weight:600; margin-bottom:6px;">Email *</label>
-        <input id="email" name="email" type="email" required placeholder="you@company.com"
-               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-      </div>
-
-      <div style="grid-column: span 6;">
-        <label for="phone" style="display:block; font-weight:600; margin-bottom:6px;">Phone</label>
-        <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-               style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-      </div>
-
-      <div style="grid-column: span 6;">
-        <label for="service" style="display:block; font-weight:600; margin-bottom:6px;">Service</label>
-        <select id="service" name="service"
-                style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-          <option value="">Select a service</option>
-          <option>Commercial Brand Package</option>
-          <option>Real Estate & Property Media</option>
-          <option>Aerial Drone Photo/Video</option>
-          <option>Event Coverage</option>
-          <option>Social Media Content & Mgmt</option>
-          <option>Product Photography / E-Com</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div style="grid-column: span 6;">
-        <label for="budget" style="display:block; font-weight:600; margin-bottom:6px;">Budget</label>
-        <select id="budget" name="budget"
-                style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-          <option value="">Not sure yet</option>
-          <option>$500–$1,500</option>
-          <option>$1,500–$3,000</option>
-          <option>$3,000–$7,500</option>
-          <option>$7,500–$15,000</option>
-          <option>$15,000+</option>
-        </select>
-      </div>
-
-      <div style="grid-column: span 12;">
-        <label for="message" style="display:block; font-weight:600; margin-bottom:6px;">Tell us about your project *</label>
-        <textarea id="message" name="message" required rows="5" placeholder="Timeline, goals, links…"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;"></textarea>
-      </div>
-
-      <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-        <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
-        <label for="smsConsent" style="color:#cfd3dc;">
-          I agree to be contacted by phone or SMS about my inquiry.
-        </label>
-      </div>
-
-      <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-        <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
-        <label for="privacy" style="color:#cfd3dc;">
-          I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.
-        </label>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-      <button id="submitBtn" type="submit"
-              style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
-        Send inquiry
-      </button>
-      <a href="mailto:hello@yourdomain.com"
-         style="color:#cfd3dc; text-decoration:none;">Or email us directly → hello@yourdomain.com</a>
-      <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px;">Secure • We never sell your data</span>
-    </div>
-
-    <!-- Status Bar -->
-    <div id="formStatus" aria-live="polite"
-         style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc;">
-    </div>
-  </form>
-</section>
-
-<script>
-  (function () {
-    const form = document.getElementById('contactForm');
-    const btn  = document.getElementById('submitBtn');
-    const bar  = document.getElementById('formStatus');
-
-    // Replace with your Formspree endpoint (Project → Forms → form endpoint)
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqagrqzr';
-
-    function showStatus(msg, ok=false){
-      bar.style.display = 'block';
-      bar.style.color = ok ? '#b3f7c8' : '#ffc8c8';
-      bar.textContent = msg;
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Honeypot
-      if (form.website && form.website.value) return;
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      btn.disabled = true; btn.textContent = 'Sending…';
-      showStatus('Sending your message…');
-
-      const payload = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-        service: form.service.value,
-        budget: form.budget.value,
-        message: form.message.value.trim(),
-        smsConsent: form.smsConsent.checked,
-        privacy: form.privacy.checked,
-        path: location.pathname,
-        ts: new Date().toISOString()
-      };
-
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (!res.ok) throw new Error('Formspree error');
-        showStatus('Thanks! We’ll get back to you ASAP.', true);
-        form.reset();
-      } catch (err) {
-        showStatus('Oops—something went wrong. Email us at hello@yourdomain.com and we’ll jump on it.');
-        console.error(err);
-      } finally {
-        btn.disabled = false; btn.textContent = 'Send inquiry';
-      }
-    });
-  })();
-</script>
-<!-- =================== /CONTACT CARD (Option A: Formspree) =================== -->
-
-
-
