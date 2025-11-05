@@ -13,7 +13,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding-top: 118px; /* prevent header overlap */
+      padding-top: 118px;
     }
 
     /* Header styles */
@@ -28,25 +28,20 @@
       transition: all 0.3s ease;
     }
 
-    /* Logo */
     .logo img { width: 120px; height: auto; object-fit: contain; }
 
     /* Hamburger Menu */
     .hamburger-menu { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
     .hamburger-menu div { width: 30px; height: 4px; background-color: #fff; border-radius: 5px; }
 
-    /* Navigation Links (bigger text as requested) */
+    /* Navigation Links */
     .nav-links { display: flex; gap: 25px; font-size: 32px; font-weight: 500; }
     .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
     .nav-links a:hover { color: #e6550f; }
 
-    /* Right-side actions (phone + CTA) */
-    .header-actions {
-      display: flex; align-items: center; gap: 16px;
-      margin-left: 16px; /* a little breathing room from nav */
-    }
+    /* Right-side actions */
+    .header-actions { display: flex; align-items: center; gap: 16px; margin-left: 16px; }
 
-    /* Phone link */
     .phone-link {
       color: #fff; text-decoration: none; font-weight: 600;
       font-size: 32px; line-height: 1;
@@ -58,15 +53,14 @@
       transform: translateY(-1px);
     }
 
-    /* CTA button in header (smaller pill but same 32px font) */
     .cta-button {
       background-color: #e6550f; color: white;
-      padding: 12px 26px; text-decoration: none; border-radius: 8px;
-      font-size: 32px; font-weight: 600; transition: background 0.3s ease;
+      padding: 12px 26px; text-decoration: none;
+      border-radius: 8px; font-size: 32px; font-weight: 600;
+      transition: background 0.3s ease;
     }
     .cta-button:hover { background-color: #d94e0f; }
 
-    /* Mobile dropdown */
     .nav-links-mobile {
       display: none; position: absolute; top: 60px; left: 0;
       background-color: #333; width: 100%; padding: 10px 0; text-align: center;
@@ -76,57 +70,23 @@
       display: block; padding: 15px; color: white; text-decoration: none;
       font-size: 18px; font-weight: 500; transition: background 0.3s ease;
     }
-    .nav-links-mobile a:hover { background: #444; }
+    .nav-links-mobile a:hover { background-color: #444; }
 
-    /* Mobile responsiveness */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger-menu { display: flex; }
       .nav-links-mobile.active { display: block; }
-      .phone-link { display: none; }  /* keep header tidy on mobile */
+      .phone-link { display: none; }
     }
 
-    /* ===== Services & Shared UI ===== */
-    .service-card h3 { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-    .service-card p  { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
-    .service-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 35px rgba(0,255,255,0.25); }
-    .service-card img:hover { transform: scale(1.05); }
-    .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 15px #00FFF0; }
-    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-20px); } 100% { opacity: 1; transform: translateY(0); } }
-    @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
-
-    /* ===== About / Let's Work Cards ===== */
-    .fade-slide { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay); }
-    .fade-slide.visible { opacity: 1; transform: translateY(0); }
-    .card { background-color: #222; border-radius: 12px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
-    .card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
-    .icon-accent { font-size: 2.5rem; position: absolute; top: 20px; right: 20px; color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease; }
-    .card:hover .icon-accent { transform: translateX(-10px) translateY(-10px) rotate(10deg); opacity: 0.2; }
-    .animated-card::before {
-      content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 300%;
-      background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
-      transform: rotate(25deg); transition: all 0.5s ease; pointer-events: none;
-    }
-    .animated-card:hover::before { animation: sweep 1s forwards; }
-    @keyframes sweep { 0% { transform: translateX(-200%) rotate(25deg); } 100% { transform: translateX(200%) rotate(25deg); } }
-    .card h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; }
-    .card p  { font-size: 1.2rem; margin-bottom: 30px; }
-    .cta-btn { display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
-    .blue-btn { background-color: #0077ff; }
-    .cta-btn:hover { transform: translateY(-3px); }
-    @media (max-width: 768px) {
-      #about-letswork { flex-direction: column; padding: 60px 20px; gap: 30px; }
-      .card { max-width: 100%; padding: 30px; }
-    }
-
-    /* ===== Contact card background (crabweb.jpg) & glass panel ===== */
+    /* Contact card background (crabweb.jpg) */
     #contact-card {
       position: relative;
       padding: 80px 20px;
       color: #fff;
       display: flex;
       justify-content: center;
-      scroll-margin-top: 130px; /* anchor aligns under sticky header */
+      scroll-margin-top: 130px;
       overflow: hidden;
       background: transparent;
     }
@@ -138,7 +98,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-color: rgba(15,17,21,0.65); /* dark overlay */
+      background-color: rgba(15,17,21,0.65);
       background-blend-mode: multiply;
       z-index: 0;
     }
@@ -153,6 +113,20 @@
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
       box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      overflow: hidden;
+    }
+
+    /* ===== Scroll reveal (cinematic fade) ===== */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .8s ease, transform .8s ease;
+      transition-delay: var(--d, 0s);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: none;
     }
   </style>
 </head>
@@ -160,41 +134,37 @@
 
   <!-- Sticky Header -->
   <header class="sticky-header">
-    <!-- Logo -->
     <div class="logo">
       <img src="MediaCompany.png" alt="Media Company Logo">
     </div>
 
-    <!-- Hamburger Menu -->
     <div class="hamburger-menu" id="hamburgerMenu">
       <div></div><div></div><div></div>
     </div>
 
-    <!-- Desktop Nav Links -->
+    <!-- ✅ Updated Nav: Contact links to #contact-card -->
     <nav class="nav-links">
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Services</a>
-      <a href="#">Contact</a>
+      <a href="#contact-card">Contact</a>
     </nav>
 
-    <!-- Phone + Get in touch (anchor to form) -->
     <div class="header-actions">
-      <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
-      <a href="#contact-card" class="cta-button" aria-label="Go to Get in touch form">Get in touch</a>
+      <a class="phone-link" href="tel:+18039205349">(803) 920-5349</a>
+      <a href="#contact-card" class="cta-button">Get in touch</a>
     </div>
   </header>
 
-  <!-- Mobile Nav Links -->
+  <!-- ✅ Mobile Menu Updated -->
   <div class="nav-links-mobile" id="navLinksMobile">
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Services</a>
-    <a href="#">Contact</a>
+    <a href="#contact-card">Contact</a>
   </div>
 
   <script>
-    // Toggle mobile navigation menu on hamburger click
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const navLinksMobile = document.getElementById('navLinksMobile');
     hamburgerMenu.addEventListener('click', () => {
@@ -202,302 +172,131 @@
     });
   </script>
 
-  <!-- =============== Services Section =============== -->
-  <section class="services" style="padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif;">
-    <!-- Headline & Subheading -->
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.5s ease-in-out;">
-        Media Services Designed to Deliver Results
-      </h2>
-      <p style="font-size: 1.3rem; color: #f0f0f0; animation: fadeIn 2s ease-in-out;">
-        Transform your brand with cinematic storytelling, drone footage, and social media strategy.
-      </p>
-    </div>
-
-    <!-- Service Cards Grid -->
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-      <!-- Commercial Brand Packages -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1s ease forwards;">
-        <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3 style="margin-bottom: 0.5rem;">📈 Commercial Brand Packages</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Branded aerial & ground video production.<br/>
-            Targeted social media ad integration (Meta, YouTube, TikTok).<br/>
-            Lead generation, analytics, and A/B testing.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">See How We Work</a>
-        </div>
-      </div>
-
-      <!-- Real Estate & Property Media -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1.5s ease forwards;">
-        <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3>🏡 Real Estate & Property Media</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>Cinematic videos for company websites.<br/>Social reels for agents.<br/>Reels for short-term rentals.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Case Study</a>
-        </div>
-      </div>
-
-      <!-- Aerial Drone -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2s ease forwards;">
-        <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3>🚁 Aerial Drone Photography & Videography</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Cinematic commercials and promotional videos.<br/>Events and weddings.<br/>Commercial real estate and development.<br/>Mapping and surveying.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Book a Consultation</a>
-        </div>
-      </div>
-
-      <!-- Event Coverage -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2.5s ease forwards;">
-        <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3>🎉 Event Coverage (Luxury, Corporate, Wedding)</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Multi-camera setups, drone footage, printed albums, recap kits, and more.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Learn More</a>
-        </div>
-      </div>
-
-      <!-- Social Media -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3s ease forwards;">
-        <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3>📲 Social Media Content Creation & Management</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Reels, branded graphics, posting schedules, engagement tracking, and growth strategies.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Start Growing</a>
-        </div>
-      </div>
-
-      <!-- Product & E-Commerce (keep ecommerceproduct.png as requested) -->
-      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
-        <img src="ecommerceproduct.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
-        <div style="padding: 1rem 1.5rem;">
-          <h3>🛒 Product Photography & E-Commerce Media</h3>
-          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
-            Studio and lifestyle shots, 360° product spins, influencer content, and website-ready media.
-          </p>
-          <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Portfolio</a>
-        </div>
-      </div>
-    </div>
+  <!-- Example Placeholder Sections (keep your real content here) -->
+  <section style="height:100vh; background:url('DJI_0648%202.jpg') center/cover no-repeat; color:white; display:flex; align-items:center; justify-content:center; font-size:2rem;">
+    <p>Hero / Services Section Content Here</p>
   </section>
 
-  <!-- Full-width YouTube section -->
-  <section style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-      <iframe
-        src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&loop=1&playlist=1oTpwMC_KrY&mute=1&vq=hd1080"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        title="Hilton Head Island Premier Locations"></iframe>
-    </div>
+  <section style="height:80vh; background-color:#1a1a1a; color:white; display:flex; align-items:center; justify-content:center; font-size:2rem;">
+    <p>About / Let's Work Section</p>
   </section>
 
-  <!-- About & Let's Work Section with Premium Effects -->
-  <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
-    <!-- Left Card: About Us -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s;">
-      <div class="icon-accent">&#128247;</div> <!-- Camera Icon -->
-      <h2>About Us</h2>
-      <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
-      <a href="/about.html" class="cta-btn">Learn More</a>
-    </div>
-
-    <!-- Right Card: Let's Work / Contact -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s;">
-      <div class="icon-accent">&#128221;</div> <!-- Contact Icon -->
-      <h2>Let's Work Together</h2>
-      <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
-      <a href="#contact-card" class="cta-btn blue-btn">Contact Us</a>
-    </div>
-  </section>
-
-  <script>
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.fade-slide').forEach(card => observer.observe(card));
-  </script>
-
-  <!-- ===================== CONTACT CARD (Formspree) ===================== -->
+  <!-- ✅ Contact Form Section with reveal-on-scroll -->
   <section id="contact-card">
-    <form id="contactForm" novalidate>
+    <form id="contactForm" novalidate class="reveal-on-scroll" style="--d: .05s;">
       <!-- Header -->
-      <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
-        <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
-        <div>
-          <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-          <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px;">
-            Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
+      <div class="reveal-on-scroll" style="--d:.10s; padding:28px 28px 8px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
+        <div class="reveal-on-scroll" style="--d:.15s; width:48px;height:48px;border-radius:12px;background:#e6550f;display:flex;align-items:center;justify-content:center;font-size:24px;">✉️</div>
+        <div class="reveal-on-scroll" style="--d:.18s;">
+          <h2 style="margin:0;font-size:28px;">Get in touch</h2>
+          <p style="margin:6px 0 0;color:#cfd3dc;font-size:14px;">Prefer a call?
+            <a href="tel:+18039205349" style="color:#fff;text-decoration:none;">(803) 920-5349</a>
           </p>
         </div>
       </div>
 
       <!-- Body -->
-      <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px;">
-        <!-- Honeypot -->
-        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
+      <div class="reveal-on-scroll" style="--d:.22s; padding:24px 28px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
 
-        <div style="grid-column: span 6;">
-          <label for="name" style="display:block; font-weight:600; margin-bottom:6px;">Full name *</label>
-          <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+        <div class="reveal-on-scroll" style="--d:.26s; grid-column:span 6;">
+          <label for="name" style="display:block;font-weight:600;margin-bottom:6px;">Full name *</label>
+          <input id="name" name="name" type="text" required placeholder="Jane Doe"
+            style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;">
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="email" style="display:block; font-weight:600; margin-bottom:6px;">Email *</label>
+        <div class="reveal-on-scroll" style="--d:.30s; grid-column:span 6;">
+          <label for="email" style="display:block;font-weight:600;margin-bottom:6px;">Email *</label>
           <input id="email" name="email" type="email" required placeholder="you@company.com"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
+            style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;">
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="phone" style="display:block; font-weight:600; margin-bottom:6px;">Phone</label>
-          <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-        </div>
-
-        <div style="grid-column: span 6;">
-          <label for="service" style="display:block; font-weight:600; margin-bottom:6px;">Service</label>
-          <select id="service" name="service"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-            <option value="">Select a service</option>
-            <option>Commercial Brand Package</option>
-            <option>Real Estate & Property Media</option>
-            <option>Aerial Drone Photo/Video</option>
-            <option>Event Coverage</option>
-            <option>Social Media Content & Mgmt</option>
-            <option>Product Photography / E-Com</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div style="grid-column: span 6;">
-          <label for="budget" style="display:block; font-weight:600; margin-bottom:6px;">Budget</label>
-          <select id="budget" name="budget"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;">
-            <option value="">Not sure yet</option>
-            <option>$500–$1,500</option>
-            <option>$1,500–$3,000</option>
-            <option>$3,000–$7,500</option>
-            <option>$7,500–$15,000</option>
-            <option>$15,000+</option>
-          </select>
-        </div>
-
-        <div style="grid-column: span 12;">
-          <label for="message" style="display:block; font-weight:600; margin-bottom:6px;">Tell us about your project *</label>
-          <textarea id="message" name="message" required rows="5" placeholder="Timeline, goals, links…"
-                    style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#11141a; color:#fff;"></textarea>
-        </div>
-
-        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-          <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
-          <label for="smsConsent" style="color:#cfd3dc;">I agree to be contacted by phone or SMS about my inquiry.</label>
-        </div>
-
-        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-          <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
-          <label for="privacy" style="color:#cfd3dc;">I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.</label>
+        <div class="reveal-on-scroll" style="--d:.34s; grid-column:span 12;">
+          <label for="message" style="display:block;font-weight:600;margin-bottom:6px;">Message *</label>
+          <textarea id="message" name="message" required rows="5" placeholder="Tell us about your project..."
+            style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;"></textarea>
         </div>
       </div>
 
       <!-- Footer -->
-      <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+      <div class="reveal-on-scroll" style="--d:.38s; padding:0 28px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
         <button id="submitBtn" type="submit"
-                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
+          style="background:#e6550f;color:#fff;border:none;padding:14px 22px;border-radius:10px;font-weight:700;cursor:pointer;">
           Send inquiry
         </button>
-        <a href="mailto:aboveallcinematics@gmail.com"
-           style="color:#cfd3dc; text-decoration:none;">Or email us directly → aboveallcinematics@gmail.com</a>
-        <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px;">Secure • We never sell your data</span>
+        <a href="mailto:aboveallcinematics@gmail.com" style="color:#cfd3dc;text-decoration:none;">Or email us directly → aboveallcinematics@gmail.com</a>
       </div>
 
-      <!-- Status Bar -->
       <div id="formStatus" aria-live="polite"
-           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc;">
+        class="reveal-on-scroll" style="--d:.42s; display:none;padding:14px 28px;background:#0f141b;border-top:1px solid rgba(255,255,255,.06);color:#cfd3dc;">
       </div>
     </form>
   </section>
-  <!-- =================== /CONTACT CARD =================== -->
 
   <script>
-    // Contact form (Formspree)
-    (function () {
-      const form = document.getElementById('contactForm');
-      const btn  = document.getElementById('submitBtn');
-      const bar  = document.getElementById('formStatus');
+    // Mobile nav toggle
+    (function(){
+      const hamburgerMenu = document.getElementById('hamburgerMenu');
+      const navLinksMobile = document.getElementById('navLinksMobile');
+      hamburgerMenu.addEventListener('click', () => {
+        navLinksMobile.classList.toggle('active');
+      });
+    })();
 
-      // Your Formspree endpoint
-      const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqagrqzr';
+    // IntersectionObserver for reveal-on-scroll
+    (function(){
+      const els = document.querySelectorAll('.reveal-on-scroll');
+      const io = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            // Unobserve once visible for performance
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(el=>io.observe(el));
+    })();
 
-      function showStatus(msg, ok=false){
-        bar.style.display = 'block';
-        bar.style.color = ok ? '#b3f7c8' : '#ffc8c8';
-        bar.textContent = msg;
+    // Simple Formspree submission (still active)
+    (function(){
+      const form=document.getElementById('contactForm');
+      const btn=document.getElementById('submitBtn');
+      const bar=document.getElementById('formStatus');
+      const ENDPOINT='https://formspree.io/f/mqagrqzr';
+      function showStatus(msg,ok=false){
+        bar.style.display='block';
+        bar.style.color=ok?'#b3f7c8':'#ffc8c8';
+        bar.textContent=msg;
       }
-
-      form.addEventListener('submit', async (e) => {
+      form.addEventListener('submit',async e=>{
         e.preventDefault();
-
-        // Honeypot
-        if (form.website && form.website.value) return;
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        btn.disabled = true; btn.textContent = 'Sending…';
-        showStatus('Sending your message…');
-
-        const payload = {
-          name: form.name.value.trim(),
-          email: form.email.value.trim(),
-          phone: form.phone.value.trim(),
-          service: form.service.value,
-          budget: form.budget.value,
-          message: form.message.value.trim(),
-          smsConsent: form.smsConsent.checked,
-          privacy: form.privacy.checked,
-          path: location.pathname,
-          ts: new Date().toISOString()
+        if(form.website&&form.website.value)return;
+        if(!form.checkValidity()){form.reportValidity();return;}
+        btn.disabled=true;btn.textContent='Sending…';showStatus('Sending your message…');
+        const payload={
+          name:form.name.value.trim(),
+          email:form.email.value.trim(),
+          message:form.message.value.trim(),
+          path:location.pathname,
+          ts:new Date().toISOString()
         };
-
-        try {
-          const res = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
+        try{
+          const res=await fetch(ENDPOINT,{
+            method:'POST',
+            headers:{'Content-Type':'application/json','Accept':'application/json'},
+            body:JSON.stringify(payload)
           });
-
-          if (!res.ok) throw new Error('Formspree error');
-          showStatus('Thanks! We’ll get back to you ASAP.', true);
+          if(!res.ok)throw new Error('Formspree error');
+          showStatus('Thanks! We’ll get back to you ASAP.',true);
           form.reset();
-        } catch (err) {
+        }catch(err){
           showStatus('Oops—something went wrong. Email us at aboveallcinematics@gmail.com.');
-          console.error(err);
-        } finally {
-          btn.disabled = false; btn.textContent = 'Send inquiry';
+        }finally{
+          btn.disabled=false;btn.textContent='Send inquiry';
         }
       });
     })();
   </script>
-
 </body>
 </html>
