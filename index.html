@@ -113,20 +113,6 @@
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
       box-shadow: 0 20px 60px rgba(0,0,0,.55);
-      overflow: hidden;
-    }
-
-    /* ===== Scroll reveal (cinematic fade) ===== */
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .8s ease, transform .8s ease;
-      transition-delay: var(--d, 0s);
-      will-change: opacity, transform;
-    }
-    .reveal-on-scroll.is-visible {
-      opacity: 1;
-      transform: none;
     }
   </style>
 </head>
@@ -142,7 +128,7 @@
       <div></div><div></div><div></div>
     </div>
 
-    <!-- ✅ Updated Nav: Contact links to #contact-card -->
+    <!-- ✅ Updated Nav: Contact now links to #contact-card -->
     <nav class="nav-links">
       <a href="#">Home</a>
       <a href="#">About</a>
@@ -172,7 +158,7 @@
     });
   </script>
 
-  <!-- Example Placeholder Sections (keep your real content here) -->
+  <!-- Example Placeholder Sections -->
   <section style="height:100vh; background:url('DJI_0648%202.jpg') center/cover no-repeat; color:white; display:flex; align-items:center; justify-content:center; font-size:2rem;">
     <p>Hero / Services Section Content Here</p>
   </section>
@@ -181,13 +167,12 @@
     <p>About / Let's Work Section</p>
   </section>
 
-  <!-- ✅ Contact Form Section with reveal-on-scroll -->
+  <!-- ✅ Contact Form Section -->
   <section id="contact-card">
-    <form id="contactForm" novalidate class="reveal-on-scroll" style="--d: .05s;">
-      <!-- Header -->
-      <div class="reveal-on-scroll" style="--d:.10s; padding:28px 28px 8px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
-        <div class="reveal-on-scroll" style="--d:.15s; width:48px;height:48px;border-radius:12px;background:#e6550f;display:flex;align-items:center;justify-content:center;font-size:24px;">✉️</div>
-        <div class="reveal-on-scroll" style="--d:.18s;">
+    <form id="contactForm" novalidate>
+      <div style="padding:28px 28px 8px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="width:48px;height:48px;border-radius:12px;background:#e6550f;display:flex;align-items:center;justify-content:center;font-size:24px;">✉️</div>
+        <div>
           <h2 style="margin:0;font-size:28px;">Get in touch</h2>
           <p style="margin:6px 0 0;color:#cfd3dc;font-size:14px;">Prefer a call?
             <a href="tel:+18039205349" style="color:#fff;text-decoration:none;">(803) 920-5349</a>
@@ -195,31 +180,29 @@
         </div>
       </div>
 
-      <!-- Body -->
-      <div class="reveal-on-scroll" style="--d:.22s; padding:24px 28px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;">
+      <div style="padding:24px 28px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px;">
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
 
-        <div class="reveal-on-scroll" style="--d:.26s; grid-column:span 6;">
+        <div style="grid-column:span 6;">
           <label for="name" style="display:block;font-weight:600;margin-bottom:6px;">Full name *</label>
           <input id="name" name="name" type="text" required placeholder="Jane Doe"
             style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;">
         </div>
 
-        <div class="reveal-on-scroll" style="--d:.30s; grid-column:span 6;">
+        <div style="grid-column:span 6;">
           <label for="email" style="display:block;font-weight:600;margin-bottom:6px;">Email *</label>
           <input id="email" name="email" type="email" required placeholder="you@company.com"
             style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;">
         </div>
 
-        <div class="reveal-on-scroll" style="--d:.34s; grid-column:span 12;">
+        <div style="grid-column:span 12;">
           <label for="message" style="display:block;font-weight:600;margin-bottom:6px;">Message *</label>
           <textarea id="message" name="message" required rows="5" placeholder="Tell us about your project..."
             style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#11141a;color:#fff;"></textarea>
         </div>
       </div>
 
-      <!-- Footer -->
-      <div class="reveal-on-scroll" style="--d:.38s; padding:0 28px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <div style="padding:0 28px 28px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
         <button id="submitBtn" type="submit"
           style="background:#e6550f;color:#fff;border:none;padding:14px 22px;border-radius:10px;font-weight:700;cursor:pointer;">
           Send inquiry
@@ -228,37 +211,13 @@
       </div>
 
       <div id="formStatus" aria-live="polite"
-        class="reveal-on-scroll" style="--d:.42s; display:none;padding:14px 28px;background:#0f141b;border-top:1px solid rgba(255,255,255,.06);color:#cfd3dc;">
+        style="display:none;padding:14px 28px;background:#0f141b;border-top:1px solid rgba(255,255,255,.06);color:#cfd3dc;">
       </div>
     </form>
   </section>
 
   <script>
-    // Mobile nav toggle
-    (function(){
-      const hamburgerMenu = document.getElementById('hamburgerMenu');
-      const navLinksMobile = document.getElementById('navLinksMobile');
-      hamburgerMenu.addEventListener('click', () => {
-        navLinksMobile.classList.toggle('active');
-      });
-    })();
-
-    // IntersectionObserver for reveal-on-scroll
-    (function(){
-      const els = document.querySelectorAll('.reveal-on-scroll');
-      const io = new IntersectionObserver((entries, obs)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add('is-visible');
-            // Unobserve once visible for performance
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      els.forEach(el=>io.observe(el));
-    })();
-
-    // Simple Formspree submission (still active)
+    // Simple Formspree submission
     (function(){
       const form=document.getElementById('contactForm');
       const btn=document.getElementById('submitBtn');
