@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Website with Sleek Sticky Header</title>
   <style>
     /* Basic reset */
@@ -13,55 +13,53 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding-top: 118px; /* Adjusted padding to prevent overlap */
+      padding-top: 118px; /* prevent header overlap */
     }
 
     /* Header styles */
     .sticky-header {
       position: fixed; top: 0; left: 0; width: 100%;
-      background-color: #333; /* Solid background color */
-      padding: 8px 16px; /* Reduced padding by 20% */
+      background-color: #333;
+      padding: 8px 16px;
       z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-      border-radius: 5px; /* Rounded corners */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border-radius: 5px;
       transition: all 0.3s ease;
     }
 
-    /* Logo styles */
-    .logo img {
-      width: 120px; height: auto; object-fit: contain; padding: 0;
-    }
+    /* Logo */
+    .logo img { width: 120px; height: auto; object-fit: contain; padding: 0; }
 
-    /* Hamburger Menu */
+    /* Hamburger */
     .hamburger-menu { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-    .hamburger-menu div { width: 30px; height: 4px; background-color: white; border-radius: 5px; }
+    .hamburger-menu div { width: 30px; height: 4px; background-color: #fff; border-radius: 5px; }
 
-    /* Navigation Links */
+    /* Desktop nav */
     .nav-links { display: flex; gap: 25px; font-size: 32px; font-weight: 500; }
-    .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
+    .nav-links a { color: #fff; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
     .nav-links a:hover { color: #e6550f; }
 
-    /* Contact Now Button (used elsewhere on page) */
+    /* Default CTA style used elsewhere on page */
     .cta-button {
-      background-color: #e6550f; color: white;
+      background-color: #e6550f; color: #fff;
       padding: 24px 40px; text-decoration: none; border-radius: 5px;
       font-size: 32px; font-weight: 600; transition: background 0.3s ease;
-      margin-left: -40px; /* existing offset */
+      margin-left: -40px;
     }
     .cta-button:hover { background-color: #d94e0f; }
 
-    /* Dropdown styles for mobile */
+    /* Mobile dropdown */
     .nav-links-mobile {
       display: none; position: absolute; top: 60px; left: 0;
       background-color: #333; width: 100%; padding: 10px 0; text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     .nav-links-mobile a {
-      display: block; padding: 15px; color: white; text-decoration: none;
+      display: block; padding: 15px; color: #fff; text-decoration: none;
       font-size: 18px; font-weight: 500; transition: background 0.3s ease;
     }
-    .nav-links-mobile a:hover { background-color: #444; }
+    .nav-links-mobile a:hover { background: #444; }
 
     /* Mobile responsiveness */
     @media (max-width: 768px) {
@@ -70,44 +68,42 @@
       .nav-links-mobile.active { display: block; }
     }
 
-    /* === Flip CTA (header-only) === */
+    /* ===== Header Flip CTA (top-to-bottom) ===== */
     .cta-flip {
-      position: relative;
-      width: fit-content;
-      perspective: 1000px;
-      margin-left: -40px; /* preserve your header offset */
-      height: 72px; /* lock height so layout doesn't jump (approx 32px font + padding) */
+      perspective: 1200px;
+      margin-left: -40px;               /* keep your offset */
+      height: 72px;                     /* ~32px font + 24px top/bottom padding */
+      width: max-content;               /* shrink-wrap */
     }
+    .cta-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;  /* tweak for faster/slower flip */
+      transform-origin: top;             /* hinge at top */
+    }
+    /* Hover (desktop) or toggled class (mobile) triggers flip */
+    .cta-flip:hover .cta-inner,
+    .cta-flip.cta-flipped .cta-inner {
+      transform: rotateX(180deg);
+    }
+
     .cta-face {
-      display: block;
-      background-color: #e6550f;
-      color: #fff;
-      padding: 24px 40px;
-      border-radius: 5px;
-      font-size: 32px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.6s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      backface-visibility: hidden; -webkit-backface-visibility: hidden;
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
+      background-color: #e6550f; color: #fff;
+      padding: 24px 40px; border-radius: 5px;
+      font-size: 32px; font-weight: 600; text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: background 0.3s ease;
     }
     .cta-face:hover { background-color: #d94e0f; }
-    .cta-front { position: relative; } /* lets container size from front face */
 
-    /* flip state variable */
-    .cta-flip { --flip-rot: 0deg; transform-style: preserve-3d; }
-    .cta-flip:hover, .cta-flip.cta-flipped { --flip-rot: 180deg; }
-
-    /* front/back transforms */
-    .cta-front { transform: rotateY(calc(var(--flip-rot) * 0)); }
-    .cta-back  { transform: rotateY(180deg) rotateY(calc(var(--flip-rot) * 1 - 180deg)); }
-
-    /* On touch devices show phone by default (no hover) */
-    @media (hover: none) and (pointer: coarse) {
-      .cta-flip { --flip-rot: 180deg; }
-    }
+    .cta-front { transform: rotateX(0deg); }      /* Contact Now (default) */
+    .cta-back  { transform: rotateX(180deg); }    /* Phone number (revealed on flip) */
   </style>
 </head>
 <body>
@@ -119,12 +115,12 @@
       <img src="MediaCompany.png" alt="Media Company Logo">
     </div>
 
-    <!-- Hamburger Menu -->
+    <!-- Hamburger -->
     <div class="hamburger-menu" id="hamburgerMenu">
       <div></div><div></div><div></div>
     </div>
 
-    <!-- Desktop Nav Links -->
+    <!-- Desktop Nav -->
     <nav class="nav-links">
       <a href="#">Home</a>
       <a href="#">About</a>
@@ -132,14 +128,16 @@
       <a href="#">Contact</a>
     </nav>
 
-    <!-- Contact Now Flip Button (replaces old .cta-button) -->
+    <!-- Contact Now Flip Button (vertical flip) -->
     <div class="cta-flip" id="ctaFlip">
-      <a class="cta-face cta-front" href="#" aria-label="Show phone number">Contact Now</a>
-      <a class="cta-face cta-back" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
+      <div class="cta-inner">
+        <a class="cta-face cta-front" href="#" aria-label="Contact Now">Contact Now</a>
+        <a class="cta-face cta-back" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
+      </div>
     </div>
   </header>
 
-  <!-- Mobile Nav Links -->
+  <!-- Mobile Nav -->
   <div class="nav-links-mobile" id="navLinksMobile">
     <a href="#">Home</a>
     <a href="#">About</a>
@@ -148,35 +146,37 @@
   </div>
 
   <script>
-    // Toggle mobile navigation menu on hamburger click
+    // Mobile nav toggle
     const hamburgerMenu = document.getElementById('hamburgerMenu');
     const navLinksMobile = document.getElementById('navLinksMobile');
     hamburgerMenu.addEventListener('click', () => {
       navLinksMobile.classList.toggle('active');
     });
 
-    // Tap-to-flip for touch devices (and click support)
+    // Tap-to-flip support + outside-click reset
     (function () {
-      const flip = document.getElementById('ctaFlip');
-      if (!flip) return;
+      const flipWrap = document.getElementById('ctaFlip');
+      if (!flipWrap) return;
 
-      // Prevent the front face's "#" from jumping
-      flip.querySelector('.cta-front')?.addEventListener('click', (e) => {
+      const front = flipWrap.querySelector('.cta-front');
+
+      // Prevent '#' navigation and toggle on click/tap (mobile friendly)
+      front.addEventListener('click', (e) => {
         e.preventDefault();
-        // If already flipped, clicking the front shouldn't happen, but safeguard anyway
-        flip.classList.toggle('cta-flipped');
+        flipWrap.classList.toggle('cta-flipped');
       });
 
-      // Close flip when clicking outside (optional)
+      // Close the flip when clicking anywhere else
       document.addEventListener('click', (e) => {
-        if (!flip.contains(e.target)) flip.classList.remove('cta-flipped');
+        if (!flipWrap.contains(e.target)) {
+          flipWrap.classList.remove('cta-flipped');
+        }
       });
     })();
   </script>
 
-  <!-- ====== Services Section (unchanged) ====== -->
+  <!-- ===== Services (your existing content) ===== -->
   <section class="services" style="padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif;">
-    <!-- Headline & Subheading -->
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.5s ease-in-out;">
         Media Services Designed to Deliver Results
@@ -186,9 +186,8 @@
       </p>
     </div>
 
-    <!-- Service Cards Grid -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-      <!-- Card Template -->
+
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1s ease forwards;">
         <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -202,7 +201,6 @@
         </div>
       </div>
 
-      <!-- Real Estate -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1.5s ease forwards;">
         <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -214,7 +212,6 @@
         </div>
       </div>
 
-      <!-- Drone Photography -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2s ease forwards;">
         <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -226,7 +223,6 @@
         </div>
       </div>
 
-      <!-- Event Coverage -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2.5s ease forwards;">
         <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -238,7 +234,6 @@
         </div>
       </div>
 
-      <!-- Social Media -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3s ease forwards;">
         <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -250,7 +245,6 @@
         </div>
       </div>
 
-      <!-- Product & E-Commerce -->
       <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
         <img src="productphotography.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
@@ -261,21 +255,20 @@
           <a href="#" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Portfolio</a>
         </div>
       </div>
+
     </div>
   </section>
 
   <style>
-    /* Ensure service titles are visible */
+    /* Ensure service titles/paragraphs readable on images */
     .service-card h3 { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
-
-    /* Make service descriptions brighter and readable */
-    .service-card p { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .service-card p  { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
     /* Card hover animations */
     .service-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 35px rgba(0,255,255,0.25); }
     .service-card img:hover { transform: scale(1.05); }
 
-    /* CTA hover effect */
+    /* CTA hover effect (service cards) */
     .cta-button:hover { transform: scale(1.05); box-shadow: 0 0 15px #00FFF0; }
 
     /* Animations */
@@ -296,9 +289,8 @@
     </div>
   </section>
 
-  <!-- About & Let's Work Section with Premium Effects -->
+  <!-- About & Let's Work -->
   <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
-    <!-- Left Card: About Us -->
     <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s;">
       <div class="icon-accent">&#128247;</div>
       <h2>About Us</h2>
@@ -306,7 +298,6 @@
       <a href="/about.html" class="cta-btn">Learn More</a>
     </div>
 
-    <!-- Right Card: Let's Work / Contact -->
     <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s;">
       <div class="icon-accent">&#128221;</div>
       <h2>Let's Work Together</h2>
@@ -316,21 +307,15 @@
   </section>
 
   <style>
-    /* Fade & Slide Animation Base with stagger delay */
     .fade-slide { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay); }
     .fade-slide.visible { opacity: 1; transform: translateY(0); }
 
-    /* Card Base Styles */
     .card { background-color: #222; border-radius: 12px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
-
-    /* Hover Lift + Shadow */
     .card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
 
-    /* Icon Accent Animation */
     .icon-accent { font-size: 2.5rem; position: absolute; top: 20px; right: 20px; color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease; }
     .card:hover .icon-accent { transform: translateX(-10px) translateY(-10px) rotate(10deg); opacity: 0.2; }
 
-    /* Gradient Sweep Overlay */
     .animated-card::before {
       content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 300%;
       background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
@@ -339,16 +324,13 @@
     .animated-card:hover::before { animation: sweep 1s forwards; }
     @keyframes sweep { 0% { transform: translateX(-200%) rotate(25deg); } 100% { transform: translateX(200%) rotate(25deg); } }
 
-    /* Headings and Text */
     .card h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; }
-    .card p { font-size: 1.2rem; margin-bottom: 30px; }
+    .card p  { font-size: 1.2rem; margin-bottom: 30px; }
 
-    /* Buttons */
-    .cta-btn { display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
+    .cta-btn { display: inline-block; background-color: #e6550f; color: #fff; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
     .blue-btn { background-color: #0077ff; }
     .cta-btn:hover { transform: translateY(-3px); }
 
-    /* Responsive Adjustments */
     @media (max-width: 768px) {
       #about-letswork { flex-direction: column; padding: 60px 20px; gap: 30px; }
       .card { max-width: 100%; padding: 30px; }
@@ -360,7 +342,6 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.2 });
-
     document.querySelectorAll('.fade-slide').forEach(card => observer.observe(card));
   </script>
 
@@ -372,7 +353,6 @@
     }
     .blue-btn { background-color: #0077ff; }
 
-    /* Hover Effects */
     .cta-btn::before {
       content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
       background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
@@ -382,7 +362,6 @@
     .cta-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px rgba(255,255,255,0.3), 0 5px 15px rgba(0,0,0,0.3); }
     .cta-btn:active { transform: translateY(0) scale(0.98); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
-    /* Smooth Gradient Slide on Hover */
     .cta-btn span { position: relative; z-index: 1; }
     .cta-btn::after {
       content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
