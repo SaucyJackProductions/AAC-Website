@@ -517,6 +517,288 @@
       });
     })();
   </script>
+<!-- ===================== ABOUT (The Drive to Create) ===================== -->
+<section id="about" class="aac-about">
+  <style>
+    /* ====== Namespaced to #about to avoid collisions ====== */
+    #about {
+      --about-bg: url('aboutbg.jpg'); /* swap file name if needed */
+      position: relative;
+      padding: clamp(80px, 12vw, 160px) 20px;
+      color:#fff;
+      overflow:hidden;
+      background:#0e1116;
+      scroll-margin-top: 130px; /* clears sticky header */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #about::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: var(--about-bg);
+      background-size: cover; background-position: center;
+      filter: contrast(1.05) brightness(0.8) saturate(1.15);
+      transform: scale(1.03);
+    }
+    #about .veil{
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
+        linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
+    }
+    #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
+
+    /* Title / Slogan */
+    #about .title{
+      font-size: clamp(38px, 6vw, 84px);
+      font-weight:800; letter-spacing:-.02em; line-height:1;
+      margin-bottom:12px;
+      background:linear-gradient(90deg,#fff,#f7e7de 60%,#ffe1d1);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 10px 35px rgba(0,0,0,.45);
+    }
+    #about .spark{
+      background:linear-gradient(90deg,#ffd4bf,#ffffff);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      position:relative;
+    }
+    #about .spark::after{
+      content:""; position:absolute; left:0; bottom:-8px; height:3px; width:0%;
+      background:linear-gradient(90deg,#ffb38c,#e6550f); border-radius:999px;
+      animation:aac-underline 1.2s ease .4s forwards;
+    }
+    @keyframes aac-underline { to { width:100%; } }
+
+    #about .kicker{
+      max-width:860px; font-size:clamp(16px, 2.2vw, 22px);
+      color:#f0f0f0; opacity:.95; margin-bottom:28px;
+    }
+
+    /* Marquee */
+    #about .marquee{ position:relative; overflow:hidden; margin:26px 0 36px;
+      border-top:1px solid rgba(255,255,255,.12);
+      border-bottom:1px solid rgba(255,255,255,.12);
+      mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+    #about .marquee .track{
+      display:inline-block; white-space:nowrap; padding:10px 0;
+      font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:#ffffffb8;
+      animation:aac-marquee 24s linear infinite;
+    }
+    #about .marquee span{ padding:0 1.25rem; }
+    @keyframes aac-marquee { from {transform:translateX(0);} to {transform:translateX(-50%);} }
+
+    /* Stats */
+    #about .stats{
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px; margin:30px 0 40px;
+    }
+    #about .stat{
+      background:rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+      border:1px solid rgba(255,255,255,.08); border-radius:16px;
+      padding:22px 20px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,.35);
+      opacity:0; transform:translateY(28px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    #about .stat.visible{ opacity:1; transform:translateY(0); }
+    #about .stat .num{ font-size:clamp(28px, 4.5vw, 44px); font-weight:800; letter-spacing:-.02em; }
+    #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
+
+    /* Split story */
+    #about .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:12px 0 30px; }
+    #about .card{
+      background:rgba(21,24,32,.82); border:1px solid rgba(255,255,255,.08);
+      border-radius:16px; padding:clamp(18px,3vw,28px); box-shadow:0 20px 55px rgba(0,0,0,.45);
+      opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+    }
+    #about .card.visible{ opacity:1; transform:translateY(0); }
+    #about .card h2{ font-size:clamp(22px, 3vw, 28px); margin-bottom:12px; }
+    #about .card p{ color:#eaeef7; opacity:.95; line-height:1.65; margin-bottom:10px; }
+    #about .values{ list-style:none; display:grid; gap:10px; padding-left:0; }
+    #about .values li{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); padding:12px 14px; border-radius:12px; }
+
+    /* Timeline */
+    #about .steps{ position:relative; margin:10px 0 12px; border-left:2px dashed rgba(255,255,255,.18); padding-left:18px; }
+    #about .step{ display:flex; gap:12px; margin:12px 0; align-items:flex-start;
+      opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+    #about .step.visible{ opacity:1; transform:translateY(0); }
+    #about .bullet{
+      min-width:34px; height:34px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(145deg,#e6550f,#ff914d); color:#111; font-weight:800;
+      box-shadow:0 8px 24px rgba(230,85,15,.35); transform:translateX(-28px);
+      border:2px solid rgba(0,0,0,.25);
+    }
+    #about .step h3{ margin:0 0 4px; font-size:18px; }
+    #about .step p{ margin:0; color:#dfe5f3; opacity:.92; }
+
+    /* CTA */
+    #about .cta{
+      display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.08); padding:18px 20px; border-radius:14px; margin-top:24px;
+      opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+    }
+    #about .cta.visible{ opacity:1; transform:translateY(0); }
+    #about .cta p{ margin:0; font-weight:700; letter-spacing:.2px; }
+    #about .cta .solid{
+      display:inline-block; text-decoration:none; color:#fff; font-weight:800;
+      background:linear-gradient(145deg,#e6550f,#ff7b31);
+      padding:12px 18px; border-radius:10px; box-shadow:0 10px 30px rgba(230,85,15,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    #about .cta .solid:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(230,85,15,.45); }
+
+    /* Responsive */
+    @media (max-width:980px){
+      #about .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+      #about .split{ grid-template-columns:1fr; }
+    }
+    @media (max-width:560px){
+      #about .cta{ flex-direction:column; align-items:flex-start; gap:10px; }
+    }
+  </style>
+
+  <div class="veil"></div>
+
+  <div class="wrap">
+    <!-- Slogan -->
+    <h1 class="title">
+      <span class="spark">The</span> Drive <span class="spark">to</span> Create
+    </h1>
+    <p class="kicker">
+      We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.
+    </p>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Storytelling • Aerial Cinematics • Real Estate Media • Social Growth • Brand Films • </span>
+        <span>Storytelling • Aerial Cinematics • Real Estate Media • Social Growth • Brand Films • </span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat" data-target="250">
+        <div class="num">0</div>
+        <div class="label">Projects Delivered</div>
+      </div>
+      <div class="stat" data-target="1200">
+        <div class="num">0</div>
+        <div class="label">Drone Flight Hours</div>
+      </div>
+      <div class="stat" data-target="24">
+        <div class="num">0</div>
+        <div class="label">Avg Turnaround (hrs)</div>
+      </div>
+      <div class="stat" data-target="150">
+        <div class="num">0</div>
+        <div class="label">5★ Client Reviews</div>
+      </div>
+    </div>
+
+    <!-- Split story -->
+    <div class="split">
+      <div class="card">
+        <h2>Our Story</h2>
+        <p>
+          Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to
+          boardroom spotlights, our team crafts visuals that speak for you when words fall short. We’re operators,
+          editors, pilots—problem solvers who obsess over framing, light, and narrative pace.
+        </p>
+        <p>
+          Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI,
+          we’ll chart the flight path and carry the mission to delivery.
+        </p>
+      </div>
+      <div class="card">
+        <h2>What Drives Us</h2>
+        <ul class="values">
+          <li>🎯 Clarity over clutter</li>
+          <li>⚡ Speed without shortcuts</li>
+          <li>🚁 Safety-first aerial ops</li>
+          <li>📈 Creative built for conversion</li>
+          <li>🤝 Real partnership, not transactions</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="steps">
+      <div class="step">
+        <div class="bullet">1</div>
+        <div>
+          <h3>Discovery & Strategy</h3>
+          <p>Define outcomes, audience, and the emotional beat that hooks attention.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="bullet">2</div>
+        <div>
+          <h3>Pre-Production</h3>
+          <p>Scripts, shot lists, flight plans, permits, and logistics—handled.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="bullet">3</div>
+        <div>
+          <h3>Production</h3>
+          <p>Ground & aerial capture with cinema-first discipline and on-site review.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="bullet">4</div>
+        <div>
+          <h3>Post & Distribution</h3>
+          <p>Edit, sound, color, and cutdowns tailored to platforms that convert.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <p>Got a vision? We’ll bring the velocity.</p>
+      <a href="#contact-card" class="solid">Start Your Project</a>
+    </div>
+  </div>
+
+  <script>
+    // Self-contained reveal + count-up
+    (function(){
+      const root = document.getElementById('about');
+      if(!root) return;
+
+      // Intersection observer
+      const reveal = (els)=> {
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){
+              e.target.classList.add('visible');
+              // Count-up for stats
+              if(e.target.classList.contains('stat') && !e.target.dataset.done){
+                e.target.dataset.done = '1';
+                const numEl = e.target.querySelector('.num');
+                const target = parseInt(e.target.dataset.target||'0',10);
+                const start = performance.now(), dur = 1000;
+                const tick = (t)=>{
+                  const p = Math.min(1,(t-start)/dur);
+                  const val = Math.floor(target * (0.15 + 0.85*p*p)); // ease
+                  numEl.textContent = val.toLocaleString();
+                  if(p<1) requestAnimationFrame(tick); else numEl.textContent = target.toLocaleString();
+                };
+                requestAnimationFrame(tick);
+              }
+              io.unobserve(e.target);
+            }
+          });
+        },{threshold:.25});
+        els.forEach(el=>io.observe(el));
+      };
+
+      reveal(root.querySelectorAll('.stat, .card, .step, .cta'));
+    })();
+  </script>
+</section>
+<!-- =================== /ABOUT =================== -->
 
 </body>
 </html>
