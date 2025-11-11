@@ -86,19 +86,36 @@
     /* ===== Services & Shared UI ===== */
     .service-card h3{
       color:#fff; /* fallback so text never disappears */
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 2px 8px rgba(0,0,0,.6);
     }
 
-    /* Bigger, bolder titles */
+    /* Bigger, bolder titles + readability chip */
     .services .service-card h3{
       font-size: clamp(1.6rem, 2.6vw, 2.2rem);
       line-height: 1.25;
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
+
+      /* Readability chip (glass dark pill behind text) */
+      position: relative;
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 12px;
+      z-index: 0; /* so ::before can sit under text */
+    }
+    .services .service-card h3::before{
+      content:"";
+      position:absolute; inset:-4px -8px;
+      background: rgba(10,12,16,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: inherit;
+      z-index:-1;
     }
 
-    /* Apply gradient safely */
+    /* Apply gradient safely (with outline for readability) */
     @supports (-webkit-background-clip:text) or (background-clip:text){
       .services .service-card h3{
         background: linear-gradient(90deg, #00FFF0, #e6550f);
@@ -106,7 +123,26 @@
         background-clip: text;
         color: transparent;
         -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 12px rgba(0,255,240,0.25), 0 0 18px rgba(230,85,15,0.3);
+        -webkit-text-stroke: 0.6px rgba(0,0,0,0.5); /* subtle outline */
+      }
+      /* Hover pulse glow */
+      .services .service-card:hover h3{
+        animation: titlePulse 0.9s ease-in-out;
+      }
+    }
+
+    @keyframes titlePulse{
+      0%{
+        text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 2px 8px rgba(0,0,0,.6);
+      }
+      50%{
+        text-shadow:
+          0 0 6px rgba(255,255,255,.6),
+          0 0 18px rgba(0,255,240,.35),
+          0 0 26px rgba(230,85,15,.35);
+      }
+      100%{
+        text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 2px 8px rgba(0,0,0,.6);
       }
     }
 
