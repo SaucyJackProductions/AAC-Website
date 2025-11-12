@@ -179,13 +179,12 @@
     @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-20px); } 100% { opacity: 1; transform: translateY(0); } }
     @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
-    /* ===== About / Let's Work Cards ===== */
+    /* (About/Let's Work card styles left in place; harmless if unused) */
     .fade-slide { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay); }
     .fade-slide.visible { opacity: 1; transform: translateY(0); }
     .card { background-color: #222; border-radius: 12px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
     .card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
     .icon-accent { font-size: 2.5rem; position: absolute; top: 20px; right: 20px; color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease; }
-    .card:hover .icon-accent { transform: translateX(-10px) translateY(-10px) rotate(10deg); opacity: 0.2; }
     .animated-card::before {
       content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 300%;
       background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
@@ -200,6 +199,7 @@
     .cta-btn:hover { transform: translateY(-3px); }
 
     @media (max-width: 768px) {
+      /* if you re-add those cards later */
       #about-letswork { flex-direction: column; padding: 60px 20px; gap: 30px; }
       .card { max-width: 100%; padding: 30px; }
     }
@@ -396,24 +396,7 @@
     </div>
   </section>
 
-  <!-- About & Let's Work Section with Premium Effects -->
-  <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
-    <!-- Left Card: About Us -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s;">
-      <div class="icon-accent">&#128247;</div>
-      <h2>About Us</h2>
-      <p>We create high-quality visual stories that capture your brand’s essence and engage audiences. Discover how Above All Cinematics can elevate your business.</p>
-      <a href="#about" class="cta-btn">Learn More</a>
-    </div>
-
-    <!-- Right Card: Let's Work / Contact -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s;">
-      <div class="icon-accent">&#128221;</div>
-      <h2>Let's Work Together</h2>
-      <p>Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.</p>
-      <a href="#contact-card" class="cta-btn blue-btn">Contact Us</a>
-    </div>
-  </section>
+  <!-- (REMOVED the #about-letswork section here) -->
 
   <!-- Enhanced mobile menu script (includes hamburger morph) -->
   <script>
