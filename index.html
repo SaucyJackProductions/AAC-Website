@@ -4,50 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Above All Cinematics</title>
-
-  <!-- ===== Design Tokens / Meta / Sharing ===== -->
-  <meta name="theme-color" content="#0e1116">
-  <meta name="description" content="We design films that make people feel — and make your pipeline move. Brand films, real estate media, aerial cinematography, and social content in Hilton Head, SC.">
-  <meta property="og:title" content="Above All Cinematics">
-  <meta property="og:description" content="Cinematic brand films, real estate media, and aerial cinematography that convert.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="og-sizzle-1200x630.jpg">
-  <meta property="og:url" content="https://yourdomain.com">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="og-sizzle-1200x630.jpg">
-
   <style>
-    :root{
-      --bg:#0e1116;
-      --panel:#151820;
-      --ink:#fffdf6;
-      --ink-dim:#dfe5f3;
-      --ink-soft:#cfd3dc;
-      --line:rgba(255,255,255,.08);
-      --line-2:rgba(255,255,255,.12);
-      --brand:#e6550f;
-      --brand-2:#00bfff;
-      --glow:#ffd780;
-      --radius:16px;
-      --shadow:0 20px 55px rgba(0,0,0,.45);
-      --header-h:118px;
-    }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    :target{ scroll-margin-top: calc(var(--header-h) + 10px); }
 
     /* Body */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f5f5;
       color: #333;
-      padding-top: var(--header-h); /* prevent header overlap */
+      padding-top: 118px; /* prevent header overlap */
     }
-
-    /* Skip link */
-    .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip:focus{left:16px;top:16px;width:auto;height:auto;z-index:2000;background:#111;color:#fff;padding:8px 12px;border-radius:8px;outline:2px solid var(--brand)}
 
     /* Header styles */
     .sticky-header {
@@ -64,15 +31,29 @@
     /* Logo */
     .logo img { width: 120px; height: auto; object-fit: contain; }
 
-    /* ===== Hamburger ===== */
+    /* ===== Hamburger (button with 3 bars that morph to X) ===== */
     .hamburger {
-      display: none;
-      appearance: none; border: 0; background: transparent; cursor: pointer;
-      padding: 8px; margin: 0; width: 44px; height: 44px; border-radius: 8px; position: relative;
+      display: none;                 /* shown via media query on mobile */
+      appearance: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 8px;
+      margin: 0;
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      position: relative;
     }
-    .hamburger:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .hamburger:focus-visible {
+      outline: 2px solid #e6550f;
+      outline-offset: 2px;
+    }
     .hamburger span {
-      position: absolute; left: 8px; right: 8px; height: 4px; background: #fff; border-radius: 4px;
+      position: absolute;
+      left: 8px; right: 8px;
+      height: 4px;
+      background: #fff;
+      border-radius: 4px;
       transition: transform .25s ease, opacity .2s ease, top .25s ease, bottom .25s ease;
     }
     .hamburger span:nth-child(1) { top: 12px; }
@@ -85,7 +66,7 @@
     /* Navigation Links (desktop) */
     .nav-links { display: flex; gap: 25px; font-size: 32px; font-weight: 500; }
     .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
-    .nav-links a:hover { color: var(--brand); }
+    .nav-links a:hover { color: #e6550f; }
 
     /* Right-side actions */
     .header-actions { display: flex; align-items: center; gap: 16px; margin-left: 16px; }
@@ -94,36 +75,53 @@
     .phone-link {
       color: #fff; text-decoration: none; font-weight: 600;
       font-size: 32px; line-height: 1;
-      transition: text-shadow 0.2s ease, transform 0.12s ease;
+      transition: text-shadow 0.3s ease, transform 0.2s ease;
       white-space: nowrap;
     }
     .phone-link:hover {
-      text-shadow: 0 0 8px var(--brand), 0 0 16px var(--brand), 0 0 24px var(--brand);
+      text-shadow: 0 0 8px #e6550f, 0 0 16px #e6550f, 0 0 24px #e6550f;
       transform: translateY(-1px);
     }
 
     /* CTA button in header */
     .cta-button {
-      background-color: var(--brand); color: white;
+      background-color: #e6550f; color: white;
       padding: 12px 26px; text-decoration: none; border-radius: 8px;
-      font-size: 32px; font-weight: 600; transition: background 0.2s ease, transform .12s ease, box-shadow .12s ease;
+      font-size: 32px; font-weight: 600; transition: background 0.3s ease;
     }
-    .cta-button:hover { background-color: #d94e0f; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(230,85,15,.35); }
+    .cta-button:hover { background-color: #d94e0f; }
 
-    /* ====== Mobile dropdown ====== */
+    /* ====== Mobile dropdown (FIXED, ABOVE HEADER, SCROLLABLE) ====== */
     .nav-links-mobile {
-      position: fixed; left: 0; right: 0; top: var(--header-h);
-      z-index: 1500; display: none; background: rgba(33,33,33,0.96);
-      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      width: 100%; padding: 8px 0; text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35); border-bottom: 1px solid rgba(255,255,255,0.06);
-      max-height: calc(100dvh - var(--header-h)); overflow-y: auto; transform: translateY(-8px); opacity: 0;
+      position: fixed;
+      left: 0; right: 0;
+      top: var(--header-h, 118px); /* sit right under header */
+      z-index: 1500;               /* above header */
+      display: none;
+      background: rgba(33,33,33,0.96);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
+      max-height: calc(100dvh - var(--header-h, 118px));
+      overflow-y: auto;
+      transform: translateY(-8px);
+      opacity: 0;
       transition: opacity .2s ease, transform .2s ease;
     }
-    .nav-links-mobile.active { display: block; opacity: 1; transform: translateY(0); }
+    .nav-links-mobile.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
     .nav-links-mobile a {
       display: block; padding: 16px 20px; color: white; text-decoration: none;
-      font-size: 18px; font-weight: 600; letter-spacing: .2px; transition: background .2s ease, color .2s ease;
+      font-size: 18px; font-weight: 600; letter-spacing: .2px;
+      transition: background .2s ease, color .2s ease;
     }
     .nav-links-mobile a + a { border-top: 1px solid rgba(255,255,255,0.06); }
     .nav-links-mobile a:hover { background: #444; }
@@ -138,143 +136,134 @@
       .phone-link { display: none; }
     }
 
-    /* ===== Global motions ===== */
-    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-20px);} 100% { opacity: 1; transform: translateY(0);} }
-    @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px);} 100% { opacity: 1; transform: translateY(0);} }
-
     /* ===== Services & Shared UI ===== */
-    .services { padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif; }
-    .services h2{
-      font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.1s ease-in-out;
-      text-align:center; margin-bottom:.75rem;
-    }
-    .services p.lead{ font-size: 1.3rem; color: #f0f0f0; animation: fadeIn 1.5s ease-in-out; text-align:center; margin-bottom:3rem; }
-
-    .filters{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom: 1.5rem; }
-    .chip{
-      padding:8px 14px; border-radius:999px; border:1px solid var(--line-2); color:#fff; background:rgba(21,24,32,.45);
-      cursor:pointer; font-weight:600; font-size:.95rem; transition:transform .12s ease, background .2s ease, box-shadow .12s ease;
-    }
-    .chip[aria-pressed="true"]{ background:linear-gradient(145deg,var(--brand),#ff7b31); border-color:transparent; box-shadow:0 8px 24px rgba(230,85,15,.35); }
-    .chip:hover{ transform:translateY(-1px); }
-
-    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-    .service-card{
-      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden;
-      width: 400px; text-align: center; transition: transform 0.18s ease, box-shadow 0.18s ease; cursor: pointer;
-      animation: slideUp .8s ease forwards;
-    }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,255,255,0.22); }
-    .service-card img{ width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s; display:block; }
-    .service-card img:hover { transform: scale(1.03); }
     .service-card h3{
-      margin-bottom: .5rem; color:#fffdf6; font-size: clamp(1.6rem, 2.6vw, 2.2rem); line-height: 1.25; font-weight: 800; letter-spacing: -0.02em;
-      display:inline-block; position:relative; padding:6px 10px; border-radius:12px; z-index:0;
-      text-shadow: 0 1px 3px rgba(0,0,0,.85), 0 0 12px rgba(255,215,128,.18), 0 0 24px rgba(255,215,128,.12);
+      color: #fffdf6;
+      text-shadow:
+        0 1px 3px rgba(0,0,0,.85),
+        0 0 12px rgba(255,215,128,.18),
+        0 0 24px rgba(255,215,128,.12);
     }
-    .service-card h3::before{
-      content:""; position:absolute; inset:-4px -8px; background: rgba(10,12,16,0.55); border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-radius: inherit; z-index:-1;
+    .services .service-card h3{
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 12px;
+      z-index: 0;
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: #fffdf6;
+      -webkit-text-stroke: 0 transparent;
     }
-    .service-card p{ font-size:.95rem; color:#fff; line-height:1.45; text-shadow:0 1px 3px rgba(0,0,0,.5); padding:0 1.2rem; }
+    .services .service-card h3::before{
+      content:"";
+      position:absolute; inset:-4px -8px;
+      background: rgba(10,12,16,0.55);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: inherit;
+      z-index:-1;
+    }
+    .service-card p { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .service-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 35px rgba(0,255,255,0.25); }
+    .service-card img:hover { transform: scale(1.05); }
+    .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 15px #00FFF0; }
 
-    .btn-pill{
-      display:inline-block;margin-top:1rem;padding:.6rem 1.4rem;border-radius:50px;text-decoration:none;font-weight:700;
-      color:#fff;background:linear-gradient(90deg,#00FFF0,#00BFFF); transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .btn-pill:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,191,255,.35); }
+    @keyframes fadeIn { 0% { opacity: 0; transform: translateY(-20px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { 0% { opacity: 0; transform: translateY(40px); } 100% { opacity: 1; transform: translateY(0); } }
 
-    /* ===== Testimonials strip ===== */
-    .proof{
-      background: linear-gradient(180deg, rgba(14,17,22,1) 0%, rgba(14,17,22,.92) 100%);
-      color:var(--ink); padding: 36px 18px; border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
+    /* (About/Let's Work card styles left in place; harmless if unused) */
+    .fade-slide { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out var(--delay), transform 0.8s ease-out var(--delay); }
+    .fade-slide.visible { opacity: 1; transform: translateY(0); }
+    .card { background-color: #222; border-radius: 12px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
+    .card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+    .icon-accent { font-size: 2.5rem; position: absolute; top: 20px; right: 20px; color: #e6550f; opacity: 0.1; transition: transform 0.5s ease, opacity 0.5s ease; }
+    .animated-card::before {
+      content: ''; position: absolute; top: -150%; left: -50%; width: 200%; height: 300%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 70%);
+      transform: rotate(25deg); transition: all 0.5s ease; pointer-events: none;
     }
-    .proof .wrap{ max-width:1200px; margin:0 auto; display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
-    .proof .card{
-      background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow: var(--shadow);
-    }
-    .proof .who{ font-weight:700; margin-top:10px; color:#fff; }
-    .proof .logo-row{ display:flex; gap:18px; align-items:center; justify-content:center; margin-top:16px; opacity:.85; flex-wrap:wrap; }
-    .proof .logo-row img{ height:28px; filter: grayscale(1) contrast(1.1) brightness(.95); opacity:.9; }
+    .animated-card:hover::before { animation: sweep 1s forwards; }
+    @keyframes sweep { 0% { transform: translateX(-200%) rotate(25deg); } 100% { transform: translateX(200%) rotate(25deg); } }
+    .card h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; }
+    .card p { font-size: 1.2rem; margin-bottom: 30px; }
+    .cta-btn { display: inline-block; background-color: #e6550f; color: white; padding: 15px 30px; font-size: 1.2rem; font-weight: 600; text-decoration: none; border-radius: 5px; transition: transform 0.3s ease, background 0.3s ease; }
+    .blue-btn { background-color: #0077ff; }
+    .cta-btn:hover { transform: translateY(-3px); }
 
-    @media (max-width:900px){ .proof .wrap{ grid-template-columns:1fr; } }
-
-    /* ===== Pricing signal / CTA stripe ===== */
-    .pricing-hint{
-      display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-      color:#fff; padding:18px 20px;
+    @media (max-width: 768px) {
+      /* if you re-add those cards later */
+      #about-letswork { flex-direction: column; padding: 60px 20px; gap: 30px; }
+      .card { max-width: 100%; padding: 30px; }
     }
-    .pricing-hint .solid{
-      display:inline-block;text-decoration:none;color:#fff;font-weight:800;background:linear-gradient(145deg,var(--brand),#ff7b31);
-      padding:12px 18px;border-radius:10px;box-shadow:0 10px 30px rgba(230,85,15,.35); transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .pricing-hint .solid:hover{ transform:translateY(-1px); box-shadow:0 16px 38px rgba(230,85,15,.45); }
-
-    /* ===== Full-width YouTube ===== */
-    #showreel { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; background:#000; }
 
     /* ===== Contact card background ===== */
     #contact-card {
-      position: relative; padding: 80px 20px; color: #fff; display: flex; justify-content: center;
-      scroll-margin-top: calc(var(--header-h) + 10px); overflow: hidden; background: transparent;
+      position: relative;
+      padding: 80px 20px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      scroll-margin-top: 130px;
+      overflow: hidden;
+      background: transparent;
     }
     #contact-card::before {
-      content: ""; position: absolute; inset: 0;
-      background-image: url("crabweb.jpg"); background-size: cover; background-position: center; background-repeat: no-repeat;
-      background-color: rgba(15,17,21,0.65); background-blend-mode: multiply; z-index: 0;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("crabweb.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: rgba(15,17,21,0.65);
+      background-blend-mode: multiply;
+      z-index: 0;
     }
     #contact-card > form {
-      position: relative; z-index: 1; width: 100%; max-width: 880px; background: rgba(21,24,32,0.8);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 880px;
+      background: rgba(21,24,32,0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
     }
+
     #contact-card label { margin-bottom: 8px; display:block; }
     #contact-card input, #contact-card select, #contact-card textarea {
-      border: 1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; border-radius:10px;
+      border: 1px solid rgba(255,255,255,.16);
+      background:#11141a;
+      color:#fff;
+      border-radius:10px;
     }
-    #contact-card textarea { line-height: 1.5; min-height: 180px; padding:16px 18px; resize: vertical; }
-    @media (max-width: 768px) { #contact-card form { padding-bottom: 8px; } }
-
-    /* ===== Scroll Progress Bar ===== */
-    .scroll-progress{
-      position:fixed; left:0; top:0; height:3px; width:0; background:linear-gradient(90deg,var(--brand),#ffb38c);
-      z-index:2000; box-shadow:0 0 10px rgba(230,85,15,.45);
+    #contact-card textarea {
+      line-height: 1.5;
+      min-height: 180px;
+      padding:16px 18px;
+      resize: vertical;
     }
-
-    /* ===== Prefers-reduced-motion ===== */
-    @media (prefers-reduced-motion: reduce){
-      *{ animation: none !important; transition: none !important; }
-      .service-card img{ transform:none !important; }
+    @media (max-width: 768px) {
+      #contact-card form { padding-bottom: 8px; }
     }
   </style>
-
-  <!-- JSON-LD (LocalBusiness + Services) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":"Above All Cinematics",
-    "url":"https://yourdomain.com",
-    "telephone":"+1-803-920-5349",
-    "areaServed":"Hilton Head Island, SC",
-    "sameAs":["https://instagram.com/yourhandle","https://youtube.com/@yourhandle"],
-    "serviceType":["Brand Films","Real Estate Media","Aerial Cinematography","Social Media Content"],
-    "address": { "@type":"PostalAddress", "addressLocality":"Hilton Head Island", "addressRegion":"SC", "addressCountry":"US" }
-  }
-  </script>
 </head>
 <body>
 
-  <a class="skip" href="#services">Skip to content</a>
-  <div class="scroll-progress" id="scrollProgress"></div>
-
   <!-- Sticky Header -->
-  <header class="sticky-header" id="siteHeader">
+  <header class="sticky-header">
     <div class="logo">
-      <img src="MediaCompany.png" alt="Above All Cinematics logo">
+      <img src="MediaCompany.png" alt="Media Company Logo">
     </div>
 
     <!-- New accessible hamburger button -->
@@ -282,7 +271,7 @@
       <span></span><span></span><span></span>
     </button>
 
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links">
       <a href="#">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -295,7 +284,7 @@
     </div>
   </header>
 
-  <!-- Mobile Nav Links -->
+  <!-- Mobile Nav Links (fixed, above header, accessible) -->
   <div class="nav-links-mobile" id="navLinksMobile" role="menu" aria-label="Mobile navigation">
     <a href="#" role="menuitem">Home</a>
     <a href="#about" role="menuitem">About</a>
@@ -304,163 +293,181 @@
   </div>
 
   <!-- =============== Services Section =============== -->
-  <section id="services" class="services" aria-label="Services">
-    <h2>Media Services Designed to Deliver Results</h2>
-    <p class="lead">We design films that make people feel — and make your pipeline move.</p>
-
-    <!-- Filter chips -->
-    <div class="filters" role="toolbar" aria-label="Filter portfolio">
-      <button class="chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="chip" data-filter="Brand">Brand</button>
-      <button class="chip" data-filter="RealEstate">Real Estate</button>
-      <button class="chip" data-filter="Aerial">Aerial</button>
-      <button class="chip" data-filter="Events">Events</button>
-      <button class="chip" data-filter="Social">Social</button>
-      <button class="chip" data-filter="Product">Product</button>
+  <section id="services" class="services" style="padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; font-family: 'Poppins', sans-serif;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: 3rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.4); animation: fadeIn 1.5s ease-in-out;">
+        Media Services Designed to Deliver Results
+      </h2>
+      <p style="font-size: 1.3rem; color: #f0f0f0; animation: fadeIn 2s ease-in-out;">
+        Transform your brand with cinematic storytelling, drone footage, and social media strategy.
+      </p>
     </div>
 
     <!-- Service Cards Grid -->
-    <div class="grid" id="serviceGrid">
-      <!-- Commercial Brand Packages (Brand) -->
-      <article class="service-card" data-cat="Brand">
-        <picture>
-          <source type="image/avif" srcset="IMG_4681-800.avif 800w, IMG_4681-1200.avif 1200w, IMG_4681-1600.avif 1600w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="IMG_4681-800.webp 800w, IMG_4681-1200.webp 1200w, IMG_4681-1600.webp 1600w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="IMG_4681.jpg" width="400" height="260" loading="lazy" decoding="async" alt="Sunrise jib over Harbour Town Lighthouse, Hilton Head">
-        </picture>
-        <div style="padding: 1rem 1.5rem;">
-          <h3>📈 Commercial Brand Packages</h3>
-          <p>Branded aerial & ground video production. Meta/YouTube/TikTok ad creative. Lead gen, analytics, and A/B tests.</p>
-          <a href="#case-studies" class="btn-pill">See How We Work</a>
-        </div>
-      </article>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
 
-      <!-- Real Estate & Property Media (RealEstate) -->
-      <article class="service-card" data-cat="RealEstate">
-        <picture>
-          <source type="image/avif" srcset="IMG_4680-800.avif 800w, IMG_4680-1200.avif 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="IMG_4680-800.webp 800w, IMG_4680-1200.webp 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="IMG_4680.jpg" width="400" height="260" loading="lazy" decoding="async" alt="Luxury coastal property exterior at golden hour">
-        </picture>
+      <!-- Commercial Brand Packages -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1s ease forwards;">
+        <img src="IMG_4681.jpg" alt="Commercial Brand" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
+        <div style="padding: 1rem 1.5rem;">
+          <h3 style="margin-bottom: 0.5rem;">📈 Commercial Brand Packages</h3>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Branded aerial & ground video production.<br/>
+            Targeted social media ad integration (Meta, YouTube, TikTok).<br/>
+            Lead generation, analytics, and A/B testing.
+          </p>
+          <a href="#showreel" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">See How We Work</a>
+        </div>
+      </div>
+
+      <!-- Real Estate & Property Media -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 1.5s ease forwards;">
+        <img src="IMG_4680.jpg" alt="Real Estate Media" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🏡 Real Estate &amp; Property Media</h3>
-          <p>Interior walkthroughs, listing photos + 3D tours. Cinematic site videos. Agent & STR reels.</p>
-          <a href="#about" class="btn-pill">View Case Study</a>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>Cinematic videos for company websites.<br/>Social reels for agents.<br/>Reels for short-term rentals.
+          </p>
+          <a href="#about" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Case Study</a>
         </div>
-      </article>
+      </div>
 
-      <!-- Aerial Drone (Aerial) -->
-      <article class="service-card" data-cat="Aerial">
-        <picture>
-          <source type="image/avif" srcset="IMG_4528-800.avif 800w, IMG_4528-1200.avif 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="IMG_4528-800.webp 800w, IMG_4528-1200.webp 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="IMG_4528.jpg" width="400" height="260" loading="lazy" decoding="async" alt="FPV drone tracking shot over marshland">
-        </picture>
+      <!-- Aerial Drone -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2s ease forwards;">
+        <img src="IMG_4528.jpg" alt="Drone Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
-          <h3>🚁 Aerial Drone Photo &amp; Video</h3>
-          <p>Commercials, events, mapping. Licensed, insured, safety-first aerial ops.</p>
-          <a href="#contact-card" class="btn-pill">Book a Consultation</a>
+          <h3>🚁 Aerial Drone Photography &amp; Videography</h3>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Cinematic commercials and promotional videos.<br/>Events and weddings.<br/>Commercial real estate and development.<br/>Mapping and surveying.
+          </p>
+          <a href="#contact-card" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Book a Consultation</a>
         </div>
-      </article>
+      </div>
 
-      <!-- Event Coverage (Events) -->
-      <article class="service-card" data-cat="Events">
-        <picture>
-          <source type="image/avif" srcset="liveevents-800.avif 800w, liveevents-1200.avif 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="liveevents-800.webp 800w, liveevents-1200.webp 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="liveevents.png" width="400" height="260" loading="lazy" decoding="async" alt="Elegant gala with lighting and stage">
-        </picture>
+      <!-- Event Coverage -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 2.5s ease forwards;">
+        <img src="liveevents.png" alt="Event Coverage" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
           <h3>🎉 Event Coverage (Luxury, Corporate, Wedding)</h3>
-          <p>Multi-cam, drone, on-site edits, printed albums, recap kits.</p>
-          <a href="#about" class="btn-pill">Learn More</a>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Multi-camera setups, drone footage, printed albums, recap kits, and more.
+          </p>
+          <a href="#about" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Learn More</a>
         </div>
-      </article>
+      </div>
 
-      <!-- Social Media (Social) -->
-      <article class="service-card" data-cat="Social">
-        <picture>
-          <source type="image/avif" srcset="socialmediamanagement-800.avif 800w, socialmediamanagement-1200.avif 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="socialmediamanagement-800.webp 800w, socialmediamanagement-1200.webp 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="socialmediamanagement.png" width="400" height="260" loading="lazy" decoding="async" alt="Grid of phones with social reels">
-        </picture>
+      <!-- Social Media -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3s ease forwards;">
+        <img src="socialmediamanagement.png" alt="Social Media Content" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
-          <h3>📲 Social Content &amp; Management</h3>
-          <p>Reels, brand graphics, calendars, engagement tracking, growth strategies.</p>
-          <a href="#contact-card" class="btn-pill">Start Growing</a>
+          <h3>📲 Social Media Content Creation &amp; Management</h3>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Reels, branded graphics, posting schedules, engagement tracking, and growth strategies.
+          </p>
+          <a href="#contact-card" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">Start Growing</a>
         </div>
-      </article>
+      </div>
 
-      <!-- Product (Product) -->
-      <article class="service-card" data-cat="Product">
-        <picture>
-          <source type="image/avif" srcset="ecommerceproduct-800.avif 800w, ecommerceproduct-1200.avif 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <source type="image/webp" srcset="ecommerceproduct-800.webp 800w, ecommerceproduct-1200.webp 1200w" sizes="(max-width: 600px) 90vw, 400px">
-          <img src="ecommerceproduct.png" width="400" height="260" loading="lazy" decoding="async" alt="Studio-lit product on seamless backdrop">
-        </picture>
+      <!-- Product & E-Commerce -->
+      <div class="service-card" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; width: 400px; text-align: center; transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; animation: slideUp 3.5s ease forwards;">
+        <img src="ecommerceproduct.png" alt="Product Photography" style="width: 100%; height: 260px; object-fit: cover; transition: transform 0.4s;">
         <div style="padding: 1rem 1.5rem;">
-          <h3>🛒 Product Photography &amp; E-Com Media</h3>
-          <p>Studio & lifestyle sets, 360° spins, influencer cuts, site-ready media.</p>
-          <a href="#case-studies" class="btn-pill">View Portfolio</a>
+          <h3>🛒 Product Photography &amp; E-Commerce Media</h3>
+          <p style="font-size: 0.95rem; color: #fff; line-height: 1.4;">
+            Studio and lifestyle shots, 360° product spins, influencer content, and website-ready media.
+          </p>
+          <a href="#showreel" class="cta-button" style="display: inline-block; margin-top: 1rem; padding: 0.6rem 1.4rem; background: linear-gradient(90deg, #00FFF0, #00BFFF); color: #fff; font-weight: 600; border-radius: 50px; text-decoration: none; transition: all 0.3s;">View Portfolio</a>
         </div>
-      </article>
-    </div>
-  </section>
+      </div>
 
-  <!-- Case Studies Micro-Reels (hover preview) -->
-  <section id="case-studies" class="proof" aria-label="Case Studies">
-    <div class="wrap">
-      <div class="card">
-        <strong>Q on Bay – Brand Film</strong>
-        <p>Reduced cost-per-reservation by 23% with a 42s hero cut + 4x verticals.</p>
-        <video src="qonbay-15s.mp4" playsinline muted loop preload="metadata" style="width:100%;border-radius:10px;margin-top:10px;"></video>
-      </div>
-      <div class="card">
-        <strong>Hilton Head Realty – Listing Series</strong>
-        <p>3x showings in 10 days using FPV entries + twilight photoset.</p>
-        <video src="hhrealty-12s.mp4" playsinline muted loop preload="metadata" style="width:100%;border-radius:10px;margin-top:10px;"></video>
-      </div>
-      <div class="card">
-        <strong>Tourism Board – Social Flight</strong>
-        <p>6.1% avg watch-through on Reels with map-to-moment hooks.</p>
-        <video src="tourism-10s.mp4" playsinline muted loop preload="metadata" style="width:100%;border-radius:10px;margin-top:10px;"></video>
-      </div>
     </div>
-    <div class="logo-row" aria-hidden="true">
-      <img src="logo1.png" alt="Partner 1">
-      <img src="logo2.png" alt="Partner 2">
-      <img src="logo3.png" alt="Partner 3">
-      <img src="logo4.png" alt="Partner 4">
-    </div>
-  </section>
-
-  <!-- Pricing signal -->
-  <section class="pricing-hint" aria-label="Starting Prices">
-    <p><strong>Brand Films</strong> from $1.5k • <strong>Real Estate</strong> from $350 • <strong>Aerial</strong> from $300</p>
-    <a class="solid" href="#contact-card">Start Your Project</a>
   </section>
 
   <!-- Full-width YouTube section -->
-  <section id="showreel" aria-label="Showreel">
+  <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
       <iframe
-        id="ytFrame"
-        src="https://www.youtube-nocookie.com/embed/1oTpwMC_KrY?autoplay=1&loop=1&playlist=1oTpwMC_KrY&mute=1&vq=hd1080&rel=0&modestbranding=1&enablejsapi=1"
+        src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&loop=1&playlist=1oTpwMC_KrY&mute=1&vq=hd1080"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+        frameborder="0"
         allow="autoplay; encrypted-media"
+        allowfullscreen
         title="Hilton Head Island Premier Locations"></iframe>
     </div>
   </section>
 
-  <!-- ===================== CONTACT CARD (Formspree + Square backup) ===================== -->
-  <section id="contact-card" aria-label="Contact form">
+  <!-- (REMOVED the #about-letswork section here) -->
+
+  <!-- Enhanced mobile menu script (includes hamburger morph) -->
+  <script>
+    (function () {
+      const header = document.querySelector('.sticky-header');
+      const hamburger = document.getElementById('hamburgerMenu');
+      const menu = document.getElementById('navLinksMobile');
+
+      // Compute and set CSS var for header height
+      function setHeaderHeightVar() {
+        const h = header ? header.offsetHeight : 118;
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      }
+      setHeaderHeightVar();
+      window.addEventListener('resize', setHeaderHeightVar);
+      window.addEventListener('scroll', setHeaderHeightVar);
+
+      function openMenu() {
+        menu.classList.add('active');
+        document.body.classList.add('menu-open');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu() {
+        menu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      function toggleMenu() {
+        if (menu.classList.contains('active')) closeMenu();
+        else openMenu();
+      }
+
+      // Button click to toggle
+      hamburger.addEventListener('click', toggleMenu);
+
+      // Close when clicking a link
+      menu.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (link) closeMenu();
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!menu.classList.contains('active')) return;
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
+      });
+
+      // Auto-close when switching to desktop
+      const mql = window.matchMedia('(min-width: 769px)');
+      mql.addEventListener('change', () => {
+        if (mql.matches) closeMenu();
+      });
+    })();
+  </script>
+
+  <!-- ===================== CONTACT CARD (Formspree) ===================== -->
+  <section id="contact-card">
     <form id="contactForm" novalidate>
       <!-- Header -->
       <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06);">
-        <div style="width:48px; height:48px; border-radius:12px; background:var(--brand); display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
+        <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
         <div>
           <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-          <p style="margin:6px 0 0 0; color:var(--ink-soft); font-size:14px;">
+          <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px;">
             Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
           </p>
         </div>
@@ -524,300 +531,36 @@
 
         <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
           <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
-          <label for="smsConsent" style="color:var(--ink-soft);">I agree to be contacted by phone or SMS about my inquiry.</label>
+          <label for="smsConsent" style="color:#cfd3dc;">I agree to be contacted by phone or SMS about my inquiry.</label>
         </div>
 
         <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
           <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
-          <label for="privacy" style="color:var(--ink-soft);">I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.</label>
+          <label for="privacy" style="color:#cfd3dc;">I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.</label>
         </div>
-
-        <!-- Hidden UTM capture -->
-        <input type="hidden" name="utm_source" id="utm_source">
-        <input type="hidden" name="utm_medium" id="utm_medium">
-        <input type="hidden" name="utm_campaign" id="utm_campaign">
-        <input type="hidden" name="utm_term" id="utm_term">
-        <input type="hidden" name="utm_content" id="utm_content">
-        <input type="hidden" name="referrer" id="referrer">
       </div>
 
       <!-- Footer -->
       <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
         <button id="submitBtn" type="submit"
-                style="background:var(--brand); color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
+                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer;">
           Send inquiry
         </button>
         <a href="mailto:aboveallcinematics@gmail.com"
-           style="color:var(--ink-soft); text-decoration:none;">Or email us directly → aboveallcinematics@gmail.com</a>
+           style="color:#cfd3dc; text-decoration:none;">Or email us directly → aboveallcinematics@gmail.com</a>
         <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px;">Secure • We never sell your data</span>
       </div>
 
       <!-- Status Bar -->
       <div id="formStatus" aria-live="polite"
-           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:var(--ink-soft);">
+           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc;">
       </div>
     </form>
   </section>
+  <!-- =================== /CONTACT CARD =================== -->
 
-  <!-- Alternate CTA: Square Appointments (Optional) -->
-  <section aria-label="Book a time" style="padding: 10px 0 50px; background:#0d1015; border-top:1px solid var(--line);">
-    <div style="max-width:980px;margin:0 auto;">
-      <!-- Replace src with your Square booking URL -->
-      <iframe title="Book an appointment"
-              src="https://squareup.com/appointments/buyer/widget/your-square-id"
-              style="width:100%;min-height:760px;border:0;border-radius:12px;box-shadow:var(--shadow);"></iframe>
-    </div>
-  </section>
-
-  <!-- ===================== ABOUT (The Drive to Create) ===================== -->
-  <section id="about" class="aac-about" aria-label="About">
-    <style>
-      /* Namespaced to #about */
-      #about {
-        --about-bg: url('aboutbg.jpg');
-        position: relative; padding: clamp(80px, 12vw, 160px) 20px; color:#fff; overflow:hidden; background:var(--bg);
-        scroll-margin-top: calc(var(--header-h) + 10px);
-      }
-      #about::before{
-        content:""; position:absolute; inset:0; background-image: var(--about-bg);
-        background-size: cover; background-position: center; filter: contrast(1.05) brightness(0.8) saturate(1.15); transform: scale(1.03);
-      }
-      #about .veil{
-        position:absolute; inset:0; z-index:0; pointer-events:none;
-        background:
-          radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
-          linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
-      }
-      #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
-
-      #about .title{
-        font-size: clamp(38px, 6vw, 84px); font-weight:800; letter-spacing:-.02em; line-height:1; margin-bottom:12px;
-        background:linear-gradient(90deg,#fff,#f7e7de 60%,#ffe1d1); -webkit-background-clip:text; background-clip:text; color:transparent;
-        text-shadow:0 10px 35px rgba(0,0,0,.45);
-      }
-      #about .spark{ background:linear-gradient(90deg,#ffd4bf,#ffffff); -webkit-background-clip:text; background-clip:text; color:transparent; position:relative; }
-      #about .spark::after{
-        content:""; position:absolute; left:0; bottom:-8px; height:3px; width:0%;
-        background:linear-gradient(90deg,#ffb38c,var(--brand)); border-radius:999px; animation:aac-underline 1.2s ease .4s forwards;
-      }
-      @keyframes aac-underline { to { width:100%; } }
-
-      #about .kicker{ max-width:860px; font-size:clamp(16px, 2.2vw, 22px); color:#f0f0f0; opacity:.95; margin-bottom:28px; }
-
-      #about .stats{
-        display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:30px 0 40px;
-      }
-      #about .stat{
-        background:rgba(255,255,255,0.08); backdrop-filter: blur(8px); border:1px solid var(--line);
-        border-radius:16px; padding:22px 20px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,.35);
-        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
-      }
-      #about .stat.visible{ opacity:1; transform:translateY(0); }
-      #about .stat .num{ font-size:clamp(28px, 4.5vw, 44px); font-weight:800; letter-spacing:-.02em; }
-      #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
-
-      #about .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:12px 0 30px; }
-      #about .card{
-        background:rgba(21,24,32,.82); border:1px solid var(--line); border-radius:16px; padding:clamp(18px,3vw,28px);
-        box-shadow:0 20px 55px rgba(0,0,0,.45); opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
-      }
-      #about .card.visible{ opacity:1; transform:translateY(0); }
-      #about .card h2{ font-size:clamp(22px, 3vw, 28px); margin-bottom:12px; }
-      #about .card p{ color:#eaeef7; opacity:.95; line-height:1.65; margin-bottom:10px; }
-      #about .values{ list-style:none; display:grid; gap:10px; padding-left:0; }
-      #about .values li{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); padding:12px 14px; border-radius:12px; }
-
-      #about .steps{ position:relative; margin:10px 0 12px; border-left:2px dashed rgba(255,255,255,.18); padding-left:18px; }
-      #about .step{ display:flex; gap:12px; margin:12px 0; align-items:flex-start; opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
-      #about .step.visible{ opacity:1; transform:translateY(0); }
-      #about .bullet{
-        min-width:34px; height:34px; border-radius:999px; display:flex; align-items:center; justify-content:center;
-        background:linear-gradient(145deg,var(--brand),#ff914d); color:#111; font-weight:800; box-shadow:0 8px 24px rgba(230,85,15,.35);
-        transform:translateX(-28px); border:2px solid rgba(0,0,0,.25);
-      }
-
-      #about .cta{
-        display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-        background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-        border:1px solid var(--line); padding:18px 20px; border-radius:14px; margin-top:24px;
-        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
-      }
-      #about .cta.visible{ opacity:1; transform:translateY(0); }
-      #about .cta p{ margin:0; font-weight:700; letter-spacing:.2px; }
-      #about .cta .solid{
-        display:inline-block; text-decoration:none; color:#fff; font-weight:800;
-        background:linear-gradient(145deg,var(--brand),#ff7b31); padding:12px 18px; border-radius:10px; box-shadow:0 10px 30px rgba(230,85,15,.35);
-        transition: transform .12s ease, box-shadow .12s ease;
-      }
-      #about .cta .solid:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(230,85,15,.45); }
-
-      @media (max-width:980px){
-        #about .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-        #about .split{ grid-template-columns:1fr; }
-      }
-      @media (max-width:560px){
-        #about .cta{ flex-direction:column; align-items:flex-start; gap:10px; }
-      }
-    </style>
-
-    <div class="veil"></div>
-
-    <div class="wrap">
-      <h1 class="title"><span class="spark">The</span> Drive <span class="spark">to</span> Create</h1>
-      <p class="kicker">We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.</p>
-
-      <div class="stats">
-        <div class="stat" data-target="250"><div class="num">0</div><div class="label">Projects Delivered</div></div>
-        <div class="stat" data-target="1200"><div class="num">0</div><div class="label">Drone Flight Hours</div></div>
-        <div class="stat" data-target="24"><div class="num">0</div><div class="label">Avg Turnaround (hrs)</div></div>
-        <div class="stat" data-target="150"><div class="num">0</div><div class="label">5★ Client Reviews</div></div>
-      </div>
-
-      <div class="split">
-        <div class="card">
-          <h2>Our Story</h2>
-          <p>Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to boardroom spotlights, our team crafts visuals that speak for you when words fall short. We’re operators, editors, pilots—problem solvers who obsess over framing, light, and narrative pace.</p>
-          <p>Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI, we’ll chart the flight path and carry the mission to delivery.</p>
-        </div>
-        <div class="card">
-          <h2>What Drives Us</h2>
-          <ul class="values">
-            <li>🎯 Clarity over clutter</li>
-            <li>⚡ Speed without shortcuts</li>
-            <li>🚁 Safety-first aerial ops</li>
-            <li>📈 Creative built for conversion</li>
-            <li>🤝 Real partnership, not transactions</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="steps">
-        <div class="step"><div class="bullet">1</div><div><h3>Discovery & Strategy</h3><p>Define outcomes, audience, and the emotional beat that hooks attention.</p></div></div>
-        <div class="step"><div class="bullet">2</div><div><h3>Pre-Production</h3><p>Scripts, shot lists, flight plans, permits, and logistics—handled.</p></div></div>
-        <div class="step"><div class="bullet">3</div><div><h3>Production</h3><p>Ground & aerial capture with cinema-first discipline and on-site review.</p></div></div>
-        <div class="step"><div class="bullet">4</div><div><h3>Post & Distribution</h3><p>Edit, sound, color, and cutdowns tailored to platforms that convert.</p></div></div>
-      </div>
-
-      <div class="cta">
-        <p>Got a vision? We’ll bring the velocity.</p>
-        <a href="#contact-card" class="solid">Start Your Project</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SCRIPTS ===== -->
   <script>
-    (function () {
-      const header = document.querySelector('.sticky-header');
-      const progress = document.getElementById('scrollProgress');
-      const hamburger = document.getElementById('hamburgerMenu');
-      const menu = document.getElementById('navLinksMobile');
-      const yt = document.getElementById('ytFrame');
-
-      // Set CSS var for header height
-      function setHeaderHeightVar() {
-        const h = header ? header.offsetHeight : 118;
-        document.documentElement.style.setProperty('--header-h', h + 'px');
-      }
-      setHeaderHeightVar();
-      window.addEventListener('resize', setHeaderHeightVar);
-      window.addEventListener('scroll', setHeaderHeightVar);
-
-      // Mobile menu
-      function openMenu(){ menu.classList.add('active'); document.body.classList.add('menu-open'); hamburger.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); }
-      function closeMenu(){ menu.classList.remove('active'); document.body.classList.remove('menu-open'); hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
-      function toggleMenu(){ menu.classList.contains('active') ? closeMenu() : openMenu(); }
-      hamburger.addEventListener('click', toggleMenu);
-      menu.addEventListener('click', (e)=>{ const link = e.target.closest('a[href]'); if(link) closeMenu(); });
-      document.addEventListener('click', (e)=>{ if (!menu.classList.contains('active')) return; if (!menu.contains(e.target) && !hamburger.contains(e.target)) closeMenu(); });
-      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu(); });
-      const mql = window.matchMedia('(min-width: 769px)'); mql.addEventListener('change', ()=>{ if (mql.matches) closeMenu(); });
-
-      // Scroll progress
-      function onScrollProgress(){
-        const h = document.documentElement;
-        const max = h.scrollHeight - h.clientHeight;
-        const pct = Math.max(0, Math.min(1, h.scrollTop / max));
-        progress.style.width = (pct * 100) + '%';
-      }
-      document.addEventListener('scroll', onScrollProgress, {passive:true}); onScrollProgress();
-
-      // Filter chips
-      const chips = document.querySelectorAll('.chip');
-      const cards = document.querySelectorAll('.service-card');
-      chips.forEach(ch => ch.addEventListener('click', ()=>{
-        chips.forEach(c=>c.setAttribute('aria-pressed', 'false'));
-        ch.setAttribute('aria-pressed', 'true');
-        const f = ch.dataset.filter;
-        cards.forEach(card=>{
-          const show = (f === 'all') || card.dataset.cat === f;
-          card.style.display = show ? '' : 'none';
-        });
-      }));
-
-      // Reveal animations & stat counters (About)
-      (function(){
-        const root = document.getElementById('about'); if(!root) return;
-        const revealEls = root.querySelectorAll('.stat, .card, .step, .cta');
-        const io = new IntersectionObserver((entries)=>{
-          entries.forEach(e=>{
-            if(e.isIntersecting){
-              e.target.classList.add('visible');
-              if(e.target.classList.contains('stat') && !e.target.dataset.done){
-                e.target.dataset.done = '1';
-                const numEl = e.target.querySelector('.num');
-                const target = parseInt(e.target.dataset.target||'0',10);
-                const start = performance.now(), dur = 1000;
-                const tick = (t)=>{
-                  const p = Math.min(1,(t-start)/dur);
-                  const val = Math.floor(target * (0.15 + 0.85*p*p));
-                  numEl.textContent = val.toLocaleString();
-                  if(p<1) requestAnimationFrame(tick); else numEl.textContent = target.toLocaleString();
-                };
-                requestAnimationFrame(tick);
-              }
-              io.unobserve(e.target);
-            }
-          });
-        },{threshold:.25});
-        revealEls.forEach(el=>io.observe(el));
-      })();
-
-      // YouTube: pause when offscreen
-      if (yt){
-        const yio = new IntersectionObserver(([e])=>{
-          yt.contentWindow.postMessage(JSON.stringify({
-            event:'command',
-            func: e.isIntersecting ? 'playVideo' : 'pauseVideo'
-          }),'*');
-        },{threshold:.5});
-        yio.observe(yt);
-      }
-
-      // Case study videos: play on hover/focus for "artist touch"
-      document.querySelectorAll('#case-studies video').forEach(v=>{
-        v.addEventListener('mouseenter', ()=> v.play());
-        v.addEventListener('focus', ()=> v.play());
-        v.addEventListener('mouseleave', ()=> v.pause());
-        v.addEventListener('blur', ()=> v.pause());
-      });
-
-      // UTM capture
-      (function captureUTM(){
-        const params = new URLSearchParams(location.search);
-        const setVal = (id, key)=>{ const el = document.getElementById(id); if(el) el.value = params.get(key) || ''; };
-        setVal('utm_source','utm_source');
-        setVal('utm_medium','utm_medium');
-        setVal('utm_campaign','utm_campaign');
-        setVal('utm_term','utm_term');
-        setVal('utm_content','utm_content');
-        const ref = document.getElementById('referrer'); if(ref) ref.value = document.referrer || '';
-      })();
-    })();
-  </script>
-
-  <!-- Contact form (Formspree) -->
-  <script>
+    // Contact form (Formspree)
     (function () {
       const form = document.getElementById('contactForm');
       const btn  = document.getElementById('submitBtn');
@@ -835,7 +578,11 @@
         e.preventDefault();
 
         if (form.website && form.website.value) return;
-        if (!form.checkValidity()) { form.reportValidity(); return; }
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
         btn.disabled = true; btn.textContent = 'Sending…';
         showStatus('Sending your message…');
@@ -850,21 +597,19 @@
           smsConsent: form.smsConsent.checked,
           privacy: form.privacy.checked,
           path: location.pathname,
-          ts: new Date().toISOString(),
-          utm_source: form.utm_source.value,
-          utm_medium: form.utm_medium.value,
-          utm_campaign: form.utm_campaign.value,
-          utm_term: form.utm_term.value,
-          utm_content: form.utm_content.value,
-          referrer: form.referrer.value
+          ts: new Date().toISOString()
         };
 
         try {
           const res = await fetch(FORMSPREE_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
             body: JSON.stringify(payload)
           });
+
           if (!res.ok) throw new Error('Formspree error');
           showStatus('Thanks! We’ll get back to you ASAP.', true);
           form.reset();
@@ -878,20 +623,285 @@
     })();
   </script>
 
-  <!-- Analytics (optional – replace with your IDs)
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config','G-XXXXXXX');
-  </script>
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init','YOUR_PIXEL_ID'); fbq('track','PageView');
-  </script>
-  -->
+  <!-- ===================== ABOUT (The Drive to Create) ===================== -->
+  <section id="about" class="aac-about">
+    <style>
+      /* ====== Namespaced to #about to avoid collisions ====== */
+      #about {
+        --about-bg: url('aboutbg.jpg');
+        position: relative;
+        padding: clamp(80px, 12vw, 160px) 20px;
+        color:#fff;
+        overflow:hidden;
+        background:#0e1116;
+        scroll-margin-top: 130px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      #about::before{
+        content:"";
+        position:absolute; inset:0;
+        background-image: var(--about-bg);
+        background-size: cover; background-position: center;
+        filter: contrast(1.05) brightness(0.8) saturate(1.15);
+        transform: scale(1.03);
+      }
+      #about .veil{
+        position:absolute; inset:0; z-index:0; pointer-events:none;
+        background:
+          radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
+          linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
+      }
+      #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
+
+      /* Title / Slogan */
+      #about .title{
+        font-size: clamp(38px, 6vw, 84px);
+        font-weight:800; letter-spacing:-.02em; line-height:1;
+        margin-bottom:12px;
+        background:linear-gradient(90deg,#fff,#f7e7de 60%,#ffe1d1);
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+        text-shadow:0 10px 35px rgba(0,0,0,.45);
+      }
+      #about .spark{
+        background:linear-gradient(90deg,#ffd4bf,#ffffff);
+        -webkit-background-clip:text; background-clip:text; color:transparent;
+        position:relative;
+      }
+      #about .spark::after{
+        content:""; position:absolute; left:0; bottom:-8px; height:3px; width:0%;
+        background:linear-gradient(90deg,#ffb38c,#e6550f); border-radius:999px;
+        animation:aac-underline 1.2s ease .4s forwards;
+      }
+      @keyframes aac-underline { to { width:100%; } }
+
+      #about .kicker{
+        max-width:860px; font-size:clamp(16px, 2.2vw, 22px);
+        color:#f0f0f0; opacity:.95; margin-bottom:28px;
+      }
+
+      /* Marquee */
+      #about .marquee{ position:relative; overflow:hidden; margin:26px 0 36px;
+        border-top:1px solid rgba(255,255,255,.12);
+        border-bottom:1px solid rgba(255,255,255,.12);
+        mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+      #about .marquee .track{
+        display:inline-block; white-space:nowrap; padding:10px 0;
+        font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:#ffffffb8;
+        animation:aac-marquee 24s linear infinite;
+      }
+      #about .marquee span{ padding:0 1.25rem; }
+      @keyframes aac-marquee { from {transform:translateX(0);} to {transform:translateX(-50%);} }
+
+      /* Stats */
+      #about .stats{
+        display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:16px; margin:30px 0 40px;
+      }
+      #about .stat{
+        background:rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+        border:1px solid rgba(255,255,255,.08); border-radius:16px;
+        padding:22px 20px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,.35);
+        opacity:0; transform:translateY(28px);
+        transition:opacity .7s ease, transform .7s ease;
+      }
+      #about .stat.visible{ opacity:1; transform:translateY(0); }
+      #about .stat .num{ font-size:clamp(28px, 4.5vw, 44px); font-weight:800; letter-spacing:-.02em; }
+      #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
+
+      /* Split story */
+      #about .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:12px 0 30px; }
+      #about .card{
+        background:rgba(21,24,32,.82); border:1px solid rgba(255,255,255,.08);
+        border-radius:16px; padding:clamp(18px,3vw,28px); box-shadow:0 20px 55px rgba(0,0,0,.45);
+        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+      }
+      #about .card.visible{ opacity:1; transform:translateY(0); }
+      #about .card h2{ font-size:clamp(22px, 3vw, 28px); margin-bottom:12px; }
+      #about .card p{ color:#eaeef7; opacity:.95; line-height:1.65; margin-bottom:10px; }
+      #about .values{ list-style:none; display:grid; gap:10px; padding-left:0; }
+      #about .values li{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); padding:12px 14px; border-radius:12px; }
+
+      /* Timeline */
+      #about .steps{ position:relative; margin:10px 0 12px; border-left:2px dashed rgba(255,255,255,.18); padding-left:18px; }
+      #about .step{ display:flex; gap:12px; margin:12px 0; align-items:flex-start;
+        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+      #about .step.visible{ opacity:1; transform:translateY(0); }
+      #about .bullet{
+        min-width:34px; height:34px; border-radius:999px; display:flex; align-items:center; justify-content:center;
+        background:linear-gradient(145deg,#e6550f,#ff914d); color:#111; font-weight:800;
+        box-shadow:0 8px 24px rgba(230,85,15,.35); transform:translateX(-28px);
+        border:2px solid rgba(0,0,0,.25);
+      }
+      #about .step h3{ margin:0 0 4px; font-size:18px; }
+      #about .step p{ margin:0; color:#dfe5f3; opacity:.92; }
+
+      /* CTA */
+      #about .cta{
+        display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+        background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+        border:1px solid rgba(255,255,255,.08); padding:18px 20px; border-radius:14px; margin-top:24px;
+        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+      }
+      #about .cta.visible{ opacity:1; transform:translateY(0); }
+      #about .cta p{ margin:0; font-weight:700; letter-spacing:.2px; }
+      #about .cta .solid{
+        display:inline-block; text-decoration:none; color:#fff; font-weight:800;
+        background:linear-gradient(145deg,#e6550f,#ff7b31);
+        padding:12px 18px; border-radius:10px; box-shadow:0 10px 30px rgba(230,85,15,.35);
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      #about .cta .solid:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(230,85,15,.45); }
+
+      @media (max-width:980px){
+        #about .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+        #about .split{ grid-template-columns:1fr; }
+      }
+      @media (max-width:560px){
+        #about .cta{ flex-direction:column; align-items:flex-start; gap:10px; }
+      }
+    </style>
+
+    <div class="veil"></div>
+
+    <div class="wrap">
+      <!-- Slogan -->
+      <h1 class="title">
+        <span class="spark">The</span> Drive <span class="spark">to</span> Create
+      </h1>
+      <p class="kicker">
+        We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.
+      </p>
+
+      <!-- Marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="track">
+          <span>Storytelling • Aerial Cinematics • Real Estate Media • Social Growth • Brand Films • </span>
+          <span>Storytelling • Aerial Cinematics • Real Estate Media • Social Growth • Brand Films • </span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat" data-target="250">
+          <div class="num">0</div>
+          <div class="label">Projects Delivered</div>
+        </div>
+        <div class="stat" data-target="1200">
+          <div class="num">0</div>
+          <div class="label">Drone Flight Hours</div>
+        </div>
+        <div class="stat" data-target="24">
+          <div class="num">0</div>
+          <div class="label">Avg Turnaround (hrs)</div>
+        </div>
+        <div class="stat" data-target="150">
+          <div class="num">0</div>
+          <div class="label">5★ Client Reviews</div>
+        </div>
+      </div>
+
+      <!-- Split story -->
+      <div class="split">
+        <div class="card">
+          <h2>Our Story</h2>
+          <p>
+            Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to
+            boardroom spotlights, our team crafts visuals that speak for you when words fall short. We’re operators,
+            editors, pilots—problem solvers who obsess over framing, light, and narrative pace.
+          </p>
+          <p>
+            Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI,
+            we’ll chart the flight path and carry the mission to delivery.
+          </p>
+        </div>
+        <div class="card">
+          <h2>What Drives Us</h2>
+          <ul class="values">
+            <li>🎯 Clarity over clutter</li>
+            <li>⚡ Speed without shortcuts</li>
+            <li>🚁 Safety-first aerial ops</li>
+            <li>📈 Creative built for conversion</li>
+            <li>🤝 Real partnership, not transactions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="steps">
+        <div class="step">
+          <div class="bullet">1</div>
+          <div>
+            <h3>Discovery & Strategy</h3>
+            <p>Define outcomes, audience, and the emotional beat that hooks attention.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bullet">2</div>
+          <div>
+            <h3>Pre-Production</h3>
+            <p>Scripts, shot lists, flight plans, permits, and logistics—handled.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bullet">3</div>
+          <div>
+            <h3>Production</h3>
+            <p>Ground & aerial capture with cinema-first discipline and on-site review.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="bullet">4</div>
+          <div>
+            <h3>Post & Distribution</h3>
+            <p>Edit, sound, color, and cutdowns tailored to platforms that convert.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta">
+        <p>Got a vision? We’ll bring the velocity.</p>
+        <a href="#contact-card" class="solid">Start Your Project</a>
+      </div>
+    </div>
+
+    <script>
+      // Self-contained reveal + count-up
+      (function(){
+        const root = document.getElementById('about');
+        if(!root) return;
+
+        const reveal = (els)=> {
+          const io = new IntersectionObserver((entries)=>{
+            entries.forEach(e=>{
+              if(e.isIntersecting){
+                e.target.classList.add('visible');
+                if(e.target.classList.contains('stat') && !e.target.dataset.done){
+                  e.target.dataset.done = '1';
+                  const numEl = e.target.querySelector('.num');
+                  const target = parseInt(e.target.dataset.target||'0',10);
+                  const start = performance.now(), dur = 1000;
+                  const tick = (t)=>{
+                    const p = Math.min(1,(t-start)/dur);
+                    const val = Math.floor(target * (0.15 + 0.85*p*p));
+                    numEl.textContent = val.toLocaleString();
+                    if(p<1) requestAnimationFrame(tick); else numEl.textContent = target.toLocaleString();
+                  };
+                  requestAnimationFrame(tick);
+                }
+                io.unobserve(e.target);
+              }
+            });
+          },{threshold:.25});
+          els.forEach(el=>io.observe(el));
+        };
+
+        reveal(root.querySelectorAll('.stat, .card, .step, .cta'));
+      })();
+    </script>
+  </section>
+  <!-- =================== /ABOUT =================== -->
 
 </body>
 </html>
