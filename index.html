@@ -31,11 +31,39 @@
     /* Logo */
     .logo img { width: 120px; height: auto; object-fit: contain; }
 
-    /* Hamburger Menu */
-    .hamburger-menu { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-    .hamburger-menu div { width: 30px; height: 4px; background-color: #fff; border-radius: 5px; }
+    /* ===== Hamburger (button with 3 bars that morph to X) ===== */
+    .hamburger {
+      display: none;                 /* shown via media query on mobile */
+      appearance: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 8px;
+      margin: 0;
+      width: 44px; height: 44px;
+      border-radius: 8px;
+      position: relative;
+    }
+    .hamburger:focus-visible {
+      outline: 2px solid #e6550f;
+      outline-offset: 2px;
+    }
+    .hamburger span {
+      position: absolute;
+      left: 8px; right: 8px;
+      height: 4px;
+      background: #fff;
+      border-radius: 4px;
+      transition: transform .25s ease, opacity .2s ease, top .25s ease, bottom .25s ease;
+    }
+    .hamburger span:nth-child(1) { top: 12px; }
+    .hamburger span:nth-child(2) { top: 20px; }
+    .hamburger span:nth-child(3) { top: 28px; }
+    .hamburger.open span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0.6); }
+    .hamburger.open span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
 
-    /* Navigation Links */
+    /* Navigation Links (desktop) */
     .nav-links { display: flex; gap: 25px; font-size: 32px; font-weight: 500; }
     .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; padding: 10px 16px; }
     .nav-links a:hover { color: #e6550f; }
@@ -101,42 +129,37 @@
     /* Lock page scroll when mobile menu open */
     body.menu-open { overflow: hidden; touch-action: none; }
 
-    /* Mobile responsiveness */
+    /* Mobile visibility rules */
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .hamburger-menu { display: flex; }
+      .hamburger { display: inline-flex; align-items: center; justify-content: center; }
       .phone-link { display: none; }
     }
 
     /* ===== Services & Shared UI ===== */
     .service-card h3{
-      /* Reverted to white with faint golden tint */
-      color: #fffdf6; /* warm white */
+      color: #fffdf6;
       text-shadow:
         0 1px 3px rgba(0,0,0,.85),
         0 0 12px rgba(255,215,128,.18),
         0 0 24px rgba(255,215,128,.12);
     }
-
-    /* Bigger, bolder titles + readability chip */
     .services .service-card h3{
       font-size: clamp(1.6rem, 2.6vw, 2.2rem);
       line-height: 1.25;
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-
-      /* Readability chip (glass dark pill behind text) */
       position: relative;
       display: inline-block;
       padding: 6px 10px;
       border-radius: 12px;
       z-index: 0;
-      /* Ensure no gradient text is applied */
       background: none;
       -webkit-background-clip: initial;
       background-clip: initial;
       -webkit-text-fill-color: #fffdf6;
+      -webkit-text-stroke: 0 transparent;
     }
     .services .service-card h3::before{
       content:"";
@@ -148,19 +171,8 @@
       border-radius: inherit;
       z-index:-1;
     }
-    /* Explicitly cancel any previous stroke or gradient rules in some browsers */
-    .services .service-card h3{
-      -webkit-text-stroke: 0 transparent;
-    }
-
-    .service-card p {
-      color: #fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    }
-    .service-card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 15px 35px rgba(0,255,255,0.25);
-    }
+    .service-card p { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+    .service-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 15px 35px rgba(0,255,255,0.25); }
     .service-card img:hover { transform: scale(1.05); }
     .cta-button:hover { transform: scale(1.02); box-shadow: 0 0 15px #00FFF0; }
 
@@ -254,10 +266,10 @@
       <img src="MediaCompany.png" alt="Media Company Logo">
     </div>
 
-    <!-- Added a11y attributes for keyboard/ARIA -->
-    <div class="hamburger-menu" id="hamburgerMenu" role="button" tabindex="0" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
-      <div></div><div></div><div></div>
-    </div>
+    <!-- New accessible hamburger button -->
+    <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
 
     <nav class="nav-links">
       <a href="#">Home</a>
@@ -403,7 +415,7 @@
     </div>
   </section>
 
-  <!-- Enhanced mobile menu script (replaces old simple toggle) -->
+  <!-- Enhanced mobile menu script (includes hamburger morph) -->
   <script>
     (function () {
       const header = document.querySelector('.sticky-header');
@@ -422,11 +434,13 @@
       function openMenu() {
         menu.classList.add('active');
         document.body.classList.add('menu-open');
+        hamburger.classList.add('open');
         hamburger.setAttribute('aria-expanded', 'true');
       }
       function closeMenu() {
         menu.classList.remove('active');
         document.body.classList.remove('menu-open');
+        hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       }
       function toggleMenu() {
@@ -434,16 +448,8 @@
         else openMenu();
       }
 
-      // Click to toggle
+      // Button click to toggle
       hamburger.addEventListener('click', toggleMenu);
-
-      // Keyboard support for hamburger (Enter/Space)
-      hamburger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleMenu();
-        }
-      });
 
       // Close when clicking a link
       menu.addEventListener('click', (e) => {
