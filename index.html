@@ -256,6 +256,10 @@
     @media (max-width: 768px) {
       #contact-card form { padding-bottom: 8px; }
     }
+
+    /* ======= NEW: ensure video sits behind, cards show above ======= */
+    #showreel { position: relative; z-index: 0; }
+    #about-letswork { position: relative; z-index: 1; isolation: isolate; }
   </style>
 </head>
 <body>
@@ -383,16 +387,10 @@
     </div>
   </section>
 
-  <!-- Full-width YouTube section -->
-  <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
+  <!-- ======= REPLACED: Full-width YouTube section with API-controlled player ======= -->
+  <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; z-index:0;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-      <iframe
-        src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&loop=1&playlist=1oTpwMC_KrY&mute=1&vq=hd1080"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        title="Hilton Head Island Premier Locations"></iframe>
+      <div id="aacShowreelPlayer" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
     </div>
   </section>
 
@@ -919,6 +917,49 @@
     </script>
   </section>
   <!-- =================== /ABOUT =================== -->
+
+  <!-- ========= YouTube IFrame API: autoplay (muted), playsinline, request 1080p ========= -->
+  <script>
+    (function () {
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScript = document.getElementsByTagName('script')[0];
+      firstScript.parentNode.insertBefore(tag, firstScript);
+
+      var player;
+      window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player('aacShowreelPlayer', {
+          videoId: '1oTpwMC_KrY',
+          playerVars: {
+            autoplay: 1,
+            mute: 1,                 // required for autoplay on mobile
+            controls: 0,
+            rel: 0,
+            modestbranding: 1,
+            loop: 1,
+            playlist: '1oTpwMC_KrY', // required for loop
+            playsinline: 1,          // iOS inline playback
+            vq: 'hd1080'             // initial quality hint
+          },
+          events: {
+            onReady: function (e) {
+              try {
+                e.target.mute();
+                e.target.playVideo();
+                e.target.setPlaybackQuality('hd1080');
+                setTimeout(function(){ e.target.setPlaybackQuality('hd1080'); }, 800);
+              } catch (err) {}
+            },
+            onStateChange: function (e) {
+              if (e.data === YT.PlayerState.PLAYING) {
+                try { e.target.setPlaybackQuality('hd1080'); } catch (err) {}
+              }
+            }
+          }
+        });
+      };
+    })();
+  </script>
 
 </body>
 </html>
