@@ -304,17 +304,6 @@
     <h2>Media Services Designed to Deliver Results</h2>
     <p class="lead">Transform your brand with cinematic storytelling, drone footage, and social media strategy.</p>
 
-    <!-- Filter chips -->
-    <div class="filters" role="toolbar" aria-label="Filter portfolio">
-      <button class="chip" data-filter="all" aria-pressed="true">All</button>
-      <button class="chip" data-filter="Brand">Brand</button>
-      <button class="chip" data-filter="RealEstate">Real Estate</button>
-      <button class="chip" data-filter="Aerial">Aerial</button>
-      <button class="chip" data-filter="Events">Events</button>
-      <button class="chip" data-filter="Social">Social</button>
-      <button class="chip" data-filter="Product">Product</button>
-    </div>
-
     <!-- Service Cards Grid -->
     <div class="grid" id="serviceGrid">
 
@@ -576,7 +565,7 @@
       document.addEventListener('scroll', onScrollProgress, {passive:true});
       onScrollProgress();
 
-      // Simple filter logic (for chips)
+      // Simple filter logic (for chips) – safe even if there are no .chip elements
       const chips = document.querySelectorAll('.chip');
       const cards = document.querySelectorAll('.service-card');
       chips.forEach(ch => ch.addEventListener('click', ()=>{
