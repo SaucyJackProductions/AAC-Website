@@ -202,10 +202,13 @@
 
   /* ===== Services (readability upgrades) ===== */
   .services {
-    padding: 4rem 2rem;
-    background:
-      linear-gradient(180deg, rgba(5,7,11,0.96), rgba(5,7,11,0.98)),
-      url('DJI_0648%202.jpg') center/cover no-repeat;
+  position: relative;
+  padding: 4rem 2rem;
+  /* Put the IMAGE first, gradient second, and make the gradient lighter */
+  background:
+    url('DJI_0648%202.jpg') center/cover no-repeat,
+    linear-gradient(180deg, rgba(5,7,11,0.6), rgba(5,7,11,0.85));
+}
   }
   .services h2{
     font-size: clamp(2.4rem, 4vw, 3rem);
