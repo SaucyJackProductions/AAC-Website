@@ -260,6 +260,29 @@
       font-family: 'Inter', sans-serif;
       font-weight: 400;
     }
+
+    /* ===== CONTACT (Get in touch) – full background image visible ===== */
+    #contact-card{
+      position: relative;
+      padding: 80px 20px;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: contain; /* show entire image */
+      background-color: #0e1116;
+      display: flex;
+      justify-content: center;
+    }
+    /* Keep your existing background-image source wherever it’s defined (external CSS, inline, etc.).
+       This just makes sure it displays fully without cropping. */
+
+    #contact-card form{
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      box-shadow: var(--shadow);
+      border-radius: 18px;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
@@ -379,31 +402,9 @@
     </div>
   </section>
 
-  <!-- About & Let's Work Section (unchanged layout, new fonts via globals) -->
-  <section id="about-letswork" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; padding: 80px 20px; background-color: #1a1a1a; color: white; gap: 40px;">
-    <!-- Left Card: About Us -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0s; background-color:#222; border-radius:12px; padding:40px; box-shadow:0 8px 20px rgba(0,0,0,0.5); position:relative; overflow:hidden;">
-      <div class="icon-accent" style="font-size:2.5rem; position:absolute; top:20px; right:20px; color:#e6550f; opacity:0.12;">📷</div>
-      <h2>About Us</h2>
-      <p style="font-family:'Inter',sans-serif; font-size:1.05rem;">
-        We create high-quality visual stories that capture your brand’s essence and engage audiences.
-        Discover how Above All Cinematics can elevate your business.
-      </p>
-      <a href="#about" class="btn-pill" style="margin-top:1.2rem;">Learn More</a>
-    </div>
+  <!-- *** Removed the About Us / Let's Work Together two-box section here *** -->
 
-    <!-- Right Card: Let's Work / Contact -->
-    <div class="card animated-card fade-slide" style="flex: 1 1 400px; max-width: 600px; --delay: 0.3s; background-color:#222; border-radius:12px; padding:40px; box-shadow:0 8px 20px rgba(0,0,0,0.5); position:relative; overflow:hidden;">
-      <div class="icon-accent" style="font-size:2.5rem; position:absolute; top:20px; right:20px; color:#e6550f; opacity:0.12;">📝</div>
-      <h2>Let's Work Together</h2>
-      <p style="font-family:'Inter',sans-serif; font-size:1.05rem;">
-        Ready to bring your vision to life? Reach out today and let's craft visuals that leave a lasting impression.
-      </p>
-      <a href="#contact-card" class="btn-pill" style="margin-top:1.2rem; background:linear-gradient(90deg,#0077ff,#00bfff);">Contact Us</a>
-    </div>
-  </section>
-
-  <!-- ===================== CONTACT CARD (original) ===================== -->
+  <!-- ===================== CONTACT CARD ===================== -->
   <section id="contact-card">
     <form id="contactForm" novalidate>
       <!-- Header -->
