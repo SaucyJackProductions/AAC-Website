@@ -261,42 +261,75 @@
       font-weight: 400;
     }
 
-    /* ===== CONTACT (Get in touch) – full background image visible ===== */
-    /* ===== CONTACT (Get in touch) – full background image visible ===== */
-#contact-card {
-  position: relative;
-  padding: 140px 20px;        /* more vertical space so image is fully visible */
-  background-image: url('crabweb.jpg');   /* <<< EXACT FILE NAME */
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: contain;   /* show entire image without cropping */
-  background-color: #0e1116;  /* around the edges */
-  display: flex;
-  justify-content: center;
-}
-
-/* Keep your form sitting nicely on top */
-#contact-card form {
-  max-width: 900px;
-  width: 100%;
-  margin: 0 auto;
-  box-shadow: var(--shadow);
-  border-radius: 18px;
-  overflow: hidden;
-  background: rgba(0,0,0,0.65);   /* optional: improves readability */
-  backdrop-filter: blur(6px);     /* optional: premium glass effect */
-}
-
-    /* Keep your existing background-image source wherever it’s defined (external CSS, inline, etc.).
-       This just makes sure it displays fully without cropping. */
-
-    #contact-card form{
-      max-width: 900px;
+    /* ===== CONTACT (Get in touch) – zero empty space, full image, floating cinematic card ===== */
+    #contact-card {
+      position: relative;
       width: 100%;
-      margin: 0 auto;
-      box-shadow: var(--shadow);
-      border-radius: 18px;
+      background-image: url('crabweb.jpg');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;              /* fills area with no empty space */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;                   /* full-screen section */
+      margin: 0;
+      padding: 0;
       overflow: hidden;
+    }
+
+    /* Dark cinematic veil */
+    #contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
+        linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.75));
+      z-index: 0;
+    }
+
+    /* Floating glass card */
+    #contact-card form {
+      position: relative;
+      z-index: 2;
+      width: min(900px, 92vw);
+      background: rgba(10,12,16,0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-radius: 22px;
+      border: 1px solid rgba(230,85,15,0.55);
+      overflow: hidden;
+      animation: floatCard 12s ease-in-out infinite alternate;
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.85),
+        0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    /* Glow under the card to sell the float */
+    #contact-card form::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -38px;
+      width: 70%;
+      height: 40px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(0,0,0,0.7), transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes floatCard {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-14px); }
+    }
+
+    @media(max-width:600px){
+      #contact-card {
+        min-height: auto;
+        background-size: cover;
+        padding: 40px 0;
+      }
     }
   </style>
 </head>
@@ -404,7 +437,7 @@
     </div>
   </section>
 
-  <!-- Full-width YouTube section (original) -->
+  <!-- Full-width YouTube section -->
   <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
       <iframe
@@ -417,13 +450,11 @@
     </div>
   </section>
 
-  <!-- *** Removed the About Us / Let's Work Together two-box section here *** -->
-
-  <!-- ===================== CONTACT CARD ===================== -->
+  <!-- ===================== CONTACT CARD (floating cinematic) ===================== -->
   <section id="contact-card">
     <form id="contactForm" novalidate>
       <!-- Header -->
-      <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06); background:#151820; color:#fff;">
+      <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(21,24,32,0.78); color:#fff;">
         <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
         <div>
           <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
@@ -434,7 +465,7 @@
       </div>
 
       <!-- Body -->
-      <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px; background:#151820; color:#fff;">
+      <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px; background:rgba(21,24,32,0.78); color:#fff;">
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
 
         <div style="grid-column: span 6;">
@@ -499,7 +530,7 @@
       </div>
 
       <!-- Footer -->
-      <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:#151820; color:#fff;">
+      <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:rgba(21,24,32,0.78); color:#fff;">
         <button id="submitBtn" type="submit"
                 style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
           Send inquiry
@@ -516,7 +547,7 @@
     </form>
   </section>
 
-  <!-- Scripts: keep original menu logic; add progress + simple filter -->
+  <!-- Scripts: menu, scroll progress, chips filter -->
   <script>
     (function () {
       const header = document.querySelector('.sticky-header');
