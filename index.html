@@ -262,16 +262,31 @@
     }
 
     /* ===== CONTACT (Get in touch) – full background image visible ===== */
-    #contact-card{
-      position: relative;
-      padding: 80px 20px;
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: contain; /* show entire image */
-      background-color: #0e1116;
-      display: flex;
-      justify-content: center;
-    }
+    /* ===== CONTACT (Get in touch) – full background image visible ===== */
+#contact-card {
+  position: relative;
+  padding: 140px 20px;        /* more vertical space so image is fully visible */
+  background-image: url('crabweb.jpg');   /* <<< EXACT FILE NAME */
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;   /* show entire image without cropping */
+  background-color: #0e1116;  /* around the edges */
+  display: flex;
+  justify-content: center;
+}
+
+/* Keep your form sitting nicely on top */
+#contact-card form {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.65);   /* optional: improves readability */
+  backdrop-filter: blur(6px);     /* optional: premium glass effect */
+}
+
     /* Keep your existing background-image source wherever it’s defined (external CSS, inline, etc.).
        This just makes sure it displays fully without cropping. */
 
