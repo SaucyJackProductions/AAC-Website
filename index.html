@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Above All Cinematics</title>
+
+  <!-- ✅ SEO Metadata (Critical) -->
+  <title>Above All Media | Hilton Head Video & Marketing</title>
+  <meta name="description" content="Above All Media provides cinematic video, real estate media, drone, and marketing content for Hilton Head and Lowcountry businesses.">
 
   <!-- Modern, cinematic font system -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -362,6 +365,7 @@
     </nav>
 
     <div class="header-actions">
+      <!-- ✅ Phone number already click-to-call -->
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
       <a href="#contact-card" class="cta-button" aria-label="Go to Get in touch form">Get in touch</a>
     </div>
@@ -463,7 +467,13 @@
         <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
         <div>
           <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-          <p style="margin:6px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
+
+          <!-- ✅ Service area text -->
+          <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
+            Serving Hilton Head Island, Bluffton, Beaufort &amp; the Lowcountry
+          </p>
+
+          <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
             Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
           </p>
         </div>
@@ -540,8 +550,13 @@
                 style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
           Send inquiry
         </button>
-        <a href="mailto:aboveallcinematics@gmail.com"
-           style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">Or email us directly → aboveallcinematics@gmail.com</a>
+
+        <!-- ✅ Updated email -->
+        <a href="mailto:info@aboveallmediasc.com"
+           style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">
+          Or email us directly → info@aboveallmediasc.com
+        </a>
+
         <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px; font-family:'Inter',sans-serif;">Secure • We never sell your data</span>
       </div>
 
@@ -687,7 +702,8 @@
           showStatus('Thanks! We’ll get back to you ASAP.', true);
           form.reset();
         } catch (err) {
-          showStatus('Oops—something went wrong. Email us at aboveallcinematics@gmail.com.');
+          <!-- ✅ Updated fallback email -->
+          showStatus('Oops—something went wrong. Email us at info@aboveallmediasc.com.');
           console.error(err);
         } finally {
           btn.disabled = false; btn.textContent = 'Send inquiry';
