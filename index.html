@@ -27,6 +27,9 @@
       --t-fast:120ms;
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
+
+      /* ✅ move nav right ~1 inch */
+      --nav-shift-right: 96px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -87,84 +90,89 @@
     }
 
     /* =========================================================
-       ✅ HEADER UPDATE (your requested fixes)
-       - Nav links truly centered on desktop (grid header layout)
-       - Logo bigger so it matches header height
-       - Header always uses the "scrolled" look (no color change)
-       - Keeps hamburger behavior for mobile
+       ✅ HEADER (FORCED OVERRIDES)
+       - Bigger logo
+       - Nav shifted right 1 inch
     ========================================================== */
-    .sticky-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
+    header.sticky-header {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      z-index: 1000 !important;
 
-      /* Always the "scrolled" look */
-      background: rgba(28, 28, 32, 0.92);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      background: rgba(28, 28, 32, 0.92) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      backdrop-filter: blur(10px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      padding: 10px 16px;
-      min-height: 84px;
+      padding: 10px 16px !important;
+      min-height: 90px !important;
 
-      /* ✅ True centering via GRID */
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
+      display: grid !important;
+      grid-template-columns: auto 1fr auto !important;
+      align-items: center !important;
 
-      border-radius: 0;
-      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      border-radius: 0 !important;
     }
 
     /* Logo wrapper */
-    .logo{
-      display:flex;
-      align-items:center;
+    header.sticky-header .logo{
+      display:flex !important;
+      align-items:center !important;
     }
-    .logo a{
-      display:inline-flex;
-      align-items:center;
-      text-decoration:none;
-      line-height:0;
+    header.sticky-header .logo a{
+      display:inline-flex !important;
+      align-items:center !important;
+      text-decoration:none !important;
+      line-height:0 !important;
     }
 
-    /* ✅ Bigger logo + transparent-safe rendering */
-    .logo img{
+    /* ✅ LOGO BIGGER (desktop) */
+    header.sticky-header .logo img{
       background: transparent !important;
-      height: 68px; /* bigger on desktop */
-      width: auto;
-      object-fit: contain;
-      display:block;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+      height: 82px !important; /* ✅ bigger than your current 68px */
+      width: auto !important;
+      object-fit: contain !important;
+      display:block !important;
+      max-height: none !important;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
 
-    /* ✅ Center the desktop nav links */
-    .nav-links{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap: 26px;
-      font-size: clamp(16px, 1.6vw, 20px);
-      font-weight: 600;
+    /* ✅ NAV SHIFT RIGHT ~ 1 inch */
+    header.sticky-header nav.nav-links{
+      display:flex !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap: 26px !important;
+      font-size: clamp(16px, 1.6vw, 20px) !important;
+      font-weight: 600 !important;
+
+      /* ✅ THIS is the inch shift */
+      transform: translateX(var(--nav-shift-right)) !important;
+
+      /* keep it centered within the middle grid column */
+      justify-self: center !important;
+      width: 100% !important;
     }
-    .nav-links a{
-      color: white;
-      text-decoration: none;
-      transition: color var(--t-fast) var(--ease);
-      padding: 10px 14px;
+
+    header.sticky-header nav.nav-links a{
+      color: white !important;
+      text-decoration: none !important;
+      transition: color var(--t-fast) var(--ease) !important;
+      padding: 10px 14px !important;
     }
-    .nav-links a:hover { color: var(--brand); }
+    header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
     /* Right side actions align right */
-    .header-actions{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      gap: 16px;
-      margin-left: 0; /* important for true centering */
+    header.sticky-header .header-actions{
+      display:flex !important;
+      justify-content:flex-end !important;
+      align-items:center !important;
+      gap: 16px !important;
+      justify-self: end !important;
+      margin-left: 0 !important;
     }
 
     .phone-link {
@@ -228,16 +236,16 @@
     body.menu-open { overflow: hidden; touch-action: none; }
 
     @media (max-width: 768px) {
-      /* On mobile: logo + hamburger + actions */
-      .sticky-header{
-        grid-template-columns: auto auto 1fr;
-        min-height: 76px;
+      header.sticky-header{
+        grid-template-columns: auto auto 1fr !important;
+        min-height: 76px !important;
       }
-      .logo img{ height: 56px; } /* bigger than before but fits */
-      .nav-links { display: none; }
-      .hamburger { display: inline-flex; align-items: center; justify-content: center; }
-      .phone-link { display: none; }
-      .header-actions{ justify-content:flex-end; }
+      /* ✅ LOGO BIGGER (mobile) */
+      header.sticky-header .logo img{ height: 64px !important; }
+      .nav-links { display: none !important; }
+      .hamburger { display: inline-flex !important; align-items: center; justify-content: center; }
+      .phone-link { display: none !important; }
+      .header-actions{ justify-content:flex-end !important; }
     }
 
     /* ===== Standard Components ===== */
@@ -403,6 +411,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -509,7 +518,7 @@
     </div>
   </section>
 
-  <!-- ✅ FIXED: YouTube section now renders properly (no comment inside iframe tag) -->
+  <!-- ✅ YouTube -->
   <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
       <iframe
@@ -982,3 +991,4 @@
 
 </body>
 </html>
+
