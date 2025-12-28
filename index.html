@@ -86,31 +86,63 @@
       transition: width var(--t-fast) var(--ease);
     }
 
-    /* Header styles */
+    /* =========================================================
+       ✅ HEADER FIX (Changes 1–4 applied)
+       1) Glass/cinematic header (not solid)
+       2) Ensure logo has no background
+       3) Logo sizing + crisp display
+       4) Optional drop-shadow polish
+    ========================================================== */
     .sticky-header {
-      position: fixed; top: 0; left: 0; width: 100%;
-      background-color: #333;
-      padding: 8px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      /* Glass header */
+      background: rgba(20, 20, 20, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      padding: 10px 20px;
       z-index: 1000;
-      display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      box-shadow:
+        0 6px 20px rgba(0,0,0,0.35),
+        inset 0 -1px 0 rgba(255,255,255,0.06);
+
       border-radius: 0;
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
 
-    /* ✅ Logo (UPDATED: WebP + clickable + crisp sizing) */
+    /* ✅ Logo wrapper */
+    .logo{
+      display:flex;
+      align-items:center;
+    }
     .logo a{
       display:inline-flex;
       align-items:center;
       text-decoration:none;
       line-height:0;
     }
+
+    /* ✅ Logo image: transparent + crisp + subtle shadow */
     .logo img{
-      height: 56px;   /* display size (crisp because source image is larger) */
+      background: transparent !important;
+      height: 56px;
       width: auto;
       object-fit: contain;
       display:block;
+
+      /* Optional polish */
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
     }
+
     @media (max-width: 768px){
       .logo img{ height: 48px; }
     }
