@@ -98,8 +98,22 @@
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
 
-    /* Logo */
-    .logo img { width: 120px; height: auto; object-fit: contain; }
+    /* ✅ Logo (UPDATED: WebP + clickable + crisp sizing) */
+    .logo a{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+      line-height:0;
+    }
+    .logo img{
+      height: 56px;   /* display size (crisp because source image is larger) */
+      width: auto;
+      object-fit: contain;
+      display:block;
+    }
+    @media (max-width: 768px){
+      .logo img{ height: 48px; }
+    }
 
     /* ===== Hamburger ===== */
     .hamburger {
@@ -341,7 +355,13 @@
 
   <header class="sticky-header">
     <div class="logo">
-      <img src="MediaCompany.png" alt="Above All Media Logo">
+      <a href="#" aria-label="Above All Media Home">
+        <img
+          src="assets/images/logo/above-all-media-logo-lighthouse.webp"
+          alt="Above All Media"
+          decoding="async"
+        />
+      </a>
     </div>
 
     <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
