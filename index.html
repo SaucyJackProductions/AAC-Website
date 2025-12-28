@@ -87,39 +87,39 @@
     }
 
     /* =========================================================
-       ✅ HEADER FIX (Changes 1–4 applied)
-       1) Glass/cinematic header (not solid)
-       2) Ensure logo has no background
-       3) Logo sizing + crisp display
-       4) Optional drop-shadow polish
+       ✅ HEADER UPDATE (your requested fixes)
+       - Nav links truly centered on desktop (grid header layout)
+       - Logo bigger so it matches header height
+       - Header always uses the "scrolled" look (no color change)
+       - Keeps hamburger behavior for mobile
     ========================================================== */
     .sticky-header {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-
-      /* Glass header */
-      background: rgba(20, 20, 20, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      padding: 10px 20px;
       z-index: 1000;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      /* Always the "scrolled" look */
+      background: rgba(28, 28, 32, 0.92);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 
-      box-shadow:
-        0 6px 20px rgba(0,0,0,0.35),
-        inset 0 -1px 0 rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      min-height: 84px;
+
+      /* ✅ True centering via GRID */
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
 
       border-radius: 0;
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
 
-    /* ✅ Logo wrapper */
+    /* Logo wrapper */
     .logo{
       display:flex;
       align-items:center;
@@ -131,21 +131,61 @@
       line-height:0;
     }
 
-    /* ✅ Logo image: transparent + crisp + subtle shadow */
+    /* ✅ Bigger logo + transparent-safe rendering */
     .logo img{
       background: transparent !important;
-      height: 56px;
+      height: 68px; /* bigger on desktop */
       width: auto;
       object-fit: contain;
       display:block;
-
-      /* Optional polish */
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
     }
 
-    @media (max-width: 768px){
-      .logo img{ height: 48px; }
+    /* ✅ Center the desktop nav links */
+    .nav-links{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap: 26px;
+      font-size: clamp(16px, 1.6vw, 20px);
+      font-weight: 600;
     }
+    .nav-links a{
+      color: white;
+      text-decoration: none;
+      transition: color var(--t-fast) var(--ease);
+      padding: 10px 14px;
+    }
+    .nav-links a:hover { color: var(--brand); }
+
+    /* Right side actions align right */
+    .header-actions{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap: 16px;
+      margin-left: 0; /* important for true centering */
+    }
+
+    .phone-link {
+      color: #fff; text-decoration: none;
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height: 1;
+      transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+      white-space: nowrap;
+    }
+    .phone-link:hover {
+      text-shadow: 0 0 8px var(--brand), 0 0 16px var(--brand);
+      transform: translateY(-1px);
+    }
+
+    .cta-button {
+      background-color: var(--brand); color: white;
+      padding: 12px 26px; text-decoration: none; border-radius: 8px;
+      font-size: clamp(14px, 1.4vw, 18px); font-weight: 700;
+      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+    }
+    .cta-button:hover { background-color: #d94e0f; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(230,85,15,.35); }
 
     /* ===== Hamburger ===== */
     .hamburger {
@@ -166,32 +206,6 @@
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0.6); }
     .hamburger.open span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
 
-    /* ✅ Responsive header typography */
-    .nav-links { display: flex; gap: 25px; font-size: clamp(16px, 2.0vw, 22px); font-weight: 600; }
-    .nav-links a { color: white; text-decoration: none; transition: color var(--t-fast) var(--ease); padding: 10px 16px; }
-    .nav-links a:hover { color: var(--brand); }
-
-    .header-actions { display: flex; align-items: center; gap: 16px; margin-left: 16px; }
-
-    .phone-link {
-      color: #fff; text-decoration: none;
-      font-size: clamp(16px, 2.0vw, 22px); line-height: 1;
-      transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-      white-space: nowrap;
-    }
-    .phone-link:hover {
-      text-shadow: 0 0 8px var(--brand), 0 0 16px var(--brand);
-      transform: translateY(-1px);
-    }
-
-    .cta-button {
-      background-color: var(--brand); color: white;
-      padding: 12px 26px; text-decoration: none; border-radius: 8px;
-      font-size: clamp(14px, 1.7vw, 18px); font-weight: 700;
-      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-    }
-    .cta-button:hover { background-color: #d94e0f; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(230,85,15,.35); }
-
     /* ====== Mobile dropdown ====== */
     .nav-links-mobile {
       position: fixed; left: 0; right: 0; top: var(--header-h);
@@ -205,7 +219,8 @@
     .nav-links-mobile.active { display: block; opacity: 1; transform: translateY(0); }
     .nav-links-mobile a {
       display: block; padding: 16px 20px; color: white; text-decoration: none;
-      font-size: 18px; font-weight: 600; letter-spacing: .2px; transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+      font-size: 18px; font-weight: 600; letter-spacing: .2px;
+      transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
     }
     .nav-links-mobile a + a { border-top: 1px solid rgba(255,255,255,0.06); }
     .nav-links-mobile a:hover { background: #444; }
@@ -213,9 +228,16 @@
     body.menu-open { overflow: hidden; touch-action: none; }
 
     @media (max-width: 768px) {
+      /* On mobile: logo + hamburger + actions */
+      .sticky-header{
+        grid-template-columns: auto auto 1fr;
+        min-height: 76px;
+      }
+      .logo img{ height: 56px; } /* bigger than before but fits */
       .nav-links { display: none; }
       .hamburger { display: inline-flex; align-items: center; justify-content: center; }
       .phone-link { display: none; }
+      .header-actions{ justify-content:flex-end; }
     }
 
     /* ===== Standard Components ===== */
