@@ -28,7 +28,7 @@
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* ✅ move nav right ~1 inch */
+      /* ✅ move nav right ~1 inch (desktop only) */
       --nav-shift-right: 96px;
     }
 
@@ -90,9 +90,12 @@
     }
 
     /* =========================================================
-       ✅ HEADER (FORCED OVERRIDES)
-       - Bigger logo
-       - Nav shifted right 1 inch
+       ✅ HEADER (FIXED + CLEAN)
+       Desktop:  Logo | Nav | Actions
+       Mobile:   Logo | Get in touch | Hamburger (right)
+       Fixes:
+       - Forces desktop nav to be hidden on mobile (even if other rules fight it)
+       - Enlarges logo on both desktop and mobile
     ========================================================== */
     header.sticky-header {
       position: fixed !important;
@@ -108,12 +111,11 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
       padding: 10px 16px !important;
-      min-height: 90px !important;
-
+      min-height: 110px !important; /* ✅ allow bigger logo */
       display: grid !important;
-      grid-template-columns: auto 1fr auto !important;
+      grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
       align-items: center !important;
-
+      gap: 14px !important;
       border-radius: 0 !important;
     }
 
@@ -132,15 +134,14 @@
     /* ✅ LOGO BIGGER (desktop) */
     header.sticky-header .logo img{
       background: transparent !important;
-      height: 82px !important; /* ✅ bigger than your current 68px */
+      height: 110px !important; /* ✅ larger on desktop */
       width: auto !important;
       object-fit: contain !important;
       display:block !important;
-      max-height: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
 
-    /* ✅ NAV SHIFT RIGHT ~ 1 inch */
+    /* Desktop nav */
     header.sticky-header nav.nav-links{
       display:flex !important;
       justify-content:center !important;
@@ -149,10 +150,9 @@
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
 
-      /* ✅ THIS is the inch shift */
+      /* ✅ inch shift on desktop only */
       transform: translateX(var(--nav-shift-right)) !important;
 
-      /* keep it centered within the middle grid column */
       justify-self: center !important;
       width: 100% !important;
     }
@@ -165,7 +165,7 @@
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
-    /* Right side actions align right */
+    /* Actions */
     header.sticky-header .header-actions{
       display:flex !important;
       justify-content:flex-end !important;
@@ -176,7 +176,8 @@
     }
 
     .phone-link {
-      color: #fff; text-decoration: none;
+      color: #fff;
+      text-decoration: none;
       font-size: clamp(16px, 1.6vw, 20px);
       line-height: 1;
       transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
@@ -188,46 +189,94 @@
     }
 
     .cta-button {
-      background-color: var(--brand); color: white;
-      padding: 12px 26px; text-decoration: none; border-radius: 8px;
-      font-size: clamp(14px, 1.4vw, 18px); font-weight: 700;
+      background-color: var(--brand);
+      color: white;
+      padding: 12px 26px;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 700;
       transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      white-space: nowrap;
     }
-    .cta-button:hover { background-color: #d94e0f; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(230,85,15,.35); }
+    .cta-button:hover {
+      background-color: #d94e0f;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(230,85,15,.35);
+    }
 
     /* ===== Hamburger ===== */
     .hamburger {
-      display: none;
-      appearance: none; border: 0; background: transparent; cursor: pointer;
-      padding: 8px; margin: 0; width: 44px; height: 44px; border-radius: 8px; position: relative;
+      display: none; /* shown on mobile only */
+      appearance: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 8px;
+      margin: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      position: relative;
       transition: transform var(--t-fast) var(--ease);
     }
     .hamburger:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
     .hamburger span {
-      position: absolute; left: 8px; right: 8px; height: 4px; background: #fff; border-radius: 4px;
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      height: 4px;
+      background: #fff;
+      border-radius: 4px;
       transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
     }
-    .hamburger span:nth-child(1) { top: 12px; }
-    .hamburger span:nth-child(2) { top: 20px; }
-    .hamburger span:nth-child(3) { top: 28px; }
-    .hamburger.open span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+    .hamburger span:nth-child(1) { top: 14px; }
+    .hamburger span:nth-child(2) { top: 22px; }
+    .hamburger span:nth-child(3) { top: 30px; }
+    .hamburger.open span:nth-child(1) { top: 22px; transform: rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0.6); }
-    .hamburger.open span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
+    .hamburger.open span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
 
     /* ====== Mobile dropdown ====== */
     .nav-links-mobile {
-      position: fixed; left: 0; right: 0; top: var(--header-h);
-      z-index: 1500; display: none; background: rgba(33,33,33,0.96);
-      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      width: 100%; padding: 8px 0; text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35); border-bottom: 1px solid rgba(255,255,255,0.06);
-      max-height: calc(100dvh - var(--header-h)); overflow-y: auto; transform: translateY(-8px); opacity: 0;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: var(--header-h);
+      z-index: 1500;
+
+      display: none;
+      background: rgba(33,33,33,0.96);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+
+      transform: translateY(-8px);
+      opacity: 0;
       transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
     }
-    .nav-links-mobile.active { display: block; opacity: 1; transform: translateY(0); }
+    .nav-links-mobile.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
     .nav-links-mobile a {
-      display: block; padding: 16px 20px; color: white; text-decoration: none;
-      font-size: 18px; font-weight: 600; letter-spacing: .2px;
+      display: block;
+      padding: 16px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .2px;
       transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
     }
     .nav-links-mobile a + a { border-top: 1px solid rgba(255,255,255,0.06); }
@@ -235,17 +284,49 @@
 
     body.menu-open { overflow: hidden; touch-action: none; }
 
+    /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        grid-template-columns: auto auto 1fr !important;
-        min-height: 76px !important;
+        /* ✅ Mobile: logo | CTA | hamburger */
+        grid-template-columns: auto 1fr auto !important;
+        min-height: 120px !important; /* ✅ allow bigger logo */
       }
-      /* ✅ LOGO BIGGER (mobile) */
-      header.sticky-header .logo img{ height: 64px !important; }
-      .nav-links { display: none !important; }
-      .hamburger { display: inline-flex !important; align-items: center; justify-content: center; }
-      .phone-link { display: none !important; }
-      .header-actions{ justify-content:flex-end !important; }
+
+      /* ✅ make logo larger on mobile */
+      header.sticky-header .logo img{
+        height: 96px !important;
+      }
+
+      /* ✅ HARD-KILL desktop nav on mobile (fixes "menu screwed up") */
+      header.sticky-header nav.nav-links{
+        display: none !important;
+        transform: none !important;
+      }
+
+      /* ✅ center the CTA button in the middle column */
+      header.sticky-header .header-actions{
+        justify-self: center !important;
+        justify-content: center !important;
+      }
+
+      /* hide phone on mobile */
+      header.sticky-header .phone-link{
+        display: none !important;
+      }
+
+      /* show hamburger on mobile, right side */
+      .hamburger{
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        justify-self: end !important;
+      }
+
+      /* CTA sizing on mobile */
+      header.sticky-header .cta-button{
+        padding: 12px 22px !important;
+        border-radius: 12px !important;
+      }
     }
 
     /* ===== Standard Components ===== */
@@ -264,12 +345,21 @@
     .btn-pill:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,191,255,.35); }
 
     .chip{
-      padding:8px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:#fff;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
       background:rgba(21,24,32,.65);
-      cursor:pointer; font-weight:600; font-size:.9rem;
+      cursor:pointer;
+      font-weight:600;
+      font-size:.9rem;
       transition:transform var(--t-fast) var(--ease), background var(--t-med) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
-    .chip[aria-pressed="true"]{ background:linear-gradient(145deg,var(--brand),#ff7b31); border-color:transparent; box-shadow:0 8px 24px rgba(230,85,15,.35); }
+    .chip[aria-pressed="true"]{
+      background:linear-gradient(145deg,var(--brand),#ff7b31);
+      border-color:transparent;
+      box-shadow:0 8px 24px rgba(230,85,15,.35);
+    }
     .chip:hover{ transform:translateY(-1px); }
 
     /* ===== Services ===== */
@@ -293,17 +383,31 @@
       font-family: 'Inter', sans-serif;
       font-weight: 400;
     }
-    .filters{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom: 2.0rem; }
+    .filters{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-bottom: 2.0rem;
+    }
 
     .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
     .service-card{
-      background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden;
-      width: 400px; text-align: center; transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 400px;
+      text-align: center;
+      transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
       cursor: pointer;
     }
     .service-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,255,255,0.22); }
     .service-card img{
-      width: 100%; height: 260px; object-fit: cover; display:block;
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display:block;
       transition: transform 260ms var(--ease);
     }
     .service-card img:hover { transform: scale(1.03); }
@@ -324,7 +428,9 @@
         0 0 24px rgba(255,215,128,.12);
     }
     .service-card h3::before{
-      content:""; position:absolute; inset:-4px -8px;
+      content:"";
+      position:absolute;
+      inset:-4px -8px;
       background: rgba(10,12,16,0.55);
       border: 1px solid rgba(255,255,255,0.08);
       backdrop-filter: blur(4px);
@@ -427,21 +533,27 @@
       </a>
     </div>
 
-    <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav-links">
+    <!-- Desktop nav (hidden on mobile) -->
+    <nav class="nav-links" aria-label="Primary navigation">
       <a href="#" data-section="top">Home</a>
       <a href="#about" data-section="about">About</a>
       <a href="#services" data-section="services">Services</a>
       <a href="#contact-card" data-section="contact">Contact</a>
     </nav>
 
+    <!-- Actions (CTA will sit in the middle on mobile) -->
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
       <a href="#contact-card" class="cta-button" aria-label="Go to Get in touch form">Get in touch</a>
     </div>
+
+    <!-- Hamburger (right on mobile) -->
+    <button class="hamburger" id="hamburgerMenu"
+            aria-controls="navLinksMobile"
+            aria-expanded="false"
+            aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <div class="nav-links-mobile" id="navLinksMobile" role="menu" aria-label="Mobile navigation">
@@ -991,4 +1103,3 @@
 
 </body>
 </html>
-
