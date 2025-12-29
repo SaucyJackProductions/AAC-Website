@@ -97,12 +97,14 @@
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
 
-       ✅ CHANGES YOU REQUESTED:
-       - Remove even MORE spacing around the logo (ZERO)
-       - Make logo DOUBLE size
-       - Ensure logo is flush left/top/bottom of the header
+       ✅ CHANGES NOW:
+       - Remove the "dead space" in the header bar under logo/nav/actions
+       - Tighten nav links, phone, button, hamburger
+       - Keep logo large, but do NOT force extra vertical padding
+       - Header height auto-fits content (still big logo)
     ========================================================== */
-    header.sticky-header {
+
+    header.sticky-header{
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
@@ -115,165 +117,179 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      /* ✅ CRITICAL: no padding so logo can be flush */
+      /* ✅ KEY: remove bar padding + forced height */
       padding: 0 !important;
-
-      /* ✅ DOUBLE logo size → increase header height to match */
-      min-height: 220px !important;
+      height: auto !important;
+      min-height: 0 !important;
 
       display: grid !important;
-      grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
-      align-items: stretch !important;
+      grid-template-columns: auto 1fr auto auto !important; /* logo | nav | actions | hamburger */
+      align-items: center !important;
 
-      /* ✅ CRITICAL: remove grid gap (this was “invisible padding”) */
       gap: 0 !important;
-
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: absolute zero spacing + stretch full header height */
+    /* ✅ LOGO: no extra space at all */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
-      display:flex !important;
-      align-items: stretch !important;
-      justify-content: flex-start !important;
-      height: 220px !important;
       line-height: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
     }
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
-      display:flex !important;
-      align-items: stretch !important;
-      justify-content: flex-start !important;
-      height: 100% !important;
       line-height: 0 !important;
-      text-decoration:none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      text-decoration: none !important;
     }
 
-    /* ✅ DOUBLE SIZE LOGO */
+    /* ✅ Big logo, but header stays tight (no forced tall bar padding) */
     header.sticky-header .logo img{
+      display: block !important;
       margin: 0 !important;
       padding: 0 !important;
-      display:block !important;
-      background: transparent !important;
-
-      height: 220px !important;
+      height: 150px !important;      /* ✅ adjust this (120–180) */
       width: auto !important;
-
       object-fit: contain !important;
       max-height: none !important;
-
-      /* keep it clean */
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
     }
 
     /* Desktop nav */
     header.sticky-header nav.nav-links{
-      display:flex !important;
-      justify-content:center !important;
-      align-items:center !important;
-      gap: 26px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+
+      /* ✅ reduce extra vertical space */
+      padding: 0 18px !important;
+      margin: 0 !important;
+
+      gap: 20px !important;
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
 
-      /* ✅ inch shift on desktop only */
       transform: translateX(var(--nav-shift-right)) !important;
-
       justify-self: center !important;
       width: 100% !important;
 
-      /* ✅ give nav its own padding WITHOUT touching the logo */
-      padding: 0 18px !important;
+      line-height: 1 !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
 
     header.sticky-header nav.nav-links a{
       color: white !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
-      padding: 10px 14px !important;
+
+      /* ✅ smaller vertical padding (removes “space under links”) */
+      padding: 10px 12px !important;
+      margin: 0 !important;
+      line-height: 1 !important;
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
     /* Actions */
     header.sticky-header .header-actions{
-      display:flex !important;
-      justify-content:flex-end !important;
-      align-items:center !important;
-      gap: 16px !important;
-      justify-self: end !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
 
-      /* ✅ right-side breathing room WITHOUT affecting logo */
-      padding-right: 16px !important;
-      padding-left: 12px !important;
+      gap: 14px !important;
+
+      /* ✅ reduce vertical padding */
+      padding: 0 16px 0 12px !important;
       margin: 0 !important;
+
+      justify-self: end !important;
+      line-height: 1 !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
 
-    .phone-link {
-      color: #fff;
-      text-decoration: none;
+    .phone-link{
+      color:#fff;
+      text-decoration:none;
       font-size: clamp(16px, 1.6vw, 20px);
-      line-height: 1;
-      transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+      line-height: 1 !important;
+      padding: 0 !important;
+      margin: 0 !important;
       white-space: nowrap;
+      transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
     }
-    .phone-link:hover {
+    .phone-link:hover{
       text-shadow: 0 0 8px var(--brand), 0 0 16px var(--brand);
       transform: translateY(-1px);
     }
 
-    .cta-button {
+    .cta-button{
       background-color: var(--brand);
       color: white;
-      padding: 12px 26px;
       text-decoration: none;
       border-radius: 10px;
       font-size: clamp(14px, 1.4vw, 18px);
       font-weight: 700;
-      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
       white-space: nowrap;
+
+      /* ✅ tighter button (removes extra header height) */
+      padding: 10px 18px !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+
+      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
-    .cta-button:hover {
-      background-color: #d94e0f;
+    .cta-button:hover{
+      background-color:#d94e0f;
       transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(230,85,15,.35);
+      box-shadow:0 6px 18px rgba(230,85,15,.35);
     }
 
     /* ===== Hamburger ===== */
-    .hamburger {
-      display: none; /* shown on mobile only */
-      appearance: none;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      padding: 8px;
-      margin: 0;
-      width: 48px;
-      height: 48px;
+    .hamburger{
+      display:none; /* mobile only */
+      appearance:none;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+
+      /* ✅ remove extra space */
+      padding: 6px !important;
+      margin: 0 10px 0 0 !important;
+
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
       position: relative;
       transition: transform var(--t-fast) var(--ease);
+      line-height: 1 !important;
+      align-self: center !important;
     }
-    .hamburger:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
-    .hamburger span {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      height: 4px;
-      background: #fff;
-      border-radius: 4px;
+    .hamburger:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
+    .hamburger span{
+      position:absolute;
+      left:10px;
+      right:10px;
+      height:4px;
+      background:#fff;
+      border-radius:4px;
       transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
     }
-    .hamburger span:nth-child(1) { top: 14px; }
-    .hamburger span:nth-child(2) { top: 22px; }
-    .hamburger span:nth-child(3) { top: 30px; }
-    .hamburger.open span:nth-child(1) { top: 22px; transform: rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0.6); }
-    .hamburger.open span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+    .hamburger span:nth-child(1){ top: 13px; }
+    .hamburger span:nth-child(2){ top: 20px; }
+    .hamburger span:nth-child(3){ top: 27px; }
+    .hamburger.open span:nth-child(1){ top: 20px; transform: rotate(45deg); }
+    .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
+    .hamburger.open span:nth-child(3){ top: 20px; transform: rotate(-45deg); }
 
     /* ====== Mobile dropdown ====== */
-    .nav-links-mobile {
+    .nav-links-mobile{
       position: fixed;
       left: 0;
       right: 0;
@@ -286,7 +302,7 @@
       backdrop-filter: blur(8px);
 
       width: 100%;
-      padding: 8px 0;
+      padding: 6px 0; /* ✅ tighter */
       text-align: center;
 
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -299,43 +315,41 @@
       opacity: 0;
       transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
     }
-    .nav-links-mobile.active {
-      display: block;
-      opacity: 1;
+    .nav-links-mobile.active{
+      display:block;
+      opacity:1;
       transform: translateY(0);
     }
-    .nav-links-mobile a {
-      display: block;
-      padding: 16px 20px;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: .2px;
+    .nav-links-mobile a{
+      display:block;
+      padding: 14px 20px; /* ✅ tighter */
+      color:white;
+      text-decoration:none;
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:.2px;
       transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+      line-height: 1.1;
     }
-    .nav-links-mobile a + a { border-top: 1px solid rgba(255,255,255,0.06); }
-    .nav-links-mobile a:hover { background: #444; }
+    .nav-links-mobile a + a{ border-top:1px solid rgba(255,255,255,0.06); }
+    .nav-links-mobile a:hover{ background:#444; }
 
-    body.menu-open { overflow: hidden; touch-action: none; }
+    body.menu-open{ overflow:hidden; touch-action:none; }
 
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        grid-template-columns: auto 1fr auto !important;
-        min-height: 160px !important; /* ✅ mobile header height for larger logo */
+        grid-template-columns: auto 1fr auto !important; /* logo | cta | hamburger */
+        align-items: center !important;
       }
 
-      header.sticky-header .logo{
-        height: 160px !important;
-      }
       header.sticky-header .logo img{
-        height: 160px !important; /* ✅ big mobile logo */
+        height: 110px !important; /* ✅ big but not bar-tall */
       }
 
       header.sticky-header nav.nav-links{
-        display: none !important;
-        transform: none !important;
+        display:none !important;
+        transform:none !important;
         padding: 0 !important;
       }
 
@@ -346,19 +360,18 @@
       }
 
       header.sticky-header .phone-link{
-        display: none !important;
+        display:none !important;
       }
 
       .hamburger{
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        justify-self: end !important;
-        margin-right: 12px !important;
+        display:inline-flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        justify-self:end !important;
       }
 
       header.sticky-header .cta-button{
-        padding: 12px 22px !important;
+        padding: 10px 16px !important;
         border-radius: 12px !important;
       }
     }
@@ -747,14 +760,21 @@
                     style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
         </div>
 
-        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-          <input id="smsConsent" name="smsConsent" type="checkbox" value="yes" style="margin-top:4px;">
-          <label for="smsConsent" style="color:#cfd3dc; font-family:'Inter',sans-serif;">I agree to be contacted by phone or SMS about my inquiry.</label>
+        <div style="grid-column: span 6;">
+          <label for="smsConsent" style="font-family:'Inter',sans-serif;">SMS Consent</label>
+          <select id="smsConsent" name="smsConsent" style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+            <option value="">Optional</option>
+            <option value="yes">Yes — you can text/call me</option>
+            <option value="no">No</option>
+          </select>
         </div>
 
-        <div style="grid-column: span 12; display:flex; gap:12px; align-items:flex-start;">
-          <input id="privacy" name="privacy" type="checkbox" required style="margin-top:4px;">
-          <label for="privacy" style="color:#cfd3dc; font-family:'Inter',sans-serif;">I agree to the <a href="/privacy.html" style="color:#fff;">Privacy Policy</a>.</label>
+        <div style="grid-column: span 6;">
+          <label for="privacy" style="font-family:'Inter',sans-serif;">Privacy *</label>
+          <select id="privacy" name="privacy" required style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+            <option value="">Required</option>
+            <option value="agree">I agree</option>
+          </select>
         </div>
       </div>
 
@@ -897,9 +917,6 @@
         btn.disabled = true; btn.textContent = 'Sending…';
         showStatus('Sending your message…');
 
-        const serviceVal = form.service.value;
-        const budgetVal  = form.budget.value;
-
         const payload = {
           name: form.name.value.trim(),
           email: form.email.value.trim(),
@@ -907,8 +924,8 @@
           service: form.service.value,
           budget: form.budget.value,
           message: form.message.value.trim(),
-          smsConsent: form.smsConsent.checked,
-          privacy: form.privacy.checked,
+          smsConsent: form.smsConsent.value || '',
+          privacy: form.privacy.value === 'agree',
           path: location.pathname,
           ts: new Date().toISOString()
         };
@@ -923,10 +940,7 @@
           if (!res.ok) throw new Error('Formspree error');
 
           showStatus('Thanks! We’ll get back to you ASAP.', true);
-
           form.reset();
-          form.service.value = serviceVal;
-          form.budget.value = budgetVal;
 
         } catch (err) {
           showStatus('Oops—something went wrong. Email us at info@aboveallmediasc.com.');
