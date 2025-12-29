@@ -21,7 +21,10 @@
       --line:rgba(255,255,255,.08);
       --brand:#e6550f;
       --brand-2:#00bfff;
+
+      /* ✅ keeps layout consistent with your current site */
       --header-h:118px;
+
       --radius:16px;
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
@@ -30,10 +33,6 @@
 
       /* ✅ move nav right ~1 inch (desktop only) */
       --nav-shift-right: 96px;
-
-      /* ✅ header internal spacing for nav/actions ONLY (logo stays flush) */
-      --header-pad-y: 10px;
-      --header-pad-x: 16px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -97,11 +96,6 @@
        ✅ HEADER (FIXED + CLEAN)
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
-
-       ✅ FIX (THIS IS THE IMPORTANT PART):
-       - header padding is now ZERO so logo can be FLUSH to the viewport edges
-       - nav/actions/hamburger get their own padding so the rest still looks clean
-       - logo stretches full header height; img height:100% removes the “padding look”
     ========================================================== */
     header.sticky-header {
       position: fixed !important;
@@ -116,48 +110,52 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      /* ✅ CRITICAL: remove padding from header itself */
+      /* ✅ CRITICAL: remove header padding so logo can be flush */
       padding: 0 !important;
 
-      min-height: 118px !important;
+      /* keep the header size stable */
+      min-height: 110px !important;
+
       display: grid !important;
-      grid-template-columns: auto 1fr auto !important;
-      align-items: stretch !important;   /* ✅ stretch children full height */
-      gap: 0 !important;                /* ✅ no gap creating “fake padding” */
+      grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
+      align-items: center !important;
+      gap: 14px !important;
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO AREA: fully flush to top/left, full header height */
+    /* ✅ LOGO: remove ALL padding/margin and make it flush to left/top/bottom */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
-      display: flex !important;
+      display:flex !important;
       align-items: stretch !important;
-      justify-content: flex-start !important;
-      height: 100% !important;
-      align-self: stretch !important;
+      height: 110px !important;  /* ✅ matches logo height below */
     }
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
-      display: flex !important;
+      display:flex !important;
       align-items: stretch !important;
       height: 100% !important;
-      line-height: 0 !important;
-      text-decoration: none !important;
+      text-decoration:none !important;
+      line-height:0 !important;
     }
     header.sticky-header .logo img{
-      display: block !important;
-      height: 100% !important;  /* ✅ fills the header vertically */
-      width: auto !important;
       margin: 0 !important;
       padding: 0 !important;
-      object-fit: contain !important;
+      display:block !important;
       background: transparent !important;
+
+      /* ✅ IMPORTANT: use the CROPPED image + make it big */
+      height: 110px !important;
+      width: auto !important;
+
+      object-fit: contain !important;
       max-height: none !important;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
 
-    /* Desktop nav (padding moved here, not on header) */
+    /* Desktop nav */
     header.sticky-header nav.nav-links{
       display:flex !important;
       justify-content:center !important;
@@ -171,9 +169,6 @@
 
       justify-self: center !important;
       width: 100% !important;
-
-      /* ✅ spacing for nav only */
-      padding: var(--header-pad-y) 0 !important;
     }
 
     header.sticky-header nav.nav-links a{
@@ -184,17 +179,17 @@
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
-    /* Actions (padding moved here) */
+    /* Actions */
     header.sticky-header .header-actions{
       display:flex !important;
       justify-content:flex-end !important;
       align-items:center !important;
       gap: 16px !important;
       justify-self: end !important;
-      margin-left: 0 !important;
 
-      /* ✅ spacing for actions only */
-      padding: var(--header-pad-y) var(--header-pad-x) var(--header-pad-y) 0 !important;
+      /* ✅ keep right-side breathing room WITHOUT affecting logo */
+      padding-right: 16px !important;
+      margin-left: 0 !important;
     }
 
     .phone-link {
@@ -234,17 +229,13 @@
       border: 0;
       background: transparent;
       cursor: pointer;
-
-      /* ✅ spacing moved here (not header) */
-      margin: 0 var(--header-pad-x) 0 0 !important;
-      padding: 8px !important;
-
+      padding: 8px;
+      margin: 0;
       width: 48px;
       height: 48px;
       border-radius: 10px;
       position: relative;
       transition: transform var(--t-fast) var(--ease);
-      align-self: center !important;
     }
     .hamburger:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
     .hamburger span {
@@ -313,8 +304,17 @@
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
+        /* ✅ Mobile: logo | CTA | hamburger */
         grid-template-columns: auto 1fr auto !important;
-        min-height: 118px !important;
+        min-height: 110px !important;
+      }
+
+      /* ✅ bigger logo on mobile + still flush */
+      header.sticky-header .logo{
+        height: 96px !important;
+      }
+      header.sticky-header .logo img{
+        height: 96px !important;
       }
 
       /* ✅ HARD-KILL desktop nav on mobile */
@@ -327,7 +327,7 @@
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
-        padding: var(--header-pad-y) 0 !important;
+        padding-right: 0 !important;
       }
 
       /* hide phone on mobile */
@@ -335,12 +335,13 @@
         display: none !important;
       }
 
-      /* show hamburger on mobile */
+      /* show hamburger on mobile, right side */
       .hamburger{
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
         justify-self: end !important;
+        margin-right: 12px !important;
       }
 
       /* CTA sizing on mobile */
@@ -547,7 +548,7 @@
     <div class="logo">
       <a href="#" aria-label="Above All Media Home">
         <img
-          src="assets/images/logo/above-all-media-logo-lighthouse.webp"
+          src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED.webp"
           alt="Above All Media"
           decoding="async"
         />
@@ -778,7 +779,7 @@
       }
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar);
-      window.addEventListener('scroll', setHeaderHeightVar, { passive:true });
+      /* ✅ removed scroll listener to prevent header height chasing */
 
       function openMenu() {
         menu.classList.add('active');
