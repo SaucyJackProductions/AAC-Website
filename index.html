@@ -21,8 +21,10 @@
       --line:rgba(255,255,255,.08);
       --brand:#e6550f;
       --brand-2:#00bfff;
+
       /* JS updates this, default fallback */
       --header-h:118px;
+
       --radius:16px;
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
@@ -31,6 +33,11 @@
 
       /* ✅ move nav right ~1 inch (desktop only) */
       --nav-shift-right: 96px;
+
+      /* ✅ “almost kisses top/bottom edge” tuning */
+      --logo-gap: 4px;                 /* tiny breathing room */
+      --logo-height-desktop: 168px;    /* big desktop logo */
+      --logo-height-mobile: 128px;     /* big mobile logo */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,8 +86,7 @@
     /* ===== Scroll Progress Bar (thin) ===== */
     .scroll-progress{
       position:fixed;
-      left:0;
-      top:0;
+      left:0; top:0;
       height:3px;
       width:0;
       background: linear-gradient(90deg, var(--brand), #ffb38c);
@@ -90,17 +96,15 @@
     }
 
     /* =========================================================
-       ✅ HEADER (FIXED + CLEAN)
-       Desktop: Logo | Nav | Actions
-       Mobile:  Logo | Get in touch | Hamburger (right)
-
-       ✅ CHANGES APPLIED:
-       - Logo uses tight-cropped asset
-       - Logo is bigger (almost kisses top/bottom)
-       - Header hugs content (no dead space)
-       - Prevent row stretch that creates bottom air
-       - Hamburger slightly smaller/tighter
+      ✅ HEADER (FIXED + CLEAN)
+      Desktop: Logo | Nav | Actions Mobile: Logo | Get in touch | Hamburger
+      ✅ CHANGES:
+      - Logo uses your exact file:
+        assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp
+      - Logo is bigger and “almost kisses” top/bottom with tiny gap
+      - No extra padding/margins sneaking in
     ========================================================== */
+
     header.sticky-header{
       position: fixed !important;
       top: 0 !important;
@@ -118,22 +122,19 @@
       min-height: 0 !important;
 
       display: grid !important;
-      grid-template-columns: auto 1fr auto auto !important; /* logo | nav | actions | hamburger */
-
-      /* ✅ prevent the “stretch air” under header contents */
-      align-items: stretch !important;
-
+      grid-template-columns: auto 1fr auto auto !important;
+      align-items: center !important;
       gap: 0 !important;
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: no extra space at all */
+    /* ✅ LOGO: hard-reset all spacing */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: stretch !important; /* ✅ let the image define height */
+      align-items: center !important;
       justify-content: flex-start !important;
     }
     header.sticky-header .logo a{
@@ -141,20 +142,15 @@
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: stretch !important; /* ✅ no centering gap */
+      align-items: center !important;
       justify-content: flex-start !important;
       text-decoration: none !important;
     }
-
-    /* ✅ BIGGER logo: “almost kisses” top/bottom without clipping */
     header.sticky-header .logo img{
       display: block !important;
       margin: 0 !important;
-      padding: 0 !important;
-
-      /* ✅ MAIN SIZE CONTROL (desktop) */
-      height: 200px !important;
-
+      padding: var(--logo-gap) 0 !important; /* tiny top/bottom gap only */
+      height: var(--logo-height-desktop) !important;
       width: auto !important;
       object-fit: contain !important;
       max-height: none !important;
@@ -166,19 +162,14 @@
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
-
       padding: 0 18px !important;
       margin: 0 !important;
-
       gap: 20px !important;
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
-
       transform: translateX(var(--nav-shift-right)) !important;
-
       justify-self: center !important;
       width: 100% !important;
-
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
@@ -187,7 +178,6 @@
       color: white !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
-
       padding: 10px 12px !important;
       margin: 0 !important;
       line-height: 1 !important;
@@ -199,17 +189,15 @@
       display: flex !important;
       justify-content: flex-end !important;
       align-items: center !important;
-
       gap: 14px !important;
       padding: 0 16px 0 12px !important;
       margin: 0 !important;
-
       justify-self: end !important;
-
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
     }
+
     .phone-link{
       color:#fff;
       text-decoration:none;
@@ -233,11 +221,9 @@
       font-size: clamp(14px, 1.4vw, 18px);
       font-weight: 700;
       white-space: nowrap;
-
       padding: 10px 18px !important;
       line-height: 1 !important;
       margin: 0 !important;
-
       transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
     .cta-button:hover{
@@ -248,51 +234,41 @@
 
     /* ===== Hamburger ===== */
     .hamburger{
-      display:none; /* mobile only */
+      display:none;
       appearance:none;
       border:0;
       background:transparent;
       cursor:pointer;
-
       padding: 6px !important;
       margin: 0 10px 0 0 !important;
-
-      /* ✅ slightly smaller = less bottom air */
-      width: 40px;
-      height: 40px;
-
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
       position: relative;
       transition: transform var(--t-fast) var(--ease);
       line-height: 1 !important;
       align-self: center !important;
-      justify-self: end !important;
     }
-    .hamburger:focus-visible{
-      outline: 2px solid var(--brand);
-      outline-offset: 2px;
-    }
+    .hamburger:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
     .hamburger span{
       position:absolute;
-      left:10px;
-      right:10px;
+      left:10px; right:10px;
       height:4px;
       background:#fff;
       border-radius:4px;
       transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
     }
-    .hamburger span:nth-child(1){ top: 12px; }
-    .hamburger span:nth-child(2){ top: 18px; }
-    .hamburger span:nth-child(3){ top: 24px; }
-    .hamburger.open span:nth-child(1){ top: 18px; transform: rotate(45deg); }
+    .hamburger span:nth-child(1){ top: 13px; }
+    .hamburger span:nth-child(2){ top: 20px; }
+    .hamburger span:nth-child(3){ top: 27px; }
+    .hamburger.open span:nth-child(1){ top: 20px; transform: rotate(45deg); }
     .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
-    .hamburger.open span:nth-child(3){ top: 18px; transform: rotate(-45deg); }
+    .hamburger.open span:nth-child(3){ top: 20px; transform: rotate(-45deg); }
 
     /* ====== Mobile dropdown ====== */
     .nav-links-mobile{
       position: fixed;
-      left: 0;
-      right: 0;
+      left: 0; right: 0;
       top: var(--header-h);
       z-index: 1500;
       display: none;
@@ -328,21 +304,18 @@
     }
     .nav-links-mobile a + a{ border-top:1px solid rgba(255,255,255,0.06); }
     .nav-links-mobile a:hover{ background:#444; }
-
     body.menu-open{ overflow:hidden; touch-action:none; }
 
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        grid-template-columns: auto 1fr auto !important; /* logo | cta | hamburger */
-        align-items: stretch !important;
+        grid-template-columns: auto 1fr auto !important;
+        align-items: center !important;
       }
-
-      /* ✅ bigger on mobile too */
       header.sticky-header .logo img{
-        height: 145px !important; /* almost kisses edges on mobile */
+        height: var(--logo-height-mobile) !important;  /* ✅ bigger mobile */
+        padding: 3px 0 !important;                    /* “almost kisses” */
       }
-
       header.sticky-header nav.nav-links{
         display:none !important;
         transform:none !important;
@@ -354,14 +327,12 @@
         padding: 0 !important;
       }
       header.sticky-header .phone-link{ display:none !important; }
-
       .hamburger{
         display:inline-flex !important;
         align-items:center !important;
         justify-content:center !important;
         justify-self:end !important;
       }
-
       header.sticky-header .cta-button{
         padding: 10px 16px !important;
         border-radius: 12px !important;
@@ -446,7 +417,6 @@
       transition: transform 260ms var(--ease);
     }
     .service-card img:hover { transform: scale(1.03); }
-
     .service-card h3{
       margin: .8rem 0 .4rem;
       color:#fffdf6;
@@ -545,8 +515,12 @@
   <header class="sticky-header">
     <div class="logo">
       <a href="#" aria-label="Above All Media Home">
-        <!-- ✅ UPDATED to tight-cropped logo asset -->
-        <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight.webp" alt="Above All Media" decoding="async" />
+        <!-- ✅ Correct logo path + transparent webp -->
+        <img
+          src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp"
+          alt="Above All Media"
+          decoding="async"
+        />
       </a>
     </div>
 
@@ -596,7 +570,7 @@
         <img src="IMG_4681.jpg" alt="Sunrise jib over Harbour Town Lighthouse, Hilton Head">
         <h3>📈 Commercial Brand Packages</h3>
         <p>
-          Branded aerial & ground video production.<br/>
+          Branded aerial &amp; ground video production.<br/>
           Targeted social media ad integration (Meta, YouTube, TikTok).<br/>
           Lead generation, analytics, and A/B testing.
         </p>
@@ -607,8 +581,10 @@
         <img src="IMG_4680.jpg" alt="Luxury coastal property exterior at golden hour">
         <h3>🏡 Real Estate &amp; Property Media</h3>
         <p>
-          Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>
-          Cinematic videos for company websites.<br/>Social reels for agents.<br/>
+          Interior walkthroughs.<br/>
+          High-resolution listing photos + 3D tours.<br/>
+          Cinematic videos for company websites.<br/>
+          Social reels for agents.<br/>
           Reels for short-term rentals.
         </p>
         <a href="#about" class="btn-pill">View Case Study</a>
@@ -683,25 +659,25 @@
         <div style="grid-column: span 6;">
           <label for="name" style="font-family:'Inter',sans-serif;">Full name *</label>
           <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="email" style="font-family:'Inter',sans-serif;">Email *</label>
           <input id="email" name="email" type="email" required placeholder="you@company.com"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="phone" style="font-family:'Inter',sans-serif;">Phone</label>
           <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="service" style="font-family:'Inter',sans-serif;">Service</label>
           <select id="service" name="service"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Select a service</option>
             <option>Commercial Brand Package</option>
             <option>Real Estate & Property Media</option>
@@ -716,7 +692,7 @@
         <div style="grid-column: span 6;">
           <label for="budget" style="font-family:'Inter',sans-serif;">Budget</label>
           <select id="budget" name="budget"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Not sure yet</option>
             <option>$500–$1,500</option>
             <option>$1,500–$3,000</option>
@@ -729,13 +705,13 @@
         <div style="grid-column: span 12;">
           <label for="message" style="font-family:'Inter',sans-serif;">Tell us about your project *</label>
           <textarea id="message" name="message" required rows="6" placeholder="Timeline, goals, links…"
-            style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
+                    style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
         </div>
 
         <div style="grid-column: span 6;">
           <label for="smsConsent" style="font-family:'Inter',sans-serif;">SMS Consent</label>
           <select id="smsConsent" name="smsConsent"
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Optional</option>
             <option value="yes">Yes — you can text/call me</option>
             <option value="no">No</option>
@@ -745,7 +721,7 @@
         <div style="grid-column: span 6;">
           <label for="privacy" style="font-family:'Inter',sans-serif;">Privacy *</label>
           <select id="privacy" name="privacy" required
-            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Required</option>
             <option value="agree">I agree</option>
           </select>
@@ -753,18 +729,22 @@
       </div>
 
       <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:rgba(21,24,32,0.78); color:#fff;">
-        <button id="submitBtn" type="submit" style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
+        <button id="submitBtn" type="submit"
+                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
           Send inquiry
         </button>
+
         <a href="mailto:info@aboveallmediasc.com" style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">
           Or email us directly → info@aboveallmediasc.com
         </a>
+
         <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px; font-family:'Inter',sans-serif;">
           Secure • We never sell your data
         </span>
       </div>
 
-      <div id="formStatus" aria-live="polite" style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc; font-family:'Inter',sans-serif;">
+      <div id="formStatus" aria-live="polite"
+           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc; font-family:'Inter',sans-serif;">
       </div>
     </form>
   </section>
@@ -795,25 +775,26 @@
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       }
-      function toggleMenu() {
-        menu.classList.contains('active') ? closeMenu() : openMenu();
-      }
+      function toggleMenu() { menu.classList.contains('active') ? closeMenu() : openMenu(); }
+
       hamburger.addEventListener('click', toggleMenu);
+
       menu.addEventListener('click', (e) => {
         const link = e.target.closest('a[href]');
         if (link) closeMenu();
       });
+
       document.addEventListener('click', (e) => {
         if (!menu.classList.contains('active')) return;
         if (!menu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
       });
+
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
       });
+
       const mql = window.matchMedia('(min-width: 769px)');
-      mql.addEventListener('change', () => {
-        if (mql.matches) closeMenu();
-      });
+      mql.addEventListener('change', () => { if (mql.matches) closeMenu(); });
 
       function onScrollProgress(){
         const h = document.documentElement;
@@ -848,6 +829,7 @@
         const y = window.scrollY + (header?.offsetHeight || 118) + 40;
         let current = '';
         sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
+
         desktopLinks.forEach(a=>{
           const href = a.getAttribute('href') || '';
           a.classList.toggle('active', current && href === `#${current}`);
@@ -875,7 +857,11 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (form.website && form.website.value) return;
-        if (!form.checkValidity()) { form.reportValidity(); return; }
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
         btn.disabled = true;
         btn.textContent = 'Sending…';
@@ -900,6 +886,7 @@
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(payload)
           });
+
           if (!res.ok) throw new Error('Formspree error');
 
           showStatus('Thanks! We’ll get back to you ASAP.', true);
@@ -943,8 +930,9 @@
         inset:0;
         z-index:0;
         pointer-events:none;
-        background: radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
-                    linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
+        background:
+          radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
+          linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
       }
       #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
       #about .kicker{
@@ -982,8 +970,12 @@
         font-family:'Montserrat',sans-serif;
       }
       #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
-
-      #about .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:12px 0 30px; }
+      #about .split{
+        display:grid;
+        grid-template-columns:1.1fr .9fr;
+        gap:18px;
+        margin:12px 0 30px;
+      }
       #about .card{
         background:rgba(21,24,32,.82);
         border:1px solid rgba(255,255,255,.08);
@@ -996,23 +988,55 @@
         font-family:'Inter',sans-serif;
       }
       #about .card.visible{ opacity:1; transform:translateY(0); }
-      #about .card h2{ font-size:clamp(22px, 3vw, 28px); margin-bottom:12px; font-family:'Montserrat',sans-serif; }
-      #about .card p{ color:#eaeef7; opacity:.95; line-height:1.65; margin-bottom:10px; }
-      #about .values{ list-style:none; display:grid; gap:10px; padding-left:0; }
-      #about .values li{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); padding:12px 14px; border-radius:12px; }
-
-      #about .steps{ position:relative; margin:10px 0 12px; border-left:2px dashed rgba(255,255,255,.18); padding-left:18px; }
+      #about .card h2{
+        font-size:clamp(22px, 3vw, 28px);
+        margin-bottom:12px;
+        font-family:'Montserrat',sans-serif;
+      }
+      #about .card p{
+        color:#eaeef7;
+        opacity:.95;
+        line-height:1.65;
+        margin-bottom:10px;
+      }
+      #about .values{
+        list-style:none;
+        display:grid;
+        gap:10px;
+        padding-left:0;
+      }
+      #about .values li{
+        background:rgba(255,255,255,.04);
+        border:1px solid rgba(255,255,255,.06);
+        padding:12px 14px;
+        border-radius:12px;
+      }
+      #about .steps{
+        position:relative;
+        margin:10px 0 12px;
+        border-left:2px dashed rgba(255,255,255,.18);
+        padding-left:18px;
+      }
       #about .step{
-        display:flex; gap:12px; margin:12px 0; align-items:flex-start;
-        opacity:0; transform:translateY(28px);
+        display:flex;
+        gap:12px;
+        margin:12px 0;
+        align-items:flex-start;
+        opacity:0;
+        transform:translateY(28px);
         transition:opacity .7s ease, transform .7s ease;
       }
       #about .step.visible{ opacity:1; transform:translateY(0); }
       #about .bullet{
-        min-width:34px; height:34px; border-radius:999px;
-        display:flex; align-items:center; justify-content:center;
+        min-width:34px;
+        height:34px;
+        border-radius:999px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
         background:linear-gradient(145deg,#e6550f,#ff914d);
-        color:#111; font-weight:800;
+        color:#111;
+        font-weight:800;
         box-shadow:0 8px 24px rgba(230,85,15,.35);
         transform:translateX(-28px);
         border:2px solid rgba(0,0,0,.25);
@@ -1020,22 +1044,32 @@
       }
       #about .step h3{ margin:0 0 4px; font-size:18px; font-family:'Montserrat',sans-serif; }
       #about .step p{ margin:0; color:#dfe5f3; opacity:.92; font-family:'Inter',sans-serif; }
-
       #about .cta{
-        display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+        display:flex;
+        gap:14px;
+        align-items:center;
+        justify-content:space-between;
+        flex-wrap:wrap;
         background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
         border:1px solid rgba(255,255,255,.08);
-        padding:18px 20px; border-radius:14px; margin-top:24px;
-        opacity:0; transform:translateY(28px);
+        padding:18px 20px;
+        border-radius:14px;
+        margin-top:24px;
+        opacity:0;
+        transform:translateY(28px);
         transition:opacity .7s ease, transform .7s ease;
         font-family:'Inter',sans-serif;
       }
       #about .cta.visible{ opacity:1; transform:translateY(0); }
       #about .cta p{ margin:0; font-weight:700; letter-spacing:.2px; }
       #about .cta .solid{
-        display:inline-block; text-decoration:none; color:#fff; font-weight:800;
+        display:inline-block;
+        text-decoration:none;
+        color:#fff;
+        font-weight:800;
         background:linear-gradient(145deg,#e6550f,#ff7b31);
-        padding:12px 18px; border-radius:10px;
+        padding:12px 18px;
+        border-radius:10px;
         box-shadow:0 10px 30px rgba(230,85,15,.35);
         transition: transform .12s ease, box-shadow .12s ease;
         font-family:'Montserrat',sans-serif;
@@ -1053,13 +1087,8 @@
 
     <div class="veil"></div>
     <div class="wrap">
-      <h1 class="title">
-        <span class="spark">The</span> Drive <span class="spark">to</span> Create
-      </h1>
-
-      <p class="kicker">
-        We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.
-      </p>
+      <h1 class="title"><span class="spark">The</span> Drive <span class="spark">to</span> Create</h1>
+      <p class="kicker">We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.</p>
 
       <div class="stats">
         <div class="stat" data-target="250"><div class="num">0</div><div class="label">Projects Delivered</div></div>
@@ -1073,12 +1102,12 @@
           <h2>Our Story</h2>
           <p>
             Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to boardroom spotlights,
-            our team crafts visuals that speak for you when words fall short. We’re operators, editors, pilots—problem solvers who obsess over framing,
-            light, and narrative pace.
+            our team crafts visuals that speak for you when words fall short. We’re operators, editors, pilots—problem solvers who obsess
+            over framing, light, and narrative pace.
           </p>
           <p>
-            Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI,
-            we’ll chart the flight path and carry the mission to delivery.
+            Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI, we’ll chart the flight
+            path and carry the mission to delivery.
           </p>
         </div>
 
@@ -1138,6 +1167,7 @@
               }
             });
           },{threshold:.25});
+
           els.forEach(el=>io.observe(el));
         };
 
