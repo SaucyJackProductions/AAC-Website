@@ -28,8 +28,8 @@
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* ✅ move nav right ~1 inch (desktop only) */
-      --nav-shift-right: 96px;
+      /* ✅ desktop only nav nudge (adjusted for larger logo balance) */
+      --nav-shift-right: 72px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -90,12 +90,9 @@
     }
 
     /* =========================================================
-       ✅ HEADER (FIXED + CLEAN)
+       ✅ HEADER (FLUSH LOGO + DOUBLED SIZE + BALANCED NAV)
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
-       Fixes:
-       - Forces desktop nav to be hidden on mobile (even if other rules fight it)
-       - Enlarges logo on both desktop and mobile
     ========================================================== */
     header.sticky-header {
       position: fixed !important;
@@ -110,34 +107,47 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      padding: 10px 16px !important;
-      min-height: 110px !important; /* ✅ allow bigger logo */
+      /* ✅ REMOVE ALL PADDING so logo can be flush to edges */
+      padding: 0 !important;
+
+      /* ✅ DOUBLED room for logo (visual balance) */
+      min-height: 160px !important;
+
       display: grid !important;
       grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
       align-items: center !important;
-      gap: 14px !important;
+      gap: 18px !important; /* space BETWEEN columns only (not edges) */
       border-radius: 0 !important;
+    }
+
+    /* ✅ Kill any wrapper spacing so logo truly touches edges */
+    header.sticky-header .logo,
+    header.sticky-header .logo a{
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
     /* Logo wrapper */
     header.sticky-header .logo{
       display:flex !important;
-      align-items:center !important;
+      align-items: center !important;
+      align-self: stretch !important; /* helps keep things visually centered vs tall logo */
     }
     header.sticky-header .logo a{
-      display:inline-flex !important;
-      align-items:center !important;
+      display:flex !important;
+      align-items: center !important;
       text-decoration:none !important;
       line-height:0 !important;
     }
 
-    /* ✅ LOGO BIGGER (desktop) */
+    /* ✅ LOGO DOUBLED (desktop) + flush top/bottom by matching header min-height */
     header.sticky-header .logo img{
       background: transparent !important;
-      height: 110px !important; /* ✅ larger on desktop */
+      height: 160px !important;   /* ✅ DOUBLED size */
       width: auto !important;
       object-fit: contain !important;
       display:block !important;
+      max-height: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
 
@@ -146,11 +156,15 @@
       display:flex !important;
       justify-content:center !important;
       align-items:center !important;
-      gap: 26px !important;
-      font-size: clamp(16px, 1.6vw, 20px) !important;
-      font-weight: 600 !important;
+      align-self: center !important;
+      gap: 22px !important;
 
-      /* ✅ inch shift on desktop only */
+      /* ✅ slightly tighter typography so it balances against the larger logo */
+      font-size: clamp(15px, 1.35vw, 18px) !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+
+      /* ✅ nudge right (desktop only) */
       transform: translateX(var(--nav-shift-right)) !important;
 
       justify-self: center !important;
@@ -161,7 +175,10 @@
       color: white !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
-      padding: 10px 14px !important;
+
+      /* ✅ reduce vertical padding so nav “sits” nicely with taller logo */
+      padding: 8px 12px !important;
+      line-height: 1 !important;
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
@@ -170,15 +187,19 @@
       display:flex !important;
       justify-content:flex-end !important;
       align-items:center !important;
-      gap: 16px !important;
+      align-self: center !important;
+      gap: 14px !important;
       justify-self: end !important;
       margin-left: 0 !important;
+
+      /* ✅ tiny optical drop so buttons don’t feel “too high” beside tall logo */
+      transform: translateY(2px);
     }
 
     .phone-link {
       color: #fff;
       text-decoration: none;
-      font-size: clamp(16px, 1.6vw, 20px);
+      font-size: clamp(15px, 1.35vw, 18px);
       line-height: 1;
       transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
       white-space: nowrap;
@@ -191,11 +212,11 @@
     .cta-button {
       background-color: var(--brand);
       color: white;
-      padding: 12px 26px;
+      padding: 12px 24px;
       text-decoration: none;
       border-radius: 10px;
-      font-size: clamp(14px, 1.4vw, 18px);
-      font-weight: 700;
+      font-size: clamp(13px, 1.2vw, 16px);
+      font-weight: 800;
       transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
       white-space: nowrap;
     }
@@ -289,15 +310,18 @@
       header.sticky-header{
         /* ✅ Mobile: logo | CTA | hamburger */
         grid-template-columns: auto 1fr auto !important;
-        min-height: 120px !important; /* ✅ allow bigger logo */
+
+        /* ✅ balanced for larger logo on mobile */
+        min-height: 110px !important;
+        gap: 12px !important;
       }
 
-      /* ✅ make logo larger on mobile */
+      /* ✅ DOUBLED mobile logo (but not insane) */
       header.sticky-header .logo img{
         height: 96px !important;
       }
 
-      /* ✅ HARD-KILL desktop nav on mobile (fixes "menu screwed up") */
+      /* ✅ HARD-KILL desktop nav on mobile */
       header.sticky-header nav.nav-links{
         display: none !important;
         transform: none !important;
@@ -307,6 +331,7 @@
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
+        transform: none !important;
       }
 
       /* hide phone on mobile */
