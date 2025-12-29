@@ -28,12 +28,8 @@
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* ✅ desktop nav nudge */
-      --nav-shift-right: 72px;
-
-      /* ✅ TRUE BIG LOGO SIZES */
-      --logo-h-desktop: 160px; /* ✅ double-size target */
-      --logo-h-mobile:  112px; /* ✅ big but sane */
+      /* ✅ move nav right ~1 inch (desktop only) */
+      --nav-shift-right: 96px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -94,11 +90,14 @@
     }
 
     /* =========================================================
-       ✅ HEADER: ZERO PADDING + FLUSH LOGO + TRUE 2X SIZE
+       ✅ HEADER (FIXED + CLEAN)
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
+       Fixes:
+       - Forces desktop nav to be hidden on mobile (even if other rules fight it)
+       - Enlarges logo on both desktop and mobile
     ========================================================== */
-    header.sticky-header{
+    header.sticky-header {
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
@@ -111,87 +110,75 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      padding: 0 !important;     /* ✅ REMOVE ALL PADDING */
-      margin: 0 !important;
-
-      height: var(--logo-h-desktop) !important;     /* ✅ header height = logo height */
-      min-height: var(--logo-h-desktop) !important;
-
+      padding: 10px 16px !important;
+      min-height: 110px !important; /* ✅ allow bigger logo */
       display: grid !important;
       grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
-      align-items: stretch !important;                  /* ✅ allows full-height logo */
-      gap: 0 !important;                                /* ✅ NO grid gap */
+      align-items: center !important;
+      gap: 14px !important;
       border-radius: 0 !important;
     }
 
-    /* ✅ Kill any wrapper spacing so logo truly touches edges */
-    header.sticky-header .logo,
+    /* Logo wrapper */
+    header.sticky-header .logo{
+      display:flex !important;
+      align-items:center !important;
+    }
     header.sticky-header .logo a{
-      margin: 0 !important;
-      padding: 0 !important;
-      height: 100% !important;
-      display: flex !important;
-      align-items: stretch !important;
-      justify-content: flex-start !important;
-      line-height: 0 !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      text-decoration:none !important;
+      line-height:0 !important;
     }
 
-    /* ✅ Logo fills the header: flush top/left/bottom */
+    /* ✅ LOGO BIGGER (desktop) */
     header.sticky-header .logo img{
-      display: block !important;
-      height: 100% !important;   /* ✅ fill full header height */
-      width: auto !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      max-height: none !important;
-
-      object-fit: contain !important;
       background: transparent !important;
-
-      /* ✅ If image has transparent whitespace, this "tightens" it visually */
-      transform: scale(1.12) !important;
-      transform-origin: left top !important;
-
+      height: 110px !important; /* ✅ larger on desktop */
+      width: auto !important;
+      object-fit: contain !important;
+      display:block !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
     }
 
     /* Desktop nav */
     header.sticky-header nav.nav-links{
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
+      display:flex !important;
+      justify-content:center !important;
+      align-items:center !important;
+      gap: 26px !important;
+      font-size: clamp(16px, 1.6vw, 20px) !important;
+      font-weight: 600 !important;
 
-      gap: 22px !important;
-      width: 100% !important;
-
+      /* ✅ inch shift on desktop only */
       transform: translateX(var(--nav-shift-right)) !important;
+
+      justify-self: center !important;
+      width: 100% !important;
     }
 
     header.sticky-header nav.nav-links a{
       color: white !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
-      padding: 8px 10px !important; /* slightly tighter so it balances */
+      padding: 10px 14px !important;
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
     /* Actions */
     header.sticky-header .header-actions{
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-end !important;
-      gap: 12px !important;
-
-      margin: 0 !important;
-
-      /* ✅ Right-side only padding is allowed; does NOT affect logo flush */
-      padding: 0 12px 0 0 !important;
+      display:flex !important;
+      justify-content:flex-end !important;
+      align-items:center !important;
+      gap: 16px !important;
+      justify-self: end !important;
+      margin-left: 0 !important;
     }
 
     .phone-link {
       color: #fff;
       text-decoration: none;
-      font-size: clamp(15px, 1.35vw, 18px);
+      font-size: clamp(16px, 1.6vw, 20px);
       line-height: 1;
       transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
       white-space: nowrap;
@@ -204,11 +191,11 @@
     .cta-button {
       background-color: var(--brand);
       color: white;
-      padding: 12px 24px;
+      padding: 12px 26px;
       text-decoration: none;
       border-radius: 10px;
-      font-size: clamp(13px, 1.2vw, 16px);
-      font-weight: 800;
+      font-size: clamp(14px, 1.4vw, 18px);
+      font-weight: 700;
       transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
       white-space: nowrap;
     }
@@ -225,11 +212,8 @@
       border: 0;
       background: transparent;
       cursor: pointer;
-
-      /* ✅ Hamburger can have internal padding; header has none */
       padding: 8px;
       margin: 0;
-
       width: 48px;
       height: 48px;
       border-radius: 10px;
@@ -303,37 +287,34 @@
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        height: var(--logo-h-mobile) !important;
-        min-height: var(--logo-h-mobile) !important;
+        /* ✅ Mobile: logo | CTA | hamburger */
         grid-template-columns: auto 1fr auto !important;
+        min-height: 120px !important; /* ✅ allow bigger logo */
       }
 
-      /* Make logo large + still flush */
+      /* ✅ make logo larger on mobile */
       header.sticky-header .logo img{
-        height: 100% !important;
-        transform: scale(1.10) !important;
-        transform-origin: left top !important;
+        height: 96px !important;
       }
 
-      /* HARD-KILL desktop nav on mobile */
+      /* ✅ HARD-KILL desktop nav on mobile (fixes "menu screwed up") */
       header.sticky-header nav.nav-links{
         display: none !important;
         transform: none !important;
       }
 
-      /* Center CTA */
+      /* ✅ center the CTA button in the middle column */
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
-        padding: 0 !important; /* ✅ no padding on mobile */
       }
 
-      /* Hide phone on mobile */
+      /* hide phone on mobile */
       header.sticky-header .phone-link{
         display: none !important;
       }
 
-      /* Show hamburger on mobile */
+      /* show hamburger on mobile, right side */
       .hamburger{
         display: inline-flex !important;
         align-items: center !important;
