@@ -22,7 +22,7 @@
       --brand:#e6550f;
       --brand-2:#00bfff;
 
-      /* ✅ keeps layout consistent with your current site */
+      /* JS updates this, default fallback */
       --header-h:118px;
 
       --radius:16px;
@@ -96,6 +96,11 @@
        ✅ HEADER (FIXED + CLEAN)
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
+
+       ✅ CHANGES YOU REQUESTED:
+       - Remove even MORE spacing around the logo (ZERO)
+       - Make logo DOUBLE size
+       - Ensure logo is flush left/top/bottom of the header
     ========================================================== */
     header.sticky-header {
       position: fixed !important;
@@ -110,49 +115,58 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      /* ✅ CRITICAL: remove header padding so logo can be flush */
+      /* ✅ CRITICAL: no padding so logo can be flush */
       padding: 0 !important;
 
-      /* keep the header size stable */
-      min-height: 110px !important;
+      /* ✅ DOUBLE logo size → increase header height to match */
+      min-height: 220px !important;
 
       display: grid !important;
       grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
-      align-items: center !important;
-      gap: 14px !important;
+      align-items: stretch !important;
+
+      /* ✅ CRITICAL: remove grid gap (this was “invisible padding”) */
+      gap: 0 !important;
+
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: remove ALL padding/margin and make it flush to left/top/bottom */
+    /* ✅ LOGO: absolute zero spacing + stretch full header height */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
       display:flex !important;
       align-items: stretch !important;
-      height: 110px !important;  /* ✅ matches logo height below */
+      justify-content: flex-start !important;
+      height: 220px !important;
+      line-height: 0 !important;
     }
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
       display:flex !important;
       align-items: stretch !important;
+      justify-content: flex-start !important;
       height: 100% !important;
+      line-height: 0 !important;
       text-decoration:none !important;
-      line-height:0 !important;
     }
+
+    /* ✅ DOUBLE SIZE LOGO */
     header.sticky-header .logo img{
       margin: 0 !important;
       padding: 0 !important;
       display:block !important;
       background: transparent !important;
 
-      /* ✅ IMPORTANT: use the CROPPED image + make it big */
-      height: 110px !important;
+      height: 220px !important;
       width: auto !important;
 
       object-fit: contain !important;
       max-height: none !important;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
+
+      /* keep it clean */
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
     }
 
     /* Desktop nav */
@@ -169,6 +183,9 @@
 
       justify-self: center !important;
       width: 100% !important;
+
+      /* ✅ give nav its own padding WITHOUT touching the logo */
+      padding: 0 18px !important;
     }
 
     header.sticky-header nav.nav-links a{
@@ -187,9 +204,10 @@
       gap: 16px !important;
       justify-self: end !important;
 
-      /* ✅ keep right-side breathing room WITHOUT affecting logo */
+      /* ✅ right-side breathing room WITHOUT affecting logo */
       padding-right: 16px !important;
-      margin-left: 0 !important;
+      padding-left: 12px !important;
+      margin: 0 !important;
     }
 
     .phone-link {
@@ -304,38 +322,33 @@
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        /* ✅ Mobile: logo | CTA | hamburger */
         grid-template-columns: auto 1fr auto !important;
-        min-height: 110px !important;
+        min-height: 160px !important; /* ✅ mobile header height for larger logo */
       }
 
-      /* ✅ bigger logo on mobile + still flush */
       header.sticky-header .logo{
-        height: 96px !important;
+        height: 160px !important;
       }
       header.sticky-header .logo img{
-        height: 96px !important;
+        height: 160px !important; /* ✅ big mobile logo */
       }
 
-      /* ✅ HARD-KILL desktop nav on mobile */
       header.sticky-header nav.nav-links{
         display: none !important;
         transform: none !important;
+        padding: 0 !important;
       }
 
-      /* ✅ center the CTA button in the middle column */
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
-        padding-right: 0 !important;
+        padding: 0 !important;
       }
 
-      /* hide phone on mobile */
       header.sticky-header .phone-link{
         display: none !important;
       }
 
-      /* show hamburger on mobile, right side */
       .hamburger{
         display: inline-flex !important;
         align-items: center !important;
@@ -344,7 +357,6 @@
         margin-right: 12px !important;
       }
 
-      /* CTA sizing on mobile */
       header.sticky-header .cta-button{
         padding: 12px 22px !important;
         border-radius: 12px !important;
@@ -779,7 +791,6 @@
       }
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar);
-      /* ✅ removed scroll listener to prevent header height chasing */
 
       function openMenu() {
         menu.classList.add('active');
