@@ -21,10 +21,8 @@
       --line:rgba(255,255,255,.08);
       --brand:#e6550f;
       --brand-2:#00bfff;
-
       /* JS updates this, default fallback */
       --header-h:118px;
-
       --radius:16px;
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
@@ -48,7 +46,6 @@
       letter-spacing: 0.01em;
       padding-top: var(--header-h);
     }
-
     h1, h2, h3, h4, h5 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
@@ -70,11 +67,7 @@
     }
 
     /* Nav + buttons typography */
-    .nav-links a,
-    .header-actions .cta-button,
-    .phone-link,
-    .btn-pill,
-    .chip {
+    .nav-links a, .header-actions .cta-button, .phone-link, .btn-pill, .chip {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -85,7 +78,11 @@
 
     /* ===== Scroll Progress Bar (thin) ===== */
     .scroll-progress{
-      position:fixed; left:0; top:0; height:3px; width:0;
+      position:fixed;
+      left:0;
+      top:0;
+      height:3px;
+      width:0;
       background: linear-gradient(90deg, var(--brand), #ffb38c);
       z-index:2000;
       box-shadow:0 0 10px rgba(230,85,15,.35);
@@ -94,74 +91,73 @@
 
     /* =========================================================
        ✅ HEADER (FIXED + CLEAN)
+       Desktop: Logo | Nav | Actions
+       Mobile:  Logo | Get in touch | Hamburger (right)
 
-       ✅ UPDATES YOU REQUESTED (NOW THAT LOGO IS CROPPED):
-       - Make logo BIGGER again
-       - Reduce the "dead space" at the bottom of the header bar
-       - Keep everything vertically tight (nav/phone/button/hamburger)
+       ✅ CHANGES APPLIED:
+       - Logo uses tight-cropped asset
+       - Logo is bigger (almost kisses top/bottom)
+       - Header hugs content (no dead space)
+       - Prevent row stretch that creates bottom air
+       - Hamburger slightly smaller/tighter
     ========================================================== */
-
     header.sticky-header{
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
       width: 100% !important;
       z-index: 1000 !important;
-
       background: rgba(28, 28, 32, 0.92) !important;
       -webkit-backdrop-filter: blur(10px) !important;
       backdrop-filter: blur(10px) !important;
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      /* ✅ remove bar padding */
       padding: 0 !important;
-
-      /* ✅ This is what kills the extra bottom space */
-      height: fit-content !important;
+      height: auto !important;
       min-height: 0 !important;
 
       display: grid !important;
       grid-template-columns: auto 1fr auto auto !important; /* logo | nav | actions | hamburger */
-      align-items: center !important;
+
+      /* ✅ prevent the “stretch air” under header contents */
+      align-items: stretch !important;
 
       gap: 0 !important;
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO */
+    /* ✅ LOGO: no extra space at all */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: center !important;
+      align-items: stretch !important; /* ✅ let the image define height */
       justify-content: flex-start !important;
-      align-self: stretch !important; /* helps remove “bottom gap” */
     }
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: center !important;
+      align-items: stretch !important; /* ✅ no centering gap */
       justify-content: flex-start !important;
       text-decoration: none !important;
-      align-self: stretch !important;
     }
 
-    /* ✅ BIGGER LOGO (desktop) */
+    /* ✅ BIGGER logo: “almost kisses” top/bottom without clipping */
     header.sticky-header .logo img{
       display: block !important;
       margin: 0 !important;
       padding: 0 !important;
 
-      height: 185px !important;  /* ✅ BIGGER (was 150) */
-      width: auto !important;
+      /* ✅ MAIN SIZE CONTROL (desktop) */
+      height: 200px !important;
 
+      width: auto !important;
       object-fit: contain !important;
       max-height: none !important;
-
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
     }
 
@@ -171,31 +167,28 @@
       justify-content: center !important;
       align-items: center !important;
 
-      /* ✅ tighter vertical footprint */
-      padding: 0 16px !important;
+      padding: 0 18px !important;
       margin: 0 !important;
 
-      gap: 18px !important;
+      gap: 20px !important;
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
 
       transform: translateX(var(--nav-shift-right)) !important;
+
       justify-self: center !important;
       width: 100% !important;
 
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
-      align-self: center !important;
     }
-
     header.sticky-header nav.nav-links a{
       color: white !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
 
-      /* ✅ reduce “bottom padding” feeling */
-      padding: 8px 12px !important;
+      padding: 10px 12px !important;
       margin: 0 !important;
       line-height: 1 !important;
     }
@@ -207,19 +200,16 @@
       justify-content: flex-end !important;
       align-items: center !important;
 
-      gap: 12px !important;
-
-      /* ✅ remove vertical padding */
-      padding: 0 14px 0 10px !important;
+      gap: 14px !important;
+      padding: 0 16px 0 12px !important;
       margin: 0 !important;
 
       justify-self: end !important;
+
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
-      align-self: center !important;
     }
-
     .phone-link{
       color:#fff;
       text-decoration:none;
@@ -244,8 +234,7 @@
       font-weight: 700;
       white-space: nowrap;
 
-      /* ✅ tighter button = less header height */
-      padding: 9px 16px !important;
+      padding: 10px 18px !important;
       line-height: 1 !important;
       margin: 0 !important;
 
@@ -265,19 +254,24 @@
       background:transparent;
       cursor:pointer;
 
-      /* ✅ reduce header bar bottom space on mobile */
-      padding: 4px !important;
-      margin: 0 8px 0 0 !important;
+      padding: 6px !important;
+      margin: 0 10px 0 0 !important;
 
-      width: 42px;
-      height: 42px;
+      /* ✅ slightly smaller = less bottom air */
+      width: 40px;
+      height: 40px;
+
       border-radius: 10px;
       position: relative;
       transition: transform var(--t-fast) var(--ease);
       line-height: 1 !important;
       align-self: center !important;
+      justify-self: end !important;
     }
-    .hamburger:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
+    .hamburger:focus-visible{
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
     .hamburger span{
       position:absolute;
       left:10px;
@@ -288,11 +282,11 @@
       transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
     }
     .hamburger span:nth-child(1){ top: 12px; }
-    .hamburger span:nth-child(2){ top: 19px; }
-    .hamburger span:nth-child(3){ top: 26px; }
-    .hamburger.open span:nth-child(1){ top: 19px; transform: rotate(45deg); }
+    .hamburger span:nth-child(2){ top: 18px; }
+    .hamburger span:nth-child(3){ top: 24px; }
+    .hamburger.open span:nth-child(1){ top: 18px; transform: rotate(45deg); }
     .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
-    .hamburger.open span:nth-child(3){ top: 19px; transform: rotate(-45deg); }
+    .hamburger.open span:nth-child(3){ top: 18px; transform: rotate(-45deg); }
 
     /* ====== Mobile dropdown ====== */
     .nav-links-mobile{
@@ -301,22 +295,17 @@
       right: 0;
       top: var(--header-h);
       z-index: 1500;
-
       display: none;
       background: rgba(33,33,33,0.96);
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
-
       width: 100%;
       padding: 6px 0;
       text-align: center;
-
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       border-bottom: 1px solid rgba(255,255,255,0.06);
-
       max-height: calc(100dvh - var(--header-h));
       overflow-y: auto;
-
       transform: translateY(-8px);
       opacity: 0;
       transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
@@ -346,12 +335,12 @@
     @media (max-width: 768px) {
       header.sticky-header{
         grid-template-columns: auto 1fr auto !important; /* logo | cta | hamburger */
-        align-items: center !important;
+        align-items: stretch !important;
       }
 
-      /* ✅ BIGGER logo on mobile too (was 110) */
+      /* ✅ bigger on mobile too */
       header.sticky-header .logo img{
-        height: 132px !important;
+        height: 145px !important; /* almost kisses edges on mobile */
       }
 
       header.sticky-header nav.nav-links{
@@ -359,16 +348,12 @@
         transform:none !important;
         padding: 0 !important;
       }
-
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
         padding: 0 !important;
       }
-
-      header.sticky-header .phone-link{
-        display:none !important;
-      }
+      header.sticky-header .phone-link{ display:none !important; }
 
       .hamburger{
         display:inline-flex !important;
@@ -378,7 +363,7 @@
       }
 
       header.sticky-header .cta-button{
-        padding: 9px 14px !important;
+        padding: 10px 16px !important;
         border-radius: 12px !important;
       }
     }
@@ -396,8 +381,10 @@
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
       font-size: 1.05rem;
     }
-    .btn-pill:hover{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,191,255,.35); }
-
+    .btn-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 8px 22px rgba(0,191,255,.35);
+    }
     .chip{
       padding:8px 14px;
       border-radius:999px;
@@ -417,10 +404,7 @@
     .chip:hover{ transform:translateY(-1px); }
 
     /* ===== Services ===== */
-    .services {
-      padding: 4rem 2rem;
-      background: url('DJI_0648%202.jpg') center/cover no-repeat;
-    }
+    .services { padding: 4rem 2rem; background: url('DJI_0648%202.jpg') center/cover no-repeat; }
     .services h2{
       font-size: 3rem;
       font-weight: 800;
@@ -437,15 +421,9 @@
       font-family: 'Inter', sans-serif;
       font-weight: 400;
     }
-    .filters{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-bottom: 2.0rem;
-    }
-
+    .filters{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom: 2.0rem; }
     .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+
     .service-card{
       background: rgba(255,255,255,0.15);
       backdrop-filter: blur(10px);
@@ -456,7 +434,10 @@
       transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
       cursor: pointer;
     }
-    .service-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,255,255,0.22); }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,255,255,0.22);
+    }
     .service-card img{
       width: 100%;
       height: 260px;
@@ -465,6 +446,7 @@
       transition: transform 260ms var(--ease);
     }
     .service-card img:hover { transform: scale(1.03); }
+
     .service-card h3{
       margin: .8rem 0 .4rem;
       color:#fffdf6;
@@ -476,10 +458,7 @@
       position:relative;
       padding:6px 10px;
       border-radius:12px;
-      text-shadow:
-        0 1px 3px rgba(0,0,0,.85),
-        0 0 12px rgba(255,215,128,.18),
-        0 0 24px rgba(255,215,128,.12);
+      text-shadow: 0 1px 3px rgba(0,0,0,.85), 0 0 12px rgba(255,215,128,.18), 0 0 24px rgba(255,215,128,.12);
     }
     .service-card h3::before{
       content:"";
@@ -518,17 +497,14 @@
       padding: 0;
       overflow: hidden;
     }
-
     #contact-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.65)),
-        linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.55));
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.65)),
+                  linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.55));
       z-index: 0;
     }
-
     #contact-card form {
       position: relative;
       z-index: 2;
@@ -540,11 +516,8 @@
       border: 1px solid rgba(230,85,15,0.55);
       overflow: hidden;
       animation: floatCard 12s ease-in-out infinite alternate;
-      box-shadow:
-        0 30px 70px rgba(0,0,0,0.85),
-        0 0 0 1px rgba(255,255,255,0.03);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.03);
     }
-
     #contact-card form::after {
       content: "";
       position: absolute;
@@ -556,34 +529,24 @@
       background: radial-gradient(ellipse, rgba(0,0,0,0.7), transparent 70%);
       pointer-events: none;
     }
-
     @keyframes floatCard {
-      0%   { transform: translateY(0); }
+      0% { transform: translateY(0); }
       100% { transform: translateY(-14px); }
     }
-
     @media(max-width:600px){
-      #contact-card {
-        min-height: auto;
-        background-size: cover;
-        padding: 40px 0;
-      }
+      #contact-card { min-height: auto; background-size: cover; padding: 40px 0; }
     }
   </style>
 </head>
 
 <body>
-
   <div class="scroll-progress" id="scrollProgress"></div>
 
   <header class="sticky-header">
     <div class="logo">
       <a href="#" aria-label="Above All Media Home">
-        <img
-          src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED.webp"
-          alt="Above All Media"
-          decoding="async"
-        />
+        <!-- ✅ UPDATED to tight-cropped logo asset -->
+        <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight.webp" alt="Above All Media" decoding="async" />
       </a>
     </div>
 
@@ -602,10 +565,7 @@
     </div>
 
     <!-- Hamburger (right on mobile) -->
-    <button class="hamburger" id="hamburgerMenu"
-            aria-controls="navLinksMobile"
-            aria-expanded="false"
-            aria-label="Toggle navigation menu">
+    <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -647,7 +607,9 @@
         <img src="IMG_4680.jpg" alt="Luxury coastal property exterior at golden hour">
         <h3>🏡 Real Estate &amp; Property Media</h3>
         <p>
-          Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>Cinematic videos for company websites.<br/>Social reels for agents.<br/>Reels for short-term rentals.
+          Interior walkthroughs.<br/>High-resolution listing photos + 3D tours.<br/>
+          Cinematic videos for company websites.<br/>Social reels for agents.<br/>
+          Reels for short-term rentals.
         </p>
         <a href="#about" class="btn-pill">View Case Study</a>
       </article>
@@ -656,7 +618,10 @@
         <img src="IMG_4528.jpg" alt="FPV drone tracking shot over marshland">
         <h3>🚁 Aerial Drone Photography &amp; Videography</h3>
         <p>
-          Cinematic commercials and promotional videos.<br/>Events and weddings.<br/>Commercial real estate and development.<br/>Mapping and surveying.
+          Cinematic commercials and promotional videos.<br/>
+          Events and weddings.<br/>
+          Commercial real estate and development.<br/>
+          Mapping and surveying.
         </p>
         <a href="#contact-card" class="btn-pill">Book a Consultation</a>
       </article>
@@ -703,11 +668,9 @@
         <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
         <div>
           <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-
           <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
             Serving Hilton Head Island, Bluffton, Beaufort &amp; the Lowcountry
           </p>
-
           <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
             Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
           </p>
@@ -720,24 +683,25 @@
         <div style="grid-column: span 6;">
           <label for="name" style="font-family:'Inter',sans-serif;">Full name *</label>
           <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="email" style="font-family:'Inter',sans-serif;">Email *</label>
           <input id="email" name="email" type="email" required placeholder="you@company.com"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="phone" style="font-family:'Inter',sans-serif;">Phone</label>
           <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
         </div>
 
         <div style="grid-column: span 6;">
           <label for="service" style="font-family:'Inter',sans-serif;">Service</label>
-          <select id="service" name="service" style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+          <select id="service" name="service"
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Select a service</option>
             <option>Commercial Brand Package</option>
             <option>Real Estate & Property Media</option>
@@ -751,7 +715,8 @@
 
         <div style="grid-column: span 6;">
           <label for="budget" style="font-family:'Inter',sans-serif;">Budget</label>
-          <select id="budget" name="budget" style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+          <select id="budget" name="budget"
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Not sure yet</option>
             <option>$500–$1,500</option>
             <option>$1,500–$3,000</option>
@@ -764,12 +729,13 @@
         <div style="grid-column: span 12;">
           <label for="message" style="font-family:'Inter',sans-serif;">Tell us about your project *</label>
           <textarea id="message" name="message" required rows="6" placeholder="Timeline, goals, links…"
-                    style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
+            style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
         </div>
 
         <div style="grid-column: span 6;">
           <label for="smsConsent" style="font-family:'Inter',sans-serif;">SMS Consent</label>
-          <select id="smsConsent" name="smsConsent" style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+          <select id="smsConsent" name="smsConsent"
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Optional</option>
             <option value="yes">Yes — you can text/call me</option>
             <option value="no">No</option>
@@ -778,7 +744,8 @@
 
         <div style="grid-column: span 6;">
           <label for="privacy" style="font-family:'Inter',sans-serif;">Privacy *</label>
-          <select id="privacy" name="privacy" required style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+          <select id="privacy" name="privacy" required
+            style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
             <option value="">Required</option>
             <option value="agree">I agree</option>
           </select>
@@ -786,21 +753,18 @@
       </div>
 
       <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:rgba(21,24,32,0.78); color:#fff;">
-        <button id="submitBtn" type="submit"
-                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
+        <button id="submitBtn" type="submit" style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
           Send inquiry
         </button>
-
-        <a href="mailto:info@aboveallmediasc.com"
-           style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">
+        <a href="mailto:info@aboveallmediasc.com" style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">
           Or email us directly → info@aboveallmediasc.com
         </a>
-
-        <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px; font-family:'Inter',sans-serif;">Secure • We never sell your data</span>
+        <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px; font-family:'Inter',sans-serif;">
+          Secure • We never sell your data
+        </span>
       </div>
 
-      <div id="formStatus" aria-live="polite"
-           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc; font-family:'Inter',sans-serif;">
+      <div id="formStatus" aria-live="polite" style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc; font-family:'Inter',sans-serif;">
       </div>
     </form>
   </section>
@@ -828,30 +792,28 @@
       function closeMenu() {
         menu.classList.remove('active');
         document.body.classList.remove('menu-open');
-        hamburger.classList.add('open');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       }
-      function toggleMenu() { menu.classList.contains('active') ? closeMenu() : openMenu(); }
-
+      function toggleMenu() {
+        menu.classList.contains('active') ? closeMenu() : openMenu();
+      }
       hamburger.addEventListener('click', toggleMenu);
-
       menu.addEventListener('click', (e) => {
         const link = e.target.closest('a[href]');
         if (link) closeMenu();
       });
-
       document.addEventListener('click', (e) => {
         if (!menu.classList.contains('active')) return;
         if (!menu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
       });
-
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
       });
-
       const mql = window.matchMedia('(min-width: 769px)');
-      mql.addEventListener('change', () => { if (mql.matches) closeMenu(); });
+      mql.addEventListener('change', () => {
+        if (mql.matches) closeMenu();
+      });
 
       function onScrollProgress(){
         const h = document.documentElement;
@@ -891,7 +853,6 @@
           a.classList.toggle('active', current && href === `#${current}`);
         });
       }
-
       document.addEventListener('scroll', setActiveNav, {passive:true});
       window.addEventListener('resize', setActiveNav, {passive:true});
       setActiveNav();
@@ -901,9 +862,8 @@
   <script>
     (function () {
       const form = document.getElementById('contactForm');
-      const btn  = document.getElementById('submitBtn');
-      const bar  = document.getElementById('formStatus');
-
+      const btn = document.getElementById('submitBtn');
+      const bar = document.getElementById('formStatus');
       const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mqagrqzr';
 
       function showStatus(msg, ok=false){
@@ -914,15 +874,11 @@
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         if (form.website && form.website.value) return;
+        if (!form.checkValidity()) { form.reportValidity(); return; }
 
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        btn.disabled = true; btn.textContent = 'Sending…';
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
         showStatus('Sending your message…');
 
         const payload = {
@@ -944,17 +900,16 @@
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify(payload)
           });
-
           if (!res.ok) throw new Error('Formspree error');
 
           showStatus('Thanks! We’ll get back to you ASAP.', true);
           form.reset();
-
         } catch (err) {
           showStatus('Oops—something went wrong. Email us at info@aboveallmediasc.com.');
           console.error(err);
         } finally {
-          btn.disabled = false; btn.textContent = 'Send inquiry';
+          btn.disabled = false;
+          btn.textContent = 'Send inquiry';
         }
       });
     })();
@@ -975,20 +930,23 @@
       }
       #about::before{
         content:"";
-        position:absolute; inset:0;
+        position:absolute;
+        inset:0;
         background-image: var(--about-bg);
-        background-size: cover; background-position: center;
+        background-size: cover;
+        background-position: center;
         filter: contrast(1.05) brightness(0.8) saturate(1.15);
         transform: scale(1.03);
       }
       #about .veil{
-        position:absolute; inset:0; z-index:0; pointer-events:none;
-        background:
-          radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
-          linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
+        position:absolute;
+        inset:0;
+        z-index:0;
+        pointer-events:none;
+        background: radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
+                    linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
       }
       #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
-
       #about .kicker{
         max-width:860px;
         font-size:clamp(16px, 2.2vw, 22px);
@@ -997,28 +955,44 @@
         margin-bottom:28px;
         font-family:'Inter',sans-serif;
       }
-
       #about .stats{
-        display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
-        gap:16px; margin:30px 0 40px;
+        display:grid;
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:16px;
+        margin:30px 0 40px;
       }
       #about .stat{
-        background:rgba(255,255,255,0.08); backdrop-filter: blur(8px);
-        border:1px solid rgba(255,255,255,.08); border-radius:16px;
-        padding:22px 20px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,.35);
-        opacity:0; transform:translateY(28px);
+        background:rgba(255,255,255,0.08);
+        backdrop-filter: blur(8px);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:16px;
+        padding:22px 20px;
+        text-align:center;
+        box-shadow:0 15px 40px rgba(0,0,0,.35);
+        opacity:0;
+        transform:translateY(28px);
         transition:opacity .7s ease, transform .7s ease;
         font-family:'Inter',sans-serif;
       }
       #about .stat.visible{ opacity:1; transform:translateY(0); }
-      #about .stat .num{ font-size:clamp(28px, 4.5vw, 44px); font-weight:800; letter-spacing:-.02em; font-family:'Montserrat',sans-serif; }
+      #about .stat .num{
+        font-size:clamp(28px, 4.5vw, 44px);
+        font-weight:800;
+        letter-spacing:-.02em;
+        font-family:'Montserrat',sans-serif;
+      }
       #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
 
       #about .split{ display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin:12px 0 30px; }
       #about .card{
-        background:rgba(21,24,32,.82); border:1px solid rgba(255,255,255,.08);
-        border-radius:16px; padding:clamp(18px,3vw,28px); box-shadow:0 20px 55px rgba(0,0,0,.45);
-        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+        background:rgba(21,24,32,.82);
+        border:1px solid rgba(255,255,255,.08);
+        border-radius:16px;
+        padding:clamp(18px,3vw,28px);
+        box-shadow:0 20px 55px rgba(0,0,0,.45);
+        opacity:0;
+        transform:translateY(28px);
+        transition:opacity .7s ease, transform .7s ease;
         font-family:'Inter',sans-serif;
       }
       #about .card.visible{ opacity:1; transform:translateY(0); }
@@ -1028,14 +1002,21 @@
       #about .values li{ background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.06); padding:12px 14px; border-radius:12px; }
 
       #about .steps{ position:relative; margin:10px 0 12px; border-left:2px dashed rgba(255,255,255,.18); padding-left:18px; }
-      #about .step{ display:flex; gap:12px; margin:12px 0; align-items:flex-start;
-        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+      #about .step{
+        display:flex; gap:12px; margin:12px 0; align-items:flex-start;
+        opacity:0; transform:translateY(28px);
+        transition:opacity .7s ease, transform .7s ease;
+      }
       #about .step.visible{ opacity:1; transform:translateY(0); }
       #about .bullet{
-        min-width:34px; height:34px; border-radius:999px; display:flex; align-items:center; justify-content:center;
-        background:linear-gradient(145deg,#e6550f,#ff914d); color:#111; font-weight:800;
-        box-shadow:0 8px 24px rgba(230,85,15,.35); transform:translateX(-28px);
-        border:2px solid rgba(0,0,0,.25); font-family:'Montserrat',sans-serif;
+        min-width:34px; height:34px; border-radius:999px;
+        display:flex; align-items:center; justify-content:center;
+        background:linear-gradient(145deg,#e6550f,#ff914d);
+        color:#111; font-weight:800;
+        box-shadow:0 8px 24px rgba(230,85,15,.35);
+        transform:translateX(-28px);
+        border:2px solid rgba(0,0,0,.25);
+        font-family:'Montserrat',sans-serif;
       }
       #about .step h3{ margin:0 0 4px; font-size:18px; font-family:'Montserrat',sans-serif; }
       #about .step p{ margin:0; color:#dfe5f3; opacity:.92; font-family:'Inter',sans-serif; }
@@ -1043,8 +1024,10 @@
       #about .cta{
         display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap;
         background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-        border:1px solid rgba(255,255,255,.08); padding:18px 20px; border-radius:14px; margin-top:24px;
-        opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease;
+        border:1px solid rgba(255,255,255,.08);
+        padding:18px 20px; border-radius:14px; margin-top:24px;
+        opacity:0; transform:translateY(28px);
+        transition:opacity .7s ease, transform .7s ease;
         font-family:'Inter',sans-serif;
       }
       #about .cta.visible{ opacity:1; transform:translateY(0); }
@@ -1052,8 +1035,10 @@
       #about .cta .solid{
         display:inline-block; text-decoration:none; color:#fff; font-weight:800;
         background:linear-gradient(145deg,#e6550f,#ff7b31);
-        padding:12px 18px; border-radius:10px; box-shadow:0 10px 30px rgba(230,85,15,.35);
-        transition: transform .12s ease, box-shadow .12s ease; font-family:'Montserrat',sans-serif;
+        padding:12px 18px; border-radius:10px;
+        box-shadow:0 10px 30px rgba(230,85,15,.35);
+        transition: transform .12s ease, box-shadow .12s ease;
+        font-family:'Montserrat',sans-serif;
       }
       #about .cta .solid:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(230,85,15,.45); }
 
@@ -1067,11 +1052,11 @@
     </style>
 
     <div class="veil"></div>
-
     <div class="wrap">
       <h1 class="title">
         <span class="spark">The</span> Drive <span class="spark">to</span> Create
       </h1>
+
       <p class="kicker">
         We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.
       </p>
@@ -1087,15 +1072,16 @@
         <div class="card">
           <h2>Our Story</h2>
           <p>
-            Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to
-            boardroom spotlights, our team crafts visuals that speak for you when words fall short. We’re operators,
-            editors, pilots—problem solvers who obsess over framing, light, and narrative pace.
+            Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to boardroom spotlights,
+            our team crafts visuals that speak for you when words fall short. We’re operators, editors, pilots—problem solvers who obsess over framing,
+            light, and narrative pace.
           </p>
           <p>
             Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI,
             we’ll chart the flight path and carry the mission to delivery.
           </p>
         </div>
+
         <div class="card">
           <h2>What Drives Us</h2>
           <ul class="values">
@@ -1131,19 +1117,23 @@
             entries.forEach(e=>{
               if(e.isIntersecting){
                 e.target.classList.add('visible');
+
                 if(e.target.classList.contains('stat') && !e.target.dataset.done){
                   e.target.dataset.done = '1';
                   const numEl = e.target.querySelector('.num');
                   const target = parseInt(e.target.dataset.target||'0',10);
                   const start = performance.now(), dur = 1000;
+
                   const tick = (t)=>{
                     const p = Math.min(1,(t-start)/dur);
                     const val = Math.floor(target * (0.15 + 0.85*p*p));
                     numEl.textContent = val.toLocaleString();
-                    if(p<1) requestAnimationFrame(tick); else numEl.textContent = target.toLocaleString();
+                    if(p<1) requestAnimationFrame(tick);
+                    else numEl.textContent = target.toLocaleString();
                   };
                   requestAnimationFrame(tick);
                 }
+
                 io.unobserve(e.target);
               }
             });
@@ -1155,6 +1145,5 @@
       })();
     </script>
   </section>
-
 </body>
 </html>
