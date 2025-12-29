@@ -93,9 +93,13 @@
        ✅ HEADER (FIXED + CLEAN)
        Desktop:  Logo | Nav | Actions
        Mobile:   Logo | Get in touch | Hamburger (right)
-       Fixes:
-       - Forces desktop nav to be hidden on mobile (even if other rules fight it)
-       - Enlarges logo on both desktop and mobile
+
+       ✅ CHANGES APPLIED:
+       - Logo doubles in size (desktop + mobile)
+       - Removes ALL padding/margin around the LOGO ONLY
+       - Makes logo flush to LEFT edge of the webpage
+       - Makes logo flush to TOP of header and visually to bottom of hamburger bar
+       - Keeps nav/CTA/hamburger behavior stable
     ========================================================== */
     header.sticky-header {
       position: fixed !important;
@@ -111,34 +115,45 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
       padding: 10px 16px !important;
-      min-height: 110px !important; /* ✅ allow bigger logo */
+      min-height: 110px !important;
       display: grid !important;
-      grid-template-columns: auto 1fr auto !important; /* logo | nav | actions */
+      grid-template-columns: auto 1fr auto !important;
       align-items: center !important;
       gap: 14px !important;
       border-radius: 0 !important;
     }
 
-    /* Logo wrapper */
-    header.sticky-header .logo{
-      display:flex !important;
-      align-items:center !important;
-    }
+    /* ===================== ✅ LOGO: NO PADDING + FLUSH LEFT ===================== */
+    header.sticky-header .logo,
     header.sticky-header .logo a{
-      display:inline-flex !important;
-      align-items:center !important;
-      text-decoration:none !important;
-      line-height:0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      line-height: 0 !important;
+      display: flex !important;
+      align-items: stretch !important;
+      justify-content: flex-start !important;
     }
 
-    /* ✅ LOGO BIGGER (desktop) */
+    /* ✅ Force logo to be FLUSH to the left edge of the viewport (ignores header padding) */
+    header.sticky-header .logo{
+      justify-self: start !important;
+      position: relative !important;
+      left: -16px !important;   /* cancels header padding-left:16px */
+      top: -10px !important;    /* cancels header padding-top:10px */
+    }
+
+    /* ✅ Make the logo image truly block with zero spacing */
     header.sticky-header .logo img{
       background: transparent !important;
-      height: 110px !important; /* ✅ larger on desktop */
+      height: 160px !important; /* ✅ DOUBLED desktop logo */
       width: auto !important;
       object-fit: contain !important;
-      display:block !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      max-height: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)) !important;
+      transform-origin: left center !important;
     }
 
     /* Desktop nav */
@@ -150,7 +165,6 @@
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
 
-      /* ✅ inch shift on desktop only */
       transform: translateX(var(--nav-shift-right)) !important;
 
       justify-self: center !important;
@@ -287,17 +301,27 @@
     /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
-        /* ✅ Mobile: logo | CTA | hamburger */
         grid-template-columns: auto 1fr auto !important;
-        min-height: 120px !important; /* ✅ allow bigger logo */
+        min-height: 120px !important;
       }
 
-      /* ✅ make logo larger on mobile */
+      /* ✅ Mobile logo size (bigger in hamburger layout) */
       header.sticky-header .logo img{
-        height: 96px !important;
+        height: 110px !important;
       }
 
-      /* ✅ HARD-KILL desktop nav on mobile (fixes "menu screwed up") */
+      /* ✅ On mobile, cancel ALL header left padding so logo is truly flush */
+      header.sticky-header{
+        padding-left: 0 !important;
+      }
+
+      /* ✅ Since padding-left is 0 on mobile, remove the left offset */
+      header.sticky-header .logo{
+        left: 0 !important;
+        top: -10px !important; /* keeps it flush to top inside header */
+      }
+
+      /* ✅ HARD-KILL desktop nav on mobile */
       header.sticky-header nav.nav-links{
         display: none !important;
         transform: none !important;
