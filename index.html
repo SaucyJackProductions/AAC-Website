@@ -94,14 +94,11 @@
 
     /* =========================================================
        ✅ HEADER (FIXED + CLEAN)
-       Desktop:  Logo | Nav | Actions
-       Mobile:   Logo | Get in touch | Hamburger (right)
 
-       ✅ CHANGES NOW:
-       - Remove the "dead space" in the header bar under logo/nav/actions
-       - Tighten nav links, phone, button, hamburger
-       - Keep logo large, but do NOT force extra vertical padding
-       - Header height auto-fits content (still big logo)
+       ✅ UPDATES YOU REQUESTED (NOW THAT LOGO IS CROPPED):
+       - Make logo BIGGER again
+       - Reduce the "dead space" at the bottom of the header bar
+       - Keep everything vertically tight (nav/phone/button/hamburger)
     ========================================================== */
 
     header.sticky-header{
@@ -117,9 +114,11 @@
       border-bottom: 1px solid rgba(255,255,255,0.08) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      /* ✅ KEY: remove bar padding + forced height */
+      /* ✅ remove bar padding */
       padding: 0 !important;
-      height: auto !important;
+
+      /* ✅ This is what kills the extra bottom space */
+      height: fit-content !important;
       min-height: 0 !important;
 
       display: grid !important;
@@ -130,7 +129,7 @@
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: no extra space at all */
+    /* ✅ LOGO */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
@@ -138,6 +137,7 @@
       display: flex !important;
       align-items: center !important;
       justify-content: flex-start !important;
+      align-self: stretch !important; /* helps remove “bottom gap” */
     }
     header.sticky-header .logo a{
       margin: 0 !important;
@@ -147,17 +147,21 @@
       align-items: center !important;
       justify-content: flex-start !important;
       text-decoration: none !important;
+      align-self: stretch !important;
     }
 
-    /* ✅ Big logo, but header stays tight (no forced tall bar padding) */
+    /* ✅ BIGGER LOGO (desktop) */
     header.sticky-header .logo img{
       display: block !important;
       margin: 0 !important;
       padding: 0 !important;
-      height: 150px !important;      /* ✅ adjust this (120–180) */
+
+      height: 185px !important;  /* ✅ BIGGER (was 150) */
       width: auto !important;
+
       object-fit: contain !important;
       max-height: none !important;
+
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
     }
 
@@ -167,11 +171,11 @@
       justify-content: center !important;
       align-items: center !important;
 
-      /* ✅ reduce extra vertical space */
-      padding: 0 18px !important;
+      /* ✅ tighter vertical footprint */
+      padding: 0 16px !important;
       margin: 0 !important;
 
-      gap: 20px !important;
+      gap: 18px !important;
       font-size: clamp(16px, 1.6vw, 20px) !important;
       font-weight: 600 !important;
 
@@ -182,6 +186,7 @@
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
+      align-self: center !important;
     }
 
     header.sticky-header nav.nav-links a{
@@ -189,8 +194,8 @@
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
 
-      /* ✅ smaller vertical padding (removes “space under links”) */
-      padding: 10px 12px !important;
+      /* ✅ reduce “bottom padding” feeling */
+      padding: 8px 12px !important;
       margin: 0 !important;
       line-height: 1 !important;
     }
@@ -202,16 +207,17 @@
       justify-content: flex-end !important;
       align-items: center !important;
 
-      gap: 14px !important;
+      gap: 12px !important;
 
-      /* ✅ reduce vertical padding */
-      padding: 0 16px 0 12px !important;
+      /* ✅ remove vertical padding */
+      padding: 0 14px 0 10px !important;
       margin: 0 !important;
 
       justify-self: end !important;
       line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
+      align-self: center !important;
     }
 
     .phone-link{
@@ -238,8 +244,8 @@
       font-weight: 700;
       white-space: nowrap;
 
-      /* ✅ tighter button (removes extra header height) */
-      padding: 10px 18px !important;
+      /* ✅ tighter button = less header height */
+      padding: 9px 16px !important;
       line-height: 1 !important;
       margin: 0 !important;
 
@@ -259,12 +265,12 @@
       background:transparent;
       cursor:pointer;
 
-      /* ✅ remove extra space */
-      padding: 6px !important;
-      margin: 0 10px 0 0 !important;
+      /* ✅ reduce header bar bottom space on mobile */
+      padding: 4px !important;
+      margin: 0 8px 0 0 !important;
 
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 10px;
       position: relative;
       transition: transform var(--t-fast) var(--ease);
@@ -281,12 +287,12 @@
       border-radius:4px;
       transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease), top var(--t-fast) var(--ease);
     }
-    .hamburger span:nth-child(1){ top: 13px; }
-    .hamburger span:nth-child(2){ top: 20px; }
-    .hamburger span:nth-child(3){ top: 27px; }
-    .hamburger.open span:nth-child(1){ top: 20px; transform: rotate(45deg); }
+    .hamburger span:nth-child(1){ top: 12px; }
+    .hamburger span:nth-child(2){ top: 19px; }
+    .hamburger span:nth-child(3){ top: 26px; }
+    .hamburger.open span:nth-child(1){ top: 19px; transform: rotate(45deg); }
     .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
-    .hamburger.open span:nth-child(3){ top: 20px; transform: rotate(-45deg); }
+    .hamburger.open span:nth-child(3){ top: 19px; transform: rotate(-45deg); }
 
     /* ====== Mobile dropdown ====== */
     .nav-links-mobile{
@@ -302,7 +308,7 @@
       backdrop-filter: blur(8px);
 
       width: 100%;
-      padding: 6px 0; /* ✅ tighter */
+      padding: 6px 0;
       text-align: center;
 
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -322,7 +328,7 @@
     }
     .nav-links-mobile a{
       display:block;
-      padding: 14px 20px; /* ✅ tighter */
+      padding: 14px 20px;
       color:white;
       text-decoration:none;
       font-size:18px;
@@ -343,8 +349,9 @@
         align-items: center !important;
       }
 
+      /* ✅ BIGGER logo on mobile too (was 110) */
       header.sticky-header .logo img{
-        height: 110px !important; /* ✅ big but not bar-tall */
+        height: 132px !important;
       }
 
       header.sticky-header nav.nav-links{
@@ -371,7 +378,7 @@
       }
 
       header.sticky-header .cta-button{
-        padding: 10px 16px !important;
+        padding: 9px 14px !important;
         border-radius: 12px !important;
       }
     }
@@ -821,6 +828,7 @@
       function closeMenu() {
         menu.classList.remove('active');
         document.body.classList.remove('menu-open');
+        hamburger.classList.add('open');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
       }
