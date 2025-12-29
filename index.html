@@ -31,16 +31,13 @@
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* NAV SHIFT */
+      /* ✅ NAV SHIFT (current) */
       --nav-shift-right: -24px;
 
-      /* logo sizing */
+      /* ✅ logo sizing */
       --logo-gap: 4px;
       --logo-height-desktop: 150px;
       --logo-height-mobile: 64px;
-
-      /* CTA entrance */
-      --cta-enter-delay: 120ms;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -100,7 +97,6 @@
 
     /* =========================================================
       ✅ HEADER (FIXED + CLEAN)
-      ✅ FIX: baseline alignment across logo + nav + actions
     ========================================================== */
 
     header.sticky-header{
@@ -116,33 +112,31 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
       padding: 0 !important;
+      height: auto !important;
+      min-height: 0 !important;
 
       display: grid !important;
       grid-template-columns: auto 1fr auto auto !important;
-
-      /* ✅ baseline-align the grid items */
-      align-items: baseline !important;
-
+      align-items: center !important;
       gap: 0 !important;
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: keep it on the same baseline */
+    /* ✅ LOGO: hard-reset all spacing */
     header.sticky-header .logo{
       margin: 0 !important;
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: baseline !important;
+      align-items: center !important;
       justify-content: flex-start !important;
-      align-self: baseline !important;
     }
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
       line-height: 0 !important;
       display: flex !important;
-      align-items: baseline !important;
+      align-items: center !important;
       justify-content: flex-start !important;
       text-decoration: none !important;
     }
@@ -155,27 +149,27 @@
       object-fit: contain !important;
       max-height: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
-
-      /* ✅ align image baseline to text baseline */
-      vertical-align: baseline !important;
     }
 
     /* Desktop nav */
     header.sticky-header nav.nav-links{
       display: flex !important;
       justify-content: center !important;
-      align-items: baseline !important;         /* ✅ baseline inside row */
+      align-items: center !important;
       padding: 0 18px !important;
       margin: 0 !important;
       gap: 20px !important;
+
+      /* (leave as-is unless you want it bigger too) */
       font-size: clamp(16px, 1.6vw, 20px) !important;
-      font-weight: 700 !important;
+
+      font-weight: 600 !important;
       transform: translateX(var(--nav-shift-right)) !important;
       justify-self: center !important;
       width: 100% !important;
-
       line-height: 1 !important;
-      align-self: baseline !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
     header.sticky-header nav.nav-links a{
       color: white !important;
@@ -184,8 +178,6 @@
       padding: 10px 12px !important;
       margin: 0 !important;
       line-height: 1 !important;
-      display: inline-flex !important;
-      align-items: baseline !important;         /* ✅ baseline in each link */
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
 
@@ -193,26 +185,26 @@
     header.sticky-header .header-actions{
       display: flex !important;
       justify-content: flex-end !important;
-      align-items: baseline !important;         /* ✅ baseline with nav */
+      align-items: center !important;
       gap: 14px !important;
       padding: 0 16px 0 12px !important;
       margin: 0 !important;
       justify-self: end !important;
       line-height: 1 !important;
-      align-self: baseline !important;
+      min-height: 0 !important;
+      height: auto !important;
     }
 
+    /* ✅ UPDATED: PHONE NUMBER BIGGER (match logo wordmark feel) */
     .phone-link{
       color:#fff;
       text-decoration:none;
       font-size: clamp(20px, 2.0vw, 26px) !important;
-      font-weight: 800 !important;
+      font-weight: 700 !important;
       line-height: 1 !important;
       padding: 0 !important;
       margin: 0 !important;
       white-space: nowrap;
-      display: inline-flex !important;
-      align-items: baseline !important;
       transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
     }
     .phone-link:hover{
@@ -220,33 +212,19 @@
       transform: translateY(-1px);
     }
 
-    /* ✅ CTA: subtle entrance on load */
+    /* ✅ UPDATED: CTA BUTTON BIGGER (match logo wordmark feel) */
     .cta-button{
       background-color: var(--brand);
       color: white;
       text-decoration: none;
       border-radius: 12px !important;
       font-size: clamp(18px, 1.8vw, 24px) !important;
-      font-weight: 900 !important;
+      font-weight: 800 !important;
       white-space: nowrap;
       padding: 12px 22px !important;
       line-height: 1 !important;
       margin: 0 !important;
-
-      display: inline-flex !important;
-      align-items: baseline !important;
-
-      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
-
-      /* entrance state */
-      opacity: 0;
-      transform: translateY(6px);
-      will-change: transform, opacity;
-    }
-    body.cta-ready .cta-button{
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: var(--cta-enter-delay);
+      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
     }
     .cta-button:hover{
       background-color:#d94e0f;
@@ -269,7 +247,7 @@
       position: relative;
       transition: transform var(--t-fast) var(--ease);
       line-height: 1 !important;
-      align-self: baseline !important;          /* ✅ baseline with header row */
+      align-self: center !important;
     }
     .hamburger:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
     .hamburger span{
@@ -287,7 +265,7 @@
     .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
     .hamburger.open span:nth-child(3){ top: 20px; transform: rotate(-45deg); }
 
-    /* ====== Mobile dropdown ====== */
+    /* ====== Mobile dropdown (centered stack) ====== */
     .nav-links-mobile{
       position: fixed;
       left: 0; right: 0;
@@ -318,32 +296,6 @@
       opacity:1;
       transform: translateY(0);
     }
-
-    /* ✅ phone in mobile dropdown */
-    .nav-links-mobile .mobile-phone{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      margin: 6px auto 12px;
-      padding: 12px 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.22);
-      color:#fff;
-      text-decoration:none;
-      font-family:'Montserrat',sans-serif;
-      font-weight:900;
-      font-size: 20px;
-      letter-spacing:-0.01em;
-      box-shadow: 0 10px 24px rgba(0,0,0,.25);
-      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-    }
-    .nav-links-mobile .mobile-phone:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0,0,0,.35);
-    }
-
     .nav-links-mobile a{
       display:inline-block;
       width: fit-content;
@@ -351,7 +303,7 @@
       color:white;
       text-decoration:none;
       font-size:18px;
-      font-weight:700;
+      font-weight:600;
       letter-spacing:.2px;
       transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
       line-height: 1.1;
@@ -365,11 +317,11 @@
 
     body.menu-open{ overflow:hidden; touch-action:none; }
 
-    /* ===================== MOBILE HEADER LAYOUT ===================== */
+    /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
         grid-template-columns: auto 1fr auto !important;
-        align-items: center !important; /* mobile: center looks best */
+        align-items: center !important;
       }
       header.sticky-header .logo img{
         height: var(--logo-height-mobile) !important;
@@ -384,10 +336,9 @@
         justify-self: center !important;
         justify-content: center !important;
         padding: 0 !important;
-        align-items: center !important;
       }
 
-      /* keep phone hidden in header row on mobile */
+      /* keep phone hidden on mobile (as you had) */
       header.sticky-header .phone-link{ display:none !important; }
 
       .hamburger{
@@ -395,9 +346,9 @@
         align-items:center !important;
         justify-content:center !important;
         justify-self:end !important;
-        align-self: center !important;
       }
 
+      /* ✅ UPDATED: CTA stays big on mobile too */
       header.sticky-header .cta-button{
         font-size: 20px !important;
         padding: 12px 20px !important;
@@ -442,7 +393,7 @@
 
     /* ===== Services ===== */
     .services {
-      padding: 2.25rem 2rem 4rem;
+      padding: 2.25rem 2rem 4rem; /* tighter top */
       background: url('DJI_0648%202.jpg') center/cover no-repeat;
     }
     .services h2{
@@ -610,9 +561,6 @@
   </header>
 
   <div class="nav-links-mobile" id="navLinksMobile" role="menu" aria-label="Mobile navigation">
-    <!-- ✅ phone number now shows inside dropdown -->
-    <a class="mobile-phone" href="tel:+18039205349" role="menuitem" aria-label="Call (803) 920-5349">📞 (803) 920-5349</a>
-
     <a href="#" role="menuitem">Home</a>
     <a href="#about" role="menuitem">About</a>
     <a href="#services" role="menuitem">Services</a>
@@ -823,11 +771,6 @@
       const hamburger = document.getElementById('hamburgerMenu');
       const menu = document.getElementById('navLinksMobile');
       const progress = document.getElementById('scrollProgress');
-
-      // ✅ trigger CTA subtle entrance on load
-      window.addEventListener('load', () => {
-        document.body.classList.add('cta-ready');
-      });
 
       function setHeaderHeightVar() {
         const h = header ? header.offsetHeight : 118;
@@ -1248,18 +1191,5 @@
       })();
     </script>
   </section>
-
-  <script>
-    // keep your original header height var setter (in case load changes header)
-    (function(){
-      const header = document.querySelector('.sticky-header');
-      const setHeaderHeightVar = () => {
-        const h = header ? header.offsetHeight : 118;
-        document.documentElement.style.setProperty('--header-h', h + 'px');
-      };
-      setHeaderHeightVar();
-      window.addEventListener('resize', setHeaderHeightVar);
-    })();
-  </script>
 </body>
 </html>
