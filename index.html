@@ -31,8 +31,8 @@
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* ✅ NAV SHIFT (UPDATED): move nav LEFT ~1 inch */
-      --nav-shift-right: -54px;
+      /* ✅ NAV SHIFT: moved to the right 1/2 inch from the "left 1 inch" position */
+      --nav-shift-right: -48px;
 
       /* ✅ logo sizing */
       --logo-gap: 4px;
@@ -158,13 +158,19 @@
       align-items: center !important;
       padding: 0 18px !important;
       margin: 0 !important;
-      gap: 20px !important;
-      font-size: clamp(16px, 1.6vw, 20px) !important;
-      font-weight: 600 !important;
-      transform: translateX(var(--nav-shift-right)) !important; /* ✅ now moves LEFT */
+
+      /* ✅ slightly more spacing so big font doesn't feel cramped */
+      gap: 28px !important;
+
+      /* ✅ MATCH LOGO WORDMARK SCALE (ABOVE ALL) */
+      font-size: 34px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      letter-spacing: -0.02em !important;
+
+      transform: translateX(var(--nav-shift-right)) !important;
       justify-self: center !important;
       width: 100% !important;
-      line-height: 1 !important;
       min-height: 0 !important;
       height: auto !important;
     }
@@ -381,9 +387,9 @@
 
     /* ===== Services ===== */
     .services {
-  padding: 2.25rem 2rem 4rem; /* ⬇️ tighter top, same sides, same bottom */
-  background: url('DJI_0648%202.jpg') center/cover no-repeat;
-}
+      padding: 2.25rem 2rem 4rem; /* ⬇️ tighter top, same sides, same bottom */
+      background: url('DJI_0648%202.jpg') center/cover no-repeat;
+    }
 
     .services h2{
       font-size: 3rem;
