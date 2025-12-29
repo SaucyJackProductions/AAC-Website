@@ -4,86 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- ✅ SEO Metadata (Critical) -->
-  <title>Above All Media | Hilton Head Video & Marketing</title>
-  <meta name="description" content="Above All Media provides cinematic video, real estate media, drone, and marketing content for Hilton Head and Lowcountry businesses.">
+  <!-- ✅ SEO (Core) -->
+  <title>Above All Media | Hilton Head Video Marketing, Drone & Real Estate Media</title>
+  <meta name="description" content="Hilton Head video marketing that drives bookings, listings, and sales. Cinematic video, drone, real estate media, and social ads for Hilton Head Island & the Lowcountry. Get a free strategy call.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://aboveallmediasc.com/">
 
-  <!-- Modern, cinematic font system -->
+  <!-- ✅ Social (Open Graph) -->
+  <meta property="og:title" content="Above All Media | Hilton Head Video Marketing">
+  <meta property="og:description" content="Cinematic video + drone + social ads built to get Hilton Head businesses more customers. Free strategy call.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aboveallmediasc.com/">
+  <!-- Optional: set these when you add files -->
+  <!-- <meta property="og:image" content="https://aboveallmediasc.com/assets/images/og/og-image.jpg"> -->
+  <!-- <meta name="twitter:card" content="summary_large_image"> -->
+
+  <!-- ✅ Performance: Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ✅ LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Above All Media",
+    "url": "https://aboveallmediasc.com/",
+    "telephone": "+18039205349",
+    "email": "info@aboveallmediasc.com",
+    "areaServed": ["Hilton Head Island, SC", "Bluffton, SC", "Beaufort, SC", "Lowcountry"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hilton Head Island",
+      "addressRegion": "SC",
+      "addressCountry": "US"
+    },
+    "sameAs": []
+  }
+  </script>
 
   <style>
     /* ===== Design Tokens ===== */
     :root{
       --bg:#0e1116;
       --panel:#151820;
+      --panel-2:#10131a;
       --ink:#fffdf6;
       --ink-dim:#dfe5f3;
-      --line:rgba(255,255,255,.08);
+      --line:rgba(255,255,255,.10);
       --brand:#e6550f;
       --brand-2:#00bfff;
+      --ok:#38d996;
 
-      /* JS updates this, default fallback */
-      --header-h:118px;
-
-      --radius:16px;
+      --radius:18px;
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
       --t-med:180ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
-      /* ✅ NAV SHIFT (current) */
+      /* JS updates this */
+      --header-h:118px;
+
+      /* NAV SHIFT */
       --nav-shift-right: -12px;
 
-      /* ✅ logo sizing */
+      /* LOGO SIZE */
       --logo-gap: 4px;
       --logo-height-desktop: 150px;
       --logo-height-mobile: 64px;
+
+      /* Layout */
+      --wrap: 1200px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    :target{ scroll-margin-top: calc(var(--header-h) + 10px); }
+    :target{ scroll-margin-top: calc(var(--header-h) + 14px); }
 
-    /* ===== GLOBAL TYPOGRAPHY ===== */
     body {
       font-family: 'Inter', sans-serif;
       font-weight: 400;
-      background-color: #f5f5f5;
-      color: #333;
+      background: var(--bg);
+      color: var(--ink);
       letter-spacing: 0.01em;
       padding-top: var(--header-h);
-    }
-    h1, h2, h3, h4, h5 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: #ffffff;
+      overflow-x: hidden;
     }
 
-    /* Hero title style (used in About slogan) */
-    #about .title {
+    h1, h2, h3 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       letter-spacing: -0.04em;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      background: linear-gradient(90deg, #ffffff, #ffe7d2, #ff8e46);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      color: var(--ink);
     }
 
-    /* Nav + buttons typography */
-    .nav-links a, .header-actions .cta-button, .phone-link, .btn-pill, .chip {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
+    a { color: inherit; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+    .muted { color: rgba(223,229,243,.88); }
+    .tiny { font-size: 12px; color: rgba(223,229,243,.72); }
 
-    /* ✅ Active nav highlight */
-    .nav-links a.active { color: var(--brand); }
-
-    /* ===== Scroll Progress Bar (thin) ===== */
+    /* ===== Scroll Progress Bar ===== */
     .scroll-progress{
       position:fixed;
       left:0; top:0;
@@ -96,25 +117,21 @@
     }
 
     /* =========================================================
-      ✅ HEADER (FIXED + CLEAN)
+      ✅ HEADER (FIXED)
     ========================================================== */
-
     header.sticky-header{
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
       width: 100% !important;
       z-index: 1000 !important;
-      background: rgba(28, 28, 32, 0.92) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      backdrop-filter: blur(10px) !important;
-      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      background: rgba(14, 17, 22, 0.78) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.10) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
       padding: 0 !important;
-      height: auto !important;
-      min-height: 0 !important;
-
       display: grid !important;
       grid-template-columns: auto 1fr auto auto !important;
       align-items: center !important;
@@ -122,15 +139,7 @@
       border-radius: 0 !important;
     }
 
-    /* ✅ LOGO: hard-reset all spacing */
-    header.sticky-header .logo{
-      margin: 0 !important;
-      padding: 0 !important;
-      line-height: 0 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-    }
+    header.sticky-header .logo,
     header.sticky-header .logo a{
       margin: 0 !important;
       padding: 0 !important;
@@ -147,11 +156,9 @@
       height: var(--logo-height-desktop) !important;
       width: auto !important;
       object-fit: contain !important;
-      max-height: none !important;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)) !important;
     }
 
-    /* Desktop nav */
     header.sticky-header nav.nav-links{
       display: flex !important;
       justify-content: center !important;
@@ -159,29 +166,24 @@
       padding: 0 18px !important;
       margin: 0 !important;
       gap: 20px !important;
-
-      /* (leave as-is unless you want it bigger too) */
       font-size: clamp(16px, 1.6vw, 20px) !important;
-
-      font-weight: 600 !important;
+      font-weight: 700 !important;
       transform: translateX(var(--nav-shift-right)) !important;
       justify-self: center !important;
       width: 100% !important;
       line-height: 1 !important;
-      min-height: 0 !important;
-      height: auto !important;
     }
     header.sticky-header nav.nav-links a{
-      color: white !important;
+      color: rgba(255,255,255,0.92) !important;
       text-decoration: none !important;
       transition: color var(--t-fast) var(--ease) !important;
       padding: 10px 12px !important;
-      margin: 0 !important;
       line-height: 1 !important;
+      border-radius: 10px;
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
+    header.sticky-header nav.nav-links a.active { color: var(--brand) !important; }
 
-    /* Actions */
     header.sticky-header .header-actions{
       display: flex !important;
       justify-content: flex-end !important;
@@ -191,19 +193,14 @@
       margin: 0 !important;
       justify-self: end !important;
       line-height: 1 !important;
-      min-height: 0 !important;
-      height: auto !important;
     }
 
-    /* ✅ UPDATED: PHONE NUMBER BIGGER (match logo wordmark feel) */
     .phone-link{
       color:#fff;
       text-decoration:none;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(20px, 2.0vw, 26px) !important;
-      font-weight: 700 !important;
-      line-height: 1 !important;
-      padding: 0 !important;
-      margin: 0 !important;
+      font-weight: 800 !important;
       white-space: nowrap;
       transition: text-shadow var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
     }
@@ -212,27 +209,27 @@
       transform: translateY(-1px);
     }
 
-    /* ✅ UPDATED: CTA BUTTON BIGGER (match logo wordmark feel) */
     .cta-button{
-      background-color: var(--brand);
+      background: linear-gradient(145deg, var(--brand), #ff7b31);
       color: white;
       text-decoration: none;
       border-radius: 12px !important;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(18px, 1.8vw, 24px) !important;
-      font-weight: 800 !important;
+      font-weight: 900 !important;
       white-space: nowrap;
       padding: 12px 22px !important;
       line-height: 1 !important;
-      margin: 0 !important;
-      transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
+      box-shadow: 0 10px 24px rgba(230,85,15,.28);
     }
     .cta-button:hover{
-      background-color:#d94e0f;
       transform: translateY(-1px);
-      box-shadow:0 6px 18px rgba(230,85,15,.35);
+      box-shadow: 0 16px 44px rgba(230,85,15,.40);
+      filter: saturate(1.05);
     }
 
-    /* ===== Hamburger ===== */
+    /* Hamburger */
     .hamburger{
       display:none;
       appearance:none;
@@ -265,27 +262,25 @@
     .hamburger.open span:nth-child(2){ opacity:0; transform: scaleX(0.6); }
     .hamburger.open span:nth-child(3){ top: 20px; transform: rotate(-45deg); }
 
-    /* ====== Mobile dropdown (centered stack) ====== */
     .nav-links-mobile{
       position: fixed;
       left: 0; right: 0;
       top: var(--header-h);
       z-index: 1500;
       display: none;
-      background: rgba(33,33,33,0.96);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
+      background: rgba(14,17,22,0.96);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       width: 100%;
       padding: 14px 0 10px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
       max-height: calc(100dvh - var(--header-h));
       overflow-y: auto;
       transform: translateY(-8px);
       opacity: 0;
       transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
-
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
@@ -300,24 +295,22 @@
       display:inline-block;
       width: fit-content;
       padding: 12px 18px;
-      color:white;
+      color:rgba(255,255,255,0.96);
       text-decoration:none;
+      font-family:'Montserrat',sans-serif;
       font-size:18px;
-      font-weight:600;
-      letter-spacing:.2px;
+      font-weight:800;
+      letter-spacing:-0.01em;
       transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
       line-height: 1.1;
       margin: 0 auto;
+      border-radius: 12px;
     }
-    .nav-links-mobile a + a{
-      border-top: 0;
-      margin-top: 6px;
-    }
-    .nav-links-mobile a:hover{ background:#444; border-radius: 10px; }
+    .nav-links-mobile a + a{ margin-top: 6px; }
+    .nav-links-mobile a:hover{ background:rgba(255,255,255,0.06); }
 
     body.menu-open{ overflow:hidden; touch-action:none; }
 
-    /* ===================== MOBILE HEADER LAYOUT FIX ===================== */
     @media (max-width: 768px) {
       header.sticky-header{
         grid-template-columns: auto 1fr auto !important;
@@ -327,204 +320,560 @@
         height: var(--logo-height-mobile) !important;
         padding: 2px 0 !important;
       }
-      header.sticky-header nav.nav-links{
-        display:none !important;
-        transform:none !important;
-        padding: 0 !important;
-      }
+      header.sticky-header nav.nav-links{ display:none !important; transform:none !important; padding: 0 !important; }
       header.sticky-header .header-actions{
         justify-self: center !important;
         justify-content: center !important;
         padding: 0 !important;
       }
-
-      /* keep phone hidden on mobile (as you had) */
       header.sticky-header .phone-link{ display:none !important; }
-
       .hamburger{
         display:inline-flex !important;
         align-items:center !important;
         justify-content:center !important;
         justify-self:end !important;
       }
-
-      /* ✅ UPDATED: CTA stays big on mobile too */
       header.sticky-header .cta-button{
         font-size: 20px !important;
-        padding: 12px 20px !important;
-        border-radius: 12px !important;
+        padding: 12px 18px !important;
       }
     }
 
-    /* ===== Standard Components ===== */
-    .btn-pill{
-      display:inline-block;
-      margin-top:1rem;
-      padding:.8rem 1.9rem;
-      border-radius:999px;
-      text-decoration:none;
-      font-weight:700;
-      color:#fff;
-      background:linear-gradient(90deg,#00FFF0,#00BFFF);
-      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
-      font-size: 1.05rem;
-    }
-    .btn-pill:hover{
-      transform:translateY(-1px);
-      box-shadow:0 8px 22px rgba(0,191,255,.35);
-    }
-    .chip{
-      padding:8px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      color:#fff;
-      background:rgba(21,24,32,.65);
-      cursor:pointer;
-      font-weight:600;
-      font-size:.9rem;
-      transition:transform var(--t-fast) var(--ease), background var(--t-med) var(--ease), box-shadow var(--t-fast) var(--ease);
-    }
-    .chip[aria-pressed="true"]{
-      background:linear-gradient(145deg,var(--brand),#ff7b31);
-      border-color:transparent;
-      box-shadow:0 8px 24px rgba(230,85,15,.35);
-    }
-    .chip:hover{ transform:translateY(-1px); }
-
-    /* ===== Services ===== */
-    .services {
-      padding: 2.25rem 2rem 4rem; /* tighter top */
-      background: url('DJI_0648%202.jpg') center/cover no-repeat;
-    }
-    .services h2{
-      font-size: 3rem;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-      text-align:center;
-      margin-bottom:.75rem;
-    }
-    .services p.lead{
-      font-size: 1.2rem;
-      color: #f0f0f0;
-      text-align:center;
-      margin-bottom:1.2rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-    }
-    .filters{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom: 2.0rem; }
-    .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-
-    .service-card{
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
+    /* ===== HERO ===== */
+    .hero{
+      position: relative;
+      min-height: calc(100vh - var(--header-h));
+      display: grid;
+      place-items: center;
       overflow: hidden;
-      width: 400px;
-      text-align: center;
-      transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
-      cursor: pointer;
+      background: #0b0e13;
     }
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 35px rgba(0,255,255,0.22);
-    }
-    .service-card img{
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      display:block;
-      transition: transform 260ms var(--ease);
-    }
-    .service-card img:hover { transform: scale(1.03); }
-    .service-card h3{
-      margin: .8rem 0 .4rem;
-      color:#fffdf6;
-      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-      line-height: 1.25;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      display:inline-block;
-      position:relative;
-      padding:6px 10px;
-      border-radius:12px;
-      text-shadow: 0 1px 3px rgba(0,0,0,.85), 0 0 12px rgba(255,215,128,.18), 0 0 24px rgba(255,215,128,.12);
-    }
-    .service-card h3::before{
+    .hero::before{
       content:"";
       position:absolute;
-      inset:-4px -8px;
-      background: rgba(10,12,16,0.55);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: inherit;
-      z-index:-1;
+      inset:0;
+      background:
+        radial-gradient(1100px 600px at 18% 18%, rgba(230,85,15,0.24), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 500px at 85% 30%, rgba(0,191,255,0.18), rgba(0,0,0,0) 55%),
+        linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.65));
+      z-index: 1;
+      pointer-events:none;
     }
-    .service-card p{
-      font-size:.95rem;
-      color:#fff;
-      line-height:1.45;
-      text-shadow:0 1px 3px rgba(0,0,0,.5);
-      padding:0 1.2rem 1rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
+    .hero-media{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      opacity:0.85;
+      background: url('DJI_0648%202.jpg') center/cover no-repeat; /* ✅ fallback hero image */
+      filter: contrast(1.05) saturate(1.05) brightness(0.78);
+      transform: scale(1.02);
+    }
+    .hero-inner{
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 26px 0 22px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .hero h1{
+      font-size: clamp(2.2rem, 5.2vw, 4.6rem);
+      line-height: 1.02;
+      text-shadow: 0 16px 46px rgba(0,0,0,.65);
+    }
+    .hero .sub{
+      margin-top: 14px;
+      font-size: clamp(1.05rem, 1.85vw, 1.4rem);
+      line-height: 1.45;
+      color: rgba(255,255,255,.88);
+      max-width: 58ch;
+      text-shadow: 0 10px 26px rgba(0,0,0,.55);
+    }
+    .badges{
+      margin-top: 16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(14,17,22,0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-family:'Montserrat',sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.92);
     }
 
-    /* ===== CONTACT (Get in touch) ===== */
-    #contact-card {
+    .hero-actions{
+      margin-top: 18px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn-primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border: none;
+      cursor:pointer;
+      text-decoration:none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color:#fff;
+      background: linear-gradient(145deg, var(--brand), #ff7b31);
+      box-shadow: 0 16px 40px rgba(230,85,15,.32);
+      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+    }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 22px 60px rgba(230,85,15,.44); }
+
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      text-decoration:none;
+      color: rgba(255,255,255,.92);
+      background: rgba(14,17,22,0.45);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+    }
+    .btn-ghost:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.06); }
+
+    .hero-proof{
+      background: rgba(10,12,16,0.76);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-proof .top{
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(21,24,32,0.70);
+    }
+    .hero-proof h2{
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+    .hero-proof p{
+      margin-top: 8px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: rgba(223,229,243,.90);
+    }
+    .hero-proof .mini{
+      padding: 14px 18px 18px;
+      display:grid;
+      gap:10px;
+    }
+    .mini-row{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: rgba(255,255,255,.92);
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+    .check{
+      min-width: 22px; height: 22px;
+      border-radius: 7px;
+      display:grid; place-items:center;
+      background: rgba(56,217,150,0.16);
+      border: 1px solid rgba(56,217,150,0.38);
+      color: var(--ok);
+      font-weight: 900;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    /* ===== Sections ===== */
+    section { position: relative; }
+    .section-pad{ padding: clamp(44px, 7vw, 80px) 0; }
+    .section-title{
+      font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+      margin-bottom: 10px;
+    }
+    .section-lead{
+      max-width: 78ch;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: rgba(223,229,243,.90);
+    }
+
+    /* ===== Services (conversion-first) ===== */
+    #services{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+    }
+
+    .service-grid{
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .service{
+      grid-column: span 6;
+      background: rgba(21,24,32,0.72);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.34);
+      transition: transform var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
+    }
+    .service:hover{
+      transform: translateY(-4px);
+      border-color: rgba(230,85,15,0.35);
+    }
+    .service h3{
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .service p{
+      color: rgba(223,229,243,.90);
+      line-height: 1.55;
+      font-size: 0.98rem;
+    }
+    .service .ideal{
+      margin-top: 10px;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(14,17,22,0.45);
+    }
+
+    /* ===== Portfolio ===== */
+    #portfolio{ background: rgba(255,255,255,0.01); }
+    .portfolio-grid{
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .port-card{
+      grid-column: span 6;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(21,24,32,0.72);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.38);
+    }
+    .port-card .thumb{
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #0b0e13;
+      overflow:hidden;
+    }
+    .port-card .thumb img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+      filter: contrast(1.05) saturate(1.03) brightness(0.86);
+      transform: scale(1.02);
+    }
+    .port-card .meta{
+      padding: 14px 16px 16px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(14,17,22,0.40);
+      font-family:'Montserrat',sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.92);
+    }
+    .port-card h3{
+      margin-top: 10px;
+      font-size: 1.15rem;
+    }
+    .port-card p{
+      margin-top: 8px;
+      color: rgba(223,229,243,.90);
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    /* ===== Contact (Lead Machine) ===== */
+    #contact{
       position: relative;
       width: 100%;
       background-image: url('crabweb.jpg');
       background-repeat: no-repeat;
       background-position: center -200px;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
       min-height: 100vh;
-      margin: 0;
-      padding: 0;
       overflow: hidden;
     }
-    #contact-card::before {
+    #contact::before{
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.65)),
-                  linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.55));
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.70)),
+                  linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.62));
       z-index: 0;
     }
-    #contact-card form {
+
+    .form-shell{
       position: relative;
       z-index: 2;
-      width: min(900px, 92vw);
-      background: rgba(10,12,16,0.78);
+      width: min(980px, 92vw);
+      background: rgba(10,12,16,0.80);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border-radius: 22px;
       border: 1px solid rgba(230,85,15,0.55);
       overflow: hidden;
-      animation: floatCard 12s ease-in-out infinite alternate;
       box-shadow: 0 30px 70px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.03);
     }
-    #contact-card form::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -38px;
-      width: 70%;
-      height: 40px;
-      transform: translateX(-50%);
-      background: radial-gradient(ellipse, rgba(0,0,0,0.7), transparent 70%);
-      pointer-events: none;
+
+    .form-head{
+      padding: 22px 22px 14px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(21,24,32,0.78);
     }
-    @keyframes floatCard {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-14px); }
+    .icon-box{
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--brand), #ff7b31);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 24px;
+      box-shadow: 0 12px 28px rgba(230,85,15,.28);
+      flex: 0 0 auto;
     }
-    @media(max-width:600px){
-      #contact-card { min-height: auto; background-size: cover; padding: 40px 0; }
+    .form-head h2{
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.03em;
+    }
+    .form-head p{ margin-top: 8px; }
+
+    .form-body{
+      padding: 18px 22px 22px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+      background: rgba(21,24,32,0.78);
+    }
+
+    label{
+      display:block;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+      color: rgba(223,229,243,.92);
+    }
+    input, select, textarea{
+      width:100%;
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(11,14,19,0.95);
+      color: rgba(255,255,255,0.95);
+      font-family: 'Inter', sans-serif;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(230,85,15,0.55);
+      box-shadow: 0 0 0 4px rgba(230,85,15,0.14);
+    }
+    textarea{ min-height: 140px; resize: vertical; line-height: 1.5; }
+
+    .col-6{ grid-column: span 6; }
+    .col-12{ grid-column: span 12; }
+
+    .intent{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 4px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(14,17,22,0.50);
+      cursor:pointer;
+      user-select:none;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,.92);
+      transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+    }
+    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.06); }
+    .pill input{ width:auto; padding:0; border:none; box-shadow:none; }
+
+    .form-foot{
+      padding: 16px 22px 22px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      background: rgba(21,24,32,0.78);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .submit{
+      background: linear-gradient(145deg, var(--brand), #ff7b31);
+      color:#fff;
+      border:none;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor:pointer;
+      font-family:'Montserrat',sans-serif;
+      box-shadow: 0 16px 40px rgba(230,85,15,.30);
+      transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+    }
+    .submit:hover{ transform: translateY(-1px); box-shadow: 0 22px 60px rgba(230,85,15,.42); }
+    .submit:disabled{ opacity: .7; cursor: not-allowed; transform: none; }
+
+    .form-status{
+      display:none;
+      padding: 14px 22px;
+      background: rgba(11,14,19,0.95);
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: rgba(223,229,243,.92);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ===== About (short, credibility-first) ===== */
+    #about{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    }
+    .about-card{
+      margin-top: 18px;
+      background: rgba(21,24,32,0.72);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.36);
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .about-card h3{ font-size: 1.2rem; margin-bottom: 10px; }
+    .about-card p{ color: rgba(223,229,243,.90); line-height: 1.65; }
+    .about-list{
+      list-style: none;
+      display:grid;
+      gap:10px;
+      padding-left: 0;
+    }
+    .about-list li{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(14,17,22,0.45);
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+    }
+
+    /* ===== Footer ===== */
+    footer{
+      padding: 26px 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      background: rgba(10,12,16,0.70);
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:center;
+    }
+
+    /* ===== Mobile Sticky Call Bar (conversion rocket) ===== */
+    .mobile-bar{
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 1800;
+      display:none;
+      gap: 10px;
+      align-items:center;
+      justify-content: space-between;
+      padding: 10px 10px;
+      border-radius: 18px;
+      background: rgba(14,17,22,0.78);
+      border: 1px solid rgba(255,255,255,0.14);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    }
+    .mobile-bar a{
+      flex: 1;
+      text-decoration:none;
+      font-family:'Montserrat',sans-serif;
+      font-weight: 900;
+      border-radius: 14px;
+      padding: 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      color:#fff;
+    }
+    .mobile-bar .call{ background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); }
+    .mobile-bar .quote{ background: linear-gradient(145deg, var(--brand), #ff7b31); }
+
+    @media (max-width: 820px){
+      .hero-grid{ grid-template-columns: 1fr; gap: 14px; }
+      .service{ grid-column: span 12; }
+      .port-card{ grid-column: span 12; }
+      .about-card{ grid-template-columns: 1fr; }
+      .mobile-bar{ display:flex; }
+      #contact{ min-height: auto; padding: 46px 0; }
+      .col-6{ grid-column: span 12; }
+    }
+
+    /* Reduced motion respect */
+    @media (prefers-reduced-motion: reduce){
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -532,9 +881,10 @@
 <body>
   <div class="scroll-progress" id="scrollProgress"></div>
 
+  <!-- ✅ Sticky Header -->
   <header class="sticky-header">
     <div class="logo">
-      <a href="#" aria-label="Above All Media Home">
+      <a href="#top" aria-label="Above All Media Home">
         <img
           src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp"
           alt="Above All Media"
@@ -544,15 +894,16 @@
     </div>
 
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#" data-section="top">Home</a>
-      <a href="#about" data-section="about">About</a>
+      <a href="#top" data-section="top">Home</a>
       <a href="#services" data-section="services">Services</a>
-      <a href="#contact-card" data-section="contact">Contact</a>
+      <a href="#portfolio" data-section="portfolio">Work</a>
+      <a href="#contact" data-section="contact">Contact</a>
+      <a href="#about" data-section="about">About</a>
     </nav>
 
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
-      <a href="#contact-card" class="cta-button" aria-label="Go to Get in touch form">Get in touch</a>
+      <a href="#contact" class="cta-button" aria-label="Go to form">Free Strategy</a>
     </div>
 
     <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
@@ -560,155 +911,249 @@
     </button>
   </header>
 
+  <!-- ✅ Mobile Nav -->
   <div class="nav-links-mobile" id="navLinksMobile" role="menu" aria-label="Mobile navigation">
-    <a href="#" role="menuitem">Home</a>
-    <a href="#about" role="menuitem">About</a>
+    <a href="#top" role="menuitem">Home</a>
     <a href="#services" role="menuitem">Services</a>
-    <a href="#contact-card" role="menuitem">Contact</a>
+    <a href="#portfolio" role="menuitem">Work</a>
+    <a href="#contact" role="menuitem">Contact</a>
+    <a href="#about" role="menuitem">About</a>
+    <a href="tel:+18039205349" role="menuitem">Call (803) 920-5349</a>
   </div>
 
-  <section id="services" class="services" aria-label="Services">
-    <h2>Media Services Designed to Deliver Results</h2>
-    <p class="lead">Transform your brand with cinematic storytelling, drone footage, and social media strategy.</p>
+  <!-- ✅ Mobile Sticky CTA Bar -->
+  <div class="mobile-bar" aria-label="Quick actions">
+    <a class="call" href="tel:+18039205349" aria-label="Call now">📞 Call Now</a>
+    <a class="quote" href="#contact" aria-label="Get a free strategy">⚡ Free Strategy</a>
+  </div>
 
-    <div class="filters" aria-label="Service filters">
-      <button class="chip" data-filter="all" aria-pressed="true" type="button">All</button>
-      <button class="chip" data-filter="Brand" aria-pressed="false" type="button">Brand</button>
-      <button class="chip" data-filter="RealEstate" aria-pressed="false" type="button">Real Estate</button>
-      <button class="chip" data-filter="Aerial" aria-pressed="false" type="button">Aerial</button>
-      <button class="chip" data-filter="Events" aria-pressed="false" type="button">Events</button>
-      <button class="chip" data-filter="Social" aria-pressed="false" type="button">Social</button>
-      <button class="chip" data-filter="Product" aria-pressed="false" type="button">Product</button>
+  <!-- ===================== HERO ===================== -->
+  <main id="top" class="hero" aria-label="Hilton Head Video Marketing Hero">
+    <div class="hero-media" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="wrap">
+        <div class="hero-grid">
+          <!-- Left: Message + CTAs -->
+          <div>
+            <h1>Hilton Head Video Marketing That Turns Attention Into Bookings.</h1>
+            <p class="sub">
+              Cinematic video, drone, and social ads built to help Hilton Head businesses get more customers—faster.
+              If you want your brand to look premium and convert, you’re in the right place.
+            </p>
+
+            <div class="badges" aria-label="Service area and proof points">
+              <span class="badge">📍 Hilton Head • Bluffton • Beaufort</span>
+              <span class="badge">🚁 Licensed Drone Ops</span>
+              <span class="badge">⚡ Fast Turnaround</span>
+              <span class="badge">📈 Built For Conversion</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn-primary" href="#contact" aria-label="Go to lead form">🚀 Get My Free Strategy</a>
+              <a class="btn-ghost" href="#portfolio" aria-label="View work examples">🎥 See Our Work</a>
+              <a class="btn-ghost" href="tel:+18039205349" aria-label="Call (803) 920-5349">📞 Call Now</a>
+            </div>
+
+            <p class="tiny" style="margin-top:12px;">
+              Serving Hilton Head Island, Bluffton, Beaufort & the Lowcountry • We typically respond within 24 hours.
+            </p>
+          </div>
+
+          <!-- Right: Quick Proof (psychology: clarity + trust) -->
+          <aside class="hero-proof" aria-label="Why businesses choose Above All Media">
+            <div class="top">
+              <h2>What you get (no fluff)</h2>
+              <p class="muted">
+                You’re not buying “a video.” You’re buying a system that helps people choose you.
+              </p>
+            </div>
+            <div class="mini">
+              <div class="mini-row"><span class="check">✓</span> Strategy first: we define the goal (bookings, listings, sales) before we shoot.</div>
+              <div class="mini-row"><span class="check">✓</span> Cinematic capture + fast delivery, optimized for web + social.</div>
+              <div class="mini-row"><span class="check">✓</span> Content cutdowns for Meta/IG so you can run ads that actually perform.</div>
+              <div class="mini-row"><span class="check">✓</span> Simple next step: one form, one call, one plan.</div>
+            </div>
+          </aside>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <div class="grid" id="serviceGrid">
-      <article class="service-card" data-cat="Brand">
-        <img src="IMG_4681.jpg" alt="Sunrise jib over Harbour Town Lighthouse, Hilton Head">
-        <h3>📈 Commercial Brand Packages</h3>
-        <p>
-          Branded aerial &amp; ground video production.<br/>
-          Targeted social media ad integration (Meta, YouTube, TikTok).<br/>
-          Lead generation, analytics, and A/B testing.
-        </p>
-        <a href="#showreel" class="btn-pill">See How We Work</a>
-      </article>
+  <!-- ===================== SERVICES ===================== -->
+  <section id="services" class="section-pad" aria-label="Services">
+    <div class="wrap">
+      <h2 class="section-title">Services Built to Make Hilton Head Businesses Money</h2>
+      <p class="section-lead">
+        The island is crowded. Attention is expensive. Your visuals must look premium and convert quickly.
+        These are the highest-ROI deliverables we produce for local businesses.
+      </p>
 
-      <article class="service-card" data-cat="RealEstate">
-        <img src="IMG_4680.jpg" alt="Luxury coastal property exterior at golden hour">
-        <h3>🏡 Real Estate &amp; Property Media</h3>
-        <p>
-          Interior walkthroughs.<br/>
-          High-resolution listing photos + 3D tours.<br/>
-          Cinematic videos for company websites.<br/>
-          Social reels for agents.<br/>
-          Reels for short-term rentals.
-        </p>
-        <a href="#about" class="btn-pill">View Case Study</a>
-      </article>
+      <div class="service-grid">
+        <div class="service">
+          <h3>🏡 Real Estate & Vacation Rental Media</h3>
+          <p>Listing video, drone, interior walkthroughs, reels, and website-ready edits built to stop the scroll and drive inquiries.</p>
+          <div class="ideal">Ideal for: Agents • Brokerages • Property managers • STR owners</div>
+        </div>
 
-      <article class="service-card" data-cat="Aerial">
-        <img src="IMG_4528.jpg" alt="FPV drone tracking shot over marshland">
-        <h3>🚁 Aerial Drone Photography &amp; Videography</h3>
-        <p>
-          Cinematic commercials and promotional videos.<br/>
-          Events and weddings.<br/>
-          Commercial real estate and development.<br/>
-          Mapping and surveying.
-        </p>
-        <a href="#contact-card" class="btn-pill">Book a Consultation</a>
-      </article>
+        <div class="service">
+          <h3>🍽️ Hospitality & Restaurant Marketing</h3>
+          <p>High-end brand films and short-form content that fills tables, books rooms, and builds repeat customers.</p>
+          <div class="ideal">Ideal for: Restaurants • Resorts • Hotels • Experiences</div>
+        </div>
 
-      <article class="service-card" data-cat="Events">
-        <img src="liveevents.png" alt="Elegant gala with lighting and stage">
-        <h3>🎉 Event Coverage (Luxury, Corporate, Wedding)</h3>
-        <p>Multi-camera setups, drone footage, printed albums, recap kits, and more.</p>
-        <a href="#about" class="btn-pill">Learn More</a>
-      </article>
+        <div class="service">
+          <h3>🚁 Drone Cinematography & Aerial Branding</h3>
+          <p>Licensed aerial capture that instantly elevates perceived value—perfect for coastal luxury brands and developments.</p>
+          <div class="ideal">Ideal for: Luxury brands • Developments • Marinas • Golf</div>
+        </div>
 
-      <article class="service-card" data-cat="Social">
-        <img src="socialmediamanagement.png" alt="Grid of phones with social reels">
-        <h3>📲 Social Media Content Creation &amp; Management</h3>
-        <p>Reels, branded graphics, posting schedules, engagement tracking, and growth strategies.</p>
-        <a href="#contact-card" class="btn-pill">Start Growing</a>
-      </article>
+        <div class="service">
+          <h3>📲 Social Content + Video Ads (Meta/IG)</h3>
+          <p>Content that’s edited for performance: hooks, pacing, captions, cutdowns, and ad-ready exports.</p>
+          <div class="ideal">Ideal for: Anyone who wants more leads fast</div>
+        </div>
+      </div>
 
-      <article class="service-card" data-cat="Product">
-        <img src="ecommerceproduct.png" alt="Studio-lit product on seamless backdrop">
-        <h3>🛒 Product Photography &amp; E-Commerce Media</h3>
-        <p>Studio and lifestyle shots, 360° product spins, influencer content, and website-ready media.</p>
-        <a href="#showreel" class="btn-pill">View Portfolio</a>
-      </article>
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <a class="btn-primary" href="#contact" aria-label="Get a free strategy call">⚡ Get My Free Strategy</a>
+        <span class="tiny">Prefer to talk now? <a href="tel:+18039205349" style="text-decoration:none; color:#fff; font-weight:800;">Call (803) 920-5349</a></span>
+      </div>
     </div>
   </section>
 
-  <!-- ✅ YouTube -->
-  <section id="showreel" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden;">
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-      <iframe
-        src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&loop=1&playlist=1oTpwMC_KrY&mute=1&playsinline=1&vq=hd1080"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        title="Hilton Head Island Premier Locations"></iframe>
+  <!-- ===================== PORTFOLIO ===================== -->
+  <section id="portfolio" class="section-pad" aria-label="Portfolio">
+    <div class="wrap">
+      <h2 class="section-title">Work Examples (Proof In Seconds)</h2>
+      <p class="section-lead">
+        Quick, industry-labeled examples. The goal is simple: make your business look like the obvious choice.
+      </p>
+
+      <!-- ✅ Keep it lightweight: thumbnails + one embedded reel -->
+      <div class="portfolio-grid" aria-label="Portfolio cards">
+        <article class="port-card">
+          <div class="thumb">
+            <img src="IMG_4680.jpg" alt="Luxury coastal property exterior at golden hour" loading="lazy" decoding="async">
+          </div>
+          <div class="meta">
+            <span class="tag">🏡 Real Estate / Rentals</span>
+            <h3>Listing & Rental Video That Converts</h3>
+            <p>Designed for higher inquiry rate, faster decisions, and premium positioning.</p>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="thumb">
+            <img src="IMG_4528.jpg" alt="FPV drone tracking shot over marshland" loading="lazy" decoding="async">
+          </div>
+          <div class="meta">
+            <span class="tag">🚁 Drone / Aerial</span>
+            <h3>Cinematic Aerials That Raise Perceived Value</h3>
+            <p>Luxury markets respond instantly to confidence + quality. Aerials deliver both.</p>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="thumb">
+            <img src="liveevents.png" alt="Elegant event coverage with lighting and stage" loading="lazy" decoding="async">
+          </div>
+          <div class="meta">
+            <span class="tag">🎉 Events</span>
+            <h3>Events Captured Like a Commercial</h3>
+            <p>Recap kits, highlights, and social cutdowns built for shareability and brand lift.</p>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="thumb">
+            <img src="socialmediamanagement.png" alt="Social reels and content strategy" loading="lazy" decoding="async">
+          </div>
+          <div class="meta">
+            <span class="tag">📲 Social / Ads</span>
+            <h3>Short-Form Content Built for Performance</h3>
+            <p>Hooks, pacing, captions, and platform-first cuts to drive leads and bookings.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- ✅ One Showreel Embed (muted; not autoplay to reduce friction) -->
+      <div style="margin-top:18px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.10); box-shadow:0 18px 55px rgba(0,0,0,0.45);">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+          <iframe
+            src="https://www.youtube.com/embed/1oTpwMC_KrY?mute=1&playsinline=1&rel=0"
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            title="Above All Media Showreel"></iframe>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <a class="btn-primary" href="#contact" aria-label="Get a free strategy">🚀 Turn This Into Leads</a>
+        <span class="tiny">We’ll recommend the fastest path to ROI for your business type.</span>
+      </div>
     </div>
   </section>
 
-  <section id="contact-card">
-    <form id="contactForm" novalidate>
-      <div style="padding:28px 28px 8px 28px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(21,24,32,0.78); color:#fff;">
-        <div style="width:48px; height:48px; border-radius:12px; background:#e6550f; display:flex; align-items:center; justify-content:center; font-size:24px;">✉️</div>
+  <!-- ===================== CONTACT (LEAD FORM) ===================== -->
+  <section id="contact" aria-label="Contact form">
+    <form id="contactForm" class="form-shell" novalidate>
+      <div class="form-head">
+        <div class="icon-box" aria-hidden="true">✉️</div>
         <div>
-          <h2 style="margin:0; font-size:28px; line-height:1.15;">Get in touch</h2>
-          <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
-            Serving Hilton Head Island, Bluffton, Beaufort &amp; the Lowcountry
+          <h2>Get a Free Video Strategy (Fast Response)</h2>
+          <p class="muted">
+            Tell us your goal. We’ll respond with a clear plan to get you more bookings, listings, or sales.
           </p>
-          <p style="margin:8px 0 0 0; color:#cfd3dc; font-size:14px; font-family:'Inter',sans-serif;">
-            Prefer a call? <a href="tel:+18039205349" style="color:#fff; text-decoration:none;">(803) 920-5349</a>
+          <p class="tiny" style="margin-top:10px;">
+            Serving Hilton Head Island, Bluffton, Beaufort & the Lowcountry • Prefer a call?
+            <a href="tel:+18039205349" style="color:#fff; text-decoration:none; font-weight:900;">(803) 920-5349</a>
           </p>
         </div>
       </div>
 
-      <div style="padding:24px 28px; display:grid; grid-template-columns:repeat(12,1fr); gap:16px; background:rgba(21,24,32,0.78); color:#fff;">
+      <div class="form-body">
+        <!-- honeypot -->
         <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;" aria-hidden="true">
 
-        <div style="grid-column: span 6;">
-          <label for="name" style="font-family:'Inter',sans-serif;">Full name *</label>
-          <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-6">
+          <label for="name">Full name *</label>
+          <input id="name" name="name" type="text" required minlength="2" placeholder="Jane Doe">
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="email" style="font-family:'Inter',sans-serif;">Email *</label>
-          <input id="email" name="email" type="email" required placeholder="you@company.com"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-6">
+          <label for="business">Business name</label>
+          <input id="business" name="business" type="text" placeholder="Company / Brand">
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="phone" style="font-family:'Inter',sans-serif;">Phone</label>
-          <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000"
-                 style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-6">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required placeholder="you@company.com">
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="service" style="font-family:'Inter',sans-serif;">Service</label>
-          <select id="service" name="service"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
-            <option value="">Select a service</option>
-            <option>Commercial Brand Package</option>
-            <option>Real Estate & Property Media</option>
-            <option>Aerial Drone Photo/Video</option>
-            <option>Event Coverage</option>
-            <option>Social Media Content & Mgmt</option>
-            <option>Product Photography / E-Com</option>
-            <option>Other</option>
+        <div class="col-6">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000">
+        </div>
+
+        <div class="col-6">
+          <label for="service">What do you need most?</label>
+          <select id="service" name="service">
+            <option value="">Select one</option>
+            <option>Real Estate / Rentals</option>
+            <option>Restaurant / Hospitality</option>
+            <option>Drone / Aerial</option>
+            <option>Social Content / Ads</option>
+            <option>Events</option>
+            <option>Not sure yet (recommend for me)</option>
           </select>
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="budget" style="font-family:'Inter',sans-serif;">Budget</label>
-          <select id="budget" name="budget"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-6">
+          <label for="budget">Budget range</label>
+          <select id="budget" name="budget">
             <option value="">Not sure yet</option>
             <option>$500–$1,500</option>
             <option>$1,500–$3,000</option>
@@ -718,53 +1163,117 @@
           </select>
         </div>
 
-        <div style="grid-column: span 12;">
-          <label for="message" style="font-family:'Inter',sans-serif;">Tell us about your project *</label>
-          <textarea id="message" name="message" required rows="6" placeholder="Timeline, goals, links…"
-                    style="width:100%; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif; padding:16px 18px; line-height:1.5;"></textarea>
+        <div class="col-12">
+          <label>What result are you trying to achieve? *</label>
+          <div class="intent" aria-label="Goal selection">
+            <label class="pill"><input type="checkbox" name="goal" value="More bookings"> 📅 More bookings</label>
+            <label class="pill"><input type="checkbox" name="goal" value="Sell listings faster"> 🏡 Sell listings faster</label>
+            <label class="pill"><input type="checkbox" name="goal" value="More calls/leads"> 📞 More calls/leads</label>
+            <label class="pill"><input type="checkbox" name="goal" value="Brand authority"> 👑 Brand authority</label>
+            <label class="pill"><input type="checkbox" name="goal" value="Social media growth"> 📈 Social growth</label>
+          </div>
+          <div class="tiny" style="margin-top:8px;">Pick any that apply. This helps us recommend the fastest ROI plan.</div>
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="smsConsent" style="font-family:'Inter',sans-serif;">SMS Consent</label>
-          <select id="smsConsent" name="smsConsent"
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-12">
+          <label for="timeline">How soon do you want to start?</label>
+          <select id="timeline" name="timeline">
+            <option value="">Select timeline</option>
+            <option>ASAP (this week)</option>
+            <option>1–2 weeks</option>
+            <option>2–4 weeks</option>
+            <option>Just planning</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label for="message">Details (links, goals, timeline) *</label>
+          <textarea id="message" name="message" required placeholder="Example: We need a rental promo + 6 reels to run ads for spring bookings…"></textarea>
+        </div>
+
+        <div class="col-6">
+          <label for="smsConsent">SMS consent (optional)</label>
+          <select id="smsConsent" name="smsConsent">
             <option value="">Optional</option>
             <option value="yes">Yes — you can text/call me</option>
             <option value="no">No</option>
           </select>
         </div>
 
-        <div style="grid-column: span 6;">
-          <label for="privacy" style="font-family:'Inter',sans-serif;">Privacy *</label>
-          <select id="privacy" name="privacy" required
-                  style="width:100%; padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.16); background:#11141a; color:#fff; font-family:'Inter',sans-serif;">
+        <div class="col-6">
+          <label for="privacy">Privacy *</label>
+          <select id="privacy" name="privacy" required>
             <option value="">Required</option>
             <option value="agree">I agree</option>
           </select>
         </div>
       </div>
 
-      <div style="padding: 0 28px 28px 28px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; background:rgba(21,24,32,0.78); color:#fff;">
-        <button id="submitBtn" type="submit"
-                style="background:#e6550f; color:#fff; border:none; padding:14px 22px; border-radius:10px; font-weight:700; cursor:pointer; font-family:'Montserrat',sans-serif;">
-          Send inquiry
-        </button>
+      <div class="form-foot">
+        <button id="submitBtn" class="submit" type="submit">🚀 Get My Free Strategy</button>
 
-        <a href="mailto:info@aboveallmediasc.com" style="color:#cfd3dc; text-decoration:none; font-family:'Inter',sans-serif;">
-          Or email us directly → info@aboveallmediasc.com
+        <a href="mailto:info@aboveallmediasc.com" class="muted" style="text-decoration:none; font-weight:700;">
+          Or email directly → info@aboveallmediasc.com
         </a>
 
-        <span id="formNote" style="margin-left:auto; color:#9aa1ae; font-size:12px; font-family:'Inter',sans-serif;">
-          Secure • We never sell your data
-        </span>
+        <span style="margin-left:auto;" class="tiny">Secure • We never sell your data</span>
       </div>
 
-      <div id="formStatus" aria-live="polite"
-           style="display:none; padding: 14px 28px; background:#0f141b; border-top:1px solid rgba(255,255,255,.06); color:#cfd3dc; font-family:'Inter',sans-serif;">
-      </div>
+      <div id="formStatus" class="form-status" aria-live="polite"></div>
     </form>
   </section>
 
+  <!-- ===================== ABOUT (Short, Authority) ===================== -->
+  <section id="about" class="section-pad" aria-label="About Above All Media">
+    <div class="wrap">
+      <h2 class="section-title">About Above All Media</h2>
+      <p class="section-lead">
+        We’re based in Hilton Head Island and built for one purpose: help local businesses stand out and win attention in a competitive tourist market.
+        We don’t just “make content”—we create cinematic assets designed to convert.
+      </p>
+
+      <div class="about-card">
+        <div>
+          <h3>How we work (simple + fast)</h3>
+          <p>
+            1) We define the outcome. 2) We shoot with cinematic discipline. 3) We deliver edits optimized for the web and for Meta/IG performance.
+            If you want “pretty video,” anyone can do that. If you want consistent leads—this is the difference.
+          </p>
+          <div style="margin-top:14px;">
+            <a class="btn-primary" href="#contact">⚡ Start Here</a>
+          </div>
+        </div>
+
+        <div>
+          <h3>Best-fit clients</h3>
+          <ul class="about-list">
+            <li>🏡 Real estate agents & vacation rentals</li>
+            <li>🍽️ Restaurants, resorts & hospitality</li>
+            <li>⛵ Experiences (charters, tours, events)</li>
+            <li>📣 Brands ready to run ads</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer aria-label="Footer">
+    <div class="wrap footer-grid">
+      <div>
+        <div style="font-family:'Montserrat',sans-serif; font-weight:900; letter-spacing:-0.03em;">Above All Media</div>
+        <div class="tiny" style="margin-top:6px;">Serving Hilton Head Island, Bluffton, Beaufort & the Lowcountry</div>
+        <div class="tiny" style="margin-top:6px;">
+          <a href="tel:+18039205349" style="text-decoration:none; color:#fff; font-weight:900;">(803) 920-5349</a>
+          &nbsp;•&nbsp;
+          <a href="mailto:info@aboveallmediasc.com" style="text-decoration:none; color:#fff; font-weight:900;">info@aboveallmediasc.com</a>
+        </div>
+      </div>
+      <div class="tiny" style="text-align:right;">© <span id="year"></span> Above All Media. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
   <script>
     (function () {
       const header = document.querySelector('.sticky-header');
@@ -772,6 +1281,7 @@
       const menu = document.getElementById('navLinksMobile');
       const progress = document.getElementById('scrollProgress');
 
+      // Set header height CSS var
       function setHeaderHeightVar() {
         const h = header ? header.offsetHeight : 118;
         document.documentElement.style.setProperty('--header-h', h + 'px');
@@ -779,6 +1289,7 @@
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar);
 
+      // Mobile nav
       function openMenu() {
         menu.classList.add('active');
         document.body.classList.add('menu-open');
@@ -794,58 +1305,36 @@
       function toggleMenu() { menu.classList.contains('active') ? closeMenu() : openMenu(); }
 
       hamburger.addEventListener('click', toggleMenu);
-
-      menu.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href]');
-        if (link) closeMenu();
-      });
-
+      menu.addEventListener('click', (e) => { if (e.target.closest('a[href]')) closeMenu(); });
       document.addEventListener('click', (e) => {
         if (!menu.classList.contains('active')) return;
         if (!menu.contains(e.target) && !hamburger.contains(e.target)) closeMenu();
       });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu();
-      });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('active')) closeMenu(); });
 
       const mql = window.matchMedia('(min-width: 769px)');
       mql.addEventListener('change', () => { if (mql.matches) closeMenu(); });
 
+      // Scroll progress
       function onScrollProgress(){
         const h = document.documentElement;
         const max = h.scrollHeight - h.clientHeight;
-        const pct = Math.max(0, Math.min(1, h.scrollTop / max));
+        const pct = max > 0 ? Math.max(0, Math.min(1, h.scrollTop / max)) : 0;
         progress.style.width = (pct * 100) + '%';
       }
       document.addEventListener('scroll', onScrollProgress, {passive:true});
       onScrollProgress();
 
-      const chips = document.querySelectorAll('.chip');
-      const cards = document.querySelectorAll('.service-card');
-      chips.forEach(ch => ch.addEventListener('click', ()=>{
-        chips.forEach(c=>c.setAttribute('aria-pressed','false'));
-        ch.setAttribute('aria-pressed','true');
-        const f = ch.dataset.filter;
-        cards.forEach(card=>{
-          const show = (f === 'all') || card.dataset.cat === f;
-          card.style.display = show ? '' : 'none';
-        });
-      }));
-
-      const sections = [
-        document.getElementById('about'),
-        document.getElementById('services'),
-        document.getElementById('contact-card')
-      ].filter(Boolean);
+      // Active nav highlight
+      const sections = ['top','services','portfolio','contact','about']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
 
       const desktopLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-
       function setActiveNav(){
         const y = window.scrollY + (header?.offsetHeight || 118) + 40;
         let current = '';
         sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
-
         desktopLinks.forEach(a=>{
           const href = a.getAttribute('href') || '';
           a.classList.toggle('active', current && href === `#${current}`);
@@ -854,6 +1343,9 @@
       document.addEventListener('scroll', setActiveNav, {passive:true});
       window.addEventListener('resize', setActiveNav, {passive:true});
       setActiveNav();
+
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
     })();
   </script>
 
@@ -870,10 +1362,18 @@
         bar.textContent = msg;
       }
 
+      function getGoals(){
+        const checks = Array.from(form.querySelectorAll('input[name="goal"]:checked'));
+        return checks.map(c => c.value);
+      }
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        // honeypot
         if (form.website && form.website.value) return;
 
+        // simple requirement: at least one goal OR message filled (message is required anyway)
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
@@ -881,18 +1381,21 @@
 
         btn.disabled = true;
         btn.textContent = 'Sending…';
-        showStatus('Sending your message…');
+        showStatus('Sending your request…');
 
         const payload = {
-          name: form.name.value.trim(),
-          email: form.email.value.trim(),
+          name: (form.name.value || '').trim(),
+          business: (form.business.value || '').trim(),
+          email: (form.email.value || '').trim(),
           phone: (form.phone.value || '').replace(/[^\d+]/g,'').trim(),
-          service: form.service.value,
-          budget: form.budget.value,
-          message: form.message.value.trim(),
+          service: form.service.value || '',
+          budget: form.budget.value || '',
+          goals: getGoals(),
+          timeline: form.timeline.value || '',
+          message: (form.message.value || '').trim(),
           smsConsent: form.smsConsent.value || '',
           privacy: form.privacy.value === 'agree',
-          path: location.pathname,
+          path: location.pathname + location.hash,
           ts: new Date().toISOString()
         };
 
@@ -905,291 +1408,25 @@
 
           if (!res.ok) throw new Error('Formspree error');
 
-          showStatus('Thanks! We’ll get back to you ASAP.', true);
+          showStatus('✅ Success! We’ll reach out within 24 hours. If it’s urgent, call (803) 920-5349.', true);
           form.reset();
+          btn.textContent = '🚀 Get My Free Strategy';
         } catch (err) {
-          showStatus('Oops—something went wrong. Email us at info@aboveallmediasc.com.');
+          showStatus('Oops—something went wrong. Email us at info@aboveallmediasc.com or call (803) 920-5349.');
           console.error(err);
+          btn.textContent = '🚀 Get My Free Strategy';
         } finally {
           btn.disabled = false;
-          btn.textContent = 'Send inquiry';
         }
       });
     })();
   </script>
 
-  <!-- ===================== ABOUT (The Drive to Create) ===================== -->
-  <section id="about" class="aac-about">
-    <style>
-      #about {
-        --about-bg: url('aboutbg.jpg');
-        position: relative;
-        padding: clamp(40px, 8vw, 90px) 20px clamp(80px, 12vw, 160px);
-        color:#fff;
-        overflow:hidden;
-        background:#0e1116;
-        scroll-margin-top: 130px;
-        font-family: 'Inter', sans-serif;
-      }
-      #about::before{
-        content:"";
-        position:absolute;
-        inset:0;
-        background-image: var(--about-bg);
-        background-size: cover;
-        background-position: center;
-        filter: contrast(1.05) brightness(0.8) saturate(1.15);
-        transform: scale(1.03);
-      }
-      #about .veil{
-        position:absolute;
-        inset:0;
-        z-index:0;
-        pointer-events:none;
-        background:
-          radial-gradient(1200px 600px at 20% 10%, rgba(230,85,15,0.18), rgba(0,0,0,0) 60%),
-          linear-gradient(to bottom, rgba(10,12,16,0.55), rgba(10,12,16,0.85));
-      }
-      #about .wrap{ position:relative; z-index:1; max-width:1200px; margin:0 auto; }
-      #about .kicker{
-        max-width:860px;
-        font-size:clamp(16px, 2.2vw, 22px);
-        color:#f0f0f0;
-        opacity:.95;
-        margin-bottom:28px;
-        font-family:'Inter',sans-serif;
-      }
-      #about .stats{
-        display:grid;
-        grid-template-columns:repeat(4,minmax(0,1fr));
-        gap:16px;
-        margin:30px 0 40px;
-      }
-      #about .stat{
-        background:rgba(255,255,255,0.08);
-        backdrop-filter: blur(8px);
-        border:1px solid rgba(255,255,255,.08);
-        border-radius:16px;
-        padding:22px 20px;
-        text-align:center;
-        box-shadow:0 15px 40px rgba(0,0,0,.35);
-        opacity:0;
-        transform:translateY(28px);
-        transition:opacity .7s ease, transform .7s ease;
-        font-family:'Inter',sans-serif;
-      }
-      #about .stat.visible{ opacity:1; transform:translateY(0); }
-      #about .stat .num{
-        font-size:clamp(28px, 4.5vw, 44px);
-        font-weight:800;
-        letter-spacing:-.02em;
-        font-family:'Montserrat',sans-serif;
-      }
-      #about .stat .label{ margin-top:6px; color:#d9dde6; font-size:14px; }
-      #about .split{
-        display:grid;
-        grid-template-columns:1.1fr .9fr;
-        gap:18px;
-        margin:12px 0 30px;
-      }
-      #about .card{
-        background:rgba(21,24,32,.82);
-        border:1px solid rgba(255,255,255,.08);
-        border-radius:16px;
-        padding:clamp(18px,3vw,28px);
-        box-shadow:0 20px 55px rgba(0,0,0,.45);
-        opacity:0;
-        transform:translateY(28px);
-        transition:opacity .7s ease, transform .7s ease;
-        font-family:'Inter',sans-serif;
-      }
-      #about .card.visible{ opacity:1; transform:translateY(0); }
-      #about .card h2{
-        font-size:clamp(22px, 3vw, 28px);
-        margin-bottom:12px;
-        font-family:'Montserrat',sans-serif;
-      }
-      #about .card p{
-        color:#eaeef7;
-        opacity:.95;
-        line-height:1.65;
-        margin-bottom:10px;
-      }
-      #about .values{
-        list-style:none;
-        display:grid;
-        gap:10px;
-        padding-left:0;
-      }
-      #about .values li{
-        background:rgba(255,255,255,.04);
-        border:1px solid rgba(255,255,255,.06);
-        padding:12px 14px;
-        border-radius:12px;
-      }
-      #about .steps{
-        position:relative;
-        margin:10px 0 12px;
-        border-left:2px dashed rgba(255,255,255,.18);
-        padding-left:18px;
-      }
-      #about .step{
-        display:flex;
-        gap:12px;
-        margin:12px 0;
-        align-items:flex-start;
-        opacity:0;
-        transform:translateY(28px);
-        transition:opacity .7s ease, transform .7s ease;
-      }
-      #about .step.visible{ opacity:1; transform:translateY(0); }
-      #about .bullet{
-        min-width:34px;
-        height:34px;
-        border-radius:999px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:linear-gradient(145deg,#e6550f,#ff914d);
-        color:#111;
-        font-weight:800;
-        box-shadow:0 8px 24px rgba(230,85,15,.35);
-        transform:translateX(-28px);
-        border:2px solid rgba(0,0,0,.25);
-        font-family:'Montserrat',sans-serif;
-      }
-      #about .step h3{ margin:0 0 4px; font-size:18px; font-family:'Montserrat',sans-serif; }
-      #about .step p{ margin:0; color:#dfe5f3; opacity:.92; font-family:'Inter',sans-serif; }
-      #about .cta{
-        display:flex;
-        gap:14px;
-        align-items:center;
-        justify-content:space-between;
-        flex-wrap:wrap;
-        background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-        border:1px solid rgba(255,255,255,.08);
-        padding:18px 20px;
-        border-radius:14px;
-        margin-top:24px;
-        opacity:0;
-        transform:translateY(28px);
-        transition:opacity .7s ease, transform .7s ease;
-        font-family:'Inter',sans-serif;
-      }
-      #about .cta.visible{ opacity:1; transform:translateY(0); }
-      #about .cta p{ margin:0; font-weight:700; letter-spacing:.2px; }
-      #about .cta .solid{
-        display:inline-block;
-        text-decoration:none;
-        color:#fff;
-        font-weight:800;
-        background:linear-gradient(145deg,#e6550f,#ff7b31);
-        padding:12px 18px;
-        border-radius:10px;
-        box-shadow:0 10px 30px rgba(230,85,15,.35);
-        transition: transform .12s ease, box-shadow .12s ease;
-        font-family:'Montserrat',sans-serif;
-      }
-      #about .cta .solid:hover{ transform:translateY(-2px); box-shadow:0 16px 40px rgba(230,85,15,.45); }
-
-      @media (max-width:980px){
-        #about .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-        #about .split{ grid-template-columns:1fr; }
-      }
-      @media (max-width:560px){
-        #about .cta{ flex-direction:column; align-items:flex-start; gap:10px; }
-      }
-    </style>
-
-    <div class="veil"></div>
-    <div class="wrap">
-      <h1 class="title"><span class="spark">The</span> Drive <span class="spark">to</span> Create</h1>
-      <p class="kicker">We turn ideas into cinematic stories—from first sketch to final frame. Precision, heart, and momentum.</p>
-
-      <div class="stats">
-        <div class="stat" data-target="250"><div class="num">0</div><div class="label">Projects Delivered</div></div>
-        <div class="stat" data-target="1200"><div class="num">0</div><div class="label">Drone Flight Hours</div></div>
-        <div class="stat" data-target="24"><div class="num">0</div><div class="label">Avg Turnaround (hrs)</div></div>
-        <div class="stat" data-target="237"><div class="num">0</div><div class="label">5★ Client Reviews</div></div>
-      </div>
-
-      <div class="split">
-        <div class="card">
-          <h2>Our Story</h2>
-          <p>
-            Above All Cinematics was built on the belief that motion moves people. From Hilton Head’s golden hours to boardroom spotlights,
-            our team crafts visuals that speak for you when words fall short. We’re operators, editors, pilots—problem solvers who obsess
-            over framing, light, and narrative pace.
-          </p>
-          <p>
-            Whether you need listings to stop thumbs, a brand film that opens doors, or a campaign that stacks ROI, we’ll chart the flight
-            path and carry the mission to delivery.
-          </p>
-        </div>
-
-        <div class="card">
-          <h2>What Drives Us</h2>
-          <ul class="values">
-            <li>🎯 Clarity over clutter</li>
-            <li>⚡ Speed without shortcuts</li>
-            <li>🚁 Safety-first aerial ops</li>
-            <li>📈 Creative built for conversion</li>
-            <li>🤝 Real partnership, not transactions</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="steps">
-        <div class="step"><div class="bullet">1</div><div><h3>Discovery & Strategy</h3><p>Define outcomes, audience, and the emotional beat that hooks attention.</p></div></div>
-        <div class="step"><div class="bullet">2</div><div><h3>Pre-Production</h3><p>Scripts, shot lists, flight plans, permits, and logistics—handled.</p></div></div>
-        <div class="step"><div class="bullet">3</div><div><h3>Production</h3><p>Ground & aerial capture with cinema-first discipline and on-site review.</p></div></div>
-        <div class="step"><div class="bullet">4</div><div><h3>Post & Distribution</h3><p>Edit, sound, color, and cutdowns tailored to platforms that convert.</p></div></div>
-      </div>
-
-      <div class="cta">
-        <p>Got a vision? We’ll bring the velocity.</p>
-        <a href="#contact-card" class="solid">Start Your Project</a>
-      </div>
-    </div>
-
-    <script>
-      (function(){
-        const root = document.getElementById('about');
-        if(!root) return;
-
-        const reveal = (els)=> {
-          const io = new IntersectionObserver((entries)=>{
-            entries.forEach(e=>{
-              if(e.isIntersecting){
-                e.target.classList.add('visible');
-
-                if(e.target.classList.contains('stat') && !e.target.dataset.done){
-                  e.target.dataset.done = '1';
-                  const numEl = e.target.querySelector('.num');
-                  const target = parseInt(e.target.dataset.target||'0',10);
-                  const start = performance.now(), dur = 1000;
-
-                  const tick = (t)=>{
-                    const p = Math.min(1,(t-start)/dur);
-                    const val = Math.floor(target * (0.15 + 0.85*p*p));
-                    numEl.textContent = val.toLocaleString();
-                    if(p<1) requestAnimationFrame(tick);
-                    else numEl.textContent = target.toLocaleString();
-                  };
-                  requestAnimationFrame(tick);
-                }
-
-                io.unobserve(e.target);
-              }
-            });
-          },{threshold:.25});
-
-          els.forEach(el=>io.observe(el));
-        };
-
-        reveal(root.querySelectorAll('.stat, .card, .step, .cta'));
-      })();
-    </script>
-  </section>
+  <!-- OPTIONAL: Add your Meta Pixel here when ready -->
+  <!--
+  <script>
+    // Meta Pixel placeholder
+  </script>
+  -->
 </body>
 </html>
