@@ -224,6 +224,14 @@
       filter: saturate(1.05);
     }
 
+    /* ✅ Subtle CTA "alive" on load (non-annoying) */
+    @keyframes ctaPulseIn {
+      0% { transform: translateY(0) scale(1); box-shadow: 0 10px 24px rgba(230,85,15,.18); }
+      40% { transform: translateY(-1px) scale(1.01); box-shadow: 0 18px 44px rgba(230,85,15,.34); }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 10px 24px rgba(230,85,15,.28); }
+    }
+    .cta-button.pulse-in{ animation: ctaPulseIn 900ms var(--ease) 1; }
+
     .hamburger{
       display:none;
       appearance:none;
@@ -488,8 +496,6 @@
 
     /* =========================================================
       ✅ SERVICES (BRIGHTER + PREMIUM COASTAL ENERGY)
-      - Adds subtle “aqua/orange” light bands
-      - Cards pop more, hover glow, and one “featured” card
     ========================================================== */
     #services{
       background:
@@ -664,6 +670,36 @@
     }
     .port-card h3{ margin-top: 10px; font-size: 1.15rem; }
     .port-card p{ margin-top: 8px; color: rgba(223,229,243,.90); line-height: 1.55; font-size: 0.96rem; }
+
+    /* ✅ Full-bleed video wrapper (flush left/right) */
+    .full-bleed{
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+    .video-shell{
+      margin-top: 18px;
+      border-radius: 0; /* flush edges */
+      overflow:hidden;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+      background: #000;
+    }
+    .video-shell .ratio{
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    .video-shell iframe{
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      height:100%;
+      border:none;
+    }
 
     /* ===== Contact (Full Form) ===== */
     #contact{
@@ -1039,7 +1075,7 @@
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
       <!-- ✅ NOW opens modal -->
-      <button class="cta-button" type="button" data-open-modal aria-label="Open free strategy form">Free Strategy</button>
+      <button class="cta-button" type="button" data-open-modal aria-label="Open free strategy form">Build My Custom Growth Strategy</button>
     </div>
 
     <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
@@ -1055,13 +1091,13 @@
     <a href="#contact" role="menuitem">Contact</a>
     <a href="#about" role="menuitem">About</a>
     <a href="tel:+18039205349" role="menuitem">Call (803) 920-5349</a>
-    <a href="#" role="menuitem" data-open-modal>Free Strategy</a>
+    <a href="#" role="menuitem" data-open-modal>Build My Custom Growth Strategy</a>
   </div>
 
   <!-- ✅ Mobile Sticky CTA Bar (NOW opens modal) -->
   <div class="mobile-bar" aria-label="Quick actions">
     <a class="call" href="tel:+18039205349" aria-label="Call now">📞 Call Now</a>
-    <button class="quote" type="button" data-open-modal aria-label="Get a free strategy">⚡ Free Strategy</button>
+    <button class="quote" type="button" data-open-modal aria-label="Get a free strategy">⚡ Build My Growth Strategy</button>
   </div>
 
   <!-- ===================== HERO ===================== -->
@@ -1075,7 +1111,7 @@
             <h1>Hilton Head Video Marketing That Turns Attention Into Bookings.</h1>
             <p class="sub">
               Cinematic video, drone, and social ads built to help Hilton Head businesses get more customers—faster.
-              If you want your brand to look premium and convert, you’re in the right place.
+              Your audience should understand your value within seconds—and feel confident taking the next step.
             </p>
 
             <div class="badges" aria-label="Service area and proof points">
@@ -1087,8 +1123,8 @@
 
             <div class="hero-actions">
               <!-- ✅ NOW opens modal -->
-              <button class="btn-primary" type="button" data-open-modal aria-label="Open free strategy form">🚀 Get My Free Strategy</button>
-              <a class="btn-ghost" href="#portfolio" aria-label="View work examples">🎥 See Our Work</a>
+              <button class="btn-primary" type="button" data-open-modal aria-label="Open free strategy form">🚀 Build My Custom Growth Strategy</button>
+              <a class="btn-ghost" href="#portfolio" aria-label="View work examples">🎥 Real Work</a>
               <a class="btn-ghost" href="tel:+18039205349" aria-label="Call (803) 920-5349">📞 Call Now</a>
             </div>
 
@@ -1101,14 +1137,15 @@
             <div class="top">
               <h2>What you get (no fluff)</h2>
               <p class="muted">
-                You’re not buying “a video.” You’re buying a system that helps people choose you.
+                You’re not buying videos—you’re investing in a system that positions your brand as the obvious choice before a conversation even starts.
+                And true to our name, that system is designed to keep you <strong>Above All</strong> the competition.
               </p>
             </div>
             <div class="mini">
-              <div class="mini-row"><span class="check">✓</span> Strategy first: we define the goal (bookings, listings, sales) before we shoot.</div>
+              <div class="mini-row"><span class="check">✓</span> Strategy first: we define the outcome (bookings, listings, sales) before we shoot.</div>
               <div class="mini-row"><span class="check">✓</span> Cinematic capture + fast delivery, optimized for web + social.</div>
-              <div class="mini-row"><span class="check">✓</span> Content cutdowns for Meta/IG so you can run ads that actually perform.</div>
-              <div class="mini-row"><span class="check">✓</span> Simple next step: one form, one call, one plan.</div>
+              <div class="mini-row"><span class="check">✓</span> Cutdowns built for Meta/IG performance—so your best content can actually work.</div>
+              <div class="mini-row"><span class="check">✓</span> Simple next step: one quick form → we respond with a clear plan.</div>
             </div>
           </aside>
         </div>
@@ -1121,8 +1158,8 @@
     <div class="wrap">
       <h2 class="section-title">Services Built to Make Hilton Head Businesses Money</h2>
       <p class="section-lead">
-        The island is crowded. Attention is expensive. Your visuals must look premium and convert quickly.
-        These are the highest-ROI deliverables we produce for local businesses.
+        The island is crowded. Attention is expensive.
+        Your brand needs to look premium, feel intentional, and clearly communicate value—fast.
       </p>
 
       <div class="service-grid">
@@ -1156,18 +1193,18 @@
       <div class="mid-cta" aria-label="Mid page call to action">
         <div class="inner">
           <div>
-            <h3>Want a simple plan that gets you leads fast?</h3>
+            <h3>Want a clear plan that gets you leads fast?</h3>
             <p>Tell us what you sell and your goal. We’ll reply with the fastest path to bookings, listings, or calls in Hilton Head.</p>
           </div>
           <div class="actions">
-            <button class="btn-primary" type="button" data-open-modal>⚡ Get My Free Strategy</button>
+            <button class="btn-primary" type="button" data-open-modal>⚡ Build My Custom Growth Strategy</button>
             <a class="btn-ghost" href="tel:+18039205349">📞 Call Now</a>
           </div>
         </div>
       </div>
 
       <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-        <button class="btn-primary" type="button" data-open-modal>🚀 Get My Free Strategy</button>
+        <button class="btn-primary" type="button" data-open-modal>🚀 Build My Custom Growth Strategy</button>
         <span class="tiny">Prefer to talk now? <a href="tel:+18039205349" style="text-decoration:none; color:#fff; font-weight:900;">Call (803) 920-5349</a></span>
       </div>
     </div>
@@ -1176,7 +1213,7 @@
   <!-- ===================== PORTFOLIO ===================== -->
   <section id="portfolio" class="section-pad" aria-label="Portfolio">
     <div class="wrap">
-      <h2 class="section-title">Work Examples (Proof In Seconds)</h2>
+      <h2 class="section-title">Real Work. Real Brands. Immediate Credibility.</h2>
       <p class="section-lead">
         Quick, industry-labeled examples. The goal is simple: make your business look like the obvious choice.
       </p>
@@ -1211,7 +1248,10 @@
           <div class="meta">
             <span class="tag">🎉 Events</span>
             <h3>Events Captured Like a Commercial</h3>
-            <p>Recap kits, highlights, and social cutdowns built for shareability and brand lift.</p>
+            <p>
+              We create cinematic event films designed to attract sponsors, partners, and future bookings—not just document the day.
+              Your event becomes a long-term marketing asset, not a one-day expense.
+            </p>
           </div>
         </article>
 
@@ -1227,12 +1267,12 @@
         </article>
       </div>
 
-      <div style="margin-top:18px; border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,0.10); box-shadow:0 18px 55px rgba(0,0,0,0.45);">
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+      <!-- ✅ Full-bleed YouTube (flush left/right) + autoplay + HQ hint -->
+      <div class="full-bleed video-shell" aria-label="Above All Media showreel video">
+        <div class="ratio">
           <iframe
-            src="https://www.youtube.com/embed/1oTpwMC_KrY?mute=1&playsinline=1&rel=0"
-            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&vq=hd2160"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
             loading="lazy"
             title="Above All Media Showreel"></iframe>
@@ -1252,9 +1292,10 @@
       <div class="form-head">
         <div class="icon-box" aria-hidden="true">✉️</div>
         <div>
-          <h2>Get a Free Video Strategy (Fast Response)</h2>
+          <h2>Build My Custom Growth Strategy</h2>
           <p class="muted">
-            Tell us your goal. We’ll respond with a clear plan to get you more bookings, listings, or sales.
+            Tell us your goal. We’ll respond with a clear plan to get you more bookings, listings, or sales—
+            with a system built to keep you <strong>Above All</strong> the competition.
           </p>
           <p class="tiny" style="margin-top:10px;">
             Serving Hilton Head Island, Bluffton, Beaufort & the Lowcountry • Prefer a call?
@@ -1358,7 +1399,7 @@
       </div>
 
       <div class="form-foot">
-        <button id="submitBtn" class="submit" type="submit">🚀 Get My Free Strategy</button>
+        <button id="submitBtn" class="submit" type="submit">🚀 Build My Custom Growth Strategy</button>
 
         <a href="mailto:info@aboveallmediasc.com" class="muted" style="text-decoration:none; font-weight:800;">
           Or email directly → info@aboveallmediasc.com
@@ -1426,7 +1467,7 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
         <div>
-          <h3 id="modalTitle">Free Strategy Call Request (30 seconds)</h3>
+          <h3 id="modalTitle">Build My Custom Growth Strategy (30 seconds)</h3>
           <p>Quick details so we can respond with a clear plan. If it’s urgent, call <a href="tel:+18039205349" style="color:#fff; font-weight:900; text-decoration:none;">(803) 920-5349</a>.</p>
         </div>
         <button class="modal-close" type="button" id="closeModal" aria-label="Close">✕</button>
@@ -1490,6 +1531,15 @@
       const hamburger = document.getElementById('hamburgerMenu');
       const menu = document.getElementById('navLinksMobile');
       const progress = document.getElementById('scrollProgress');
+
+      // ✅ CTA pulse on load
+      const headerCta = document.querySelector('.cta-button');
+      if (headerCta) {
+        window.addEventListener('load', () => {
+          headerCta.classList.add('pulse-in');
+          setTimeout(()=> headerCta.classList.remove('pulse-in'), 1100);
+        });
+      }
 
       function setHeaderHeightVar() {
         const h = header ? header.offsetHeight : 118;
@@ -1652,7 +1702,7 @@
           console.error(err);
         } finally {
           btn.disabled = false;
-          btn.textContent = '🚀 Get My Free Strategy';
+          btn.textContent = '🚀 Build My Custom Growth Strategy';
         }
       });
 
