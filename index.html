@@ -126,12 +126,13 @@
       border-bottom: 1px solid rgba(255,255,255,0.10) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      padding: 0 !important;
+      padding: 0 10px 0 0 !important; /* ✅ gives a right buffer so CTA never looks cut */
       display: grid !important;
       grid-template-columns: auto 1fr auto auto !important;
       align-items: center !important;
       gap: 0 !important;
       border-radius: 0 !important;
+      overflow: visible !important; /* ✅ prevent any accidental clipping */
     }
 
     header.sticky-header .logo,
@@ -167,6 +168,7 @@
       justify-self: center !important;
       width: 100% !important;
       line-height: 1 !important;
+      min-width: 0 !important; /* ✅ helps grid compress cleanly */
     }
     header.sticky-header nav.nav-links a{
       color: rgba(255,255,255,0.92) !important;
@@ -184,10 +186,11 @@
       justify-content: flex-end !important;
       align-items: center !important;
       gap: 14px !important;
-      padding: 0 16px 0 12px !important;
+      padding: 0 18px 0 12px !important; /* ✅ slightly more right padding */
       margin: 0 !important;
       justify-self: end !important;
       line-height: 1 !important;
+      min-width: 0 !important;
     }
 
     .phone-link{
@@ -217,6 +220,7 @@
       line-height: 1 !important;
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
       box-shadow: 0 10px 24px rgba(230,85,15,.28);
+      max-width: 100%;
     }
     .cta-button:hover{
       transform: translateY(-1px);
@@ -1075,7 +1079,7 @@
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
       <!-- ✅ NOW opens modal -->
-      <button class="cta-button" type="button" data-open-modal aria-label="Open free strategy form">Build My Custom Growth Strategy</button>
+      <button class="cta-button" type="button" data-open-modal aria-label="Open strategy form">Grow My Business</button>
     </div>
 
     <button class="hamburger" id="hamburgerMenu" aria-controls="navLinksMobile" aria-expanded="false" aria-label="Toggle navigation menu">
@@ -1091,13 +1095,13 @@
     <a href="#contact" role="menuitem">Contact</a>
     <a href="#about" role="menuitem">About</a>
     <a href="tel:+18039205349" role="menuitem">Call (803) 920-5349</a>
-    <a href="#" role="menuitem" data-open-modal>Build My Custom Growth Strategy</a>
+    <a href="#" role="menuitem" data-open-modal>Grow My Business</a>
   </div>
 
   <!-- ✅ Mobile Sticky CTA Bar (NOW opens modal) -->
   <div class="mobile-bar" aria-label="Quick actions">
     <a class="call" href="tel:+18039205349" aria-label="Call now">📞 Call Now</a>
-    <button class="quote" type="button" data-open-modal aria-label="Get a free strategy">⚡ Build My Growth Strategy</button>
+    <button class="quote" type="button" data-open-modal aria-label="Grow my business">⚡ Grow My Business</button>
   </div>
 
   <!-- ===================== HERO ===================== -->
@@ -1197,14 +1201,16 @@
             <p>Tell us what you sell and your goal. We’ll reply with the fastest path to bookings, listings, or calls in Hilton Head.</p>
           </div>
           <div class="actions">
-            <button class="btn-primary" type="button" data-open-modal>⚡ Build My Custom Growth Strategy</button>
+            <!-- ✅ SWAPPED: Boost My Bookings -->
+            <button class="btn-primary" type="button" data-open-modal>⚡ Boost My Bookings</button>
             <a class="btn-ghost" href="tel:+18039205349">📞 Call Now</a>
           </div>
         </div>
       </div>
 
       <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
-        <button class="btn-primary" type="button" data-open-modal>🚀 Build My Custom Growth Strategy</button>
+        <!-- ✅ SWAPPED: Get More Leads (so it’s not stacked duplicate) -->
+        <button class="btn-primary" type="button" data-open-modal>🚀 Get More Leads</button>
         <span class="tiny">Prefer to talk now? <a href="tel:+18039205349" style="text-decoration:none; color:#fff; font-weight:900;">Call (803) 920-5349</a></span>
       </div>
     </div>
