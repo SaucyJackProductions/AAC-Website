@@ -305,6 +305,20 @@
     }
     .nav-links-mobile a:hover{ background:rgba(255,255,255,0.06); }
 
+    /* ✅ Option A: special mobile CTA inside dropdown */
+    .nav-links-mobile .mobile-cta{
+      display:block;
+      margin: 12px auto 6px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-align:center;
+      background: linear-gradient(145deg, var(--brand), #ff7b31);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 16px 40px rgba(230,85,15,.28);
+    }
+
     body.menu-open{ overflow:hidden; touch-action:none; }
 
     @media (max-width: 768px) {
@@ -314,7 +328,9 @@
       header.sticky-header .header-actions{ justify-self: center !important; padding: 0 !important; }
       header.sticky-header .phone-link{ display:none !important; }
       .hamburger{ display:inline-flex !important; align-items:center !important; justify-content:center !important; justify-self:end !important; }
-      header.sticky-header .cta-button{ font-size: 20px !important; padding: 12px 18px !important; }
+
+      /* ✅ Option A: hide header CTA on mobile so it never overlaps logo/hamburger */
+      header.sticky-header .cta-button{ display:none !important; }
     }
 
     /* ===== HERO ===== */
@@ -499,7 +515,8 @@
     }
 
     /* =========================================================
-      ✅ SERVICES (BRIGHTER + PREMIUM COASTAL ENERGY)
+      ✅ SERVICES (keep dark / premium)
+      ✅ CHANGE: bigger titles in the 4 boxes
     ========================================================== */
     #services{
       background:
@@ -545,14 +562,19 @@
       border-color: rgba(0,191,255,0.30);
       box-shadow: 0 24px 70px rgba(0,0,0,0.55);
     }
+
+    /* ✅ Bigger service titles (all 4 boxes) */
     .service h3{
-      font-size: 1.2rem;
-      margin-bottom: 8px;
+      font-size: clamp(1.15rem, 1.25vw, 1.45rem);
+      margin-bottom: 10px;
       letter-spacing: -0.02em;
       display:flex;
       align-items:center;
       gap:10px;
+      line-height: 1.15;
+      font-weight: 900;
     }
+
     .service p{
       color: rgba(223,229,243,.93);
       line-height: 1.55;
@@ -629,7 +651,34 @@
     }
 
     /* ===== Portfolio ===== */
-    #portfolio{ background: rgba(255,255,255,0.01); }
+    #portfolio{
+      position: relative;
+      overflow: hidden;
+      background: rgba(255,255,255,0.01);
+    }
+
+    /* ✅ Artistic Work background (subtle + premium) */
+    #portfolio::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: url("assets/images/work/work-bg.webp") center/cover no-repeat;
+      filter: blur(10px);
+      transform: scale(1.08);
+      opacity: 0.22;
+      pointer-events:none;
+      z-index:0;
+    }
+    #portfolio::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.35), rgba(0,0,0,0.80));
+      pointer-events:none;
+      z-index:0;
+    }
+    #portfolio .wrap{ position: relative; z-index:1; }
+
     .portfolio-grid{
       margin-top: 22px;
       display:grid;
@@ -826,6 +875,8 @@
       background: rgba(21,24,32,0.78);
       border-top: 1px solid rgba(255,255,255,.08);
     }
+
+    /* ✅ Bigger button font for "Build My Custom Growth Strategy" */
     .submit{
       background: linear-gradient(145deg, var(--brand), #ff7b31);
       color:#fff;
@@ -835,8 +886,11 @@
       font-weight: 900;
       cursor:pointer;
       font-family:'Montserrat',sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.1;
       box-shadow: 0 16px 40px rgba(230,85,15,.30);
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+      white-space: nowrap;
     }
     .submit:hover{ transform: translateY(-1px); box-shadow: 0 22px 60px rgba(230,85,15,.42); }
     .submit:disabled{ opacity: .7; cursor: not-allowed; transform: none; }
@@ -1078,7 +1132,7 @@
 
     <div class="header-actions">
       <a class="phone-link" href="tel:+18039205349" aria-label="Call (803) 920-5349">(803) 920-5349</a>
-      <!-- ✅ NOW opens modal -->
+      <!-- ✅ NOW opens modal (hidden on mobile via CSS Option A) -->
       <button class="cta-button" type="button" data-open-modal aria-label="Open strategy form">Grow My Business</button>
     </div>
 
@@ -1095,7 +1149,9 @@
     <a href="#contact" role="menuitem">Contact</a>
     <a href="#about" role="menuitem">About</a>
     <a href="tel:+18039205349" role="menuitem">Call (803) 920-5349</a>
-    <a href="#" role="menuitem" data-open-modal>Grow My Business</a>
+
+    <!-- ✅ Option A: CTA lives INSIDE the dropdown (bigger + never overlaps header) -->
+    <a href="#" role="menuitem" class="mobile-cta" data-open-modal>Grow My Business</a>
   </div>
 
   <!-- ✅ Mobile Sticky CTA Bar (NOW opens modal) -->
@@ -1273,11 +1329,11 @@
         </article>
       </div>
 
-      <!-- ✅ Full-bleed YouTube (flush left/right) + autoplay + HQ hint -->
+      <!-- ✅ Full-bleed YouTube (flush left/right) + autoplay + LOOP -->
       <div class="full-bleed video-shell" aria-label="Above All Media showreel video">
         <div class="ratio">
           <iframe
-            src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&vq=hd2160"
+            src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&vq=hd2160&loop=1&playlist=1oTpwMC_KrY"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
             loading="lazy"
@@ -1538,7 +1594,7 @@
       const menu = document.getElementById('navLinksMobile');
       const progress = document.getElementById('scrollProgress');
 
-      // ✅ CTA pulse on load
+      // ✅ CTA pulse on load (desktop only; mobile CTA hidden)
       const headerCta = document.querySelector('.cta-button');
       if (headerCta) {
         window.addEventListener('load', () => {
