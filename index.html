@@ -10,11 +10,21 @@
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://aboveallmediasc.com/">
 
-  <!-- ✅ Social (Open Graph) — HOLDING OFF ON IMAGE FOR NOW -->
+  <!-- ✅ Social (Open Graph) -->
   <meta property="og:title" content="Above All Media | Hilton Head Video Marketing">
   <meta property="og:description" content="Cinematic video + drone + social ads built to get Hilton Head businesses more customers. Free strategy call.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aboveallmediasc.com/">
+  <!-- ✅ Use your hero image as OG image (swap to a dedicated og-image.webp if you add one later) -->
+  <meta property="og:image" content="https://aboveallmediasc.com/assets/images/logo/harbour-town-hilton-head-drone-background-desktop.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- ✅ Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Above All Media | Hilton Head Video Marketing">
+  <meta name="twitter:description" content="Cinematic video + drone + social ads built to get Hilton Head businesses more customers. Free strategy call.">
+  <meta name="twitter:image" content="https://aboveallmediasc.com/assets/images/logo/harbour-town-hilton-head-drone-background-desktop.webp">
 
   <!-- ✅ Performance: Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,6 +67,7 @@
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
       --t-med:180ms;
+      --t-slow:520ms;
       --ease: cubic-bezier(.2,.7,.2,1);
 
       --header-h:118px;
@@ -73,6 +84,12 @@
       --hero-dim-top: 0.60;
       --hero-dim-mid: 0.30;
       --hero-dim-btm: 0.72;
+
+      /* ✅ Portfolio artistic background tuning */
+      --port-dim: 0.82;
+
+      /* ✅ Contact background image */
+      --contact-bg: url("assets/images/backgrounds/crabweb.webp");
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -111,6 +128,20 @@
       z-index:2000;
       box-shadow:0 0 10px rgba(230,85,15,.35);
       transition: width var(--t-fast) var(--ease);
+    }
+
+    /* ===== Subtle grain (premium cinematic) ===== */
+    .grain{
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      opacity: .06;
+      background-image:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.06), rgba(255,255,255,0) 35%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05), rgba(255,255,255,0) 40%),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,0.04), rgba(255,255,255,0) 45%);
+      mix-blend-mode: overlay;
     }
 
     /* =========================================================
@@ -227,6 +258,16 @@
       box-shadow: 0 10px 24px rgba(230,85,15,.28);
       max-width: 100%;
       border: 1px solid rgba(255,255,255,0.14);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-button::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(260px 120px at 30% 30%, rgba(255,255,255,0.20), rgba(255,255,255,0) 55%);
+      opacity:.55;
+      pointer-events:none;
     }
     .cta-button:hover{
       transform: translateY(-1px);
@@ -316,10 +357,27 @@
       header.sticky-header{ grid-template-columns: auto 1fr auto !important; }
       header.sticky-header .logo img{ height: var(--logo-height-mobile) !important; padding: 2px 0 !important; }
       header.sticky-header nav.nav-links{ display:none !important; }
-      header.sticky-header .header-actions{ justify-self: center !important; padding: 0 !important; }
+
+      /* ✅ Keep CTA from overlapping logo/hamburger on mobile */
+      header.sticky-header .header-actions{
+        justify-self: center !important;
+        padding: 0 6px !important;
+        gap: 10px !important;
+      }
       header.sticky-header .phone-link{ display:none !important; }
-      .hamburger{ display:inline-flex !important; align-items:center !important; justify-content:center !important; justify-self:end !important; }
-      header.sticky-header .cta-button{ font-size: 18px !important; padding: 10px 14px !important; }
+
+      .hamburger{
+        display:inline-flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        justify-self:end !important;
+      }
+      header.sticky-header .cta-button{
+        font-size: 16px !important;
+        padding: 10px 12px !important;
+        border-radius: 12px !important;
+        max-width: min(60vw, 260px) !important;
+      }
     }
 
     /* ✅ OPTION A FIX: prevent overlap on small phones */
@@ -377,6 +435,7 @@
       z-index: 0;
       pointer-events:none;
       filter: blur(0px);
+      transform: translate3d(var(--par-x, 0px), var(--par-y, 0px), 0);
     }
 
     .hero-media{
@@ -388,8 +447,9 @@
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      transform: scale(1.02);
+      transform: scale(1.04);
       filter: contrast(1.05) saturate(1.05) brightness(0.86);
+      will-change: transform;
     }
 
     /* ✅ Mobile hero background swap */
@@ -481,6 +541,16 @@
       box-shadow: 0 16px 44px rgba(230,85,15,.34);
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
       border: 1px solid rgba(255,255,255,0.14);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(260px 120px at 30% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0) 58%);
+      opacity:.55;
+      pointer-events:none;
     }
     .btn-primary:hover{
       transform: translateY(-2px);
@@ -566,6 +636,18 @@
       font-size: 1.06rem;
       line-height: 1.7;
       color: rgba(223,229,243,.90);
+    }
+
+    /* ✅ Reveal animations */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.in{
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* =========================================================
@@ -692,8 +774,36 @@
       flex-wrap:wrap;
     }
 
-    /* ===== Portfolio ===== */
-    #portfolio{ background: rgba(255,255,255,0.01); }
+    /* ===== Portfolio (with artistic background) ===== */
+    #portfolio{
+      position: relative;
+      background: rgba(255,255,255,0.01);
+      overflow: hidden;
+    }
+    #portfolio::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background-image: url("assets/images/logo/harbour-town-hilton-head-drone-background-desktop.webp");
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.05) contrast(1.05) brightness(.55);
+      transform: scale(1.08);
+      opacity: .35;
+      pointer-events:none;
+    }
+    #portfolio::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 420px at 15% 20%, rgba(0,191,255,0.10), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 420px at 88% 45%, rgba(230,85,15,0.12), rgba(0,0,0,0) 62%),
+        linear-gradient(to bottom, rgba(14,17,22,var(--port-dim)) 0%, rgba(14,17,22,0.92) 38%, rgba(14,17,22,0.98) 100%);
+      pointer-events:none;
+    }
+    #portfolio .wrap{ position: relative; z-index: 2; }
+
     .portfolio-grid{
       margin-top: 22px;
       display:grid;
@@ -707,6 +817,12 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(21,24,32,0.72);
       box-shadow: 0 16px 44px rgba(0,0,0,0.38);
+      transition: transform var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), border-color var(--t-med) var(--ease);
+    }
+    .port-card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.56);
     }
     .port-card .thumb{
       position: relative;
@@ -753,6 +869,18 @@
       border-bottom: 1px solid rgba(255,255,255,0.10);
       box-shadow: 0 18px 55px rgba(0,0,0,0.45);
       background: #000;
+      position: relative;
+    }
+    .video-shell::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(600px 240px at 20% 30%, rgba(0,191,255,0.10), rgba(0,0,0,0) 60%),
+        radial-gradient(600px 240px at 82% 45%, rgba(230,85,15,0.12), rgba(0,0,0,0) 62%);
+      pointer-events:none;
+      z-index: 1;
+      opacity: .7;
     }
     .video-shell .ratio{
       position: relative;
@@ -760,6 +888,7 @@
       height: 0;
       overflow: hidden;
       max-width: 100%;
+      z-index: 0;
     }
     .video-shell iframe{
       position:absolute;
@@ -773,22 +902,35 @@
     #contact{
       position: relative;
       width: 100%;
-      background-image: url('crabweb.jpg');
+      background-image: var(--contact-bg);
       background-repeat: no-repeat;
-      background-position: center -200px;
+      background-position: center;
       background-size: cover;
       display: grid;
       place-items: center;
       min-height: 100vh;
       overflow: hidden;
+      isolation: isolate;
     }
     #contact::before{
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.70)),
-                  linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.62));
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.16), rgba(0,0,0,0.70)),
+        linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.72));
       z-index: 0;
+    }
+    #contact::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(800px 420px at 18% 25%, rgba(0,191,255,0.10), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 420px at 88% 40%, rgba(230,85,15,0.12), rgba(0,0,0,0) 62%);
+      z-index: 1;
+      pointer-events:none;
+      opacity: .7;
     }
     .form-shell{
       position: relative;
@@ -906,6 +1048,16 @@
       box-shadow: 0 16px 46px rgba(230,85,15,.34);
       transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
       border: 1px solid rgba(255,255,255,0.14);
+      position: relative;
+      overflow:hidden;
+    }
+    .submit::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(260px 120px at 30% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0) 58%);
+      opacity:.55;
+      pointer-events:none;
     }
     .submit:hover{ transform: translateY(-1px); box-shadow: 0 24px 76px rgba(230,85,15,.44); }
     .submit:disabled{ opacity: .7; cursor: not-allowed; transform: none; }
@@ -1125,6 +1277,7 @@
 
 <body>
   <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- ✅ Sticky Header -->
   <header class="sticky-header">
@@ -1176,12 +1329,12 @@
   <!-- ===================== HERO ===================== -->
   <main id="top" class="hero" aria-label="Hilton Head Video Marketing Hero">
     <div class="hero-accent" aria-hidden="true"></div>
-    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-media" aria-hidden="true" id="heroMedia"></div>
 
     <div class="hero-inner">
       <div class="wrap">
         <div class="hero-grid">
-          <div>
+          <div class="reveal">
             <h1>Hilton Head Video Marketing That Turns Attention Into Bookings.</h1>
             <p class="sub">
               Cinematic video, drone, and social ads built to help Hilton Head businesses get more customers—faster.
@@ -1206,7 +1359,7 @@
             </p>
           </div>
 
-          <aside class="hero-proof" aria-label="Why businesses choose Above All Media">
+          <aside class="hero-proof reveal" aria-label="Why businesses choose Above All Media">
             <div class="top">
               <h2>What you get (no fluff)</h2>
               <p class="muted">
@@ -1229,40 +1382,40 @@
   <!-- ===================== SERVICES ===================== -->
   <section id="services" class="section-pad" aria-label="Services">
     <div class="wrap">
-      <h2 class="section-title">Services Built to Make Hilton Head Businesses Money</h2>
-      <p class="section-lead">
+      <h2 class="section-title reveal">Services Built to Make Hilton Head Businesses Money</h2>
+      <p class="section-lead reveal">
         The island is crowded. Attention is expensive.
         Your brand needs to look premium, feel intentional, and clearly communicate value—fast.
       </p>
 
       <div class="service-grid">
-        <div class="service featured">
+        <div class="service featured reveal">
           <div class="flag">🔥 Highest ROI on the island</div>
           <h3>🏡 Real Estate & Vacation Rental Media</h3>
           <p>Listing video, drone, interior walkthroughs, reels, and website-ready edits built to stop the scroll and drive inquiries.</p>
           <div class="ideal">Ideal for: Agents • Brokerages • Property managers • STR owners</div>
         </div>
 
-        <div class="service">
+        <div class="service reveal">
           <h3>🍽️ Hospitality & Restaurant Marketing</h3>
           <p>High-end brand films and short-form content that fills tables, books rooms, and builds repeat customers.</p>
           <div class="ideal">Ideal for: Restaurants • Resorts • Hotels • Experiences</div>
         </div>
 
-        <div class="service">
+        <div class="service reveal">
           <h3>🚁 Drone Cinematography & Aerial Branding</h3>
           <p>Licensed aerial capture that instantly elevates perceived value—perfect for coastal luxury brands and developments.</p>
           <div class="ideal">Ideal for: Luxury brands • Developments • Marinas • Golf</div>
         </div>
 
-        <div class="service">
+        <div class="service reveal">
           <h3>📲 Social Content + Video Ads (Meta/IG)</h3>
           <p>Content edited for performance: hooks, pacing, captions, cutdowns, and ad-ready exports.</p>
           <div class="ideal">Ideal for: Anyone who wants more leads fast</div>
         </div>
       </div>
 
-      <div class="mid-cta" aria-label="Mid page call to action">
+      <div class="mid-cta reveal" aria-label="Mid page call to action">
         <div class="inner">
           <div>
             <h3>Want a clear plan that gets you leads fast?</h3>
@@ -1275,7 +1428,7 @@
         </div>
       </div>
 
-      <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+      <div class="reveal" style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
         <button class="btn-primary" type="button" data-open-modal>🚀 Get More Leads</button>
         <span class="tiny">Prefer to talk now? <a href="tel:+18039205349" style="text-decoration:none; color:#fff; font-weight:900;">Call (803) 920-5349</a></span>
       </div>
@@ -1285,15 +1438,15 @@
   <!-- ===================== PORTFOLIO ===================== -->
   <section id="portfolio" class="section-pad" aria-label="Portfolio">
     <div class="wrap">
-      <h2 class="section-title">Real Work. Real Brands. Immediate Credibility.</h2>
-      <p class="section-lead">
+      <h2 class="section-title reveal">Real Work. Real Brands. Immediate Credibility.</h2>
+      <p class="section-lead reveal">
         Quick, industry-labeled examples. The goal is simple: make your business look like the obvious choice.
       </p>
 
       <div class="portfolio-grid" aria-label="Portfolio cards">
-        <article class="port-card">
+        <article class="port-card reveal">
           <div class="thumb">
-            <img src="IMG_4680.jpg" alt="Luxury coastal property exterior at golden hour" loading="lazy" decoding="async">
+            <img src="assets/images/portfolio/IMG_4680.webp" alt="Luxury coastal property exterior at golden hour" loading="lazy" decoding="async">
           </div>
           <div class="meta">
             <span class="tag">🏡 Real Estate / Rentals</span>
@@ -1302,9 +1455,9 @@
           </div>
         </article>
 
-        <article class="port-card">
+        <article class="port-card reveal">
           <div class="thumb">
-            <img src="IMG_4528.jpg" alt="FPV drone tracking shot over marshland" loading="lazy" decoding="async">
+            <img src="assets/images/portfolio/IMG_4528.webp" alt="FPV drone tracking shot over marshland" loading="lazy" decoding="async">
           </div>
           <div class="meta">
             <span class="tag">🚁 Drone / Aerial</span>
@@ -1313,9 +1466,9 @@
           </div>
         </article>
 
-        <article class="port-card">
+        <article class="port-card reveal">
           <div class="thumb">
-            <img src="liveevents.png" alt="Elegant event coverage with lighting and stage" loading="lazy" decoding="async">
+            <img src="assets/images/portfolio/liveevents.webp" alt="Elegant event coverage with lighting and stage" loading="lazy" decoding="async">
           </div>
           <div class="meta">
             <span class="tag">🎉 Events</span>
@@ -1327,9 +1480,9 @@
           </div>
         </article>
 
-        <article class="port-card">
+        <article class="port-card reveal">
           <div class="thumb">
-            <img src="socialmediamanagement.png" alt="Social reels and content strategy" loading="lazy" decoding="async">
+            <img src="assets/images/portfolio/socialmediamanagement.webp" alt="Social reels and content strategy" loading="lazy" decoding="async">
           </div>
           <div class="meta">
             <span class="tag">📲 Social / Ads</span>
@@ -1340,7 +1493,7 @@
       </div>
 
       <!-- ✅ Full-bleed YouTube (flush left/right) + autoplay + TRUE LOOP -->
-      <div class="full-bleed video-shell" aria-label="Above All Media showreel video">
+      <div class="full-bleed video-shell reveal" aria-label="Above All Media showreel video">
         <div class="ratio">
           <iframe
             src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&loop=1&playlist=1oTpwMC_KrY&vq=hd2160"
@@ -1351,7 +1504,7 @@
         </div>
       </div>
 
-      <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+      <div class="reveal" style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
         <button class="btn-primary" type="button" data-open-modal>🚀 Turn This Into Leads</button>
         <span class="tiny">We’ll recommend the fastest path to ROI for your business type.</span>
       </div>
@@ -1360,7 +1513,7 @@
 
   <!-- ===================== CONTACT (FULL LEAD FORM) ===================== -->
   <section id="contact" aria-label="Contact form">
-    <form id="contactForm" class="form-shell" novalidate>
+    <form id="contactForm" class="form-shell reveal" novalidate>
       <div class="form-head">
         <div class="icon-box" aria-hidden="true">✉️</div>
         <div>
@@ -1487,13 +1640,13 @@
   <!-- ===================== ABOUT ===================== -->
   <section id="about" class="section-pad" aria-label="About Above All Media">
     <div class="wrap">
-      <h2 class="section-title">About Above All Media</h2>
-      <p class="section-lead">
+      <h2 class="section-title reveal">About Above All Media</h2>
+      <p class="section-lead reveal">
         We’re based in Hilton Head Island and built for one purpose: help local businesses stand out and win attention in a competitive tourist market.
         We don’t just “make content”—we create cinematic assets designed to convert.
       </p>
 
-      <div class="about-card">
+      <div class="about-card reveal">
         <div>
           <h3>How we work (simple + fast)</h3>
           <p>
@@ -1603,7 +1756,9 @@
       const hamburger = document.getElementById('hamburgerMenu');
       const menu = document.getElementById('navLinksMobile');
       const progress = document.getElementById('scrollProgress');
+      const heroMedia = document.getElementById('heroMedia');
 
+      // CTA pulse on load
       const headerCta = document.querySelector('.cta-button');
       if (headerCta) {
         window.addEventListener('load', () => {
@@ -1619,6 +1774,7 @@
       setHeaderHeightVar();
       window.addEventListener('resize', setHeaderHeightVar);
 
+      // Mobile menu
       function openMenu() {
         menu.classList.add('active');
         document.body.classList.add('menu-open');
@@ -1644,6 +1800,7 @@
       const mql = window.matchMedia('(min-width: 769px)');
       mql.addEventListener('change', () => { if (mql.matches) closeMenu(); });
 
+      // Scroll progress
       function onScrollProgress(){
         const h = document.documentElement;
         const max = h.scrollHeight - h.clientHeight;
@@ -1653,6 +1810,7 @@
       document.addEventListener('scroll', onScrollProgress, {passive:true});
       onScrollProgress();
 
+      // Active nav
       const sections = ['top','services','portfolio','contact','about']
         .map(id => document.getElementById(id))
         .filter(Boolean);
@@ -1671,7 +1829,38 @@
       window.addEventListener('resize', setActiveNav, {passive:true});
       setActiveNav();
 
+      // Year
       document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Reveal on scroll
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.14 });
+      document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+      // Subtle hero parallax (very light)
+      let raf = 0;
+      function onParallax(){
+        if(raf) return;
+        raf = requestAnimationFrame(()=>{
+          const y = window.scrollY || 0;
+          const t = Math.min(1, y / 700);
+          // background shifts slightly
+          if(heroMedia){
+            heroMedia.style.transform = `scale(1.06) translateY(${t * 10}px)`;
+          }
+          // accent float
+          document.documentElement.style.setProperty('--par-y', (t * 10) + 'px');
+          raf = 0;
+        });
+      }
+      document.addEventListener('scroll', onParallax, { passive:true });
+      onParallax();
     })();
   </script>
 
