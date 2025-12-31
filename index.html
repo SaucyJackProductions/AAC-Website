@@ -673,17 +673,17 @@
 
     /* ✅ Artistic Work background (UPDATED to your drone image + parallax) */
     #portfolio::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        url("assets/images/work/harbour-town-hilton-head-drone-background-desktop.webp")
-        center calc(50% + var(--port-y)) / cover no-repeat;
-      filter: blur(9px);
-      transform: scale(1.08);
-      opacity: 0.24;
-      pointer-events:none;
-      z-index:0;
+  content:"";
+  position:absolute;
+  inset:0;
+  background: url("/assets/images/logo/harbour-town-hilton-head-drone-background-desktop.webp") center/cover no-repeat;
+  filter: blur(10px);
+  transform: scale(1.08);
+  opacity: 0.22;
+  pointer-events:none;
+  z-index:0;
+}
+
     }
     #portfolio::after{
       content:"";
