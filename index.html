@@ -119,35 +119,6 @@
           "Bluffton, SC",
           "Beaufort, SC"
         ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Do you offer drone videography in Hilton Head Island?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. Above All Media provides licensed drone cinematography for Hilton Head Island, Bluffton, Beaufort, and surrounding Lowcountry businesses."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you create real estate listing videos and vacation rental media?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. We create listing videos, aerials, walkthroughs, reels, and marketing assets for agents, brokerages, property managers, and vacation rental owners."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you make social media ads for local businesses?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes. We create performance-focused short-form video and ad creative for Meta, Instagram, and other digital channels designed to generate leads, inquiries, and bookings."
-            }
-          }
-        ]
       }
     ]
   }
@@ -156,25 +127,20 @@
   <style>
     :root{
       --bg:#0e1116;
-      --panel:#151820;
-      --panel-2:#10131a;
       --ink:#fffdf6;
       --ink-dim:#dfe5f3;
-      --line:rgba(255,255,255,.10);
       --brand:#e6550f;
       --brand-2:#00bfff;
       --ok:#38d996;
 
-      --radius:18px;
       --shadow:0 20px 55px rgba(0,0,0,.45);
       --t-fast:120ms;
       --t-med:180ms;
       --ease:cubic-bezier(.2,.7,.2,1);
 
-      --header-h:118px;
-      --nav-shift-right:-12px;
+      --header-h:110px;
       --logo-gap:4px;
-      --logo-height-desktop:150px;
+      --logo-height-desktop:124px;
       --logo-height-mobile:64px;
       --wrap:1200px;
       --port-y:0px;
@@ -236,17 +202,16 @@
       left:0 !important;
       width:100% !important;
       z-index:1000 !important;
-      background:rgba(14,17,22,.78) !important;
+      background:rgba(14,17,22,.82) !important;
       -webkit-backdrop-filter:blur(12px) !important;
       backdrop-filter:blur(12px) !important;
       border-bottom:1px solid rgba(255,255,255,.10) !important;
       box-shadow:0 10px 30px rgba(0,0,0,.35) !important;
-      padding:0 10px 0 0 !important;
+      padding:0 14px 0 0 !important;
       display:grid !important;
-      grid-template-columns:auto 1fr auto auto !important;
+      grid-template-columns:auto minmax(0,1fr) auto auto !important;
       align-items:center !important;
       gap:0 !important;
-      border-radius:0 !important;
       overflow:visible !important;
     }
 
@@ -259,6 +224,7 @@
       align-items:center !important;
       justify-content:flex-start !important;
       text-decoration:none !important;
+      min-width:0;
     }
 
     header.sticky-header .logo img{
@@ -275,36 +241,41 @@
       display:flex !important;
       justify-content:center !important;
       align-items:center !important;
-      padding:0 18px !important;
+      padding:0 24px !important;
       margin:0 !important;
-      gap:20px !important;
-      font-size:clamp(16px,1.6vw,20px) !important;
+      gap:12px !important;
+      font-size:clamp(15px,1.25vw,18px) !important;
       font-weight:700 !important;
-      transform:translateX(var(--nav-shift-right)) !important;
       justify-self:center !important;
       width:100% !important;
       line-height:1 !important;
       min-width:0 !important;
+      flex-wrap:nowrap !important;
     }
 
     header.sticky-header nav.nav-links a{
       color:rgba(255,255,255,.92) !important;
       text-decoration:none !important;
-      transition:color var(--t-fast) var(--ease) !important;
-      padding:10px 12px !important;
+      transition:color var(--t-fast) var(--ease), background var(--t-fast) var(--ease) !important;
+      padding:10px 10px !important;
       line-height:1 !important;
       border-radius:10px;
+      white-space:nowrap;
+      flex:0 0 auto;
     }
 
     header.sticky-header nav.nav-links a:hover,
-    header.sticky-header nav.nav-links a.active{color:var(--brand) !important}
+    header.sticky-header nav.nav-links a.active{
+      color:var(--brand) !important;
+      background:rgba(255,255,255,.04);
+    }
 
     header.sticky-header .header-actions{
       display:flex !important;
       justify-content:flex-end !important;
       align-items:center !important;
       gap:14px !important;
-      padding:0 18px 0 12px !important;
+      padding:0 6px 0 8px !important;
       margin:0 !important;
       justify-self:end !important;
       line-height:1 !important;
@@ -329,7 +300,7 @@
     }
     .phone-stack .number{
       font-family:'Montserrat',sans-serif;
-      font-size:clamp(20px,2vw,26px) !important;
+      font-size:clamp(18px,1.7vw,22px) !important;
       font-weight:900 !important;
       color:#fff;
       transition:text-shadow var(--t-fast) var(--ease),transform var(--t-fast) var(--ease);
@@ -348,10 +319,10 @@
       text-decoration:none;
       border-radius:12px !important;
       font-family:'Montserrat',sans-serif;
-      font-size:clamp(18px,1.8vw,24px) !important;
+      font-size:clamp(16px,1.35vw,20px) !important;
       font-weight:900 !important;
       white-space:nowrap;
-      padding:12px 22px !important;
+      padding:12px 18px !important;
       line-height:1 !important;
       transition:transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),filter var(--t-fast) var(--ease);
       box-shadow:0 10px 24px rgba(230,85,15,.28);
@@ -449,7 +420,18 @@
 
     body.menu-open{overflow:hidden;touch-action:none}
 
-    @media (max-width:768px){
+    @media (max-width:1180px){
+      header.sticky-header nav.nav-links{
+        gap:8px !important;
+        font-size:15px !important;
+        padding:0 14px !important;
+      }
+      .phone-stack .number{font-size:18px !important}
+      .cta-button{font-size:16px !important;padding:11px 15px !important}
+      :root{--logo-height-desktop:108px}
+    }
+
+    @media (max-width:920px){
       header.sticky-header{grid-template-columns:auto 1fr auto !important}
       header.sticky-header .logo img{height:var(--logo-height-mobile) !important;padding:2px 0 !important}
       header.sticky-header nav.nav-links{display:none !important}
@@ -490,8 +472,8 @@
     .hero-inner{position:relative;z-index:2;width:100%;padding:26px 0 22px}
     .hero-grid{
       display:grid;
-      grid-template-columns:1.18fr .82fr;
-      gap:18px;
+      grid-template-columns:1.12fr .88fr;
+      gap:24px;
       align-items:center;
     }
     .hero h1{
@@ -776,10 +758,12 @@
       content:"";
       position:absolute;
       inset:0;
-      background:url("assets/images/work/harbour-town-hilton-head-drone-background-desktop.webp") center calc(50% + var(--port-y)) / cover no-repeat;
-      filter:blur(9px);
-      transform:scale(1.08);
-      opacity:.24;
+      background:
+        url("assets/images/work/harbour-town-background.png")
+        center calc(50% + var(--port-y)) / cover no-repeat;
+      filter:blur(10px);
+      transform:scale(1.1);
+      opacity:.25;
       pointer-events:none;
       z-index:0;
     }
@@ -793,7 +777,7 @@
     }
     #portfolio .wrap{position:relative;z-index:1}
     @media (max-width:820px){
-      #portfolio::before{filter:blur(6px);opacity:.18;transform:scale(1.06)}
+      #portfolio::before{filter:blur(7px);opacity:.2;transform:scale(1.08)}
     }
 
     .portfolio-grid{
@@ -958,7 +942,7 @@
       width:100%;
       background-image:url('assets/images/backgrounds/crabweb.jpg');
       background-repeat:no-repeat;
-      background-position:center -200px;
+      background-position:center center;
       background-size:cover;
       display:grid;
       place-items:center;
@@ -1379,14 +1363,14 @@
       <div class="wrap">
         <div class="hero-grid">
           <div class="reveal in-view">
-            <h1 id="heroHeadline">Hilton Head Video Marketing, Drone & Real Estate Media That Drives More Bookings</h1>
+            <h1 id="heroHeadline">Hilton Head Video Marketing for Real Estate, Hospitality & Local Brands</h1>
 
             <p class="sub" id="heroSub">
-              Above All Media helps Hilton Head, Bluffton, and Beaufort businesses turn attention into revenue with premium video, licensed drone cinematography, real estate media, and social ad creative built for conversion.
+              We create cinematic video, drone content, and social media assets that help businesses across Hilton Head and the Lowcountry win more leads, bookings, and higher-value customers.
             </p>
 
             <div class="hero-micro" id="heroMicro" aria-label="Micro tagline">
-              Premium presence. Measurable outcomes.
+              Authority first. Conversion always.
             </div>
 
             <div class="badges" aria-label="Service area and proof points">
@@ -1920,7 +1904,7 @@
       }
 
       function setHeaderHeightVar() {
-        const h = header ? header.offsetHeight : 118;
+        const h = header ? header.offsetHeight : 110;
         document.documentElement.style.setProperty('--header-h', h + 'px');
       }
       setHeaderHeightVar();
@@ -1961,7 +1945,7 @@
         if (e.key === 'Escape' && menu && menu.classList.contains('active')) closeMenu();
       });
 
-      const mql = window.matchMedia('(min-width: 769px)');
+      const mql = window.matchMedia('(min-width: 921px)');
       mql.addEventListener('change', () => {
         if (mql.matches) closeMenu();
       });
@@ -1981,7 +1965,7 @@
 
       const desktopLinks = document.querySelectorAll('.nav-links a[href^="#"]');
       function setActiveNav() {
-        const y = window.scrollY + (header?.offsetHeight || 118) + 40;
+        const y = window.scrollY + (header?.offsetHeight || 110) + 40;
         let current = '';
         sections.forEach(sec => {
           if (sec.offsetTop <= y) current = sec.id;
@@ -2032,56 +2016,6 @@
       window.addEventListener('scroll', updatePortfolioParallax, { passive: true });
       window.addEventListener('resize', updatePortfolioParallax, { passive: true });
       updatePortfolioParallax();
-    })();
-  </script>
-
-  <script>
-    (function () {
-      const headline = document.getElementById('heroHeadline');
-      const sub = document.getElementById('heroSub');
-      const micro = document.getElementById('heroMicro');
-      if (!headline || !sub || !micro) return;
-
-      const variants = {
-        A: {
-          h1: 'Hilton Head Video Marketing, Drone & Real Estate Media That Drives More Bookings',
-          sub: 'Above All Media helps Hilton Head, Bluffton, and Beaufort businesses turn attention into revenue with premium video, licensed drone cinematography, real estate media, and social ad creative built for conversion.',
-          micro: 'Premium presence. Measurable outcomes.'
-        },
-        B: {
-          h1: 'Hilton Head Video Marketing for Real Estate, Hospitality & Local Brands',
-          sub: 'We create cinematic video, drone content, and social media assets that help businesses across Hilton Head and the Lowcountry win more leads, bookings, and higher-value customers.',
-          micro: 'Authority first. Conversion always.'
-        }
-      };
-
-      const params = new URLSearchParams(location.search);
-      const forced = (params.get('v') || '').toUpperCase();
-      const key = 'aamHeroVariant';
-
-      function chooseVariant() {
-        if (forced === 'A' || forced === 'B') return forced;
-
-        const stored = localStorage.getItem(key);
-        if (stored === 'A' || stored === 'B') return stored;
-
-        return Math.random() < 0.5 ? 'A' : 'B';
-      }
-
-      function applyVariant(v) {
-        const data = variants[v] || variants.A;
-        headline.textContent = data.h1;
-        sub.textContent = data.sub;
-        micro.textContent = data.micro;
-
-        if (!(forced === 'A' || forced === 'B')) {
-          try {
-            localStorage.setItem(key, v);
-          } catch (e) {}
-        }
-      }
-
-      applyVariant(chooseVariant());
     })();
   </script>
 
