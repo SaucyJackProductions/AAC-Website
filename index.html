@@ -4,36 +4,1727 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Above All Media | Hilton Head Video Marketing, Drone, Real Estate & Lead-Driven Brand Content</title>
+  <title>Above All Media | Hilton Head Luxury Media, Drone, Real Estate & Brand Storytelling</title>
   <meta
     name="description"
-    content="Above All Media creates commercials, drone cinematography, real estate visuals, and lead-driven brand content for businesses across Hilton Head, Savannah, and Charleston. Premium visuals built to help brands grow, get more leads, and make more money."
+    content="Above All Media creates premium commercials, drone cinematography, luxury real estate visuals, and social-first brand content for businesses across Hilton Head, Savannah, and Charleston."
   />
   <meta
     name="keywords"
-    content="Hilton Head videographer, Hilton Head drone video, Hilton Head real estate media, Hilton Head video marketing, Hilton Head social media content, lead generation video, Charleston videographer, Savannah drone videographer, restaurant commercial Hilton Head, Above All Media"
+    content="Hilton Head videographer, Hilton Head drone video, Hilton Head real estate media, luxury real estate video, Hilton Head social media content, Charleston videographer, Savannah drone videographer, restaurant commercial Hilton Head, Above All Media"
   />
   <meta name="author" content="Above All Media" />
   <meta name="robots" content="index, follow" />
 
-  <meta property="og:title" content="Above All Media | Hilton Head Video Marketing, Drone, Real Estate & Lead-Driven Brand Content" />
+  <meta property="og:title" content="Above All Media | Hilton Head Luxury Media, Drone, Real Estate & Brand Storytelling" />
   <meta
     property="og:description"
-    content="Commercials, drone cinematography, real estate visuals, and social-first content designed to help businesses grow, get more leads, and look like the premium option."
+    content="Premium commercials, drone cinematography, luxury real estate media, and social-first content for brands across Hilton Head, Savannah, and Charleston."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aboveallmediasc.com" />
   <meta property="og:image" content="assets/images/og-image.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Above All Media | Hilton Head Video Marketing, Drone, Real Estate & Lead-Driven Brand Content" />
+  <meta name="twitter:title" content="Above All Media | Hilton Head Luxury Media, Drone, Real Estate & Brand Storytelling" />
   <meta
     name="twitter:description"
-    content="Commercials, drone cinematography, real estate visuals, and social-first content designed to help businesses grow, get more leads, and look like the premium option."
+    content="Premium commercials, drone cinematography, luxury real estate media, and social-first content for brands across Hilton Head, Savannah, and Charleston."
   />
   <meta name="twitter:image" content="assets/images/og-image.jpg" />
 
   <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+  <style>
+    :root {
+      --bg: #070707;
+      --bg-soft: #101010;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(255, 255, 255, 0.16);
+      --text: #f4f1eb;
+      --muted: #b8b2a8;
+      --muted-2: rgba(255, 255, 255, 0.72);
+      --gold: #d6b36a;
+      --gold-2: #f0d7a2;
+      --gold-soft: rgba(214, 179, 106, 0.16);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.24);
+      --radius: 20px;
+      --radius-lg: 30px;
+      --max: 1260px;
+      --transition: 0.35s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(214, 179, 106, 0.10), transparent 22%),
+        radial-gradient(circle at bottom left, rgba(214, 179, 106, 0.06), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--max));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 780px;
+      font-size: 1.03rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.12), transparent 80%);
+      transform: translateX(-120%);
+      transition: transform 0.7s ease;
+    }
+
+    .btn:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #0b0b0b;
+      border-color: rgba(214, 179, 106, 0.7);
+      box-shadow: 0 12px 30px rgba(214, 179, 106, 0.20);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(214, 179, 106, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(7, 7, 7, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(7, 7, 7, 0.92);
+      border-bottom-color: rgba(255,255,255,0.10);
+    }
+
+    .nav-wrap {
+      width: min(95%, 1340px);
+      margin: 0 auto;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      font-size: 0.94rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.95rem;
+      white-space: nowrap;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-2);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      isolation: isolate;
+      padding-top: 110px;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.26), rgba(0,0,0,0.78)),
+        url("assets/images/portfolio/IMG_4528.jpg") center center / cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(214,179,106,0.10), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.08), transparent 18%);
+      z-index: -1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 240px;
+      background: linear-gradient(to top, var(--bg), transparent);
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: end;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3rem, 7vw, 6.3rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+      margin-bottom: 22px;
+      max-width: 980px;
+      text-wrap: balance;
+    }
+
+    .hero-copy p {
+      color: rgba(255,255,255,0.86);
+      font-size: 1.1rem;
+      max-width: 720px;
+    }
+
+    .hero-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(8,8,8,0.56);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(214,179,106,0.08), transparent 45%);
+      pointer-events: none;
+    }
+
+    .hero-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      display: grid;
+      gap: 13px;
+      color: rgba(255,255,255,0.84);
+      font-size: 0.97rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .hero-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(214,179,106,0.55);
+    }
+
+    .trust-bar {
+      position: relative;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+      overflow: hidden;
+      padding: 22px 0;
+    }
+
+    .trust-track {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      white-space: nowrap;
+      min-width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .trust-label {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .trust-item {
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      font-size: 0.94rem;
+      letter-spacing: 0.04em;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.26);
+      flex: 0 0 6px;
+    }
+
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 42px;
+    }
+
+    .about-copy {
+      padding: 30px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .about-copy p + p {
+      margin-top: 18px;
+    }
+
+    .about-points {
+      display: grid;
+      gap: 16px;
+    }
+
+    .about-point {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+    }
+
+    .about-point:hover {
+      transform: translateY(-3px);
+      border-color: rgba(214,179,106,0.26);
+    }
+
+    .about-point h4 {
+      margin-bottom: 8px;
+      font-size: 1.03rem;
+    }
+
+    .about-point p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .service-card {
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      min-height: 252px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(214,179,106,0.08), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(214,179,106,0.30);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-number {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.16rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 42px;
+    }
+
+    .work-card {
+      position: relative;
+      min-height: 440px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .work-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+      transition: transform 0.7s ease;
+      z-index: -2;
+    }
+
+    .work-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.82), rgba(0,0,0,0.14) 55%, rgba(0,0,0,0.06)),
+        linear-gradient(140deg, rgba(214,179,106,0.12), transparent 35%);
+      z-index: -1;
+    }
+
+    .work-card:hover::before {
+      transform: scale(1.08);
+    }
+
+    .work-serg::before {
+      background-image: url("assets/images/portfolio/local-legend.jpg");
+    }
+
+    .work-host2home::before {
+      background-image: url("assets/images/portfolio/host2home-luxury.jpg");
+    }
+
+    .work-coast::before {
+      background-image: url("assets/images/portfolio/coast-real-estate.jpg");
+    }
+
+    .work-yoshi::before {
+      background-image: url("assets/images/portfolio/chef-yoshi.jpg");
+    }
+
+    .work-oliver::before {
+      background-image: url("assets/images/portfolio/olliver-lux.jpg");
+    }
+
+    .work-harbour::before {
+      background-image: url("assets/images/portfolio/crabweb.jpg");
+    }
+
+    .work-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      padding: 28px;
+    }
+
+    .work-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.94);
+      backdrop-filter: blur(8px);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .work-content h3 {
+      font-size: 1.62rem;
+      line-height: 1.05;
+      margin-bottom: 10px;
+      max-width: 560px;
+    }
+
+    .work-content p {
+      color: rgba(255,255,255,0.84);
+      max-width: 620px;
+      font-size: 0.98rem;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .proof-card {
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+    }
+
+    .proof-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(214,179,106,0.24);
+    }
+
+    .proof-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.14rem;
+    }
+
+    .proof-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .logos-shell {
+      margin-top: 42px;
+      border-radius: 28px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-shell::before,
+    .logos-shell::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .logos-shell::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(7,7,7,0.95), transparent);
+    }
+
+    .logos-shell::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(7,7,7,0.95), transparent);
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: max-content;
+      animation: marquee 26s linear infinite;
+    }
+
+    .logo-item {
+      width: 210px;
+      height: 90px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      flex-shrink: 0;
+      transition: var(--transition);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .logo-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(214,179,106,0.30);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .logo-item img {
+      max-height: 44px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(1) brightness(1.4);
+      opacity: 0.78;
+      transition: var(--transition);
+    }
+
+    .logo-item:hover img {
+      filter: grayscale(0) brightness(1);
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .logo-fallback {
+      color: rgba(255,255,255,0.84);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .algorithm-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .algorithm-card {
+      padding: 26px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+    }
+
+    .algorithm-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(214,179,106,0.24);
+    }
+
+    .algorithm-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.12rem;
+    }
+
+    .algorithm-card p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .authority-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      margin-top: 42px;
+      align-items: stretch;
+    }
+
+    .authority-image {
+      min-height: 560px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.42)),
+        url("assets/images/portfolio/crabweb.jpg") center center / cover no-repeat;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .authority-image::after {
+      content: "Hilton Head Visual Authority";
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.46);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.92);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .authority-panel {
+      display: grid;
+      gap: 18px;
+    }
+
+    .authority-box {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      transition: var(--transition);
+    }
+
+    .authority-box:hover {
+      transform: translateY(-4px);
+      border-color: rgba(214,179,106,0.24);
+    }
+
+    .authority-box h3 {
+      margin-bottom: 8px;
+      font-size: 1.06rem;
+    }
+
+    .authority-box p {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .cta {
+      background:
+        linear-gradient(135deg, rgba(214,179,106,0.12), rgba(255,255,255,0.03)),
+        #0b0b0b;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cta-box {
+      padding: 48px;
+      border-radius: 32px;
+      border: 1px solid rgba(214,179,106,0.20);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(214,179,106,0.10), transparent 40%);
+      pointer-events: none;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1.02rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box .eyebrow,
+    .cta-box .section-title,
+    .cta-box .btn-row {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 30px;
+      margin-top: 42px;
+    }
+
+    .contact-card,
+    .contact-form {
+      padding: 30px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-card h3,
+    .contact-form h3 {
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .contact-list li {
+      color: var(--muted);
+    }
+
+    .contact-list strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .contact-form form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      background: #0f0f0f;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 16px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: rgba(214,179,106,0.44);
+      box-shadow: 0 0 0 4px rgba(214,179,106,0.08);
+    }
+
+    .contact-form textarea {
+      min-height: 170px;
+      resize: vertical;
+    }
+
+    .site-footer {
+      padding: 28px 0 46px;
+      color: rgba(255,255,255,0.56);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .grid-2,
+      .authority-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .proof-grid,
+      .algorithm-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 16px;
+        right: 16px;
+        background: rgba(10, 10, 10, 0.96);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+        margin-left: 0;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 8px 4px;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .nav-wrap {
+        min-height: 76px;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .services-grid,
+      .proof-grid,
+      .algorithm-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 86px 0;
+      }
+
+      .hero-copy h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-copy p,
+      .section-subtitle,
+      .cta-box p {
+        font-size: 0.98rem;
+      }
+
+      .hero-card,
+      .about-copy,
+      .service-card,
+      .proof-card,
+      .algorithm-card,
+      .authority-box,
+      .contact-card,
+      .contact-form,
+      .cta-box {
+        padding: 22px;
+      }
+
+      .work-card {
+        min-height: 370px;
+      }
+
+      .work-content h3 {
+        font-size: 1.4rem;
+      }
+
+      .logo-item {
+        width: 180px;
+        height: 82px;
+      }
+
+      .logos-shell::before,
+      .logos-shell::after {
+        width: 54px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="nav-wrap">
+      <a href="#top" class="brand">
+        <img src="assets/images/logo.png" alt="Above All Media Logo" />
+        <span class="brand-text">Above All Media</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#work">Work Proof</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Hilton Head • Savannah • Charleston</span>
+            <h1>Luxury Media That Makes Your Brand Look Unmistakably Elite.</h1>
+            <p>
+              Above All Media creates premium commercials, drone cinematography, luxury real estate visuals,
+              and social-first brand content for restaurants, hospitality, high-end properties, and businesses
+              that want to look sharp, cinematic, and impossible to ignore online.
+            </p>
+
+            <div class="btn-row">
+              <a href="#work" class="btn btn-primary">View Work</a>
+              <a href="#contact" class="btn btn-secondary">Start Your Project</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <h3>What Sets The Work Apart</h3>
+            <ul>
+              <li>Cinematic story-first commercials that feel polished and intentional</li>
+              <li>Drone visuals that give coastal brands scale, prestige, and place</li>
+              <li>Luxury property media for oceanfront homes, golf course estates, and premium listings</li>
+              <li>Short-form edits built for modern attention spans and social-first performance</li>
+              <li>Brand visuals that make businesses look trusted, established, and high value</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-bar" aria-label="Industries marquee">
+      <div class="trust-track">
+        <span class="trust-label">Trusted Across</span>
+        <span class="trust-item">Restaurants</span>
+        <span class="dot"></span>
+        <span class="trust-item">Luxury Real Estate</span>
+        <span class="dot"></span>
+        <span class="trust-item">Hospitality</span>
+        <span class="dot"></span>
+        <span class="trust-item">Tourism</span>
+        <span class="dot"></span>
+        <span class="trust-item">Lifestyle Brands</span>
+        <span class="dot"></span>
+        <span class="trust-item">Restaurants</span>
+        <span class="dot"></span>
+        <span class="trust-item">Luxury Real Estate</span>
+        <span class="dot"></span>
+        <span class="trust-item">Hospitality</span>
+        <span class="dot"></span>
+        <span class="trust-item">Tourism</span>
+        <span class="dot"></span>
+        <span class="trust-item">Lifestyle Brands</span>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <span class="eyebrow">About</span>
+        <h2 class="section-title">Built To Position Local Brands Above The Rest.</h2>
+        <p class="section-subtitle">
+          This is not filler content and it is not generic production. The entire approach is built around premium
+          execution, cinematic atmosphere, local authority, and making brands across Hilton Head, Savannah,
+          and Charleston feel more valuable online.
+        </p>
+
+        <div class="grid-2">
+          <div class="about-copy glass-card">
+            <p>
+              Strong media should do more than simply show what a business looks like. It should shape perception.
+              It should make the brand feel elevated, intentional, established, and worth paying attention to.
+            </p>
+            <p>
+              Whether the project is a launch commercial, a luxury listing, a restaurant story, or social media
+              content for ongoing visibility, the goal stays the same: create visuals that people remember and trust.
+            </p>
+          </div>
+
+          <div class="about-points">
+            <div class="about-point">
+              <h4>Cinematic First</h4>
+              <p>Every project is shaped to feel premium, polished, atmospheric, and worth stopping for.</p>
+            </div>
+            <div class="about-point">
+              <h4>Coastal Market Aware</h4>
+              <p>Hilton Head, Charleston, and Savannah all reward strong lifestyle storytelling and a premium sense of place.</p>
+            </div>
+            <div class="about-point">
+              <h4>Made To Live Everywhere</h4>
+              <p>Website visuals, reels, Facebook assets, Google Business content, and long-form brand media all matter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <span class="eyebrow">Services</span>
+        <h2 class="section-title">Premium Creative Services For Brands That Want A Stronger Presence.</h2>
+        <p class="section-subtitle">
+          Everything here is designed to make your business feel more refined, more memorable, and more credible
+          from the first second somebody lands on your site or profile.
+        </p>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <span class="service-number">01</span>
+            <h3>Commercial Video Production</h3>
+            <p>
+              Launch pieces, brand films, interview-led storytelling, and cinematic commercials that give your business
+              depth, personality, and a more premium identity.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">02</span>
+            <h3>Luxury Real Estate Media</h3>
+            <p>
+              High-end walkthroughs, exterior beauty footage, neighborhood and lifestyle context, and elegant visuals
+              for listings that deserve a stronger presentation.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">03</span>
+            <h3>Drone Cinematography</h3>
+            <p>
+              Aerial storytelling for marinas, resorts, estates, restaurants, and local landmarks that instantly adds
+              scale, beauty, and local authority.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">04</span>
+            <h3>Short-Form Social Content</h3>
+            <p>
+              Reels and vertical edits designed to feel modern, polished, and attention-grabbing while still aligning
+              with a premium brand image.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">05</span>
+            <h3>Restaurant & Hospitality Media</h3>
+            <p>
+              Atmosphere, food, staff, interviews, energy, and visual storytelling that helps hospitality brands look
+              established and desirable.
+            </p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">06</span>
+            <h3>Brand Content Systems</h3>
+            <p>
+              Instead of random one-off assets, build a stronger bank of content for your site, social media,
+              promotions, listings, and ongoing visibility.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="container">
+        <span class="eyebrow">Work Proof</span>
+        <h2 class="section-title">Real Projects. Real Brands. Real Market Authority.</h2>
+        <p class="section-subtitle">
+          No made-up metrics. No inflated claims. Just real visual work, real client categories,
+          and premium execution that gives immediate credibility.
+        </p>
+
+        <div class="work-grid">
+          <article class="work-card work-serg">
+            <div class="work-content">
+              <span class="work-tag">Restaurant Launch Storytelling</span>
+              <h3>Local Legend / SERG Group</h3>
+              <p>
+                Created a launch commercial for Local Legend with handheld footage, drone work inside the building,
+                scripted narrative, and interviews featuring leadership, brewing, culinary, and management voices.
+              </p>
+            </div>
+          </article>
+
+          <article class="work-card work-host2home">
+            <div class="work-content">
+              <span class="work-tag">Luxury Property Media</span>
+              <h3>Host2Home</h3>
+              <p>
+                Produced elevated real estate and hospitality visuals for oceanfront homes, waterfront properties,
+                and high-end residences positioned for a premium presentation.
+              </p>
+            </div>
+          </article>
+
+          <article class="work-card work-coast">
+            <div class="work-content">
+              <span class="work-tag">Hilton Head Real Estate</span>
+              <h3>Coast Real Estate Group</h3>
+              <p>
+                Built polished media for luxury real estate in Hilton Head with an emphasis on atmosphere,
+                architecture, surroundings, and a look suited to affluent buyers.
+              </p>
+            </div>
+          </article>
+
+          <article class="work-card work-yoshi">
+            <div class="work-content">
+              <span class="work-tag">Lead-Focused Social Content</span>
+              <h3>Sun &amp; Moon Catering / Chef Yoshi</h3>
+              <p>
+                Created cinematic and energetic social content built to make the brand feel active, memorable,
+                and visually stronger across its online presence.
+              </p>
+            </div>
+          </article>
+
+          <article class="work-card work-oliver">
+            <div class="work-content">
+              <span class="work-tag">Charleston Brand Commercial</span>
+              <h3>Olliver Lux Hair Society</h3>
+              <p>
+                Produced commercial-style brand content and supporting reels that helped the visual presentation
+                feel more refined, polished, and luxury oriented.
+              </p>
+            </div>
+          </article>
+
+          <article class="work-card work-harbour">
+            <div class="work-content">
+              <span class="work-tag">Local Visual Authority</span>
+              <h3>Harbour, Coastline &amp; Lifestyle Cinematics</h3>
+              <p>
+                Capturing Hilton Head from the air and the ground creates a powerful library of local visuals
+                that tourism, hospitality, and premium service brands immediately connect with.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Why It Works</span>
+        <h2 class="section-title">Authority Comes From Presentation, Taste, And Recognizable Work.</h2>
+        <p class="section-subtitle">
+          You do not need fake numbers to position strength. You need visuals that feel expensive,
+          projects that show range, and brands that signal trust.
+        </p>
+
+        <div class="proof-grid">
+          <article class="proof-card">
+            <h3>Recognizable Brand Categories</h3>
+            <p>
+              Restaurants, luxury homes, real estate, hospitality, and beauty brands all expand your perceived range
+              without watering down your style.
+            </p>
+          </article>
+
+          <article class="proof-card">
+            <h3>Consistent Premium Feel</h3>
+            <p>
+              Even across different industries, the presentation stays cinematic, clean, and elevated.
+            </p>
+          </article>
+
+          <article class="proof-card">
+            <h3>Trust Before The Pitch</h3>
+            <p>
+              When the site looks refined and the work feels legit, clients start trusting the brand before you ever speak.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Trusted By</span>
+        <h2 class="section-title">Logo Marquee With Real Image Slots Ready To Go.</h2>
+        <p class="section-subtitle">
+          Drop each real logo file into your logos folder and these image slots will display them automatically.
+          Replace the placeholder PNGs with transparent SVG or PNG logos for the cleanest premium look.
+        </p>
+
+        <div class="logos-shell">
+          <div class="logos-track">
+            <div class="logo-item">
+              <img src="assets/images/logos/serg-group-logo.png" alt="SERG Group Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">SERG Group</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/local-legend-logo.png" alt="Local Legend Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Local Legend</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/host2home-logo.png" alt="Host2Home Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Host2Home</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/coast-logo.png" alt="Coast Real Estate Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Coast Real Estate</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/sun-moon-logo.png" alt="Sun and Moon Catering Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Sun &amp; Moon</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/olliver-lux-logo.png" alt="Olliver Lux Hair Society Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Olliver Lux</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/serg-group-logo.png" alt="SERG Group Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">SERG Group</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/local-legend-logo.png" alt="Local Legend Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Local Legend</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/host2home-logo.png" alt="Host2Home Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Host2Home</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/coast-logo.png" alt="Coast Real Estate Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Coast Real Estate</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/sun-moon-logo.png" alt="Sun and Moon Catering Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Sun &amp; Moon</span>
+            </div>
+
+            <div class="logo-item">
+              <img src="assets/images/logos/olliver-lux-logo.png" alt="Olliver Lux Hair Society Logo Duplicate" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+              <span class="logo-fallback" style="display:none;">Olliver Lux</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Content Strategy</span>
+        <h2 class="section-title">Built To Support Instagram, Facebook, And Google Business.</h2>
+        <p class="section-subtitle">
+          Great media is not only about what looks cool on shoot day. It is about how the content travels,
+          how it performs, and how it reinforces trust across every touchpoint.
+        </p>
+
+        <div class="algorithm-grid">
+          <article class="algorithm-card">
+            <h3>Instagram Reels</h3>
+            <p>
+              Fast hooks, vertical framing, movement, pacing, and premium edits help content feel modern,
+              watchable, and built for discovery.
+            </p>
+          </article>
+
+          <article class="algorithm-card">
+            <h3>Facebook Business</h3>
+            <p>
+              Community visibility, event support, boosted posts, and familiar branded content help local businesses
+              stay present where their audience already spends time.
+            </p>
+          </article>
+
+          <article class="algorithm-card">
+            <h3>Google Business Presence</h3>
+            <p>
+              Strong professional assets help people trust what they see when they are actively searching,
+              comparing options, and deciding who feels the most legitimate.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Visual Authority</span>
+        <h2 class="section-title">Hilton Head Should Be Captured Like A Destination Brand.</h2>
+        <p class="section-subtitle">
+          Harbour views, marinas, coastal light, golf course estates, oceanfront homes, and landmark visuals create
+          a layer of place-based authority that generic agencies cannot manufacture.
+        </p>
+
+        <div class="authority-grid">
+          <div class="authority-image" aria-label="Harbour scene background"></div>
+
+          <div class="authority-panel">
+            <div class="authority-box">
+              <h3>Tourism Energy</h3>
+              <p>
+                Coastal visuals instantly communicate experience, atmosphere, aspiration, and the feeling people are buying into.
+              </p>
+            </div>
+
+            <div class="authority-box">
+              <h3>Luxury Context</h3>
+              <p>
+                Businesses look more valuable when framed in the right visual world with the right mood and environment.
+              </p>
+            </div>
+
+            <div class="authority-box">
+              <h3>Local Market Edge</h3>
+              <p>
+                The deeper the work speaks the language of Hilton Head and the coast, the more undeniable the fit becomes.
+              </p>
+            </div>
+
+            <div class="authority-box">
+              <h3>Creative Advantage</h3>
+              <p>
+                Many agencies show content. Fewer combine story, place, refinement, and local identity at the same time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="container">
+        <div class="cta-box">
+          <span class="eyebrow">Let’s Elevate Your Brand</span>
+          <h2 class="section-title">For Businesses That Want To Look Premium, Refined, And Above The Noise.</h2>
+          <p>
+            If your business needs stronger visuals, stronger positioning, and a more polished online presence,
+            this is where it starts. Restaurants, real estate, hospitality, tourism, and service brands all benefit
+            when the media finally matches the quality of what they offer.
+          </p>
+
+          <div class="btn-row">
+            <a href="#contact" class="btn btn-primary">Book A Project</a>
+            <a href="#work" class="btn btn-secondary">See Project Types</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h2 class="section-title">Tell Me What You Want To Create.</h2>
+        <p class="section-subtitle">
+          Whether you need a launch commercial, listing visuals, aerial coverage, or ongoing short-form content,
+          let’s build something that makes your business feel impossible to overlook.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Above All Media</h3>
+            <ul class="contact-list">
+              <li>
+                <strong>Service Area</strong>
+                Hilton Head Island, Bluffton, Savannah, Charleston, and surrounding coastal markets
+              </li>
+              <li>
+                <strong>Project Types</strong>
+                Commercials, brand films, drone, real estate media, restaurant content, short-form social video
+              </li>
+              <li>
+                <strong>Best Fit Clients</strong>
+                Restaurants, hospitality, tourism, luxury services, premium properties, and businesses that want elevated presentation
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-form">
+            <h3>Start Your Project</h3>
+            <form action="#" method="post">
+              <div class="field-row">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+              </div>
+
+              <div class="field-row">
+                <input type="text" name="business" placeholder="Business Name" />
+                <select name="service">
+                  <option value="">Service Needed</option>
+                  <option value="commercial">Commercial Video</option>
+                  <option value="real-estate">Luxury Real Estate Media</option>
+                  <option value="drone">Drone Cinematography</option>
+                  <option value="social">Short-Form Social Content</option>
+                  <option value="branding">Brand Content Package</option>
+                </select>
+              </div>
+
+              <textarea name="message" placeholder="Tell me about your project, what you want captured, and the look you are going for."></textarea>
+
+              <button type="submit" class="btn btn-primary">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <p>© 2026 Above All Media. All rights reserved.</p>
+        <p>Hilton Head Luxury Media • Drone • Real Estate • Brand Storytelling</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const siteHeader = document.getElementById("siteHeader");
+
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", () => {
+        const isActive = navLinks.classList.toggle("active");
+        menuToggle.classList.toggle("active", isActive);
+        menuToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
+      });
+
+      navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          menuToggle.classList.remove("active");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 24) {
+        siteHeader.classList.add("scrolled");
+      } else {
+        siteHeader.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>
 
   <style>
     :root {
