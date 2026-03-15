@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,10 +83,10 @@
 
       --header-h:118px;
 
-      --nav-shift-right: -12px;
+      --nav-shift-right: 0px;
 
       --logo-gap: 4px;
-      --logo-height-desktop: 150px;
+      --logo-height-desktop: 132px;
       --logo-height-mobile: 64px;
 
       --wrap: 1200px;
@@ -167,11 +166,11 @@
       border-bottom: 1px solid rgba(255,255,255,0.10) !important;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
 
-      padding: 0 10px 0 0 !important;
+      padding: 0 18px 0 8px !important;
       display: grid !important;
-      grid-template-columns: auto 1fr auto auto !important;
+      grid-template-columns: auto minmax(0,1fr) auto auto !important;
       align-items: center !important;
-      gap: 0 !important;
+      gap: 10px !important;
       border-radius: 0 !important;
       overflow: visible !important;
     }
@@ -185,7 +184,13 @@
       align-items: center !important;
       justify-content: flex-start !important;
       text-decoration: none !important;
+      flex-shrink: 0;
     }
+
+    header.sticky-header .logo{
+      padding-right: 16px !important;
+    }
+
     header.sticky-header .logo img{
       display: block !important;
       margin: 0 !important;
@@ -200,17 +205,19 @@
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
-      padding: 0 18px !important;
+      padding: 0 20px 0 10px !important;
       margin: 0 !important;
-      gap: 20px !important;
-      font-size: clamp(16px, 1.6vw, 20px) !important;
+      gap: 24px !important;
+      font-size: clamp(16px, 1.45vw, 19px) !important;
       font-weight: 700 !important;
       transform: translateX(var(--nav-shift-right)) !important;
       justify-self: center !important;
       width: 100% !important;
       line-height: 1 !important;
       min-width: 0 !important;
+      flex-wrap: nowrap !important;
     }
+
     header.sticky-header nav.nav-links a{
       color: rgba(255,255,255,0.92) !important;
       text-decoration: none !important;
@@ -218,6 +225,7 @@
       padding: 10px 12px !important;
       line-height: 1 !important;
       border-radius: 10px;
+      white-space: nowrap;
     }
     header.sticky-header nav.nav-links a:hover { color: var(--brand) !important; }
     header.sticky-header nav.nav-links a.active { color: var(--brand) !important; }
@@ -227,14 +235,14 @@
       justify-content: flex-end !important;
       align-items: center !important;
       gap: 14px !important;
-      padding: 0 18px 0 12px !important;
+      padding: 0 10px 0 8px !important;
       margin: 0 !important;
       justify-self: end !important;
       line-height: 1 !important;
       min-width: 0 !important;
+      flex-shrink: 0;
     }
 
-    /* ✅ Luxury phone stack: name + number (subtle, premium) */
     .phone-stack{
       display:flex;
       flex-direction:column;
@@ -376,7 +384,8 @@
     body.menu-open{ overflow:hidden; touch-action:none; }
 
     @media (max-width: 768px) {
-      header.sticky-header{ grid-template-columns: auto 1fr auto !important; }
+      header.sticky-header{ grid-template-columns: auto 1fr auto !important; padding: 0 10px 0 4px !important; }
+      header.sticky-header .logo{ padding-right: 8px !important; }
       header.sticky-header .logo img{ height: var(--logo-height-mobile) !important; padding: 2px 0 !important; }
       header.sticky-header nav.nav-links{ display:none !important; }
       header.sticky-header .header-actions{ justify-self: center !important; padding: 0 !important; }
@@ -440,7 +449,6 @@
       text-shadow: 0 10px 26px rgba(0,0,0,.55);
     }
 
-    /* ✅ NEW: Hero micro-line (short, punchy, mobile-friendly) */
     .hero-micro{
       margin-top: 10px;
       display:inline-flex;
@@ -1305,8 +1313,7 @@
       <div class="wrap">
         <div class="hero-grid">
           <div class="reveal in-view">
-            <!-- ✅ A/B HERO: dynamic text (defaults to Variant A for SEO + no-JS users) -->
-            <h1 id="heroHeadline">We don’t just make you look premium. We make you more profitable.</h1>
+            <h1 id="heroHeadline">Look like the Market Leader. Grow like One.</h1>
 
             <p class="sub" id="heroSub">
               Conversion-ready video, drone, and social media campaigns built to drive more bookings, more leads, and higher-value customers in Hilton Head & the Lowcountry.
@@ -1474,7 +1481,8 @@
       <div class="full-bleed video-shell reveal" aria-label="Above All Media showreel video">
         <div class="ratio">
           <iframe
-            src="https://www.youtube.com/embed/1oTpwMC_KrY?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&vq=hd2160&loop=1&playlist=1oTpwMC_KrY"
+            id="portfolioVideo"
+            src="https://www.youtube.com/embed/8bVvm4GSDu8?enablejsapi=1&autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&vq=hd2160&loop=1&playlist=8bVvm4GSDu8"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
             loading="lazy"
@@ -1743,6 +1751,9 @@
     </div>
   </div>
 
+  <!-- YouTube Iframe API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <!-- ===================== SCRIPTS ===================== -->
   <script>
     (function () {
@@ -1854,59 +1865,6 @@
       window.addEventListener('scroll', updatePortfolioParallax, {passive:true});
       window.addEventListener('resize', updatePortfolioParallax, {passive:true});
       updatePortfolioParallax();
-    })();
-  </script>
-
-  <!-- ✅ NEW: A/B HERO VARIANT ROTATION (sticky per visitor) -->
-  <script>
-    (function(){
-      const headline = document.getElementById('heroHeadline');
-      const sub = document.getElementById('heroSub');
-      const micro = document.getElementById('heroMicro');
-      if(!headline || !sub || !micro) return;
-
-      const variants = {
-        A: {
-          h1: "We don’t just make you look premium. We make you more profitable.",
-          sub: "Conversion-ready video, drone, and social media campaigns built to drive more bookings, more leads, and higher-value customers in Hilton Head & the Lowcountry.",
-          micro: "Authority first. Conversion always."
-        },
-        B: {
-          h1: "Based in Hilton Head Island. Built for brands that want premium presence with measurable outcomes.",
-          sub: "We don’t just produce visuals—we build conversion-ready video, drone, and social assets that make your business the obvious choice (and turn attention into revenue).",
-          micro: "Premium presence. Measurable outcomes."
-        }
-      };
-
-      // URL override: ?v=A or ?v=B
-      const params = new URLSearchParams(location.search);
-      const forced = (params.get('v') || "").toUpperCase();
-      const key = "aamHeroVariant";
-
-      function chooseVariant(){
-        if (forced === "A" || forced === "B") return forced;
-
-        const stored = localStorage.getItem(key);
-        if (stored === "A" || stored === "B") return stored;
-
-        // First-time visitor: random 50/50, then persist
-        return (Math.random() < 0.5) ? "A" : "B";
-      }
-
-      function applyVariant(v){
-        const data = variants[v] || variants.A;
-        headline.textContent = data.h1;
-        sub.textContent = data.sub;
-        micro.textContent = data.micro;
-
-        // Persist only when not forced (so sharing forced links doesn’t overwrite)
-        if (!(forced === "A" || forced === "B")) {
-          try { localStorage.setItem(key, v); } catch(e) {}
-        }
-      }
-
-      const v = chooseVariant();
-      applyVariant(v);
     })();
   </script>
 
@@ -2056,35 +2014,93 @@
       });
     })();
   </script>
+
+  <script>
+    let portfolioPlayer;
+    let userHasInteracted = false;
+    let videoInView = false;
+    let unmuteAttempted = false;
+
+    function markInteraction() {
+      userHasInteracted = true;
+      attemptVideoUnmute();
+    }
+
+    ['click', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+      window.addEventListener(evt, markInteraction, { passive: true, once: false });
+    });
+
+    function attemptVideoUnmute() {
+      if (!portfolioPlayer || typeof portfolioPlayer.unMute !== 'function') return;
+      if (!videoInView || !userHasInteracted || unmuteAttempted === true) return;
+
+      try {
+        portfolioPlayer.unMute();
+        portfolioPlayer.setVolume(100);
+        portfolioPlayer.playVideo();
+        if (typeof portfolioPlayer.setPlaybackQuality === 'function') {
+          portfolioPlayer.setPlaybackQuality('hd1080');
+          portfolioPlayer.setPlaybackQuality('highres');
+        }
+        unmuteAttempted = true;
+      } catch (e) {
+        console.warn('Autounmute blocked by browser policy.', e);
+      }
+    }
+
+    function onYouTubeIframeAPIReady() {
+      portfolioPlayer = new YT.Player('portfolioVideo', {
+        events: {
+          onReady: function (event) {
+            try {
+              event.target.mute();
+              event.target.playVideo();
+              event.target.setLoop(true);
+              if (typeof event.target.setPlaybackQuality === 'function') {
+                event.target.setPlaybackQuality('hd1080');
+                event.target.setPlaybackQuality('highres');
+              }
+            } catch (e) {
+              console.warn(e);
+            }
+          },
+          onStateChange: function (event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              try {
+                event.target.playVideo();
+              } catch (e) {}
+            }
+          }
+        }
+      });
+    }
+
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+    (function(){
+      const videoShell = document.querySelector('.video-shell');
+      if (!videoShell) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          videoInView = entry.isIntersecting && entry.intersectionRatio > 0.45;
+          if (videoInView && portfolioPlayer) {
+            try {
+              portfolioPlayer.playVideo();
+              if (typeof portfolioPlayer.setPlaybackQuality === 'function') {
+                portfolioPlayer.setPlaybackQuality('hd1080');
+                portfolioPlayer.setPlaybackQuality('highres');
+              }
+            } catch (e) {}
+            attemptVideoUnmute();
+          }
+        });
+      }, {
+        threshold: [0.25, 0.45, 0.65]
+      });
+
+      observer.observe(videoShell);
+    })();
+  </script>
 </body>
 </html>
-        "email": "info@aboveallmediasc.com",
-        "areaServed": ["Hilton Head Island, SC", "Bluffton, SC", "Beaufort, SC", "Lowcountry"],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Hilton Head Island",
-          "addressRegion": "SC",
-          "addressCountry": "US"
-        },
-        "sameAs": [],
-        "founder": {
-          "@type": "Person",
-          "name": "Chandler Pirie",
-          "telephone": "+18039205349"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "Chandler Pirie",
-        "jobTitle": "Founder & Creative Director",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Above All Media",
-          "url": "https://aboveallmediasc.com/"
-        }
-      }
-    ]
-  }
-  </script>
-
- 
