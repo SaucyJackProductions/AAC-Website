@@ -36,7 +36,6 @@
       --muted:rgba(235,239,246,.82);
       --muted-soft:rgba(255,255,255,.72);
       --line:rgba(255,255,255,.10);
-      --line-soft:rgba(255,255,255,.06);
       --brand:#f26a21;
       --brand-2:#ff8f52;
       --brand-3:#ffb38e;
@@ -47,9 +46,6 @@
       --hero-overlay-left:rgba(4,7,12,.44);
       --hero-overlay-right:rgba(4,7,12,.02);
       --hero-overlay-bottom:rgba(4,7,12,.22);
-      --radius-xl:30px;
-      --radius-lg:24px;
-      --radius-md:18px;
       --ease:cubic-bezier(.22,1,.36,1);
     }
 
@@ -196,7 +192,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:28px;
+      gap:34px;
       min-width:0;
       flex-wrap:wrap;
     }
@@ -205,8 +201,8 @@
       position:relative;
       font-family:'Montserrat',sans-serif;
       font-weight:800;
-      font-size:16px;
-      color:rgba(255,255,255,.94);
+      font-size:19px;
+      color:rgba(255,255,255,.96);
       transition:color .2s ease, opacity .2s ease;
     }
 
@@ -273,6 +269,7 @@
       cursor:pointer;
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
+      position:relative;
     }
 
     .menu-toggle span,
@@ -310,7 +307,7 @@
       background:
         linear-gradient(to right, var(--hero-overlay-left), var(--hero-overlay-right)),
         linear-gradient(to bottom, rgba(0,0,0,.02), var(--hero-overlay-bottom)),
-        url('assets/images/harbourtownhiltonhead.png') center 68% / cover no-repeat;
+        url('assets/images/harbourtownhiltonhead.png') center 78% / cover no-repeat;
       transform:scale(1.06);
       transform-origin:center center;
       will-change:transform;
@@ -600,34 +597,18 @@
       background:#000;
     }
 
-    .card-image,
-    .card-video{
+    .card-image{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:transform .9s var(--ease), opacity .55s ease, filter .55s ease;
-    }
-
-    .card-image{
-      opacity:1;
-      z-index:1;
-    }
-
-    .card-video{
-      opacity:0;
-      z-index:2;
-      pointer-events:none;
+      transition:transform .9s var(--ease), filter .55s ease;
     }
 
     .work-card:hover .card-image{
       transform:scale(1.06);
-      filter:brightness(.7);
-    }
-
-    .work-card:hover .card-video{
-      opacity:1;
+      filter:brightness(.8);
     }
 
     .card-media::after{
@@ -636,62 +617,8 @@
       inset:0;
       background:
         linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.06) 48%, rgba(0,0,0,.26) 100%);
-      z-index:3;
+      z-index:2;
       pointer-events:none;
-    }
-
-    .card-badge{
-      position:absolute;
-      top:16px;
-      left:16px;
-      z-index:4;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      background:rgba(5,8,13,.52);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      font-family:'Montserrat',sans-serif;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-    }
-
-    .play-pill{
-      position:absolute;
-      right:16px;
-      bottom:16px;
-      z-index:4;
-      width:58px;
-      height:58px;
-      border-radius:50%;
-      display:grid;
-      place-items:center;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      box-shadow:0 10px 24px rgba(0,0,0,.24);
-      transition:transform .45s var(--ease), background .35s ease;
-    }
-
-    .work-card:hover .play-pill{
-      transform:scale(1.08);
-      background:rgba(255,255,255,.18);
-    }
-
-    .play-pill::before{
-      content:"";
-      margin-left:4px;
-      width:0;
-      height:0;
-      border-top:9px solid transparent;
-      border-bottom:9px solid transparent;
-      border-left:14px solid #fff;
     }
 
     .work-copy{
@@ -1030,7 +957,8 @@
         padding:10px 0 12px;
       }
       .logo img{height:76px}
-      nav{gap:22px}
+      nav{gap:24px}
+      nav a{font-size:18px}
       .header-right{justify-content:center}
       .phone{text-align:center}
     }
@@ -1038,7 +966,7 @@
     @media (max-width:980px){
       :root{--header-h:110px}
       nav{gap:18px}
-      nav a{font-size:15px}
+      nav a{font-size:16px}
       .hero-grid,
       .about-grid{
         grid-template-columns:1fr;
@@ -1060,7 +988,6 @@
     @media (max-width:780px){
       .menu-toggle{
         display:inline-flex;
-        position:relative;
       }
 
       nav{
@@ -1125,7 +1052,7 @@
         background:
           linear-gradient(to right, rgba(4,7,12,.52), rgba(4,7,12,.10)),
           linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.22)),
-          url('assets/images/harbourtownhiltonhead.png') 56% 70% / cover no-repeat;
+          url('assets/images/harbourtownhiltonhead.png') 56% 80% / cover no-repeat;
       }
       section{padding:80px 0}
       .contact-head,
@@ -1253,11 +1180,6 @@
         <article class="work-card reveal" data-delay="1">
           <div class="card-media">
             <img class="card-image" src="IMG_4680.jpg" alt="Luxury property and rental media">
-            <video class="card-video" muted loop playsinline preload="none" poster="IMG_4680.jpg">
-              <source src="assets/video/real-estate-preview.mp4" type="video/mp4">
-            </video>
-            <div class="card-badge">Preview</div>
-            <div class="play-pill" aria-hidden="true"></div>
           </div>
           <div class="work-copy">
             <span class="tag">Real Estate / Rentals</span>
@@ -1271,11 +1193,6 @@
         <article class="work-card reveal" data-delay="2">
           <div class="card-media">
             <img class="card-image" src="IMG_4528.jpg" alt="Hospitality and restaurant marketing">
-            <video class="card-video" muted loop playsinline preload="none" poster="IMG_4528.jpg">
-              <source src="assets/video/hospitality-preview.mp4" type="video/mp4">
-            </video>
-            <div class="card-badge">Preview</div>
-            <div class="play-pill" aria-hidden="true"></div>
           </div>
           <div class="work-copy">
             <span class="tag">Hospitality / Restaurants</span>
@@ -1289,11 +1206,6 @@
         <article class="work-card reveal" data-delay="3">
           <div class="card-media">
             <img class="card-image" src="liveevents.png" alt="Drone and aerial branding">
-            <video class="card-video" muted loop playsinline preload="none" poster="liveevents.png">
-              <source src="assets/video/drone-preview.mp4" type="video/mp4">
-            </video>
-            <div class="card-badge">Preview</div>
-            <div class="play-pill" aria-hidden="true"></div>
           </div>
           <div class="work-copy">
             <span class="tag">Drone / Aerial</span>
@@ -1307,11 +1219,6 @@
         <article class="work-card reveal" data-delay="4">
           <div class="card-media">
             <img class="card-image" src="socialmediamanagement.png" alt="Social content and video ads">
-            <video class="card-video" muted loop playsinline preload="none" poster="socialmediamanagement.png">
-              <source src="assets/video/social-preview.mp4" type="video/mp4">
-            </video>
-            <div class="card-badge">Preview</div>
-            <div class="play-pill" aria-hidden="true"></div>
           </div>
           <div class="work-copy">
             <span class="tag">Social / Ads</span>
@@ -1481,7 +1388,6 @@
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('site-nav');
     const reveals = document.querySelectorAll('.reveal');
-    const hoverCards = document.querySelectorAll('.work-card');
 
     function handleHeader() {
       if (window.scrollY > 18) {
@@ -1524,35 +1430,6 @@
         heroBg.style.transform = `scale(1.06) translate3d(0, ${y * 0.10}px, 0)`;
       }
     }, { passive: true });
-
-    hoverCards.forEach(card => {
-      const video = card.querySelector('.card-video');
-
-      const playPreview = () => {
-        if (!video) return;
-        const source = video.querySelector('source');
-        if (!source || !source.getAttribute('src')) return;
-        if (video.dataset.loaded !== "true") {
-          video.load();
-          video.dataset.loaded = "true";
-        }
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(() => {});
-        }
-      };
-
-      const stopPreview = () => {
-        if (!video) return;
-        video.pause();
-        video.currentTime = 0;
-      };
-
-      card.addEventListener('mouseenter', playPreview);
-      card.addEventListener('mouseleave', stopPreview);
-      card.addEventListener('touchstart', playPreview, { passive: true });
-      card.addEventListener('touchend', stopPreview, { passive: true });
-    });
 
     if (menuToggle) {
       menuToggle.addEventListener('click', () => {
