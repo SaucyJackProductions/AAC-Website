@@ -33,20 +33,16 @@
   <style>
     :root{
       --bg:#06080b;
-      --bg-soft:#0b1016;
       --ink:#ffffff;
       --muted:rgba(235,239,246,.82);
       --muted-soft:rgba(255,255,255,.72);
-      --line:rgba(255,255,255,.10);
       --brand:#f26a21;
       --brand-2:#ff8f52;
-      --glass:rgba(255,255,255,.06);
-      --glass-soft:rgba(255,255,255,.035);
-      --shadow:0 24px 80px rgba(0,0,0,.34);
+      --shadow:0 24px 80px rgba(0,0,0,.30);
       --wrap:1280px;
       --header-h:104px;
-      --hero-overlay-left:rgba(5,8,14,.60);
-      --hero-overlay-right:rgba(5,8,14,.12);
+      --hero-overlay-left:rgba(5,8,14,.56);
+      --hero-overlay-right:rgba(5,8,14,.08);
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -75,10 +71,10 @@
     }
 
     .glass{
-      background:var(--glass);
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.09);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
       box-shadow:var(--shadow);
     }
 
@@ -112,13 +108,13 @@
 
     .btn-ghost{
       color:#fff;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
     }
 
     .btn-ghost:hover{
       transform:translateY(-2px);
-      background:rgba(255,255,255,.12);
+      background:rgba(255,255,255,.11);
     }
 
     header{
@@ -214,7 +210,7 @@
       inset:0;
       background:
         linear-gradient(to right, var(--hero-overlay-left), var(--hero-overlay-right)),
-        linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.22)),
+        linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.18)),
         url('assets/images/harbourtownhiltonhead.png') center center / cover no-repeat;
       transform:scale(1.02);
     }
@@ -238,7 +234,7 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.08fr) minmax(330px,.80fr);
+      grid-template-columns:minmax(0,1.08fr) minmax(320px,.74fr);
       gap:28px;
       align-items:end;
     }
@@ -264,7 +260,7 @@
       max-width:11ch;
       line-height:.93;
       letter-spacing:-.065em;
-      text-shadow:0 18px 50px rgba(0,0,0,.34);
+      text-shadow:0 18px 50px rgba(0,0,0,.30);
     }
 
     .hero h1 span{
@@ -277,8 +273,8 @@
       max-width:34ch;
       font-size:clamp(1.08rem, 1.9vw, 1.34rem);
       line-height:1.65;
-      color:rgba(255,255,255,.95);
-      text-shadow:0 10px 32px rgba(0,0,0,.20);
+      color:rgba(255,255,255,.96);
+      text-shadow:0 10px 32px rgba(0,0,0,.18);
     }
 
     .hero-actions{
@@ -292,26 +288,26 @@
       margin-top:16px;
       font-size:14px;
       line-height:1.55;
-      color:rgba(255,255,255,.78);
+      color:rgba(255,255,255,.80);
       max-width:54ch;
     }
 
-    /* MAIN FIXED BOX */
+    /* MUCH LIGHTER HERO BOX */
     .hero-side{
       border-radius:28px;
-      padding:24px;
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-      box-shadow:0 12px 34px rgba(0,0,0,.16);
+      padding:22px;
+      background:rgba(255,255,255,.015);
+      border:1px solid rgba(255,255,255,.06);
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
     }
 
     .hero-side h3{
-      font-size:clamp(1.6rem,2.4vw,2.2rem);
+      font-size:clamp(1.55rem,2.3vw,2.1rem);
       margin-bottom:14px;
       max-width:14ch;
-      text-shadow:0 6px 18px rgba(0,0,0,.18);
+      text-shadow:0 4px 12px rgba(0,0,0,.14);
     }
 
     .hero-side ul{
@@ -321,40 +317,45 @@
     }
 
     .hero-side li{
-      padding:14px 15px;
-      border-radius:16px;
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(255,255,255,.08);
+      padding:12px 0;
+      border-radius:0;
+      background:transparent;
+      border:none;
       line-height:1.56;
-      color:rgba(255,255,255,.94);
-      text-shadow:0 4px 14px rgba(0,0,0,.16);
+      color:rgba(255,255,255,.95);
+      text-shadow:0 3px 10px rgba(0,0,0,.14);
     }
 
     .hero-proof{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;
+      gap:12px;
       margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,255,255,.08);
     }
 
     .proof-card{
-      padding:12px 12px 10px;
-      border-radius:16px;
-      background:rgba(255,255,255,.02);
-      border:1px solid rgba(255,255,255,.08);
+      padding:0;
+      border-radius:0;
+      background:transparent;
+      border:none;
+      box-shadow:none;
     }
 
     .proof-card strong{
       display:block;
       font-family:'Montserrat',sans-serif;
-      font-size:1.05rem;
+      font-size:1rem;
       margin-bottom:4px;
+      text-shadow:0 3px 8px rgba(0,0,0,.14);
     }
 
     .proof-card span{
-      color:rgba(255,255,255,.76);
+      color:rgba(255,255,255,.82);
       font-size:.9rem;
       line-height:1.45;
+      text-shadow:0 3px 8px rgba(0,0,0,.14);
     }
 
     section{padding:96px 0}
