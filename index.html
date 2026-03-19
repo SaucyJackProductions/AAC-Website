@@ -1,259 +1,1021 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Above All Media | Hilton Head Video Marketing</title>
+  <title>Above All Media | Hilton Head Video Marketing That Generates More Leads</title>
+  <meta name="description" content="Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing built to grow your business.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://aboveallmediasc.com/">
 
-<meta property="og:title" content="Look Like the Market Leader | Above All Media">
-<meta property="og:description" content="Generate more leads, get more calls and bookings, and attract higher-paying clients.">
-<meta property="og:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Look Like the Market Leader | Above All Media">
+  <meta property="og:description" content="Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing.">
+  <meta property="og:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
+  <meta property="og:image:secure_url" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://aboveallmediasc.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Above All Media">
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Look Like the Market Leader | Above All Media">
+  <meta name="twitter:description" content="Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing.">
+  <meta name="twitter:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
 
-<style>
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#05070a;
-  color:#fff;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-h1,h2,h3{
-  font-family:'Montserrat',sans-serif;
-}
+  <style>
+    :root{
+      --bg:#06080b;
+      --ink:#ffffff;
+      --muted:rgba(235,239,246,.82);
+      --muted-soft:rgba(255,255,255,.72);
+      --brand:#f26a21;
+      --brand-2:#ff8f52;
+      --shadow:0 24px 80px rgba(0,0,0,.30);
+      --wrap:1280px;
+      --header-h:104px;
+      --hero-overlay-left:rgba(5,8,14,.56);
+      --hero-overlay-right:rgba(5,8,14,.08);
+    }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      overflow-x:hidden;
+      padding-top:var(--header-h);
+    }
 
-.hero-bg{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(to right, rgba(0,0,0,.45), rgba(0,0,0,.05)),
-    url('assets/images/harbourtownhiltonhead.png') center 65%/cover no-repeat;
-}
+    h1,h2,h3,h4{
+      font-family:'Montserrat',sans-serif;
+      letter-spacing:-.045em;
+      line-height:1.02;
+    }
 
-/* SHIFTED DOWN (65% shows sunset more) */
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
 
-.hero-content{
-  position:relative;
-  z-index:2;
-  width:90%;
-  max-width:1200px;
-  margin:auto;
-}
+    .wrap{
+      width:min(var(--wrap), calc(100% - 40px));
+      margin:0 auto;
+    }
 
-.hero-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-}
+    .glass{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.09);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      box-shadow:var(--shadow);
+    }
 
-/* LEFT TEXT */
-.hero h1{
-  font-size:clamp(3rem,6vw,6rem);
-  line-height:.95;
-}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:56px;
+      padding:14px 24px;
+      border-radius:16px;
+      border:none;
+      cursor:pointer;
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size:17px;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+      white-space:nowrap;
+    }
 
-.hero h1 span{
-  color:#ff8f52;
-}
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      box-shadow:0 20px 48px rgba(242,106,33,.34);
+    }
 
-.hero p{
-  margin-top:20px;
-  max-width:500px;
-  font-size:1.2rem;
-  line-height:1.6;
-}
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 24px 54px rgba(242,106,33,.42);
+    }
 
-.buttons{
-  margin-top:25px;
-  display:flex;
-  gap:15px;
-}
+    .btn-ghost{
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
+    }
 
-.btn{
-  padding:14px 22px;
-  border-radius:10px;
-  font-weight:bold;
-  text-decoration:none;
-}
+    .btn-ghost:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.11);
+    }
 
-.btn-primary{
-  background:#f26a21;
-  color:#fff;
-}
+    header{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:1000;
+      background:rgba(6,9,14,.74);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-.btn-ghost{
-  border:1px solid #fff;
-}
+    .header-inner{
+      min-height:var(--header-h);
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:28px;
+      padding:8px 0;
+    }
 
-/* RIGHT SIDE (NO BOX NOW) */
-.hero-side{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:15px;
-}
+    .logo{
+      display:flex;
+      align-items:center;
+      min-width:0;
+    }
 
-.hero-side h3{
-  font-size:1.8rem;
-}
+    .logo img{
+      height:84px;
+      width:auto;
+      object-fit:contain;
+    }
 
-.hero-side ul{
-  list-style:none;
-  padding:0;
-}
+    nav{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:28px;
+      min-width:0;
+      flex-wrap:wrap;
+    }
 
-.hero-side li{
-  margin-bottom:10px;
-  font-size:1rem;
-  line-height:1.5;
-}
+    nav a{
+      font-family:'Montserrat',sans-serif;
+      font-weight:800;
+      font-size:16px;
+      color:rgba(255,255,255,.94);
+      transition:color .18s ease;
+    }
 
-/* PROOF */
-.proof{
-  margin-top:15px;
-  display:flex;
-  gap:20px;
-}
+    nav a:hover{color:var(--brand)}
 
-.proof div{
-  font-size:.9rem;
-}
+    .header-right{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:16px;
+      flex-wrap:wrap;
+    }
 
-/* SECTIONS */
-section{
-  padding:80px 20px;
-  max-width:1100px;
-  margin:auto;
-}
+    .phone{
+      text-align:right;
+      line-height:1.08;
+      white-space:nowrap;
+    }
 
-.work-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
+    .phone .label{
+      font-family:'Montserrat',sans-serif;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.68);
+    }
 
-.card{
-  background:#0b0f14;
-  padding:20px;
-  border-radius:15px;
-}
+    .phone .number{
+      font-family:'Montserrat',sans-serif;
+      font-size:22px;
+      font-weight:900;
+      color:#fff;
+    }
 
-iframe{
-  width:100%;
-  height:500px;
-  margin-top:30px;
-}
+    .hero{
+      position:relative;
+      min-height:calc(100vh - var(--header-h));
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+    }
 
-/* CONTACT */
-.contact{
-  background:rgba(255,255,255,.03);
-  padding:30px;
-  border-radius:20px;
-}
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to right, var(--hero-overlay-left), var(--hero-overlay-right)),
+        linear-gradient(to bottom, rgba(0,0,0,.04), rgba(0,0,0,.18)),
+        url('assets/images/harbourtownhiltonhead.png') center center / cover no-repeat;
+      transform:scale(1.02);
+    }
 
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  margin-bottom:15px;
-  border:none;
-  border-radius:8px;
-}
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:180px;
+      background:linear-gradient(to bottom, rgba(6,8,11,0), rgba(6,8,11,.92));
+      z-index:1;
+      pointer-events:none;
+    }
 
-/* MOBILE */
-@media(max-width:900px){
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
-}
-</style>
+    .hero-content{
+      position:relative;
+      z-index:2;
+      width:100%;
+      padding:72px 0 60px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(320px,.74fr);
+      gap:28px;
+      align-items:end;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 15px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      font-family:'Montserrat',sans-serif;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:20px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .hero h1{
+      font-size:clamp(3.6rem, 7vw, 6.9rem);
+      max-width:11ch;
+      line-height:.93;
+      letter-spacing:-.065em;
+      text-shadow:0 18px 50px rgba(0,0,0,.30);
+    }
+
+    .hero h1 span{
+      color:var(--brand-2);
+      display:inline-block;
+    }
+
+    .hero-subtext{
+      margin-top:20px;
+      max-width:34ch;
+      font-size:clamp(1.08rem, 1.9vw, 1.34rem);
+      line-height:1.65;
+      color:rgba(255,255,255,.96);
+      text-shadow:0 10px 32px rgba(0,0,0,.18);
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .hero-trust{
+      margin-top:16px;
+      font-size:14px;
+      line-height:1.55;
+      color:rgba(255,255,255,.80);
+      max-width:54ch;
+    }
+
+    /* MUCH LIGHTER HERO BOX */
+    .hero-side{
+      border-radius:28px;
+      padding:22px;
+      background:rgba(255,255,255,.015);
+      border:1px solid rgba(255,255,255,.06);
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .hero-side h3{
+      font-size:clamp(1.55rem,2.3vw,2.1rem);
+      margin-bottom:14px;
+      max-width:14ch;
+      text-shadow:0 4px 12px rgba(0,0,0,.14);
+    }
+
+    .hero-side ul{
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+
+    .hero-side li{
+      padding:12px 0;
+      border-radius:0;
+      background:transparent;
+      border:none;
+      line-height:1.56;
+      color:rgba(255,255,255,.95);
+      text-shadow:0 3px 10px rgba(0,0,0,.14);
+    }
+
+    .hero-proof{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .proof-card{
+      padding:0;
+      border-radius:0;
+      background:transparent;
+      border:none;
+      box-shadow:none;
+    }
+
+    .proof-card strong{
+      display:block;
+      font-family:'Montserrat',sans-serif;
+      font-size:1rem;
+      margin-bottom:4px;
+      text-shadow:0 3px 8px rgba(0,0,0,.14);
+    }
+
+    .proof-card span{
+      color:rgba(255,255,255,.82);
+      font-size:.9rem;
+      line-height:1.45;
+      text-shadow:0 3px 8px rgba(0,0,0,.14);
+    }
+
+    section{padding:96px 0}
+
+    .section-head{
+      max-width:940px;
+      margin-bottom:32px;
+    }
+
+    .section-kicker{
+      display:inline-block;
+      margin-bottom:12px;
+      color:var(--brand-2);
+      font-family:'Montserrat',sans-serif;
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .section-head h2{
+      font-size:clamp(2.2rem,4vw,3.4rem);
+      margin-bottom:12px;
+    }
+
+    .section-head p{
+      font-size:1.08rem;
+      line-height:1.76;
+      color:var(--muted);
+      max-width:74ch;
+    }
+
+    #work{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(1000px 520px at 12% 8%, rgba(0,183,255,.08), transparent 60%),
+        radial-gradient(900px 560px at 88% 42%, rgba(242,106,33,.12), transparent 58%);
+    }
+
+    .work-grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:18px;
+    }
+
+    .work-card{
+      grid-column:span 6;
+      border-radius:26px;
+      overflow:hidden;
+      transition:transform .18s ease;
+    }
+
+    .work-card:hover{transform:translateY(-4px)}
+
+    .work-card img{
+      width:100%;
+      aspect-ratio:16/9;
+      object-fit:cover;
+    }
+
+    .work-copy{
+      padding:22px 22px 24px;
+    }
+
+    .tag{
+      display:inline-flex;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      font-family:'Montserrat',sans-serif;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:12px;
+      letter-spacing:.04em;
+    }
+
+    .work-copy h3{
+      font-size:1.42rem;
+      margin-bottom:10px;
+    }
+
+    .work-copy p{
+      color:var(--muted);
+      line-height:1.74;
+      font-size:1rem;
+    }
+
+    .showreel{
+      margin-top:24px;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+    }
+
+    .showreel .ratio{
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      background:#000;
+    }
+
+    .showreel iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .why-strip{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .why-item{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .why-item h4{
+      font-size:1rem;
+      margin-bottom:8px;
+    }
+
+    .why-item p{
+      color:var(--muted-soft);
+      line-height:1.65;
+      font-size:.96rem;
+    }
+
+    #contact{
+      position:relative;
+      background:
+        linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.20)),
+        url('crabweb.jpg') center/cover no-repeat;
+    }
+
+    .contact-shell{
+      width:min(1020px,100%);
+      margin:0 auto;
+      border-radius:30px;
+      overflow:hidden;
+      background:rgba(10,14,20,.24);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      box-shadow:var(--shadow);
+    }
+
+    .contact-head{
+      padding:30px 30px 18px;
+      background:rgba(10,14,20,.12);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .contact-head h2{
+      font-size:clamp(2rem,3vw,2.9rem);
+      margin-bottom:10px;
+    }
+
+    .contact-head p{
+      max-width:72ch;
+      line-height:1.74;
+      color:rgba(255,255,255,.88);
+    }
+
+    .contact-body{
+      padding:24px 30px 30px;
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+      background:rgba(10,14,20,.08);
+    }
+
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-size:.95rem;
+      color:rgba(255,255,255,.92);
+      font-weight:600;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(5,8,13,.34);
+      color:#fff;
+      padding:15px 16px;
+      outline:none;
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder{
+      color:rgba(255,255,255,.62);
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:rgba(242,106,33,.70);
+      box-shadow:0 0 0 4px rgba(242,106,33,.12);
+      background:rgba(5,8,13,.46);
+    }
+
+    .contact-note{
+      color:rgba(255,255,255,.70);
+      font-size:.94rem;
+      line-height:1.55;
+      margin-top:6px;
+    }
+
+    #about{
+      position:relative;
+      background:
+        linear-gradient(rgba(0,0,0,.44), rgba(0,0,0,.60)),
+        url('DJI_0648%202.jpg') center/cover no-repeat;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .about-card{
+      padding:26px;
+      border-radius:28px;
+    }
+
+    .about-card h3{
+      font-size:1.42rem;
+      margin-bottom:12px;
+    }
+
+    .about-card p{
+      color:var(--muted);
+      line-height:1.76;
+    }
+
+    .about-list{
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+
+    .about-list li{
+      padding:15px 15px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-weight:700;
+      line-height:1.48;
+    }
+
+    .cta-band{
+      padding:32px;
+      border-radius:28px;
+      margin-top:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .cta-band h3{
+      font-size:clamp(1.7rem,2.8vw,2.5rem);
+      max-width:14ch;
+    }
+
+    .cta-band p{
+      color:var(--muted);
+      max-width:58ch;
+      line-height:1.7;
+    }
+
+    footer{
+      padding:28px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:#05070a;
+    }
+
+    .footer-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .footer-title{
+      font-family:'Montserrat',sans-serif;
+      font-size:1.05rem;
+      font-weight:800;
+    }
+
+    .footer-copy{
+      color:rgba(255,255,255,.72);
+      line-height:1.6;
+    }
+
+    @media (max-width:1240px){
+      :root{--header-h:118px}
+      .header-inner{
+        grid-template-columns:1fr;
+        justify-items:center;
+        gap:10px;
+        padding:10px 0 12px;
+      }
+      .logo img{height:76px}
+      nav{gap:22px}
+      .header-right{justify-content:center}
+      .phone{text-align:center}
+    }
+
+    @media (max-width:980px){
+      :root{--header-h:110px}
+      nav{gap:18px}
+      nav a{font-size:15px}
+      .hero-grid,
+      .about-grid{
+        grid-template-columns:1fr;
+      }
+      .work-card{grid-column:span 12}
+      .col-6{grid-column:span 12}
+      .hero-proof,
+      .why-strip{
+        grid-template-columns:1fr;
+      }
+      .cta-band{
+        padding:24px;
+      }
+    }
+
+    @media (max-width:720px){
+      :root{--header-h:122px}
+      .wrap{width:min(100% - 24px, var(--wrap))}
+      .logo img{height:64px}
+      nav{gap:14px 18px}
+      nav a{font-size:14px}
+      .phone .number{font-size:19px}
+      .btn{width:100%}
+      .header-right{width:100%;gap:12px}
+      .hero-content{padding:48px 0 46px}
+      .hero h1{font-size:clamp(2.9rem,13vw,4.25rem)}
+      .hero-subtext{max-width:100%}
+      section{padding:78px 0}
+      .contact-head,
+      .contact-body{
+        padding-left:18px;
+        padding-right:18px;
+      }
+      .contact-head{padding-top:22px}
+      .cta-band{padding:20px}
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="wrap header-inner">
+      <a class="logo" href="#top" aria-label="Above All Media home">
+        <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" alt="Above All Media">
+      </a>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
+      <nav aria-label="Primary navigation">
+        <a href="#top">Home</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </nav>
 
-  <div class="hero-content">
-    <div class="hero-grid">
-
-      <!-- LEFT -->
-      <div>
-        <h1>
-          Look Like the Market Leader.<br>
-          <span>Grow Like One.</span>
-        </h1>
-
-        <p>
-          Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing built to grow your business.
-        </p>
-
-        <div class="buttons">
-          <a href="#contact" class="btn btn-primary">Request Strategy</a>
-          <a href="#work" class="btn btn-ghost">View Work</a>
-        </div>
+      <div class="header-right">
+        <a class="phone" href="tel:+18039205349">
+          <div class="label">Call Chandler</div>
+          <div class="number">(803) 920-5349</div>
+        </a>
+        <a class="btn btn-primary" href="#contact">Request a Strategy</a>
       </div>
-
-      <!-- RIGHT FLOATING -->
-      <div class="hero-side">
-        <h3>Built to make your business impossible to ignore.</h3>
-
-        <ul>
-          <li>Premium visuals that instantly raise perceived value</li>
-          <li>Content built to generate real leads and calls</li>
-          <li>Short-form + ads designed to convert</li>
-          <li>Position your brand above competitors</li>
-        </ul>
-
-        <div class="proof">
-          <div><strong>Premium</strong><br>Luxury positioning</div>
-          <div><strong>Leads</strong><br>Calls & bookings</div>
-          <div><strong>Local</strong><br>Hilton Head</div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</div>
+  </header>
 
-<!-- WORK -->
-<section id="work">
-  <h2>Content that drives real business growth</h2>
+  <main id="top" class="hero">
+    <div class="hero-bg"></div>
 
-  <div class="work-grid">
-    <div class="card">Real Estate & Rentals</div>
-    <div class="card">Restaurants & Hospitality</div>
-    <div class="card">Drone & Aerial</div>
-    <div class="card">Social Media & Ads</div>
-  </div>
+    <div class="hero-content">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Hilton Head • Bluffton • Beaufort</div>
 
-  <iframe src="https://www.youtube.com/embed/8bVvm4GSDu8?autoplay=1&mute=1&loop=1&playlist=8bVvm4GSDu8"></iframe>
-</section>
+          <h1>
+            Look Like the Market Leader.<br>
+            <span>Grow Like One.</span>
+          </h1>
 
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Request Your Growth Strategy</h2>
+          <p class="hero-subtext">
+            Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing built to make your business the obvious choice.
+          </p>
 
-  <div class="contact">
-    <input placeholder="Name">
-    <input placeholder="Business">
-    <input placeholder="Email">
-    <textarea placeholder="What do you need?"></textarea>
-    <button class="btn btn-primary">Submit</button>
-  </div>
-</section>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Request a Strategy</a>
+            <a class="btn btn-ghost" href="#work">View Work</a>
+          </div>
 
+          <p class="hero-trust">
+            Premium content for brands that want stronger positioning, more attention, and real business growth.
+          </p>
+        </div>
+
+        <div class="hero-side">
+          <h3>Built to make your business impossible to ignore.</h3>
+          <ul>
+            <li>Premium visuals that instantly raise perceived value and trust.</li>
+            <li>Content designed to generate leads, calls, and bookings.</li>
+            <li>Short-form, website, and ad creative built for attention and conversion.</li>
+            <li>Position your brand above the competition and attract better clients.</li>
+          </ul>
+
+          <div class="hero-proof">
+            <div class="proof-card">
+              <strong>Premium</strong>
+              <span>Luxury positioning that makes your brand feel established.</span>
+            </div>
+            <div class="proof-card">
+              <strong>Lead-Gen</strong>
+              <span>Built to support calls, bookings, inquiries, and growth.</span>
+            </div>
+            <div class="proof-card">
+              <strong>Local</strong>
+              <span>Hilton Head visuals with a market-leading edge.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-kicker">What We Build</span>
+        <h2>Content that makes your business look premium and perform like it.</h2>
+        <p>
+          We create cinematic video, drone content, reels, and ad-ready assets that help brands stand out, build trust faster, and turn attention into real leads, calls, bookings, and growth.
+        </p>
+      </div>
+
+      <div class="work-grid">
+        <article class="work-card glass">
+          <img src="IMG_4680.jpg" alt="Luxury property and rental media">
+          <div class="work-copy">
+            <span class="tag">Real Estate / Rentals</span>
+            <h3>Listing & Rental Video That Converts</h3>
+            <p>
+              Listing video, drone, walkthroughs, reels, and website-ready edits built to increase inquiries, drive bookings, and support stronger pricing for agents, brokerages, vacation rentals, property managers, and short-term rental brands.
+            </p>
+          </div>
+        </article>
+
+        <article class="work-card glass">
+          <img src="IMG_4528.jpg" alt="Hospitality and restaurant marketing">
+          <div class="work-copy">
+            <span class="tag">Hospitality / Restaurants</span>
+            <h3>Hospitality Content That Makes You the Easy Choice</h3>
+            <p>
+              Brand films and short-form content that help restaurants, resorts, hotels, and hospitality brands look premium, create desire fast, and attract more customers, reservations, and bookings.
+            </p>
+          </div>
+        </article>
+
+        <article class="work-card glass">
+          <img src="liveevents.png" alt="Drone and aerial branding">
+          <div class="work-copy">
+            <span class="tag">Drone / Aerial</span>
+            <h3>Drone Cinematography & Aerial Branding</h3>
+            <p>
+              Licensed aerial capture that gives your business a stronger first impression and adds the kind of visual authority competitors often lack. Ideal for developments, marinas, golf properties, luxury brands, and destination businesses.
+            </p>
+          </div>
+        </article>
+
+        <article class="work-card glass">
+          <img src="socialmediamanagement.png" alt="Social content and video ads">
+          <div class="work-copy">
+            <span class="tag">Social / Ads</span>
+            <h3>Short-Form Content Built to Generate Leads</h3>
+            <p>
+              Platform-first edits designed to stop the scroll, create demand, and generate qualified leads across Instagram, Facebook, and paid campaigns for businesses that want more attention tied to real growth.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="showreel">
+        <div class="ratio">
+          <iframe
+            src="https://www.youtube.com/embed/8bVvm4GSDu8?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=8bVvm4GSDu8"
+            title="Above All Media Showreel"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="why-strip">
+        <div class="why-item">
+          <h4>Catch attention fast</h4>
+          <p>Sharper visuals, better hooks, and stronger first impressions across your site and social media.</p>
+        </div>
+        <div class="why-item">
+          <h4>Build instant trust</h4>
+          <p>Premium content raises perceived value so your business feels established before prospects reach out.</p>
+        </div>
+        <div class="why-item">
+          <h4>Drive better leads</h4>
+          <p>Creative built around real business goals: more calls, more bookings, and higher-paying clients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-shell">
+        <div class="contact-head">
+          <span class="section-kicker">Let’s Build</span>
+          <h2>Request Your Custom Growth Strategy</h2>
+          <p>
+            Tell us what you want to grow, and we’ll map out the clearest content strategy to help you generate more leads, get more calls, and win better clients. Need the fastest path? Call Chandler directly at <strong>(803) 920-5349</strong>.
+          </p>
+        </div>
+
+        <form class="contact-body">
+          <div class="col-6">
+            <label for="full-name">Full name</label>
+            <input id="full-name" type="text" placeholder="Jane Doe">
+          </div>
+
+          <div class="col-6">
+            <label for="business-name">Business name</label>
+            <input id="business-name" type="text" placeholder="Company / Brand">
+          </div>
+
+          <div class="col-6">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@company.com">
+          </div>
+
+          <div class="col-6">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="(803) 000-0000">
+          </div>
+
+          <div class="col-6">
+            <label for="service-type">What do you need?</label>
+            <select id="service-type">
+              <option>Real Estate / Rentals</option>
+              <option>Hospitality / Restaurant</option>
+              <option>Drone / Aerial</option>
+              <option>Social / Ads</option>
+              <option>Events</option>
+              <option>Full Brand Content Package</option>
+            </select>
+          </div>
+
+          <div class="col-6">
+            <label for="budget">Budget range</label>
+            <select id="budget">
+              <option>Not sure yet</option>
+              <option>$500–$1,500</option>
+              <option>$1,500–$3,000</option>
+              <option>$3,000–$7,500</option>
+              <option>$7,500–$15,000</option>
+              <option>$15,000+</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="project-details">Project details</label>
+            <textarea id="project-details" placeholder="Tell us what you want to promote, where the content will be used, and what result you want."></textarea>
+            <p class="contact-note">
+              The more specific you are, the better we can map a strategy that fits your brand and growth goals.
+            </p>
+          </div>
+
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Request My Strategy</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-kicker">About Above All Media</span>
+        <h2>Built for businesses that want to stand out and scale up.</h2>
+        <p>
+          Based in Hilton Head Island, Above All Media creates premium visual content for businesses that want stronger positioning, better attention, and content that actually supports revenue growth.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card glass">
+          <h3>How we work</h3>
+          <p>
+            First we identify the business goal. Then we build the visual system around that goal with video, drone, reels, and delivery formats designed to help drive bookings, leads, stronger positioning, and a more trusted brand presence online.
+          </p>
+        </div>
+
+        <div class="about-card glass">
+          <h3>Best-fit clients</h3>
+          <ul class="about-list">
+            <li>🏡 Real estate agents, developments, and vacation rentals</li>
+            <li>🍽️ Restaurants, resorts, hotels, and hospitality brands</li>
+            <li>⛵ Marinas, charters, tours, and destination experiences</li>
+            <li>📈 Businesses ready to grow through stronger content and ads</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cta-band glass">
+        <div>
+          <h3>Make your business the obvious choice.</h3>
+          <p>
+            Premium positioning wins attention faster. Better attention turns into stronger leads, more calls, and more growth.
+          </p>
+        </div>
+        <a class="btn btn-primary" href="#contact">Start Your Project</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-copy">
+        <div class="footer-title">Above All Media</div>
+        Serving Hilton Head Island, Bluffton, Beaufort & the Lowcountry
+      </div>
+      <div class="footer-copy">© 2026 Above All Media. All rights reserved.</div>
+    </div>
+  </footer>
 </body>
 </html>
+
