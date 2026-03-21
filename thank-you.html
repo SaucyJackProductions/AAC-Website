@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Thank You | Above All Media</title>
+  <meta name="description" content="Thanks for contacting Above All Media. Your inquiry has been received.">
+  <meta name="robots" content="noindex,follow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#05070a;
+      --ink:#ffffff;
+      --muted:rgba(235,239,246,.82);
+      --brand:#f26a21;
+      --brand-2:#ff8f52;
+      --shadow:0 24px 80px rgba(0,0,0,.34);
+      --ease:cubic-bezier(.22,1,.36,1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      font-family:'Inter',sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(rgba(4,7,12,.55), rgba(4,7,12,.7)),
+        url('assets/images/harbourtownhiltonhead.png') center center / cover no-repeat;
+    }
+
+    .card{
+      width:min(760px,100%);
+      padding:38px 32px;
+      border-radius:28px;
+      background:rgba(8,12,18,.64);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:14px;
+      color:var(--brand-2);
+      font-family:'Montserrat',sans-serif;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    h1{
+      font-family:'Montserrat',sans-serif;
+      font-size:clamp(2.4rem,6vw,4.4rem);
+      line-height:.95;
+      letter-spacing:-.05em;
+      margin-bottom:16px;
+    }
+
+    p{
+      color:var(--muted);
+      font-size:1.05rem;
+      line-height:1.75;
+      max-width:56ch;
+    }
+
+    .actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:54px;
+      padding:14px 22px;
+      border-radius:16px;
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size:16px;
+      text-decoration:none;
+      transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .25s ease;
+    }
+
+    .btn:hover{transform:translateY(-3px)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      box-shadow:0 20px 48px rgba(242,106,33,.28);
+    }
+
+    .btn-ghost{
+      color:#fff;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="eyebrow">Inquiry Received</div>
+    <h1>Thank you — we’ll be in touch soon.</h1>
+    <p>
+      Your message has been received by Above All Media. We’ll review your inquiry and follow up with the clearest next step based on your goals, brand, and growth opportunity.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/">Return Home</a>
+      <a class="btn btn-ghost" href="/#work">View Work</a>
+    </div>
+  </main>
+</body>
+</html>
