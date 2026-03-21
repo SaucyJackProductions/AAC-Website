@@ -331,13 +331,13 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(to right, rgba(4,7,12,.32), rgba(4,7,12,.02)),
-        linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.22)),
+        linear-gradient(to right, rgba(4,7,12,.26), rgba(4,7,12,.01)),
+        linear-gradient(to bottom, rgba(0,0,0,.01), rgba(4,7,12,.14)),
         url('assets/images/harbourtownhiltonhead.png');
       background-size:cover;
-      background-position:center 87%;
+      background-position:center 92%;
       background-repeat:no-repeat;
-      transform:scale(1.1);
+      transform:scale(1.11);
       transform-origin:center center;
       will-change:transform, background-position;
       animation:heroKenBurns 16s ease-in-out infinite alternate;
@@ -348,10 +348,10 @@
       position:absolute;
       inset:0;
       background:
-        radial-gradient(460px 220px at 53% 10%, rgba(255,170,108,.14), transparent 60%),
-        linear-gradient(120deg, transparent 10%, rgba(255,255,255,.04) 38%, transparent 62%);
+        radial-gradient(460px 220px at 53% 9%, rgba(255,190,120,.18), transparent 60%),
+        linear-gradient(120deg, transparent 12%, rgba(255,255,255,.03) 38%, transparent 62%);
       mix-blend-mode:screen;
-      opacity:.9;
+      opacity:.82;
       animation:waterSheen 11s ease-in-out infinite alternate;
       pointer-events:none;
     }
@@ -361,7 +361,7 @@
       inset:auto auto 18% 6%;
       width:580px;
       height:580px;
-      background:radial-gradient(circle, rgba(255,145,82,.16) 0%, rgba(255,145,82,.04) 40%, transparent 72%);
+      background:radial-gradient(circle, rgba(255,145,82,.13) 0%, rgba(255,145,82,.03) 40%, transparent 72%);
       filter:blur(18px);
       pointer-events:none;
       z-index:0;
@@ -374,7 +374,7 @@
       background-image:
         radial-gradient(rgba(255,255,255,.06) .7px, transparent .7px);
       background-size:18px 18px;
-      opacity:.045;
+      opacity:.035;
       mix-blend-mode:screen;
       pointer-events:none;
       z-index:1;
@@ -385,7 +385,7 @@
       position:absolute;
       inset:auto 0 0 0;
       height:210px;
-      background:linear-gradient(to bottom, rgba(5,7,10,0), rgba(5,7,10,.98));
+      background:linear-gradient(to bottom, rgba(5,7,10,0), rgba(5,7,10,.96));
       z-index:2;
       pointer-events:none;
     }
@@ -399,7 +399,7 @@
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.05fr) minmax(320px,.72fr);
+      grid-template-columns:minmax(0,1.05fr) minmax(300px,.68fr);
       gap:34px;
       align-items:end;
     }
@@ -482,35 +482,37 @@
 
     .hero-side{
       position:relative;
-      padding:18px 18px 20px;
+      padding:8px 0 0;
       align-self:end;
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
-      border:1px solid rgba(255,255,255,.10);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
-      box-shadow:var(--shadow);
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      backdrop-filter:none;
+      -webkit-backdrop-filter:none;
     }
 
     .hero-side h3{
-      font-size:clamp(1.5rem,2.2vw,2rem);
-      margin-bottom:16px;
-      max-width:14ch;
+      font-size:clamp(1.45rem,2.15vw,1.95rem);
+      margin-bottom:14px;
+      max-width:13ch;
+      text-shadow:0 10px 26px rgba(0,0,0,.34);
     }
 
     .hero-side ul{
       list-style:none;
       display:grid;
-      gap:12px;
-      margin-bottom:18px;
+      gap:10px;
+      margin-bottom:16px;
+      max-width:25ch;
     }
 
     .hero-side li{
       position:relative;
       padding-left:18px;
-      line-height:1.58;
-      color:rgba(255,255,255,.96);
+      line-height:1.52;
+      color:rgba(255,255,255,.97);
       font-size:1rem;
+      text-shadow:0 8px 20px rgba(0,0,0,.32);
     }
 
     .hero-side li::before{
@@ -529,29 +531,32 @@
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:12px;
-      padding-top:16px;
+      margin-top:16px;
+      padding-top:14px;
       border-top:1px solid rgba(255,255,255,.10);
     }
 
     .proof-card{
-      padding:12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(8,12,18,.18);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
     }
 
     .proof-card strong{
       display:block;
       font-family:'Montserrat',sans-serif;
-      font-size:1rem;
-      margin-bottom:4px;
+      font-size:.98rem;
+      margin-bottom:3px;
     }
 
     .proof-card span{
       display:block;
-      color:rgba(255,255,255,.82);
-      font-size:.88rem;
-      line-height:1.45;
+      color:rgba(255,255,255,.86);
+      font-size:.84rem;
+      line-height:1.4;
     }
 
     .sticky-mobile-cta{
@@ -765,13 +770,6 @@
       width:100%;
       height:100%;
       border:0;
-    }
-
-    .showreel-note{
-      margin-top:12px;
-      color:rgba(255,255,255,.70);
-      font-size:.92rem;
-      line-height:1.55;
     }
 
     .why-strip{
@@ -1096,8 +1094,8 @@
     }
 
     @keyframes heroKenBurns{
-      0%{transform:scale(1.1) translate3d(0,0,0)}
-      100%{transform:scale(1.14) translate3d(-0.2%, -0.5%, 0)}
+      0%{transform:scale(1.11) translate3d(0,0,0)}
+      100%{transform:scale(1.15) translate3d(-0.2%, -0.45%, 0)}
     }
 
     @media (max-width:1240px){
@@ -1198,16 +1196,15 @@
       .hero-subtext{max-width:100%}
       .hero-bg{
         background:
-          linear-gradient(to right, rgba(4,7,12,.34), rgba(4,7,12,.06)),
-          linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.18)),
+          linear-gradient(to right, rgba(4,7,12,.30), rgba(4,7,12,.04)),
+          linear-gradient(to bottom, rgba(0,0,0,.01), rgba(4,7,12,.12)),
           url('assets/images/harbourtownhiltonhead.png');
         background-size:cover;
-        background-position:20% 92%;
+        background-position:18% 96%;
         background-repeat:no-repeat;
       }
       .hero-side{
-        padding:16px;
-        border-radius:22px;
+        padding:4px 0 0;
       }
       .sticky-mobile-cta{display:flex}
       section{padding:82px 0}
@@ -1246,7 +1243,7 @@
       }
 
       .hero-bg{
-        background-position:16% 94%;
+        background-position:14% 98%;
       }
 
       .hero-copy .eyebrow{
@@ -1342,27 +1339,26 @@
         </div>
 
         <div class="hero-side">
-          <h3>Built to make your business impossible to ignore.</h3>
+          <h3>Premium content built to win attention and drive action.</h3>
 
           <ul>
-            <li>Premium visuals that raise perceived value and trust.</li>
-            <li>Content built to generate calls, leads, and bookings.</li>
-            <li>Short-form, website, and ad creative made for conversion.</li>
-            <li>Position your brand above competitors and attract better clients.</li>
+            <li>Raise perceived value fast.</li>
+            <li>Generate more calls, leads, and bookings.</li>
+            <li>Look like the premium choice in your market.</li>
           </ul>
 
           <div class="hero-proof">
             <div class="proof-card">
               <strong>Premium</strong>
-              <span>Luxury positioning that feels established.</span>
+              <span>High-end positioning.</span>
             </div>
             <div class="proof-card">
               <strong>Lead-Gen</strong>
-              <span>Built to support calls, inquiries, and growth.</span>
+              <span>Built for action.</span>
             </div>
             <div class="proof-card">
-              <strong>Local</strong>
-              <span>Hilton Head visuals with a market edge.</span>
+              <strong>Authority</strong>
+              <span>Stand above competitors.</span>
             </div>
           </div>
         </div>
@@ -1444,9 +1440,6 @@
           <div id="player"></div>
         </div>
       </div>
-      <p class="showreel-note reveal">
-        Browsers can block true autoplay with sound, especially on iPhone. This setup autoplays muted, requests high quality, and tries to unmute once the video is in view after user interaction.
-      </p>
 
       <div class="why-strip">
         <div class="why-item reveal" data-delay="1">
@@ -1664,7 +1657,7 @@
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (heroBg && y < window.innerHeight * 1.2) {
-        const translateY = y * 0.09;
+        const translateY = y * 0.08;
         const translateX = y * -0.01;
         heroBg.style.transform = `scale(1.11) translate3d(${translateX}px, ${translateY}px, 0)`;
       }
@@ -1701,7 +1694,7 @@
         playerVars: {
           autoplay: 1,
           mute: 1,
-          controls: 0,
+          controls: 1,
           rel: 0,
           playsinline: 1,
           loop: 1,
