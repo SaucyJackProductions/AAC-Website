@@ -28,16 +28,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na2.hs-scripts.com/245616775.js"></script>
-  <!-- End of HubSpot Embed Code -->
-
   <style>
     :root{
       --bg:#05070a;
+      --bg-soft:#0b1118;
       --ink:#ffffff;
       --muted:rgba(235,239,246,.82);
       --muted-soft:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.09);
       --brand:#f26a21;
       --brand-2:#ff8f52;
       --shadow:0 24px 80px rgba(0,0,0,.34);
@@ -63,16 +61,15 @@
     }
 
     body.nav-open{overflow:hidden}
+    a{text-decoration:none;color:inherit}
+    img,video{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
 
     h1,h2,h3,h4{
       font-family:'Montserrat',sans-serif;
       letter-spacing:-.045em;
       line-height:1.02;
     }
-
-    a{text-decoration:none;color:inherit}
-    img,video{max-width:100%;display:block}
-    button,input,select,textarea{font:inherit}
 
     .wrap{
       width:min(var(--wrap), calc(100% - 40px));
@@ -167,9 +164,7 @@
       transition:min-height .35s ease;
     }
 
-    header.is-scrolled .header-inner{
-      min-height:88px;
-    }
+    header.is-scrolled .header-inner{min-height:88px}
 
     .logo{
       display:flex;
@@ -368,13 +363,15 @@
       -webkit-backdrop-filter:blur(8px);
     }
 
-    .hero-copy > *{
+    .hero-copy > *,
+    .hero-side{
       opacity:0;
       transform:translateY(26px);
       filter:blur(8px);
     }
 
-    .hero.in-view .hero-copy > *{
+    .hero.in-view .hero-copy > *,
+    .hero.in-view .hero-side{
       animation:cinematicUp 1.15s var(--ease) forwards;
     }
 
@@ -383,6 +380,7 @@
     .hero.in-view .hero-copy > *:nth-child(3){animation-delay:.32s}
     .hero.in-view .hero-copy > *:nth-child(4){animation-delay:.46s}
     .hero.in-view .hero-copy > *:nth-child(5){animation-delay:.58s}
+    .hero.in-view .hero-side{animation-delay:.38s}
 
     .hero h1{
       font-size:clamp(3.5rem, 7vw, 7rem);
@@ -406,7 +404,6 @@
       font-size:clamp(1.08rem, 1.9vw, 1.34rem);
       line-height:1.65;
       color:rgba(255,255,255,.96);
-      text-shadow:0 10px 32px rgba(0,0,0,.12);
     }
 
     .hero-actions{
@@ -428,20 +425,12 @@
       position:relative;
       padding:12px 0 0;
       align-self:end;
-      opacity:0;
-      transform:translateY(28px);
-      filter:blur(8px);
-    }
-
-    .hero.in-view .hero-side{
-      animation:cinematicUp 1.25s var(--ease) .38s forwards;
     }
 
     .hero-side h3{
       font-size:clamp(1.55rem,2.3vw,2.1rem);
       margin-bottom:16px;
       max-width:15ch;
-      text-shadow:0 4px 14px rgba(0,0,0,.14);
     }
 
     .hero-side ul{
@@ -452,10 +441,9 @@
 
     .hero-side li{
       position:relative;
-      padding:0 0 0 16px;
+      padding-left:16px;
       line-height:1.58;
       color:rgba(255,255,255,.95);
-      text-shadow:0 3px 10px rgba(0,0,0,.12);
     }
 
     .hero-side li::before{
@@ -484,7 +472,6 @@
       font-family:'Montserrat',sans-serif;
       font-size:1rem;
       margin-bottom:4px;
-      text-shadow:0 3px 8px rgba(0,0,0,.14);
     }
 
     .proof-card span{
@@ -492,7 +479,6 @@
       color:rgba(255,255,255,.84);
       font-size:.9rem;
       line-height:1.45;
-      text-shadow:0 3px 8px rgba(0,0,0,.14);
     }
 
     section{
@@ -548,22 +534,10 @@
     .reveal[data-delay="4"]{transition-delay:.32s}
 
     #work{
-      position:relative;
       overflow:hidden;
       background:
         radial-gradient(1000px 520px at 12% 8%, rgba(0,183,255,.08), transparent 60%),
         radial-gradient(900px 560px at 88% 42%, rgba(242,106,33,.12), transparent 58%);
-    }
-
-    #work::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.02), transparent 18%),
-        linear-gradient(90deg, transparent 0%, rgba(255,255,255,.015) 50%, transparent 100%);
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.8), transparent 95%);
     }
 
     .work-grid{
@@ -574,14 +548,12 @@
 
     .work-card{
       grid-column:span 6;
-      position:relative;
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.09);
       background:rgba(255,255,255,.04);
       box-shadow:var(--shadow);
       transition:transform .55s var(--ease), border-color .35s ease, box-shadow .35s ease;
-      isolation:isolate;
     }
 
     .work-card:hover{
@@ -616,14 +588,10 @@
       position:absolute;
       inset:0;
       background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.06) 48%, rgba(0,0,0,.26) 100%);
-      z-index:2;
       pointer-events:none;
     }
 
-    .work-copy{
-      padding:22px 22px 24px;
-      position:relative;
-    }
+    .work-copy{padding:22px 22px 24px}
 
     .tag{
       display:inline-flex;
@@ -656,15 +624,6 @@
       border:1px solid rgba(255,255,255,.10);
       box-shadow:var(--shadow);
       position:relative;
-    }
-
-    .showreel::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:linear-gradient(135deg, rgba(255,255,255,.08), transparent 26%, transparent 72%, rgba(255,255,255,.05));
-      z-index:1;
     }
 
     .showreel .ratio{
@@ -716,18 +675,17 @@
     }
 
     #contact{
-      position:relative;
       background:
-        linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.24)),
+        linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.34)),
         url('crabweb.jpg') center/cover no-repeat;
     }
 
     .contact-shell{
-      width:min(1020px,100%);
+      width:min(1080px,100%);
       margin:0 auto;
       border-radius:30px;
       overflow:hidden;
-      background:rgba(10,14,20,.22);
+      background:rgba(10,14,20,.28);
       border:1px solid rgba(255,255,255,.10);
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
@@ -735,8 +693,8 @@
     }
 
     .contact-head{
-      padding:30px 30px 18px;
-      background:rgba(10,14,20,.10);
+      padding:32px 32px 18px;
+      background:rgba(10,14,20,.14);
       border-bottom:1px solid rgba(255,255,255,.08);
     }
 
@@ -751,12 +709,52 @@
       color:rgba(255,255,255,.88);
     }
 
-    .contact-body{
-      padding:24px 30px 30px;
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:0;
+    }
+
+    .contact-panel{
+      padding:28px 32px 32px;
+      background:rgba(10,14,20,.08);
+    }
+
+    .contact-panel + .contact-panel{
+      border-left:1px solid rgba(255,255,255,.08);
+    }
+
+    .contact-panel h3{
+      font-size:1.35rem;
+      margin-bottom:12px;
+    }
+
+    .contact-panel p{
+      color:var(--muted);
+      line-height:1.72;
+    }
+
+    .contact-points{
+      list-style:none;
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .contact-points li{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      line-height:1.55;
+    }
+
+    .contact-form{
       display:grid;
       grid-template-columns:repeat(12,1fr);
       gap:14px;
-      background:rgba(10,14,20,.05);
+      margin-top:22px;
     }
 
     .col-6{grid-column:span 6}
@@ -793,9 +791,7 @@
       color:rgba(255,255,255,.62);
     }
 
-    select option{
-      color:#111;
-    }
+    select option{color:#111}
 
     input:focus,select:focus,textarea:focus{
       border-color:rgba(242,106,33,.70);
@@ -804,15 +800,21 @@
       transform:translateY(-1px);
     }
 
-    .contact-note{
+    .contact-note,
+    .submit-meta{
       color:rgba(255,255,255,.70);
       font-size:.94rem;
       line-height:1.55;
-      margin-top:6px;
+    }
+
+    .submit-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
     }
 
     #about{
-      position:relative;
       background:
         linear-gradient(rgba(0,0,0,.44), rgba(0,0,0,.60)),
         url('DJI_0648%202.jpg') center/cover no-repeat;
@@ -854,7 +856,7 @@
     }
 
     .about-list li{
-      padding:15px 15px;
+      padding:15px;
       border-radius:16px;
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.08);
@@ -971,27 +973,21 @@
       nav{gap:18px}
       nav a{font-size:16px}
       .hero-grid,
-      .about-grid{
+      .about-grid,
+      .contact-grid{
         grid-template-columns:1fr;
       }
-      .hero-side{
-        max-width:720px;
-      }
+      .hero-side{max-width:720px}
       .work-card{grid-column:span 12}
       .col-6{grid-column:span 12}
       .hero-proof,
-      .why-strip{
-        grid-template-columns:1fr;
-      }
-      .cta-band{
-        padding:24px;
-      }
+      .why-strip{grid-template-columns:1fr}
+      .cta-band{padding:24px}
+      .contact-panel + .contact-panel{border-left:none;border-top:1px solid rgba(255,255,255,.08)}
     }
 
     @media (max-width:780px){
-      .menu-toggle{
-        display:inline-flex;
-      }
+      .menu-toggle{display:inline-flex}
 
       nav{
         position:fixed;
@@ -1035,13 +1031,8 @@
         justify-items:stretch;
       }
 
-      .header-inner .logo{
-        justify-content:flex-start;
-      }
-
-      .header-inner nav{
-        justify-self:center;
-      }
+      .header-inner .logo{justify-content:flex-start}
+      .header-inner nav{justify-self:center}
     }
 
     @media (max-width:720px){
@@ -1059,7 +1050,7 @@
       }
       section{padding:80px 0}
       .contact-head,
-      .contact-body{
+      .contact-panel{
         padding-left:18px;
         padding-right:18px;
       }
@@ -1128,7 +1119,7 @@
           </h1>
 
           <p class="hero-subtext">
-            Generate more leads, get more calls and bookings, and attract higher-paying clients with premium Hilton Head video marketing built to make your business the obvious choice.
+            Generate more leads, get more calls, and attract higher-paying clients with premium Hilton Head video marketing built to make your business the obvious choice.
           </p>
 
           <div class="hero-actions">
@@ -1145,7 +1136,7 @@
           <h3>Built to make your business impossible to ignore.</h3>
           <ul>
             <li>Premium visuals that instantly raise perceived value and trust.</li>
-            <li>Content designed to generate leads, calls, and bookings.</li>
+            <li>Content designed to generate leads, calls, bookings, and stronger positioning.</li>
             <li>Short-form, website, and ad creative built for attention and conversion.</li>
             <li>Position your brand above the competition and attract better clients.</li>
           </ul>
@@ -1157,7 +1148,7 @@
             </div>
             <div class="proof-card">
               <strong>Lead-Gen</strong>
-              <span>Built to support calls, bookings, inquiries, and growth.</span>
+              <span>Built to support calls, inquiries, bookings, and growth.</span>
             </div>
             <div class="proof-card">
               <strong>Local</strong>
@@ -1268,76 +1259,97 @@
           <span class="section-kicker">Let’s Build</span>
           <h2>Request Your Custom Growth Strategy</h2>
           <p>
-            Tell us what you want to grow, and we’ll map out the clearest content strategy to help you generate more leads, get more calls, and win better clients. Need the fastest path? Call Chandler directly at <strong>(803) 920-5349</strong>.
+            Tell us what you want to grow, and we’ll map out the clearest content strategy to help you generate more leads, more calls, and better clients. Need the fastest path? Call Chandler directly at <strong>(803) 920-5349</strong>.
           </p>
         </div>
 
-        <form
-          class="contact-body"
-          id="contact-form"
-          action="https://formsubmit.co/info@aboveallmediasc.com"
-          method="POST"
-        >
-          <input type="hidden" name="_subject" value="New Above All Media Lead">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://aboveallmediasc.com/?submitted=true#contact">
-
-          <div class="col-6">
-            <label for="full-name">Full name</label>
-            <input id="full-name" name="fullname" type="text" placeholder="Jane Doe" required>
-          </div>
-
-          <div class="col-6">
-            <label for="business-name">Business name</label>
-            <input id="business-name" name="company" type="text" placeholder="Company / Brand">
-          </div>
-
-          <div class="col-6">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@company.com" required>
-          </div>
-
-          <div class="col-6">
-            <label for="phone">Phone</label>
-            <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000">
-          </div>
-
-          <div class="col-6">
-            <label for="service-type">What do you need?</label>
-            <select id="service-type" name="service_type">
-              <option value="Real Estate / Rentals">Real Estate / Rentals</option>
-              <option value="Hospitality / Restaurant">Hospitality / Restaurant</option>
-              <option value="Drone / Aerial">Drone / Aerial</option>
-              <option value="Social / Ads">Social / Ads</option>
-              <option value="Events">Events</option>
-              <option value="Full Brand Content Package">Full Brand Content Package</option>
-            </select>
-          </div>
-
-          <div class="col-6">
-            <label for="budget">Budget range</label>
-            <select id="budget" name="budget">
-              <option value="Not sure yet">Not sure yet</option>
-              <option value="$500–$1,500">$500–$1,500</option>
-              <option value="$1,500–$3,000">$1,500–$3,000</option>
-              <option value="$3,000–$7,500">$3,000–$7,500</option>
-              <option value="$7,500–$15,000">$7,500–$15,000</option>
-              <option value="$15,000+">$15,000+</option>
-            </select>
-          </div>
-
-          <div class="col-12">
-            <label for="project-details">Project details</label>
-            <textarea id="project-details" name="message" placeholder="Tell us what you want to promote, where the content will be used, and what result you want." required></textarea>
-            <p class="contact-note">
-              The more specific you are, the better we can map a strategy that fits your brand and growth goals.
+        <div class="contact-grid">
+          <div class="contact-panel">
+            <h3>What happens next</h3>
+            <p>
+              After you submit, we’ll review your inquiry, look at the opportunity, and reach back out with the clearest next move based on your business, offer, and growth goals.
             </p>
+
+            <ul class="contact-points">
+              <li><strong>Clear direction:</strong> We focus on the fastest path to stronger positioning and better lead flow.</li>
+              <li><strong>Built around growth:</strong> Website, social, ad, and brand-use strategy all considered from the start.</li>
+              <li><strong>Premium execution:</strong> Strong visuals are only useful if they move the business forward.</li>
+            </ul>
           </div>
 
-          <div class="col-12">
-            <button class="btn btn-primary" type="submit">Request My Strategy</button>
+          <div class="contact-panel">
+            <form
+              class="contact-form"
+              id="contact-form"
+              action="https://formsubmit.co/info@aboveallmediasc.com"
+              method="POST"
+            >
+              <input type="hidden" name="_subject" value="New Above All Media Lead">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://aboveallmediasc.com/thank-you.html">
+
+              <div class="col-6">
+                <label for="full-name">Full name</label>
+                <input id="full-name" name="fullname" type="text" placeholder="Jane Doe" required>
+              </div>
+
+              <div class="col-6">
+                <label for="business-name">Business name</label>
+                <input id="business-name" name="company" type="text" placeholder="Company / Brand">
+              </div>
+
+              <div class="col-6">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required>
+              </div>
+
+              <div class="col-6">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000">
+              </div>
+
+              <div class="col-6">
+                <label for="service-type">What do you need?</label>
+                <select id="service-type" name="service_type">
+                  <option value="Real Estate / Rentals">Real Estate / Rentals</option>
+                  <option value="Hospitality / Restaurant">Hospitality / Restaurant</option>
+                  <option value="Drone / Aerial">Drone / Aerial</option>
+                  <option value="Social / Ads">Social / Ads</option>
+                  <option value="Events">Events</option>
+                  <option value="Full Brand Content Package">Full Brand Content Package</option>
+                </select>
+              </div>
+
+              <div class="col-6">
+                <label for="budget">Budget range</label>
+                <select id="budget" name="budget">
+                  <option value="Not sure yet">Not sure yet</option>
+                  <option value="$500–$1,500">$500–$1,500</option>
+                  <option value="$1,500–$3,000">$1,500–$3,000</option>
+                  <option value="$3,000–$7,500">$3,000–$7,500</option>
+                  <option value="$7,500–$15,000">$7,500–$15,000</option>
+                  <option value="$15,000+">$15,000+</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label for="project-details">Project details</label>
+                <textarea id="project-details" name="message" placeholder="Tell us what you want to promote, where the content will be used, and what result you want." required></textarea>
+                <p class="contact-note">
+                  The more specific you are, the better we can map a strategy that fits your brand and growth goals.
+                </p>
+              </div>
+
+              <div class="col-12 submit-wrap">
+                <button class="btn btn-primary" type="submit">Request My Strategy</button>
+                <p class="submit-meta">
+                  You’ll be redirected to a confirmation page after submission.
+                </p>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -1402,11 +1414,7 @@
     const reveals = document.querySelectorAll('.reveal');
 
     function handleHeader() {
-      if (window.scrollY > 18) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
+      header.classList.toggle('is-scrolled', window.scrollY > 18);
     }
 
     handleHeader();
@@ -1414,15 +1422,11 @@
 
     const heroObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
       });
     }, { threshold: 0.2 });
 
-    if (hero) {
-      heroObserver.observe(hero);
-    }
+    if (hero) heroObserver.observe(hero);
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
