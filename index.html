@@ -811,18 +811,6 @@
       margin-top:6px;
     }
 
-    .form-status{
-      margin-top:14px;
-      color:rgba(255,255,255,.86);
-      font-size:.95rem;
-      line-height:1.5;
-      display:none;
-    }
-
-    .form-status.show{
-      display:block;
-    }
-
     #about{
       position:relative;
       background:
@@ -1284,7 +1272,16 @@
           </p>
         </div>
 
-        <form class="contact-body" id="contact-form" method="POST">
+        <form
+          class="contact-body"
+          id="contact-form"
+          action="https://formsubmit.co/info@aboveallmediasc.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="New Above All Media Lead">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://aboveallmediasc.com/?submitted=true#contact">
+
           <div class="col-6">
             <label for="full-name">Full name</label>
             <input id="full-name" name="fullname" type="text" placeholder="Jane Doe" required>
@@ -1335,7 +1332,6 @@
             <p class="contact-note">
               The more specific you are, the better we can map a strategy that fits your brand and growth goals.
             </p>
-            <p class="form-status" id="form-status">Thanks — your request was submitted.</p>
           </div>
 
           <div class="col-12">
@@ -1404,8 +1400,6 @@
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('site-nav');
     const reveals = document.querySelectorAll('.reveal');
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
 
     function handleHeader() {
       if (window.scrollY > 18) {
@@ -1466,16 +1460,6 @@
           menuToggle.setAttribute('aria-expanded', 'false');
           document.body.classList.remove('nav-open');
         });
-      });
-    }
-
-    if (contactForm) {
-      contactForm.addEventListener('submit', () => {
-        setTimeout(() => {
-          if (formStatus) {
-            formStatus.classList.add('show');
-          }
-        }, 50);
       });
     }
   </script>
