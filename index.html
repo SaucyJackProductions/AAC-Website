@@ -32,14 +32,16 @@
     :root{
       --bg:#05070a;
       --bg-soft:#0b1118;
+      --bg-deep:#03050a;
       --ink:#ffffff;
-      --muted:rgba(235,239,246,.82);
+      --muted:rgba(235,239,246,.84);
       --muted-soft:rgba(255,255,255,.72);
       --line:rgba(255,255,255,.09);
       --brand:#f26a21;
-      --brand-2:#ff8f52;
+      --brand-2:#ff9b5c;
+      --brand-3:#ffd2b7;
       --shadow:0 24px 80px rgba(0,0,0,.34);
-      --shadow-soft:0 10px 30px rgba(0,0,0,.18);
+      --shadow-soft:0 12px 34px rgba(0,0,0,.18);
       --wrap:1280px;
       --header-h:104px;
       --ease:cubic-bezier(.22,1,.36,1);
@@ -50,7 +52,8 @@
     body{
       font-family:'Inter',sans-serif;
       background:
-        radial-gradient(1000px 500px at 20% -5%, rgba(242,106,33,.08), transparent 60%),
+        radial-gradient(1100px 540px at 18% -8%, rgba(242,106,33,.09), transparent 58%),
+        radial-gradient(900px 420px at 92% 12%, rgba(0,132,255,.08), transparent 58%),
         linear-gradient(180deg,#05070a 0%,#06090e 100%);
       color:var(--ink);
       overflow-x:hidden;
@@ -76,8 +79,8 @@
     .glass{
       background:rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
       box-shadow:var(--shadow);
     }
 
@@ -88,15 +91,15 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-height:56px;
-      padding:14px 24px;
-      border-radius:16px;
+      min-height:58px;
+      padding:15px 26px;
+      border-radius:18px;
       border:none;
       cursor:pointer;
       font-family:'Montserrat',sans-serif;
       font-weight:900;
       font-size:17px;
-      transition:transform .45s var(--ease), box-shadow .45s var(--ease), background .3s ease, border-color .3s ease;
+      transition:transform .45s var(--ease), box-shadow .45s var(--ease), background .3s ease, border-color .3s ease, opacity .3s ease;
       white-space:nowrap;
       isolation:isolate;
     }
@@ -105,7 +108,7 @@
       content:"";
       position:absolute;
       inset:-1px;
-      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.25) 45%, transparent 68%);
+      background:linear-gradient(120deg, transparent 18%, rgba(255,255,255,.22) 45%, transparent 68%);
       transform:translateX(-140%);
       transition:transform .9s var(--ease);
       z-index:-1;
@@ -117,7 +120,7 @@
     .btn-primary{
       color:#fff;
       background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      box-shadow:0 20px 48px rgba(242,106,33,.30);
+      box-shadow:0 18px 44px rgba(242,106,33,.30);
     }
 
     .btn-primary:hover{
@@ -132,39 +135,38 @@
 
     .btn-ghost:hover{
       background:rgba(255,255,255,.11);
-      border-color:rgba(255,255,255,.24);
+      border-color:rgba(255,255,255,.22);
     }
 
     .btn-mobile-call,
     .btn-mobile-contact{
       display:none;
-      min-height:42px;
-      padding:10px 14px;
+      min-height:40px;
+      padding:10px 12px;
       border-radius:14px;
-      font-size:12px;
-      font-weight:900;
+      font-size:11px;
       letter-spacing:.01em;
     }
 
     .btn-mobile-call{
       background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.14);
       color:#fff;
     }
 
     .btn-mobile-contact{
       color:#fff;
       background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      box-shadow:0 10px 24px rgba(242,106,33,.25);
+      box-shadow:0 10px 24px rgba(242,106,33,.28);
     }
 
     header{
       position:fixed;
       inset:0 0 auto 0;
-      z-index:1000;
-      background:rgba(5,8,13,.70);
-      backdrop-filter:blur(14px);
-      -webkit-backdrop-filter:blur(14px);
+      z-index:1200;
+      background:rgba(5,8,13,.62);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(255,255,255,.08);
       transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
     }
@@ -272,6 +274,13 @@
       color:#fff;
     }
 
+    .mobile-quick-actions{
+      display:none;
+      align-items:center;
+      justify-content:flex-end;
+      gap:8px;
+    }
+
     .menu-toggle{
       display:none;
       width:52px;
@@ -322,28 +331,28 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(to right, rgba(4,7,12,.34), rgba(4,7,12,.04)),
-        linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.24)),
+        linear-gradient(to right, rgba(4,7,12,.32), rgba(4,7,12,.02)),
+        linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.22)),
         url('assets/images/harbourtownhiltonhead.png');
       background-size:cover;
-      background-position:center 82%;
+      background-position:center 87%;
       background-repeat:no-repeat;
-      transform:scale(1.08);
+      transform:scale(1.1);
       transform-origin:center center;
       will-change:transform, background-position;
-      animation:heroKenBurns 18s ease-in-out infinite alternate;
+      animation:heroKenBurns 16s ease-in-out infinite alternate;
     }
 
-    .hero-bg::after{
+    .hero-bg::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(115deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 18%, rgba(255,255,255,.04) 36%, rgba(255,255,255,0) 60%);
+        radial-gradient(460px 220px at 53% 10%, rgba(255,170,108,.14), transparent 60%),
+        linear-gradient(120deg, transparent 10%, rgba(255,255,255,.04) 38%, transparent 62%);
       mix-blend-mode:screen;
-      opacity:.28;
-      transform:translateX(-10%);
-      animation:harborSheen 11s ease-in-out infinite alternate;
+      opacity:.9;
+      animation:waterSheen 11s ease-in-out infinite alternate;
       pointer-events:none;
     }
 
@@ -352,33 +361,45 @@
       inset:auto auto 18% 6%;
       width:580px;
       height:580px;
-      background:radial-gradient(circle, rgba(255,145,82,.18) 0%, rgba(255,145,82,.04) 40%, transparent 70%);
+      background:radial-gradient(circle, rgba(255,145,82,.16) 0%, rgba(255,145,82,.04) 40%, transparent 72%);
       filter:blur(18px);
       pointer-events:none;
       z-index:0;
       animation:glowFloat 8s ease-in-out infinite alternate;
     }
 
+    .hero-noise{
+      position:absolute;
+      inset:0;
+      background-image:
+        radial-gradient(rgba(255,255,255,.06) .7px, transparent .7px);
+      background-size:18px 18px;
+      opacity:.045;
+      mix-blend-mode:screen;
+      pointer-events:none;
+      z-index:1;
+    }
+
     .hero::after{
       content:"";
       position:absolute;
       inset:auto 0 0 0;
-      height:190px;
-      background:linear-gradient(to bottom, rgba(5,7,10,0), rgba(5,7,10,.96));
-      z-index:1;
+      height:210px;
+      background:linear-gradient(to bottom, rgba(5,7,10,0), rgba(5,7,10,.98));
+      z-index:2;
       pointer-events:none;
     }
 
     .hero-content{
       position:relative;
-      z-index:2;
+      z-index:3;
       width:100%;
       padding:76px 0 64px;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(310px,.72fr);
+      grid-template-columns:minmax(0,1.05fr) minmax(320px,.72fr);
       gap:34px;
       align-items:end;
     }
@@ -421,16 +442,16 @@
     .hero.in-view .hero-side{animation-delay:.38s}
 
     .hero h1{
-      font-size:clamp(3.5rem, 7vw, 7rem);
+      font-size:clamp(3.6rem, 7vw, 7rem);
       max-width:11ch;
       line-height:.92;
-      letter-spacing:-.068em;
+      letter-spacing:-.07em;
       text-shadow:0 18px 50px rgba(0,0,0,.24);
     }
 
     .hero h1 span{
       display:inline-block;
-      background:linear-gradient(180deg,#ffd1b6 0%, var(--brand-2) 60%, var(--brand) 100%);
+      background:linear-gradient(180deg,var(--brand-3) 0%, var(--brand-2) 58%, var(--brand) 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
@@ -438,7 +459,7 @@
 
     .hero-subtext{
       margin-top:20px;
-      max-width:34ch;
+      max-width:35ch;
       font-size:clamp(1.08rem, 1.9vw, 1.34rem);
       line-height:1.65;
       color:rgba(255,255,255,.96);
@@ -461,28 +482,34 @@
 
     .hero-side{
       position:relative;
-      padding:12px 0 0;
+      padding:18px 18px 20px;
       align-self:end;
+      border-radius:26px;
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:var(--shadow);
     }
 
     .hero-side h3{
-      font-size:clamp(1.5rem,2.3vw,2.05rem);
-      margin-bottom:18px;
+      font-size:clamp(1.5rem,2.2vw,2rem);
+      margin-bottom:16px;
       max-width:14ch;
     }
 
     .hero-side ul{
       list-style:none;
       display:grid;
-      gap:14px;
+      gap:12px;
       margin-bottom:18px;
     }
 
     .hero-side li{
       position:relative;
-      padding-left:19px;
+      padding-left:18px;
       line-height:1.58;
-      color:rgba(255,255,255,.95);
+      color:rgba(255,255,255,.96);
       font-size:1rem;
     }
 
@@ -501,10 +528,16 @@
     .hero-proof{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:18px;
-      padding-top:18px;
+      gap:12px;
+      padding-top:16px;
       border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .proof-card{
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
     }
 
     .proof-card strong{
@@ -516,13 +549,54 @@
 
     .proof-card span{
       display:block;
-      color:rgba(255,255,255,.84);
-      font-size:.9rem;
+      color:rgba(255,255,255,.82);
+      font-size:.88rem;
       line-height:1.45;
     }
 
+    .sticky-mobile-cta{
+      display:none;
+      position:fixed;
+      left:12px;
+      right:12px;
+      bottom:12px;
+      z-index:1300;
+      gap:10px;
+      padding:10px;
+      border-radius:22px;
+      background:rgba(8,12,18,.86);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      box-shadow:0 18px 44px rgba(0,0,0,.28);
+    }
+
+    .sticky-mobile-cta a{
+      flex:1 1 0;
+      min-height:46px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:14px;
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size:12px;
+      text-transform:none;
+    }
+
+    .sticky-mobile-cta .call{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color:#fff;
+    }
+
+    .sticky-mobile-cta .contact{
+      color:#fff;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    }
+
     section{
-      padding:100px 0;
+      padding:104px 0;
       position:relative;
     }
 
@@ -588,7 +662,7 @@
 
     .work-card{
       grid-column:span 6;
-      border-radius:26px;
+      border-radius:28px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.09);
       background:rgba(255,255,255,.04);
@@ -619,15 +693,15 @@
     }
 
     .work-card:hover .card-image{
-      transform:scale(1.06);
-      filter:brightness(.8);
+      transform:scale(1.07);
+      filter:brightness(.82);
     }
 
     .card-media::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.06) 48%, rgba(0,0,0,.26) 100%);
+      background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.08) 48%, rgba(0,0,0,.28) 100%);
       pointer-events:none;
     }
 
@@ -658,12 +732,23 @@
     }
 
     .showreel{
-      margin-top:26px;
+      margin-top:28px;
       border-radius:30px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,.10);
       box-shadow:var(--shadow);
       position:relative;
+      background:#000;
+    }
+
+    .showreel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:30px;
+      pointer-events:none;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
+      z-index:2;
     }
 
     .showreel .ratio{
@@ -673,7 +758,8 @@
       background:#000;
     }
 
-    .showreel iframe{
+    .showreel iframe,
+    .showreel #player{
       position:absolute;
       inset:0;
       width:100%;
@@ -689,7 +775,7 @@
     }
 
     .why-strip{
-      margin-top:20px;
+      margin-top:22px;
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:14px;
@@ -1004,14 +1090,14 @@
       100%{transform:translateX(130%)}
     }
 
-    @keyframes heroKenBurns{
-      0%{transform:scale(1.08) translate3d(0,0,0)}
-      100%{transform:scale(1.13) translate3d(-0.4%, -0.7%, 0)}
+    @keyframes waterSheen{
+      0%{transform:translate3d(-4%,0,0) scale(1)}
+      100%{transform:translate3d(4%,0,0) scale(1.02)}
     }
 
-    @keyframes harborSheen{
-      0%{transform:translate3d(-10%,0,0) scale(1)}
-      100%{transform:translate3d(6%,0,0) scale(1.04)}
+    @keyframes heroKenBurns{
+      0%{transform:scale(1.1) translate3d(0,0,0)}
+      100%{transform:scale(1.14) translate3d(-0.2%, -0.5%, 0)}
     }
 
     @media (max-width:1240px){
@@ -1030,7 +1116,7 @@
     }
 
     @media (max-width:980px){
-      :root{--header-h:110px}
+      :root{--header-h:112px}
       nav{gap:18px}
       nav a{font-size:16px}
       .hero-grid,
@@ -1038,7 +1124,7 @@
       .contact-grid{
         grid-template-columns:1fr;
       }
-      .hero-side{max-width:720px}
+      .hero-side{max-width:760px}
       .work-card{grid-column:span 12}
       .col-6{grid-column:span 12}
       .hero-proof,
@@ -1049,6 +1135,7 @@
 
     @media (max-width:780px){
       .menu-toggle{display:inline-flex}
+      .mobile-quick-actions{display:flex}
 
       nav{
         position:fixed;
@@ -1095,19 +1182,11 @@
       .header-inner{
         grid-template-columns:auto 1fr auto;
         justify-items:stretch;
-        gap:14px;
+        gap:12px;
       }
 
       .header-inner .logo{justify-content:flex-start}
       .header-inner nav{justify-self:center}
-
-      .mobile-quick-actions{
-        display:flex;
-        align-items:center;
-        justify-content:flex-end;
-        gap:8px;
-        min-width:0;
-      }
     }
 
     @media (max-width:720px){
@@ -1115,18 +1194,23 @@
       .wrap{width:min(100% - 24px, var(--wrap))}
       .logo img{height:62px}
       .hero-content{padding:44px 0 42px}
-      .hero h1{font-size:clamp(2.9rem,13vw,4.35rem)}
+      .hero h1{font-size:clamp(2.95rem,13vw,4.35rem)}
       .hero-subtext{max-width:100%}
       .hero-bg{
         background:
-          linear-gradient(to right, rgba(4,7,12,.40), rgba(4,7,12,.08)),
-          linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.24)),
+          linear-gradient(to right, rgba(4,7,12,.34), rgba(4,7,12,.06)),
+          linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.18)),
           url('assets/images/harbourtownhiltonhead.png');
         background-size:cover;
-        background-position:22% 88%;
+        background-position:20% 92%;
         background-repeat:no-repeat;
       }
-      section{padding:80px 0}
+      .hero-side{
+        padding:16px;
+        border-radius:22px;
+      }
+      .sticky-mobile-cta{display:flex}
+      section{padding:82px 0}
       .contact-head,
       .contact-panel{
         padding-left:18px;
@@ -1135,7 +1219,6 @@
       .contact-head{padding-top:22px}
       .cta-band{padding:20px}
       .showreel .ratio{padding-bottom:60%}
-      .hero-side h3{max-width:100%}
     }
 
     @media (max-width:560px){
@@ -1152,7 +1235,7 @@
       .btn-mobile-contact{
         min-height:38px;
         padding:9px 10px;
-        font-size:11px;
+        font-size:10px;
         border-radius:12px;
       }
 
@@ -1163,12 +1246,18 @@
       }
 
       .hero-bg{
-        background-position:18% 90%;
+        background-position:16% 94%;
       }
 
       .hero-copy .eyebrow{
         font-size:11px;
         padding:9px 12px;
+      }
+
+      .sticky-mobile-cta{
+        left:10px;
+        right:10px;
+        bottom:10px;
       }
     }
 
@@ -1215,7 +1304,6 @@
         <div class="mobile-quick-actions">
           <a class="btn btn-mobile-call" href="tel:+18039205349">Call Chandler</a>
           <a class="btn btn-mobile-contact" href="#contact">Contact Now</a>
-
           <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span>
           </button>
@@ -1227,6 +1315,7 @@
   <main id="top" class="hero">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-glow"></div>
+    <div class="hero-noise"></div>
 
     <div class="hero-content">
       <div class="wrap hero-grid">
@@ -1258,28 +1347,33 @@
           <ul>
             <li>Premium visuals that raise perceived value and trust.</li>
             <li>Content built to generate calls, leads, and bookings.</li>
-            <li>Short-form, website, and ad creative made for attention and conversion.</li>
+            <li>Short-form, website, and ad creative made for conversion.</li>
             <li>Position your brand above competitors and attract better clients.</li>
           </ul>
 
           <div class="hero-proof">
             <div class="proof-card">
               <strong>Premium</strong>
-              <span>Luxury positioning that makes your brand feel established.</span>
+              <span>Luxury positioning that feels established.</span>
             </div>
             <div class="proof-card">
               <strong>Lead-Gen</strong>
-              <span>Built to support calls, inquiries, bookings, and growth.</span>
+              <span>Built to support calls, inquiries, and growth.</span>
             </div>
             <div class="proof-card">
               <strong>Local</strong>
-              <span>Hilton Head visuals with a market-leading edge.</span>
+              <span>Hilton Head visuals with a market edge.</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
+
+  <div class="sticky-mobile-cta" id="sticky-mobile-cta">
+    <a class="call" href="tel:+18039205349">Call Chandler</a>
+    <a class="contact" href="#contact">Contact Now</a>
+  </div>
 
   <section id="work">
     <div class="wrap">
@@ -1351,7 +1445,7 @@
         </div>
       </div>
       <p class="showreel-note reveal">
-        Autoplay is set up for the strongest browser-safe behavior. True automatic sound on iPhone can still be limited by Safari, but this code will try to unmute when the video enters view after interaction and mute again when it leaves the screen.
+        Browsers can block true autoplay with sound, especially on iPhone. This setup autoplays muted, requests high quality, and tries to unmute once the video is in view after user interaction.
       </p>
 
       <div class="why-strip">
@@ -1570,9 +1664,9 @@
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (heroBg && y < window.innerHeight * 1.2) {
-        const translateY = y * 0.085;
+        const translateY = y * 0.09;
         const translateX = y * -0.01;
-        heroBg.style.transform = `scale(1.1) translate3d(${translateX}px, ${translateY}px, 0)`;
+        heroBg.style.transform = `scale(1.11) translate3d(${translateX}px, ${translateY}px, 0)`;
       }
     }, { passive: true });
 
