@@ -42,9 +42,6 @@
       --shadow-soft:0 10px 30px rgba(0,0,0,.18);
       --wrap:1280px;
       --header-h:104px;
-      --hero-overlay-left:rgba(4,7,12,.44);
-      --hero-overlay-right:rgba(4,7,12,.02);
-      --hero-overlay-bottom:rgba(4,7,12,.22);
       --ease:cubic-bezier(.22,1,.36,1);
     }
 
@@ -301,9 +298,12 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(to right, var(--hero-overlay-left), var(--hero-overlay-right)),
-        linear-gradient(to bottom, rgba(0,0,0,.02), var(--hero-overlay-bottom)),
-        url('assets/images/harbourtownhiltonhead.png') center 78% / cover no-repeat;
+        linear-gradient(to right, rgba(4,7,12,.35), rgba(4,7,12,.02)),
+        linear-gradient(to bottom, rgba(0,0,0,.05), rgba(4,7,12,.18)),
+        url('assets/images/harbourtownhiltonhead.png');
+      background-size:cover;
+      background-position:center 72%;
+      background-repeat:no-repeat;
       transform:scale(1.06);
       transform-origin:center center;
       will-change:transform;
@@ -704,9 +704,10 @@
     }
 
     .contact-head p{
-      max-width:72ch;
-      line-height:1.74;
-      color:rgba(255,255,255,.88);
+      max-width:78ch;
+      line-height:1.82;
+      color:rgba(255,255,255,.90);
+      font-size:1.02rem;
     }
 
     .contact-grid{
@@ -725,13 +726,14 @@
     }
 
     .contact-panel h3{
-      font-size:1.35rem;
+      font-size:1.42rem;
       margin-bottom:12px;
     }
 
     .contact-panel p{
       color:var(--muted);
-      line-height:1.72;
+      line-height:1.78;
+      font-size:1rem;
     }
 
     .contact-points{
@@ -742,12 +744,12 @@
     }
 
     .contact-points li{
-      padding:14px 16px;
+      padding:15px 16px;
       border-radius:16px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.09);
       color:#fff;
-      line-height:1.55;
+      line-height:1.6;
     }
 
     .contact-form{
@@ -763,16 +765,17 @@
     label{
       display:block;
       margin-bottom:8px;
-      font-size:.95rem;
-      color:rgba(255,255,255,.92);
-      font-weight:600;
+      font-size:.94rem;
+      color:rgba(255,255,255,.95);
+      font-weight:700;
+      letter-spacing:.01em;
     }
 
     input,select,textarea{
       width:100%;
       border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(5,8,13,.32);
+      background:rgba(5,8,13,.34);
       color:#fff;
       padding:15px 16px;
       outline:none;
@@ -794,17 +797,18 @@
     select option{color:#111}
 
     input:focus,select:focus,textarea:focus{
-      border-color:rgba(242,106,33,.70);
-      box-shadow:0 0 0 4px rgba(242,106,33,.12);
-      background:rgba(5,8,13,.46);
+      border-color:rgba(242,106,33,.76);
+      box-shadow:0 0 0 4px rgba(242,106,33,.13);
+      background:rgba(5,8,13,.48);
       transform:translateY(-1px);
     }
 
     .contact-note,
     .submit-meta{
-      color:rgba(255,255,255,.70);
-      font-size:.94rem;
-      line-height:1.55;
+      color:rgba(255,255,255,.72);
+      font-size:.93rem;
+      line-height:1.58;
+      max-width:62ch;
     }
 
     .submit-wrap{
@@ -1044,9 +1048,12 @@
       .hero-subtext{max-width:100%}
       .hero-bg{
         background:
-          linear-gradient(to right, rgba(4,7,12,.52), rgba(4,7,12,.10)),
-          linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.22)),
-          url('assets/images/harbourtownhiltonhead.png') 56% 80% / cover no-repeat;
+          linear-gradient(to right, rgba(4,7,12,.45), rgba(4,7,12,.08)),
+          linear-gradient(to bottom, rgba(0,0,0,.05), rgba(4,7,12,.20)),
+          url('assets/images/harbourtownhiltonhead.png');
+        background-size:cover;
+        background-position:center 75%;
+        background-repeat:no-repeat;
       }
       section{padding:80px 0}
       .contact-head,
@@ -1256,24 +1263,24 @@
     <div class="wrap">
       <div class="contact-shell reveal">
         <div class="contact-head">
-          <span class="section-kicker">Let’s Build</span>
-          <h2>Request Your Custom Growth Strategy</h2>
+          <span class="section-kicker">Start the Conversation</span>
+          <h2>Tell Us Where You Want to Grow</h2>
           <p>
-            Tell us what you want to grow, and we’ll map out the clearest content strategy to help you generate more leads, more calls, and better clients. Need the fastest path? Call Chandler directly at <strong>(803) 920-5349</strong>.
+            If you want stronger positioning, better brand perception, and content built to generate more qualified leads, inquiries, and bookings, this is where it starts. Share a few details below and we’ll review the opportunity, the goals, and the clearest next move for your business. Need the fastest path? Call Chandler directly at <strong>(803) 920-5349</strong>.
           </p>
         </div>
 
         <div class="contact-grid">
           <div class="contact-panel">
-            <h3>What happens next</h3>
+            <h3>What happens after you submit</h3>
             <p>
-              After you submit, we’ll review your inquiry, look at the opportunity, and reach back out with the clearest next move based on your business, offer, and growth goals.
+              We review every inquiry with a strategy-first lens. That means we are not just looking at the type of content you want — we are looking at how the content should position your brand, support your offer, and help drive real business growth.
             </p>
 
             <ul class="contact-points">
-              <li><strong>Clear direction:</strong> We focus on the fastest path to stronger positioning and better lead flow.</li>
-              <li><strong>Built around growth:</strong> Website, social, ad, and brand-use strategy all considered from the start.</li>
-              <li><strong>Premium execution:</strong> Strong visuals are only useful if they move the business forward.</li>
+              <li><strong>Strategic review:</strong> We assess your business, your goals, and where premium content can create the most leverage.</li>
+              <li><strong>Clear recommendation:</strong> You’ll get direction on the strongest next step based on what will actually move the needle.</li>
+              <li><strong>Premium execution:</strong> Every project is built to elevate perception, strengthen trust, and help turn attention into action.</li>
             </ul>
           </div>
 
@@ -1290,27 +1297,27 @@
               <input type="hidden" name="_next" value="https://aboveallmediasc.com/thank-you.html">
 
               <div class="col-6">
-                <label for="full-name">Full name</label>
-                <input id="full-name" name="fullname" type="text" placeholder="Jane Doe" required>
+                <label for="full-name">Your name</label>
+                <input id="full-name" name="fullname" type="text" placeholder="Your full name" required>
               </div>
 
               <div class="col-6">
-                <label for="business-name">Business name</label>
-                <input id="business-name" name="company" type="text" placeholder="Company / Brand">
+                <label for="business-name">Business / brand</label>
+                <input id="business-name" name="company" type="text" placeholder="Your company or brand name">
               </div>
 
               <div class="col-6">
-                <label for="email">Email</label>
+                <label for="email">Email address</label>
                 <input id="email" name="email" type="email" placeholder="you@company.com" required>
               </div>
 
               <div class="col-6">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" placeholder="(803) 000-0000">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" placeholder="Best number to reach you">
               </div>
 
               <div class="col-6">
-                <label for="service-type">What do you need?</label>
+                <label for="service-type">Project type</label>
                 <select id="service-type" name="service_type">
                   <option value="Real Estate / Rentals">Real Estate / Rentals</option>
                   <option value="Hospitality / Restaurant">Hospitality / Restaurant</option>
@@ -1322,7 +1329,7 @@
               </div>
 
               <div class="col-6">
-                <label for="budget">Budget range</label>
+                <label for="budget">Investment range</label>
                 <select id="budget" name="budget">
                   <option value="Not sure yet">Not sure yet</option>
                   <option value="$500–$1,500">$500–$1,500</option>
@@ -1334,17 +1341,17 @@
               </div>
 
               <div class="col-12">
-                <label for="project-details">Project details</label>
-                <textarea id="project-details" name="message" placeholder="Tell us what you want to promote, where the content will be used, and what result you want." required></textarea>
+                <label for="project-details">Tell us about the opportunity</label>
+                <textarea id="project-details" name="message" placeholder="What are you promoting, where will the content be used, and what result do you want it to help drive?" required></textarea>
                 <p class="contact-note">
-                  The more specific you are, the better we can map a strategy that fits your brand and growth goals.
+                  The more context you give, the better we can recommend the right creative direction, content plan, and growth-focused next step.
                 </p>
               </div>
 
               <div class="col-12 submit-wrap">
                 <button class="btn btn-primary" type="submit">Request My Strategy</button>
                 <p class="submit-meta">
-                  You’ll be redirected to a confirmation page after submission.
+                  After submission, you’ll be redirected to a confirmation page. We’ll review your inquiry and be in touch soon.
                 </p>
               </div>
             </form>
