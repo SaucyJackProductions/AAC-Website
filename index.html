@@ -135,6 +135,29 @@
       border-color:rgba(255,255,255,.24);
     }
 
+    .btn-mobile-call,
+    .btn-mobile-contact{
+      display:none;
+      min-height:42px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.01em;
+    }
+
+    .btn-mobile-call{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.16);
+      color:#fff;
+    }
+
+    .btn-mobile-contact{
+      color:#fff;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      box-shadow:0 10px 24px rgba(242,106,33,.25);
+    }
+
     header{
       position:fixed;
       inset:0 0 auto 0;
@@ -251,9 +274,9 @@
 
     .menu-toggle{
       display:none;
-      width:50px;
-      height:50px;
-      border-radius:14px;
+      width:52px;
+      height:52px;
+      border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.06);
       color:#fff;
@@ -263,6 +286,7 @@
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
       position:relative;
+      flex-shrink:0;
     }
 
     .menu-toggle span,
@@ -298,15 +322,29 @@
       position:absolute;
       inset:0;
       background:
-        linear-gradient(to right, rgba(4,7,12,.35), rgba(4,7,12,.02)),
-        linear-gradient(to bottom, rgba(0,0,0,.05), rgba(4,7,12,.18)),
+        linear-gradient(to right, rgba(4,7,12,.34), rgba(4,7,12,.04)),
+        linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.24)),
         url('assets/images/harbourtownhiltonhead.png');
       background-size:cover;
-      background-position:center 72%;
+      background-position:center 82%;
       background-repeat:no-repeat;
-      transform:scale(1.06);
+      transform:scale(1.08);
       transform-origin:center center;
-      will-change:transform;
+      will-change:transform, background-position;
+      animation:heroKenBurns 18s ease-in-out infinite alternate;
+    }
+
+    .hero-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 18%, rgba(255,255,255,.04) 36%, rgba(255,255,255,0) 60%);
+      mix-blend-mode:screen;
+      opacity:.28;
+      transform:translateX(-10%);
+      animation:harborSheen 11s ease-in-out infinite alternate;
+      pointer-events:none;
     }
 
     .hero-glow{
@@ -428,31 +466,33 @@
     }
 
     .hero-side h3{
-      font-size:clamp(1.55rem,2.3vw,2.1rem);
-      margin-bottom:16px;
-      max-width:15ch;
+      font-size:clamp(1.5rem,2.3vw,2.05rem);
+      margin-bottom:18px;
+      max-width:14ch;
     }
 
     .hero-side ul{
       list-style:none;
       display:grid;
-      gap:10px;
+      gap:14px;
+      margin-bottom:18px;
     }
 
     .hero-side li{
       position:relative;
-      padding-left:16px;
+      padding-left:19px;
       line-height:1.58;
       color:rgba(255,255,255,.95);
+      font-size:1rem;
     }
 
     .hero-side li::before{
       content:"";
       position:absolute;
       left:0;
-      top:.64em;
-      width:7px;
-      height:7px;
+      top:.62em;
+      width:8px;
+      height:8px;
       border-radius:50%;
       background:linear-gradient(135deg,var(--brand),var(--brand-2));
       box-shadow:0 0 18px rgba(255,143,82,.55);
@@ -639,6 +679,13 @@
       width:100%;
       height:100%;
       border:0;
+    }
+
+    .showreel-note{
+      margin-top:12px;
+      color:rgba(255,255,255,.70);
+      font-size:.92rem;
+      line-height:1.55;
     }
 
     .why-strip{
@@ -957,6 +1004,16 @@
       100%{transform:translateX(130%)}
     }
 
+    @keyframes heroKenBurns{
+      0%{transform:scale(1.08) translate3d(0,0,0)}
+      100%{transform:scale(1.13) translate3d(-0.4%, -0.7%, 0)}
+    }
+
+    @keyframes harborSheen{
+      0%{transform:translate3d(-10%,0,0) scale(1)}
+      100%{transform:translate3d(6%,0,0) scale(1.04)}
+    }
+
     @media (max-width:1240px){
       :root{--header-h:118px}
       .header-inner{
@@ -1026,17 +1083,31 @@
       }
 
       .header-right .phone,
-      .header-right .btn{
+      .header-right > .btn.btn-primary{
         display:none;
+      }
+
+      .btn-mobile-call,
+      .btn-mobile-contact{
+        display:inline-flex;
       }
 
       .header-inner{
         grid-template-columns:auto 1fr auto;
         justify-items:stretch;
+        gap:14px;
       }
 
       .header-inner .logo{justify-content:flex-start}
       .header-inner nav{justify-self:center}
+
+      .mobile-quick-actions{
+        display:flex;
+        align-items:center;
+        justify-content:flex-end;
+        gap:8px;
+        min-width:0;
+      }
     }
 
     @media (max-width:720px){
@@ -1048,11 +1119,11 @@
       .hero-subtext{max-width:100%}
       .hero-bg{
         background:
-          linear-gradient(to right, rgba(4,7,12,.45), rgba(4,7,12,.08)),
-          linear-gradient(to bottom, rgba(0,0,0,.05), rgba(4,7,12,.20)),
+          linear-gradient(to right, rgba(4,7,12,.40), rgba(4,7,12,.08)),
+          linear-gradient(to bottom, rgba(0,0,0,.02), rgba(4,7,12,.24)),
           url('assets/images/harbourtownhiltonhead.png');
         background-size:cover;
-        background-position:center 75%;
+        background-position:22% 88%;
         background-repeat:no-repeat;
       }
       section{padding:80px 0}
@@ -1064,6 +1135,41 @@
       .contact-head{padding-top:22px}
       .cta-band{padding:20px}
       .showreel .ratio{padding-bottom:60%}
+      .hero-side h3{max-width:100%}
+    }
+
+    @media (max-width:560px){
+      .header-inner{
+        grid-template-columns:auto 1fr auto;
+        gap:10px;
+      }
+
+      .mobile-quick-actions{
+        gap:6px;
+      }
+
+      .btn-mobile-call,
+      .btn-mobile-contact{
+        min-height:38px;
+        padding:9px 10px;
+        font-size:11px;
+        border-radius:12px;
+      }
+
+      .menu-toggle{
+        width:48px;
+        height:48px;
+        border-radius:15px;
+      }
+
+      .hero-bg{
+        background-position:18% 90%;
+      }
+
+      .hero-copy .eyebrow{
+        font-size:11px;
+        padding:9px 12px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -1103,10 +1209,17 @@
           <div class="label">Call Chandler</div>
           <div class="number">(803) 920-5349</div>
         </a>
+
         <a class="btn btn-primary" href="#contact">Request a Strategy</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-          <span></span>
-        </button>
+
+        <div class="mobile-quick-actions">
+          <a class="btn btn-mobile-call" href="tel:+18039205349">Call Chandler</a>
+          <a class="btn btn-mobile-contact" href="#contact">Contact Now</a>
+
+          <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -1141,11 +1254,12 @@
 
         <div class="hero-side">
           <h3>Built to make your business impossible to ignore.</h3>
+
           <ul>
-            <li>Premium visuals that instantly raise perceived value and trust.</li>
-            <li>Content designed to generate leads, calls, bookings, and stronger positioning.</li>
-            <li>Short-form, website, and ad creative built for attention and conversion.</li>
-            <li>Position your brand above the competition and attract better clients.</li>
+            <li>Premium visuals that raise perceived value and trust.</li>
+            <li>Content built to generate calls, leads, and bookings.</li>
+            <li>Short-form, website, and ad creative made for attention and conversion.</li>
+            <li>Position your brand above competitors and attract better clients.</li>
           </ul>
 
           <div class="hero-proof">
@@ -1233,14 +1347,12 @@
 
       <div class="showreel reveal">
         <div class="ratio">
-          <iframe
-            src="https://www.youtube.com/embed/8bVvm4GSDu8?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&loop=1&playlist=8bVvm4GSDu8"
-            title="Above All Media Showreel"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
+          <div id="player"></div>
         </div>
       </div>
+      <p class="showreel-note reveal">
+        Autoplay is set up for the strongest browser-safe behavior. True automatic sound on iPhone can still be limited by Safari, but this code will try to unmute when the video enters view after interaction and mute again when it leaves the screen.
+      </p>
 
       <div class="why-strip">
         <div class="why-item reveal" data-delay="1">
@@ -1412,6 +1524,7 @@
     </div>
   </footer>
 
+  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     const header = document.getElementById('site-header');
     const hero = document.querySelector('.hero');
@@ -1419,6 +1532,11 @@
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.getElementById('site-nav');
     const reveals = document.querySelectorAll('.reveal');
+
+    let player = null;
+    let userHasInteracted = false;
+    let videoObserver = null;
+    let videoShouldPlay = false;
 
     function handleHeader() {
       header.classList.toggle('is-scrolled', window.scrollY > 18);
@@ -1452,7 +1570,9 @@
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (heroBg && y < window.innerHeight * 1.2) {
-        heroBg.style.transform = `scale(1.06) translate3d(0, ${y * 0.10}px, 0)`;
+        const translateY = y * 0.085;
+        const translateX = y * -0.01;
+        heroBg.style.transform = `scale(1.1) translate3d(${translateX}px, ${translateY}px, 0)`;
       }
     }, { passive: true });
 
@@ -1472,6 +1592,93 @@
           document.body.classList.remove('nav-open');
         });
       });
+    }
+
+    ['click', 'touchstart', 'keydown'].forEach(eventName => {
+      window.addEventListener(eventName, () => {
+        userHasInteracted = true;
+        tryUnmuteVideo();
+      }, { once: false, passive: true });
+    });
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        videoId: '8bVvm4GSDu8',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          rel: 0,
+          playsinline: 1,
+          loop: 1,
+          playlist: '8bVvm4GSDu8',
+          modestbranding: 1,
+          enablejsapi: 1
+        },
+        events: {
+          onReady: handlePlayerReady
+        }
+      });
+    }
+
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+    function handlePlayerReady(event) {
+      try {
+        event.target.mute();
+        event.target.playVideo();
+        event.target.setPlaybackQuality('hd2160');
+      } catch (e) {}
+
+      const showreel = document.querySelector('.showreel');
+
+      if (showreel) {
+        videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!player) return;
+
+            if (entry.isIntersecting) {
+              videoShouldPlay = true;
+              try {
+                player.playVideo();
+                player.setPlaybackQuality('hd2160');
+              } catch (e) {}
+              tryUnmuteVideo();
+            } else {
+              videoShouldPlay = false;
+              try {
+                player.mute();
+                player.pauseVideo();
+              } catch (e) {}
+            }
+          });
+        }, { threshold: 0.55 });
+
+        videoObserver.observe(showreel);
+      }
+    }
+
+    function tryUnmuteVideo() {
+      if (!player || !videoShouldPlay) return;
+
+      try {
+        player.setPlaybackQuality('hd2160');
+      } catch (e) {}
+
+      if (userHasInteracted) {
+        try {
+          player.unMute();
+          player.setVolume(100);
+        } catch (e) {
+          try {
+            player.mute();
+          } catch (err) {}
+        }
+      } else {
+        try {
+          player.mute();
+        } catch (e) {}
+      }
     }
   </script>
 </body>
