@@ -6,7 +6,7 @@
   Scroll = altitude. Full-screen hero film, smooth inertia scroll (Lenis 1.3.26, MIT, loaded from jsDelivr; the site works without it), flight HUD, colour that grades
   from night to golden hour to dusk as you climb. All motion is transform/opacity (compositor-only) and is
   switched off for prefers-reduced-motion. No fabricated stats, client counts, or testimonials.
-  Upload these next to this file: assets/video/hero.mp4, hero-mobile.mp4, hero-poster.jpg, hero-poster-mobile.jpg, flight-lighthouse.mp4, flight-sunrise.mp4
+  Upload these next to this file: assets/videos/hero.mp4, hero-mobile.mp4, hero-poster.jpg, hero-poster-mobile.jpg, flight-lighthouse.mp4, flight-sunrise.mp4
 -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
@@ -30,8 +30,8 @@
 <meta name="twitter:description" content="Cinematic video and drone content built to make Hilton Head businesses look like the market leader.">
 <meta name="twitter:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
 
-<link rel="preload" as="image" href="assets/video/hero-poster.jpg" media="(min-width:721px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/video/hero-poster-mobile.jpg" media="(max-width:720px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/videos/hero-poster.jpg" media="(min-width:721px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/videos/hero-poster-mobile.jpg" media="(max-width:720px)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -257,7 +257,9 @@ nav.primary a:hover,nav.primary a.active{color:#fff}
 .js .reveal.in-view{opacity:1;translate:0 0;scale:1}
 .js .reveal[data-delay="1"]{transition-delay:.07s}.js .reveal[data-delay="2"]{transition-delay:.14s}.js .reveal[data-delay="3"]{transition-delay:.21s}
 .js .reveal[data-delay="4"]{transition-delay:.28s}.js .reveal[data-delay="5"]{transition-delay:.35s}.js .reveal[data-delay="6"]{transition-delay:.42s}
-.js .reveal.done{transition-delay:0s!important} /* spotlight + tilt targets */
+.js .reveal.done{transition-delay:0s!important}
+
+/* spotlight + tilt targets */
 .fx{--mx:50%;--my:50%;position:relative}
 .fx::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .45s;background:radial-gradient(440px circle at var(--mx) var(--my),rgba(255,205,140,.15),transparent 62%)}
 .fx:hover::after{opacity:1}
@@ -492,7 +494,8 @@ footer{position:relative;z-index:1;padding:44px 0 30px;border-top:1px solid var(
 }
 
 </style>
-</head> <body>
+</head>
+<body>
 <a class="skip" href="#capabilities">Skip to content</a>
 <div class="ambient" aria-hidden="true"><div class="amb amb-night"></div><div class="amb amb-gold"></div><div class="amb amb-dusk"></div></div>
 <div class="grain" aria-hidden="true"></div>
@@ -556,10 +559,10 @@ footer{position:relative;z-index:1;padding:44px 0 30px;border-top:1px solid var(
 <main id="top" class="hero">
   <div class="hero-media" id="hero-media">
     <picture>
-      <source media="(max-width:720px)" srcset="assets/video/hero-poster-mobile.jpg">
-      <img class="hero-poster" src="assets/video/hero-poster.jpg" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
+      <source media="(max-width:720px)" srcset="assets/videos/hero-poster-mobile.jpg">
+      <img class="hero-poster" src="assets/videos/hero-poster.jpg" alt="" width="1600" height="900" fetchpriority="high" decoding="async">
     </picture>
-    <video class="hero-video" id="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/video/hero.mp4" data-mobile="assets/video/hero-mobile.mp4" data-start="1.5"></video>
+    <video class="hero-video" id="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="assets/videos/hero.mp4" data-mobile="assets/videos/hero-mobile.mp4" data-start="1.5"></video>
   </div>
   <div class="hero-shade"></div>
 
@@ -700,7 +703,7 @@ footer{position:relative;z-index:1;padding:44px 0 30px;border-top:1px solid var(
       <article class="work-card fx tilt reveal" data-delay="1">
         <div class="card-media"><div class="pz" data-pz>
           <img src="liveevents.png" alt="Drone and aerial branding" width="1280" height="720" loading="lazy" decoding="async" onerror="this.style.display='none'">
-          <video muted loop playsinline preload="none" data-src="assets/video/flight-lighthouse.mp4" aria-hidden="true" tabindex="-1"></video>
+          <video muted loop playsinline preload="none" data-src="assets/videos/flight-lighthouse.mp4" aria-hidden="true" tabindex="-1"></video>
         </div></div>
         <div class="work-copy">
           <span class="tag"><span class="dot"></span>Capture 03 &mdash; Drone / Aerial</span>
@@ -858,7 +861,7 @@ footer{position:relative;z-index:1;padding:44px 0 30px;border-top:1px solid var(
     </div>
 
     <div class="cta-band reveal">
-      <video muted loop playsinline preload="none" data-src="assets/video/flight-sunrise.mp4" aria-hidden="true" tabindex="-1"></video>
+      <video muted loop playsinline preload="none" data-src="assets/videos/flight-sunrise.mp4" aria-hidden="true" tabindex="-1"></video>
       <div>
         <h3>Make your business the <span class="grad">obvious choice.</span></h3>
         <p>Premium positioning wins attention faster. Better attention turns into stronger leads, more calls, and more growth.</p>
@@ -884,7 +887,9 @@ footer{position:relative;z-index:1;padding:44px 0 30px;border-top:1px solid var(
       <button class="to-top" id="to-top" type="button">Back to launch &uarr;</button>
     </div>
   </div>
-</footer> <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
 <script>
 /* Above All Media v4 — motion engine. One rAF loop drives everything that moves on scroll. */
 (function () {
