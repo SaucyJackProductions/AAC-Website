@@ -383,7 +383,7 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 
 /* ---------- 8. contact ---------- */
 .ct{position:relative;overflow:hidden;padding:clamp(110px,12vw,180px) 0;background:#050605;isolation:isolate}
-.ct-bg{position:absolute;inset:-10% 0;z-index:-1;background:url(assets/lux/aerial.webp) center/cover;opacity:.32;filter:saturate(.9);will-change:transform}
+.ct-bg{position:absolute;inset:-10% 0;z-index:-1;background:url(assets/lux/marsh.webp) center/cover;opacity:.32;filter:saturate(.9);will-change:transform}
 .ct-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#050605 0%,rgba(5,6,5,.55) 30%,rgba(5,6,5,.75) 70%,#050605 100%)}
 .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,100px);align-items:start}
 .ct-side h2{font-size:clamp(46px,5.6vw,96px);margin:18px 0 26px}
@@ -573,6 +573,16 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 .sc-path.gold::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,235,190,.25);background:radial-gradient(80% 60% at 100% 0,rgba(255,181,97,.18),transparent 60%)}
 .sc-replay{display:block;margin:22px auto 0;background:none;border:none;cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-soft);padding:8px 10px}
 .sc-replay:hover{color:var(--brass-light)}
+.sc-sound{position:absolute;right:24px;bottom:22px;z-index:7;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;background:rgba(7,8,7,.55);box-shadow:inset 0 0 0 1px rgba(234,210,160,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 11px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);transition:opacity .4s,background-color .3s}
+.sc-sound[hidden]{display:none}
+.sc-sound:hover{background:rgba(201,166,107,.25)}
+.sc-sound .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.sc-sound .eq i{width:2px;height:4px;background:currentColor;border-radius:1px}
+.sc-sound[aria-pressed="true"] .eq i{animation:scEq .9s ease-in-out infinite}
+.sc-sound[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.3s}.sc-sound[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.6s}
+@keyframes scEq{0%,100%{height:3px}50%{height:12px}}
+.sc.is-out .sc-sound{opacity:0;pointer-events:none}
+@media (max-width:720px){.sc-sound{top:86px;bottom:auto;right:16px}}
 @keyframes scFlash{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
 @keyframes scRec{50%{opacity:.2}}
 @media (max-width:860px){
@@ -737,6 +747,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     <video id="sc-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1" poster="skycaddy/media/aam_golfball_poster.jpg" data-mp4="skycaddy/media/aam_golfball.mp4" data-webm="skycaddy/media/aam_golfball.webm"></video>
   </div>
   <div class="sc-flash" aria-hidden="true"></div>
+  <button class="sc-sound" id="sc-sound" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="sc-sound-label">Sound on</span></button>
   <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>Sky Caddy &middot; Hole 10 &middot; Palmetto Dunes</div>
   <div class="sc-choice" id="sc-choice">
     <div class="sc-card">
@@ -789,7 +800,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       <li class="svc-row rv"><a href="#contact" data-img="0" data-cursor="Enquire"><span class="n">01</span><span class="t">Real Estate &amp; Rentals</span><span class="d">Listing films, twilight aerials and walkthroughs that make a property feel worth its price.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/estate.webp" alt="" loading="lazy" decoding="async"></a></li>
       <li class="svc-row rv"><a href="#contact" data-img="1" data-cursor="Enquire"><span class="n">02</span><span class="t">Hospitality &amp; Dining</span><span class="d">Brand films and reels that fill tables, rooms and charters.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/dining.webp" alt="" loading="lazy" decoding="async"></a></li>
       <li class="svc-row rv"><a href="#contact" data-img="2" data-cursor="Enquire"><span class="n">03</span><span class="t">Aerial Cinematography</span><span class="d">Licensed drone work that gives your brand the view competitors can&rsquo;t reach from the ground.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/aerial.webp" alt="" loading="lazy" decoding="async"></a></li>
-      <li class="svc-row rv"><a href="#contact" data-img="3" data-cursor="Enquire"><span class="n">04</span><span class="t">Social &amp; Paid Creative</span><span class="d">Platform-first edits with the hook up front, built to bring in qualified leads.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/harbour.webp" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#contact" data-img="3" data-cursor="Enquire"><span class="n">04</span><span class="t">Social &amp; Paid Creative</span><span class="d">Platform-first edits with the hook up front, built to bring in qualified leads.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/coast.webp" alt="" loading="lazy" decoding="async"></a></li>
       <li class="svc-row rv"><a href="#contact" data-img="4" data-cursor="Enquire"><span class="n">05</span><span class="t">Brand &amp; Product Films</span><span class="d">Considered, cinematic storytelling for products and the people behind them.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/product.webp" alt="" loading="lazy" decoding="async"></a></li>
       <li class="svc-row rv"><a href="skycaddy/" data-img="5" data-cursor="Play"><span class="n">06</span><span class="t">Interactive 3D Experiences<span class="tag">New</span></span><span class="d">Courses and properties your clients can explore before they arrive, like our Sky Caddy Hole 10.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="assets/lux/skycaddy.webp" alt="" loading="lazy" decoding="async"></a></li>
     </ol>
@@ -798,7 +809,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     <img src="assets/lux/estate.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/dining.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/aerial.webp" alt="" loading="lazy" decoding="async">
-    <img src="assets/lux/harbour.webp" alt="" loading="lazy" decoding="async">
+    <img src="assets/lux/coast.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/product.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/skycaddy.webp" alt="" loading="lazy" decoding="async">
   </div>
@@ -860,7 +871,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         </article>
 
         <article class="hz-card rv" data-cursor="View">
-          <div class="hz-media"><span class="num" aria-hidden="true">04</span><img src="assets/lux/harbour.webp" alt="Harbour Town marina at sunset" width="2000" height="963" loading="lazy" decoding="async"></div>
+          <div class="hz-media"><span class="num" aria-hidden="true">04</span><img src="assets/lux/coast.webp" alt="Oceanfront homes and marsh at sunset, shot by drone" width="1448" height="1086" loading="lazy" decoding="async"></div>
           <div class="hz-copy">
             <span class="cat">Social &amp; Paid</span>
             <h3>Short-form built to generate leads</h3>
@@ -1044,7 +1055,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 <!-- 9. ABOUT -->
 <section id="about" class="ab" aria-labelledby="about-title">
   <div class="wrap ab-grid">
-    <figure class="ab-img rv"><img src="assets/lux/aerial.webp" alt="Sunset over Hilton Head marsh and harbour, shot by drone" width="2000" height="1500" loading="lazy" decoding="async" data-pz><figcaption>Hilton Head Island &middot; Golden hour</figcaption></figure>
+    <figure class="ab-img rv"><img src="assets/lux/marsh-resort.webp" alt="Boardwalk across the marsh to a Hilton Head resort at sunset, shot by drone" width="1448" height="1086" loading="lazy" decoding="async" data-pz><figcaption>Hilton Head Island &middot; Golden hour</figcaption></figure>
     <div>
       <span class="kicker">About Above All Media</span>
       <h2 id="about-title" data-split>For businesses that intend to <em>stand above.</em></h2>
@@ -1781,6 +1792,26 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   var sec = D.getElementById('skycaddy');
   if (!sec) return;
   var video = D.getElementById('sc-video'), choice = D.getElementById('sc-choice'), replay = D.getElementById('sc-replay');
+  var soundBtn = D.getElementById('sc-sound'), soundLabel = D.getElementById('sc-sound-label');
+  /* The film carries its music. Browsers only allow sound after the visitor has tapped, clicked or pressed a key,
+     so: with that, the swing plays with music; without it, it plays muted and offers "Sound on", which replays it with music. */
+  var touched = false, wantSound = true;
+  ['pointerdown', 'keydown', 'touchend'].forEach(function (ev) { W.addEventListener(ev, function () { touched = true; }, { capture: true, passive: true }); });
+  function mayPlaySound() { return wantSound && (touched || !!(navigator.userActivation && navigator.userActivation.hasBeenActive)); }
+  function syncSound() {
+    if (!soundBtn) return;
+    var on = !video.muted;
+    soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    soundLabel.textContent = on ? 'Sound off' : 'Sound on';
+  }
+  function playFilm() {
+    video.muted = !mayPlaySound(); syncSound();
+    var p; try { p = video.play(); } catch (e) { p = null; }
+    if (p && p.catch) p.catch(function () {
+      if (!video.muted) { video.muted = true; syncSound(); var q = video.play(); if (q && q.catch) q.catch(function () { timer = setTimeout(open, 1200); }); }
+      else timer = setTimeout(open, 1200);
+    });
+  }
   var mq = function (q) { return W.matchMedia && W.matchMedia(q).matches; };
   var conn = navigator.connection || {};
   var still = mq('(prefers-reduced-motion: reduce)') || !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
@@ -1806,8 +1837,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     state = 'playing';
     load();
     try { video.currentTime = 0; } catch (e) {}
-    var p; try { p = video.play(); } catch (e) { p = null; }
-    if (p && p.catch) p.catch(function () { timer = setTimeout(open, 1200); });
+    if (soundBtn) soundBtn.hidden = false;
+    playFilm();
     /* if the film never starts (no autoplay, slow network), don't keep the visitor waiting */
     timer = setTimeout(function () { if (state === 'playing' && video.currentTime < 0.2) open(); }, 5000);
   }
@@ -1816,7 +1847,15 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   });
   video.addEventListener('ended', open);
 
+  if (soundBtn) soundBtn.addEventListener('click', function () {
+    touched = true;
+    if (!video.muted) { wantSound = false; video.muted = true; syncSound(); return; }
+    wantSound = true; video.muted = false; syncSound();
+    if (state === 'playing') { try { video.currentTime = 0; } catch (e) {} clearTimeout(timer); var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+  });
+
   replay.addEventListener('click', function () {
+    wantSound = true;
     clearTimeout(timer);
     sec.classList.remove('is-broken', 'is-out');
     state = 'idle';
