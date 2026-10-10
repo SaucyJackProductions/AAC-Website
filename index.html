@@ -166,6 +166,16 @@ html:not(.js) .loader,.still .loader{display:none}
 .ld-mark em{color:var(--gold-l)}
 .ld-bar{height:1px;background:var(--line);overflow:hidden}
 .ld-bar i{display:block;height:100%;background:var(--gold-grad);transform-origin:0 50%;transform:scaleX(0);transition:transform .4s var(--ease)}
+.ld-enter{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:34px;animation:ldIn .9s var(--ease) both}
+.ld-enter[hidden]{display:none}
+.gate .ld-row{opacity:0;transition:opacity .4s}
+.ld-go{display:inline-flex;align-items:center;gap:14px;height:56px;padding:0 30px;border:0;border-radius:999px;cursor:pointer;background:var(--gold-grad);color:#120d05;font:600 12px var(--font-body);letter-spacing:.2em;text-transform:uppercase;box-shadow:0 14px 50px rgba(201,166,107,.28);transition:transform .5s var(--ease)}
+.ld-go:hover{transform:scale(1.04)}
+.ld-go .eq i{background:#120d05}
+.ld-quiet{background:none;border:0;cursor:pointer;padding:8px;font:400 10px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-soft);transition:color .3s}
+.ld-quiet:hover{color:var(--ink)}
+html.gate,html.gate body{overflow:hidden}
+@keyframes ldIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .ld-row{display:flex;justify-content:space-between;margin-top:14px;font:400 10px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-soft)}
 
 /* ---------- header ---------- */
@@ -340,6 +350,23 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .gc-band-t em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .gc-band-go{font:500 12px var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l)}
 .gc-band:hover img{scale:1.04}
+.gc-band video,.gc-g video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s}
+.gc-band video.is-playing,.gc-g video.is-playing{opacity:1}
+.gc-g{grid-column:span 8;aspect-ratio:16/9}
+.gc-h{grid-column:span 4}
+.gc-i,.gc-j{grid-column:span 6;aspect-ratio:16/10}
+.gc-k{grid-column:span 5;aspect-ratio:5/4}.gc-l{grid-column:span 7}
+.gc-film{position:relative;display:block;width:100%;aspect-ratio:16/9;max-height:86vh;margin:0 0 14px;padding:0;border:0;border-radius:3px;overflow:hidden;cursor:pointer;background:#0b0b0a url(assets/lux/hole10-film.webp) center/cover;text-align:left;color:var(--ink)}
+.has-cur .gc-film{cursor:none}
+.gc-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s}
+.gc-film video.is-playing{opacity:1}
+.gc-film::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.62),transparent 45%);pointer-events:none;transition:opacity .8s}
+.gc-film.loud::after{opacity:.35}
+.gc-film-in{position:absolute;z-index:1;left:clamp(22px,4vw,64px);bottom:clamp(22px,4vw,56px);display:flex;flex-direction:column;gap:14px;max-width:min(720px,70%);transition:opacity .8s}
+.gc-film.loud .gc-film-in{opacity:.0}
+.gc-film-t{font:400 clamp(32px,4.4vw,72px)/1.02 var(--serif)}
+.gc-film-t em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gc-film-snd{position:absolute;z-index:1;right:clamp(18px,3vw,40px);bottom:clamp(22px,4vw,56px);display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:999px;background:rgba(7,8,7,.55);box-shadow:inset 0 0 0 1px rgba(234,210,160,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 11px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l)}
 
 /* feed phones */
 .feed{display:grid;grid-template-columns:1fr auto;gap:clamp(40px,6vw,100px);align-items:center;margin-top:clamp(80px,9vw,140px)}
@@ -450,7 +477,8 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 
 /* ---------- footer ---------- */
 .ft{position:relative;padding:clamp(100px,12vw,170px) 0 34px;background:#040504;overflow:hidden;isolation:isolate}
-.ft-bg{position:absolute;inset:-10% 0 auto;height:80%;z-index:-1;background:url(assets/lux/sail-solo.webp) center 40%/cover;opacity:.22;will-change:transform}
+.ft-bg{position:absolute;inset:-10% 0 auto;height:80%;z-index:-1;background:url(assets/lux/sunset-sea.webp) center 40%/cover;opacity:.34;will-change:transform}
+.ft-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ft-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#040504 0%,rgba(4,5,4,.3) 40%,#040504 100%)}
 .ft-cta{display:block;padding-bottom:clamp(60px,8vw,110px);border-bottom:1px solid var(--line)}
 .ft-cta .kicker{margin-bottom:26px}
@@ -614,8 +642,11 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 .sc-sound{position:absolute;right:24px;bottom:22px;z-index:7;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;background:rgba(7,8,7,.55);box-shadow:inset 0 0 0 1px rgba(234,210,160,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 11px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);transition:opacity .4s,background-color .3s}
 .sc-sound[hidden]{display:none}
 .sc-sound:hover{background:rgba(201,166,107,.25)}
-.sc-sound .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
-.sc-sound .eq i{width:2px;height:4px;background:currentColor;border-radius:1px}
+.sc-sound .eq,.ld-go .eq,.gc-film-snd .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.sc-sound .eq i,.gc-film-snd .eq i{width:2px;height:4px;background:currentColor;border-radius:1px}
+.ld-go .eq i{width:2px;height:4px;border-radius:1px;animation:scEq .9s ease-in-out infinite}
+.ld-go .eq i:nth-child(2),.gc-film.loud .eq i:nth-child(2){animation-delay:-.3s}.ld-go .eq i:nth-child(3),.gc-film.loud .eq i:nth-child(3){animation-delay:-.6s}
+.gc-film.loud .eq i{animation:scEq .9s ease-in-out infinite}
 .sc-sound[aria-pressed="true"] .eq i{animation:scEq .9s ease-in-out infinite}
 .sc-sound[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.3s}.sc-sound[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.6s}
 @keyframes scEq{0%,100%{height:3px}50%{height:12px}}
@@ -663,6 +694,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .gc-b,.gc-c{grid-column:span 6}
   .gc-d,.gc-e,.gc-f{grid-column:span 6}.gc-f{grid-column:1/-1;aspect-ratio:16/9}
   .gc-band{aspect-ratio:4/3}
+  .gc-g{grid-column:1/-1}.gc-h{grid-column:1/-1;aspect-ratio:16/10}.gc-k,.gc-l{grid-column:span 6;aspect-ratio:4/3}
+  .gc-film{aspect-ratio:4/5;max-height:none}.gc-film video{object-position:62% 50%}
   .feed-phones{justify-content:center}
 }
 @media (max-width:720px){
@@ -688,7 +721,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .ft-row{grid-template-columns:1fr}
   .ft-legal{padding-bottom:80px}
   .sticky-mobile-cta{display:flex}
-  .gc-b,.gc-c,.gc-d,.gc-e{grid-column:1/-1}
+  .gc-b,.gc-c,.gc-d,.gc-e,.gc-i,.gc-j,.gc-k,.gc-l{grid-column:1/-1}
+  .gc-film-in{max-width:none;right:20px;bottom:86px}.gc-film-snd{left:20px;right:auto;bottom:22px}
   .gc-band-in{left:20px;right:20px;top:auto;bottom:24px;translate:none;gap:12px}.gc-band-t{font-size:34px}.gc-band::after{background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,.1) 75%)}
   .phone{width:44vw;border-radius:26px;padding:6px}.phone video{border-radius:21px}.phone-tag{left:14px;right:14px;top:16px;font-size:8px}.phone-snd{bottom:14px;font-size:8px;padding:6px 10px}
   .col-6{grid-column:span 12}
@@ -700,12 +734,16 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="loader" id="loader" aria-hidden="true">
+<div class="loader" id="loader" role="dialog" aria-label="Enter Above All Media">
   <div class="ld-in">
     <span class="ld-k">Hilton Head Island &middot; 32.2163&deg; N</span>
     <div class="ld-mark">Above <em>All</em></div>
     <div class="ld-bar"><i id="ld-fill"></i></div>
-    <div class="ld-row"><span>Descending from orbit</span><span id="ld-pct">000</span></div>
+    <div class="ld-row" aria-hidden="true"><span>Descending from orbit</span><span id="ld-pct">000</span></div>
+    <div class="ld-enter" id="ld-enter" hidden>
+      <button class="ld-go" id="ld-sound" type="button"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Enter with sound</button>
+      <button class="ld-quiet" id="ld-quiet" type="button">Enter without sound</button>
+    </div>
   </div>
 </div>
 <div class="grain" aria-hidden="true"></div>
@@ -795,7 +833,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   </div>
   <div class="sc-flash" aria-hidden="true"></div>
   <button class="sc-sound" id="sc-sound" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="sc-sound-label">Sound on</span></button>
-  <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>Sky Caddy &middot; Hole 10 &middot; Palmetto Dunes</div>
+  <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>Sky Caddy &middot; Hole 10 &middot; Hilton Head Island</div>
   <div class="sc-choice" id="sc-choice">
     <div class="sc-card">
       <span class="section-kicker">Above All Media &middot; Hilton Head Island</span>
@@ -805,7 +843,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <a class="sc-path gold" href="skycaddy/">
           <span class="k">Sky Caddy &middot; Hole 10</span>
           <b>Play the Course</b>
-          <span>Step onto the Robert Trent Jones Oceanfront in our living 3D model. Pick a club, read the wind, take your shot.</span>
+          <span>Step onto Hole 10 in our living 3D model. Pick a club, read the wind, take your shot.</span>
           <span class="go">Enter the course &rarr;</span>
         </a>
         <a class="sc-path" href="#contact">
@@ -821,7 +859,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
           <span class="go">Keep exploring &rarr;</span>
         </a>
       </div>
-      <button class="sc-replay" id="sc-replay" type="button">&#8635; Watch the swing again</button>
+      <button class="sc-replay" id="sc-replay" type="button">&#8635; Watch the swing again, with sound</button>
     </div>
   </div>
 </section>
@@ -855,7 +893,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <div class="svc-float" id="svc-float" aria-hidden="true">
     <img src="assets/lux/estate.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/dining.webp" alt="" loading="lazy" decoding="async">
-    <img src="assets/lux/aerial.webp" alt="" loading="lazy" decoding="async">
+    <img src="assets/lux/harbour.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/coast.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/product.webp" alt="" loading="lazy" decoding="async">
     <img src="assets/lux/skycaddy.webp" alt="" loading="lazy" decoding="async">
@@ -950,6 +988,14 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <a class="btn btn-line rv" href="skycaddy/" data-cursor="Play">Play Sky Caddy &middot; Hole 10 <span class="arrow" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
+    <button class="gc-film rv" id="gc-film" type="button" data-cursor="Sound" aria-label="Play the Hole 10 film with sound">
+      <video muted loop playsinline preload="none" poster="assets/lux/hole10-film.webp" data-src="assets/lux/hole10-film.mp4" data-webm="assets/lux/hole10-film.webm" aria-hidden="true" tabindex="-1"></video>
+      <span class="gc-film-in">
+        <span class="kicker">Hole 10 &middot; The film</span>
+        <span class="gc-film-t">Tee to ocean, <em>in one take of light.</em></span>
+      </span>
+      <span class="gc-film-snd"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl">Play with sound</span></span>
+    </button>
     <div class="gc-grid">
       <figure class="gc-a rv" data-cursor="View"><img src="assets/lux/golf-hole10-bird.webp" alt="Morning light over a lagoon on Hole 10, a bird crossing the sky" width="1674" height="940" loading="lazy" decoding="async" data-pz><figcaption><span>Hole 10</span>Morning light on the lagoon</figcaption></figure>
       <figure class="gc-b rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-island-green.webp" alt="Island green surrounded by water, straight down from a drone" width="1674" height="940" loading="lazy" decoding="async" data-pz><figcaption><span>Overhead</span>The island green</figcaption></figure>
@@ -957,8 +1003,15 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       <figure class="gc-d rv" data-cursor="View"><img src="assets/lux/golf-noon-green.webp" alt="Oceanfront golf hole between the beach and the marsh" width="1677" height="938" loading="lazy" decoding="async" data-pz><figcaption><span>Oceanfront</span>Beach, links and marsh</figcaption></figure>
       <figure class="gc-e rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-full-course.webp" alt="Full golf course with lagoons at sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The layout</span>The whole course in one frame</figcaption></figure>
       <figure class="gc-f rv" data-d="2" data-cursor="View"><img src="assets/lux/golf-green-fairway.webp" alt="Green and bunkers with the ocean sunset behind" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Green, bunkers and the Atlantic</figcaption></figure>
+      <figure class="gc-g rv" data-cursor="View"><img src="assets/lux/hole10-fly.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/lux/hole10-fly.mp4" data-webm="assets/lux/hole10-fly.webm" aria-hidden="true" tabindex="-1"></video><figcaption><span>Flyover &middot; traced</span>Tee to green, with the line drawn in</figcaption></figure>
+      <figure class="gc-h rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-1.webp" alt="Bunker and green with the ocean beyond at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The green</span>Sand, sea and the flag</figcaption></figure>
+      <figure class="gc-i rv" data-cursor="View"><img src="assets/lux/golf-new-2.webp" alt="Fairway and bunkers running toward the sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Sunset</span>The long view home</figcaption></figure>
+      <figure class="gc-j rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-4.webp" alt="Bunkers in front of a green with the ocean behind at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Two bunkers, one line</figcaption></figure>
+      <figure class="gc-k rv" data-cursor="View"><img src="assets/lux/golf-new-3.webp" alt="Putting green and flag in low evening light" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Golden hour</span>The putting surface</figcaption></figure>
+      <figure class="gc-l rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-5.webp" alt="Aerial of a green framed by sculpted bunkers at sunrise" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Overhead</span>Bunkers carved like brushstrokes</figcaption></figure>
       <a class="gc-band rv" href="skycaddy/" data-cursor="Play">
         <img src="assets/lux/golf-sunset-zoom.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" data-pz>
+        <video muted loop playsinline preload="none" data-src="assets/lux/golf-ambient.mp4" data-webm="assets/lux/golf-ambient.webm" aria-hidden="true" tabindex="-1"></video>
         <span class="gc-band-in">
           <span class="kicker">Sky Caddy &middot; interactive 3D</span>
           <span class="gc-band-t">Play the hole <em>before you play it.</em></span>
@@ -1013,8 +1066,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 <section class="fl" id="flight" aria-labelledby="fl-title">
   <div class="fl-stick" id="fl-stick">
     <div class="fl-win" id="fl-win">
-      <picture><source media="(max-aspect-ratio:4/5)" srcset="assets/lux/window-m.webp"><img src="assets/lux/window.webp" alt="" loading="lazy" decoding="async"></picture>
-      <video muted loop playsinline preload="none" data-src="assets/lux/window.mp4" data-portrait="assets/lux/window-m.mp4" aria-hidden="true" tabindex="-1"></video>
+      <picture><source media="(max-aspect-ratio:4/5)" srcset="assets/lux/harbour-fly-m.webp"><img src="assets/lux/harbour-fly.webp" alt="" loading="lazy" decoding="async"></picture>
+      <video muted loop playsinline preload="none" data-src="assets/lux/harbour-fly.mp4" data-portrait="assets/lux/harbour-fly-m.mp4" data-webm="assets/lux/harbour-fly.webm" aria-hidden="true" tabindex="-1"></video>
     </div>
     <h2 class="fl-title" id="fl-title"><span id="fl-l">The view</span> <span id="fl-r"><em>that sells.</em></span></h2>
     <p class="fl-cap" id="fl-cap">Licensed aerial cinematography across Hilton Head, Bluffton, Beaufort and the Lowcountry</p>
@@ -1177,7 +1230,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 </aside>
 
 <footer class="ft">
-  <div class="ft-bg" data-pz-bg aria-hidden="true"></div>
+  <div class="ft-bg" data-pz-bg aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lux/sunset-sea.webp" data-src="assets/lux/sunset-sea.mp4" data-webm="assets/lux/sunset-sea.webm" tabindex="-1"></video></div>
   <div class="wrap">
     <a class="ft-cta" href="#contact" data-cursor="Begin">
       <span class="kicker">Ready when you are</span>
@@ -1376,16 +1429,31 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       if (ok[0] && !dsLive) { dsLive = true; ds.classList.add('live'); drawn = -1; }
       if (p >= 1) finishLoader();
     }
+    /* Once the frames are in, the visitor steps in with a tap. That tap is what lets the swing film and the reels play their music later. */
+    var gateOpen = false;
     function finishLoader() {
+      if (loaderDone || gateOpen) return; gateOpen = true;
+      var box = $('#ld-enter'), go = $('#ld-sound'), quiet = $('#ld-quiet');
+      if (!box || !go) return enter(true);
+      if (lenis) lenis.stop();
+      root.classList.add('gate'); box.hidden = false;
+      setTimeout(function () { try { go.focus({ preventScroll: true }); } catch (e) {} }, 60);
+      go.addEventListener('click', function () { enter(true); });
+      quiet.addEventListener('click', function () { enter(false); });
+    }
+    function enter(sound) {
       if (loaderDone) return; loaderDone = true;
+      W.__aamSound = sound;
+      root.classList.remove('gate'); if (lenis) lenis.start();
+      var lo = $('#loader'); if (lo) lo.setAttribute('aria-hidden', 'true');
       setTimeout(function () {
         root.classList.add('loaded');
         setTimeout(function () { root.classList.add('ready'); $$('[data-split]', ds).forEach(function (el) { if (!el.closest('#ds-end')) el.classList.add('in'); }); autoT0 = performance.now(); }, 450);
-      }, Math.max(0, 1100 - (Date.now() - loadStart)));
+      }, 0);
     }
     if (!still && ctx) {
       sizeCanvas(); loadFrames();
-      setTimeout(finishLoader, 3200);           /* never hold the visitor on a slow line */
+      setTimeout(finishLoader, 3200);           /* on a slow line, offer the way in without waiting for every frame */
     } else {
       root.classList.add('loaded', 'ready');
       $$('[data-split]').forEach(function (el) { el.classList.add('in'); });
@@ -1605,7 +1673,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     requestAnimationFrame(tick);
 
     /* ---------- feed phones: tap one for sound, the other goes quiet ---------- */
-    var phones = $$('.feed .phone');
+    var phones = $$('.feed .phone, .gc-film');
+    function setLbl(ph) { var l = $('.lbl', ph); if (l) l.textContent = ph.classList.contains('loud') ? 'Sound off' : 'Play with sound'; }
     phones.forEach(function (ph) {
       var v = $('video', ph);
       ph.addEventListener('click', function () {
@@ -1613,9 +1682,24 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         phones.forEach(function (o) { var ov = $('video', o); ov.muted = true; o.classList.remove('loud'); });
         if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-webm') && !v.canPlayType('video/mp4; codecs="avc1.42E01E"')) ? v.getAttribute('data-webm') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
         if (on) { v.muted = false; try { v.currentTime = 0; } catch (e) {} ph.classList.add('loud'); }
+        phones.forEach(setLbl);
         var p = v.play(); if (p && p.catch) p.catch(function () {});
       });
     });
+    /* the Hole 10 film: a visitor who came in with sound hears it once it fills the screen; it goes quiet when they scroll on */
+    var film = $('#gc-film');
+    if (film && 'IntersectionObserver' in W) {
+      var fv = $('video', film);
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.intersectionRatio >= 0.7 && W.__aamSound && !film.classList.contains('loud') && !film.__heard) {
+            film.__heard = true; film.click();
+          } else if (e.intersectionRatio < 0.25 && film.classList.contains('loud')) {
+            fv.muted = true; film.classList.remove('loud'); setLbl(film);
+          }
+        });
+      }, { threshold: [0, 0.25, 0.7] }).observe(film);
+    }
 
     /* ---------- sticky mobile CTA ---------- */
     var sticky = $('#sticky-mobile-cta');
@@ -1907,9 +1991,18 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   var soundBtn = D.getElementById('sc-sound'), soundLabel = D.getElementById('sc-sound-label');
   /* The film carries its music. Browsers only allow sound after the visitor has tapped, clicked or pressed a key,
      so: with that, the swing plays with music; without it, it plays muted and offers "Sound on", which replays it with music. */
-  var touched = false, wantSound = true;
-  ['pointerdown', 'keydown', 'touchend'].forEach(function (ev) { W.addEventListener(ev, function () { touched = true; }, { capture: true, passive: true }); });
-  function mayPlaySound() { return wantSound && (touched || !!(navigator.userActivation && navigator.userActivation.hasBeenActive)); }
+  var touched = false, wantSound = W.__aamSound !== false;
+  ['pointerdown', 'keydown', 'touchend'].forEach(function (ev) { W.addEventListener(ev, function (e) {
+    var first = !touched; touched = true;
+    /* the film started muted and the visitor has now tapped while it plays: start the swing over, with its music */
+    if (first && state === 'playing' && video.muted && wantSound && !(soundBtn && soundBtn.contains(e.target))) {
+      video.muted = false; syncSound();
+      try { video.currentTime = 0; } catch (x) {}
+      clearTimeout(timer);
+      var p = video.play(); if (p && p.catch) p.catch(function () { video.muted = true; syncSound(); });
+    }
+  }, { capture: true, passive: true }); });
+  function mayPlaySound() { if (W.__aamSound === false && !touched) return false; return wantSound && (touched || !!(navigator.userActivation && navigator.userActivation.hasBeenActive)); }
   function syncSound() {
     if (!soundBtn) return;
     var on = !video.muted;
