@@ -576,6 +576,39 @@ html{scroll-padding-bottom:96px}
 .hero-glow.is-on{opacity:var(--glow-opacity,1)}
 @media (prefers-reduced-motion:reduce),(forced-colors:active){.hero-glow{display:none}}
 
+
+/* ---------- SkyCaddy: section two. Golfer swings, the ball shatters the screen, visitor picks a path ---------- */
+.sc{position:relative;z-index:1;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#020508;isolation:isolate}
+.sc-stage{position:absolute;inset:0}
+.sc-video,.sc-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 50%}
+.sc-glass{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.sc-flash{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--ix,52%) var(--iy,56%),rgba(255,255,255,.95),rgba(255,230,180,.35) 22%,transparent 55%)}
+.sc.is-hit .sc-flash{animation:scFlash .55s ease-out}
+.sc.is-hit .sc-stage{animation:scShake .42s cubic-bezier(.36,.07,.19,.97)}
+.sc-shade{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.2s var(--ease);background:linear-gradient(180deg,rgba(2,5,8,.7),rgba(2,5,8,.55) 40%,rgba(2,5,8,.86))}
+.sc-tag{position:absolute;left:24px;bottom:22px;z-index:5;display:flex;align-items:center;gap:10px;opacity:.85}
+.sc-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--coral);box-shadow:0 0 12px var(--coral);animation:scRec 1.4s steps(1) infinite}
+.sc-choice{position:absolute;inset:0;z-index:6;display:grid;place-items:center;padding:96px 20px 72px;text-align:center;opacity:0;visibility:hidden;transition:opacity .9s var(--ease),visibility 0s .9s}
+.sc-card{max-width:760px;translate:0 26px;scale:.97;transition:translate 1s var(--ease),scale 1s var(--ease)}
+.sc-card h2{font-size:clamp(34px,5.6vw,72px);margin-bottom:16px}
+.sc-card p{color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:600px;margin:0 auto 30px}
+.sc-card .section-kicker{justify-content:center}
+.sc-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.sc-replay{margin-top:22px;background:none;border:none;cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-soft);padding:8px 10px}
+.sc-replay:hover{color:var(--brass-light)}
+.sc.is-broken .sc-shade{opacity:1}
+.sc.is-broken .sc-choice{opacity:1;visibility:visible;transition:opacity .9s var(--ease),visibility 0s}
+.sc.is-broken .sc-card{translate:0 0;scale:1}
+.sc.is-broken .sc-tag{opacity:0;transition:opacity .4s}
+@keyframes scFlash{0%{opacity:0}12%{opacity:1}100%{opacity:0}}
+@keyframes scShake{10%,90%{translate:-2px 1px}20%,80%{translate:4px -2px}30%,50%,70%{translate:-7px 3px}40%,60%{translate:7px -3px}}
+@keyframes scRec{50%{opacity:.2}}
+@media (max-width:720px){
+  .sc-video,.sc-poster{object-position:28% 50%}
+  .sc-actions{flex-direction:column;align-items:stretch;max-width:340px;margin:0 auto}
+  .sc-tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){.sc.is-hit .sc-stage,.sc.is-hit .sc-flash{animation:none}}
 </style>
 </head>
 <body>
@@ -698,6 +731,29 @@ html{scroll-padding-bottom:96px}
     </div>
   </div>
   <div class="scroll-cue" aria-hidden="true">Scroll</div>
+</section>
+
+<section id="skycaddy" class="sc" aria-labelledby="sc-title">
+  <div class="sc-stage">
+    <img class="sc-poster" src="skycaddy/poster.jpg" alt="" width="1280" height="720" loading="lazy" decoding="async">
+    <video class="sc-video" id="sc-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="skycaddy/intro.mp4" data-mobile="skycaddy/intro-mobile.mp4"></video>
+    <div class="sc-shade"></div>
+    <canvas class="sc-glass" id="sc-glass" aria-hidden="true"></canvas>
+    <div class="sc-flash" aria-hidden="true"></div>
+  </div>
+  <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>SkyCaddy &middot; Palmetto Dunes &middot; Hole 10</div>
+  <div class="sc-choice" id="sc-choice">
+    <div class="sc-card">
+      <span class="section-kicker">SkyCaddy by Above All Media</span>
+      <h2 id="sc-title">That one went <span class="grad">through the screen.</span></h2>
+      <p>SkyCaddy is a playable 3D twin of Hilton Head&rsquo;s fairways, built from our drone flights. Step onto the course, or keep exploring what we make.</p>
+      <div class="sc-actions">
+        <a class="btn btn-primary" href="skycaddy/">Enter the Course &amp; Play</a>
+        <a class="btn btn-ghost" href="#capabilities">Continue to Website</a>
+      </div>
+      <button class="sc-replay" id="sc-replay" type="button">&#8635; Replay the swing</button>
+    </div>
+  </div>
 </section>
 
 <div class="mq" aria-hidden="true">
@@ -1812,6 +1868,206 @@ html{scroll-padding-bottom:96px}
   } catch (e) { disabled = true; }
 })();
 
+</script>
+<script>
+/* SkyCaddy section: plays the tee shot, and at impact the ball "breaks" the screen.
+   The frame at impact is frozen onto a canvas, cracked from the impact point, then the shards fall away
+   to reveal the flyover and the two choices. Reduced motion, save-data, or any failure: choices show at once. */
+(function () {
+  'use strict';
+  var W = window, D = document;
+  var sec = D.getElementById('skycaddy');
+  if (!sec) return;
+  var video = D.getElementById('sc-video'), cv = D.getElementById('sc-glass'), choice = D.getElementById('sc-choice');
+  var poster = sec.querySelector('.sc-poster'), replay = D.getElementById('sc-replay');
+  var mq = function (q) { return W.matchMedia && W.matchMedia(q).matches; };
+  var conn = navigator.connection || {};
+  var still = mq('(prefers-reduced-motion: reduce)') || !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  var IMPACT = 1.8;           /* seconds into intro.mp4 where the ball comes at the lens */
+  var IX = 0.54, IY = 0.64;   /* impact point, as a fraction of the stage */
+  var state = 'idle', raf = 0, shards = [], cracks = [], t0 = 0, frame = null;
+
+  function broken() {
+    state = 'done';
+    sec.classList.add('is-broken');
+  }
+  function show() { broken(); }
+
+  /* keyboard users tabbing in should never wait for the animation */
+  choice.addEventListener('focusin', function () { if (state !== 'done') { cancelAnimationFrame(raf); clear(); broken(); } });
+
+  if (still || !cv.getContext) { show(); return; }
+  var ctx = cv.getContext('2d');
+  if (!ctx) { show(); return; }
+
+  function size() {
+    var r = sec.getBoundingClientRect(), dpr = Math.min(W.devicePixelRatio || 1, 2);
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { w: r.width, h: r.height };
+  }
+  function clear() { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height); }
+
+  /* snapshot the current picture with object-fit: cover math (object-position matches the CSS) */
+  function snapshot(w, h) {
+    var src = (video.readyState >= 2 && video.videoWidth) ? video : poster;
+    var sw = src.videoWidth || src.naturalWidth, sh = src.videoHeight || src.naturalHeight;
+    if (!sw || !sh) return null;
+    var ox = w < 721 ? 0.28 : 0.32;
+    var s = Math.max(w / sw, h / sh), dw = sw * s, dh = sh * s;
+    var c = D.createElement('canvas'), dpr = Math.min(W.devicePixelRatio || 1, 2);
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    var x = c.getContext('2d');
+    x.scale(dpr, dpr);
+    try { x.drawImage(src, (w - dw) * ox, (h - dh) * 0.5, dw, dh); } catch (e) { return null; }
+    return c;
+  }
+
+  function build(w, h) {
+    var cx = w * IX, cy = h * IY, R = Math.hypot(Math.max(cx, w - cx), Math.max(cy, h - cy)) * 1.05;
+    var rays = [], n = w < 721 ? 11 : 15, i, k;
+    for (i = 0; i < n; i++) rays.push((i + 0.25 + Math.random() * 0.5) / n * Math.PI * 2);
+    var rings = [0.05, 0.13, 0.26, 0.45, 0.72, 1.05];
+    var pts = rays.map(function (a, ri) {
+      return rings.map(function (r, k) {
+        var jr = r * R * (1 + (Math.random() - 0.5) * 0.28 * (k ? 1 : 0.4));
+        var ja = a + (Math.random() - 0.5) * 0.12;
+        return [cx + Math.cos(ja) * jr, cy + Math.sin(ja) * jr];
+      });
+    });
+    shards = []; cracks = [];
+    for (i = 0; i < n; i++) {
+      var a = pts[i], b = pts[(i + 1) % n];
+      shards.push(mk([[cx, cy], a[0], b[0]], cx, cy, 0));
+      for (k = 0; k < rings.length - 1; k++) shards.push(mk([a[k], b[k], b[k + 1], a[k + 1]], cx, cy, k + 1));
+      cracks.push(a);
+    }
+    /* ring cracks: only some segments, like real glass */
+    for (k = 0; k < rings.length - 2; k++) for (i = 0; i < n; i++) if (Math.random() < 0.72 - k * 0.1) cracks.push([pts[i][k], pts[(i + 1) % n][k]]);
+  }
+  function mk(poly, cx, cy, ring) {
+    var mx = 0, my = 0;
+    poly.forEach(function (p) { mx += p[0]; my += p[1]; });
+    mx /= poly.length; my /= poly.length;
+    var dx = mx - cx, dy = my - cy, d = Math.hypot(dx, dy) || 1;
+    var push = 2.2 + Math.random() * 2.6;
+    return { poly: poly, mx: mx, my: my, vx: dx / d * push * (1 + ring * 0.25), vy: dy / d * push - 2 - Math.random() * 2,
+             vr: (Math.random() - 0.5) * 0.16, delay: ring * 70 + Math.random() * 120, x: 0, y: 0, r: 0 };
+  }
+
+  function path(poly) {
+    ctx.beginPath(); ctx.moveTo(poly[0][0], poly[0][1]);
+    for (var i = 1; i < poly.length; i++) ctx.lineTo(poly[i][0], poly[i][1]);
+    ctx.closePath();
+  }
+  function drawCracks(w, h, p) {
+    ctx.drawImage(frame, 0, 0, w, h);
+    ctx.lineCap = 'round';
+    var cx = w * IX, cy = h * IY;
+    for (var i = 0; i < cracks.length; i++) {
+      var c = cracks[i];
+      ctx.beginPath();
+      if (c.length > 2) {
+        /* radial crack grows outward from the impact */
+        ctx.moveTo(cx, cy);
+        var upto = Math.max(1, Math.ceil(c.length * p));
+        for (var k = 0; k < upto; k++) ctx.lineTo(c[k][0], c[k][1]);
+      } else if (p > 0.55) { ctx.moveTo(c[0][0], c[0][1]); ctx.lineTo(c[1][0], c[1][1]); }
+      ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 3; ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 1.1; ctx.stroke();
+    }
+    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 70);
+    g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI * 2); ctx.fill();
+  }
+  function drawFall(w, h, ms) {
+    clear(); ctx.setTransform(Math.min(W.devicePixelRatio || 1, 2), 0, 0, Math.min(W.devicePixelRatio || 1, 2), 0, 0);
+    var live = 0, dt = 1;
+    for (var i = 0; i < shards.length; i++) {
+      var s = shards[i];
+      if (ms > s.delay) {
+        s.vy += 0.55 * dt; s.x += s.vx * dt; s.y += s.vy * dt; s.r += s.vr * dt;
+      }
+      if (s.my + s.y > h + 400) continue;
+      live++;
+      ctx.save();
+      ctx.translate(s.mx + s.x, s.my + s.y); ctx.rotate(s.r); ctx.translate(-s.mx, -s.my);
+      path(s.poly); ctx.save(); ctx.clip(); ctx.drawImage(frame, 0, 0, w, h); ctx.restore();
+      ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.restore();
+    }
+    return live;
+  }
+
+  function hit() {
+    if (state !== 'playing' && state !== 'waiting') return;
+    state = 'breaking';
+    var dim = size(), w = dim.w, h = dim.h;
+    frame = snapshot(w, h);
+    if (!frame) { broken(); return; }
+    build(w, h);
+    sec.style.setProperty('--ix', IX * 100 + '%'); sec.style.setProperty('--iy', IY * 100 + '%');
+    sec.classList.remove('is-hit'); void sec.offsetWidth; sec.classList.add('is-hit');
+    try { video.pause(); } catch (e) {}
+    t0 = performance.now();
+    var resumed = false;
+    (function loop(now) {
+      var el = now - t0;
+      if (el < 900) {
+        drawCracks(w, h, Math.min(1, el / 200));
+      } else {
+        if (!resumed) { resumed = true; try { video.play(); } catch (e) {} setTimeout(broken, 650); }
+        if (!drawFall(w, h, el - 900)) { clear(); return; }
+      }
+      raf = requestAnimationFrame(loop);
+    })(t0);
+  }
+
+  function watch() {
+    if (state !== 'playing') return;
+    if (video.currentTime >= IMPACT) { hit(); return; }
+    raf = requestAnimationFrame(watch);
+  }
+
+  function start() {
+    if (state !== 'idle') return;
+    state = 'waiting';
+    if (!video.getAttribute('src')) {
+      var small = mq('(max-width: 720px)');
+      video.src = (small && video.getAttribute('data-mobile')) || video.getAttribute('data-src');
+    }
+    video.loop = false;
+    video.currentTime = 0;
+    var p;
+    try { p = video.play(); } catch (e) { p = null; }
+    var fallback = setTimeout(function () { if (state === 'waiting') hit(); }, 4500);
+    var go = function () { clearTimeout(fallback); state = 'playing'; raf = requestAnimationFrame(watch); };
+    if (p && p.then) p.then(function () { if (state === 'waiting') go(); }, function () { clearTimeout(fallback); setTimeout(function () { if (state === 'waiting') hit(); }, 900); });
+    else video.addEventListener('playing', function () { if (state === 'waiting') go(); }, { once: true });
+  }
+
+  /* after the break, keep the flyover running behind the choices */
+  video.addEventListener('ended', function () { if (state === 'done') { video.currentTime = 2.2; video.play().catch(function () {}); } });
+
+  replay.addEventListener('click', function () {
+    cancelAnimationFrame(raf); clear();
+    sec.classList.remove('is-broken', 'is-hit');
+    state = 'idle';
+    try { replay.blur(); } catch (e) {}
+    start();
+  });
+
+  if (!('IntersectionObserver' in W)) { show(); return; }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting && e.intersectionRatio >= 0.6) start();
+      else if (!e.isIntersecting && state === 'done') { try { video.pause(); } catch (x) {} }
+      else if (e.isIntersecting && state === 'done' && video.paused) { video.play().catch(function () {}); }
+    });
+  }, { threshold: [0, 0.6] });
+  io.observe(sec);
+  W.addEventListener('resize', function () { if (state === 'done') clear(); }, { passive: true });
+})();
 </script>
 </body>
 </html>
