@@ -594,7 +594,9 @@ html{scroll-padding-bottom:96px}
 .sc-card p{color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:600px;margin:0 auto 30px}
 .sc-card .section-kicker{justify-content:center}
 .sc-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
-.sc-replay{margin-top:22px;background:none;border:none;cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-soft);padding:8px 10px}
+.sc-play{display:inline-block;margin-top:22px;font-weight:600;font-size:15px;color:var(--brass-light);border-bottom:1px solid rgba(255,213,146,.35);padding-bottom:2px}
+.sc-play:hover{border-color:var(--brass-light)}
+.sc-replay{display:block;margin:14px auto 0;background:none;border:none;cursor:pointer;font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-soft);padding:8px 10px}
 .sc-replay:hover{color:var(--brass-light)}
 .sc.is-broken .sc-shade{opacity:1}
 .sc.is-broken .sc-choice{opacity:1;visibility:visible;transition:opacity .9s var(--ease),visibility 0s}
@@ -744,13 +746,14 @@ html{scroll-padding-bottom:96px}
   <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>SkyCaddy &middot; Palmetto Dunes &middot; Hole 10</div>
   <div class="sc-choice" id="sc-choice">
     <div class="sc-card">
-      <span class="section-kicker">SkyCaddy by Above All Media</span>
-      <h2 id="sc-title">That one went <span class="grad">through the screen.</span></h2>
-      <p>SkyCaddy is a playable 3D twin of Hilton Head&rsquo;s fairways, built from our drone flights. Step onto the course, or keep exploring what we make.</p>
+      <span class="section-kicker">Above All Media &middot; Hilton Head Island</span>
+      <h2 id="sc-title">Some brands get noticed. <span class="grad">Yours breaks through.</span></h2>
+      <p>That&rsquo;s the standard we shoot to. Cinematic film, drone and social content for Lowcountry brands that refuse to blend in. Tell us what you&rsquo;re building, or keep exploring the work.</p>
       <div class="sc-actions">
-        <a class="btn btn-primary" href="skycaddy/">Enter the Course &amp; Play</a>
-        <a class="btn btn-ghost" href="#capabilities">Continue to Website</a>
+        <a class="btn btn-primary" href="#contact">Start Your Project</a>
+        <a class="btn btn-ghost" href="#capabilities">Continue the Tour</a>
       </div>
+      <a class="sc-play" href="skycaddy/">Or fly Hole 10 in SkyCaddy &rarr;</a>
       <button class="sc-replay" id="sc-replay" type="button">&#8635; Replay the swing</button>
     </div>
   </div>
