@@ -319,6 +319,42 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 @media (min-width:1000px) and (max-height:820px){.js:not(.still) .hz-card{width:min(58vh,560px)}.js:not(.still) .hz-copy h3{font-size:30px}.js:not(.still) .hz-copy .out{display:none}}
 @media (max-width:999px){.hz-card{max-width:640px}}
 
+/* ---------- 4b. golf collection ---------- */
+.gc{padding:clamp(100px,12vw,170px) 0;background:var(--bg)}
+.gc-head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.gc-head h2{font-size:clamp(46px,6vw,104px);margin-top:18px}
+.gc-head .lede{margin-bottom:28px}
+.gc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.gc-grid figure,.gc-band{position:relative;overflow:hidden;border-radius:3px;background:#111;margin:0}
+.gc-grid img{position:absolute;inset:-7% 0;width:100%;height:114%;object-fit:cover;transition:scale 1.6s var(--ease)}
+.gc-grid figure:hover img{scale:1.05}
+.gc-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 22px 18px;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent);font:400 clamp(18px,1.5vw,24px)/1.2 var(--serif);color:var(--ink)}
+.gc-grid figcaption span{display:block;margin-bottom:6px;font:500 10px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l)}
+.gc-a{grid-column:span 7;grid-row:span 2;aspect-ratio:auto;min-height:clamp(420px,46vw,720px)}
+.gc-b,.gc-c{grid-column:span 5;aspect-ratio:16/10}
+.gc-d,.gc-e,.gc-f{grid-column:span 4;aspect-ratio:4/3}
+.gc-band{grid-column:1/-1;display:block;aspect-ratio:21/8;margin-top:6px}
+.gc-band::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.15) 65%)}
+.gc-band-in{position:absolute;z-index:1;left:clamp(24px,4vw,64px);top:50%;translate:0 -50%;display:flex;flex-direction:column;gap:18px;max-width:640px}
+.gc-band-t{font:400 clamp(36px,4.6vw,78px)/1 var(--serif);color:var(--ink)}
+.gc-band-t em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gc-band-go{font:500 12px var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-l)}
+.gc-band:hover img{scale:1.04}
+
+/* feed phones */
+.feed{display:grid;grid-template-columns:1fr auto;gap:clamp(40px,6vw,100px);align-items:center;margin-top:clamp(80px,9vw,140px)}
+.feed-copy h3{font-size:clamp(40px,4.6vw,78px);margin:18px 0 22px}
+.feed-phones{display:flex;gap:clamp(16px,2.4vw,34px)}
+.phone{position:relative;width:clamp(200px,18vw,270px);aspect-ratio:9/19.5;border-radius:34px;padding:9px;border:0;cursor:pointer;background:linear-gradient(160deg,#2a2a27,#0b0b0a);box-shadow:inset 0 0 0 1px rgba(234,210,160,.25),0 40px 90px rgba(0,0,0,.55);overflow:hidden;transition:translate .7s var(--ease)}
+.has-cur .phone{cursor:none}
+.phone:nth-child(2){translate:0 40px}
+.phone:hover{translate:0 -6px}.phone:nth-child(2):hover{translate:0 34px}
+.phone video{width:100%;height:100%;object-fit:cover;border-radius:26px;background:#000}
+.phone-tag{position:absolute;left:22px;right:22px;top:24px;font:500 9px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.8);text-align:left}
+.phone-snd{position:absolute;left:50%;bottom:24px;translate:-50% 0;padding:8px 14px;border-radius:999px;background:rgba(7,8,7,.6);box-shadow:inset 0 0 0 1px rgba(234,210,160,.5);font:500 9px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);white-space:nowrap;transition:opacity .4s}
+.phone.loud .phone-snd{opacity:0}
+.phone.loud{box-shadow:inset 0 0 0 1px var(--gold-l),0 40px 90px rgba(0,0,0,.55),0 0 60px rgba(201,166,107,.25)}
+
 /* ---------- 5. the reel ---------- */
 .reel{padding:clamp(100px,12vw,170px) 0}
 .reel-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:46px}
@@ -413,7 +449,9 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .ab-list li:hover{padding-left:12px;color:var(--gold-l)}
 
 /* ---------- footer ---------- */
-.ft{position:relative;padding:clamp(100px,12vw,170px) 0 34px;background:#040504;overflow:hidden}
+.ft{position:relative;padding:clamp(100px,12vw,170px) 0 34px;background:#040504;overflow:hidden;isolation:isolate}
+.ft-bg{position:absolute;inset:-10% 0 auto;height:80%;z-index:-1;background:url(assets/lux/sail-solo.webp) center 40%/cover;opacity:.22;will-change:transform}
+.ft-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#040504 0%,rgba(4,5,4,.3) 40%,#040504 100%)}
 .ft-cta{display:block;padding-bottom:clamp(60px,8vw,110px);border-bottom:1px solid var(--line)}
 .ft-cta .kicker{margin-bottom:26px}
 .ft-big{display:block;font:400 clamp(52px,8.6vw,150px)/.95 var(--serif);letter-spacing:-.02em;max-width:13ch;transition:color .4s}
@@ -620,6 +658,12 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .ft-row{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}
   .reel-head{flex-direction:column;align-items:flex-start}
   .ab-img{aspect-ratio:4/3}
+  .gc-head,.feed{grid-template-columns:1fr}
+  .gc-a{grid-column:1/-1;grid-row:auto;min-height:0;aspect-ratio:4/3}
+  .gc-b,.gc-c{grid-column:span 6}
+  .gc-d,.gc-e,.gc-f{grid-column:span 6}.gc-f{grid-column:1/-1;aspect-ratio:16/9}
+  .gc-band{aspect-ratio:4/3}
+  .feed-phones{justify-content:center}
 }
 @media (max-width:720px){
   .hdr-bar{height:72px}
@@ -644,6 +688,9 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .ft-row{grid-template-columns:1fr}
   .ft-legal{padding-bottom:80px}
   .sticky-mobile-cta{display:flex}
+  .gc-b,.gc-c,.gc-d,.gc-e{grid-column:1/-1}
+  .gc-band-in{left:20px;right:20px;top:auto;bottom:24px;translate:none;gap:12px}.gc-band-t{font-size:34px}.gc-band::after{background:linear-gradient(0deg,rgba(0,0,0,.75),rgba(0,0,0,.1) 75%)}
+  .phone{width:44vw;border-radius:26px;padding:6px}.phone video{border-radius:21px}.phone-tag{left:14px;right:14px;top:16px;font-size:8px}.phone-snd{bottom:14px;font-size:8px;padding:6px 10px}
   .col-6{grid-column:span 12}
 }
 @media (prefers-reduced-motion:reduce){
@@ -674,7 +721,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     <nav class="primary" id="site-nav" aria-label="Primary navigation">
       <a href="#capabilities" data-sec="capabilities">Services</a>
       <a href="#work" data-sec="work">Work</a>
-      <a href="#skycaddy" data-sec="skycaddy">Sky Caddy</a>
+      <a href="#golf" data-sec="golf">Golf</a>
       <a href="#process" data-sec="process">Process</a>
       <a href="#about" data-sec="about">About</a>
     </nav>
@@ -690,7 +737,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <a href="#top" style="--i:0">Home</a>
   <a href="#capabilities" style="--i:1">Services</a>
   <a href="#work" style="--i:2">Work</a>
-  <a href="skycaddy/" style="--i:3">Play Sky Caddy</a>
+  <a href="#golf" style="--i:3">Golf</a>
   <a href="#process" style="--i:4">Process</a>
   <a href="#contact" style="--i:5">Begin a Project</a>
   <div class="mm-foot">(803) 920-5349 &middot; Hilton Head Island, SC</div>
@@ -890,6 +937,38 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   </div>
 </section>
 
+<!-- 4b. THE GOLF COLLECTION -->
+<section id="golf" class="gc" aria-labelledby="golf-title">
+  <div class="wrap">
+    <div class="gc-head">
+      <div>
+        <span class="kicker">The golf collection</span>
+        <h2 id="golf-title" data-split>Every hole, <em>from above.</em></h2>
+      </div>
+      <div>
+        <p class="lede rv">Aerial photography, cinematic flyovers and playable 3D course models for the Lowcountry&rsquo;s courses, clubs and resorts. Golfers see the course before they book the tee time.</p>
+        <a class="btn btn-line rv" href="skycaddy/" data-cursor="Play">Play Sky Caddy &middot; Hole 10 <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+    <div class="gc-grid">
+      <figure class="gc-a rv" data-cursor="View"><img src="assets/lux/golf-hole10-bird.webp" alt="Morning light over a lagoon on Hole 10, a bird crossing the sky" width="1674" height="940" loading="lazy" decoding="async" data-pz><figcaption><span>Hole 10</span>Morning light on the lagoon</figcaption></figure>
+      <figure class="gc-b rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-island-green.webp" alt="Island green surrounded by water, straight down from a drone" width="1674" height="940" loading="lazy" decoding="async" data-pz><figcaption><span>Overhead</span>The island green</figcaption></figure>
+      <figure class="gc-c rv" data-d="2" data-cursor="View"><img src="assets/lux/golf-sunset-tee.webp" alt="Fairway, marsh and resort at sunset, shot by drone" width="1294" height="1216" loading="lazy" decoding="async" data-pz><figcaption><span>Golden hour</span>Last light on the fairway</figcaption></figure>
+      <figure class="gc-d rv" data-cursor="View"><img src="assets/lux/golf-noon-green.webp" alt="Oceanfront golf hole between the beach and the marsh" width="1677" height="938" loading="lazy" decoding="async" data-pz><figcaption><span>Oceanfront</span>Beach, links and marsh</figcaption></figure>
+      <figure class="gc-e rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-full-course.webp" alt="Full golf course with lagoons at sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The layout</span>The whole course in one frame</figcaption></figure>
+      <figure class="gc-f rv" data-d="2" data-cursor="View"><img src="assets/lux/golf-green-fairway.webp" alt="Green and bunkers with the ocean sunset behind" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Green, bunkers and the Atlantic</figcaption></figure>
+      <a class="gc-band rv" href="skycaddy/" data-cursor="Play">
+        <img src="assets/lux/golf-sunset-zoom.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" data-pz>
+        <span class="gc-band-in">
+          <span class="kicker">Sky Caddy &middot; interactive 3D</span>
+          <span class="gc-band-t">Play the hole <em>before you play it.</em></span>
+          <span class="gc-band-go">Enter the course <span class="arrow" aria-hidden="true">&rarr;</span></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- 5. THE REEL -->
 <section class="reel" id="reel" aria-labelledby="reel-title">
   <div class="wrap">
@@ -907,6 +986,24 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
           <button type="button" id="reel-sound" aria-pressed="false">Sound off</button>
           <a href="https://www.youtube.com/watch?v=8bVvm4GSDu8" target="_blank" rel="noopener">Open on YouTube</a>
         </div>
+      </div>
+    </div>
+
+    <div class="feed">
+      <div class="feed-copy">
+        <span class="kicker">Made for the feed</span>
+        <h3 data-split>Vertical cuts that <em>stop the scroll.</em></h3>
+        <p class="lede rv">Shot, cut and scored for Reels, TikTok and Shorts, with the hook in the first second. Tap a phone to hear it.</p>
+      </div>
+      <div class="feed-phones">
+        <button class="phone rv" type="button" data-cursor="Sound" aria-label="Play the Hilton Head reel with sound">
+          <video muted loop playsinline preload="none" poster="assets/lux/hhi-reel.webp" data-src="assets/lux/hhi-reel.mp4" data-webm="assets/lux/hhi-reel.webm" aria-hidden="true" tabindex="-1"></video>
+          <span class="phone-tag">Outer space to Hilton Head</span><span class="phone-snd" aria-hidden="true">Tap for sound</span>
+        </button>
+        <button class="phone rv" data-d="1" type="button" data-cursor="Sound" aria-label="Play the beach bulldozer clip with sound">
+          <video muted loop playsinline preload="none" poster="assets/lux/bulldozer.webp" data-src="assets/lux/bulldozer.mp4" data-webm="assets/lux/bulldozer.webm" aria-hidden="true" tabindex="-1"></video>
+          <span class="phone-tag">The viral one</span><span class="phone-snd" aria-hidden="true">Tap for sound</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1080,6 +1177,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 </aside>
 
 <footer class="ft">
+  <div class="ft-bg" data-pz-bg aria-hidden="true"></div>
   <div class="wrap">
     <a class="ft-cta" href="#contact" data-cursor="Begin">
       <span class="kicker">Ready when you are</span>
@@ -1094,6 +1192,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <h4>Studio</h4>
         <a href="#capabilities">Services</a>
         <a href="#work">Selected work</a>
+        <a href="#golf">The golf collection</a>
         <a href="skycaddy/">Sky Caddy &middot; Hole 10</a>
         <a href="#process">The flight plan</a>
       </div>
@@ -1216,7 +1315,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         es.forEach(function (en) {
           var v = en.target, p;
           if (en.isIntersecting) {
-            if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-portrait') && W.innerWidth / W.innerHeight < 0.8) ? v.getAttribute('data-portrait') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
+            if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-webm') && !v.canPlayType('video/mp4; codecs="avc1.42E01E"')) ? v.getAttribute('data-webm') : (v.getAttribute('data-portrait') && W.innerWidth / W.innerHeight < 0.8) ? v.getAttribute('data-portrait') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
             p = v.play(); if (p && p.catch) p.catch(function () {});
           } else v.pause();
         });
@@ -1504,6 +1603,19 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
+
+    /* ---------- feed phones: tap one for sound, the other goes quiet ---------- */
+    var phones = $$('.feed .phone');
+    phones.forEach(function (ph) {
+      var v = $('video', ph);
+      ph.addEventListener('click', function () {
+        var on = v.muted;
+        phones.forEach(function (o) { var ov = $('video', o); ov.muted = true; o.classList.remove('loud'); });
+        if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-webm') && !v.canPlayType('video/mp4; codecs="avc1.42E01E"')) ? v.getAttribute('data-webm') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
+        if (on) { v.muted = false; try { v.currentTime = 0; } catch (e) {} ph.classList.add('loud'); }
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+      });
+    });
 
     /* ---------- sticky mobile CTA ---------- */
     var sticky = $('#sticky-mobile-cta');
