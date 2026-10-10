@@ -16,11 +16,14 @@
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#070807">
 <link rel="canonical" href="https://aboveallmediasc.com/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/lux/icon-32.png">
+<link rel="apple-touch-icon" href="assets/lux/icon-180.png">
 
 <meta property="og:title" content="Above All Media | Drone &amp; Cinematic Video, Hilton Head Island">
 <meta property="og:description" content="Cinematic video and drone content built to make Hilton Head businesses look like the market leader — and generate more leads doing it.">
-<meta property="og:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
-<meta property="og:image:secure_url" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
+<meta property="og:image" content="https://aboveallmediasc.com/assets/lux/og.jpg">
+<meta property="og:image:secure_url" content="https://aboveallmediasc.com/assets/lux/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://aboveallmediasc.com/">
@@ -29,7 +32,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Above All Media | Drone &amp; Cinematic Video, Hilton Head Island">
 <meta name="twitter:description" content="Cinematic video and drone content built to make Hilton Head businesses look like the market leader.">
-<meta name="twitter:image" content="https://aboveallmediasc.com/assets/images/social-preview.jpg">
+<meta name="twitter:image" content="https://aboveallmediasc.com/assets/lux/og.jpg">
 
 <link rel="preload" as="image" href="assets/descent/d/001.webp" media="(min-aspect-ratio:4/5)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/descent/m/001.webp" media="(max-aspect-ratio:4/5)" fetchpriority="high">
@@ -43,7 +46,7 @@
   "url": "https://aboveallmediasc.com/",
   "telephone": "+1-803-920-5349",
   "description": "Cinematic video and licensed drone content for Hilton Head real estate, hospitality, and coastal brands.",
-  "image": "https://aboveallmediasc.com/assets/images/social-preview.jpg",
+  "image": "https://aboveallmediasc.com/assets/lux/og.jpg",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Hilton Head Island",
@@ -356,7 +359,7 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .gc-h{grid-column:span 4}
 .gc-i,.gc-j{grid-column:span 6;aspect-ratio:16/10}
 .gc-k{grid-column:span 5;aspect-ratio:5/4}.gc-l{grid-column:span 7}
-.gc-film{position:relative;display:block;width:100%;aspect-ratio:16/9;max-height:86vh;margin:0 0 14px;padding:0;border:0;border-radius:3px;overflow:hidden;cursor:pointer;background:#0b0b0a url(assets/lux/hole10-film.webp) center/cover;text-align:left;color:var(--ink)}
+.gc-film{position:relative;display:block;width:100%;aspect-ratio:16/9;max-height:86vh;margin:0 0 14px;padding:0;border:0;border-radius:3px;overflow:hidden;cursor:pointer;background:#0b0b0a;text-align:left;color:var(--ink)}
 .has-cur .gc-film{cursor:none}
 .gc-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s}
 .gc-film video.is-playing{opacity:1}
@@ -447,6 +450,7 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 /* ---------- 8. contact ---------- */
 .ct{position:relative;overflow:hidden;padding:clamp(110px,12vw,180px) 0;background:#050605;isolation:isolate}
 .ct-bg{position:absolute;inset:-10% 0;z-index:-1;background:url(assets/lux/marsh.webp) center/cover;opacity:.32;filter:saturate(.9);will-change:transform}
+.js .ct-bg:not(.near),.js .ft-bg:not(.near),.js .sc-bg:not(.near){background-image:none}
 .ct-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#050605 0%,rgba(5,6,5,.55) 30%,rgba(5,6,5,.75) 70%,#050605 100%)}
 .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,6vw,100px);align-items:start}
 .ct-side h2{font-size:clamp(46px,5.6vw,96px);margin:18px 0 26px}
@@ -486,7 +490,7 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .ft-big .arrow{font-family:var(--font-body);font-weight:200;font-size:.6em;color:var(--gold-l);vertical-align:.1em}
 .ft-cta:hover .ft-big{color:var(--gold-l)}
 .ft-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding:56px 0}
-.ft-row h4{margin-bottom:16px;font:500 10px var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--muted-soft)}
+.ft-row .ft-h{margin:0 0 16px;font:500 10px var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--muted-soft)}
 .ft-row p,.ft-row a{display:block;color:var(--muted);font-weight:300;line-height:2}
 .ft-row a:hover{color:var(--gold-l)}
 .ft-brand img{height:44px;width:auto;margin-bottom:18px}
@@ -829,7 +833,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <div class="sc-bg" aria-hidden="true"></div>
   <div class="sc-frame">
     <img src="skycaddy/media/aam_golfball_poster.jpg" alt="" width="720" height="1280" loading="lazy" decoding="async">
-    <video id="sc-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1" poster="skycaddy/media/aam_golfball_poster.jpg" data-mp4="skycaddy/media/aam_golfball.mp4" data-webm="skycaddy/media/aam_golfball.webm"></video>
+    <video id="sc-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1" data-poster="skycaddy/media/aam_golfball_poster.jpg" data-mp4="skycaddy/media/aam_golfball.mp4" data-webm="skycaddy/media/aam_golfball.webm"></video>
   </div>
   <div class="sc-flash" aria-hidden="true"></div>
   <button class="sc-sound" id="sc-sound" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="sc-sound-label">Sound on</span></button>
@@ -989,7 +993,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       </div>
     </div>
     <button class="gc-film rv" id="gc-film" type="button" data-cursor="Sound" aria-label="Play the Hole 10 film with sound">
-      <video muted loop playsinline preload="none" poster="assets/lux/hole10-film.webp" data-src="assets/lux/hole10-film.mp4" data-webm="assets/lux/hole10-film.webm" aria-hidden="true" tabindex="-1"></video>
+      <video muted loop playsinline preload="none" data-poster="assets/lux/hole10-film.webp" data-src="assets/lux/hole10-film.mp4" data-webm="assets/lux/hole10-film.webm" aria-hidden="true" tabindex="-1"></video>
       <span class="gc-film-in">
         <span class="kicker">Hole 10 &middot; The film</span>
         <span class="gc-film-t">Tee to ocean, <em>in one take of light.</em></span>
@@ -1050,11 +1054,11 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       </div>
       <div class="feed-phones">
         <button class="phone rv" type="button" data-cursor="Sound" aria-label="Play the Hilton Head reel with sound">
-          <video muted loop playsinline preload="none" poster="assets/lux/hhi-reel.webp" data-src="assets/lux/hhi-reel.mp4" data-webm="assets/lux/hhi-reel.webm" aria-hidden="true" tabindex="-1"></video>
+          <video muted loop playsinline preload="none" data-poster="assets/lux/hhi-reel.webp" data-src="assets/lux/hhi-reel.mp4" data-webm="assets/lux/hhi-reel.webm" aria-hidden="true" tabindex="-1"></video>
           <span class="phone-tag">Outer space to Hilton Head</span><span class="phone-snd" aria-hidden="true">Tap for sound</span>
         </button>
         <button class="phone rv" data-d="1" type="button" data-cursor="Sound" aria-label="Play the beach bulldozer clip with sound">
-          <video muted loop playsinline preload="none" poster="assets/lux/bulldozer.webp" data-src="assets/lux/bulldozer.mp4" data-webm="assets/lux/bulldozer.webm" aria-hidden="true" tabindex="-1"></video>
+          <video muted loop playsinline preload="none" data-poster="assets/lux/bulldozer.webp" data-src="assets/lux/bulldozer.mp4" data-webm="assets/lux/bulldozer.webm" aria-hidden="true" tabindex="-1"></video>
           <span class="phone-tag">The viral one</span><span class="phone-snd" aria-hidden="true">Tap for sound</span>
         </button>
       </div>
@@ -1230,7 +1234,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 </aside>
 
 <footer class="ft">
-  <div class="ft-bg" data-pz-bg aria-hidden="true"><video muted loop playsinline preload="none" poster="assets/lux/sunset-sea.webp" data-src="assets/lux/sunset-sea.mp4" data-webm="assets/lux/sunset-sea.webm" tabindex="-1"></video></div>
+  <div class="ft-bg" data-pz-bg aria-hidden="true"><video muted loop playsinline preload="none" data-poster="assets/lux/sunset-sea.webp" data-src="assets/lux/sunset-sea.mp4" data-webm="assets/lux/sunset-sea.webm" tabindex="-1"></video></div>
   <div class="wrap">
     <a class="ft-cta" href="#contact" data-cursor="Begin">
       <span class="kicker">Ready when you are</span>
@@ -1242,7 +1246,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <p>Cinematic film, licensed aerial and social for Hilton Head Island, Bluffton, Beaufort and the Lowcountry.</p>
       </div>
       <div>
-        <h4>Studio</h4>
+        <h3 class="ft-h">Studio</h3>
         <a href="#capabilities">Services</a>
         <a href="#work">Selected work</a>
         <a href="#golf">The golf collection</a>
@@ -1250,7 +1254,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <a href="#process">The flight plan</a>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h3 class="ft-h">Contact</h3>
         <a href="tel:+18039205349">(803) 920-5349</a>
         <a href="sms:+18039205349">Text Chandler</a>
         <a href="#contact">Begin a project</a>
@@ -1305,8 +1309,9 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   if (mfText) {
     var gold = (mfText.getAttribute('data-gold') || '').split(',');
     var words = mfText.textContent.trim().split(/\s+/);
-    mfText.setAttribute('aria-label', mfText.textContent.trim());
+    var full = mfText.textContent.trim();
     mfText.textContent = '';
+    var sr = d.createElement('span'); sr.className = 'sr-only'; sr.textContent = full; mfText.appendChild(sr);
     words.forEach(function (w, i) {
       var s = d.createElement('span'); s.className = 'w' + (gold.indexOf(w) > -1 ? ' g' : ''); s.textContent = w; s.setAttribute('aria-hidden', 'true');
       mfText.appendChild(s); if (i < words.length - 1) mfText.appendChild(d.createTextNode(' '));
@@ -1361,6 +1366,15 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
       revealEls.forEach(function (el) { if (!el.closest('#top')) rio.observe(el); });
     } else revealEls.forEach(function (el) { el.classList.add('in'); });
+
+    /* ---------- hold heavy backgrounds and posters until their section is close ---------- */
+    (function () {
+      var near = $$('.ct-bg, .ft-bg, .sc-bg, video[data-poster]');
+      function wake(el) { el.classList.add('near'); var ps = el.getAttribute('data-poster'); if (ps && !el.getAttribute('poster')) el.setAttribute('poster', ps); }
+      if (!('IntersectionObserver' in W)) { near.forEach(wake); return; }
+      var nio = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { wake(e.target); nio.unobserve(e.target); } }); }, { rootMargin: '1200px 0px' });
+      near.forEach(function (el) { nio.observe(el); });
+    })();
 
     /* ---------- lazy loop videos ---------- */
     if (!still && 'IntersectionObserver' in W) {
