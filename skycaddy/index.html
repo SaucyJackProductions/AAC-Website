@@ -13,6 +13,8 @@
 <meta property="og:url" content="https://aboveallmediasc.com/skycaddy/"><meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="../assets/lux/icon-32.png"><link rel="apple-touch-icon" href="../assets/lux/icon-180.png">
+<script>/* arriving from the homepage swing film: that crash already played there, so open straight onto the course */ if (/[?&]from=film\b/.test(location.search)) document.documentElement.classList.add('skipfilm');</script>
+<style>html.skipfilm #intro-vid{display:none!important}</style>
 <style>/* same base styles the Claude artifact frame applies, so the game looks identical here */:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <style>
   :root {
@@ -2182,6 +2184,14 @@ function topLift(v){
   var up = new THREE.Vector3(-Math.sin(v.theta), 0, -Math.cos(v.theta));            // screen-up on the ground for this heading
   return { theta:v.theta, phi:v.phi, dist:v.dist, target:v.target.clone().addScaledVector(up, (1 - 2*f)*half) };
 }
+// TOP-DOWN: the framing Chandler set by hand -- hole straight up the screen, pin at the top, beach above
+var TOP_EXACT = { theta:1.99283, phi:0.13195, dist:256.38, target:new THREE.Vector3(11.562, 0, 1.337) };
+// the same as pressing Rotate-left/right in place (see lookAround): the camera stays put and turns by dYaw
+function yawView(v, dYaw){
+  function dir(th){ return new THREE.Vector3(Math.sin(v.phi)*Math.sin(th), Math.cos(v.phi), Math.sin(v.phi)*Math.cos(th)); }
+  var cam = v.target.clone().addScaledVector(dir(v.theta), v.dist), th = v.theta + dYaw;
+  return { theta:th, phi:v.phi, dist:v.dist, target:cam.addScaledVector(dir(th), -v.dist) };
+}
 // OVERVIEW, landscape screens: the framing Chandler set by hand -- whole hole from the Gold tee to the pin, ocean along the top
 var OV_EXACT = { theta:1.93197, phi:1.14662, dist:56.36, target:new THREE.Vector3(49.893, 1.430, -8.428) };
 // same angle on tall phone screens, pulled back and re-centred so the whole hole fits between the compass and the buttons
@@ -2253,14 +2263,16 @@ function oceanPan(){
     }
   }, 1250);
 }
-function animateTo(view, dur){
-  dur = dur||900;
+var ANIM_ID = 0;   // a newer camera move (or a shot) cancels any older one still running
+function animateTo(view, dur, done){
+  dur = dur||900; var id = ++ANIM_ID;
   var startT = camTheta, startP = camPhi, startD = camDist, startTarget = target.clone();
   var endT = view.theta, endP = view.phi, endD = view.dist, endTarget = view.target;
   while (endT-startT > Math.PI) endT -= 2*Math.PI;
   while (endT-startT < -Math.PI) endT += 2*Math.PI;
   var t0 = performance.now();
   function step(now){
+    if (id !== ANIM_ID) return;
     var k = Math.min(1,(now-t0)/dur);
     var e = k<0.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2; // ease
     camTheta = startT + (endT-startT)*e;
@@ -2268,7 +2280,7 @@ function animateTo(view, dur){
     camDist = startD + (endD-startD)*e;
     target.lerpVectors(startTarget, endTarget, e);
     updateCamera();
-    if (k<1) requestAnimationFrame(step);
+    if (k<1) requestAnimationFrame(step); else if (done) done();
   }
   requestAnimationFrame(step);
 }
@@ -2284,7 +2296,8 @@ document.querySelectorAll('.view-btn[data-view]').forEach(function(btn){
     var vw = views[btn.dataset.view];
     // portrait phones: pull the tee-box view back so every hitting point fits
     if (btn.dataset.view === 'tee' && innerWidth < innerHeight) vw = { theta:vw.theta, phi:vw.phi, dist:vw.dist*1.3, target:vw.target };
-    if (btn.dataset.view === 'top') vw = topAim(vw);
+    if (btn.dataset.view === 'tee') vw = yawView(vw, 2*0.035);   // then two clicks of Rotate-left, so more of the hole is in view
+    if (btn.dataset.view === 'top') vw = TOP_EXACT;   // the exact Top-down framing Chandler picked (2026-10-11 screenshot); fits phones too
     var ZIN = { hero:0.88*0.88, green:0.79*0.79 }[btn.dataset.view];   // Overview 12% closer, Green 21% closer (same aim)
     if (ZIN) vw = { theta:vw.theta, phi:vw.phi, dist:btn.dataset.view === 'hero' ? (vw.dist*ZIN + 169*FT)*0.88 : vw.dist*ZIN, target:vw.target };   // Overview: then 169 ft back and 12% in
     if (btn.dataset.view === 'hero') vw = innerWidth >= innerHeight ? OV_EXACT : OV_EXACT_TALL;   // the exact framing Chandler picked (2026-10-11 screenshot)
@@ -2715,7 +2728,8 @@ function updateTeeLabels(){
   // From the air, the five tee names move out to the left, over the marsh, each with a diagonal
   // lead line back to its tee, so the tees, fairway and green underneath stay clear.
   var camAlt = camera.position.y - groundHeightAt(camera.position.x, camera.position.z), aerial = camAlt > 12;
-  var TEE_DROP = (rect.width < 600 && document.querySelector('.view-btn.active[data-view="tee"]')) ? 96 : 0;
+  var TEE_VIEW = !!document.querySelector('.view-btn.active[data-view="tee"]') && !window.__skyPlay;
+  var TEE_DROP = (rect.width < 600 && TEE_VIEW) ? 96 : 0;
   var teeXs = items.filter(function(it){ return it.i <= 4 && !teeMarkers[it.i].isPin && !it.behind; }).map(function(it){ return it.sx; });
   var col = teeXs.length ? Math.min.apply(null, teeXs) - (rect.width < 600 ? 92 : 210) : 0;   // pushed further out toward the edge, clear of the tees
   items.forEach(function(it){ var ld = TEE_LEADS[it.i]; if (ld) ld.style.display = 'none'; });
@@ -2728,19 +2742,23 @@ function updateTeeLabels(){
     el.style.display = '';
     var wpx = el.offsetWidth || 160, hpx = el.offsetHeight || 50;
     var side = aerial && !tmk.isPin;   // every tee name, Black included, sits out over the marsh
-    var x = side ? Math.max(wpx/2 + 8, col - wpx/2) : Math.max(wpx/2+8, Math.min(rect.width-wpx/2-96, it.sx)); // stay clear of the height control
-    var y = side ? Math.max(hpx + 64, Math.min(rect.height - (rect.width < 600 ? 232 : 122), ctlTop(rect), it.sy + hpx/2)) : Math.max(hpx+64, it.sy);
-    if (TEE_DROP && !tmk.isPin) y = Math.min(ctlTop(rect) - 4, y + TEE_DROP);   // phones, Tee view: names drop an inch, clear of the compass, weather and radar   // aerial names stay above the bottom controls            // keep on screen (below the title bar)
+    var beside = TEE_VIEW && !tmk.isPin;   // Tee view: each name sits just to the right of its own tee, up off the box, on a short thread
+    var x = beside ? Math.max(wpx/2 + 8, Math.min(rect.width - wpx/2 - (rect.width < 600 ? 96 : 104), it.sx + (rect.width < 600 ? 10 : 16) + wpx/2))
+          : side ? Math.max(wpx/2 + 8, col - wpx/2) : Math.max(wpx/2+8, Math.min(rect.width-wpx/2-96, it.sx)); // stay clear of the height control
+    var y = beside ? Math.max(hpx + 64, Math.min(ctlTop(rect) - 4, it.sy - (rect.width < 600 ? 4 : 8)))
+          : side ? Math.max(hpx + 64, Math.min(rect.height - (rect.width < 600 ? 232 : 122), ctlTop(rect), it.sy + hpx/2)) : Math.max(hpx+64, it.sy);
+    if (TEE_DROP && !tmk.isPin && !beside) y = Math.min(ctlTop(rect) - 4, y + TEE_DROP);   // phones, Tee view: names drop an inch, clear of the compass, weather and radar   // aerial names stay above the bottom controls            // keep on screen (below the title bar)
     for (var guard=0; guard<12; guard++){
       var hitP = null; placed.forEach(function(p){ if (!hitP && Math.abs(p.x-x) < (p.w+wpx)/2+6 && Math.abs(p.y-y) < (p.h+hpx)/2+1) hitP = p; });
       if (!hitP) break;
       if (overhead) x = hitP.x + (hitP.w+wpx)/2 + 8;   // overhead: side by side, in a row at the tees
-      else y = hitP.y - (hitP.h + hpx)/2 - 2;           // stack just above, almost touching
+      else { y = hitP.y - (hitP.h + hpx)/2 - 2;         // stack just above, almost touching
+        if (beside) x = Math.max(wpx/2 + 8, hitP.x - hitP.w/2 + wpx/2); }   // Tee view: the stack shares one left edge, so it reads as a neat column
     }
     placed.push({x:x,y:y,w:wpx,h:hpx});
     LBL_RECTS.push({ l:x - wpx/2, r:x + wpx/2, t:y - hpx, b:y });
     el.style.left = x+'px'; el.style.top = y+'px';
-    if (side){ var ld = TEE_LEADS[it.i], ax = x + wpx/2 - 2, ay = y - hpx/2, ex = it.sx, ey = it.sy, cT = ctlTop(rect);
+    if (side || beside){ var ld = TEE_LEADS[it.i], ax = beside ? x - wpx/2 + 2 : x + wpx/2 - 2, ay = y - hpx/2, ex = it.sx, ey = it.sy, cT = ctlTop(rect);
       if (ey > cT && cT > ay){ ex = ax + (ex - ax)*(cT - ay)/(ey - ay); ey = cT; }      // the thread stops at the controls: nothing runs across the buttons
       var dx = ex - ax, dy = ey - ay, L = Math.hypot(dx, dy);
       if (L > 8){ ld.style.display = ''; ld.style.left = ax + 'px'; ld.style.top = ay + 'px'; ld.style.width = L.toFixed(1) + 'px';
@@ -3980,7 +3998,13 @@ var LIE_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABj8AAALqCAAAAABP7Rn
     $('bag-log').innerHTML = P.log.slice(-4).map(function(l){ return '<li><b>' + l.n + '</b> ' + l.club + ' <span>' + l.txt + '</span></li>'; }).join('');
     updateAim();
   }
-  var CAM_MODE = 'eye';                                             // 'eye' = a golfer's eyes behind the ball, 'high' = up 69 ft looking down 33 deg
+  // Playing cameras, cycled by the little switch:
+  //  'eye'  = Eye level, the normal view: behind the ball, 33 ft back and 33 ft up (21 + 21 more than before, so the ball shows on the ground)
+  //  'sky'  = Sky Caddy eye level: the same line, raised 220 ft, then drifting up to 369 ft
+  //  'high' = up 69 ft looking down 33 deg
+  var CAM_MODE = 'eye', CAM_ORDER = ['eye', 'sky', 'high'];
+  var EYE_BACK = 12 + 21, EYE_UP = 12 + 21, BALL_ROOM = 14;           // ft, ft, and the ball sits this many degrees below the middle of the frame
+  var SKY_UP0 = 220, SKY_UP1 = 369, SKY_DRIFT = 9000;                  // ft, ft, ms
   function behindBall(dur){
     var T = cup, dir = new THREE.Vector3(T.x - P.pos.x, 0, T.z - P.pos.z), d = dir.length(); dir.normalize();
     var green = P.lie === 3 || d*YPU < 30, cam, look;
@@ -3988,20 +4012,38 @@ var LIE_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABj8AAALqCAAAAABP7Rn
       cam = P.pos.clone().addScaledVector(dir, -1.6); cam.y = gy(cam.x, cam.z) + 69*FT;
       var pit = 33*Math.PI/180, L = (cam.y - gy(P.pos.x, P.pos.z))/Math.sin(pit);
       look = cam.clone().add(new THREE.Vector3(dir.x*Math.cos(pit)*L, -Math.sin(pit)*L, dir.z*Math.cos(pit)*L));
+    } else if (CAM_MODE === 'sky'){
+      // Sky Caddy: up over the ball, looking down the line of the shot; once there, it keeps drifting higher
+      var skyAt = function(ft){ var c = P.pos.clone().addScaledVector(dir, -0.95 - EYE_BACK*FT); c.y = gy(c.x, c.z) + (5.6 + ft)*FT; return c; };
+      look = P.pos.clone().addScaledVector(dir, green ? Math.min(d, 2.4) : Math.min(d*0.55, 24)); look.y = gy(look.x, look.z);
+      var lk = look.clone(), t1 = (dur || 1300);
+      autoRotate = false; P.readyAt = performance.now() + t1*0.85;
+      animateTo(viewFrom(skyAt(SKY_UP0), lk), t1, function(){ if (CAM_MODE === 'sky' && !P.busy) animateTo(viewFrom(skyAt(SKY_UP1), lk), SKY_DRIFT); });
+      return;
     } else {
-      cam = P.pos.clone().addScaledVector(dir, (green ? -0.75 : -0.95) - 12*FT); cam.y = gy(cam.x, cam.z) + (5.6 + 12)*FT;   // eye level, then 12 ft up and 12 ft back
+      cam = P.pos.clone().addScaledVector(dir, (green ? -0.75 : -0.95) - EYE_BACK*FT); cam.y = gy(cam.x, cam.z) + (5.6 + EYE_UP)*FT;   // eye level, then 33 ft up and 33 ft back
       look = P.pos.clone().addScaledVector(dir, green ? Math.min(d, 2.4) : Math.min(d*0.55, 24)); look.y = gy(look.x, look.z) + (green ? 0.05 : 0.35);
-      var lv = look.clone().sub(cam), hl = Math.hypot(lv.x, lv.z), pit0 = Math.atan2(lv.y, hl), pit1 = pit0 + (window.__skyPlay ? 4 : 21)*Math.PI/180, LL = lv.length();   // tilted up 21 deg (4 deg in a Sky round, so the fairway shows above the shot panel)
-      look = cam.clone().add(new THREE.Vector3(lv.x/hl*Math.cos(pit1)*LL, Math.sin(pit1)*LL, lv.z/hl*Math.cos(pit1)*LL));
+      // aim so the ball sits on the ground in the lower part of the frame, the line of the shot running up the screen to the flag
+      var bx = P.pos.x - cam.x, bz = P.pos.z - cam.z, ballDip = Math.atan2(cam.y - gy(P.pos.x, P.pos.z), Math.hypot(bx, bz));
+      var pit1 = -(ballDip - BALL_ROOM*Math.PI/180), LL = 30;
+      look = cam.clone().add(new THREE.Vector3(dir.x*Math.cos(pit1)*LL, Math.sin(pit1)*LL, dir.z*Math.cos(pit1)*LL));
     }
     autoRotate = false; animateTo(viewFrom(cam, look), dur || 1300); P.readyAt = performance.now() + (dur || 1300)*0.85;
   }
+  // on Hit: the camera swoops in to just behind the ball, then the club comes through
+  function zoomToBall(done){
+    var dir = new THREE.Vector3(cup.x - P.pos.x, 0, cup.z - P.pos.z), d = dir.length(); dir.normalize();
+    var cam = P.pos.clone().addScaledVector(dir, -0.95 - 4*FT); cam.y = gy(cam.x, cam.z) + (5.6 + 3)*FT;
+    var look = P.pos.clone().addScaledVector(dir, Math.min(d*0.55, 24)); look.y = gy(look.x, look.z) + 0.35;
+    animateTo(viewFrom(cam, look), 650, done);
+  }
   function syncOrbit(){ var off = camera.position.clone().sub(target); camDist = off.length(); camTheta = Math.atan2(off.x, off.z); camPhi = Math.acos(clamp(off.y/camDist, -1, 1)); }
-  // the little switch: eye level <-> 69 ft up
+  // the little switch: Eye level -> Sky Caddy -> 69 ft up
   var camBtn = document.createElement('button'); camBtn.id = 'cam-toggle'; camBtn.type = 'button';
-  function camLabel(){ camBtn.innerHTML = CAM_MODE === 'eye' ? '&#128065; Eye level' : '&#11014; 69 ft up'; }
+  function camLabel(){ camBtn.innerHTML = CAM_MODE === 'eye' ? '&#128065; Eye level' : CAM_MODE === 'sky' ? '&#9729; Sky Caddy' : '&#11014; 69 ft up'; }
   camLabel(); document.getElementById('canvas-wrap').appendChild(camBtn);
-  camBtn.addEventListener('click', function(){ CAM_MODE = CAM_MODE === 'eye' ? 'high' : 'eye'; camLabel(); if (P.on && !P.busy) behindBall(900); });
+  window.__camIcon = function(){ return CAM_MODE === 'high' ? '&#11014;' : CAM_MODE === 'sky' ? '&#9729;' : '&#128065;'; };
+  camBtn.addEventListener('click', function(){ CAM_MODE = CAM_ORDER[(CAM_ORDER.indexOf(CAM_MODE) + 1) % CAM_ORDER.length]; camLabel(); if (P.on && !P.busy) behindBall(900); });
   // ---- round control
   function startRound(teeIdx){
     if (typeof stopTour === 'function') stopTour(false);
@@ -4131,11 +4173,12 @@ var LIE_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABj8AAALqCAAAAABP7Rn
     // a ball that tracks over the cup on the green drops -- an approach or chip can be holed
     if (S.haz < 0 && lieAt(cup) === 3){ var sx = S.rest.x - S.C.x, sz = S.rest.z - S.C.z, sl = sx*sx + sz*sz, u = sl > 1e-9 ? Math.max(0, Math.min(1, ((cup.x - S.C.x)*sx + (cup.z - S.C.z)*sz)/sl)) : 0;
       var q = new THREE.Vector3(S.C.x + sx*u, 0, S.C.z + sz*u); q.y = gy(q.x, q.z); if (yds(q, cup)*3 < 0.7){ S.rest = cup.clone(); S.holeOut = true; } }
-    SFX.strike(P.club === 0 ? 'driver' : (c.wedge ? 'wedge' : 'iron'));
     P.busy = true; ui();
-    setTimeout(function(){                                            // the takeaway: the ball leaves on the strike, not before it
-      if (window.__onLaunch) window.__onLaunch(S);
-      fly(start, S.C, S.rest, apex, S.carry, function(){ settle(start, S.rest, S.haz, c, mis, S.C, S.why); }); }, 240);
+    zoomToBall(function(){                                            // zoom in to the ball first, then the strike
+      SFX.strike(P.club === 0 ? 'driver' : (c.wedge ? 'wedge' : 'iron'));
+      setTimeout(function(){                                          // the takeaway: the ball leaves on the strike, not before it
+        if (window.__onLaunch) window.__onLaunch(S);
+        fly(start, S.C, S.rest, apex, S.carry, function(){ settle(start, S.rest, S.haz, c, mis, S.C, S.why); }); }, 240); });
   }
   function fly(A, C, R, apex, carry, done){
     var dur = 1300 + carry*YPU*7.5, roll = Math.max(0.25, Math.hypot(R.x - C.x, R.z - C.z))*YPU, rollDur = clamp(roll*22, 0, 900);
@@ -4530,7 +4573,7 @@ var SKY = (function(){
     clearObjs(planObjs);
     var P = G.state, d = G.yds(P.pos, G.cup), pl = playsLike(d), w = window.__wx ? window.__wx() : null, putting = P.lie === 3; OPTS = options(P.pos, P.lie);
     var html = '<div class="sky-sh"><b>' + (putting ? fmtFt(d) + ' putt' : yd(d) + ' to the pin') + '</b><span>' + G.LIE[P.lie] + (w && pl.txt ? ' &middot; ' + pl.txt : '') + ' &middot; Stroke ' + (P.strokes + 1) + '</span>' +
-        '<button class="sky-cam" data-cam aria-label="Switch camera" title="Eye level / 69 ft up">' + (G.camMode && G.camMode() === 'high' ? '&#11014;' : '&#128065;') + '</button><button class="sky-x" data-quit aria-label="End round">&times;</button></div>' +
+        '<button class="sky-cam" data-cam aria-label="Switch camera" title="Eye level / Sky Caddy / 69 ft up">' + (window.__camIcon ? window.__camIcon() : '&#128065;') + '</button><button class="sky-x" data-quit aria-label="End round">&times;</button></div>' +
       '<div class="sky-chipsrow">' + OPTS.map(function(o){ return '<button class="sky-oc ' + o.key + '" data-k="' + o.key + '">' + (o.pick ? '<em>Sky&rsquo;s pick</em>' : '') + '<b>' + o.name + '</b><span></span><i><u></u></i></button>'; }).join('') + '</div>' +
       '<div class="sky-tune">' +
         '<div class="tn"><button type="button" data-t="club" data-v="-1" aria-label="Longer club"' + (putting ? ' disabled' : '') + '>&lsaquo;</button><div><small>Club</small><b id="sky-tc"></b></div><button type="button" data-t="club" data-v="1" aria-label="Shorter club"' + (putting ? ' disabled' : '') + '>&rsaquo;</button></div>' +
@@ -4542,7 +4585,7 @@ var SKY = (function(){
     var s = sheet('sky-decide', html, 'strip');
     s.querySelector('[data-quit]').onclick = endRound;
     s.querySelector('[data-hit]').onclick = fire;
-    s.querySelector('[data-cam]').onclick = function(){ var cb = $('cam-toggle'); if (cb) cb.click(); this.innerHTML = G.camMode && G.camMode() === 'high' ? '&#11014;' : '&#128065;'; };
+    s.querySelector('[data-cam]').onclick = function(){ var cb = $('cam-toggle'); if (cb) cb.click(); this.innerHTML = (window.__camIcon ? window.__camIcon() : '&#128065;'); };
     s.querySelectorAll('[data-k]').forEach(function(b){ b.onclick = function(){ load(b.dataset.k); }; });
     s.querySelectorAll('[data-t]').forEach(function(b){ var t = null, t2 = null;
       function step(){ nudge(b.dataset.t, +b.dataset.v); }
@@ -4969,6 +5012,12 @@ tick();
       gate.addEventListener('click', function(){ if (fb.parentNode) fb.remove(); unlock(); finish(); });
     } else gate.addEventListener('click', go);
     v.addEventListener('ended', finish);
+    if (document.documentElement.classList.contains('skipfilm')){   // came from the homepage film: no second swing, no second glass -- straight to the course
+      var once = function(){ unlock(); ['pointerdown','touchend','keydown'].forEach(function(t){ removeEventListener(t, once, true); }); };
+      ['pointerdown','touchend','keydown'].forEach(function(t){ addEventListener(t, once, true); });   // music and the guide's voice start on the first tap
+      try { v.removeAttribute('autoplay'); v.pause(); } catch(_){}
+      finish(); return;
+    }
     var TT = [[0, 'Hilton Head Island'], [1.7, 'Sky Caddy'], [3.4, 'Hole 10'], [5.0, 'The ocean is in play.']], ttEl = document.getElementById('iv-title'), ttLast = '';
     v.addEventListener('timeupdate', function(){ var txt = ''; TT.forEach(function(q){ if (v.currentTime >= q[0]) txt = q[1]; });
       if (txt !== ttLast && ttEl){ ttLast = txt; ttEl.classList.remove('on'); setTimeout(function(){ ttEl.textContent = txt; ttEl.classList.add('on'); }, 160); }
