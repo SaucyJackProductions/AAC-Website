@@ -806,7 +806,8 @@
   @keyframes bookPulse { 0%,100% { box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 6px 1px rgba(255,205,80,.45); filter:brightness(1); } 50% { box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 24px 7px rgba(255,214,90,.95); filter:brightness(1.18); } }
   @keyframes bookRing { 0% { opacity:.9; transform:scale(1); } 100% { opacity:0; transform:scale(1.28); } }
   @media (prefers-reduced-motion:reduce){ #ocean-badge.sky-book, #ocean-badge.sky-book::after { animation:none; } }
-  @media (min-width:601px){ #ocean-badge.sky-book { top:62px; } }
+  #ocean-badge.sky-book { top:62px; }
+  @media (max-width:600px){ #ocean-badge.sky-book { top:40px; } }
 </style>
 </head>
 <body>
@@ -2183,6 +2184,8 @@ function topLift(v){
 }
 // OVERVIEW, landscape screens: the framing Chandler set by hand -- whole hole from the Gold tee to the pin, ocean along the top
 var OV_EXACT = { theta:1.93197, phi:1.14662, dist:56.36, target:new THREE.Vector3(49.893, 1.430, -8.428) };
+// same angle on tall phone screens, pulled back and re-centred so the whole hole fits between the compass and the buttons
+var OV_EXACT_TALL = { theta:1.93197, phi:1.14662, dist:92, target:new THREE.Vector3(44.283, 1.430, -6.310) };
 var views = {
   hero:    overviewView,
   // Camera sits AT the tee (between the forking cart paths, where golfers
@@ -2284,7 +2287,7 @@ document.querySelectorAll('.view-btn[data-view]').forEach(function(btn){
     if (btn.dataset.view === 'top') vw = topAim(vw);
     var ZIN = { hero:0.88*0.88, green:0.79*0.79 }[btn.dataset.view];   // Overview 12% closer, Green 21% closer (same aim)
     if (ZIN) vw = { theta:vw.theta, phi:vw.phi, dist:btn.dataset.view === 'hero' ? (vw.dist*ZIN + 169*FT)*0.88 : vw.dist*ZIN, target:vw.target };   // Overview: then 169 ft back and 12% in
-    if (btn.dataset.view === 'hero' && innerWidth >= innerHeight) vw = OV_EXACT;   // landscape: the exact framing Chandler picked (2026-10-11 screenshot)
+    if (btn.dataset.view === 'hero') vw = innerWidth >= innerHeight ? OV_EXACT : OV_EXACT_TALL;   // the exact framing Chandler picked (2026-10-11 screenshot)
     if (btn.dataset.view === 'ocean'){ oceanPan(); showTeeChips(false); return; }
     animateTo(vw, window.__introSnap ? 10 : (window.__introGlide ? 2600 : undefined));
     showTeeChips(btn.dataset.view === 'tee');
@@ -4880,7 +4883,7 @@ window.__sky = SKY;
   function place(){
     var chip = document.querySelector('.sky-explored'), lr = look.getBoundingClientRect(); if (!lr.width) return;
     var tb = document.getElementById('title-block'), ch = document.getElementById('course-hud');   // weather/compass/radar box always starts just under the title -- never on top of it
-    if (tb && ch && ch.offsetParent){ var tr = tb.getBoundingClientRect(), cp = ch.offsetParent.getBoundingClientRect(); if (tr.height){ var lt = look.getBoundingClientRect().top; ch.style.setProperty('top', Math.round(innerWidth > 600 ? tr.bottom + 14 - cp.top : Math.max(lt, tr.bottom + 10) - cp.top + 48) + 'px', 'important'); } }   // compass top level with the Rotate box top
+    if (tb && ch && ch.offsetParent){ var tr = tb.getBoundingClientRect(), cp = ch.offsetParent.getBoundingClientRect(); if (tr.height){ var lt = look.getBoundingClientRect().top; ch.style.setProperty('top', Math.round(tr.bottom + 14 - cp.top) + 'px', 'important'); } }   // compass top level with the Rotate box top
     var bk = document.getElementById('ocean-badge');
     if (bk && bk.offsetParent){ var bp = bk.offsetParent.getBoundingClientRect(), br = bk.getBoundingClientRect(); rail.style.top = Math.round(br.bottom - bp.top + 6) + 'px'; }
     if (chip && chip.offsetParent){ var cr = chip.offsetParent.getBoundingClientRect(), ar = alt.getBoundingClientRect();
