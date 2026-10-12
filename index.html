@@ -965,16 +965,12 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="loader" id="loader" role="dialog" aria-label="Enter Above All Media">
+<div class="loader" id="loader" aria-hidden="true">
   <div class="ld-in">
     <span class="ld-k">Hilton Head Island &middot; 32.2163&deg; N</span>
     <div class="ld-mark">Above <em>All</em></div>
     <div class="ld-bar"><i id="ld-fill"></i></div>
     <div class="ld-row" aria-hidden="true"><span>Descending from orbit</span><span id="ld-pct">000</span></div>
-    <div class="ld-enter" id="ld-enter" hidden>
-      <button class="ld-go" id="ld-sound" type="button"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Enter with sound</button>
-      <button class="ld-quiet" id="ld-quiet" type="button">Enter without sound</button>
-    </div>
   </div>
 </div>
 <div class="grain" aria-hidden="true"></div>
@@ -1821,18 +1817,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       if (ok[0] && !dsLive) { dsLive = true; ds.classList.add('live'); drawn = -1; }
       if (p >= 1) finishLoader();
     }
-    /* Once the frames are in, the visitor steps in with a tap. That tap is what lets the swing film and the reels play their music later. */
-    var gateOpen = false;
-    function finishLoader() {
-      if (loaderDone || gateOpen) return; gateOpen = true;
-      var box = $('#ld-enter'), go = $('#ld-sound'), quiet = $('#ld-quiet');
-      if (!box || !go) return enter(true);
-      if (lenis) lenis.stop();
-      root.classList.add('gate'); box.hidden = false;
-      setTimeout(function () { try { go.focus({ preventScroll: true }); } catch (e) {} }, 60);
-      go.addEventListener('click', function () { enter(true); });
-      quiet.addEventListener('click', function () { enter(false); });
-    }
+    /* No entry gate: the site opens on its own once the first frames are in. Films get their music after the visitor's first tap, or from their sound buttons. */
+    function finishLoader() { enter(undefined); }
     function enter(sound) {
       if (loaderDone) return; loaderDone = true;
       W.__aamSound = sound;
@@ -1845,7 +1831,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     }
     if (!still && ctx) {
       sizeCanvas(); loadFrames();
-      setTimeout(finishLoader, 3200);           /* on a slow line, offer the way in without waiting for every frame */
+      setTimeout(finishLoader, 1600);           /* on a slow line, open without waiting for every frame */
     } else {
       root.classList.add('loaded', 'ready');
       $$('[data-split]').forEach(function (el) { el.classList.add('in'); });
