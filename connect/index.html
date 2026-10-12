@@ -10,6 +10,10 @@
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/lux/icon-32.png">
 <link rel="apple-touch-icon" href="../assets/lux/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chandler · AAM">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Chandler Pirie · Above All Media">
 <meta property="og:description" content="Luxury media & marketing. Cinematic · Aerial · Campaigns. Hilton Head Island, SC.">
@@ -155,6 +159,48 @@ footer .mark{font:italic 400 22px/1 var(--serif)}
 footer p{margin-top:10px;font:400 9.5px/1.8 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-soft)}
 footer a:hover{color:var(--gold-l)}
 
+.actions{grid-template-columns:1fr auto auto}
+.icon-btn{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line-2);background:rgba(244,238,227,.03);color:var(--gold-l);transition:background .3s}
+.icon-btn:hover{background:rgba(244,238,227,.07)}
+.icon-btn svg{width:20px;height:20px}
+
+/* ---------- bottom sheets (exchange, share) ---------- */
+dialog.sheet{position:fixed;inset:auto 0 0 0;margin:0 auto;width:min(100%,520px);max-width:none;max-height:92svh;border:0;padding:0;color:var(--ink);background:transparent;overflow:visible}
+dialog.sheet::backdrop{background:rgba(5,6,5,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.sheet-in{position:relative;max-height:92svh;overflow:auto;padding:12px 22px calc(26px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;background:radial-gradient(80% 50% at 50% 0%,rgba(201,166,107,.12),transparent 70%),#0d0e0b;box-shadow:inset 0 1px 0 rgba(234,210,160,.35),0 -30px 80px rgba(0,0,0,.6)}
+dialog.sheet[open] .sheet-in{animation:rise .55s var(--ease)}
+@keyframes rise{from{transform:translateY(40px);opacity:0}}
+.grip{width:38px;height:4px;border-radius:4px;background:var(--line-2);margin:0 auto 18px}
+.sheet h2{font:400 32px/1.05 var(--serif);margin-top:8px}
+.sheet h2 em{font-style:italic}
+.sheet .sub{margin-top:6px;font-size:13px;color:var(--muted)}
+.sheet .close{top:14px;right:14px;width:38px;height:38px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.fields .full{grid-column:1/-1}
+.fields label{display:block;font:500 9.5px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted-soft);margin:0 0 7px 2px}
+.fields input,.fields textarea{width:100%;font:400 16px/1.3 var(--sans);color:var(--ink);background:rgba(244,238,227,.04);border:0;border-radius:12px;padding:13px 14px;box-shadow:inset 0 0 0 1px var(--line);outline:0;transition:box-shadow .3s}
+.fields textarea{min-height:76px;resize:vertical}
+.fields input:focus,.fields textarea:focus{box-shadow:inset 0 0 0 1px var(--gold-l)}
+.fields .hp{position:absolute;left:-9999px}
+.consent{margin-top:14px;font-size:11.5px;color:var(--muted-soft)}
+.sheet .save{width:100%;margin-top:16px;border:0;cursor:pointer}
+.sheet .save[disabled]{opacity:.6}
+.done{display:none;text-align:center;padding:10px 0 4px}
+.sheet.sent .done{display:block}.sheet.sent form{display:none}
+.done .tick{width:64px;height:64px;margin:6px auto 14px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--gold-l);color:var(--gold-l)}
+.done .tick svg{width:26px;height:26px}
+.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-top:22px}
+.share-grid a,.share-grid button{display:flex;flex-direction:column;align-items:center;gap:8px;font:500 9px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center}
+.share-grid span.ic{width:54px;height:54px;border-radius:16px}
+.share-grid a:hover,.share-grid button:hover{color:var(--ink)}
+.share-link{display:flex;align-items:center;gap:10px;margin-top:22px;padding:6px 6px 6px 16px;border-radius:14px;box-shadow:inset 0 0 0 1px var(--line);font-size:13px;color:var(--muted)}
+.share-link span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.share-link .pill{height:36px}
+.tips{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);display:grid;gap:10px}
+.tips a,.tips button{display:flex;align-items:center;gap:12px;text-align:left;font-size:13px;color:var(--muted)}
+.tips svg{width:18px;height:18px;color:var(--gold-l);flex:none}
+.tips b{color:var(--ink);font-weight:500}
+
 /* ---------- full-screen QR ---------- */
 dialog.show{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;border:0;padding:0;background:transparent;color:var(--ink)}
 dialog.show::backdrop{background:rgba(5,6,5,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
@@ -200,6 +246,13 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
   <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4ZM13.5 6.5l4 4"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4 20h16"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-4-4M20 16H6l4 4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 20l1.2-4.1A8.5 8.5 0 1 1 8.4 19L4 20Z"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5l.9 2.1-.6.8a5 5 0 0 0 2.5 2.5l.8-.6 2.1.9v.5c0 .3-.1.6-.6.8-1.6.7-6.3-2.4-6.4-6.4Z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 10.5V16M8 7.8v.01M11.5 16v-5.5M11.5 13c0-1.6 1-2.6 2.3-2.6s2.2.8 2.2 2.6V16" stroke-linecap="round"/></symbol>
+  <symbol id="i-dots" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18" cy="12" r="1.6"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M12 8v6M9 11h6" stroke-linecap="round"/></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="9.5" r="1.8"/><path d="m4 18 5.5-5 4 3.5 2.5-2 4.5 3.5"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
 </svg>
 
@@ -227,8 +280,9 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
   </section>
 
   <section class="actions rv" style="--i:5" aria-label="Save and contact">
-    <a class="save" href="chandler-pirie.vcf" data-vcf><svg><use href="#i-save"/></svg>Save Contact</a>
-    <button class="share" type="button" data-share aria-label="Share this card"><svg><use href="#i-share"/></svg></button>
+    <button class="save" type="button" data-xchg><svg><use href="#i-swap"/></svg>Exchange Contact</button>
+    <a class="icon-btn" href="chandler-pirie.vcf" data-vcf aria-label="Save Chandler's contact"><svg><use href="#i-down"/></svg></a>
+    <button class="icon-btn" type="button" data-share aria-label="Share this card"><svg><use href="#i-share"/></svg></button>
     <nav class="quick" aria-label="Quick contact">
       <a href="tel:+18039205349"><svg><use href="#i-phone"/></svg>Call</a>
       <a href="sms:+18039205349"><svg><use href="#i-text"/></svg>Text</a>
@@ -281,6 +335,7 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
 </svg></button></div>
     <div class="qr-row">
       <button class="pill" type="button" data-share><svg><use href="#i-share"/></svg>Share</button>
+      <a class="pill" href="chandler-pirie.vcf" data-vcf><svg><use href="#i-save"/></svg>Save contact</a>
       <button class="pill" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy link</button>
       <a class="pill" href="above-all-media-qr.png" download="Above-All-Media-QR.png"><svg><use href="#i-down"/></svg>Save QR</a>
     </div>
@@ -304,6 +359,59 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
 </svg></div>
     <h2 id="show-title">Scan to <em class="gold">connect</em></h2>
     <p>aboveallmediasc.com/connect</p>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="xchg" aria-labelledby="xchg-title">
+  <div class="sheet-in">
+    <div class="grip" aria-hidden="true"></div>
+    <button class="close" type="button" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    <form id="xchg-form" novalidate>
+      <span class="kicker">Exchange contact</span>
+      <h2 id="xchg-title">Share your info with <em class="gold">Chandler</em></h2>
+      <p class="sub">He'll get your details right away and follow up personally.</p>
+      <div class="fields">
+        <div class="full"><label for="x-name">Name</label><input id="x-name" name="fullname" autocomplete="name" required></div>
+        <div><label for="x-phone">Phone</label><input id="x-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel"></div>
+        <div><label for="x-email">Email</label><input id="x-email" name="email" type="email" autocomplete="email" inputmode="email"></div>
+        <div class="full"><label for="x-company">Company / brand</label><input id="x-company" name="company" autocomplete="organization"></div>
+        <div class="full"><label for="x-note">Where we met, or what you're working on</label><textarea id="x-note" name="note"></textarea></div>
+        <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </div>
+      <button class="save" type="submit"><svg><use href="#i-swap"/></svg><span>Send to Chandler</span></button>
+      <p class="consent">Add a phone or email so Chandler can reach you. Your info goes only to Above All Media.</p>
+    </form>
+    <div class="done" role="status">
+      <div class="tick"><svg><use href="#i-check"/></svg></div>
+      <h2>Thank <em class="gold">you.</em></h2>
+      <p class="sub">Chandler has your info. Save his contact so you have it too.</p>
+      <a class="save" href="chandler-pirie.vcf" data-vcf style="margin-top:20px"><svg><use href="#i-save"/></svg>Save Chandler's Contact</a>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="share-sheet" aria-labelledby="share-title">
+  <div class="sheet-in">
+    <div class="grip" aria-hidden="true"></div>
+    <button class="close" type="button" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+    <span class="kicker">Share</span>
+    <h2 id="share-title">Pass along <em class="gold">the card</em></h2>
+    <div class="share-grid">
+      <button type="button" data-show-qr><span class="ic"><svg><use href="#i-qr"/></svg></span>QR code</button>
+      <a data-s="sms"><span class="ic"><svg><use href="#i-text"/></svg></span>Text</a>
+      <a data-s="mail"><span class="ic"><svg><use href="#i-mail"/></svg></span>Email</a>
+      <a data-s="wa" target="_blank" rel="noopener"><span class="ic"><svg><use href="#i-wa"/></svg></span>WhatsApp</a>
+      <a data-s="li" target="_blank" rel="noopener"><span class="ic"><svg><use href="#i-in"/></svg></span>LinkedIn</a>
+      <a data-s="fb" target="_blank" rel="noopener"><span class="ic"><svg><use href="#i-fb"/></svg></span>Facebook</a>
+      <a href="chandler-pirie.vcf" data-vcf><span class="ic"><svg><use href="#i-save"/></svg></span>Contact file</a>
+      <button type="button" data-native><span class="ic"><svg><use href="#i-dots"/></svg></span>More</button>
+    </div>
+    <div class="share-link"><span>aboveallmediasc.com/connect</span><button class="pill" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy</button></div>
+    <div class="tips">
+      <a href="above-all-media-qr.png" download="Above-All-Media-QR.png"><svg><use href="#i-down"/></svg><span><b>Download the QR</b> for print, signs and slides</span></a>
+      <a href="qr-wallpaper.png" download="Chandler-QR-Lock-Screen.png"><svg><use href="#i-img"/></svg><span><b>Lock-screen QR</b>: set as wallpaper so anyone can scan your phone</span></a>
+      <button type="button" data-a2hs><svg><use href="#i-home"/></svg><span><b>Add to Home Screen</b> to open your card in one tap</span></button>
+    </div>
   </div>
 </dialog>
 
@@ -336,24 +444,73 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
     else prompt('Copy this link', URL_);
   }
   D.querySelectorAll('[data-copy]').forEach(function (b) { b.addEventListener('click', copy); });
-  D.querySelectorAll('[data-share]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      if (navigator.share) navigator.share({ title: 'Chandler Pirie · Above All Media', text: 'Luxury media & marketing on Hilton Head Island.', url: URL_ }).catch(function () {});
-      else copy();
-    });
+  var MSG = 'Chandler Pirie · Above All Media. Luxury media & marketing on Hilton Head Island: ';
+  function nativeShare() {
+    if (navigator.share) navigator.share({ title: 'Chandler Pirie · Above All Media', text: MSG, url: URL_ }).catch(function () {});
+    else copy();
+  }
+  function sheet(id) { var d = D.getElementById(id); D.querySelectorAll('dialog[open]').forEach(function (o) { if (o !== d) o.close(); }); if (d.showModal) d.showModal(); return d; }
+  D.querySelectorAll('[data-share]').forEach(function (b) { b.addEventListener('click', function () { sheet('share-sheet'); }); });
+  D.querySelector('[data-native]').addEventListener('click', nativeShare);
+  var ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var e = encodeURIComponent, links = {
+    sms: 'sms:' + (ios ? '&' : '?') + 'body=' + e(MSG + URL_),
+    mail: 'mailto:?subject=' + e('Chandler Pirie · Above All Media') + '&body=' + e(MSG + URL_),
+    wa: 'https://wa.me/?text=' + e(MSG + URL_),
+    li: 'https://www.linkedin.com/sharing/share-offsite/?url=' + e(URL_),
+    fb: 'https://www.facebook.com/sharer/sharer.php?u=' + e(URL_)
+  };
+  D.querySelectorAll('[data-s]').forEach(function (a) { a.href = links[a.getAttribute('data-s')]; });
+
+  // Add to Home Screen: Android gets the real prompt, iPhone gets the two-step hint
+  var deferred = null;
+  addEventListener('beforeinstallprompt', function (ev) { ev.preventDefault(); deferred = ev; });
+  D.querySelector('[data-a2hs]').addEventListener('click', function () {
+    if (deferred) { deferred.prompt(); deferred = null; return; }
+    toast(ios ? 'Tap Share, then Add to Home Screen' : 'Use your browser menu: Add to Home Screen');
+  });
+
+  // Exchange Contact: goes to the same Google lead sheet as the site form, email fallback
+  var LEADS = 'https://script.google.com/macros/s/AKfycbz-82RGSFUoXPeaPY4lOUTbSqbAkkLGacjTJIMsjw1r0t383bDspd2HGNQXKBSsde8/exec';
+  var xd = D.getElementById('xchg'), xf = D.getElementById('xchg-form'), opened = Date.now();
+  D.querySelectorAll('[data-xchg]').forEach(function (b) { b.addEventListener('click', function () { sheet('xchg'); }); });
+  xf.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var f = xf.elements, name = f.fullname.value.trim(), email = f.email.value.trim(), phone = f.phone.value.trim();
+    if (f._honey.value) return;
+    if (!name) { f.fullname.focus(); toast('Add your name'); return; }
+    if (!email && !phone) { f.phone.focus(); toast('Add a phone or email'); return; }
+    if (email && !f.email.checkValidity()) { f.email.focus(); toast('Check your email'); return; }
+    var btn = xf.querySelector('button[type=submit]'), lbl = btn.querySelector('span');
+    btn.disabled = true; lbl.textContent = 'Sending…';
+    var note = f.note.value.trim(), msg = 'Card exchange from aboveallmediasc.com/connect' + (note ? '\n\n' + note : '');
+    var qs = new URLSearchParams({ fullname: name, company: f.company.value.trim(), email: email, phone: phone, service_type: 'Card exchange', budget: '', message: msg, _honey: '', slot: '', src: 'connect-card', page: location.href.split('#')[0], _t: String(Date.now() - opened) });
+    function ok() { xd.classList.add('sent'); }
+    function viaEmail() {
+      return fetch('https://formsubmit.co/ajax/aboveallcinematics@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ _subject: 'New card exchange: ' + name, name: name, email: email, phone: phone, company: f.company.value.trim(), note: note, lead_source: 'connect-card' }) })
+        .then(function (r) { if (!r.ok) throw new Error('send'); });
+    }
+    fetch(LEADS, { method: 'POST', body: qs, redirect: 'follow' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!(j && j.ok === true)) throw new Error('rejected'); })
+      .catch(viaEmail)
+      .then(ok, function () { btn.disabled = false; lbl.textContent = 'Send to Chandler'; toast('Couldn\'t send. Text Chandler instead'); });
   });
 
   var dlg = D.getElementById('qr-show');
   D.querySelectorAll('[data-show-qr]').forEach(function (b) {
     b.addEventListener('click', function () {
-      if (dlg.showModal) dlg.showModal(); else location.hash = 'share';
+      if (dlg.showModal) sheet('qr-show'); else location.hash = 'share';
     });
   });
-  dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.classList.contains('show-in')) dlg.close(); });
+  D.querySelectorAll('dialog').forEach(function (d) {
+    d.querySelector('[data-close]').addEventListener('click', function () { d.close(); });
+    d.addEventListener('click', function (ev) { if (ev.target === d || ev.target.classList.contains('show-in')) d.close(); });
+  });
   if (location.hash === '#qr' && dlg.showModal) dlg.showModal();
 
-  D.querySelector('[data-vcf]').addEventListener('click', function () { setTimeout(function () { toast('Opening contact card'); }, 150); });
+  if (location.hash === '#exchange') sheet('xchg');
 })();
 </script>
 </body>

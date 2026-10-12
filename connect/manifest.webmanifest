@@ -1,0 +1,13 @@
+{
+  "name": "Chandler Pirie · Above All Media",
+  "short_name": "Chandler · AAM",
+  "start_url": "/connect/?src=home",
+  "scope": "/connect/",
+  "display": "standalone",
+  "background_color": "#070807",
+  "theme_color": "#070807",
+  "icons": [
+    { "src": "/assets/lux/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/lux/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
