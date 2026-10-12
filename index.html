@@ -734,6 +734,117 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ===== Estates: luxury real estate showcase ===== */
+.es{padding:0 0 clamp(60px,8vw,110px);background:var(--bg)}
+.es em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--gold-l)}
+.es .kicker{margin-bottom:18px}
+.est-big{font-family:var(--serif);font-weight:500;font-size:clamp(44px,6vw,92px);line-height:1;letter-spacing:-.015em;color:var(--ink);margin:0 0 18px;text-wrap:balance}
+
+/* the build film: scroll scrubs the video while the stage stays pinned */
+.est-film{position:relative}
+.est-stage{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden;background:#05080b}
+.est-film.is-scrub{height:420vh}
+.est-film.is-scrub .est-stage{position:sticky;top:0}
+.est-still,.est-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.est-still{z-index:1;transition:opacity 1s var(--ease)}
+.est-film.is-past .est-still{opacity:0}
+.est-shade,.est-frame{z-index:2}
+.est-video{opacity:0;transition:opacity 1.2s var(--ease)}
+.est-video.is-ready{opacity:1}
+.est-shade{position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(90deg,rgba(3,5,8,.82) 0%,rgba(3,5,8,.45) 38%,rgba(3,5,8,0) 66%),
+  linear-gradient(0deg,rgba(3,5,8,.75) 0%,rgba(3,5,8,0) 30%),
+  linear-gradient(180deg,rgba(3,5,8,.55) 0%,rgba(3,5,8,0) 22%)}
+.est-frame{position:absolute;inset:clamp(14px,2.4vw,30px);pointer-events:none;font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,238,227,.72)}
+.est-frame i{position:absolute;width:30px;height:30px;border-color:rgba(234,210,160,.7);border-style:solid;border-width:0}
+.est-frame i:nth-child(1){top:0;left:0;border-top-width:1px;border-left-width:1px}
+.est-frame i:nth-child(2){top:0;right:0;border-top-width:1px;border-right-width:1px}
+.est-frame i:nth-child(3){bottom:0;left:0;border-bottom-width:1px;border-left-width:1px}
+.est-frame i:nth-child(4){bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
+.est-rec{position:absolute;top:96px;left:48px}
+.est-rec::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:10px;vertical-align:middle;box-shadow:0 0 10px var(--coral);animation:estBlink 1.6s steps(2) infinite}
+.est-tc{position:absolute;top:96px;right:48px;color:var(--gold-l)}
+@keyframes estBlink{50%{opacity:.2}}
+.est-copy{position:absolute;left:0;right:0;bottom:clamp(120px,17vh,190px);z-index:2}
+.est-beat{position:absolute;left:0;bottom:0;max-width:min(680px,92%);opacity:0;translate:0 26px;transition:opacity .7s var(--ease),translate .9s var(--ease);pointer-events:none}
+.est-beat.is-on{opacity:1;translate:0 0;pointer-events:auto}
+.est-beat h2{font-size:clamp(48px,6.6vw,108px);line-height:.98;margin:0 0 22px}
+.est-beat p:not(.est-big){font-size:clamp(16px,1.25vw,19px);font-weight:300;line-height:1.75;color:var(--muted);max-width:52ch;margin:0}
+.est-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.est-steps{position:absolute;left:0;right:0;bottom:clamp(36px,6vh,64px);width:min(var(--wrap),calc(100% - 40px));margin:0 auto;z-index:2}
+.est-steps ol{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:0 0 12px;padding:0}
+.est-steps li{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,238,227,.42);transition:color .5s}
+.est-steps li.is-on{color:var(--gold-l)}
+.est-steps-bar{display:block;height:1px;background:rgba(244,238,227,.16);overflow:hidden}
+.est-steps-bar i{display:block;height:100%;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+/* without scroll-scrub (reduced motion, no JS, data saver): one calm still frame, all copy readable */
+.est-film:not(.is-scrub) .est-beat{position:relative;opacity:1;translate:none;pointer-events:auto;display:none}
+.est-film:not(.is-scrub) .est-beat:first-child,.est-film:not(.is-scrub) .est-beat:last-child{display:block}
+.est-film:not(.is-scrub) .est-stage{height:auto;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end}
+.est-film:not(.is-scrub) .est-copy{position:relative;bottom:auto;padding:170px 0 clamp(70px,10vh,110px)}
+.est-film:not(.is-scrub) .est-beat:last-child .kicker,.est-film:not(.is-scrub) .est-beat:last-child .est-big{display:none}
+.est-film:not(.is-scrub) .est-beat:last-child{margin-top:26px}
+.est-film:not(.is-scrub) .est-steps,.est-film:not(.is-scrub) .est-video,.est-film:not(.is-scrub) .est-tc{display:none}
+
+/* after the film */
+.est-after{padding-top:clamp(90px,12vw,150px)}
+.est-head{max-width:760px;margin-bottom:40px}
+.est-head h3{font-size:clamp(42px,5.4vw,92px);margin:0 0 18px}
+.est-head .lede{margin:0}
+.est-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:clamp(90px,11vw,140px)}
+.est-compare{position:relative;margin:0;border-radius:3px;overflow:hidden;aspect-ratio:16/9;border:1px solid rgba(234,210,160,.14);box-shadow:var(--shadow);--x:55%;user-select:none;touch-action:pan-y}
+.est-compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.est-top{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x)) 0 0)}
+.est-handle{position:absolute;top:0;bottom:0;left:var(--x);width:1px;background:rgba(255,236,200,.9);box-shadow:0 0 18px rgba(234,210,160,.6);pointer-events:none}
+.est-handle::after{content:"\2194";position:absolute;top:50%;left:50%;translate:-50% -50%;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#140a02;background:linear-gradient(135deg,#f6e6c0,#c9a66b);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.est-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none}
+.est-compare:has(.est-range:focus-visible){outline:2px solid var(--gold-l);outline-offset:3px}
+.est-tag{position:absolute;bottom:16px;padding:7px 12px;border-radius:999px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:rgba(3,5,8,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none}
+.est-tag-l{left:16px}.est-tag-r{right:16px}
+
+.est-gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-bottom:clamp(80px,10vw,130px)}
+.est-shot{position:relative;display:block;padding:0;border:0;border-radius:3px;overflow:hidden;background:#0a0f14;cursor:zoom-in;grid-column:span 4;aspect-ratio:4/3;color:inherit;font:inherit}
+.est-shot.est-wide{grid-column:span 8;aspect-ratio:auto}
+.est-film-tile{cursor:default}
+.est-shot img,.est-shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease),filter 1.4s var(--ease)}
+.est-shot:hover img,.est-shot:focus-visible img{transform:scale(1.06)}
+.est-shot:focus-visible{outline:2px solid var(--gold-l);outline-offset:3px}
+.est-shot::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(3,5,8,.7),rgba(3,5,8,0) 45%);pointer-events:none}
+.est-cap{position:absolute;left:22px;bottom:18px;z-index:1;text-align:left;font:400 clamp(18px,1.5vw,24px)/1.2 var(--serif);color:var(--ink)}
+.est-cap span{display:block;margin-bottom:6px;font:500 10px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l)}
+
+.est-offer{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(30px,5vw,80px);align-items:center;padding:clamp(30px,4.5vw,60px);border-radius:3px;border:1px solid rgba(234,210,160,.16);background:radial-gradient(120% 140% at 100% 0%,rgba(201,166,107,.12),transparent 55%),var(--bg-2)}
+.est-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.est-list li{display:grid;grid-template-columns:minmax(180px,.9fr) 1.2fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.est-list li:last-child{border-bottom:0}
+.est-list b{font:400 clamp(20px,1.7vw,26px)/1.2 var(--serif);color:var(--ink)}
+.est-list span{color:var(--muted-soft);line-height:1.6}
+.est-offer-cta .est-big{font-size:clamp(40px,4.4vw,72px)}
+
+.est-lightbox{padding:0;border:0;background:transparent;max-width:min(94vw,1600px);max-height:92vh;overflow:visible}
+.est-lightbox::backdrop{background:rgba(2,4,6,.9);backdrop-filter:blur(6px)}
+.est-lightbox img{display:block;max-width:min(94vw,1600px);max-height:88vh;border-radius:3px;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.est-lb-close{position:absolute;top:-18px;right:-18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(234,210,160,.4);background:rgba(10,15,20,.9);color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
+
+@media (max-width:980px){
+  .est-compare-grid{grid-template-columns:1fr}
+  .est-shot,.est-shot.est-wide{grid-column:span 12;aspect-ratio:16/10}
+  .est-gallery .est-shot:not(.est-wide):not(.est-film-tile){grid-column:span 6;aspect-ratio:1/1}
+  .est-offer{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .est-film.is-scrub{height:340vh}
+  .est-shade{background:linear-gradient(0deg,rgba(3,5,8,.9) 0%,rgba(3,5,8,.55) 42%,rgba(3,5,8,.1) 70%),linear-gradient(180deg,rgba(3,5,8,.6) 0%,rgba(3,5,8,0) 24%)}
+  .est-rec{top:84px;left:22px;font-size:9.5px}.est-tc{top:84px;right:22px;font-size:9.5px}
+  .est-copy{bottom:96px}
+  .est-steps{top:118px;bottom:auto}
+  .est-steps li{font-size:8.5px;letter-spacing:.14em}
+  .est-gallery{gap:12px}
+  .est-gallery .est-shot:not(.est-wide):not(.est-film-tile){grid-column:span 12;aspect-ratio:16/10}
+  .est-list li{grid-template-columns:1fr;gap:4px}
+  .est-lb-close{top:8px;right:8px}
+}
 </style>
 </head>
 <body>
@@ -763,6 +874,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     <nav class="primary" id="site-nav" aria-label="Primary navigation">
       <a href="#capabilities" data-sec="capabilities">Services</a>
       <a href="#work" data-sec="work">Work</a>
+      <a href="#estates" data-sec="estates">Estates</a>
       <a href="#golf" data-sec="golf">Golf</a>
       <a href="#process" data-sec="process">Process</a>
       <a href="#about" data-sec="about">About</a>
@@ -779,9 +891,10 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <a href="#top" style="--i:0">Home</a>
   <a href="#capabilities" style="--i:1">Services</a>
   <a href="#work" style="--i:2">Work</a>
-  <a href="#golf" style="--i:3">Golf</a>
-  <a href="#process" style="--i:4">Process</a>
-  <a href="#contact" style="--i:5">Begin a Project</a>
+  <a href="#estates" style="--i:3">Estates</a>
+  <a href="#golf" style="--i:4">Golf</a>
+  <a href="#process" style="--i:5">Process</a>
+  <a href="#contact" style="--i:6">Begin a Project</a>
   <div class="mm-foot">(803) 920-5349 &middot; Hilton Head Island, SC</div>
 </nav>
 
@@ -977,6 +1090,125 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       </div>
     </div>
   </div>
+</section>
+
+<!-- 4a. THE ESTATE COLLECTION: scroll scrubs the build film (assets/estate/), then day/dusk compare and gallery -->
+<section id="estates" class="es" aria-labelledby="estates-title">
+
+  <div class="est-film" id="est-film">
+    <div class="est-stage">
+      <video class="est-video" id="est-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"
+        data-film="assets/estate/estate-build.mp4" data-film-mobile="assets/estate/estate-build-mobile.mp4"></video>
+      <img class="est-still" src="assets/estate/build-night-poster.webp" alt="" width="1600" height="900" loading="lazy" decoding="async" aria-hidden="true">
+      <div class="est-shade" aria-hidden="true"></div>
+      <div class="est-frame" aria-hidden="true"><i></i><i></i><i></i><i></i>
+        <span class="est-rec">Estate Film &middot; Hilton Head Island</span>
+        <span class="est-tc" id="est-tc">00:00</span>
+      </div>
+
+      <div class="est-copy wrap">
+        <div class="est-beat is-on" data-from="0">
+          <span class="kicker">The estate collection</span>
+          <h2 id="estates-title">Some homes deserve a <em>premiere,</em> not a listing.</h2>
+          <p>Cinematic film, aerial and twilight imagery for the Lowcountry&rsquo;s finest properties.</p>
+        </div>
+        <div class="est-beat" data-from=".24">
+          <span class="kicker">01 &mdash; Architecture</span>
+          <p class="est-big">Built <em>line by line.</em></p>
+          <p>We film a home the way it was designed: deliberately, with every roofline, terrace and sightline given its moment.</p>
+        </div>
+        <div class="est-beat" data-from=".52">
+          <span class="kicker">02 &mdash; Twilight</span>
+          <p class="est-big">Lit for the <em>golden hour.</em></p>
+          <p>Twilight is when a house becomes a lifestyle. We plan every shoot around the light.</p>
+        </div>
+        <div class="est-beat" data-from=".8">
+          <span class="kicker">03 &mdash; Market</span>
+          <p class="est-big">Ready to <em>sell the dream.</em></p>
+          <div class="est-actions">
+            <a class="btn btn-gold" href="#contact" data-service="Real Estate / Rentals">Book a Listing Film <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-line" href="#est-collection">View the Collection</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="est-steps" aria-hidden="true">
+        <ol><li class="is-on">Vision</li><li>Architecture</li><li>Twilight</li><li>Market</li></ol>
+        <span class="est-steps-bar"><i id="est-fill"></i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap est-after">
+    <div class="est-head">
+      <span class="kicker">Day to dusk</span>
+      <h3 data-split>One home. <em>Two moods.</em></h3>
+      <p class="lede rv">Daylight sells the space. Twilight sells the life. Drag to see the same estate both ways.</p>
+    </div>
+
+    <div class="est-compare-grid">
+      <figure class="est-compare rv" style="--d:1">
+        <img src="assets/estate/palm-day-1600.webp" srcset="assets/estate/palm-day-900.webp 900w, assets/estate/palm-day-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Estate rear elevation and pool in daylight" width="1677" height="938" loading="lazy" decoding="async">
+        <div class="est-top"><img src="assets/estate/palm-dusk-1600.webp" srcset="assets/estate/palm-dusk-900.webp 900w, assets/estate/palm-dusk-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="The same estate at twilight with every light on" width="1677" height="938" loading="lazy" decoding="async"></div>
+        <span class="est-tag est-tag-l">Twilight</span><span class="est-tag est-tag-r">Daylight</span>
+        <span class="est-handle" aria-hidden="true"></span>
+        <input class="est-range" type="range" min="0" max="100" value="55" aria-label="Compare twilight and daylight views of the estate">
+      </figure>
+      <figure class="est-compare rv" style="--d:2">
+        <img src="assets/estate/pool-day-1600.webp" srcset="assets/estate/pool-day-900.webp 900w, assets/estate/pool-day-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Pool terrace and glass balconies in daylight" width="1680" height="935" loading="lazy" decoding="async">
+        <div class="est-top"><img src="assets/estate/pool-dusk-1600.webp" srcset="assets/estate/pool-dusk-900.webp 900w, assets/estate/pool-dusk-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Pool terrace glowing at dusk" width="1680" height="935" loading="lazy" decoding="async"></div>
+        <span class="est-tag est-tag-l">Dusk</span><span class="est-tag est-tag-r">Daylight</span>
+        <span class="est-handle" aria-hidden="true"></span>
+        <input class="est-range" type="range" min="0" max="100" value="55" aria-label="Compare dusk and daylight views of the pool terrace">
+      </figure>
+    </div>
+
+    <div class="est-head" id="est-collection">
+      <span class="kicker">The collection</span>
+      <h3 data-split>Every angle, <em>after dark.</em></h3>
+    </div>
+
+    <div class="est-gallery">
+      <button type="button" class="est-shot est-wide rv" data-full="assets/estate/lawn-twilight-1600.webp" data-cursor="View">
+        <img src="assets/estate/lawn-twilight-900.webp" srcset="assets/estate/lawn-twilight-900.webp 900w, assets/estate/lawn-twilight-1600.webp 1600w" sizes="(max-width:900px) 100vw, 66vw" alt="Estate at twilight from the lawn, lit walkway leading to the pool" width="1852" height="849" loading="lazy" decoding="async">
+        <span class="est-cap"><span>01</span>The Approach</span>
+      </button>
+      <div class="est-shot est-film-tile rv" style="--d:1">
+        <video muted loop playsinline preload="none" data-src="assets/estate/estate-pool-loop.mp4" poster="assets/estate/pool-loop-poster.webp" aria-hidden="true" tabindex="-1"></video>
+        <span class="est-cap"><span>Film</span>Night to Day</span>
+      </div>
+      <button type="button" class="est-shot rv" style="--d:1" data-full="assets/estate/terraces-night-1600.webp" data-cursor="View">
+        <img src="assets/estate/terraces-night-900.webp" alt="Three tiers of terraces glowing at night" width="1699" height="926" loading="lazy" decoding="async">
+        <span class="est-cap"><span>02</span>The Terraces</span>
+      </button>
+      <button type="button" class="est-shot rv" style="--d:2" data-full="assets/estate/terraces-twilight-1600.webp" data-cursor="View">
+        <img src="assets/estate/terraces-twilight-900.webp" alt="Estate with pool and spa at blue hour" width="1701" height="924" loading="lazy" decoding="async">
+        <span class="est-cap"><span>03</span>Blue Hour</span>
+      </button>
+      <button type="button" class="est-shot rv" style="--d:3" data-full="assets/estate/palm-dusk-1600.webp" data-cursor="View">
+        <img src="assets/estate/palm-dusk-900.webp" alt="Pool, fire pit and palms under evening light" width="1677" height="938" loading="lazy" decoding="async">
+        <span class="est-cap"><span>04</span>The Courtyard</span>
+      </button>
+    </div>
+
+    <div class="est-offer rv">
+      <ul class="est-list">
+        <li><b>Cinematic listing film</b><span>Horizontal for the web, vertical for social</span></li>
+        <li><b>Aerial coverage</b><span>Licensed drone, the property and its surroundings</span></li>
+        <li><b>Twilight photography</b><span>The shots that stop the scroll on the MLS</span></li>
+        <li><b>Agent-branded reels</b><span>Ready to post the day the listing goes live</span></li>
+      </ul>
+      <div class="est-offer-cta">
+        <p class="est-big">Listing a <em>landmark?</em></p>
+        <a class="btn btn-gold" href="#contact" data-service="Real Estate / Rentals">Book a Listing Film <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="est-lightbox" id="est-lightbox" aria-label="Enlarged estate photo">
+    <img alt="" id="est-lb-img">
+    <button type="button" class="est-lb-close" id="est-lb-close" aria-label="Close">&times;</button>
+  </dialog>
 </section>
 
 <!-- 4b. THE GOLF COLLECTION -->
@@ -1249,6 +1481,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
         <h3 class="ft-h">Studio</h3>
         <a href="#capabilities">Services</a>
         <a href="#work">Selected work</a>
+        <a href="#estates">The estate collection</a>
         <a href="#golf">The golf collection</a>
         <a href="skycaddy/">Sky Caddy &middot; Hole 10</a>
         <a href="#process">The flight plan</a>
@@ -2092,5 +2325,105 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 })();
 </script>
 
+<script>
+/* ===== Estates: scroll-scrubbed build film, day/dusk compare, lightbox =====
+   Independent of the main script. If anything is missing, the section stays a calm still frame. */
+(function () {
+  var d = document, film = d.getElementById('est-film');
+  if (!film) return;
+  var sec = d.getElementById('estates');
+
+  /* "Book a Listing Film" pre-selects the service in the contact form */
+  [].forEach.call(d.querySelectorAll('a[data-service]'), function (a) {
+    a.addEventListener('click', function () {
+      var sel = d.getElementById('service-type'), val = a.getAttribute('data-service');
+      if (sel && [].some.call(sel.options, function (o) { return o.value === val; })) sel.value = val;
+    });
+  });
+
+  /* day / dusk compare sliders */
+  [].forEach.call(sec.querySelectorAll('.est-compare'), function (fig) {
+    var r = fig.querySelector('.est-range');
+    function set() { fig.style.setProperty('--x', r.value + '%'); }
+    r.addEventListener('input', set); set();
+  });
+
+  /* lightbox */
+  var lb = d.getElementById('est-lightbox'), lbImg = d.getElementById('est-lb-img');
+  if (lb && typeof lb.showModal === 'function') {
+    [].forEach.call(sec.querySelectorAll('.est-shot[data-full]'), function (b) {
+      b.addEventListener('click', function () {
+        var img = b.querySelector('img');
+        lbImg.src = b.getAttribute('data-full'); lbImg.alt = img ? img.alt : '';
+        lb.showModal();
+      });
+    });
+    d.getElementById('est-lb-close').addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+  } else {
+    [].forEach.call(sec.querySelectorAll('.est-shot[data-full]'), function (b) { b.style.cursor = 'default'; });
+  }
+
+  /* the build film: scroll position = playhead */
+  var v = d.getElementById('est-video');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn = navigator.connection || {}, lowData = !!(conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+  if (d.documentElement.classList.contains('still')) reduce = true;
+  if (!v || reduce || lowData || !('IntersectionObserver' in window) || !window.requestAnimationFrame) return;
+
+  film.classList.add('is-scrub');
+  var beats = [].slice.call(film.querySelectorAll('.est-beat')), steps = film.querySelectorAll('.est-steps li');
+  var fill = d.getElementById('est-fill'), tc = d.getElementById('est-tc');
+  var mobile = window.matchMedia('(max-width: 720px)').matches;
+  var loaded = false, dur = 0, cur = 0, active = false, raf = 0, lastBeat = -1;
+
+  function load() {
+    if (loaded) return; loaded = true;
+    v.preload = 'auto';
+    v.src = v.getAttribute(mobile ? 'data-film-mobile' : 'data-film');
+    v.addEventListener('loadedmetadata', function () {
+      dur = v.duration || 0;
+      /* iOS only paints seeked frames after one play() */
+      var p = v.play(); if (p && p.then) p.then(function () { v.pause(); render(cur, true); }).catch(function () {});
+    }, { once: true });
+    v.addEventListener('loadeddata', function () { v.classList.add('is-ready'); }, { once: true });
+  }
+  function progress() {
+    var r = film.getBoundingClientRect(), span = r.height - window.innerHeight;
+    return span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+  }
+  function pad(n) { return ('0' + n).slice(-2); }
+  function render(p, force) {
+    if (fill) fill.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    film.classList.toggle('is-past', p > 0.04 && v.classList.contains('is-ready'));
+    var b = 0;
+    beats.forEach(function (el, i) { if (p >= parseFloat(el.getAttribute('data-from'))) b = i; });
+    if (b !== lastBeat) {
+      lastBeat = b;
+      beats.forEach(function (el, i) { el.classList.toggle('is-on', i === b); });
+      [].forEach.call(steps, function (el, i) { el.classList.toggle('is-on', i <= b); });
+    }
+    if (dur && v.readyState >= 1) {
+      var t = p * (dur - 0.05);
+      if ((force || Math.abs(v.currentTime - t) > 0.03) && !v.seeking) v.currentTime = t;
+      if (tc) tc.textContent = pad(Math.floor(t)) + ':' + pad(Math.floor((t % 1) * 24));
+    }
+  }
+  function tick() {
+    raf = 0;
+    var target = progress();
+    cur += (target - cur) * 0.12;
+    if (Math.abs(target - cur) < 0.0004) cur = target;
+    render(cur);
+    if (active || cur !== target) raf = requestAnimationFrame(tick);
+  }
+  new IntersectionObserver(function (es) { if (es[0].isIntersecting) load(); }, { rootMargin: '150% 0px' }).observe(film);
+  new IntersectionObserver(function (es) {
+    active = es[0].isIntersecting;
+    if (active && !raf) raf = requestAnimationFrame(tick);
+  }).observe(film);
+  cur = progress(); render(cur);
+})();
+</script>
 </body>
 </html>
