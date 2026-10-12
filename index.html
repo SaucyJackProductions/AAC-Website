@@ -459,6 +459,14 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .ct-tel span{font:500 10px var(--font-mono);letter-spacing:.26em;text-transform:uppercase;color:var(--muted-soft)}
 .ct-tel b{font:400 clamp(34px,3.4vw,54px)/1 var(--serif);color:var(--ink);transition:color .3s}
 .ct-tel:hover b{color:var(--gold-l)}
+.ct-card-qr{display:flex;align-items:center;gap:20px;margin:-14px 0 44px;padding:14px 18px 14px 14px;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(234,210,160,.22);background:linear-gradient(180deg,rgba(234,210,160,.05),rgba(234,210,160,.01));max-width:440px}
+.ct-card-qr img{width:96px;height:96px;border-radius:10px;flex:none;background:#050605}
+.ct-card-qr strong{display:block;font:400 22px/1.1 var(--serif)}
+.ct-card-qr p{margin:4px 0 10px;font-size:13px;color:var(--muted)}
+.ct-card-qr .on-mob{display:none}
+.ct-card-qr nav{display:flex;gap:16px;flex-wrap:wrap}
+.ct-card-qr nav a{font:500 10px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);border-bottom:1px solid rgba(234,210,160,.35);padding-bottom:4px}
+.ct-card-qr nav a:hover{border-color:var(--gold-l)}
 .ct-points{list-style:none;border-top:1px solid var(--line)}
 .ct-points li{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:20px 0;border-bottom:1px solid var(--line);color:var(--muted);font-weight:300;line-height:1.65;font-size:15px}
 .ct-points li span{font:400 11px var(--font-mono);letter-spacing:.16em;color:var(--gold);padding-top:4px}
@@ -921,6 +929,9 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .ct-points{display:none}
   .ct-side .lede{margin-bottom:24px}
   .ct-tel{margin-bottom:8px}
+  .ct-card-qr{margin:14px 0 22px;padding:14px 16px}
+  .ct-card-qr img,.ct-card-qr .on-desk{display:none}
+  .ct-card-qr .on-mob{display:inline}
 }
 
 /* the always-there CTA: compact pill on desktop, full bar on phones */
@@ -954,16 +965,12 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="loader" id="loader" role="dialog" aria-label="Enter Above All Media">
+<div class="loader" id="loader" aria-hidden="true">
   <div class="ld-in">
     <span class="ld-k">Hilton Head Island &middot; 32.2163&deg; N</span>
     <div class="ld-mark">Above <em>All</em></div>
     <div class="ld-bar"><i id="ld-fill"></i></div>
     <div class="ld-row" aria-hidden="true"><span>Descending from orbit</span><span id="ld-pct">000</span></div>
-    <div class="ld-enter" id="ld-enter" hidden>
-      <button class="ld-go" id="ld-sound" type="button"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>Enter with sound</button>
-      <button class="ld-quiet" id="ld-quiet" type="button">Enter without sound</button>
-    </div>
   </div>
 </div>
 <div class="grain" aria-hidden="true"></div>
@@ -1478,6 +1485,14 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       <h2 id="contact-title" data-split>Tell us where you want <em>to grow.</em></h2>
       <p class="lede rv">Share a few details and we&rsquo;ll review the opportunity, the goals, and the clearest next move for your business. You&rsquo;ll hear back personally.</p>
       <a class="ct-tel rv" href="tel:+18039205349"><span>Call or text Chandler</span><b>(803) 920-5349</b></a>
+      <div class="ct-card-qr rv">
+        <img src="connect/qr-small.webp" alt="QR code to Chandler's digital card" width="96" height="96" loading="lazy" decoding="async">
+        <div>
+          <strong>Take Chandler with you</strong>
+          <p><span class="on-desk">Scan with your phone for his full card: links, socials and contact.</span><span class="on-mob">His full card: links, socials and contact.</span></p>
+          <nav><a href="connect/">Open digital card &rarr;</a><a href="connect/chandler-pirie.vcf">Save contact</a></nav>
+        </div>
+      </div>
       <ul class="ct-points rv">
         <li><span>I</span><div><strong>Strategic review</strong>We look at your business, your goals, and where premium content creates the most leverage.</div></li>
         <li><span>II</span><div><strong>Clear recommendation</strong>Direction on the strongest next step, based on what will actually move the needle.</div></li>
@@ -1615,6 +1630,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         <a href="tel:+18039205349">(803) 920-5349</a>
         <a href="sms:+18039205349">Text Chandler</a>
         <a href="#contact">Begin a project</a>
+        <a href="connect/">Digital card &amp; QR</a>
       </div>
     </div>
     <div class="ft-mark" aria-hidden="true">Above <em>All</em></div>
@@ -1801,18 +1817,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       if (ok[0] && !dsLive) { dsLive = true; ds.classList.add('live'); drawn = -1; }
       if (p >= 1) finishLoader();
     }
-    /* Once the frames are in, the visitor steps in with a tap. That tap is what lets the swing film and the reels play their music later. */
-    var gateOpen = false;
-    function finishLoader() {
-      if (loaderDone || gateOpen) return; gateOpen = true;
-      var box = $('#ld-enter'), go = $('#ld-sound'), quiet = $('#ld-quiet');
-      if (!box || !go) return enter(true);
-      if (lenis) lenis.stop();
-      root.classList.add('gate'); box.hidden = false;
-      setTimeout(function () { try { go.focus({ preventScroll: true }); } catch (e) {} }, 60);
-      go.addEventListener('click', function () { enter(true); });
-      quiet.addEventListener('click', function () { enter(false); });
-    }
+    /* No entry gate: the site opens on its own once the first frames are in. Films get their music after the visitor's first tap, or from their sound buttons. */
+    function finishLoader() { enter(undefined); }
     function enter(sound) {
       if (loaderDone) return; loaderDone = true;
       W.__aamSound = sound;
@@ -1825,7 +1831,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     }
     if (!still && ctx) {
       sizeCanvas(); loadFrames();
-      setTimeout(finishLoader, 3200);           /* on a slow line, offer the way in without waiting for every frame */
+      setTimeout(finishLoader, 1600);           /* on a slow line, open without waiting for every frame */
     } else {
       root.classList.add('loaded', 'ready');
       $$('[data-split]').forEach(function (el) { el.classList.add('in'); });
