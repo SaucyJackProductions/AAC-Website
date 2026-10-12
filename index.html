@@ -845,6 +845,111 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   .est-list li{grid-template-columns:1fr;gap:4px}
   .est-lb-close{top:8px;right:8px}
 }
+/* ===== v6: tighter rhythm (less scroll, more per scroll) + the inquiry drawer ===== */
+.ds{height:300vh}
+.mf{padding:clamp(80px,9vw,130px) 0 clamp(50px,6vw,80px)}
+.mf .kicker{margin-bottom:28px}
+.mf-foot{margin-top:36px}
+.svc{padding-bottom:clamp(70px,8vw,110px)}
+.svc-head{margin-bottom:36px}
+.svc-row a{padding:22px 0}
+.est-film.is-scrub{height:280vh}
+.est-after{padding-top:clamp(70px,8vw,110px)}
+.est-head{margin-bottom:30px}
+.est-compare-grid{margin-bottom:clamp(60px,7vw,90px)}
+.est-gallery{margin-bottom:clamp(50px,6vw,80px)}
+.gc{padding:clamp(70px,8vw,120px) 0}
+.gc-head{margin-bottom:36px}
+.gc-acts{display:flex;flex-wrap:wrap;gap:12px}
+.gc-film{max-height:72vh}
+.gc-grid:not(.is-open) .gc-more{display:none}
+.gc-more-btn{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;min-height:56px;border:1px solid var(--line-2);border-radius:3px;background:transparent;color:var(--gold-l);font:500 12px var(--font-body);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background-color .4s,border-color .4s}
+.gc-more-btn:hover{background:rgba(201,166,107,.08);border-color:var(--gold)}
+.gc-grid.is-open .gc-more-btn{display:none}
+.reel{padding:clamp(70px,8vw,120px) 0}
+.reel-head{margin-bottom:32px}
+.reel-side{display:flex;flex-direction:column;align-items:flex-start;gap:20px;max-width:420px}
+.feed{margin-top:clamp(50px,6vw,80px)}
+.fl{height:170vh}
+.fl-go{display:inline-block;margin-left:10px;color:var(--gold-l);white-space:nowrap;pointer-events:auto}
+.pr{padding:clamp(80px,9vw,130px) 0}
+.step{padding-bottom:clamp(34px,4vw,52px)}
+.step .num{font-size:clamp(52px,5vw,84px)}
+.pr-go{margin:44px 0 0 46px}
+.ab{padding:clamp(70px,8vw,120px) 0}
+.ab-img{aspect-ratio:5/4}
+.ct{padding:clamp(80px,9vw,130px) 0}
+@media (min-width:1100px){
+  .reel .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 clamp(36px,3.4vw,60px);align-items:center}
+  .reel-head{grid-column:1/-1}
+  .feed{display:flex;flex-direction:column;align-items:flex-start;gap:26px;margin:0}
+  .feed-copy .lede{display:none}
+  .feed-copy h3{font-size:clamp(30px,2.4vw,40px);margin:12px 0 0}
+  .phone{width:clamp(150px,11vw,196px);border-radius:28px;padding:7px}
+  .phone video{border-radius:22px}
+  .phone:nth-child(2){translate:0 26px}.phone:nth-child(2):hover{translate:0 20px}
+  .pr-grid{align-items:start}
+}
+@media (max-width:999px){
+  .gc-grid:not(.is-open) .gc-d,.gc-grid:not(.is-open) .gc-e,.gc-grid:not(.is-open) .gc-f{display:none}
+}
+@media (max-width:720px){
+  .ds{height:280vh}
+  .fl{height:150vh}
+  .est-film.is-scrub{height:240vh}
+  .gc-film{aspect-ratio:4/5}
+  .pr-go{margin-left:0}
+  .ab-img{aspect-ratio:16/11}
+  .fl-go{display:block;margin:10px 0 0}
+}
+
+/* phones: galleries swipe sideways instead of stacking six screens deep */
+@media (max-width:999px){
+  .js:not(.still) .hz-track,.hz-track{display:grid;grid-template-columns:repeat(5,min(82vw,560px));grid-template-rows:auto auto;column-gap:14px;row-gap:34px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:clamp(70px,10vw,110px) var(--gut);scroll-padding:0 var(--gut)}
+  .hz-track::-webkit-scrollbar{display:none}
+  .hz-intro{grid-row:1;grid-column:1/span 1;position:sticky;left:0;width:calc(100vw - var(--gut)*2);max-width:none}
+  .hz-intro h2{margin:14px 0 16px}
+  .hz-card,.hz-end{grid-row:2;scroll-snap-align:start;max-width:none}
+  .hz-card{gap:18px}
+  .hz-end{padding:24px;border:1px solid var(--line);border-radius:3px;gap:20px}
+  .hz-hint{display:inline-flex;margin-top:18px}
+}
+@media (max-width:720px){
+  .est-gallery{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:calc(var(--gut) * -1);padding-right:var(--gut)}
+  .est-gallery::-webkit-scrollbar{display:none}
+  .est-gallery .est-shot,.est-gallery .est-shot.est-wide,.est-gallery .est-shot:not(.est-wide):not(.est-film-tile){grid-column:auto;aspect-ratio:4/5;scroll-snap-align:start}
+  .ct-points{display:none}
+  .ct-side .lede{margin-bottom:24px}
+  .ct-tel{margin-bottom:8px}
+}
+
+/* the always-there CTA: compact pill on desktop, full bar on phones */
+.sticky-mobile-cta .dk{display:none}
+.hz-hint-m{display:none}
+@media (max-width:999px){.hz-hint-d{display:none}.hz-hint-m{display:inline}}
+@media (min-width:721px){
+  .sticky-mobile-cta{display:flex;left:auto;right:24px;bottom:24px;width:auto}
+  .sticky-mobile-cta a{flex:0 0 auto;padding:0 22px}
+  .sticky-mobile-cta .text,.sticky-mobile-cta .m{display:none}
+  .sticky-mobile-cta .dk{display:inline;font-family:var(--font-mono);letter-spacing:.1em}
+  .sticky-mobile-cta .contact{padding:0 28px}
+}
+html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visibility:hidden;pointer-events:none}
+
+/* the inquiry drawer: the real form slides in over whatever you are looking at */
+.iq{position:fixed;inset:0 0 0 auto;width:min(580px,100vw);height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0b0c0a;color:var(--ink);box-shadow:-40px 0 120px rgba(0,0,0,.6),inset 1px 0 0 var(--line);overflow:hidden;transform:translateX(104%);transition:transform .7s var(--ease)}
+.iq.is-in{transform:none}
+.iq::backdrop{background:rgba(3,4,3,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.iq-panel{height:100%;overflow-y:auto;overscroll-behavior:contain;padding:clamp(28px,4vw,48px) clamp(22px,3.6vw,46px) 40px}
+.iq-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:30px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.iq-head h2{font-size:clamp(40px,4vw,58px);margin:14px 0 10px}
+.iq-head h2 em{font-style:italic;color:var(--gold-l)}
+.iq-head p{color:var(--muted);font-weight:300}
+.iq-close{flex:0 0 auto;width:48px;height:48px;border-radius:50%;border:0;box-shadow:inset 0 0 0 1px var(--line-2);background:transparent;color:var(--ink);font-size:26px;line-height:1;cursor:pointer;transition:background-color .3s}
+.iq-close:hover{background:rgba(201,166,107,.14)}
+.ct-card.is-away{display:flex;flex-direction:column;justify-content:center;min-height:320px}
+@media (max-width:720px){.iq{width:100vw}.iq-head h2{font-size:40px}}
+@media (prefers-reduced-motion:reduce){.iq{transition:none}}
 </style>
 </head>
 <body>
@@ -894,7 +999,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <a href="#estates" style="--i:3">Estates</a>
   <a href="#golf" style="--i:4">Golf</a>
   <a href="#process" style="--i:5">Process</a>
-  <a href="#contact" style="--i:6">Begin a Project</a>
+  <a href="#about" style="--i:6">About</a>
+  <a href="#contact" style="--i:7">Begin a Project</a>
   <div class="mm-foot">(803) 920-5349 &middot; Hilton Head Island, SC</div>
 </nav>
 
@@ -1039,7 +1145,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
           <span class="kicker">Selected work</span>
           <h2 id="work-title" data-split>Looks premium. <em>Performs like it.</em></h2>
           <p class="lede">Cinematic video, drone, reels and ad-ready assets that help brands stand out, build trust faster and turn attention into calls, bookings and growth.</p>
-          <span class="hz-hint" aria-hidden="true">Keep scrolling &rarr;</span>
+          <span class="hz-hint" aria-hidden="true"><span class="hz-hint-d">Keep scrolling</span><span class="hz-hint-m">Swipe</span> &rarr;</span>
         </div>
 
         <article class="hz-card rv" data-cursor="View">
@@ -1221,7 +1327,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       </div>
       <div>
         <p class="lede rv">Aerial photography, cinematic flyovers and playable 3D course models for the Lowcountry&rsquo;s courses, clubs and resorts. Golfers see the course before they book the tee time.</p>
-        <a class="btn btn-line rv" href="skycaddy/" data-cursor="Play">Play Sky Caddy &middot; Hole 10 <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <div class="gc-acts rv"><a class="btn btn-gold" href="#contact" data-service="Drone / Aerial">Film Your Course <span class="arrow" aria-hidden="true">&rarr;</span></a><a class="btn btn-line" href="skycaddy/" data-cursor="Play">Play Hole 10 <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
       </div>
     </div>
     <button class="gc-film rv" id="gc-film" type="button" data-cursor="Sound" aria-label="Play the Hole 10 film with sound">
@@ -1239,12 +1345,13 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       <figure class="gc-d rv" data-cursor="View"><img src="assets/lux/golf-noon-green.webp" alt="Oceanfront golf hole between the beach and the marsh" width="1677" height="938" loading="lazy" decoding="async" data-pz><figcaption><span>Oceanfront</span>Beach, links and marsh</figcaption></figure>
       <figure class="gc-e rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-full-course.webp" alt="Full golf course with lagoons at sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The layout</span>The whole course in one frame</figcaption></figure>
       <figure class="gc-f rv" data-d="2" data-cursor="View"><img src="assets/lux/golf-green-fairway.webp" alt="Green and bunkers with the ocean sunset behind" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Green, bunkers and the Atlantic</figcaption></figure>
-      <figure class="gc-g rv" data-cursor="View"><img src="assets/lux/hole10-fly.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/lux/hole10-fly.mp4" data-webm="assets/lux/hole10-fly.webm" aria-hidden="true" tabindex="-1"></video><figcaption><span>Flyover &middot; traced</span>Tee to green, with the line drawn in</figcaption></figure>
-      <figure class="gc-h rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-1.webp" alt="Bunker and green with the ocean beyond at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The green</span>Sand, sea and the flag</figcaption></figure>
-      <figure class="gc-i rv" data-cursor="View"><img src="assets/lux/golf-new-2.webp" alt="Fairway and bunkers running toward the sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Sunset</span>The long view home</figcaption></figure>
-      <figure class="gc-j rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-4.webp" alt="Bunkers in front of a green with the ocean behind at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Two bunkers, one line</figcaption></figure>
-      <figure class="gc-k rv" data-cursor="View"><img src="assets/lux/golf-new-3.webp" alt="Putting green and flag in low evening light" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Golden hour</span>The putting surface</figcaption></figure>
-      <figure class="gc-l rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-5.webp" alt="Aerial of a green framed by sculpted bunkers at sunrise" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Overhead</span>Bunkers carved like brushstrokes</figcaption></figure>
+      <figure class="gc-g gc-more rv" data-cursor="View"><img src="assets/lux/hole10-fly.webp" alt="" width="1600" height="900" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/lux/hole10-fly.mp4" data-webm="assets/lux/hole10-fly.webm" aria-hidden="true" tabindex="-1"></video><figcaption><span>Flyover &middot; traced</span>Tee to green, with the line drawn in</figcaption></figure>
+      <figure class="gc-h gc-more rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-1.webp" alt="Bunker and green with the ocean beyond at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>The green</span>Sand, sea and the flag</figcaption></figure>
+      <figure class="gc-i gc-more rv" data-cursor="View"><img src="assets/lux/golf-new-2.webp" alt="Fairway and bunkers running toward the sunset, shot by drone" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Sunset</span>The long view home</figcaption></figure>
+      <figure class="gc-j gc-more rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-4.webp" alt="Bunkers in front of a green with the ocean behind at sunset" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Approach</span>Two bunkers, one line</figcaption></figure>
+      <figure class="gc-k gc-more rv" data-cursor="View"><img src="assets/lux/golf-new-3.webp" alt="Putting green and flag in low evening light" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Golden hour</span>The putting surface</figcaption></figure>
+      <figure class="gc-l gc-more rv" data-d="1" data-cursor="View"><img src="assets/lux/golf-new-5.webp" alt="Aerial of a green framed by sculpted bunkers at sunrise" width="1672" height="941" loading="lazy" decoding="async" data-pz><figcaption><span>Overhead</span>Bunkers carved like brushstrokes</figcaption></figure>
+      <button class="gc-more-btn" type="button" aria-expanded="false" id="gc-more-btn"><span>See six more frames</span> <span aria-hidden="true">+</span></button>
       <a class="gc-band rv" href="skycaddy/" data-cursor="Play">
         <img src="assets/lux/golf-sunset-zoom.webp" alt="" width="1672" height="941" loading="lazy" decoding="async" data-pz>
         <video muted loop playsinline preload="none" data-src="assets/lux/golf-ambient.mp4" data-webm="assets/lux/golf-ambient.webm" aria-hidden="true" tabindex="-1"></video>
@@ -1263,7 +1370,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   <div class="wrap">
     <div class="reel-head">
       <div><span class="kicker">The reel</span><h2 id="reel-title" data-split>Ninety seconds <em>above the rest.</em></h2></div>
-      <p class="lede rv">Turn the sound on. This is the standard every project is held to.</p>
+      <div class="reel-side"><p class="lede rv">Turn the sound on. This is the standard every project is held to.</p><a class="btn btn-line rv" href="#contact">Hold us to it <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
     </div>
     <div class="showreel rv" id="showreel" data-cursor="Play">
       <div class="ratio">
@@ -1306,7 +1413,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       <video muted loop playsinline preload="none" data-src="assets/lux/harbour-fly.mp4" data-portrait="assets/lux/harbour-fly-m.mp4" data-webm="assets/lux/harbour-fly.webm" aria-hidden="true" tabindex="-1"></video>
     </div>
     <h2 class="fl-title" id="fl-title"><span id="fl-l">The view</span> <span id="fl-r"><em>that sells.</em></span></h2>
-    <p class="fl-cap" id="fl-cap">Licensed aerial cinematography across Hilton Head, Bluffton, Beaufort and the Lowcountry</p>
+    <p class="fl-cap" id="fl-cap">Licensed aerial cinematography across Hilton Head, Bluffton, Beaufort and the Lowcountry <a class="fl-go" href="#contact" data-service="Drone / Aerial">Book a flight &rarr;</a></p>
   </div>
 </section>
 
@@ -1325,6 +1432,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       <li class="step rv"><span class="num">03</span><h3>Cut it</h3><p>Edits built for your website, reels and paid ads, with the hook up front and the polish all the way through.</p></li>
       <li class="step rv"><span class="num">04</span><h3>Deliver it</h3><p>Every format your channels need, ready to publish and built to keep working long after launch day.</p></li>
     </ol>
+    <a class="btn btn-gold pr-go rv" href="#contact">Step one: tell us the goal <span class="arrow" aria-hidden="true">&rarr;</span></a>
   </div>
 </section>
 
@@ -1342,7 +1450,26 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 <script type="application/json" id="proof-data">[]</script>
 
 
-<!-- 8. CONTACT -->
+<!-- 8. ABOUT -->
+<section id="about" class="ab" aria-labelledby="about-title">
+  <div class="wrap ab-grid">
+    <figure class="ab-img rv"><img src="assets/lux/marsh-resort.webp" alt="Boardwalk across the marsh to a Hilton Head resort at sunset, shot by drone" width="1448" height="1086" loading="lazy" decoding="async" data-pz><figcaption>Hilton Head Island &middot; Golden hour</figcaption></figure>
+    <div>
+      <span class="kicker">About Above All Media</span>
+      <h2 id="about-title" data-split>For businesses that intend to <em>stand above.</em></h2>
+      <p class="lede rv">Based on Hilton Head Island, we create premium visual content for businesses that want stronger positioning, better attention, and content that actually supports revenue. First we find the business goal. Then we build the visual system around it.</p>
+      <ul class="ab-list rv">
+        <li>Real estate agents, developments and vacation rentals</li>
+        <li>Restaurants, resorts, hotels and hospitality brands</li>
+        <li>Marinas, charters, golf and destination experiences</li>
+        <li>Businesses ready to grow through stronger content and ads</li>
+      </ul>
+      <a class="btn btn-line rv" href="#contact">Start your project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. CONTACT -->
 <section id="contact" class="ct" aria-labelledby="contact-title">
   <div class="ct-bg" data-pz-bg aria-hidden="true"></div>
   <div class="wrap ct-grid">
@@ -1438,32 +1565,29 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   </div>
 </section>
 
-<!-- 9. ABOUT -->
-<section id="about" class="ab" aria-labelledby="about-title">
-  <div class="wrap ab-grid">
-    <figure class="ab-img rv"><img src="assets/lux/marsh-resort.webp" alt="Boardwalk across the marsh to a Hilton Head resort at sunset, shot by drone" width="1448" height="1086" loading="lazy" decoding="async" data-pz><figcaption>Hilton Head Island &middot; Golden hour</figcaption></figure>
-    <div>
-      <span class="kicker">About Above All Media</span>
-      <h2 id="about-title" data-split>For businesses that intend to <em>stand above.</em></h2>
-      <p class="lede rv">Based on Hilton Head Island, we create premium visual content for businesses that want stronger positioning, better attention, and content that actually supports revenue. First we find the business goal. Then we build the visual system around it.</p>
-      <ul class="ab-list rv">
-        <li>Real estate agents, developments and vacation rentals</li>
-        <li>Restaurants, resorts, hotels and hospitality brands</li>
-        <li>Marinas, charters, golf and destination experiences</li>
-        <li>Businesses ready to grow through stronger content and ads</li>
-      </ul>
-      <a class="btn btn-line rv" href="#contact">Start your project <span class="arrow" aria-hidden="true">&rarr;</span></a>
-    </div>
-  </div>
-</section>
+
 
 </main>
 
 <aside class="sticky-mobile-cta" id="sticky-mobile-cta" aria-label="Quick contact">
-  <a class="call" href="tel:+18039205349" aria-label="Call Chandler">Call</a>
+  <a class="call" href="tel:+18039205349" aria-label="Call Chandler"><span class="m">Call</span><span class="dk">(803) 920-5349</span></a>
   <a class="text" href="sms:+18039205349" aria-label="Text Chandler">Text</a>
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
+
+<dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
+  <div class="iq-panel">
+    <div class="iq-head">
+      <div>
+        <span class="kicker">Private consultation</span>
+        <h2 id="iq-title">Begin a <em>project.</em></h2>
+        <p>Two short steps. You&rsquo;ll hear back personally.</p>
+      </div>
+      <button class="iq-close" id="iq-close" type="button" aria-label="Close the form">&times;</button>
+    </div>
+    <div class="iq-body" id="iq-body"></div>
+  </div>
+</dialog>
 
 <footer class="ft">
   <div class="ft-bg" data-pz-bg aria-hidden="true"><video muted loop playsinline preload="none" data-poster="assets/lux/sunset-sea.webp" data-src="assets/lux/sunset-sea.mp4" data-webm="assets/lux/sunset-sea.webm" tabindex="-1"></video></div>
@@ -1558,7 +1682,8 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 
     /* ---------- smooth scroll ---------- */
     if (!reduce && W.Lenis) {
-      try { lenis = new W.Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true }); } catch (e) { lenis = null; }
+      try { lenis = new W.Lenis({ lerp: 0.1, wheelMultiplier: 1.15, smoothWheel: true }); } catch (e) { lenis = null; }
+      W.__aamLenis = lenis;
     }
 
     /* ---------- menu ---------- */
@@ -1757,7 +1882,7 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
       hzOn = !still && W.matchMedia('(min-width: 1000px)').matches;
       if (!hzOn) { hz.style.height = ''; hzTrack.style.transform = ''; return; }
       hzDist = Math.max(0, hzTrack.scrollWidth - vw);
-      hz.style.height = (hzDist + vh) + 'px';
+      hz.style.height = (hzDist * 0.62 + vh) + 'px';   /* the gallery travels faster than the wheel */
     }
 
     /* ---------- marquee ---------- */
@@ -1951,9 +2076,11 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     /* ---------- sticky mobile CTA ---------- */
     var sticky = $('#sticky-mobile-cta');
     if (sticky && 'IntersectionObserver' in W) {
+      /* there from the first scroll to the footer; it steps aside only while the form itself is on screen */
       var onHero = true, onContact = false, contactEl = $('#contact');
       var syncSticky = function () { sticky.classList.toggle('is-visible', !onHero && !onContact); };
-      new IntersectionObserver(function (es) { onHero = es[0].isIntersecting; syncSticky(); }, { threshold: 0 }).observe(ds);
+      var heroCheck = function () { var h = W.pageYOffset < vh * 0.6; if (h !== onHero) { onHero = h; syncSticky(); } };
+      W.addEventListener('scroll', heroCheck, { passive: true }); heroCheck();
       if (contactEl) new IntersectionObserver(function (es) { onContact = es[0].isIntersecting; syncSticky(); }, { threshold: 0.12 }).observe(contactEl);
     }
 
@@ -2333,14 +2460,6 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
   if (!film) return;
   var sec = d.getElementById('estates');
 
-  /* "Book a Listing Film" pre-selects the service in the contact form */
-  [].forEach.call(d.querySelectorAll('a[data-service]'), function (a) {
-    a.addEventListener('click', function () {
-      var sel = d.getElementById('service-type'), val = a.getAttribute('data-service');
-      if (sel && [].some.call(sel.options, function (o) { return o.value === val; })) sel.value = val;
-    });
-  });
-
   /* day / dusk compare sliders */
   [].forEach.call(sec.querySelectorAll('.est-compare'), function (fig) {
     var r = fig.querySelector('.est-range');
@@ -2423,6 +2542,94 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
     if (active && !raf) raf = requestAnimationFrame(tick);
   }).observe(film);
   cur = progress(); render(cur);
+})();
+</script>
+<script>
+/* ===== Inquiry drawer: every "Begin a Project" opens the real form right where you are =====
+   One form only. It moves into the drawer while open and back into #contact on close, so the
+   two-step wizard, call booking and Google/FormSubmit delivery behave exactly as before.
+   Without JS (or without <dialog>) the links simply scroll to #contact. */
+(function () {
+  var d = document, root = d.documentElement, W = window;
+  var dlg = d.getElementById('inquire'), body = d.getElementById('iq-body'), form = d.getElementById('contact-form');
+  var home = form && form.parentNode, card = d.querySelector('#contact .ct-card'), contact = d.getElementById('contact');
+  if (!dlg || !body || !form || typeof dlg.showModal !== 'function') return;
+  var holder = d.createElement('div'); holder.hidden = true;
+  holder.innerHTML = '<p class="lede">The form is open beside you.</p>';
+  var lastFocus = null;
+
+  function preset(val) {
+    var sel = d.getElementById('service-type');
+    if (val && sel && [].some.call(sel.options, function (o) { return o.value === val; })) sel.value = val;
+  }
+  function inView(el) { var r = el.getBoundingClientRect(); return r.top < W.innerHeight * 0.6 && r.bottom > W.innerHeight * 0.4; }
+  function firstField() { return form.querySelector('.wiz-step:not([hidden]) input:not([type=hidden]):not([tabindex="-1"]),.wiz-step:not([hidden]) select,.wiz-step:not([hidden]) textarea'); }
+
+  function open(val) {
+    preset(val);
+    if (dlg.open) return;
+    lastFocus = d.activeElement;
+    home.insertBefore(holder, form); holder.hidden = false;
+    body.appendChild(form);
+    if (card) card.classList.add('is-away');
+    root.classList.add('iq-open');
+    if (W.__aamLenis) W.__aamLenis.stop();
+    dlg.showModal();
+    requestAnimationFrame(function () { requestAnimationFrame(function () { dlg.classList.add('is-in'); }); });
+    var f = firstField(); if (f) try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); }
+  }
+  function close() {
+    if (!dlg.open) return;
+    dlg.classList.remove('is-in');
+    var done = function () {
+      if (!dlg.open) return;
+      dlg.close();
+    };
+    if (W.matchMedia('(prefers-reduced-motion: reduce)').matches) done(); else setTimeout(done, 520);
+  }
+  dlg.addEventListener('close', function () {
+    dlg.classList.remove('is-in');
+    home.insertBefore(form, holder); holder.hidden = true; if (holder.parentNode) holder.parentNode.removeChild(holder);
+    if (card) card.classList.remove('is-away');
+    root.classList.remove('iq-open');
+    if (W.__aamLenis) W.__aamLenis.start();
+    if (lastFocus && lastFocus.focus) try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
+  });
+  dlg.addEventListener('cancel', function (e) { e.preventDefault(); close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });   /* backdrop */
+  d.getElementById('iq-close').addEventListener('click', close);
+
+  /* capture phase, so this runs before the smooth-scroll anchor handler */
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href="#contact"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var val = a.getAttribute('data-service');
+    if (dlg.open) { e.preventDefault(); e.stopPropagation(); preset(val); return; }
+    if (inView(contact)) {   /* the form is already on screen: just start it */
+      e.preventDefault(); e.stopPropagation(); preset(val);
+      var f = firstField(); if (f) f.focus();
+      return;
+    }
+    e.preventDefault(); e.stopPropagation();
+    var menu = d.getElementById('mmenu');
+    if (menu && menu.classList.contains('open')) d.getElementById('menu-toggle').click();
+    open(val);
+  }, true);
+
+  /* a link ending in ?inquire (ads, email signatures) opens the form on arrival */
+  if (/[?&]inquire\b/.test(location.search)) setTimeout(function () { open(); }, 400);
+})();
+
+/* Golf: six frames up front, the rest one tap away */
+(function () {
+  var b = document.getElementById('gc-more-btn');
+  if (!b) return;
+  b.addEventListener('click', function () {
+    var g = b.closest('.gc-grid'); g.classList.add('is-open'); b.setAttribute('aria-expanded', 'true');
+    var f = g.querySelector('.gc-more'); if (f) { f.setAttribute('tabindex', '-1'); f.focus({ preventScroll: true }); }
+    [].forEach.call(g.querySelectorAll('.gc-more.rv'), function (el) { el.classList.add('in'); });
+    window.dispatchEvent(new Event('resize'));
+  });
 })();
 </script>
 </body>
