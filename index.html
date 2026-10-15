@@ -674,6 +674,30 @@ input::placeholder,textarea::placeholder{color:rgba(244,238,227,.36)}
 @keyframes scEq{0%,100%{height:3px}50%{height:12px}}
 .sc.is-out .sc-sound{opacity:0;pointer-events:none}
 @media (max-width:720px){.sc-sound{top:86px;bottom:auto;right:16px}}
+/* the swing holds the screen: Skip lets the visitor on, Play the swing stands in when the phone won't autoplay (Low Power Mode) */
+.sc-skip{position:absolute;left:50%;bottom:22px;translate:-50% 0;z-index:7;height:40px;padding:0 20px;border-radius:999px;border:0;cursor:pointer;background:rgba(7,8,7,.45);box-shadow:inset 0 0 0 1px rgba(247,242,232,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 11px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:rgba(247,242,232,.8);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s,color .3s}
+.sc-skip:hover{color:var(--gold-l)}
+.sc.is-on .sc-skip{opacity:1;visibility:visible;transition:opacity .6s 1.2s,visibility 0s,color .3s}
+.sc.is-out .sc-skip{opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.sc-play{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:7;display:none;flex-direction:column;align-items:center;gap:16px;background:none;border:0;cursor:pointer;font:500 12px var(--font-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-l)}
+.sc-play-ring{display:grid;place-items:center;width:96px;height:96px;padding-left:6px;border-radius:50%;font-size:26px;background:rgba(7,8,7,.45);box-shadow:inset 0 0 0 1px rgba(234,210,160,.7),0 0 60px rgba(201,166,107,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:scale .4s var(--ease)}
+.sc-play:hover .sc-play-ring{scale:1.06}
+.sc.is-blocked .sc-play{display:flex}
+html.sc-held{overscroll-behavior:none}
+@media (max-width:720px){.sc-skip{bottom:calc(92px + env(safe-area-inset-bottom,0px))}}
+/* site music: one quiet pill, bottom left (above the contact bar on phones); steps aside where the swing has its own */
+.music-btn{position:fixed;left:24px;bottom:24px;z-index:1800;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;background:rgba(7,8,7,.6);box-shadow:inset 0 0 0 1px rgba(234,210,160,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:500 11px var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);opacity:0;pointer-events:none;transition:opacity .5s,background-color .3s}
+.music-btn[hidden]{display:none}
+html.ready .music-btn{opacity:1;pointer-events:auto}
+html.ready.sc-in .music-btn,html.iq-open .music-btn,body.nav-open .music-btn{opacity:0;pointer-events:none}
+.music-btn:hover{background:rgba(201,166,107,.25)}
+.music-btn .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.music-btn .eq i{width:2px;height:4px;background:currentColor;border-radius:1px}
+.music-btn .eq i:nth-child(1){height:6px}.music-btn .eq i:nth-child(2){height:10px}.music-btn .eq i:nth-child(3){height:7px}
+.music-btn[aria-pressed="true"] .eq i{animation:scEq .9s ease-in-out infinite}
+.music-btn[aria-pressed="true"] .eq i:nth-child(2){animation-delay:-.3s}.music-btn[aria-pressed="true"] .eq i:nth-child(3){animation-delay:-.6s}
+.still .music-btn[aria-pressed="true"] .eq i{animation:none;height:9px}
+@media (max-width:720px){.music-btn{left:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:44px;padding:0}.music-btn .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}}
 @keyframes scFlash{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
 @keyframes scRec{50%{opacity:.2}}
 @media (max-width:860px){
@@ -1086,6 +1110,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <div class="sc-flash" aria-hidden="true"></div>
   <button class="sc-sound" id="sc-sound" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span id="sc-sound-label">Sound on</span></button>
   <div class="sc-tag mono-tag" aria-hidden="true"><span class="dot"></span>Sky Caddy &middot; Hole 10 &middot; Hilton Head Island</div>
+  <button class="sc-play" id="sc-play" type="button"><span class="sc-play-ring" aria-hidden="true">&#9654;</span><span>Play the swing</span></button>
+  <button class="sc-skip" id="sc-skip" type="button">Skip <span aria-hidden="true">&rarr;</span></button>
   <div class="sc-choice" id="sc-choice">
     <div class="sc-card">
       <span class="section-kicker">Above All Media &middot; Hilton Head Island</span>
@@ -1111,7 +1137,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
           <span class="go">Keep exploring &rarr;</span>
         </a>
       </div>
-      <button class="sc-replay" id="sc-replay" type="button">&#8635; Watch the swing again, with sound</button>
+      <button class="sc-replay" id="sc-replay" type="button">&#8635; Watch the swing again</button>
     </div>
   </div>
 </section>
@@ -1611,6 +1637,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <a class="text" href="sms:+18039205349" aria-label="Text Chandler">Text</a>
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
+<button class="music-btn" id="music-btn" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
 
 <dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
   <div class="iq-panel">
@@ -2154,13 +2181,17 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         inView = es[0].isIntersecting;
         if (!ytReady) return;
         try { if (inView && !userPaused) yt.playVideo(); else if (!inView) yt.pauseVideo(); } catch (e) {}
+        reelDuck();
       }, { threshold: 0.35 }).observe(reelBox);
     }
     function setSound(on) {
       soundOn = on;
       if (soundBtn) { soundBtn.textContent = on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); }
       if (ytReady) { try { on ? (yt.unMute(), yt.setVolume(100)) : yt.mute(); } catch (e) {} }
+      reelDuck();
     }
+    /* the site music steps out while the reel plays with its sound */
+    function reelDuck() { if (W.__aamMusic) W.__aamMusic.duck('reel', soundOn && inView && !userPaused); }
     if (soundBtn) soundBtn.addEventListener('click', function () { setSound(!soundOn); });
     if (hit) hit.addEventListener('click', function () {
       if (!ytReady) { window.open('https://www.youtube.com/watch?v=' + VID, '_blank', 'noopener'); return; }
@@ -2169,6 +2200,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         if (!soundOn && st === 1 && !userPaused && !hit._clicked) { hit._clicked = true; setSound(true); return; }
         hit._clicked = true;
         if (st === 1) { userPaused = true; yt.pauseVideo(); } else { userPaused = false; yt.playVideo(); }
+        reelDuck();
       } catch (e) {}
     });
 
@@ -2389,102 +2421,281 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 })();
 </script>
 <script>
-/* SkyCaddy section: plays the Sky Caddy opening film (the drive through the glass). When it ends, the film
-   punches toward the viewer and bursts open, as it does on the course page, and the three paths appear.
-   Reduced motion, save-data, blocked autoplay or any failure: the paths show without waiting. */
+/* Site music: the swing film's own track, looped without a gap through Web Audio. It plays at full volume while the
+   swing scene fills the screen, at half volume everywhere else, and goes quiet while another film plays with its own sound.
+   Browsers only allow sound once the visitor has tapped, clicked or pressed a key (a scroll doesn't count), so it tries
+   to start straight away and otherwise starts on that first tap. The Music button turns it off for the rest of the visit. */
 (function () {
   'use strict';
-  var W = window, D = document;
+  var W = window, D = document, root = D.documentElement;
+  var AC = W.AudioContext || W.webkitAudioContext;
+  var btn = D.getElementById('music-btn'), lbl = D.getElementById('music-lbl');
+  var LOOP = 6.667, FULL = 1, BED = 0.5;   /* four bars of the swing track */
+  var ctx = null, gain = null, buf = null, src = null, t0 = 0, loopEnd = LOOP;
+  var wanted = true, started = false, scene = false, ducks = {};
+  function store(v) { try { if (v == null) return W.sessionStorage.getItem('aam-music'); W.sessionStorage.setItem('aam-music', v); } catch (e) {} return null; }
+  if (store() === 'off') wanted = false;
+
+  function audible() { return wanted && started && !!ctx && ctx.state === 'running'; }
+  function level() { for (var k in ducks) if (ducks[k]) return 0; return scene ? FULL : BED; }
+  function apply(quick) {
+    if (!gain) return;
+    var v = wanted ? level() : 0, now = ctx.currentTime;
+    try { gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value, now); gain.gain.setTargetAtTime(v, now, quick ? 0.06 : 0.45); }
+    catch (e) { gain.gain.value = v; }
+  }
+  function paint() {
+    if (!btn) return;
+    var on = audible();
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Turn the music off' : 'Turn the music on');
+    if (lbl) lbl.textContent = on ? 'Music on' : (wanted ? 'Play music' : 'Music off');
+  }
+  function tell(extra) {
+    paint();
+    var e; try { e = new CustomEvent('aam:music', { detail: extra || {} }); } catch (x) { e = D.createEvent('CustomEvent'); e.initCustomEvent('aam:music', false, false, extra || {}); }
+    W.dispatchEvent(e);
+  }
+  function makeCtx() {
+    if (ctx || !AC) return ctx;
+    try { ctx = new AC(); } catch (e) { return null; }
+    gain = ctx.createGain(); gain.gain.value = 0; gain.connect(ctx.destination);
+    ctx.onstatechange = function () { go(); paint(); };
+    return ctx;
+  }
+  function fetchTrack() {
+    if (fetchTrack.p) return fetchTrack.p;
+    var a = D.createElement('audio');
+    var url = a.canPlayType && a.canPlayType('audio/mp4; codecs="mp4a.40.2"') ? 'assets/audio/swing-music.m4a' : 'assets/audio/swing-music.mp3';
+    fetchTrack.p = fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+      .then(function (ab) { return new Promise(function (ok, no) { ctx.decodeAudioData(ab, ok, no); }); })   /* callback form: older Safari */
+      .then(function (b) { buf = b; loopEnd = Math.min(LOOP, b.duration); go(); })
+      .catch(function () { if (btn) btn.hidden = true; });
+    return fetchTrack.p;
+  }
+  function from(offset) {
+    if (!buf) return;
+    if (src) { try { src.stop(); } catch (e) {} try { src.disconnect(); } catch (e) {} }
+    src = ctx.createBufferSource(); src.buffer = buf; src.loop = true; src.loopStart = 0; src.loopEnd = loopEnd;
+    src.connect(gain);
+    var off = (((offset || 0) % loopEnd) + loopEnd) % loopEnd;
+    src.start(0, off); t0 = ctx.currentTime - off;
+  }
+  function go() {
+    if (started || !wanted || !buf || !ctx || ctx.state !== 'running') return;
+    started = true;
+    from(0); apply();
+    tell({ started: true });
+  }
+  /* inside a tap, click or key press: the browser now lets the music start */
+  function unlock() {
+    if (!wanted || !makeCtx()) return;
+    if (ctx.state !== 'running') { var r = ctx.resume(); if (r && r.then) r.then(go, function () {}); }
+    fetchTrack(); go();
+    if (started && ctx.state === 'running') ['pointerdown', 'keydown', 'touchend', 'click'].forEach(function (ev) { W.removeEventListener(ev, unlock, true); });
+  }
+  function setWanted(on) {
+    wanted = on; store(on ? 'on' : 'off');
+    if (on) { unlock(); if (started && ctx.state !== 'running') ctx.resume(); apply(true); }
+    else if (gain) { apply(true); setTimeout(function () { if (!wanted && ctx.state === 'running') ctx.suspend(); }, 300); }
+    tell({});
+  }
+
+  W.__aamMusic = {
+    on: audible,
+    toggle: function () { setWanted(!audible()); },
+    scene: function (on) { if (scene === !!on) return; scene = !!on; apply(); },
+    duck: function (who, on) { if (!!ducks[who] === !!on) return; ducks[who] = !!on; apply(true); },
+    sync: function (sec) { if (audible()) from(sec); }
+  };
+  if (!AC || !W.fetch || !W.Promise) return;
+  if (btn) { btn.hidden = false; btn.addEventListener('click', function () { setWanted(!audible()); }); }
+  paint();
+  ['pointerdown', 'keydown', 'touchend', 'click'].forEach(function (ev) { W.addEventListener(ev, unlock, true); });
+  /* some browsers already allow sound for a site the visitor knows: try now, quietly fall back to the first tap */
+  if (wanted) { makeCtx(); fetchTrack(); try { var r = ctx.resume(); if (r && r.then) r.then(go, function () {}); } catch (e) {} }
+  D.addEventListener('visibilitychange', function () {
+    if (!ctx || !started) return;
+    if (D.hidden) ctx.suspend(); else if (wanted) ctx.resume();
+  });
+  /* another film playing with its own sound: the music steps out, and comes back when it's muted, paused or done */
+  function films() {
+    var loud = false;
+    [].forEach.call(D.querySelectorAll('video'), function (v) { if (v.id !== 'sc-video' && !v.paused && !v.muted && !v.ended) loud = true; });
+    W.__aamMusic.duck('film', loud);
+  }
+  ['play', 'pause', 'ended', 'volumechange'].forEach(function (ev) { D.addEventListener(ev, films, true); });
+})();
+</script>
+<script>
+/* SkyCaddy section: the Sky Caddy opening film, start to finish: the golfer swings, the ball smashes through the glass,
+   the film punches toward the viewer and bursts open, and the three paths appear.
+   The film is fetched as soon as the page has loaded, so it's ready when the visitor gets here. When the section comes
+   into view the page settles on it and holds still for the swing (Skip lets them on). Its music is the site music at
+   full volume. Reduced motion, save-data or a film that can't load: the paths show without waiting. A phone that won't
+   autoplay (iPhone Low Power Mode) gets a Play the swing button instead of the scene being skipped. */
+(function () {
+  'use strict';
+  var W = window, D = document, root = D.documentElement;
   var sec = D.getElementById('skycaddy');
   if (!sec) return;
   var video = D.getElementById('sc-video'), choice = D.getElementById('sc-choice'), replay = D.getElementById('sc-replay');
   var soundBtn = D.getElementById('sc-sound'), soundLabel = D.getElementById('sc-sound-label');
-  /* The film carries its music. Browsers only allow sound after the visitor has tapped, clicked or pressed a key,
-     so: with that, the swing plays with music; without it, it plays muted and offers "Sound on", which replays it with music. */
-  var touched = false, wantSound = W.__aamSound !== false;
-  ['pointerdown', 'keydown', 'touchend'].forEach(function (ev) { W.addEventListener(ev, function (e) {
-    var first = !touched; touched = true;
-    /* the film started muted and the visitor has now tapped while it plays: start the swing over, with its music */
-    if (first && state === 'playing' && video.muted && wantSound && !(soundBtn && soundBtn.contains(e.target))) {
-      video.muted = false; syncSound();
-      try { video.currentTime = 0; } catch (x) {}
-      clearTimeout(timer);
-      var p = video.play(); if (p && p.catch) p.catch(function () { video.muted = true; syncSound(); });
-    }
-  }, { capture: true, passive: true }); });
-  function mayPlaySound() { if (W.__aamSound === false && !touched) return false; return wantSound && (touched || !!(navigator.userActivation && navigator.userActivation.hasBeenActive)); }
+  var playBtn = D.getElementById('sc-play'), skipBtn = D.getElementById('sc-skip');
+  function music() { return W.__aamMusic; }
+  var mq = function (q) { return W.matchMedia && W.matchMedia(q).matches; };
+  var conn = navigator.connection || {};
+  var still = root.classList.contains('still') || mq('(prefers-reduced-motion: reduce)') || !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  var state = 'idle', timer = 0, holdTimer = 0, held = false, jumpAt = 0, jumpTo = '';
+
   function syncSound() {
     if (!soundBtn) return;
-    var on = !video.muted;
+    var on = !!(music() && music().on());
     soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
     soundLabel.textContent = on ? 'Sound off' : 'Sound on';
   }
-  function playFilm() {
-    video.muted = !mayPlaySound(); syncSound();
-    var p; try { p = video.play(); } catch (e) { p = null; }
-    if (p && p.catch) p.catch(function () {
-      if (!video.muted) { video.muted = true; syncSound(); var q = video.play(); if (q && q.catch) q.catch(function () { timer = setTimeout(open, 1200); }); }
-      else timer = setTimeout(open, 1200);
-    });
-  }
-  var mq = function (q) { return W.matchMedia && W.matchMedia(q).matches; };
-  var conn = navigator.connection || {};
-  var still = mq('(prefers-reduced-motion: reduce)') || !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
-  var state = 'idle', timer = 0;
+  W.addEventListener('aam:music', function (e) {
+    syncSound();
+    /* the music has just started while the swing plays: start the swing over, so the beat lands with it */
+    if (e.detail && e.detail.started && state === 'playing' && !video.paused) { try { video.currentTime = 0; } catch (x) {} music().sync(0); }
+  });
 
   function open() {
     if (state === 'done') return;
     state = 'done'; clearTimeout(timer);
+    hold(false);
+    sec.classList.remove('is-on', 'is-blocked');
     sec.classList.add('is-out');
     timer = setTimeout(function () { sec.classList.add('is-broken'); }, still ? 0 : 520);
   }
   choice.addEventListener('focusin', open);
   if (still || !('IntersectionObserver' in W)) { open(); return; }
 
+  /* ---- hold the page on the swing until the glass breaks ---- */
+  function guard(e) {
+    if (!held) return;
+    var t = e.target;
+    if (t && t.closest && t.closest('dialog,.mmenu,.sc-skip,.sc-sound,.music-btn,.sticky-mobile-cta')) return;
+    if (e.type === 'keydown') {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' ', 'End', 'Home'].indexOf(e.key) < 0) return;
+      if (t && t.closest && t.closest('input,textarea,select,button,a')) return;
+    }
+    if (e.cancelable) e.preventDefault();
+  }
+  W.addEventListener('wheel', guard, { passive: false });
+  W.addEventListener('touchmove', guard, { passive: false });
+  W.addEventListener('keydown', guard);
+  function hold(on) {
+    clearTimeout(holdTimer);
+    if (held === on) return;
+    held = on;
+    root.classList.toggle('sc-held', on);
+    var L = W.__aamLenis;
+    if (on) {
+      var y = sec.getBoundingClientRect().top;
+      /* never hold anyone longer than a slow line and the film need */
+      holdTimer = setTimeout(function () { hold(false); }, 22000);
+      if (L) {
+        L.scrollTo(sec, { duration: Math.abs(y) < 4 ? 0 : 0.8, force: true, lock: true, easing: function (x) { return 1 - Math.pow(1 - x, 3); }, onComplete: function () { if (held) L.stop(); } });
+      } else if (Math.abs(y) > 3) {
+        try { W.scrollTo({ top: W.pageYOffset + y, behavior: 'smooth' }); } catch (e) { W.scrollTo(0, W.pageYOffset + y); }
+      }
+    } else if (L) L.start();
+  }
+  /* a menu or button jump that only passes through this section isn't a visit: don't stop it here */
+  D.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[href^="#"]');
+    if (a) { jumpAt = Date.now(); jumpTo = a.getAttribute('href'); }
+  }, true);
+  function passingThrough() { return Date.now() - jumpAt < 2600 && jumpTo !== '#skycaddy'; }
+
+  /* ---- the film ---- */
   function load() {
     if (video.getAttribute('src')) return;
     var mp4 = video.canPlayType('video/mp4; codecs="avc1.42E01E"');
+    video.preload = 'auto';
     video.src = video.getAttribute(mp4 ? 'data-mp4' : 'data-webm');
-    video.addEventListener('error', open);
+    video.addEventListener('error', function () { if (state !== 'idle') open(); });
+    try { video.load(); } catch (e) {}
+  }
+  function blocked() {
+    if (state !== 'playing') return;
+    state = 'blocked'; clearTimeout(timer);
+    hold(false);
+    sec.classList.remove('is-on'); sec.classList.add('is-blocked');
   }
   function start() {
     if (state !== 'idle') return;
+    if (passingThrough()) return;
     state = 'playing';
     load();
-    try { video.currentTime = 0; } catch (e) {}
+    if (video.currentTime > 0) { try { video.currentTime = 0; } catch (e) {} }
+    video.muted = true;   /* the film's music comes from the site music, so it never fights the browser's autoplay rules */
+    sec.classList.remove('is-blocked'); sec.classList.add('is-on');
     if (soundBtn) soundBtn.hidden = false;
-    playFilm();
-    /* if the film never starts (no autoplay, slow network), don't keep the visitor waiting */
-    timer = setTimeout(function () { if (state === 'playing' && video.currentTime < 0.2) open(); }, 5000);
+    syncSound();
+    hold(true);
+    clearTimeout(timer);
+    if (video.readyState >= 3) { roll(); return; }
+    /* not enough of the film in yet: ask to play now (so a phone that refuses autoplay is found out at once),
+       then wait on the first frame until it can play through without stalling mid-swing */
+    var p; try { p = video.play(); } catch (e) { p = null; }
+    if (p && p.then) p.then(function () { if (state === 'playing' && video.readyState < 3) video.pause(); }, function (err) { if (err && err.name === 'NotAllowedError') blocked(); });
+    video.addEventListener('canplaythrough', roll, { once: true });
+    timer = setTimeout(roll, 6000);
   }
+  function roll() {
+    if (state !== 'playing' || roll.busy) return;
+    roll.busy = true; clearTimeout(timer);
+    var p; try { p = video.play(); } catch (e) { p = null; }
+    if (p && p.then) p.then(function () { roll.busy = false; }, function (err) { roll.busy = false; if (err && err.name === 'NotAllowedError') blocked(); });
+    else roll.busy = false;
+    /* a film that still hasn't started after 10s more (a very slow line): let the visitor on, the paths show */
+    timer = setTimeout(function () { if (state === 'playing' && video.currentTime < 0.2) open(); }, 10000);
+  }
+  video.addEventListener('playing', function () {
+    if (state !== 'playing') return;
+    if (music()) music().sync(video.currentTime);
+  });
   video.addEventListener('timeupdate', function () {
     if (state === 'playing' && video.duration && video.currentTime >= video.duration - 0.3) open();
   });
   video.addEventListener('ended', open);
 
+  if (skipBtn) skipBtn.addEventListener('click', function () { open(); try { replay.focus({ preventScroll: true }); } catch (e) {} });
+  /* the tap itself must start the film, or a Low Power Mode iPhone refuses again */
+  if (playBtn) playBtn.addEventListener('click', function () { state = 'idle'; jumpAt = 0; start(); roll(); });
   if (soundBtn) soundBtn.addEventListener('click', function () {
-    touched = true;
-    if (!video.muted) { wantSound = false; video.muted = true; syncSound(); return; }
-    wantSound = true; video.muted = false; syncSound();
-    if (state === 'playing') { try { video.currentTime = 0; } catch (e) {} clearTimeout(timer); var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    var m = music(); if (!m) return;
+    m.toggle();
+    if (m.on() && state === 'playing') { try { video.currentTime = 0; } catch (e) {} m.sync(0); }
+    syncSound();
   });
 
   replay.addEventListener('click', function () {
-    wantSound = true;
     clearTimeout(timer);
     sec.classList.remove('is-broken', 'is-out');
-    state = 'idle';
+    state = 'idle'; jumpAt = 0;
     try { replay.blur(); } catch (e) {}
     setTimeout(start, 350);
   });
 
-  var io = new IntersectionObserver(function (es) {
+  /* fetch the film right after the opening frames, so the swing is ready before the visitor arrives */
+  setTimeout(load, 2200);
+
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      var on = e.isIntersecting && e.intersectionRatio >= 0.5;
+      root.classList.toggle('sc-in', on);
+      if (music()) music().scene(on);
+    });
+  }, { threshold: [0, 0.5] }).observe(sec);
+  new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (e.isIntersecting && e.intersectionRatio >= 0.6) start();
       else if (e.isIntersecting) load();
     });
-  }, { threshold: [0, 0.6], rootMargin: '0px 0px 300px 0px' });
-  io.observe(sec);
+  }, { threshold: [0, 0.6], rootMargin: '0px 0px 300px 0px' }).observe(sec);
 })();
 </script>
 
