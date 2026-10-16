@@ -1637,7 +1637,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <a class="text" href="sms:+18039205349" aria-label="Text Chandler">Text</a>
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
-<button class="music-btn" id="music-btn" type="button" aria-pressed="false" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
+<button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="https://media.viewmax.io/users/eJ0lGnD0cjKx13qkCj8Zq10FRUFWzxht/lyria/49a3dc49-d38a-4d20-b59b-2f17c648b216.mp3" data-scene="https://media.viewmax.io/users/eJ0lGnD0cjKx13qkCj8Zq10FRUFWzxht/lyria/4daad90d-b540-46ac-a9ca-d60167d2aae2.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
 
 <dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
   <div class="iq-panel">
@@ -2421,102 +2421,122 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 })();
 </script>
 <script>
-/* Site music: the swing film's own track, looped without a gap through Web Audio. It plays at full volume while the
-   swing scene fills the screen, at half volume everywhere else, and goes quiet while another film plays with its own sound.
+/* Site music: two tracks. A lo-fi jazz hip-hop bed plays at half volume across the site; on the swing scene it
+   fades out and a heavy rock track takes over at full volume, looping for as long as the scene is on screen, then the
+   jazz comes back where it left off. Both go quiet while another film plays with its own sound.
    Browsers only allow sound once the visitor has tapped, clicked or pressed a key (a scroll doesn't count), so it tries
-   to start straight away and otherwise starts on that first tap. The Music button turns it off for the rest of the visit. */
+   to start straight away and otherwise starts on that first tap. The Music button turns it off for the rest of the visit.
+   The tracks are named on the Music button (data-bed, data-scene). */
 (function () {
   'use strict';
-  var W = window, D = document, root = D.documentElement;
-  var AC = W.AudioContext || W.webkitAudioContext;
+  var W = window, D = document;
   var btn = D.getElementById('music-btn'), lbl = D.getElementById('music-lbl');
-  var LOOP = 6.667, FULL = 1, BED = 0.5;   /* four bars of the swing track */
-  var ctx = null, gain = null, buf = null, src = null, t0 = 0, loopEnd = LOOP;
-  var wanted = true, started = false, scene = false, ducks = {};
+  if (!btn || !W.Audio) return;
+  var BED = 0.5, SCENE = 1, FADE = 900;
+  var AC = W.AudioContext || W.webkitAudioContext, ctx = null;
+  var wanted = true, live = false, scene = false, ducks = {};
   function store(v) { try { if (v == null) return W.sessionStorage.getItem('aam-music'); W.sessionStorage.setItem('aam-music', v); } catch (e) {} return null; }
   if (store() === 'off') wanted = false;
 
-  function audible() { return wanted && started && !!ctx && ctx.state === 'running'; }
-  function level() { for (var k in ducks) if (ducks[k]) return 0; return scene ? FULL : BED; }
-  function apply(quick) {
-    if (!gain) return;
-    var v = wanted ? level() : 0, now = ctx.currentTime;
-    try { gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value, now); gain.gain.setTargetAtTime(v, now, quick ? 0.06 : 0.45); }
-    catch (e) { gain.gain.value = v; }
+  /* one looping track. Same-origin files run through Web Audio so the level also works on iPhones,
+     which ignore an audio element's volume; anything else falls back to the element's own volume. */
+  function track(url) {
+    var a = new Audio(), t = { el: a, level: 0, target: 0, gain: null };
+    a.loop = true; a.preload = 'none'; a.src = url;
+    a.setAttribute('playsinline', '');
+    var same = false; try { same = new URL(url, location.href).origin === location.origin; } catch (e) {}
+    t.graph = same && !!AC;
+    if (!t.graph) a.volume = 0;
+    return t;
   }
+  var bed = track(btn.getAttribute('data-bed')), rock = track(btn.getAttribute('data-scene'));
+  var tracks = [bed, rock];
+
+  function wire() {
+    if (ctx || !AC) return;
+    try { ctx = new AC(); } catch (e) { ctx = null; return; }
+    tracks.forEach(function (t) {
+      if (!t.graph) return;
+      try { var s = ctx.createMediaElementSource(t.el); t.gain = ctx.createGain(); t.gain.gain.value = 0; s.connect(t.gain); t.gain.connect(ctx.destination); }
+      catch (e) { t.graph = false; t.gain = null; }
+    });
+  }
+  function set(t, v) { t.level = v; if (t.gain) t.gain.gain.value = v; else t.el.volume = Math.max(0, Math.min(1, v)); }
+
+  function targets() {
+    var quiet = !wanted || !live; for (var k in ducks) if (ducks[k]) quiet = true;
+    bed.target = quiet || scene ? 0 : BED;
+    rock.target = quiet || !scene ? 0 : SCENE;
+  }
+  /* fade each track toward its level; a silent track pauses, so the jazz picks up where it stopped */
+  var fading = 0;
+  function step() {
+    var busy = false, d = 40 / FADE;
+    tracks.forEach(function (t) {
+      var v = t.level;
+      if (Math.abs(t.target - v) > 0.001) { busy = true; v += Math.max(-d, Math.min(d, t.target - v)); set(t, v); }
+      if (t.target > 0 && t.el.paused) play(t);
+      if (t.target === 0 && t.level <= 0.001 && !t.el.paused) t.el.pause();
+    });
+    if (!busy) { clearInterval(fading); fading = 0; }
+  }
+  function apply() { targets(); if (!fading) fading = setInterval(step, 40); step(); }
+  function play(t) {
+    if (t.el.preload === 'none') t.el.preload = 'auto';
+    var p; try { p = t.el.play(); } catch (e) { p = null; }
+    if (p && p.catch) p.catch(function () {});
+    return p;
+  }
+  function audible() { return wanted && live; }
   function paint() {
-    if (!btn) return;
     var on = audible();
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.setAttribute('aria-label', on ? 'Turn the music off' : 'Turn the music on');
     if (lbl) lbl.textContent = on ? 'Music on' : (wanted ? 'Play music' : 'Music off');
-  }
-  function tell(extra) {
-    paint();
-    var e; try { e = new CustomEvent('aam:music', { detail: extra || {} }); } catch (x) { e = D.createEvent('CustomEvent'); e.initCustomEvent('aam:music', false, false, extra || {}); }
+    var e; try { e = new CustomEvent('aam:music'); } catch (x) { e = D.createEvent('CustomEvent'); e.initCustomEvent('aam:music', false, false, null); }
     W.dispatchEvent(e);
   }
-  function makeCtx() {
-    if (ctx || !AC) return ctx;
-    try { ctx = new AC(); } catch (e) { return null; }
-    gain = ctx.createGain(); gain.gain.value = 0; gain.connect(ctx.destination);
-    ctx.onstatechange = function () { go(); paint(); };
-    return ctx;
+
+  /* start: inside a tap, click or key press every track is started once (iPhones want each one blessed by a tap),
+     then the one that shouldn't be heard yet is paused again */
+  function begin() {
+    if (!wanted) return;
+    wire();
+    if (ctx && ctx.state !== 'running') { try { ctx.resume(); } catch (e) {} }
+    targets();
+    var lead = scene ? rock : bed, other = scene ? bed : rock;
+    var p = play(lead);
+    if (!other.el.played || !other.el.played.length) { var q = play(other); if (q && q.then) q.then(function () { if (other.target === 0) other.el.pause(); }, function () {}); else other.el.pause(); }
+    function ok() { if (live) return; live = true; paint(); apply(); quit(); }
+    if (p && p.then) p.then(ok, function () {}); else if (!lead.el.paused) ok();
   }
-  function fetchTrack() {
-    if (fetchTrack.p) return fetchTrack.p;
-    var a = D.createElement('audio');
-    var url = a.canPlayType && a.canPlayType('audio/mp4; codecs="mp4a.40.2"') ? 'assets/audio/swing-music.m4a' : 'assets/audio/swing-music.mp3';
-    fetchTrack.p = fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
-      .then(function (ab) { return new Promise(function (ok, no) { ctx.decodeAudioData(ab, ok, no); }); })   /* callback form: older Safari */
-      .then(function (b) { buf = b; loopEnd = Math.min(LOOP, b.duration); go(); })
-      .catch(function () { if (btn) btn.hidden = true; });
-    return fetchTrack.p;
-  }
-  function from(offset) {
-    if (!buf) return;
-    if (src) { try { src.stop(); } catch (e) {} try { src.disconnect(); } catch (e) {} }
-    src = ctx.createBufferSource(); src.buffer = buf; src.loop = true; src.loopStart = 0; src.loopEnd = loopEnd;
-    src.connect(gain);
-    var off = (((offset || 0) % loopEnd) + loopEnd) % loopEnd;
-    src.start(0, off); t0 = ctx.currentTime - off;
-  }
-  function go() {
-    if (started || !wanted || !buf || !ctx || ctx.state !== 'running') return;
-    started = true;
-    from(0); apply();
-    tell({ started: true });
-  }
-  /* inside a tap, click or key press: the browser now lets the music start */
-  function unlock() {
-    if (!wanted || !makeCtx()) return;
-    if (ctx.state !== 'running') { var r = ctx.resume(); if (r && r.then) r.then(go, function () {}); }
-    fetchTrack(); go();
-    if (started && ctx.state === 'running') ['pointerdown', 'keydown', 'touchend', 'click'].forEach(function (ev) { W.removeEventListener(ev, unlock, true); });
-  }
+  var evs = ['pointerdown', 'keydown', 'touchend', 'click'];
+  function quit() { evs.forEach(function (ev) { W.removeEventListener(ev, begin, true); }); }
   function setWanted(on) {
     wanted = on; store(on ? 'on' : 'off');
-    if (on) { unlock(); if (started && ctx.state !== 'running') ctx.resume(); apply(true); }
-    else if (gain) { apply(true); setTimeout(function () { if (!wanted && ctx.state === 'running') ctx.suspend(); }, 300); }
-    tell({});
+    if (on) begin();
+    apply(); paint();
   }
 
   W.__aamMusic = {
     on: audible,
     toggle: function () { setWanted(!audible()); },
     scene: function (on) { if (scene === !!on) return; scene = !!on; apply(); },
-    duck: function (who, on) { if (!!ducks[who] === !!on) return; ducks[who] = !!on; apply(true); },
-    sync: function (sec) { if (audible()) from(sec); }
+    duck: function (who, on) { if (!!ducks[who] === !!on) return; ducks[who] = !!on; apply(); },
+    sync: function () {}
   };
-  if (!AC || !W.fetch || !W.Promise) return;
-  if (btn) { btn.hidden = false; btn.addEventListener('click', function () { setWanted(!audible()); }); }
+  btn.hidden = false;
+  btn.addEventListener('click', function (e) { e.stopPropagation(); setWanted(!audible()); });
   paint();
-  ['pointerdown', 'keydown', 'touchend', 'click'].forEach(function (ev) { W.addEventListener(ev, unlock, true); });
+  evs.forEach(function (ev) { W.addEventListener(ev, begin, true); });
   /* some browsers already allow sound for a site the visitor knows: try now, quietly fall back to the first tap */
-  if (wanted) { makeCtx(); fetchTrack(); try { var r = ctx.resume(); if (r && r.then) r.then(go, function () {}); } catch (e) {} }
+  if (wanted) {
+    if (bed.graph) { wire(); if (ctx && ctx.resume) ctx.resume().then(function () { if (ctx.state === 'running') begin(); }, function () {}); }
+    else { var p0; try { p0 = bed.el.play(); } catch (e) { p0 = null; } if (p0 && p0.then) p0.then(begin, function () {}); }
+  }
   D.addEventListener('visibilitychange', function () {
-    if (!ctx || !started) return;
-    if (D.hidden) ctx.suspend(); else if (wanted) ctx.resume();
+    if (D.hidden) tracks.forEach(function (t) { if (!t.el.paused) { t.el.pause(); t.away = true; } });
+    else tracks.forEach(function (t) { if (t.away) { t.away = false; if (t.target > 0) play(t); } });
   });
   /* another film playing with its own sound: the music steps out, and comes back when it's muted, paused or done */
   function films() {
@@ -2531,9 +2551,10 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 /* SkyCaddy section: the Sky Caddy opening film, start to finish: the golfer swings, the ball smashes through the glass,
    the film punches toward the viewer and bursts open, and the three paths appear.
    The film is fetched as soon as the page has loaded, so it's ready when the visitor gets here. When the section comes
-   into view the page settles on it and holds still for the swing (Skip lets them on). Its music is the site music at
-   full volume. Reduced motion, save-data or a film that can't load: the paths show without waiting. A phone that won't
-   autoplay (iPhone Low Power Mode) gets a Play the swing button instead of the scene being skipped. */
+   into view the first time, the page settles on it and holds still for the swing (Skip lets them on). The scene has its
+   own music (heavy rock, looping while it's on screen). Once the paths have sat for 12 seconds the swing plays again,
+   and it starts over each time the visitor scrolls back to it. Reduced motion, save-data or a film that can't load: the
+   paths show without waiting. A phone that won't autoplay (iPhone Low Power Mode) gets a Play the swing button. */
 (function () {
   'use strict';
   var W = window, D = document, root = D.documentElement;
@@ -2546,7 +2567,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   var mq = function (q) { return W.matchMedia && W.matchMedia(q).matches; };
   var conn = navigator.connection || {};
   var still = root.classList.contains('still') || mq('(prefers-reduced-motion: reduce)') || !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
-  var state = 'idle', timer = 0, holdTimer = 0, held = false, jumpAt = 0, jumpTo = '';
+  var state = 'idle', timer = 0, holdTimer = 0, again = 0, held = false, seen = false, jumpAt = 0, jumpTo = '';
+  var AGAIN = 12000;   /* how long the paths sit before the swing plays again */
 
   function syncSound() {
     if (!soundBtn) return;
@@ -2554,11 +2576,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
     soundLabel.textContent = on ? 'Sound off' : 'Sound on';
   }
-  W.addEventListener('aam:music', function (e) {
-    syncSound();
-    /* the music has just started while the swing plays: start the swing over, so the beat lands with it */
-    if (e.detail && e.detail.started && state === 'playing' && !video.paused) { try { video.currentTime = 0; } catch (x) {} music().sync(0); }
-  });
+  W.addEventListener('aam:music', syncSound);
 
   function open() {
     if (state === 'done') return;
@@ -2567,7 +2585,25 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     sec.classList.remove('is-on', 'is-blocked');
     sec.classList.add('is-out');
     timer = setTimeout(function () { sec.classList.add('is-broken'); }, still ? 0 : 520);
+    clearTimeout(again);
+    if (!still) again = setTimeout(encore, AGAIN + 520);
   }
+  /* the paths have sat long enough: swing again, unless the visitor is choosing one right now */
+  function encore() {
+    if (state !== 'done') return;
+    var busy = choice.contains(D.activeElement) && D.activeElement !== replay;
+    try { busy = busy || !!choice.querySelector('.sc-path:hover'); } catch (e) {}
+    if (busy || !root.classList.contains('sc-in')) { again = setTimeout(encore, 4000); return; }
+    restart();
+  }
+  function reset() {
+    clearTimeout(timer); clearTimeout(again);
+    hold(false);
+    sec.classList.remove('is-broken', 'is-out', 'is-on', 'is-blocked');
+    state = 'idle';
+    try { video.pause(); video.currentTime = 0; } catch (e) {}
+  }
+  function restart() { reset(); jumpAt = 0; setTimeout(start, 350); }
   choice.addEventListener('focusin', open);
   if (still || !('IntersectionObserver' in W)) { open(); return; }
 
@@ -2634,7 +2670,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     sec.classList.remove('is-blocked'); sec.classList.add('is-on');
     if (soundBtn) soundBtn.hidden = false;
     syncSound();
-    hold(true);
+    if (!seen) hold(true);
+    seen = true;
     clearTimeout(timer);
     if (video.readyState >= 3) { roll(); return; }
     /* not enough of the film in yet: ask to play now (so a phone that refuses autoplay is found out at once),
@@ -2653,10 +2690,6 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     /* a film that still hasn't started after 10s more (a very slow line): let the visitor on, the paths show */
     timer = setTimeout(function () { if (state === 'playing' && video.currentTime < 0.2) open(); }, 10000);
   }
-  video.addEventListener('playing', function () {
-    if (state !== 'playing') return;
-    if (music()) music().sync(video.currentTime);
-  });
   video.addEventListener('timeupdate', function () {
     if (state === 'playing' && video.duration && video.currentTime >= video.duration - 0.3) open();
   });
@@ -2668,17 +2701,10 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   if (soundBtn) soundBtn.addEventListener('click', function () {
     var m = music(); if (!m) return;
     m.toggle();
-    if (m.on() && state === 'playing') { try { video.currentTime = 0; } catch (e) {} m.sync(0); }
     syncSound();
   });
 
-  replay.addEventListener('click', function () {
-    clearTimeout(timer);
-    sec.classList.remove('is-broken', 'is-out');
-    state = 'idle'; jumpAt = 0;
-    try { replay.blur(); } catch (e) {}
-    setTimeout(start, 350);
-  });
+  replay.addEventListener('click', function () { try { replay.blur(); } catch (e) {} restart(); });
 
   /* fetch the film right after the opening frames, so the swing is ready before the visitor arrives */
   setTimeout(load, 2200);
@@ -2688,6 +2714,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       var on = e.isIntersecting && e.intersectionRatio >= 0.5;
       root.classList.toggle('sc-in', on);
       if (music()) music().scene(on);
+      /* gone from the screen: set the swing back to the tee, so it plays again when they scroll back */
+      if (!e.isIntersecting && state !== 'idle') reset();
     });
   }, { threshold: [0, 0.5] }).observe(sec);
   new IntersectionObserver(function (es) {
