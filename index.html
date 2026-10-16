@@ -1637,7 +1637,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <a class="text" href="sms:+18039205349" aria-label="Text Chandler">Text</a>
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
-<button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="https://media.viewmax.io/users/eJ0lGnD0cjKx13qkCj8Zq10FRUFWzxht/lyria/49a3dc49-d38a-4d20-b59b-2f17c648b216.mp3" data-scene="https://media.viewmax.io/users/eJ0lGnD0cjKx13qkCj8Zq10FRUFWzxht/lyria/4daad90d-b540-46ac-a9ca-d60167d2aae2.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
+<button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="https://media.viewmax.io/users/eJ0lGnD0cjKx13qkCj8Zq10FRUFWzxht/lyria/49a3dc49-d38a-4d20-b59b-2f17c648b216.mp3" data-scene="assets/audio/swing-loop.m4a assets/audio/swing-loop.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
 
 <dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
   <div class="iq-panel">
@@ -2422,7 +2422,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 </script>
 <script>
 /* Site music: two tracks. A lo-fi jazz hip-hop bed plays at half volume across the site; on the swing scene it
-   fades out and a heavy rock track takes over at full volume, looping for as long as the scene is on screen, then the
+   fades out and the swing film's own song takes over at full volume (a minute-long loop of it, so the repeat isn't
+   noticeable), playing for as long as the scene is on screen, then the
    jazz comes back where it left off. Both go quiet while another film plays with its own sound.
    Browsers only allow sound once the visitor has tapped, clicked or pressed a key (a scroll doesn't count), so it tries
    to start straight away and otherwise starts on that first tap. The Music button turns it off for the rest of the visit.
@@ -2440,8 +2441,14 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 
   /* one looping track. Same-origin files run through Web Audio so the level also works on iPhones,
      which ignore an audio element's volume; anything else falls back to the element's own volume. */
-  function track(url) {
+  function track(list) {
+    /* the first file this browser can play (AAC is smaller; MP3 for browsers without it) */
     var a = new Audio(), t = { el: a, level: 0, target: 0, gain: null };
+    var urls = (list || '').split(/\s+/).filter(Boolean), url = urls[urls.length - 1] || '';
+    for (var i = 0; i < urls.length; i++) {
+      var type = /\.m4a$/.test(urls[i]) ? 'audio/mp4; codecs="mp4a.40.2"' : /\.mp3$/.test(urls[i]) ? 'audio/mpeg' : '';
+      if (!type || a.canPlayType(type)) { url = urls[i]; break; }
+    }
     a.loop = true; a.preload = 'none'; a.src = url;
     a.setAttribute('playsinline', '');
     var same = false; try { same = new URL(url, location.href).origin === location.origin; } catch (e) {}
@@ -2523,7 +2530,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     toggle: function () { setWanted(!audible()); },
     scene: function (on) { if (scene === !!on) return; scene = !!on; apply(); },
     duck: function (who, on) { if (!!ducks[who] === !!on) return; ducks[who] = !!on; apply(); },
-    sync: function () {}
+    /* the swing is starting from the tee: take its song back to the top so the hit lands with it */
+    cue: function () { try { rock.el.currentTime = 0; } catch (e) {} }
   };
   btn.hidden = false;
   btn.addEventListener('click', function (e) { e.stopPropagation(); setWanted(!audible()); });
@@ -2552,7 +2560,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
    the film punches toward the viewer and bursts open, and the three paths appear.
    The film is fetched as soon as the page has loaded, so it's ready when the visitor gets here. When the section comes
    into view the first time, the page settles on it and holds still for the swing (Skip lets them on). The scene has its
-   own music (heavy rock, looping while it's on screen). Once the paths have sat for 12 seconds the swing plays again,
+   own music (the film's song, looping while it's on screen). Once the paths have sat for 12 seconds the swing plays again,
    and it starts over each time the visitor scrolls back to it. Reduced motion, save-data or a film that can't load: the
    paths show without waiting. A phone that won't autoplay (iPhone Low Power Mode) gets a Play the swing button. */
 (function () {
@@ -2672,6 +2680,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     syncSound();
     if (!seen) hold(true);
     seen = true;
+    if (music()) music().cue();
     clearTimeout(timer);
     if (video.readyState >= 3) { roll(); return; }
     /* not enough of the film in yet: ask to play now (so a phone that refuses autoplay is found out at once),
