@@ -1639,7 +1639,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <a class="text" href="sms:+18039205349" aria-label="Text Chandler">Text</a>
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
-<button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="assets/audio/lofi-jazz.mp3" data-scene="assets/audio/swing-loop.m4a assets/audio/swing-loop.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
+<button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="assets/audio/lofi-jazz-drop.mp3" data-scene="assets/audio/swing-loop.m4a assets/audio/swing-loop.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
 
 <dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
   <div class="iq-panel">
@@ -2456,7 +2456,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 })();
 </script>
 <script>
-/* Site music: two tracks. A lo-fi jazz hip-hop bed plays at a third of full volume, from 12 seconds in, across the site; on the swing scene it
+/* Site music: two tracks. A lo-fi jazz hip-hop bed plays at a third of full volume across the site
+   (the file starts right on the beat drop, with the intro cut); on the swing scene it
    fades out and the swing film's own song takes over at full volume (a minute-long loop of it, so the repeat isn't
    noticeable), playing for as long as the scene is on screen, then the
    jazz comes back where it left off. Both go quiet while another film plays with its own sound.
@@ -2493,12 +2494,6 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   }
   var bed = track(btn.getAttribute('data-bed')), rock = track(btn.getAttribute('data-scene'));
   var tracks = [bed, rock];
-  /* the jazz comes in where the bass drops, 12 seconds in, and loops back to that same point */
-  var DROP = 12;
-  bed.el.loop = false;
-  bed.el.addEventListener('loadedmetadata', function () { if (!bed.started && bed.el.currentTime < DROP) try { bed.el.currentTime = DROP; } catch (e) {} });
-  bed.el.addEventListener('ended', function () { try { bed.el.currentTime = DROP; } catch (e) {} if (bed.target > 0) play(bed); });
-  bed.el.addEventListener('playing', function () { bed.started = true; });
 
   function wire() {
     if (ctx || !AC) return;
@@ -2531,7 +2526,6 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   function apply() { targets(); if (!fading) fading = setInterval(step, 40); step(); }
   function play(t) {
     if (t.el.preload === 'none') t.el.preload = 'auto';
-    if (t === bed && !bed.started && bed.el.readyState >= 1 && bed.el.currentTime < DROP) { try { bed.el.currentTime = DROP; } catch (e) {} }
     var p; try { p = t.el.play(); } catch (e) { p = null; }
     if (p && p.catch) p.catch(function () {});
     return p;
@@ -2541,8 +2535,9 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     var on = audible();
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
     btn.setAttribute('aria-label', on ? 'Turn the sound off' : 'Turn the sound on');
-    if (lbl) lbl.textContent = on ? 'Sound off' : (wanted ? 'Tap for sound' : 'Sound on');
-    /* until the browser lets sound start, the button asks for that one tap, plainly; once playing it keeps breathing as the off switch */
+    /* sound is on by default, so the button is the off switch from the start; until the browser lets it play,
+       the first tap anywhere (this button included) starts it */
+    if (lbl) lbl.textContent = wanted ? 'Sound off' : 'Sound on';
     btn.classList.toggle('ask', wanted && !live);
     btn.classList.toggle('playing', on);
     var e; try { e = new CustomEvent('aam:music'); } catch (x) { e = D.createEvent('CustomEvent'); e.initCustomEvent('aam:music', false, false, null); }
@@ -2586,7 +2581,16 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     cue: function () { try { rock.el.currentTime = 0; } catch (e) {} }
   };
   btn.hidden = false;
-  btn.addEventListener('click', function (e) { e.stopPropagation(); setWanted(!audible()); });
+  /* a tap on the button that is the visitor's first one starts the sound rather than turning it straight back off */
+  var was = null;
+  function note() { was = audible(); }
+  btn.addEventListener('pointerdown', note); btn.addEventListener('keydown', note);
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var on = was == null ? audible() : was; was = null;
+    if (wanted && !on) { begin(); return; }
+    setWanted(!on);
+  });
   paint();
   evs.forEach(function (ev) { W.addEventListener(ev, begin, true); });
   /* some browsers already allow sound for a site the visitor knows: try now, quietly fall back to the first tap */
