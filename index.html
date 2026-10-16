@@ -698,7 +698,9 @@ html.ready.sc-in .music-btn,html.iq-open .music-btn,body.nav-open .music-btn{opa
 html.ready.sc-in .music-btn.ask{opacity:1;pointer-events:auto}
 @keyframes musicAsk{0%,100%{box-shadow:0 10px 36px rgba(201,166,107,.3),0 0 0 0 rgba(234,210,160,.45)}50%{box-shadow:0 10px 36px rgba(201,166,107,.45),0 0 0 10px rgba(234,210,160,0)}}
 .still .music-btn.ask{animation:none}
-@media (max-width:720px){.music-btn{left:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:44px;padding:0}.music-btn .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.music-btn.ask{width:auto;padding:0 18px;left:50%;translate:-50% 0;bottom:calc(132px + env(safe-area-inset-bottom,0px))}.music-btn.ask .lbl{position:static;width:auto;height:auto;overflow:visible;clip-path:none}}
+.music-btn.playing{animation:musicAsk 2.4s ease-in-out infinite}
+.still .music-btn.playing{animation:none}
+@media (max-width:720px){.music-btn{left:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:44px;padding:0}.music-btn .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.music-btn.ask{width:auto;padding:0 18px;left:50%;translate:-50% 0;bottom:calc(132px + env(safe-area-inset-bottom,0px))}.music-btn.ask .lbl{position:static;width:auto;height:auto;overflow:visible;clip-path:none}.music-btn.playing{width:auto;padding:0 16px}.music-btn.playing .lbl{position:static;width:auto;height:auto;overflow:visible;clip-path:none}}
 @keyframes scFlash{0%{opacity:0}18%{opacity:1}100%{opacity:0}}
 @keyframes scRec{50%{opacity:.2}}
 @media (max-width:860px){
@@ -2454,19 +2456,19 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 })();
 </script>
 <script>
-/* Site music: two tracks. A lo-fi jazz hip-hop bed plays at half volume across the site; on the swing scene it
+/* Site music: two tracks. A lo-fi jazz hip-hop bed plays at a third of full volume, from 12 seconds in, across the site; on the swing scene it
    fades out and the swing film's own song takes over at full volume (a minute-long loop of it, so the repeat isn't
    noticeable), playing for as long as the scene is on screen, then the
    jazz comes back where it left off. Both go quiet while another film plays with its own sound.
    Browsers only allow sound once the visitor has tapped, clicked or pressed a key (a scroll doesn't count), so it tries
-   to start straight away and otherwise starts on that first tap. The Music button turns it off for the rest of the visit.
+   to start straight away and otherwise starts on that first tap. The Sound button turns it off for the rest of the visit.
    The tracks are named on the Music button (data-bed, data-scene). */
 (function () {
   'use strict';
   var W = window, D = document;
   var btn = D.getElementById('music-btn'), lbl = D.getElementById('music-lbl');
   if (!btn || !W.Audio) return;
-  var BED = 0.5, SCENE = 1, FADE = 900;
+  var BED = 0.33, SCENE = 1, FADE = 900;
   var AC = W.AudioContext || W.webkitAudioContext, ctx = null;
   var wanted = true, live = false, scene = false, ducks = {};
   function store(v) { try { if (v == null) return W.sessionStorage.getItem('aam-music'); W.sessionStorage.setItem('aam-music', v); } catch (e) {} return null; }
@@ -2491,6 +2493,12 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   }
   var bed = track(btn.getAttribute('data-bed')), rock = track(btn.getAttribute('data-scene'));
   var tracks = [bed, rock];
+  /* the jazz comes in where the bass drops, 12 seconds in, and loops back to that same point */
+  var DROP = 12;
+  bed.el.loop = false;
+  bed.el.addEventListener('loadedmetadata', function () { if (!bed.started && bed.el.currentTime < DROP) try { bed.el.currentTime = DROP; } catch (e) {} });
+  bed.el.addEventListener('ended', function () { try { bed.el.currentTime = DROP; } catch (e) {} if (bed.target > 0) play(bed); });
+  bed.el.addEventListener('playing', function () { bed.started = true; });
 
   function wire() {
     if (ctx || !AC) return;
@@ -2523,6 +2531,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   function apply() { targets(); if (!fading) fading = setInterval(step, 40); step(); }
   function play(t) {
     if (t.el.preload === 'none') t.el.preload = 'auto';
+    if (t === bed && !bed.started && bed.el.readyState >= 1 && bed.el.currentTime < DROP) { try { bed.el.currentTime = DROP; } catch (e) {} }
     var p; try { p = t.el.play(); } catch (e) { p = null; }
     if (p && p.catch) p.catch(function () {});
     return p;
@@ -2531,10 +2540,11 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   function paint() {
     var on = audible();
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.setAttribute('aria-label', on ? 'Turn the music off' : 'Turn the music on');
-    if (lbl) lbl.textContent = on ? 'Music on' : (wanted ? 'Tap for sound' : 'Music off');
-    /* until the browser lets sound start, the button asks for that one tap, plainly */
+    btn.setAttribute('aria-label', on ? 'Turn the sound off' : 'Turn the sound on');
+    if (lbl) lbl.textContent = on ? 'Sound off' : (wanted ? 'Tap for sound' : 'Sound on');
+    /* until the browser lets sound start, the button asks for that one tap, plainly; once playing it keeps breathing as the off switch */
     btn.classList.toggle('ask', wanted && !live);
+    btn.classList.toggle('playing', on);
     var e; try { e = new CustomEvent('aam:music'); } catch (x) { e = D.createEvent('CustomEvent'); e.initCustomEvent('aam:music', false, false, null); }
     W.dispatchEvent(e);
   }
