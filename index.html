@@ -2107,33 +2107,57 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     }
     requestAnimationFrame(tick);
 
-    /* ---------- feed phones: tap one for sound, the other goes quiet ---------- */
-    var phones = $$('.feed .phone, .gc-film');
-    function setLbl(ph) { var l = $('.lbl', ph); if (l) l.textContent = ph.classList.contains('loud') ? 'Sound off' : 'Play with sound'; }
-    phones.forEach(function (ph) {
+    /* ---------- films with sound: the Hole 10 film and the feed phones ----------
+       Once the site's music is playing, whichever of them fills the screen plays with its sound at 69% (the music steps
+       out meanwhile); scroll on and it goes quiet again. Tapping one turns its sound on or off by hand. */
+    var VOL = 0.69;
+    var phones = $$('.feed .phone, .gc-film'), seen = [];
+    function setLbl(ph) {
+      var loud = ph.classList.contains('loud'), l = $('.lbl', ph), t = $('.phone-snd', ph);
+      if (l) l.textContent = loud ? 'Sound off' : 'Play with sound';
+      if (t) t.textContent = loud ? 'Tap to mute' : 'Tap for sound';
+    }
+    function srcOf(v) {
+      if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-webm') && !v.canPlayType('video/mp4; codecs="avc1.42E01E"')) ? v.getAttribute('data-webm') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
+    }
+    function loud(ph, restart) {
       var v = $('video', ph);
+      phones.forEach(function (o) { if (o !== ph) { $('video', o).muted = true; o.classList.remove('loud'); } });
+      srcOf(v);
+      if (W.__aamMusic && W.__aamMusic.level) W.__aamMusic.level(v, VOL); else v.volume = VOL;
+      v.muted = false; ph.classList.add('loud');
+      if (restart) { try { v.currentTime = 0; } catch (e) {} }
+      phones.forEach(setLbl);
+      var p = v.play(); if (p && p.catch) p.catch(function () { v.muted = true; ph.classList.remove('loud'); setLbl(ph); });
+    }
+    function quiet(ph) { $('video', ph).muted = true; ph.classList.remove('loud'); setLbl(ph); }
+    phones.forEach(function (ph) {
       ph.addEventListener('click', function () {
-        var on = v.muted;
-        phones.forEach(function (o) { var ov = $('video', o); ov.muted = true; o.classList.remove('loud'); });
-        if (!v.getAttribute('src')) { v.src = (v.getAttribute('data-webm') && !v.canPlayType('video/mp4; codecs="avc1.42E01E"')) ? v.getAttribute('data-webm') : v.getAttribute('data-src'); v.addEventListener('playing', function () { v.classList.add('is-playing'); }, { once: true }); }
-        if (on) { v.muted = false; try { v.currentTime = 0; } catch (e) {} ph.classList.add('loud'); }
-        phones.forEach(setLbl);
-        var p = v.play(); if (p && p.catch) p.catch(function () {});
+        phones.forEach(function (o) { o.__byHand = false; });
+        if (ph.classList.contains('loud')) { quiet(ph); ph.__hush = true; return; }
+        ph.__hush = false; ph.__byHand = true; loud(ph, true);
       });
     });
-    /* the Hole 10 film: a visitor who came in with sound hears it once it fills the screen; it goes quiet when they scroll on */
-    var film = $('#gc-film');
-    if (film && 'IntersectionObserver' in W) {
-      var fv = $('video', film);
-      new IntersectionObserver(function (es) {
+    function pickLoud() {
+      var m = W.__aamMusic, on = !!(m && m.on()), best = null, top = 0.6;
+      if (phones.some(function (ph) { return ph.__byHand && ph.classList.contains('loud'); })) return;   /* their own pick stands */
+      phones.forEach(function (ph, i) { if (!ph.__hush && (seen[i] || 0) >= top + (best ? 0.1 : 0)) { top = seen[i]; best = ph; } });   /* side by side: the first one wins a near tie */
+      phones.forEach(function (ph) {
+        if (!on || ph !== best) { if (ph.classList.contains('loud') && !ph.__byHand) quiet(ph); }
+      });
+      if (on && best && !best.classList.contains('loud')) { loud(best, !best.__heard); best.__heard = true; }
+    }
+    if ('IntersectionObserver' in W) {
+      var pio = new IntersectionObserver(function (es) {
         es.forEach(function (e) {
-          if (e.intersectionRatio >= 0.7 && W.__aamSound && !film.classList.contains('loud') && !film.__heard) {
-            film.__heard = true; film.click();
-          } else if (e.intersectionRatio < 0.25 && film.classList.contains('loud')) {
-            fv.muted = true; film.classList.remove('loud'); setLbl(film);
-          }
+          var i = phones.indexOf(e.target);
+          seen[i] = e.isIntersecting ? e.intersectionRatio : 0;
+          if (!e.isIntersecting) { e.target.__hush = e.target.__byHand = false; if (e.target.classList.contains('loud')) quiet(e.target); }
         });
-      }, { threshold: [0, 0.25, 0.7] }).observe(film);
+        pickLoud();
+      }, { threshold: [0, 0.25, 0.6, 0.8, 1] });
+      phones.forEach(function (ph) { pio.observe(ph); });
+      W.addEventListener('aam:music', pickLoud);
     }
 
     /* ---------- sticky mobile CTA ---------- */
@@ -2167,7 +2191,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         videoId: VID,
         playerVars: { autoplay: 1, mute: 1, controls: 0, rel: 0, playsinline: 1, loop: 1, playlist: VID, modestbranding: 1, iv_load_policy: 3, disablekb: 1, fs: 0 },
         events: {
-          onReady: function () { ytReady = true; if (inView && !userPaused) { try { yt.mute(); yt.playVideo(); } catch (e) {} } },
+          onReady: function () { ytReady = true; if (inView && !userPaused) { try { soundOn ? (yt.unMute(), yt.setVolume(69)) : yt.mute(); yt.playVideo(); } catch (e) {} } },
           onStateChange: function (e) {
             if (e.data === 1) { poster.classList.add('hide'); if (!tcTimer) tcTimer = setInterval(function () { try { tc.textContent = fmtTC(yt.getCurrentTime()); } catch (x) {} }, 100); }
             if (e.data === 0) { try { yt.playVideo(); } catch (x) {} }
@@ -2181,18 +2205,27 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         inView = es[0].isIntersecting;
         if (!ytReady) return;
         try { if (inView && !userPaused) yt.playVideo(); else if (!inView) yt.pauseVideo(); } catch (e) {}
+        if (!inView) reelHush = false;
+        reelAuto();
         reelDuck();
       }, { threshold: 0.35 }).observe(reelBox);
     }
     function setSound(on) {
       soundOn = on;
       if (soundBtn) { soundBtn.textContent = on ? 'Sound on' : 'Sound off'; soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); }
-      if (ytReady) { try { on ? (yt.unMute(), yt.setVolume(100)) : yt.mute(); } catch (e) {} }
+      if (ytReady) { try { on ? (yt.unMute(), yt.setVolume(69)) : yt.mute(); } catch (e) {} }
       reelDuck();
     }
     /* the site music steps out while the reel plays with its sound */
     function reelDuck() { if (W.__aamMusic) W.__aamMusic.duck('reel', soundOn && inView && !userPaused); }
-    if (soundBtn) soundBtn.addEventListener('click', function () { setSound(!soundOn); });
+    if (soundBtn) soundBtn.addEventListener('click', function () { reelHush = soundOn; setSound(!soundOn); });
+    /* once the site's music is playing, the reel plays with its sound at 69% while it's on screen */
+    var reelHush = false;
+    function reelAuto() {
+      var on = !!(W.__aamMusic && W.__aamMusic.on()) && inView && !userPaused && !reelHush;
+      if (on !== soundOn) setSound(on);
+    }
+    W.addEventListener('aam:music', reelAuto);
     if (hit) hit.addEventListener('click', function () {
       if (!ytReady) { window.open('https://www.youtube.com/watch?v=' + VID, '_blank', 'noopener'); return; }
       try {
@@ -2530,6 +2563,13 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     toggle: function () { setWanted(!audible()); },
     scene: function (on) { if (scene === !!on) return; scene = !!on; apply(); },
     duck: function (who, on) { if (!!ducks[who] === !!on) return; ducks[who] = !!on; apply(); },
+    /* set a film's own sound level; through Web Audio when it's running, so iPhones (which ignore .volume) follow it too */
+    level: function (el, v) {
+      if (ctx && ctx.state === 'running' && !el.__aamGain) {
+        try { var src = ctx.createMediaElementSource(el), g = ctx.createGain(); src.connect(g); g.connect(ctx.destination); el.__aamGain = g; } catch (e) {}
+      }
+      if (el.__aamGain) { el.__aamGain.gain.value = v; el.volume = 1; } else el.volume = v;
+    },
     /* the swing is starting from the tee: take its song back to the top so the hit lands with it */
     cue: function () { try { rock.el.currentTime = 0; } catch (e) {} }
   };
