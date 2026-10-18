@@ -550,6 +550,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
    Karplus-Strong rhythm + lead guitars, melodic bass, drawbar organ,
    drums, shaker, congas/bongos and a steel-pan accent. */
 (function () {
+  var MUSIC_VOL = 0.33;
   var BPM = 110, BEAT = 60 / BPM, S16 = BEAT / 4, E8 = BEAT / 2, BAR = BEAT * 4;
   var SWO = (2 * 0.58 - 1) * S16;          // swing: odd 16ths land late
   var LOOK = 0.15, TICK = 25;
@@ -706,10 +707,11 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     g.lim = comp(C.createDynamicsCompressor(), -6, 0, 20, 0.002, 0.15); g.lim.connect(C.destination);
     g.master = gn(0.85, g.lim);
     g.mComp = comp(C.createDynamicsCompressor(), -18, 10, 2.5, 0.015, 0.3);
-    g.mFade = gn(0, g.master); g.mComp.connect(g.mFade);
+    g.mVol = gn(MUSIC_VOL, g.master);                    // music sits at 33% under the construction sounds
+    g.mFade = gn(0, g.mVol); g.mComp.connect(g.mFade);
     g.mIn = gn(0.42, g.mComp);
     g.verb = C.createConvolver(); g.verb.buffer = impulse(1.9); g.verb.connect(gn(0.55, g.master));
-    g.rFade = gn(0, g.verb);                              // music reverb send (fades with the music)
+    g.rFade = gn(0, gn(MUSIC_VOL, g.verb));                              // music reverb send (fades with the music)
     g.sfx = gn(0.9); g.sfx.connect(bq('lowpass', 8500, 0.5, g.master)); g.sfx.connect(gn(0.16, g.verb));
     function bus(v, p, rv) { var o = gn(v); o.connect(pn(p, g.mIn)); if (rv) o.connect(gn(rv, g.rFade)); return o; }
 
