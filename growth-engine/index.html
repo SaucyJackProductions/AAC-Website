@@ -1,0 +1,1561 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Lupe Growth Engine: a client-acquisition proposal for New Trust Services, LLC.">
+<meta name="robots" content="noindex">
+<title>Lupe Growth Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a fixed WebGL job site behind a scrolling stack of drawing-sheet cards; the build progress tracks the pitch. */
+:root{
+  color-scheme: dark;
+  --ink:#0f0e0c;
+  --panel:rgba(19,17,14,.80);
+  --panel-solid:#16140f;
+  --fg:#efe9dd;
+  --muted:#a9a192;
+  --gold:#d2a95a;
+  --gold-deep:#8c6d34;
+  --concrete:#8f8b84;
+  --line:rgba(239,233,221,.14);
+  --line-strong:rgba(210,169,90,.45);
+  --title:'Cinzel','Trajan Pro',Georgia,serif;
+  --display:'Big Shoulders Display','Big Shoulders','Oswald','Arial Narrow',Impact,sans-serif;
+  --body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+.build{position:fixed;inset:0;z-index:0;overflow:hidden;background:#0f0e0c;transition:opacity .4s,visibility 0s}
+.build.off{opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.build-bg{position:absolute;inset:-60px;background:#14110d center/cover no-repeat;filter:blur(26px) brightness(.5) saturate(1.15)}
+.build-frame{position:absolute;top:0;bottom:0;right:0;left:14vw;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%);mask-image:linear-gradient(90deg,transparent,#000 18%)}
+.shot{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;overflow:hidden}
+.shot.on{opacity:1}
+.stagebox{position:absolute;transform-origin:60% 45%}
+.stagebox .plate{position:absolute;inset:0;display:block;width:100%;height:100%}
+.piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.drop-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(12,9,7,.8),rgba(12,9,7,0));opacity:0;pointer-events:none}
+.build-dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.build::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 62% 45%,transparent 55%,rgba(8,7,6,.5))}
+#fade{position:fixed;inset:0;background:#050505;opacity:0;pointer-events:none;z-index:1}
+.no-gl body,.no-gl{background:
+  linear-gradient(rgba(210,169,90,.06) 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(90deg,rgba(210,169,90,.06) 1px,transparent 1px) 0 0/40px 40px,
+  var(--ink)}
+.no-gl #stage,.no-gl .hud{display:none}
+
+/* top band */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+body::after{content:"";position:fixed;inset:0 0 auto;height:calc(env(safe-area-inset-top,0px) + 74px);z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,9,.94),rgba(12,11,9,.7) 55%,rgba(12,11,9,0))}
+.brand{position:fixed;z-index:4;top:calc(env(safe-area-inset-top,0px) + 16px);left:max(16px,env(safe-area-inset-left,0px));font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fg);display:flex;gap:10px;align-items:center}
+.brand b{display:inline-block;width:18px;height:18px;border:1.5px solid var(--gold);position:relative}
+.brand b::after{content:"";position:absolute;left:3px;right:3px;bottom:3px;height:5px;background:var(--gold)}
+.hud{position:fixed;z-index:4;top:calc(env(safe-area-inset-top,0px) + 12px);right:max(16px,env(safe-area-inset-right,0px));width:250px;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 12px 12px;font:500 11px/1.35 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.hud-row{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.hud-title{color:var(--muted)}
+.hud-stage{color:var(--fg);margin-top:4px;font-size:12px}
+.hud-num{color:var(--gold);font-variant-numeric:tabular-nums;font-size:12px}
+.hud-bar{height:3px;background:var(--line);margin-top:8px;position:relative;overflow:hidden}
+.hud-bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--gold)}
+.sound{position:fixed;z-index:5;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);appearance:none;background:var(--panel);color:var(--fg);border:1px solid var(--line-strong);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:10px 12px 10px 30px;cursor:pointer;min-height:36px}
+.sound::before{content:"";position:absolute;left:12px;top:50%;width:8px;height:8px;margin-top:-4px;border:1.5px solid var(--muted);border-radius:50%}
+.sound[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.sound[aria-pressed="true"]::before{background:var(--gold);border-color:var(--gold)}
+.no-gl .sound{display:none}
+.rec{display:none;align-items:center;gap:6px;margin-top:8px;color:#ff8b7a}
+.rec::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff5a45;box-shadow:0 0 8px #ff5a45}
+.hud.kitchen .rec{display:flex}
+
+/* story */
+main{position:relative;z-index:2;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.beat{min-height:115vh;display:flex;align-items:center;padding-block:14vh}
+.card{width:100%;max-width:470px;background:linear-gradient(180deg,rgba(12,10,8,.5),rgba(12,10,8,.3));border:1px solid rgba(210,169,90,.3);box-shadow:0 30px 80px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,236,200,.1);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.65);padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.card.wide{max-width:560px}
+.tb{display:flex;flex-wrap:wrap;border:1px solid var(--line-strong);font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);width:max-content;max-width:100%}
+.tb span{padding:7px 9px;min-width:0}
+.tb span+span{border-left:1px solid var(--line-strong)}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;margin:0;text-wrap:balance;letter-spacing:.005em}
+h1{font-weight:900;font-size:clamp(2.6rem,9.2vw,8rem);overflow-wrap:anywhere;line-height:.86}
+h2{font-weight:800;font-size:clamp(2.1rem,4.4vw,3.35rem);line-height:.92}
+/* titles: engraved metal with real depth, like a premiere title card */
+h1,h2{font-family:var(--title);font-weight:800;letter-spacing:.035em;text-shadow:none;padding-bottom:.06em;
+  background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.75) 50%,transparent 58%) -150% 0/250% 100% no-repeat,
+    linear-gradient(180deg,#fffaf0 0%,#f3e9d6 40%,#b7aa93 54%,#ece1cc 68%,#fff9ec 100%) 0 0/100% var(--lh) repeat-y;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 #6a5f4f) drop-shadow(0 1px 0 #554b3e) drop-shadow(0 1px 0 #41392f) drop-shadow(0 1.5px 0 #2c261f) drop-shadow(0 10px 14px rgba(0,0,0,.75));
+  animation:sheen 7s ease-in-out 1.5s infinite}
+h1{--lh:1em;font-size:clamp(2.2rem,7.2vw,6.2rem);line-height:1}
+h2{--lh:1.06em;font-size:clamp(1.7rem,3.4vw,2.65rem);line-height:1.06}
+h1 em,h2 em{background:linear-gradient(100deg,transparent 42%,rgba(255,250,230,.85) 50%,transparent 58%) -150% 0/250% 100% no-repeat,
+    linear-gradient(180deg,#fff2c6 0%,#f0cb74 32%,#b5842e 54%,#e6b95c 72%,#fff0bd 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:sheen 7s ease-in-out 1.5s infinite}
+@keyframes sheen{0%,55%{background-position:-150% 0,0 0}100%{background-position:250% 0,0 0}}
+h3{font-weight:800;font-size:1.35rem;line-height:1;letter-spacing:.02em}
+h1 em,h2 em{font-style:normal}
+p{margin:0;max-width:62ch}
+.lead{font-size:1.06rem;color:var(--fg)}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.kicker{font:500 11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.loss{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:var(--fg);font-size:.98rem}
+.spec{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.spec li{display:grid;grid-template-columns:7.2rem 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);align-items:baseline}
+.spec li:last-child{border-bottom:1px solid var(--line)}
+.spec b{font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.spec span{color:var(--fg);font-size:.95rem;min-width:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.two>div{border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.two h3{color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border:1px solid var(--line);color:var(--fg)}
+.flow{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.flow li{display:grid;grid-template-columns:2.2rem 6.6rem 1fr;gap:10px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}
+.flow li:last-child{border-bottom:1px solid var(--line)}
+.flow i{font:500 12px/1 var(--mono);color:var(--gold);font-style:normal}
+.flow b{font-family:var(--display);font-weight:800;font-size:1.15rem;text-transform:uppercase;letter-spacing:.03em}
+.flow span{color:var(--muted);font-size:.92rem}
+
+/* hero */
+.hero{min-height:100vh;align-items:flex-end;padding-block:18vh 12vh}
+.hero-in{max-width:980px;width:100%;min-width:0;display:flex;flex-direction:column;gap:22px}
+.hero h1{text-shadow:none}
+.hero .lead{max-width:46ch;font-size:1.15rem;text-shadow:0 1px 20px rgba(0,0,0,.8)}
+.cue{display:flex;gap:12px;align-items:center;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.cue::before{content:"";width:1px;height:38px;background:linear-gradient(var(--gold),transparent)}
+
+/* phone mock */
+.phone{border:1px solid var(--line-strong);padding:14px;display:flex;flex-direction:column;gap:10px;background:rgba(0,0,0,.25);max-width:300px}
+.phone .bar{font:500 10px/1 var(--mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase;display:flex;justify-content:space-between}
+.phone .btn{background:var(--gold);color:#17130b;font:700 1.05rem/1 var(--display);text-transform:uppercase;letter-spacing:.06em;padding:12px;text-align:center}
+
+/* jobs + calculator */
+.jobs{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.jobs td{padding:8px 0;border-top:1px solid var(--line);font-size:.95rem}
+.jobs td:last-child{text-align:right;font:500 13px/1.3 var(--mono);color:var(--gold)}
+.calc{border:1px solid var(--line-strong);padding:16px;display:flex;flex-direction:column;gap:12px;background:rgba(0,0,0,.25)}
+.calc label{font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.calc select,.calc input{width:100%;accent-color:var(--gold)}
+.calc select{background:var(--panel-solid);color:var(--fg);border:1px solid var(--line);padding:9px 10px;font:500 14px var(--body)}
+.calc select:focus-visible,.calc input:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.big{font:900 clamp(2.4rem,6vw,3.4rem)/.9 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:8px}
+.funnel div{display:grid;grid-template-columns:3.4rem 1fr;gap:10px;align-items:center}
+.funnel b{font:800 1.6rem/1 var(--display);text-align:right;font-variant-numeric:tabular-nums}
+.funnel span{position:relative;height:30px;display:flex;align-items:center;padding-left:10px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--fg);min-width:0}
+.funnel span::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:linear-gradient(90deg,var(--gold-deep),rgba(210,169,90,.25));z-index:-1}
+.funnel span{z-index:0}
+.funnel .win b{color:var(--gold)}
+
+/* timeline */
+.phases{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line)}
+.phases li{padding:12px 10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.phases li+li{border-left:1px solid var(--line)}
+.phases i{font:500 10.5px/1 var(--mono);color:var(--gold);font-style:normal;letter-spacing:.12em;text-transform:uppercase}
+.phases b{font:800 1.15rem/1 var(--display);text-transform:uppercase}
+.phases span{font-size:.82rem;color:var(--muted);line-height:1.45}
+
+/* investment */
+.invest{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.invest>div{border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.invest>div.feature{border-color:var(--line-strong);background:rgba(210,169,90,.06)}
+.invest ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:.9rem}
+.price{font:500 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-top:1px solid var(--line);padding-top:10px;margin-top:auto}
+.verify{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.verify li::marker{color:var(--gold);font-family:var(--mono)}
+
+/* cta */
+.cta .card{max-width:600px}
+.cta-btn{appearance:none;border:0;background:var(--gold);color:#17130b;font:800 1.35rem/1 var(--display);text-transform:uppercase;letter-spacing:.06em;padding:16px 20px;cursor:pointer;align-self:flex-start}
+.cta-btn:hover{background:#e0bb72}
+.paste{font:500 13px/1.5 var(--mono);border:1px dashed var(--line-strong);padding:12px;color:var(--fg);user-select:all;-webkit-user-select:all}
+.copied{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);min-height:1em}
+.foot{padding-block:8vh 12vh;font:500 10.5px/1.6 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+@media (min-width:900px){
+  main{padding-left:max(5vw,env(safe-area-inset-left,0px))}
+}
+@media (max-width:899px){
+  .build-frame{left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top,0px) + 100px);-webkit-mask-image:none;mask-image:none}
+  body::after{height:calc(env(safe-area-inset-top,0px) + 112px);background:linear-gradient(180deg,#0f0e0c,#0f0e0c 76%,rgba(15,14,12,0))}
+  .sound{right:auto;left:max(16px,env(safe-area-inset-left,0px));bottom:auto;top:calc(env(safe-area-inset-top,0px) + 44px)}
+  .hud{width:auto;left:auto;top:calc(env(safe-area-inset-top,0px) + 44px);right:max(16px,env(safe-area-inset-right,0px));padding:8px 10px 10px;font-size:10px;min-width:200px}
+  .beat{min-height:135vh;align-items:flex-end;padding-block:58vh 6vh}
+  .hero{min-height:100vh;padding-block:30vh 8vh}
+  .hero-in{background:linear-gradient(180deg,rgba(15,14,12,0),rgba(15,14,12,.72) 22%);padding-block:28px 12px;margin-inline:-16px;padding-inline:16px;width:calc(100% + 32px)}
+  .card{background:linear-gradient(180deg,rgba(12,10,8,.56),rgba(12,10,8,.38));padding:20px 18px 22px}
+  .spec li{grid-template-columns:1fr;gap:2px}
+  .flow li{grid-template-columns:1.8rem 1fr;}
+  .flow li span{grid-column:2}
+}
+@media (max-width:520px){
+  .two,.invest{grid-template-columns:1fr}
+  .phases{grid-template-columns:1fr 1fr}
+  .phases li:nth-child(3){border-left:0}
+  .phases li:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}h1,h2,h1 em,h2 em{animation:none}}
+</style>
+</head>
+<body>
+<div id="ge-in" aria-hidden="true" style="position:fixed;inset:0;z-index:99999;pointer-events:none;display:none;background:radial-gradient(circle at 50% 50%,#fff8e6 0%,#ffd98c 18%,#c9873a 38%,#070807 70%);"></div>
+<script>
+/* Arriving from the Above All Media "Growth Engine" button: the blast's afterglow clears to reveal the page. */
+(function(){var k=0;try{k=sessionStorage.getItem('ge-boom');sessionStorage.removeItem('ge-boom');}catch(e){}
+if(!k)return;var el=document.getElementById('ge-in');el.style.display='block';
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}
+el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',offset:.25},{opacity:0,transform:'scale(3)'}],{duration:1300,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'}).onfinish=function(){el.remove();};})();
+</script>
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="build" id="build" aria-hidden="true"><div class="build-bg"></div><div class="build-frame"></div><canvas class="build-dust"></canvas></div>
+<div id="fade"></div>
+<button id="sound" class="sound" type="button" aria-pressed="false" hidden>Sound off</button>
+<div class="brand"><b></b>New Trust Services, LLC · Growth Engine</div>
+<div class="hud" id="hud" aria-hidden="true">
+  <div class="hud-row"><span class="hud-title" id="hudTitle">Mansion · new build</span><span class="hud-num" id="hudNum">0%</span></div>
+  <div class="hud-stage" id="hudStage">Site plan</div>
+  <div class="hud-bar"><i id="hudBar"></i></div>
+  <div class="rec" id="hudRec">Filming: before video</div>
+</div>
+
+<main id="story">
+
+  <section class="beat hero" data-m="0" data-k="0" data-s="0" data-a="0">
+    <div class="hero-in">
+      <div class="tb"><span>Proposal</span><span>Sheet A-000</span><span>Prepared for New Trust Services, LLC</span></div>
+      <h1>Lupe builds the work.<br><em>We build the demand.</em></h1>
+      <p class="lead">For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM and follow-up. Scroll, and watch it drop into place, piece by piece, from the slab up.</p>
+      <div class="cue">Scroll to start the build</div>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.04" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-001</span><span>Foundation</span></div>
+      <h2>The work is already good. <em>Nobody can see it.</em></h2>
+      <p>Word of mouth proves people trust Lupe and New Trust Services, LLC. The hard part is done: craftsmanship, experience, a crew, licenses, insurance, referrals, and the ability to finish real construction jobs.</p>
+      <ul class="spec">
+        <li><b>Already built</b><span>Skill, crew, reputation, referrals.</span></li>
+        <li><b>Missing</b><span>A clean website, online booking, Google and Meta lead flow, fast follow-up, organized customers.</span></li>
+      </ul>
+      <p class="loss">Tonight, a homeowner planning a $90K kitchen will search, find three contractors with a real website and reviews, and call one of them. Every week without a system, that call goes to someone else.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.145" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>S-101</span><span>Structure</span><span>Phase 1 of 4</span></div>
+      <h2>Everything starts <em>below grade.</em></h2>
+      <p>Before a single ad dollar is spent, we pour the foundation. We decide exactly which jobs Lupe wants more of, then build the machine to find those people and nobody else.</p>
+      <ul class="spec">
+        <li><b>Services</b><span>What Lupe sells, ranked by margin.</span></li>
+        <li><b>Photos</b><span>Finished work that proves the quality.</span></li>
+        <li><b>Territory</b><span>Where the crew will drive, and where it won't.</span></li>
+        <li><b>Pricing rules</b><span>Minimum job size, so small jobs stop eating the calendar.</span></li>
+        <li><b>Ideal customer</b><span>The homeowner with a real budget and a real timeline.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.3" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>S-201</span><span>Exterior walls</span><span>Operating model</span></div>
+      <h2>One side creates demand. <em>One side delivers.</em></h2>
+      <div class="two">
+        <div><span class="kicker">Chandler</span><h3>Generates big jobs</h3><div class="chips"><span>Website</span><span>Google</span><span>Meta</span><span>Booking</span><span>CRM</span><span>Follow-up</span></div></div>
+        <div><span class="kicker">Lupe · New Trust Services, LLC</span><h3>Knocks them out</h3><div class="chips"><span>Crews</span><span>Estimates</span><span>Licenses</span><span>Materials</span><span>Execution</span><span>Finishing</span></div></div>
+      </div>
+      <p>Clean and logical. Everybody stays in their lane, and Lupe never has to become a marketer to grow.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.47" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-301</span><span>Roofing</span><span>Mobile-first website</span></div>
+      <h2>A front door that books <em>while Lupe is on site.</em></h2>
+      <div class="phone" aria-label="Website preview">
+        <div class="bar"><span>lupe · home</span><span>9:41</span></div>
+        <div class="btn">Book a Project Consultation</div>
+        <div class="chips"><span>Kitchen</span><span>Bath</span><span>Remodel</span><span>Addition</span><span>Custom Build</span></div>
+      </div>
+      <ul class="spec">
+        <li><b>Fast booking</b><span>Clients request appointments, upload photos and describe the project.</span></li>
+        <li><b>Trust proof</b><span>Photos, reviews, specialties, licensing and insurance, finished work.</span></li>
+        <li><b>Luxury position</b><span>The site sells quality, reliability and finish detail, never cheap labor.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.635" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-401</span><span>Interiors</span><span>Lead flow</span></div>
+      <h2>No more hoping the <em>next job appears.</em></h2>
+      <p>Five predictable paths for serious homeowners to reach Lupe, all running into one system.</p>
+      <ol class="flow">
+        <li><i>01</i><b>Google</b><span>People already searching</span></li>
+        <li><i>02</i><b>Meta</b><span>Before/after attention</span></li>
+        <li><i>03</i><b>Referrals</b><span>Trust gets forwarded</span></li>
+        <li><i>04</i><b>Website</b><span>Booking + project form</span></li>
+        <li><i>05</i><b>CRM</b><span>Follow-up + records</span></li>
+      </ol>
+      <p class="loss">Leads that wait go cold. Missed-call recovery texts back automatically, so the homeowner who calls while Lupe is on a ladder doesn't move on to the next name.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.86" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-501</span><span>Landscape</span><span>CRM + clientele</span></div>
+      <h2>The customer list <em>becomes an asset.</em></h2>
+      <p>Not scattered texts. Not forgotten names. A real database.</p>
+      <ul class="spec">
+        <li><b>Lead source</b><span>Where every opportunity came from.</span></li>
+        <li><b>Project history</b><span>Photos, scope, estimate, invoice, completion.</span></li>
+        <li><b>Follow-up</b><span>Reminders, nurture texts, missed-call recovery.</span></li>
+        <li><b>Reviews</b><span>Systemized requests after completed work.</span></li>
+        <li><b>Maintenance</b><span>Annual check-ins and service contracts.</span></li>
+      </ul>
+      <p class="loss">If Lupe ever sells, a clean customer database and a repeat revenue system help prove New Trust Services, LLC is bigger than one man.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="0.96" data-k="0" data-s="0" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>A-601</span><span>Finished estate</span><span>Recurring revenue</span></div>
+      <h2>Finished projects <em>shouldn't go dark.</em></h2>
+      <p>Maintenance contracts keep the lights on long after the crew leaves.</p>
+      <ul class="spec">
+        <li><b>Repeat contact</b><span>Past clients hear from Lupe on a schedule.</span></li>
+        <li><b>Priority service</b><span>Relationships, not one-off transactions.</span></li>
+        <li><b>Seasonal</b><span>Inspections and punch lists.</span></li>
+        <li><b>Upsell</b><span>More remodels, upgrades and referrals.</span></li>
+        <li><b>Valuation</b><span>Cleaner numbers for the day the company is worth more.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="0.02" data-s="1" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>Content engine</span><span>Day 1</span><span>Before video</span></div>
+      <h2>Now watch one kitchen <em>sell the next one.</em></h2>
+      <p>Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming on day one, while it still looks like this.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="0.26" data-s="1" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>Demo</span><span>Progress clips</span></div>
+      <h2>Demo day is <em>pure attention.</em></h2>
+      <p>Before-and-after is what Meta is built for. Short progress clips keep Lupe's name in front of homeowners who are still deciding who to hire.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="0.42" data-s="1" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>Rough-in</span><span>Problem → solution</span></div>
+      <h2>Show the part <em>nobody else shows.</em></h2>
+      <p>New plumbing and electrical, done right behind the wall. Problem-to-solution stories prove Lupe does the work cheap crews skip, which is exactly what high-end clients pay to avoid.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="0.74" data-s="1" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>Cabinets + marble</span><span>Craft close-ups</span></div>
+      <h2>Sell the <em>finish work.</em></h2>
+      <p>Tight reveals, clean scribe lines, Calacatta marble with a waterfall edge that meets the floor. Close-ups are where a six-figure client decides Lupe is the one.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="1" data-a="0.15">
+    <div class="card">
+      <div class="tb"><span>Day 42</span><span>Final reveal</span></div>
+      <h2>Reveal. Review. <em>Retarget.</em></h2>
+      <p>The reveal video goes out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.</p>
+      <p class="loss">Craftsmanship hidden in a phone gallery cannot create demand.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="0" data-a="0.55">
+    <div class="card wide">
+      <div class="tb"><span>Job strategy</span><span>Bigger, better jobs</span></div>
+      <h2>Aim for the big jobs, <em>not every job.</em></h2>
+      <table class="jobs" aria-label="Example job values">
+        <tr><td>Luxury bathrooms</td><td>$15K–$45K+</td></tr>
+        <tr><td>Kitchens</td><td>$35K–$100K+</td></tr>
+        <tr><td>Additions</td><td>$75K–$250K+</td></tr>
+        <tr><td>Whole-home remodels</td><td>$150K–$500K+</td></tr>
+        <tr><td>Custom builds</td><td>$500K+</td></tr>
+        <tr><td>Commercial upgrades</td><td>Case by case</td></tr>
+      </table>
+      <div class="calc">
+        <span class="kicker">What does a missed job cost?</span>
+        <label for="jobType"><span>Job type</span></label>
+        <select id="jobType">
+          <option value="15000">Luxury bathroom · from $15K</option>
+          <option value="35000" selected>Kitchen · from $35K</option>
+          <option value="75000">Addition · from $75K</option>
+          <option value="150000">Whole-home remodel · from $150K</option>
+          <option value="500000">Custom build · from $500K</option>
+        </select>
+        <label for="lost"><span>Jobs per quarter that go to someone else</span><span id="lostVal">2</span></label>
+        <input id="lost" type="range" min="1" max="6" step="1" value="2">
+        <div class="big" id="lossYear">$280,000</div>
+        <p class="small muted" id="lossNote">a year in project revenue Lupe never got the chance to bid. Uses the low end of each range. Examples only; Lupe approves pricing, scope and final estimates.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="0" data-a="1.05">
+    <div class="card">
+      <div class="tb"><span>The money logic</span><span>Ad dollar → signed job</span></div>
+      <h2>A few right jobs <em>can change the month.</em></h2>
+      <div class="funnel" aria-label="Illustrative lead funnel">
+        <div><b>50</b><span style="--w:100%">New leads</span></div>
+        <div><b>20</b><span style="--w:40%">Qualified</span></div>
+        <div><b>10</b><span style="--w:20%">Site visits</span></div>
+        <div><b>5</b><span style="--w:10%">Estimates</span></div>
+        <div class="win"><b>2–3</b><span style="--w:5%">Signed jobs</span></div>
+      </div>
+      <p>Two or three signed kitchens at the low end of the range is $70K–$105K in projects for Lupe to price, approve and build. We track every step from ad dollar to signed contract, so nobody has to guess what's working.</p>
+      <p class="small muted">Illustrative only, not a revenue guarantee. The system wins when it produces qualified opportunities Lupe can price, approve and complete profitably.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="0" data-a="1.6">
+    <div class="card wide">
+      <div class="tb"><span>Schedule</span><span>90-day build</span></div>
+      <h2>Start focused. Prove it. <em>Scale what works.</em></h2>
+      <ol class="phases">
+        <li><i>Phase 1</i><b>Foundation</b><span>Services, photos, territory, pricing rules, ideal customer.</span></li>
+        <li><i>Phase 2</i><b>Build</b><span>Mobile website, booking, CRM, Google Business, social pages.</span></li>
+        <li><i>Phase 3</i><b>Launch</b><span>Content, Google and Meta tests, lead capture, follow-up.</span></li>
+        <li><i>Phase 4</i><b>Measure</b><span>Booked calls, estimates, won jobs, revenue, reviews.</span></li>
+      </ol>
+      <p>At day 90 we keep what creates qualified work and cut what doesn't.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="0" data-a="2.15">
+    <div class="card wide">
+      <div class="tb"><span>Investment</span><span>Setup + monthly</span></div>
+      <h2>Build it once. <em>Run it every month.</em></h2>
+      <div class="invest">
+        <div>
+          <span class="kicker">One-time setup</span>
+          <h3>The Growth Engine build</h3>
+          <ul>
+            <li>Mobile-first website with booking and project form</li>
+            <li>CRM: lead source, project history, follow-up, missed-call recovery, review requests</li>
+            <li>Google Business Profile and social pages</li>
+            <li>Google and Meta ad accounts with tracking to signed jobs</li>
+            <li>Content plan and photo library</li>
+          </ul>
+          <div class="price">Quoted at the Business Build Session</div>
+        </div>
+        <div class="feature">
+          <span class="kicker">Monthly retainer</span>
+          <h3>Run, measure, scale</h3>
+          <ul>
+            <li>Google and Meta campaigns, tested and tuned</li>
+            <li>Before, progress and reveal content every project</li>
+            <li>Retargeting ads to site visitors who haven't booked</li>
+            <li>CRM nurture, reviews and maintenance-contract program</li>
+            <li>Monthly report: booked calls, estimates, won jobs, revenue</li>
+          </ul>
+          <div class="price">Quoted at the Business Build Session</div>
+        </div>
+      </div>
+      <p class="loss">Measure the retainer against signed projects, not likes. A single extra kitchen at the low end of the range is a $35K project.</p>
+    </div>
+  </section>
+
+  <section class="beat" data-m="1" data-k="1" data-s="0" data-a="2.6">
+    <div class="card">
+      <div class="tb"><span>General notes</span><span>Verified before launch</span></div>
+      <h2>What we lock down <em>before ads go live.</em></h2>
+      <ol class="verify">
+        <li>Licenses, insurance and territory</li>
+        <li>Which job types have the best margin</li>
+        <li>Minimum job size</li>
+        <li>Who approves estimates and contracts</li>
+        <li>How generated leads are tracked</li>
+        <li>How payment and compensation are documented</li>
+        <li>Maintenance contract offer and pricing</li>
+      </ol>
+      <p>The promise isn't magic. It's disciplined execution, measurement and follow-up.</p>
+      <p class="small muted">Final terms should be reviewed by qualified legal and accounting professionals.</p>
+    </div>
+  </section>
+
+  <section class="beat cta" data-m="1" data-k="1" data-s="0" data-a="3.1">
+    <div class="card">
+      <div class="tb"><span>Next step</span><span>Business Build Session</span></div>
+      <h2>New Trust Services, LLC builds the work. <em>Chandler builds the demand.</em></h2>
+      <p>Website. Booking. Google. Meta. CRM. Content. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.</p>
+      <ul class="spec">
+        <li><b>Bring</b><span>Your best finished-project photos.</span></li>
+        <li><b>Decide</b><span>The job types you want more of, and your minimum job size.</span></li>
+        <li><b>Draw</b><span>The territory your crews will cover.</span></li>
+      </ul>
+      <button class="cta-btn" id="imIn" type="button">Copy my “I'm in” text</button>
+      <p class="paste" id="imInText">Chandler, I'm in. Let's book the Business Build Session and start the Growth Engine for New Trust Services, LLC.</p>
+      <p class="copied" id="copied" aria-live="polite"></p>
+      <p class="small muted">Paste it into a text to Chandler. Every week the system isn't live is another week of searches that land on someone else.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Growth Engine proposal for New Trust Services, LLC · Prepared by Chandler, Above All Media</span>
+    <span>Job values and funnel numbers are examples and projections, not guarantees.</span>
+  </footer>
+</main>
+
+<script>
+/* calculator + copy: work with or without WebGL */
+(function(){
+  var fmt = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+  var job = document.getElementById('jobType'), lost = document.getElementById('lost');
+  function calc(){
+    var v = (+job.value) * (+lost.value) * 4;
+    document.getElementById('lostVal').textContent = lost.value;
+    document.getElementById('lossYear').textContent = fmt.format(v);
+  }
+  job.addEventListener('change',calc); lost.addEventListener('input',calc); calc();
+  var btn = document.getElementById('imIn'), txt = document.getElementById('imInText'), out = document.getElementById('copied');
+  function selectText(){ var r=document.createRange(); r.selectNodeContents(txt); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }
+  btn.addEventListener('click',function(){
+    try{
+      navigator.clipboard.writeText(txt.textContent).then(function(){ out.textContent='Copied. Paste it into a text to Chandler.'; },function(){ selectText(); out.textContent='Selected. Press copy on your device.'; });
+    }catch(e){ selectText(); out.textContent='Selected. Press copy on your device.'; }
+  });
+})();
+</script>
+<script>
+(function(){
+'use strict';
+/* Estate build: the real coastal estate, built piece by piece. Each stage is a clean
+   photo plate plus the cut-out piece: scrolling lowers the piece in from above the frame,
+   then it drops under gravity, slams onto the build (shake, dust, thud) and the shot cuts
+   to the next stage with that piece installed. Works with or without WebGL. */
+var wrap = document.getElementById('build');
+if (!wrap) return;
+var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// m: scroll position the stage is centred on. piece: [x, y, w, h] of the hanging piece (fractions of the plate),
+// land: [dx, dy, scale] where it comes to rest, measured from its hanging spot
+var FRAMES = [
+  {src: 'final',      m: 0,    stage: 'The vision',          w: 2412, h: 1328},
+  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.1484, .0428, .654, .2864],  land: [0, .45, 1.08]},
+  {src: 'structure',  m: .145, stage: 'Structure',           w: 1600, h: 981,  piece: [.1388, .0265, .6538, .366],  land: [-.025, .15, .72]},
+  {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74]},
+  {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87]},
+  {src: 'interiors',  m: .635, stage: 'Interiors',           w: 1600, h: 985,  piece: [.0956, 0, .785, .4772],      land: [0, .06, .95]},
+  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  piece: [.1764, .0954, .7089, .2589], land: [.339, .391, .42]},
+  {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15]},
+  {src: 'final',      m: .96,  stage: 'The finished estate', w: 2412, h: 1328}
+];
+var FALL = 620, SETTLE = 420;   // fall + settle ms
+var bg = wrap.querySelector('.build-bg'), stack = wrap.querySelector('.build-frame'), dust = wrap.querySelector('.build-dust');
+var shots = FRAMES.map(function(f){
+  var s = document.createElement('div'); s.className = 'shot';
+  var box = document.createElement('div'); box.className = 'stagebox'; s.appendChild(box);
+  var plate = new Image(); plate.alt = ''; plate.decoding = 'async'; plate.className = 'plate';
+  plate.src = f.piece ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
+  box.appendChild(plate);
+  var o = {el: s, box: box, bw: 0, bh: 0};
+  if (f.piece){
+    var sh = document.createElement('div'); sh.className = 'drop-shadow'; box.appendChild(sh);
+    var pc = new Image(); pc.alt = ''; pc.decoding = 'async'; pc.className = 'piece'; pc.src = 'estate2/' + f.src + '_piece.webp';
+    pc.style.left = f.piece[0]*100 + '%'; pc.style.top = f.piece[1]*100 + '%'; pc.style.width = f.piece[2]*100 + '%'; pc.style.height = f.piece[3]*100 + '%';
+    box.appendChild(pc); o.piece = pc; o.shadow = sh;
+  }
+  stack.appendChild(s); return o;
+});
+var hud = document.getElementById('hud'), hTitle = document.getElementById('hudTitle'), hNum = document.getElementById('hudNum'),
+    hStage = document.getElementById('hudStage'), hBar = document.getElementById('hudBar'), fade = document.getElementById('fade');
+
+function clamp(x, a, b){ return Math.min(b === undefined ? 1 : b, Math.max(a || 0, x)); }
+function lerp(a, b, t){ return a + (b - a)*t; }
+function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+var beats = Array.prototype.slice.call(document.querySelectorAll('.beat')), anchors = [];
+function measure(){
+  anchors = beats.map(function(b){ var r = b.getBoundingClientRect(), top = r.top + scrollY;
+    return {y: b.classList.contains('hero') ? top + innerHeight*.5 : top + r.height*.5, m: +b.dataset.m, s: +b.dataset.s, a: +b.dataset.a}; });
+}
+function target(){
+  var y = scrollY + innerHeight*.5, A = anchors;
+  if (y <= A[0].y) return {m: A[0].m, s: A[0].s, a: A[0].a};
+  for (var i = 0; i < A.length - 1; i++) if (y <= A[i+1].y){
+    var t = (y - A[i].y)/(A[i+1].y - A[i].y);
+    return {m: lerp(A[i].m, A[i+1].m, t), s: A[i].s === A[i+1].s ? A[i].s : lerp(A[i].s, A[i+1].s, clamp((t - .3)/.4)), a: lerp(A[i].a, A[i+1].a, t)};
+  }
+  var L = A[A.length - 1]; return {m: L.m, s: L.s, a: L.a};
+}
+function frameAt(m){ for (var i = FRAMES.length - 1; i > 0; i--) if (m >= (FRAMES[i].m + FRAMES[i-1].m)/2) return i; return 0; }
+function span(i){ return [i ? (FRAMES[i].m + FRAMES[i-1].m)/2 : 0, i < FRAMES.length - 1 ? (FRAMES[i].m + FRAMES[i+1].m)/2 : 1]; }
+// the piece comes down from above the frame as its card scrolls in, and lets go just before the card is centred
+function dropAt(i){ var lo = span(i)[0]; return FRAMES[i].m - .15*(FRAMES[i].m - lo); }
+
+/* each plate covers the frame; the camera pans sideways to keep the action (the piece, then where it lands) in view */
+var FW = 0, FH = 0;
+function focus(i){ var f = FRAMES[i]; return f.piece ? f.piece[0] + f.piece[2]/2 : .45; }
+function pan(i, fx){
+  var s = shots[i], narrow = FW/FH < 1.2, c = narrow ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
+  s.box.style.left = Math.max(FW - s.bw, Math.min(0, FW*c - fx*s.bw)).toFixed(1) + 'px';
+}
+function layout(){
+  var fw = stack.clientWidth, fh = stack.clientHeight; FW = fw; FH = fh;
+  shots.forEach(function(s, i){
+    var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h), w = f.w*k, h = f.h*k;
+    s.bw = w; s.bh = h;
+    s.box.style.width = w + 'px'; s.box.style.height = h + 'px';
+    s.box.style.top = (fh - h)*.3 + 'px'; pan(i, focus(i));
+    if (f.piece){
+      // soft contact shadow where the piece will land
+      var p = f.piece, L = f.land, sw = p[2]*L[2]*.92;
+      s.shadow.style.width = sw*100 + '%'; s.shadow.style.height = (p[3]*L[2]*.16)*100 + '%';
+      s.shadow.style.left = (p[0] + p[2]/2 + L[0] - sw/2)*100 + '%'; s.shadow.style.top = (p[1] + p[3] + L[1] - p[3]*L[2]*.1)*100 + '%';
+    }
+  });
+}
+
+/* piece placement: y=0 is the hanging spot from the photo, 1 is the landing spot; `lift` raises it above the frame */
+function place(i, t, lift, sway, squash){
+  var s = shots[i], f = FRAMES[i], p = f.piece, L = f.land;
+  var x = L[0]*s.bw*t, y = L[1]*s.bh*t - lift*(p[1] + p[3] + .12)*s.bh, k = lerp(1, L[2], t);
+  pan(i, focus(i) + L[0]*t);
+  s.piece.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (sway || 0).toFixed(3) + 'deg) scale(' + k.toFixed(4) + ',' + (k*(squash || 1)).toFixed(4) + ')';
+  s.shadow.style.opacity = (lift > .98 ? 0 : (.16 + .5*t*t)*(1 - lift)).toFixed(3);
+  s.shadow.style.transform = 'scale(' + (1.35 - .35*t).toFixed(3) + ')';
+}
+
+/* dust: soft puffs that burst sideways from the landing line */
+var dctx = dust.getContext('2d'), puffs = [], dustT = 0;
+function sizeDust(){ var r = Math.min(devicePixelRatio || 1, 2); dust.width = dust.clientWidth*r; dust.height = dust.clientHeight*r; dctx.setTransform(r, 0, 0, r, 0, 0); }
+function burst(i){
+  var rect = shots[i].piece.getBoundingClientRect(), dr = dust.getBoundingClientRect();
+  if (!rect.width) return;
+  var y = rect.bottom - dr.top - rect.height*.06, x0 = rect.left - dr.left + rect.width*.04, x1 = rect.right - dr.left - rect.width*.04, n = Math.round(30 + rect.width/18);
+  for (var j = 0; j < n; j++){
+    var x = lerp(x0, x1, Math.random()), dir = x < (x0 + x1)/2 ? -1 : 1;
+    puffs.push({x: x, y: y + (Math.random() - .5)*12, vx: dir*(40 + Math.random()*150), vy: -(15 + Math.random()*60), r: 10 + Math.random()*28, life: 0, max: .9 + Math.random()*.9});
+  }
+  // a few chips of debris that pop up and fall back
+  for (j = 0; j < 14; j++) puffs.push({chip: 1, x: lerp(x0, x1, Math.random()), y: y, vx: (Math.random() - .5)*260, vy: -(120 + Math.random()*220), r: 1.5 + Math.random()*2.5, life: 0, max: .7 + Math.random()*.4});
+  if (!dustT) dustT = requestAnimationFrame(stepDust);
+}
+var lastD = 0;
+function stepDust(now){
+  var dt = lastD ? Math.min(.05, (now - lastD)/1000) : .016; lastD = now;
+  dctx.clearRect(0, 0, dust.clientWidth, dust.clientHeight);
+  puffs = puffs.filter(function(p){ return (p.life += dt) < p.max; });
+  puffs.forEach(function(p){
+    var k = p.life/p.max;
+    if (p.chip){
+      p.vy += 900*dt; p.x += p.vx*dt; p.y += p.vy*dt;
+      dctx.fillStyle = 'rgba(70,60,50,' + (1 - k).toFixed(3) + ')'; dctx.fillRect(p.x, p.y, p.r, p.r); return;
+    }
+    p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= .965; p.vy *= .95;
+    var r = p.r*(1 + k*2.4), g = dctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r), a = .42*(1 - k)*Math.min(1, p.life*12);
+    g.addColorStop(0, 'rgba(222,196,166,' + a + ')'); g.addColorStop(1, 'rgba(222,196,166,0)');
+    dctx.fillStyle = g; dctx.fillRect(p.x - r, p.y - r, 2*r, 2*r);
+  });
+  if (puffs.length) dustT = requestAnimationFrame(stepDust); else { dustT = 0; lastD = 0; dctx.clearRect(0, 0, dust.clientWidth, dust.clientHeight); }
+}
+function shake(power){
+  if (!stack.animate) return;
+  var a = 4 + power*4;
+  stack.animate([{transform: 'translate(0,0)'}, {transform: 'translate(' + -a + 'px,' + a*.9 + 'px)'}, {transform: 'translate(' + a*.8 + 'px,' + -a*.7 + 'px)'},
+    {transform: 'translate(' + -a*.5 + 'px,' + a*.4 + 'px)'}, {transform: 'translate(' + a*.2 + 'px,' + -a*.2 + 'px)'}, {transform: 'translate(0,0)'}], {duration: 420, easing: 'ease-out'});
+}
+
+/* state: which stage, and whether its piece is hanging (phase 0) or down (phase 1). `fall` is the running drop. */
+var cur = null, st = {i: -1, down: false}, vis = -1, fall = null, lastKey = '';
+function setVisible(j){
+  if (j === vis) return; vis = j;
+  shots.forEach(function(s, k){ s.el.classList.toggle('on', k === j); });
+  bg.style.backgroundImage = 'url("estate/' + FRAMES[j].src + '_s.jpg")';
+  if (FRAMES[j].piece) place(j, 0, 1, 0, 1);   // the next piece waits above the frame
+}
+function startFall(i, now){
+  fall = {i: i, t0: now, hit: false};
+  setVisible(i);
+}
+function stepFall(now){
+  var i = fall.i, t = (now - fall.t0)/FALL;
+  if (t < 1){ var g = t*t; place(i, g, 0, (1 - t)*fall.sway0, 1 + .03*g); return; }
+  var a = (now - fall.t0 - FALL)/SETTLE;
+  if (!fall.hit){
+    fall.hit = true; var big = FRAMES[i].piece[2]*FRAMES[i].land[2];
+    shake(1 + big); burst(i);
+    if (window.__lupeThud) window.__lupeThud(1 + big*1.2);
+  }
+  // squash on impact, then rebound
+  var sq = a < 1 ? 1 - .05*Math.sin(Math.min(1, a*2.2)*Math.PI)*(1 - a) : 1;
+  place(i, 1, 0, 0, sq);
+  if (a >= 1){ fall = null; setVisible(i + 1); }
+}
+function hangAt(i, m, now){
+  var lo = span(i)[0], e = clamp((m - lo)/Math.max(.001, .6*(dropAt(i) - lo))), lift = 1 - easeOut(e);
+  // crane sway while it hangs; it settles as it comes down to its spot
+  var sway = reduce ? 0 : Math.sin(now/900 + i)*.5*(.4 + .6*lift);
+  place(i, 0, lift, sway, 1);
+  return sway;
+}
+function frame(now){
+  if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze the fall mid-air
+  var tg = target();
+  if (!cur || reduce || window.__lupeSnap) cur = tg;
+  else { var f = .14; cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
+  var key = cur.m.toFixed(4) + cur.s.toFixed(3) + cur.a.toFixed(4);
+  if (key !== lastKey){
+    lastKey = key;
+    fade.style.opacity = clamp(1 - Math.abs(cur.s*2 - 1)*1.6).toFixed(3);
+    wrap.classList.toggle('off', cur.s >= .5);
+  }
+  if (cur.s < .5){
+    var i = frameAt(cur.m), sp = span(i), p = clamp((cur.m - sp[0])/Math.max(.001, sp[1] - sp[0])), F = FRAMES[i];
+    var down = !!F.piece && cur.m >= dropAt(i);
+    if (i !== st.i || down !== st.down){
+      var forward = i > st.i || (i === st.i && down && !st.down);
+      if (fall && fall.i !== i){ place(fall.i, 1, 0, 0, 1); fall = null; }
+      if (down && forward && !reduce && st.i !== -1 && i - st.i <= 1){
+        var sw = shots[i].piece ? hangAt(i, dropAt(i), now) : 0;
+        if (!fall){ startFall(i, now); fall.sway0 = sw; }
+      } else if (down){ fall = null; place(i, 1, 0, 0, 1); setVisible(i + 1); }
+      else { fall = null; setVisible(i); }
+      st = {i: i, down: down};
+    }
+    if (fall) stepFall(now);
+    else if (F.piece && !down) hangAt(i, cur.m, now);
+    // slow push-in inside each stage
+    var z = reduce ? 1 : 1.04 - .04*p, sb = shots[vis].box;
+    sb.style.transform = 'scale(' + z.toFixed(4) + ') translateX(' + (reduce ? 0 : -cur.a*.6).toFixed(2) + '%)';
+    hud.classList.remove('kitchen'); hTitle.textContent = 'Estate · new build'; hNum.textContent = Math.round(cur.m*100) + '%';
+    hStage.textContent = cur.m >= .995 && !cur.a ? 'Complete' : F.stage; hBar.style.width = (cur.m*100).toFixed(1) + '%';
+  }
+  requestAnimationFrame(frame);
+}
+function resize(){ measure(); layout(); sizeDust(); lastKey = ''; }
+addEventListener('resize', resize);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+addEventListener('load', measure);
+resize();
+window.__lupeBuild = true;
+requestAnimationFrame(frame);
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script>
+(function(){
+'use strict';
+var root = document.documentElement;
+if (!window.THREE || !THREE.RoomEnvironment) { root.classList.add('no-gl'); return; }
+var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var canvas = document.getElementById('stage');
+var renderer;
+try { renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, powerPreference: 'high-performance'}); }
+catch (e) { root.classList.add('no-gl'); return; }
+var small = Math.min(innerWidth, innerHeight) < 700 || innerWidth < 900;
+var gl2 = renderer.capabilities.isWebGL2;
+var hasPost = !small && gl2 && !!THREE.EffectComposer && !!THREE.UnrealBloomPass;
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, hasPost ? 1.25 : 1.5));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .6;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+var ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+var TEX = small ? 256 : 512;
+var dirty = true;
+function invalidate(){ dirty = true; }
+
+/* ---------- math + helpers ---------- */
+function clamp(x, a, b){ a = a === undefined ? 0 : a; b = b === undefined ? 1 : b; return Math.min(b, Math.max(a, x)); }
+function seg(p, a, b){ return clamp((p - a) / (b - a)); }
+function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+function es(p, a, b){ return ease(seg(p, a, b)); }
+function lerp(a, b, t){ return a + (b - a) * t; }
+function col(h){ return new THREE.Color(h); }
+var seed = 11;
+function rnd(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+
+/* ---------- procedural textures (stone, stucco, marble, concrete) ---------- */
+function cv(w, h){ var c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+function noise(w, h, cx, cy, oct, persist){
+  var out = new Float32Array(w*h), amp = 1, tot = 0;
+  for (var o = 0; o < oct; o++){
+    var gx = cx << o, gy = cy << o, g = new Float32Array(gx*gy);
+    for (var i = 0; i < g.length; i++) g[i] = rnd();
+    for (var y = 0; y < h; y++){
+      var fy = y / h * gy, iy = fy | 0, ty = fy - iy; ty = ty*ty*(3 - 2*ty);
+      var r0 = (iy % gy) * gx, r1 = ((iy + 1) % gy) * gx;
+      for (var x = 0; x < w; x++){
+        var fx = x / w * gx, ix = fx | 0, tx = fx - ix; tx = tx*tx*(3 - 2*tx);
+        var x0 = ix % gx, x1 = (ix + 1) % gx;
+        var a = g[r0+x0] + (g[r0+x1] - g[r0+x0]) * tx, b = g[r1+x0] + (g[r1+x1] - g[r1+x0]) * tx;
+        out[y*w + x] += (a + (b - a) * ty) * amp;
+      }
+    }
+    tot += amp; amp *= (persist || .5);
+  }
+  for (var j = 0; j < out.length; j++) out[j] /= tot;
+  return out;
+}
+function paint(w, h, fn, nStrength){
+  var c = cv(w, h), ctx = c.getContext('2d'), img = ctx.createImageData(w, h), d = img.data, px = [0,0,0];
+  var hm = nStrength ? new Float32Array(w*h) : null;
+  for (var y = 0; y < h; y++) for (var x = 0; x < w; x++){
+    var i = y*w + x, hv = fn(x, y, i, px);
+    d[i*4] = px[0]; d[i*4+1] = px[1]; d[i*4+2] = px[2]; d[i*4+3] = 255;
+    if (hm) hm[i] = hv || 0;
+  }
+  ctx.putImageData(img, 0, 0);
+  return {map: c, normal: hm ? normalCanvas(hm, w, h, nStrength) : null};
+}
+function normalCanvas(hm, w, h, s){
+  var c = cv(w, h), ctx = c.getContext('2d'), img = ctx.createImageData(w, h), d = img.data;
+  for (var y = 0; y < h; y++) for (var x = 0; x < w; x++){
+    var l = hm[y*w + (x - 1 + w) % w], r = hm[y*w + (x + 1) % w], u = hm[((y - 1 + h) % h)*w + x], dn = hm[((y + 1) % h)*w + x];
+    var nx = (l - r) * s, ny = (dn - u) * s, len = Math.sqrt(nx*nx + ny*ny + 1), i = (y*w + x)*4;
+    d[i] = (nx/len*.5 + .5)*255; d[i+1] = (ny/len*.5 + .5)*255; d[i+2] = (1/len*.5 + .5)*255; d[i+3] = 255;
+  }
+  ctx.putImageData(img, 0, 0); return c;
+}
+function T(c, srgb){ var t = new THREE.CanvasTexture(c); if (srgb !== false) t.encoding = THREE.sRGBEncoding; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = ANISO; return t; }
+function std(o, ts, set){
+  var p = Object.assign({roughness: .85, metalness: 0}, o);
+  if (set){ p.map = T(set.map); if (set.normal){ p.normalMap = T(set.normal, false); p.normalScale = new THREE.Vector2(o.ns || .8, o.ns || .8); } }
+  delete p.ns;
+  var m = new THREE.MeshStandardMaterial(p); m.userData.ts = ts || 0; return m;
+}
+var S = TEX, Sx = TEX / 512;
+var texConcrete = (function(){ var n = noise(S,S,4,4,6,.55), f = noise(S,S,64,64,1); return paint(S,S,function(x,y,i,p){
+  var v = .62 + .22*n[i] + .07*(f[i] - .5), hole = Math.pow((x % (128*Sx)) - 64*Sx, 2) + Math.pow((y % (128*Sx)) - 64*Sx, 2) < 16*Sx*Sx;
+  if (hole) v *= .55; p[0] = 190*v; p[1] = 188*v; p[2] = 182*v; return n[i]*.6 + f[i]*.4 - (hole ? .5 : 0); }, 2.2); })();
+var texStucco = (function(){ var n = noise(S,S,16,16,5,.6), f = noise(S,S,128,128,1); return paint(S,S,function(x,y,i,p){
+  var v = .955 + .045*n[i] - .03*f[i]; p[0] = 240*v; p[1] = 236*v; p[2] = 228*v; return n[i]*.4 + f[i]*.6; }, 2.6); })();
+var texLime = (function(){ var n = noise(S,S,24,24,4,.6), f = noise(S,S,160,160,1), pw = 256*Sx, ph = 128*Sx, tone = []; for (var k = 0; k < 64; k++) tone.push(.93 + rnd()*.09);
+  return paint(S,S,function(x,y,i,p){
+    var row = (y / ph) | 0, off = row % 2 ? pw/2 : 0, colI = (((x + off) / pw) | 0), lx = (x + off) % pw, ly = y % ph;
+    var joint = lx < 2 || ly < 2, v = tone[(row*4 + colI) % 64] * (.94 + .08*n[i]) - (f[i] > .82 ? .08 : 0);
+    if (joint) v *= .72; p[0] = 216*v; p[1] = 203*v; p[2] = 181*v; return joint ? 0 : .6 + .4*n[i]*.5 + f[i]*.2; }, 3); })();
+var texDirt = (function(){ var a = noise(S,S,8,8,5), b = noise(S,S,96,96,2); return paint(S,S,function(x,y,i,p){
+  var v = .75 + .4*a[i] + (b[i] > .75 ? .15 : 0); p[0] = 112*v; p[1] = 90*v; p[2] = 70*v; return a[i]*.5 + b[i]*.5; }, 3); })();
+var texPaver = (function(){ var n = noise(S,S,32,32,3), pw = 128*Sx, tone = []; for (var k = 0; k < 16; k++) tone.push(.9 + rnd()*.12);
+  return paint(S,S,function(x,y,i,p){ var lx = x % pw, ly = y % pw, joint = lx < 3 || ly < 3, v = tone[((y/pw|0)*4 + (x/pw|0)) % 16] * (.94 + .08*n[i]);
+    if (joint) v *= .55; p[0] = 196*v; p[1] = 191*v; p[2] = 182*v; return joint ? 0 : .7 + .3*n[i]; }, 3); })();
+var texTrav = (function(){ var n = noise(S,S,2,24,4), f = noise(S,S,128,128,1), tw = 256*Sx, th = 128*Sx;
+  return paint(S,S,function(x,y,i,p){ var joint = x % tw < 2 || y % th < 2, v = .9 + .12*n[i] - (f[i] > .86 ? .14 : 0);
+    if (joint) v *= .8; p[0] = 226*v; p[1] = 210*v; p[2] = 184*v; return joint ? 0 : .6 + .3*n[i] - (f[i] > .86 ? .3 : 0); }, 2.5); })();
+function woodTex(base, rows, contrast, gap){
+  var n = noise(S,S,2,96,3,.6), tones = []; for (var k = 0; k < 64; k++) tones.push(.88 + rnd()*.2);
+  var rh = S / rows;
+  return paint(S,S,function(x,y,i,p){
+    var r = (y / rh) | 0, off = (r * 173) % S, plank = ((x + off) / (S/2)) | 0, edge = y % rh < 1.5 || ((x + off) % (S/2)) < 1.5;
+    var v = tones[(r*3 + plank) % 64] * (1 - contrast/2 + contrast*n[i]);
+    if (edge && gap) v *= .55;
+    p[0] = base[0]*v; p[1] = base[1]*v; p[2] = base[2]*v; return edge ? 0 : .5 + .5*n[i];
+  }, 1.6);
+}
+var texWalnut = woodTex([110, 74, 48], 8, .45, true);
+var texLumber = woodTex([218, 186, 140], 1, .35, false);
+var texOldOak = woodTex([178, 116, 58], 4, .5, false);
+var texDrywall = (function(){ var n = noise(S,S,8,8,3); return paint(S,S,function(x,y,i,p){
+  var tape = (x % (256*Sx)) < 22*Sx, v = (tape ? 1.07 : .98) * (.97 + .03*n[i]); p[0] = 205*v; p[1] = 204*v; p[2] = 200*v; return tape ? .6 : .5; }, 1); })();
+var texPlaster = (function(){ var n = noise(S,S,6,6,5,.6); return paint(S,S,function(x,y,i,p){ var v = .95 + .06*n[i]; p[0] = 240*v; p[1] = 233*v; p[2] = 222*v; return n[i]; }, 1.2); })();
+var texLino = (function(){ var n = noise(S,S,16,16,3), t = 64*Sx; return paint(S,S,function(x,y,i,p){
+  var c = (((x/t)|0) + ((y/t)|0)) % 2, v = .85 + .2*n[i]; p[0] = (c ? 214 : 168)*v; p[1] = (c ? 196 : 140)*v; p[2] = (c ? 150 : 88)*v; return .5; }, 0); })();
+var texLeaf = (function(){ var a = noise(S,S,32,32,3,.6); return paint(S,S,function(x,y,i,p){ var v = .55 + .7*a[i]; p[0] = 58*v; p[1] = 86*v; p[2] = 46*v; return a[i]; }, 4); })();
+var texLam = (function(){ var a = noise(S,S,64,64,1); return paint(S,S,function(x,y,i,p){ var v = .92 + .1*a[i]; p[0] = 214*v; p[1] = 196*v; p[2] = 156*v; return .5; }, 0); })();
+var texCushion = (function(){ var a = noise(S,S,96,96,2); return paint(S,S,function(x,y,i,p){ var v = .93 + .07*a[i]; p[0] = 238*v; p[1] = 232*v; p[2] = 220*v; return a[i]; }, 1.5); })();
+
+function marbleCanvas(w, h, mirror){
+  var c = cv(w, h), x = c.getContext('2d'), dw = mirror ? w/2 : w;
+  x.fillStyle = '#f4f2ee'; x.fillRect(0, 0, dw, h);
+  for (var i = 0; i < 90; i++){
+    var cx = rnd()*dw, cy = rnd()*h, r = (.06 + rnd()*.3)*h, tone = rnd() < .3 ? '190,168,128' : '160,158,160';
+    var g = x.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, 'rgba(' + tone + ',' + (.04 + rnd()*.06) + ')'); g.addColorStop(1, 'rgba(' + tone + ',0)');
+    x.fillStyle = g; x.fillRect(cx - r, cy - r, 2*r, 2*r);
+  }
+  function walk(x0, y0, ang, len, wig){ var pts = [[x0, y0]], px = x0, py = y0, a = ang; for (var s = 0; s < len; s += 8){ a += (rnd() - .5)*wig; px += Math.cos(a)*8; py += Math.sin(a)*8; pts.push([px, py]); } return pts; }
+  function stroke(pts, width, color, alpha, blur){
+    x.save(); x.lineCap = 'round'; x.lineJoin = 'round'; x.beginPath(); x.moveTo(pts[0][0], pts[0][1]);
+    for (var i = 1; i < pts.length - 1; i++){ x.quadraticCurveTo(pts[i][0], pts[i][1], (pts[i][0] + pts[i+1][0])/2, (pts[i][1] + pts[i+1][1])/2); }
+    x.strokeStyle = 'rgba(' + color + ',' + alpha + ')'; x.lineWidth = width; x.shadowColor = 'rgba(' + color + ',' + alpha + ')'; x.shadowBlur = blur; x.stroke(); x.restore();
+  }
+  var k = dw / 1024;
+  for (var v = 0; v < 4; v++){
+    var pts = walk(-40, rnd()*h, (rnd() - .5)*.9 + (v % 2 ? .25 : -.25), dw*1.4, .28);
+    stroke(pts, 34*k, '190,158,108', .09, 40*k); stroke(pts, 12*k, '138,132,128', .26, 14*k); stroke(pts, 3.4*k, '104,98,96', .5, 3*k);
+    for (var b = 0; b < 6; b++){ var q = pts[(rnd()*pts.length)|0]; stroke(walk(q[0], q[1], (rnd() - .5)*3, 60 + rnd()*260*k, .5), 1.4*k, '118,112,112', .32, 2*k); }
+  }
+  for (var t = 0; t < 26; t++) stroke(walk(rnd()*dw, rnd()*h, rnd()*6.28, 80 + rnd()*400*k, .45), .9*k, '120,118,124', .35 + rnd()*.25, 1*k);
+  if (mirror){ x.save(); x.translate(w, 0); x.scale(-1, 1); x.drawImage(c, 0, 0, dw, h, 0, 0, dw, h); x.restore(); }
+  return c;
+}
+var marbleTex = T(marbleCanvas(small ? 1024 : 2048, small ? 512 : 1024, false));
+var marbleBook = T(marbleCanvas(small ? 1024 : 2048, small ? 512 : 1024, true));
+marbleTex.wrapS = marbleTex.wrapT = marbleBook.wrapS = marbleBook.wrapT = THREE.ClampToEdgeWrapping;
+
+function interiorCanvas(kind){
+  var w = 1024, h = 256, c = cv(w, h), x = c.getContext('2d');
+  var g = x.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#2c2016'); g.addColorStop(.12, '#5b4029'); g.addColorStop(.55, '#a87d50'); g.addColorStop(.8, '#7a5634'); g.addColorStop(1, '#3a2717');
+  x.fillStyle = g; x.fillRect(0, 0, w, h);
+  for (var i = 0; i < 10; i++){ var cx = 50 + i*104, r = x.createRadialGradient(cx, 14, 0, cx, 14, 150); r.addColorStop(0, 'rgba(255,214,160,.65)'); r.addColorStop(1, 'rgba(255,214,160,0)'); x.fillStyle = r; x.fillRect(cx - 150, 0, 300, h); }
+  x.fillStyle = '#1b130c'; x.fillRect(0, 0, w, 10);
+  if (kind === 'living'){
+    [[90, 60, 120, 80, '#2f4a5c'], [520, 50, 160, 100, '#8a3b2a'], [800, 70, 90, 70, '#c9b07a']].forEach(function(a){ x.fillStyle = '#1a120b'; x.fillRect(a[0] - 6, a[1] - 6, a[2] + 12, a[3] + 12); x.fillStyle = a[4]; x.fillRect(a[0], a[1], a[2], a[3]); });
+    x.fillStyle = '#d8cbb5'; x.fillRect(230, 170, 260, 56); x.fillStyle = '#c4b59d'; x.fillRect(240, 150, 240, 30); x.fillStyle = '#3b2a1c'; x.fillRect(640, 200, 200, 20);
+    var lamp = x.createRadialGradient(930, 120, 0, 930, 120, 60); lamp.addColorStop(0, 'rgba(255,230,190,1)'); lamp.addColorStop(1, 'rgba(255,200,140,0)'); x.fillStyle = lamp; x.fillRect(860, 50, 140, 140);
+  } else {
+    x.fillStyle = '#e6dccb'; x.fillRect(150, 160, 300, 70); x.fillStyle = '#4b3a2a'; x.fillRect(140, 110, 320, 50);
+    x.fillStyle = '#1a120b'; x.fillRect(600, 60, 180, 120); x.fillStyle = '#6d7f86'; x.fillRect(606, 66, 168, 108);
+    [[110, 150], [490, 150]].forEach(function(a){ var lg = x.createRadialGradient(a[0], a[1], 0, a[0], a[1], 50); lg.addColorStop(0, 'rgba(255,225,180,1)'); lg.addColorStop(1, 'rgba(255,200,140,0)'); x.fillStyle = lg; x.fillRect(a[0] - 50, a[1] - 50, 100, 100); });
+  }
+  return T(c);
+}
+function frondCanvas(){
+  var w = 128, h = 512, c = cv(w, h), x = c.getContext('2d');
+  x.strokeStyle = '#6d6838'; x.lineWidth = 3; x.beginPath(); x.moveTo(w/2, h); x.lineTo(w/2, 4); x.stroke();
+  for (var y = 10; y < h - 6; y += 4){
+    var t = 1 - y/h, L = (w/2 - 3)*Math.sin(Math.PI*Math.min(1, t*1.12))*(.85 + rnd()*.15);
+    for (var sd = -1; sd <= 1; sd += 2){
+      var g = 92 + rnd()*44, r = 58 + rnd()*34;
+      x.strokeStyle = 'rgb(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(34 + rnd()*22) + ')'; x.lineWidth = 2 + rnd()*1.2;
+      x.beginPath(); x.moveTo(w/2, y); x.quadraticCurveTo(w/2 + sd*L*.5, y + 5, w/2 + sd*L, y + 16 + rnd()*10); x.stroke();
+    }
+  }
+  return T(c);
+}
+function dustCanvas(){ var c = cv(64, 64), x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32); g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(.4, 'rgba(255,255,255,.35)'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = g; x.fillRect(0, 0, 64, 64); return new THREE.CanvasTexture(c); }
+
+/* ---------- leafy foliage: hundreds of alpha-cut leaf-cluster cards per crown, normals bent outward so it shades like a volume ---------- */
+function leafAtlas(pal, leafL, leafW, count){
+  // each quadrant is a sprig: twigs radiating from the centre with leaves strung along them, so the silhouette is ragged, never a disc
+  var S = 512, c = cv(S, S), x = c.getContext('2d');
+  for (var q = 0; q < 4; q++){
+    var cx = (q % 2)*S/2 + S/4, cy = Math.floor(q/2)*S/2 + S/4, R = S/4 - 10, nt = 7 + Math.floor(rnd()*4), tw = [];
+    for (var t = 0; t < nt; t++){ var a0 = t/nt*6.2832 + (rnd() - .5)*.6, len = R*(.55 + rnd()*.45), bend = (rnd() - .5)*.8; tw.push([a0, len, bend]);
+      x.strokeStyle = 'rgba(78,64,48,.95)'; x.lineWidth = 1.8; x.beginPath(); x.moveTo(cx, cy);
+      for (var s = 1; s <= 8; s++){ var u = s/8, aa = a0 + bend*u; x.lineTo(cx + Math.cos(aa)*len*u, cy + Math.sin(aa)*len*u); } x.stroke(); }
+    for (var i = 0; i < count; i++){
+      var w = tw[Math.floor(rnd()*nt)], u = Math.pow(rnd(), .7), aa = w[0] + w[2]*u, off = (rnd() - .5)*leafL*2.2*(.4 + u);
+      var px = cx + Math.cos(aa)*w[1]*u - Math.sin(aa)*off, py = cy + Math.sin(aa)*w[1]*u + Math.cos(aa)*off;
+      var p = pal[Math.floor(rnd()*pal.length)], sh = .7 + rnd()*.42;
+      x.save(); x.translate(px, py); x.rotate(aa + (rnd() - .5)*2.2);
+      var L = leafL*(.7 + rnd()*.6), W = leafW*(.7 + rnd()*.6);
+      x.fillStyle = 'rgb(' + Math.round(p[0]*sh) + ',' + Math.round(p[1]*sh) + ',' + Math.round(p[2]*sh) + ')';
+      x.beginPath(); x.ellipse(L*.5, 0, L, W, 0, 0, 6.2832); x.fill();
+      x.fillStyle = 'rgba(255,255,235,.10)'; x.beginPath(); x.ellipse(L*.35, -W*.25, L*.55, W*.4, 0, 0, 6.2832); x.fill();
+      x.restore();
+    }
+  }
+  return T(c);
+}
+function leafMat(tex){
+  var m = new THREE.MeshStandardMaterial({map: tex, alphaTest: .4, side: THREE.DoubleSide, roughness: .78, vertexColors: true});
+  m.onBeforeCompile = function(sh){ sh.fragmentShader = sh.fragmentShader.replace('#include <normal_fragment_begin>', 'float faceDirection = 1.0;\nvec3 normal = normalize(vNormal);\nvec3 geometryNormal = normal;'); };
+  m.userData.depth = new THREE.MeshDepthMaterial({depthPacking: THREE.RGBADepthPacking, map: tex, alphaTest: .4, side: THREE.DoubleSide});
+  return m;
+}
+function crown(n, rx, ry, rz, sz, cy, boxy){
+  var P = [], N = [], U = [], C = [], I = [], a = new THREE.Vector3(), b = new THREE.Vector3(), cs = [[-1, -1, 0, 0], [1, -1, 1, 0], [1, 1, 1, 1], [-1, 1, 0, 1]];
+  for (var i = 0; i < n; i++){
+    var px, py, pz, d;
+    if (boxy){ px = (rnd()*2 - 1)*rx; py = (rnd()*2 - 1)*ry; pz = (rnd()*2 - 1)*rz; d = Math.max(Math.abs(px)/rx, Math.abs(py)/ry, Math.abs(pz)/rz); }
+    else { var u = rnd()*2 - 1, th = rnd()*6.2832, s = Math.sqrt(1 - u*u), lump = 1 + .2*Math.sin(th*3 + u*4)*Math.cos(u*5 - th*2); d = Math.pow(rnd(), .45);
+      px = Math.cos(th)*s*d*rx*lump; py = u*d*ry*lump; pz = Math.sin(th)*s*d*rz*lump; }
+    a.set(rnd() - .5, rnd() - .5, rnd() - .5).normalize(); b.set(rnd() - .5, rnd() - .5, rnd() - .5); b.addScaledVector(a, -b.dot(a)).normalize();
+    var hs = sz*(.75 + rnd()*.5)/2, nx = px/rx, ny = py/ry + .35, nz = pz/rz, L = Math.hypot(nx, ny, nz) || 1;
+    var ao = (.3 + .7*d)*(.75 + .25*clamp(py/ry*.5 + .5, 0, 1)), q = Math.floor(rnd()*4), qu = (q % 2)*.5, qv = Math.floor(q/2)*.5, k = P.length/3;
+    for (var j = 0; j < 4; j++){ var c = cs[j]; P.push(px + (a.x*c[0] + b.x*c[1])*hs, cy + py + (a.y*c[0] + b.y*c[1])*hs, pz + (a.z*c[0] + b.z*c[1])*hs); N.push(nx/L, ny/L, nz/L); U.push(qu + c[2]*.5, qv + c[3]*.5); C.push(ao, ao, ao); }
+    I.push(k, k + 1, k + 2, k, k + 2, k + 3);
+  }
+  var g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2)); g.setAttribute('color', new THREE.Float32BufferAttribute(C, 3)); g.setIndex(I); return g;
+}
+function leafMesh(g, m, x, y, z){ var me = new THREE.Mesh(g, m); me.position.set(x || 0, y || 0, z || 0); me.castShadow = me.receiveShadow = true; me.customDepthMaterial = m.userData.depth; return me; }
+
+/* ---------- real photo assets (published beside the page) ---------- */
+THREE.DefaultLoadingManager.onLoad = function(){ window.__lupeAssets = true; invalidate(); };
+var texLoader = new THREE.TextureLoader();
+function photo(name, srgb, rx, ry){
+  var t = texLoader.load('assets/' + name, invalidate);
+  if (srgb !== false) t.encoding = THREE.sRGBEncoding;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = ANISO; t.repeat.set(rx || 1, ry || 1); return t;
+}
+
+/* ---------- geometry helpers ---------- */
+function scaleUV(g, w, h, d, ts){
+  var uv = g.attributes.uv, dims = [[d,h],[d,h],[w,d],[w,d],[w,h],[w,h]];
+  for (var i = 0; i < uv.count; i++){ var s = dims[(i/4)|0]; uv.setXY(i, uv.getX(i)*s[0]/ts, uv.getY(i)*s[1]/ts); }
+}
+function box(w, h, d, m, x, y, z, base){
+  var g = new THREE.BoxGeometry(w, h, d);
+  if (m.userData && m.userData.ts) scaleUV(g, w, h, d, m.userData.ts);
+  if (base) g.translate(0, h/2, 0);
+  var me = new THREE.Mesh(g, m); me.position.set(x || 0, y || 0, z || 0);
+  me.castShadow = me.receiveShadow = true; return me;
+}
+function cyl(rt, rb, h, m, x, y, z, segs){ var g = new THREE.CylinderGeometry(rt, rb, h, segs || 16); g.translate(0, h/2, 0); var me = new THREE.Mesh(g, m); me.position.set(x || 0, y || 0, z || 0); me.castShadow = me.receiveShadow = true; return me; }
+function grow(o, t, axis){ o.visible = t > .001; o.scale[axis || 'y'] = Math.max(t, .001); }
+function blob(r, m, x, y, z, detail){
+  var g = new THREE.IcosahedronGeometry(r, detail === undefined ? 1 : detail), p = g.attributes.position;
+  for (var i = 0; i < p.count; i++){ var vx = p.getX(i), vy = p.getY(i), vz = p.getZ(i), k = 1 + .22*Math.sin(vx*3.1 + vy*1.7) * Math.cos(vz*2.3 - vy*1.3); p.setXYZ(i, vx*k, vy*k*.85, vz*k); }
+  g.computeVertexNormals();
+  var me = new THREE.Mesh(g, m); me.position.set(x, y, z); me.castShadow = true; me.receiveShadow = true; return me;
+}
+function group(){ var g = new THREE.Group(); for (var i = 0; i < arguments.length; i++) g.add(arguments[i]); return g; }
+var dummy = new THREE.Object3D();
+
+/* =========================================================
+   DROP-INTO-PLACE ENGINE
+   pieces fall with gravity, squash on impact, kick up dust and shake the camera
+   ========================================================= */
+var IMP = .64, dustTex = dustCanvas();
+var MD = [], KD = [], KL = [];
+function makeDust(scene, bb, mass, k){
+  var w = bb.max.x - bb.min.x, d = bb.max.z - bb.min.z, n = Math.round(clamp((w + d) * 2.2 * Math.min(mass, 2) / k, 10, 80));
+  var pos = new Float32Array(n*3), base = [], dirs = [], cx = (bb.min.x + bb.max.x)/2, cz = (bb.min.z + bb.max.z)/2, y = bb.min.y + .1*k;
+  for (var i = 0; i < n; i++){
+    var s = rnd()*2*(w + d), x, z;
+    if (s < w){ x = bb.min.x + s; z = bb.min.z; } else if (s < w + d){ x = bb.max.x; z = bb.min.z + s - w; } else if (s < 2*w + d){ x = bb.max.x - (s - w - d); z = bb.max.z; } else { x = bb.min.x; z = bb.max.z - (s - 2*w - d); }
+    var dx = x - cx, dz = z - cz, L = Math.hypot(dx, dz) || 1; base.push([x, y, z]); dirs.push([dx/L + (rnd() - .5)*.6, .4 + rnd()*.8, dz/L + (rnd() - .5)*.6, .5 + rnd()*.7]);
+  }
+  var g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  var m = new THREE.PointsMaterial({map: dustTex, color: 0xc9bca8, size: (1 + mass*.7)*k, sizeAttenuation: true, transparent: true, depthWrite: false, opacity: 0});
+  var p = new THREE.Points(g, m); p.frustumCulled = false; p.visible = false; scene.add(p);
+  p.userData = {base: base, dirs: dirs, spread: (1.2 + mass*1.1)*k, size0: m.size}; return p;
+}
+function updateDust(p, g){
+  if (g <= 0 || g >= 1){ p.visible = false; return; }
+  p.visible = true;
+  var u = p.userData, a = p.geometry.attributes.position, e = 1 - Math.pow(1 - g, 3);
+  for (var i = 0; i < u.base.length; i++){ var b = u.base[i], dr = u.dirs[i], r = u.spread*e*dr[3];
+    a.setXYZ(i, b[0] + dr[0]*r, b[1] + dr[1]*r*.55, b[2] + dr[2]*r); }
+  a.needsUpdate = true;
+  p.material.opacity = .6*Math.pow(1 - g, 1.5)*Math.min(1, g*10);
+  p.material.size = u.size0*(1 + 2.4*e);
+}
+function addDrop(list, scene, obj, a, b, o){
+  o = o || {};
+  obj.updateMatrixWorld(true);
+  var bb = new THREE.Box3().setFromObject(obj), k = o.k || 1;
+  var tilt = o.tilt === undefined ? .35 : o.tilt;
+  var d = {obj: obj, a: a, b: b, h: o.h || 18*k, mass: o.mass === undefined ? 1 : o.mass, tx: (rnd() - .5)*tilt, tz: (rnd() - .5)*tilt,
+    by: obj.position.y, rx: obj.rotation.x, rz: obj.rotation.z, piv: bb.min.y, sx: obj.scale.x, sy: obj.scale.y, sz: obj.scale.z, last: 0};
+  if (o.dust !== false && d.mass > .15) d.dust = makeDust(scene, bb, d.mass, k);
+  obj.visible = false; list.push(d); return d;
+}
+function applyDrop(d, t){
+  var o = d.obj;
+  if (t <= 0){ o.visible = false; if (d.dust) d.dust.visible = false; d.last = t; return 0; }
+  o.visible = true;
+  var off, sq = 0, tilt = 0, g = 0;
+  if (t < IMP){ var f = t / IMP; off = d.h*(1 - f*f); tilt = 1 - f; }
+  else { g = (t - IMP) / (1 - IMP); var bh = Math.min(.4, .02*d.h) / Math.max(1, d.mass); off = g < .4 ? bh*Math.sin(Math.PI*g/.4) : 0; sq = .06*Math.min(1.4, d.mass)*Math.exp(-g*8)*Math.cos(g*26); if (g >= 1) sq = 0; }
+  var s = 1 - sq;
+  o.scale.set(d.sx*(1 + sq*.5), d.sy*s, d.sz*(1 + sq*.5));
+  o.position.y = d.by + off + (d.piv - d.by)*(1 - s);
+  o.rotation.x = d.rx + d.tx*tilt; o.rotation.z = d.rz + d.tz*tilt;
+  if (d.dust) updateDust(d.dust, t >= IMP ? g : 0);
+  if (d.last < IMP && t >= IMP && t < 1 && d.mass > .25) thud(d.mass);
+  d.last = t;
+  return (t >= IMP && g < 1) ? d.mass*Math.exp(-g*6) : 0;
+}
+function addLift(list, obj, a, b, o){ o = o || {}; var d = {obj: obj, a: a, b: b, h: o.h || 6, by: obj.position.y, rx: obj.rotation.x, rz: obj.rotation.z, tx: (rnd() - .5)*.6, tz: (rnd() - .5)*.6}; list.push(d); return d; }
+function applyLift(d, t){ var o = d.obj; if (t >= 1){ o.visible = false; return; } o.visible = true; var e = t*t; o.position.y = d.by + d.h*e; o.rotation.x = d.rx + d.tx*e; o.rotation.z = d.rz + d.tz*e; }
+function seq(list, scene, items, a, b, o){
+  var n = items.length; items.forEach(function(it, i){ var s = a + (b - a)*.72*i/Math.max(1, n - 1); addDrop(list, scene, it, s, s + (b - a)*.28, typeof o === 'function' ? o(it, i) : o); });
+}
+
+/* ---------- impact sound (opt-in) ---------- */
+var actx = null, soundOn = false, lastThud = 0, noiseBuf = null;
+function thud(mass){
+  if (!soundOn || !actx) return;
+  var now = actx.currentTime; if (now - lastThud < .06) return; lastThud = now;
+  var v = clamp(.18 + mass*.22, 0, .8);
+  var src = actx.createBufferSource(); src.buffer = noiseBuf;
+  var lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380 + 300/mass;
+  var ng = actx.createGain(); ng.gain.setValueAtTime(v, now); ng.gain.exponentialRampToValueAtTime(.001, now + .35 + mass*.1);
+  src.connect(lp); lp.connect(ng); ng.connect(actx.destination); src.start(now); src.stop(now + .6);
+  var osc = actx.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(90/Math.sqrt(mass + .3), now); osc.frequency.exponentialRampToValueAtTime(32, now + .3);
+  var og = actx.createGain(); og.gain.setValueAtTime(v*.9, now); og.gain.exponentialRampToValueAtTime(.001, now + .4);
+  osc.connect(og); og.connect(actx.destination); osc.start(now); osc.stop(now + .45);
+}
+window.__lupeThud = function(m){ thud(m); };
+var soundBtn = document.getElementById('sound');
+if (soundBtn){
+  soundBtn.hidden = false;
+  soundBtn.addEventListener('click', function(){
+    try {
+      if (!actx){ var AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); noiseBuf = actx.createBuffer(1, actx.sampleRate*.6, actx.sampleRate); var ch = noiseBuf.getChannelData(0); for (var i = 0; i < ch.length; i++) ch[i] = (Math.random()*2 - 1)*Math.pow(1 - i/ch.length, 2); }
+      soundOn = !soundOn; if (soundOn && actx.state === 'suspended') actx.resume();
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off';
+      if (soundOn) thud(1.2);
+    } catch (e) { soundBtn.hidden = true; }
+  });
+}
+
+/* ---------- shared materials ---------- */
+var concreteMat = std({color: 0xd9d6d0, roughness: .92}, 2.4, texConcrete);
+var stuccoMat = std({color: 0xffffff, roughness: .82, ns: .6}, 3, texStucco);
+var limeMat = std({color: 0xffffff, roughness: .72, ns: .9}, 2.4, texLime);
+var dirtMat = std({color: 0xffffff, roughness: 1}, 4, texDirt);
+var paverMat = std({color: 0xffffff, roughness: .8}, 2.4, texPaver);
+var travMat = std({color: 0xffffff, roughness: .6}, 2.4, texTrav);
+var walnutMat = std({color: 0xffffff, roughness: .55, ns: .4}, 2, texWalnut);
+var lumberMat = std({color: 0xffffff, roughness: .8, ns: .5}, 1, texLumber);
+var steelMat = new THREE.MeshStandardMaterial({color: 0x4d5258, roughness: .45, metalness: .75});
+var blackMetal = new THREE.MeshStandardMaterial({color: 0x121314, roughness: .35, metalness: .7});
+var fasciaMat = new THREE.MeshStandardMaterial({color: 0xf2efe9, roughness: .5});
+var leafMats = [0x7d8a63, 0x8f9a66, 0x6a7a5a].map(function(c){ return std({color: c, roughness: .95, ns: 1.2}, 2, texLeaf); });
+var oliveMat = std({color: 0xb7c09a, roughness: .95, ns: 1.2}, 2, texLeaf);
+var hedgeMat = std({color: 0x7c9468, roughness: 1, ns: 1.4}, 1.5, texLeaf);
+var barkMat = new THREE.MeshStandardMaterial({color: col('#5b5044').convertSRGBToLinear(), roughness: .95});
+var treeLeaf = leafMat(leafAtlas([[58, 82, 40], [72, 96, 48], [48, 68, 34], [86, 106, 54], [96, 104, 50]], 9, 4, 950));
+var oliveLeaf = leafMat(leafAtlas([[104, 118, 88], [124, 134, 104], [86, 100, 74], [140, 146, 118]], 7, 2.2, 1500));
+var hedgeLeaf = leafMat(leafAtlas([[46, 72, 36], [58, 86, 42], [40, 60, 30], [66, 92, 46]], 6, 3.4, 1500));
+var glassMat = new THREE.MeshStandardMaterial({color: 0x1d2a33, roughness: .03, metalness: .9, transparent: true, opacity: .5, envMapIntensity: 1.5});
+var darkMat = new THREE.MeshStandardMaterial({color: 0x222222, roughness: .7});
+var brassM = new THREE.MeshStandardMaterial({color: 0xd2a650, roughness: .28, metalness: 1});
+var cushionMat = std({color: 0xffffff, roughness: 1, ns: .6}, 1, texCushion);
+
+var pmrem = new THREE.PMREMGenerator(renderer);
+/* photographed HDR panoramas, shipped as two PNGs (RGB mantissa + shared exponent) and rebuilt into a half-float texture */
+function hdrPNG(name, cb){
+  var mgr = THREE.DefaultLoadingManager, url = 'assets/' + name; mgr.itemStart(url);
+  function img(u){ return fetch(u).then(function(r){ if (!r.ok) throw new Error(u); return r.blob(); }).then(function(b){ return createImageBitmap(b, {premultiplyAlpha: 'none', colorSpaceConversion: 'none'}); }); }
+  function px(bm){ var c = cv(bm.width, bm.height), x = c.getContext('2d'); x.drawImage(bm, 0, 0); return x.getImageData(0, 0, bm.width, bm.height).data; }
+  Promise.all([img(url + '_m.png'), img(url + '_e.png')]).then(function(r){
+    var W = r[0].width, H = r[0].height, m = px(r[0]), e = px(r[1]), out = new Uint16Array(W*H*4), toH = THREE.DataUtils.toHalfFloat;
+    for (var y = 0; y < H; y++) for (var x = 0; x < W; x++){
+      var i = (y*W + x)*4, o = ((H - 1 - y)*W + x)*4, ex = e[i], f = ex ? Math.pow(2, ex - 136) : 0;
+      out[o] = toH(m[i]*f); out[o + 1] = toH(m[i + 1]*f); out[o + 2] = toH(m[i + 2]*f); out[o + 3] = 15360;
+    }
+    var t = new THREE.DataTexture(out, W, H, THREE.RGBAFormat, THREE.HalfFloatType);
+    t.minFilter = t.magFilter = THREE.LinearFilter; t.generateMipmaps = false; t.encoding = THREE.LinearEncoding; t.needsUpdate = true;
+    cb(t); mgr.itemEnd(url);
+  }).catch(function(){ mgr.itemError(url); mgr.itemEnd(url); });
+}
+
+/* =========================================================
+   KITCHEN (hyperlapse remodel, drop-in style)
+   ========================================================= */
+var K = new THREE.Scene();
+K.background = col('#0b0a09');
+K.environment = pmrem.fromScene(new THREE.RoomEnvironment(), .04).texture;
+if (window.createImageBitmap && window.fetch && THREE.DataUtils){ hdrPNG('room', function(t){ K.environment = pmrem.fromEquirectangular(t).texture; t.dispose(); invalidate(); }); }
+var kCam = new THREE.PerspectiveCamera(50, 1, .05, 120);
+var kHemi = new THREE.HemisphereLight(0xf1ece4, 0x3a2e22, .25); K.add(kHemi);
+var kSun = new THREE.DirectionalLight(0xfff0d8, 2.4); kSun.castShadow = true;
+kSun.shadow.mapSize.set(2048, 2048); var ksc = kSun.shadow.camera; ksc.left = -7; ksc.right = 7; ksc.top = 7; ksc.bottom = -7; ksc.near = 1; ksc.far = 40; kSun.shadow.bias = -.0005; kSun.shadow.normalBias = .02;
+K.add(kSun); K.add(kSun.target); kSun.target.position.set(-.5, 0, -.2);
+var kFill = new THREE.PointLight(0xdfe8ff, .9, 14, 2); kFill.position.set(0, 2.8, .8); K.add(kFill);
+var kWarm = new THREE.PointLight(0xffc88f, 0, 7, 2); kWarm.position.set(-.1, 1.9, .45); K.add(kWarm);
+var kDown = new THREE.PointLight(0xffe2bf, 0, 9, 2); kDown.position.set(-1.6, 2.8, -1.8); K.add(kDown);
+var KU = [], KK = {k: .6};
+
+var plyMat = std({color: 0xb08a5e, roughness: .95}, 1.2, texLumber);
+var woodFloorMat = new THREE.MeshStandardMaterial({map: photo('wood.jpg', true), roughnessMap: photo('wood_r.jpg', false), bumpMap: photo('wood_b.jpg', false), bumpScale: .003, roughness: .85});
+// pine photo graded toward wire-brushed white oak
+woodFloorMat.onBeforeCompile = function(sh){ sh.fragmentShader = sh.fragmentShader.replace('#include <map_fragment>', '#include <map_fragment>\ndiffuseColor.rgb = mix(vec3(dot(diffuseColor.rgb, vec3(.3, .59, .11))), diffuseColor.rgb, .8) * vec3(.97, .9, .8);'); };
+woodFloorMat.userData.ts = 2.2;
+var linoMat = std({color: 0xffffff, roughness: .55, transparent: true}, 2.4, texLino);
+var oldWallMat = std({color: 0xd9c98a, roughness: .9}, 3, texPlaster);
+var paintMat = std({color: 0xffffff, roughness: .9, ns: .3}, 3, texPlaster);
+var oldOakMat = std({color: 0xffffff, roughness: .6, ns: .5}, 1, texOldOak);
+var lamMat = std({color: 0xffffff, roughness: .5}, 1, texLam);
+var almondMat = new THREE.MeshStandardMaterial({color: 0xe6dfcd, roughness: .4});
+var cabMat = new THREE.MeshStandardMaterial({color: 0x17181a, roughness: .62, metalness: .05});
+var cabFront = new THREE.MeshStandardMaterial({color: 0x1c1d20, roughness: .55, metalness: .05});
+var steel = new THREE.MeshStandardMaterial({color: 0xc8ccd0, roughness: .3, metalness: 1});
+var blackGlass = new THREE.MeshStandardMaterial({color: 0x08090a, roughness: .12, metalness: .4});
+var marbleMat = new THREE.MeshStandardMaterial({map: marbleTex, roughness: .12, metalness: 0});
+var marbleBookMat = new THREE.MeshStandardMaterial({map: marbleBook, roughness: .14, metalness: 0});
+var kWalnut = std({color: 0xffffff, roughness: .5, ns: .4}, 1.2, texWalnut);
+var plasterHood = new THREE.MeshStandardMaterial({color: 0xefe9de, roughness: .9, flatShading: true, map: T(texPlaster.map)});
+var studKMat = std({color: 0xffffff, roughness: .8}, 1, texLumber);
+var ceilKMat = std({color: 0xf4f1ec, roughness: .95}, 3, texPlaster);
+
+// shell: subfloor, studs, sheathing, window opening, real garden photo outside
+K.add(box(9.4, .1, 8.6, plyMat, 0, -.1, .9, true));
+var lino = box(9, .015, 8.2, linoMat, 0, 0, .9, true); K.add(lino);
+KU.push(function(k){ var t = es(k, .22, .27); linoMat.opacity = 1 - t; lino.visible = t < .999; });
+var sheath = std({color: 0x8a7350, roughness: 1}, 1.2, texLumber);
+K.add(box(9.4, 3.1, .05, sheath, 0, 0, -3.37, true), box(.05, 3.1, 8.6, sheath, 4.67, 0, .9, true));
+var WIN = {z0: -1.9, z1: 1.3, y0: .85, y1: 2.65};
+[[-3.4, WIN.z0, 0, 3.1], [WIN.z1, 5.2, 0, 3.1], [WIN.z0, WIN.z1, 0, WIN.y0], [WIN.z0, WIN.z1, WIN.y1, 3.1]].forEach(function(r){ K.add(box(.05, r[3] - r[2], r[1] - r[0], sheath, -4.67, r[2], (r[0] + r[1])/2, true)); });
+var kStudPos = [];
+for (var sx = -4.5; sx <= 4.51; sx += .41) kStudPos.push([sx, -3.27, 0]);
+for (var sz = -3.2; sz <= 5.2; sz += .41){ if (sz > WIN.z0 - .05 && sz < WIN.z1 + .05) continue; kStudPos.push([-4.57, sz, 1]); kStudPos.push([4.57, sz, 1]); }
+var kStudGeo = new THREE.BoxGeometry(.05, 3, .14); scaleUV(kStudGeo, .05, 3, .14, 1); kStudGeo.translate(0, 1.5, 0);
+var kStuds = new THREE.InstancedMesh(kStudGeo, studKMat, kStudPos.length);
+kStudPos.forEach(function(p, i){ dummy.position.set(p[0], 0, p[1]); dummy.rotation.set(0, p[2] ? Math.PI/2 : 0, 0); dummy.scale.set(1, 1, 1); dummy.updateMatrix(); kStuds.setMatrixAt(i, dummy.matrix); });
+dummy.rotation.set(0, 0, 0); kStuds.castShadow = kStuds.receiveShadow = true; K.add(kStuds);
+K.add(box(.14, .25, WIN.z1 - WIN.z0 + .3, studKMat, -4.57, WIN.y1, (WIN.z0 + WIN.z1)/2, true));
+var garden = new THREE.Mesh(new THREE.PlaneGeometry(12, 4.2), new THREE.MeshBasicMaterial({map: photo('window.jpg', true), color: 0xffffff})); garden.position.set(-6.6, 1.3, -.3); garden.rotation.y = Math.PI/2; K.add(garden);
+
+// wall surfaces built as panels so they can lift away / drop in
+function wallPanels(mtl, op){
+  var list = [];
+  for (var x = -4.5; x < 4.49; x += 1.5) list.push(box(1.5, 3, .03, mtl, x + .75, 0, -3.18, true));
+  for (var z = -3.2; z < 4.99; z += 1.64) list.push(box(.03, 3, 1.64, mtl, 4.48, 0, z + .82, true));
+  [[-3.2, op.z0, 0, 3], [op.z1, 5, 0, 3], [op.z0, op.z1, 0, op.y0], [op.z0, op.z1, op.y1, 3]].forEach(function(r){ list.push(box(.03, r[3] - r[2], r[1] - r[0], mtl, -4.48, r[2], (r[0] + r[1])/2, true)); });
+  list.forEach(function(p){ K.add(p); }); return list;
+}
+var oldPanels = wallPanels(oldWallMat, {z0: -.9, z1: .3, y0: 1.2, y1: 2.2});
+var newPanels = wallPanels(paintMat, WIN);
+// windows
+var oldWin = group(box(.06, 1.0, 1.2, new THREE.MeshStandardMaterial({color: 0xc9c9c4, metalness: .6, roughness: .4}), -4.47, 1.2, -.3, true), box(.03, .9, 1.1, new THREE.MeshStandardMaterial({color: 0xbfd6e6, transparent: true, opacity: .25, roughness: .05}), -4.44, 1.25, -.3, true));
+oldWin.children.forEach(function(c){ c.castShadow = false; }); K.add(oldWin);
+var newWin = new THREE.Group(); K.add(newWin);
+(function(){ var zc = (WIN.z0 + WIN.z1)/2, w = WIN.z1 - WIN.z0, h = WIN.y1 - WIN.y0;
+  newWin.add(box(.08, .07, w, blackMetal, -4.47, WIN.y0, zc, true), box(.08, .07, w, blackMetal, -4.47, WIN.y1 - .07, zc, true), box(.08, .07, w, blackMetal, -4.47, WIN.y0 + h*.72, zc, true));
+  for (var i = 0; i <= 4; i++) newWin.add(box(.08, h, .05, blackMetal, -4.47, WIN.y0, WIN.z0 + w*i/4, true));
+  var g = box(.02, h, w, new THREE.MeshStandardMaterial({color: 0xcfe0ea, transparent: true, opacity: .1, roughness: .02, metalness: .2}), -4.5, WIN.y0, zc, true); g.castShadow = false; newWin.add(g);
+  newWin.add(box(.32, .04, w + .1, marbleMat, -4.36, WIN.y0 - .04, zc, true));
+})();
+
+// old kitchen: everything lifts away during demo
+function raisedDoor(g, w, h, x, y, z, mtl){ g.add(box(w, h, .02, mtl, x, y, z, true)); g.add(box(w - .12, h - .12, .02, mtl, x, y + .06, z + .015, true)); }
+function piece(builder, x, y, z){ var g = new THREE.Group(); g.position.set(x, y, z); builder(g); K.add(g); return g; }
+var oldCeiling = box(9.4, .12, 8.6, std({color: 0xece6d6, roughness: .95}, 3, texPlaster), 0, 3.0, .9, true); K.add(oldCeiling);
+var oldLight = piece(function(g){ g.add(box(1.3, .1, .45, new THREE.MeshStandardMaterial({color: 0xf6f7f2, emissive: 0xeaf2ff, emissiveIntensity: .9})), box(1.32, .03, .47, almondMat, 0, .05, 0)); }, -.6, 2.93, .2);
+var olds = [
+  piece(function(g){ g.add(box(6, .75, .34, oldOakMat, 0, 0, 0, true)); for (var i = 0; i < 9; i++) raisedDoor(g, .6, .7, -2.72 + i*.68, .025, .18, oldOakMat); }, -1.4, 1.45, -3.0),
+  piece(function(g){ g.add(box(.86, 1.72, .72, almondMat, 0, 0, 0, true), box(.86, .01, .01, darkMat, 0, 1.15, .365, true), box(.03, .5, .04, almondMat, -.35, .6, .38, true)); }, 2.3, 0, -2.82),
+  piece(function(g){ g.add(box(2.4, .04, .64, lamMat, 0, 0, 0, true), box(2.4, .1, .02, lamMat, 0, .04, -.31, true)); }, -3.2, .88, -2.86),
+  piece(function(g){ g.add(box(2.84, .04, .64, lamMat, 0, 0, 0, true), box(2.84, .1, .02, lamMat, 0, .04, -.31, true)); }, .18, .88, -2.86),
+  piece(function(g){ g.add(box(.76, .9, .62, almondMat, 0, 0, 0, true), box(.76, .18, .05, almondMat, 0, .9, -.28, true)); [[-.18,-.15],[.18,-.15],[-.18,.15],[.18,.15]].forEach(function(p){ g.add(cyl(.09, .09, .01, darkMat, p[0], .9, p[1], 14)); }); g.add(box(.6, .35, .02, blackGlass, 0, .25, .315, true)); }, -1.62, 0, -2.88),
+  piece(function(g){ g.add(box(2.4, .88, .6, oldOakMat, 0, 0, 0, true)); for (var i = 0; i < 4; i++) raisedDoor(g, .55, .68, -.9 + i*.6, .1, .31, oldOakMat); }, -3.2, 0, -2.88),
+  piece(function(g){ g.add(box(2.84, .88, .6, oldOakMat, 0, 0, 0, true)); for (var i = 0; i < 4; i++) raisedDoor(g, .62, .68, -1.05 + i*.7, .1, .31, oldOakMat); }, .18, 0, -2.88)
+];
+
+/* demolition: a first-person sledgehammer smashes the old kitchen apart; every piece breaks into
+   chunks that fly, fall and pile up on the floor, then the debris is hauled out before rough-in */
+var DEMO = [], TS = 55, CLEAR = [.285, .31];
+var shardGeo = (function(){ var g = new THREE.IcosahedronGeometry(.5, 0), p = g.attributes.position;
+  for (var i = 0; i < p.count; i++){ var k = .75 + rnd()*.4; p.setXYZ(i, p.getX(i)*k, p.getY(i)*k, p.getZ(i)*k); }
+  g.computeVertexNormals(); return g; })();
+function firstMat(o){ var m = null; o.traverse(function(c){ if (!m && c.isMesh) m = c.material; }); return m; }
+// break `obj` into chunks; `out` is the direction debris is thrown (into the room)
+function shatter(obj, kI, cell, out, maxN, pow){
+  pow = pow || [1, 1];
+  obj.updateMatrixWorld(true);
+  var bb = new THREE.Box3().setFromObject(obj), sz = bb.getSize(new THREE.Vector3()), c = bb.getCenter(new THREE.Vector3());
+  var nx = Math.max(1, Math.round(sz.x/cell)), ny = Math.max(1, Math.round(sz.y/cell)), nz = Math.max(1, Math.round(sz.z/cell));
+  while (nx*ny*nz > (maxN || 30)){ if (nx >= ny && nx >= nz) nx--; else if (ny >= nz) ny--; else nz--; }
+  var n = nx*ny*nz, mesh = new THREE.InstancedMesh(shardGeo, firstMat(obj), n), ch = [];
+  mesh.castShadow = mesh.receiveShadow = true; mesh.visible = false; mesh.frustumCulled = false; K.add(mesh);
+  for (var ix = 0; ix < nx; ix++) for (var iy = 0; iy < ny; iy++) for (var iz = 0; iz < nz; iz++){
+    var s = [sz.x/nx*(.55 + rnd()*.5), sz.y/ny*(.55 + rnd()*.5), sz.z/nz*(.55 + rnd()*.5)];
+    s[(rnd()*3)|0] *= .4;   // broken pieces are slabs and splinters, not blocks
+    var p0 = [bb.min.x + (ix + .5)*sz.x/nx, bb.min.y + (iy + .5)*sz.y/ny, bb.min.z + (iz + .5)*sz.z/nz];
+    var sp = (1.2 + rnd()*2.6)*pow[0], h = Math.min(s[0], s[1], s[2])*.35 + .01;
+    var v = [out[0]*sp + ((p0[0] - c.x)*1.4 + (rnd() - .5)*1.6)*pow[0], out[1] + (1 + rnd()*2.2)*pow[1], out[2]*sp + ((p0[2] - c.z)*1.4 + (rnd() - .5)*1.6)*pow[0]];
+    var tl = (v[1] + Math.sqrt(v[1]*v[1] + 19.6*Math.max(0, p0[1] - h)))/9.8;
+    ch.push({p0: p0, v: v, s: s, h: h, tl: tl, w: [(rnd() - .5)*14, (rnd() - .5)*14, (rnd() - .5)*14], r0: [rnd()*6.3, rnd()*6.3, rnd()*6.3], kI: kI + (p0[1] > c.y ? 0 : .002)});
+  }
+  var d = {obj: obj, mesh: mesh, ch: ch, kI: kI}; DEMO.push(d); return d;
+}
+var rotE = new THREE.Euler();
+function applyShatter(d, k){
+  d.obj.visible = k < d.kI;
+  var clr = seg(k, CLEAR[0], CLEAR[1]);
+  if (k < d.kI || clr >= 1){ d.mesh.visible = false; return; }
+  d.mesh.visible = true;
+  for (var i = 0; i < d.ch.length; i++){
+    var c = d.ch[i], t = Math.max(0, (k - c.kI)*TS), tf = Math.min(t, c.tl), slide = 1 - Math.exp(-Math.max(0, t - c.tl)*5);
+    var x = c.p0[0] + c.v[0]*tf + c.v[0]*.18*slide, z = c.p0[2] + c.v[2]*tf + c.v[2]*.18*slide;
+    var y = t < c.tl ? c.p0[1] + c.v[1]*t - 4.9*t*t : c.h;
+    var sc = 1 - clr;
+    dummy.position.set(x, y - clr*.4, z);
+    dummy.rotation.set(c.r0[0] + c.w[0]*tf, c.r0[1] + c.w[1]*tf, c.r0[2] + c.w[2]*tf);
+    dummy.scale.set(c.s[0]*sc, c.s[1]*sc, c.s[2]*sc); dummy.updateMatrix(); d.mesh.setMatrixAt(i, dummy.matrix);
+  }
+  d.mesh.instanceMatrix.needsUpdate = true;
+}
+// strikes: when the hammer lands, what it breaks, and which way the debris flies
+var IN = [0, .2, 1];
+var strikes = [
+  {k: .115, hit: [olds[0]], cell: .22, out: IN, max: 48},
+  {k: .14, hit: [olds[4], olds[2]], cell: .2, out: IN, max: 40},
+  {k: .16, hit: [olds[1]], cell: .22, out: [-.4, .2, 1], max: 40},
+  {k: .18, hit: [olds[5]], cell: .22, out: IN, max: 44},
+  {k: .2, hit: [olds[3], olds[6]], cell: .22, out: IN, max: 44},
+  {k: .222, hit: oldPanels.slice(0, 6), cell: .34, out: IN, wave: .012, pow: [.45, .5]},
+  {k: .242, hit: oldPanels.slice(6, 11), cell: .34, out: [-1, .2, 0], wave: .01, pow: [.45, .5]},
+  {k: .26, hit: oldPanels.slice(11).concat([oldWin]), cell: .34, out: [1, .2, 0], wave: .006, pow: [.45, .5]},
+  {k: .272, hit: [oldCeiling, oldLight], cell: .62, out: [0, -1, 0], hammer: false, max: 120, pow: [.25, 0]}
+];
+strikes.forEach(function(st){
+  st.parts = st.hit.map(function(o, i){ return shatter(o, st.k + (st.wave || 0)*i/Math.max(1, st.hit.length - 1), st.cell, st.out, st.max, st.pow); });
+  var bb = new THREE.Box3(); st.hit.forEach(function(o){ bb.expandByObject(o); }); st.center = bb.getCenter(new THREE.Vector3());
+  st.dust = makeDust(K, bb, 1.4, 1); st.last = 0;
+});
+// the sledgehammer, held first-person: hickory handle, rubber grip, forged head
+var hickory = std({color: 0xd7b48a, roughness: .55}, 1, texLumber);
+var forged = new THREE.MeshStandardMaterial({color: 0x2b2c2f, roughness: .38, metalness: .9});
+var hammer = new THREE.Group(), hHead = new THREE.Group();
+hammer.add(cyl(.02, .024, .95, hickory, 0, 0, 0, 12), cyl(.027, .027, .26, new THREE.MeshStandardMaterial({color: 0x161616, roughness: .85}), 0, -.02, 0, 12));
+hHead.add(box(.28, .115, .115, forged, 0, 0, 0), cyl(.066, .066, .03, forged, .14, 0, 0, 16).rotateZ(-Math.PI/2), cyl(.066, .066, .03, forged, -.17, 0, 0, 16).rotateZ(-Math.PI/2));
+hHead.position.y = .93; hammer.add(hHead);
+hammer.traverse(function(o){ if (o.isMesh){ o.castShadow = false; o.receiveShadow = false; } });
+hammer.rotation.order = 'YXZ'; hammer.position.set(.36, -.52, -.55); hammer.visible = false;
+kCam.add(hammer); K.add(kCam);
+var aimV = new THREE.Vector3();
+function swingAt(k){
+  // rest: handle up, head out of frame. windup → accelerate down → impact → recoil
+  var th = -.15, yaw = 0, on = false, best = null;
+  for (var i = 0; i < strikes.length; i++){ var st = strikes[i]; if (st.hammer === false) continue;
+    if (k > st.k - .016 && k < st.k + .012){ best = st; break; } }
+  if (best){
+    var u = (k - best.k)/.016;
+    if (u < -.45) th = lerp(-.15, .5, ease(seg(u, -1, -.45)));
+    else if (u < 0){ var f = seg(u, -.45, 0); th = lerp(.5, -1.28, f*f); }
+    else th = lerp(-1.28, -.15, ease(seg(u, 0, .75)));
+    aimV.copy(best.center).applyMatrix4(kCam.matrixWorldInverse);
+    yaw = clamp(Math.atan2(-(aimV.x - hammer.position.x), -(aimV.z - hammer.position.z)), -.45, .45);
+  }
+  on = k > .1 && k < .262;
+  hammer.visible = on && !reduce;
+  hammer.rotation.set(th, yaw, -.12);
+}
+
+// rough-in pops in
+var copper = new THREE.MeshStandardMaterial({color: 0xc47d4a, metalness: 1, roughness: .35});
+var pexR = new THREE.MeshStandardMaterial({color: 0xc0392b, roughness: .5}), pexB = new THREE.MeshStandardMaterial({color: 0x2e6fc4, roughness: .5});
+var boxBlue = new THREE.MeshStandardMaterial({color: 0x2b6fd6, roughness: .5}), romex = new THREE.MeshStandardMaterial({color: 0xe9c23d, roughness: .6});
+var ductMat = new THREE.MeshStandardMaterial({color: 0xb9bcbf, metalness: .9, roughness: .35});
+var rough = [cyl(.016, .016, 1.1, copper, -1.62, 0, -3.25, 8), cyl(.14, .14, .9, ductMat, -1.62, 2.1, -3.0, 16), cyl(.012, .012, .7, pexR, -.6, 0, .32, 8), cyl(.012, .012, .7, pexB, -.5, 0, .32, 8), cyl(.03, .03, .45, new THREE.MeshStandardMaterial({color: 0xeeeeea, roughness: .5}), -.4, 0, .32, 10)];
+[-3.8, -2.6, -.5, .7, 3.4].forEach(function(x){ rough.push(group(box(.1, .14, .06, boxBlue, x, 1.12, -3.22, true), cyl(.01, .01, 1.74, romex, x, 1.26, -3.24, 6))); });
+[-2.6, 2.6, 4].forEach(function(z){ rough.push(group(box(.06, .14, .1, boxBlue, -4.52, 1.12, z, true), cyl(.01, .01, 1.74, romex, -4.54, 1.26, z, 6))); });
+rough.forEach(function(r){ K.add(r); });
+seq(KD, K, rough, .3, .42, {mass: .1, h: 2.2, k: .3, tilt: .2, dust: false});
+KU.push(function(k){ rough.forEach(function(r, i){ if (k > .5 && i !== 2 && i !== 3 && i !== 4) r.visible = false; }); });
+
+// new build drops in, piece by piece
+seq(KD, K, newPanels, .44, .52, {mass: .5, h: 4.5, k: .25, tilt: .25});
+addDrop(KD, K, newWin, .52, .55, {mass: .6, h: 4, k: .25, tilt: .1});
+var planks = [];
+for (var pzz = -3.2, pi = 0; pzz < 5; pzz += 1.025, pi++){ var pl = box(9, .02, 1.02, woodFloorMat, 0, .005, pzz + .51, true); pl.castShadow = false;
+  (function(uv, o){ for (var i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i)*9/3.2 + o*.37, uv.getY(i)*1.02/1.6 + o*.6); })(pl.geometry.attributes.uv, pi);
+  K.add(pl); planks.push(pl); }
+seq(KD, K, planks, .53, .58, {mass: .4, h: 3, k: .25, tilt: .3});
+function baseCab(x0, x1){
+  var g = new THREE.Group(), w = x1 - x0; g.position.set((x0 + x1)/2, 0, -2.86);
+  g.add(box(w, .1, .54, new THREE.MeshStandardMaterial({color: 0x0b0b0c, roughness: .8}), 0, 0, -.03, true), box(w, .78, .58, cabMat, 0, .1, -.01, true));
+  var n = Math.max(1, Math.round(w / .6));
+  for (var i = 0; i < n; i++){ var cx = -w/2 + (i + .5)*w/n;
+    g.add(box(w/n - .006, .2, .02, cabFront, cx, .67, .29, true), box(w/n - .006, .55, .02, cabFront, cx, .11, .29, true));
+    g.add(box(Math.min(.4, w/n*.6), .015, .025, brassM, cx, .82, .315), box(Math.min(.4, w/n*.6), .015, .025, brassM, cx, .6, .315)); }
+  K.add(g); return g;
+}
+var cabsL = baseCab(-4.45, -2.25), cabsR = baseCab(-.98, 1.25);
+var range = piece(function(g){ var w = 1.22; g.add(box(w, .9, .62, steel, 0, 0, 0, true), box(w, .03, .62, blackGlass, 0, .9, 0, true));
+  for (var i = 0; i < 3; i++) g.add(box(.38, .025, .55, new THREE.MeshStandardMaterial({color: 0x111111, roughness: .6, metalness: .5}), -.4 + i*.4, .93, 0, true));
+  for (var k = 0; k < 6; k++) g.add(cyl(.025, .025, .03, brassM, -.5 + k*.2, .82, .31, 12).rotateX(Math.PI/2));
+  g.add(box(.68, .5, .02, blackGlass, -.25, .18, .315, true), box(.4, .5, .02, blackGlass, .37, .18, .315, true), box(.6, .02, .03, brassM, -.25, .72, .34), box(.34, .02, .03, brassM, .37, .72, .34)); }, -1.615, 0, -2.86);
+var talls = piece(function(g){ g.add(box(3.2, 2.72, .62, cabMat, 0, 0, 0, true), box(3.2, .28, .62, cabMat, 0, 2.72, 0, true));
+  for (var i = 0; i < 4; i++){ var cx = -1.6 + (i + .5)*.8; g.add(box(.794, 2.6, .02, cabFront, cx, .1, .32, true), box(.02, 1.1, .03, brassM, cx + (i % 2 ? -.33 : .33), .8, .345, true)); } }, 2.85, 0, -2.86);
+seq(KD, K, [cabsL, range, cabsR, talls], .58, .65, {mass: 1, h: 4.5, k: .3, tilt: .2});
+var island = piece(function(g){ g.add(box(3.2, .1, .94, new THREE.MeshStandardMaterial({color: 0x0b0b0c, roughness: .8}), 0, 0, 0, true), box(3.2, .74, 1.0, cabMat, 0, .1, 0, true));
+  for (var ii = 0; ii < 5; ii++){ var cx = -1.6 + (ii + .5)*.64; g.add(box(.634, .72, .02, cabFront, cx, .11, -.51, true), box(.4, .015, .025, brassM, cx, .76, -.535)); } }, -.1, 0, .45);
+addDrop(KD, K, island, .64, .68, {mass: 1.6, h: 4.5, k: .3, tilt: .1});
+var tops = [box(.08, .84, 1.16, marbleMat, -1.74, 0, .45, true), box(.08, .84, 1.16, marbleMat, 1.54, 0, .45, true), box(3.36, .08, 1.16, marbleMat, -.1, .84, .45, true), box(2.2, .04, .66, marbleMat, -3.35, .88, -2.86, true), box(2.23, .04, .66, marbleMat, .135, .88, -2.86, true)];
+tops.forEach(function(t){ K.add(t); });
+seq(KD, K, tops, .68, .75, function(t, i){ return {mass: i === 2 ? 1.8 : 1, h: 4, k: .3, tilt: .12}; });
+var splash = box(5.7, 2.08, .03, marbleBookMat, -1.6, .92, -3.15, true); splash.receiveShadow = true; K.add(splash);
+addDrop(KD, K, splash, .75, .79, {mass: 1.4, h: 4, k: .3, tilt: .05});
+var hoodGeo = new THREE.CylinderGeometry(.667*Math.SQRT1_2, Math.SQRT1_2, 1, 4, 1); hoodGeo.rotateY(Math.PI/4); hoodGeo.translate(0, .5, 0);
+var hood = new THREE.Mesh(hoodGeo, plasterHood); hood.scale.set(1.5, 1.22, .66); hood.position.set(-1.615, 1.78, -2.84); hood.castShadow = hood.receiveShadow = true; K.add(hood);
+addDrop(KD, K, hood, .78, .81, {mass: .9, h: 3, k: .3, tilt: .1});
+var ceramic = new THREE.MeshStandardMaterial({color: 0xe9e3d8, roughness: .5});
+var shelf = group(box(1.6, .06, .26, kWalnut, -3.45, 1.95, -3.0, true), cyl(.06, .08, .26, ceramic, -3.95, 2.01, -3.0, 20), cyl(.09, .05, .14, new THREE.MeshStandardMaterial({color: 0x6b5a48, roughness: .7}), -3.6, 2.01, -3.0, 20), cyl(.11, .11, .04, ceramic, -3.2, 2.01, -3.0, 24), cyl(.11, .11, .04, ceramic, -3.2, 2.05, -3.0, 24), cyl(.05, .06, .2, new THREE.MeshStandardMaterial({color: 0x2d3a33, roughness: .4}), -2.85, 2.01, -3.0, 16));
+K.add(shelf); addDrop(KD, K, shelf, .8, .82, {mass: .3, h: 2.5, k: .3, tilt: .1, dust: false});
+var ceiling = box(9.4, .12, 8.6, ceilKMat, 0, 3.0, .9, true); K.add(ceiling);
+var canMat = new THREE.MeshStandardMaterial({color: 0xffffff, emissive: 0xfff0d8, emissiveIntensity: 0});
+[[-3, -2], [-1, -2], [1, -2], [-3, .5], [1.8, .5], [-3, 2.5], [1.8, 2.5]].forEach(function(p){ var c = new THREE.Mesh(new THREE.CylinderGeometry(.07, .07, .02, 20), canMat); c.position.set(p[0], 2.995, p[1]); ceiling.add(c); c.position.sub(ceiling.position).setY(-.005); });
+addDrop(KD, K, ceiling, .82, .85, {mass: .8, h: 3.5, k: .3, tilt: .02, dust: false});
+var alabaster = new THREE.MeshStandardMaterial({color: 0xf6ead6, emissive: 0xffc88a, emissiveIntensity: 0, roughness: .35});
+var pendants = new THREE.Group(); K.add(pendants);
+[-1.1, -.1, .9].forEach(function(x){
+  var g = new THREE.Group(); g.position.set(x, 0, .45);
+  g.add(cyl(.006, .006, .78, brassM, 0, 2.22, 0, 6), cyl(.06, .06, .02, brassM, 0, 2.98, 0, 16), cyl(.035, .03, .05, brassM, 0, 2.2, 0, 16));
+  var gl = new THREE.Mesh(new THREE.SphereGeometry(.2, 32, 24), alabaster); gl.position.y = 2.0; g.add(gl); pendants.add(g);
+});
+KU.push(function(k){ var t = es(k, .85, .89); pendants.visible = t > .001; pendants.scale.y = Math.max(t, .001); pendants.position.y = 3.0*(1 - t); });
+var boucle = new THREE.MeshStandardMaterial({color: 0xe7e0d3, roughness: 1});
+var stools = [];
+[-1.25, -.45, .35, 1.15].forEach(function(x){
+  var g = new THREE.Group(); g.position.set(x, 0, 1.42);
+  g.add(cyl(.2, .19, .1, boucle, 0, .64, 0, 28));
+  [[.12, .12], [-.12, .12], [.12, -.12], [-.12, -.12]].forEach(function(p){ g.add(cyl(.012, .012, .66, brassM, p[0], 0, p[1], 8)); });
+  var ring = new THREE.Mesh(new THREE.TorusGeometry(.17, .01, 8, 24), brassM); ring.rotation.x = Math.PI/2; ring.position.y = .24; g.add(ring);
+  K.add(g); stools.push(g);
+});
+seq(KD, K, stools, .88, .92, {mass: .3, h: 3, k: .25, tilt: .3});
+var lemonMat = new THREE.MeshStandardMaterial({color: 0xf2c933, roughness: .45});
+var decor = [];
+var bowl = new THREE.Mesh(new THREE.SphereGeometry(.18, 24, 12, 0, Math.PI*2, Math.PI/2, Math.PI/2), new THREE.MeshStandardMaterial({color: 0x1d1b19, roughness: .4, side: THREE.DoubleSide})); bowl.position.set(.55, 1.1, .4); bowl.castShadow = true; K.add(bowl); decor.push(bowl);
+[[.5, .38], [.62, .45], [.55, .5], [.6, .33], [.48, .47]].forEach(function(p, i){ var l = new THREE.Mesh(new THREE.SphereGeometry(.045, 16, 12), lemonMat); l.scale.set(1, .85, .85); l.position.set(p[0], .965 + (i > 2 ? .04 : 0), p[1]); l.castShadow = true; K.add(l); decor.push(l); });
+var board = box(.5, .03, .32, kWalnut, -1.35, .92, .5, true); K.add(board); decor.push(board);
+var vase = group(cyl(.07, .09, .32, ceramic, 1.2, .92, .35, 24)); for (var br = 0; br < 5; br++){ var stem = cyl(.004, .006, .5, barkMat, 1.2, 1.12, .35, 4); stem.rotation.set((rnd() - .5)*.6, 0, (rnd() - .5)*.6); vase.add(stem); } vase.add(leafMesh(crown(46, .2, .2, .2, .16, 0), oliveLeaf, 1.2, 1.5, .35)); K.add(vase); decor.push(vase);
+var sink = group(box(.76, .004, .44, blackGlass, -.7, .921, .5, true), cyl(.03, .03, .05, brassM, -.7, .921, .16, 16));
+var sp = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.7, .92, .16), new THREE.Vector3(-.7, 1.22, .16), new THREE.Vector3(-.7, 1.34, .26), new THREE.Vector3(-.7, 1.3, .38), new THREE.Vector3(-.7, 1.22, .4)]), 40, .014, 10, false), brassM); sp.castShadow = true; sink.add(sp); K.add(sink); decor.unshift(sink);
+seq(KD, K, decor, .91, .96, {mass: .12, h: 1.6, k: .2, tilt: .6, dust: false});
+
+// lighting story: cool fluorescent → work lights → warm finish; the sun races across the window
+var cool = col('#dfe8ff'), work = col('#ffffff'), warm = col('#ffd6a8'), kSunDay = col('#fff0d8'), kSunEve = col('#ff9a5c');
+KU.push(function(k){
+  var demo = es(k, .12, .2), fin = es(k, .88, .97);
+  kFill.color.copy(cool).lerp(work, demo).lerp(warm, fin);
+  kFill.intensity = lerp(.8, 1.1, demo) - fin*.6;
+  alabaster.emissiveIntensity = es(k, .87, .92)*2.4; kWarm.intensity = es(k, .87, .93)*2.6; kDown.intensity = es(k, .86, .92)*1.2; canMat.emissiveIntensity = es(k, .86, .92)*2.2;
+  var hyper = 1 - fin, cyc = reduce ? 1 : .5 + .5*Math.cos(k*41*Math.PI*2), sa = reduce ? 0 : k*41*Math.PI*2;
+  kSun.intensity = lerp(2.6, .2 + 2.6*cyc, hyper) * (1 - fin*.25);
+  kSun.color.lerpColors(kSunDay, kSunEve, hyper*(1 - cyc)*.7 + fin*.45);
+  kSun.position.set(-12, 3.2 + 2.6*Math.abs(Math.cos(sa))*hyper + fin*1.2, -.3 + 5*Math.sin(sa)*hyper + fin*2.5);
+  kHemi.intensity = .22 + fin*.06;
+  K.userData.exposure = .5 - fin*.03; K.userData.bloom = .08 + fin*.22;
+});
+K.traverse(function(o){ if (o.material && o.material.isMeshStandardMaterial){ var mt = o.material; mt.envMapIntensity = (mt.metalness > .5 || mt.roughness < .2) ? .85 : .3; } });
+var kTarget = new THREE.Vector3(), kShake = 0;
+function placeKitchenCam(k){
+  var t = es(k, 0, 1), jx = 0, jy = 0;
+  if (!reduce && k < .9){ jx = Math.sin(k*310)*.01; jy = Math.cos(k*270)*.008; }
+  if (!reduce && kShake > .001){ var s = Math.min(.05, kShake*.02); jx += Math.sin(k*4100)*s; jy += Math.sin(k*3300 + 1)*s; }
+  kCam.position.set(lerp(3.7, 3.0, t) + jx, lerp(1.75, 1.55, t) + jy, lerp(4.8, 3.7, t));
+  kTarget.set(lerp(-1.2, -.9, t), lerp(1.15, 1.0, t), lerp(-1.5, -1.0, t));
+  kCam.lookAt(kTarget);
+}
+
+/* =========================================================
+   post-processing (desktop): MSAA → bloom → grade
+   ========================================================= */
+var composer = null, renderPass = null, bloom = null;
+var GradeShader = {
+  uniforms: {tDiffuse: {value: null}, vig: {value: .3}, grain: {value: .016}},
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: 'uniform sampler2D tDiffuse; uniform float vig; uniform float grain; varying vec2 vUv;' +
+    'float h(vec2 p){ return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }' +
+    'void main(){ vec4 c = LinearTosRGB(texture2D(tDiffuse, vUv)); float d = distance(vUv, vec2(.5)); c.rgb *= mix(1.0, smoothstep(.95, .25, d), vig); c.rgb += (h(vUv * 1024.0) - .5) * grain; gl_FragColor = c; }'
+};
+if (hasPost){
+  try {
+    var half = renderer.extensions.has('EXT_color_buffer_float') || renderer.extensions.has('EXT_color_buffer_half_float');
+    var rt = new THREE.WebGLMultisampleRenderTarget(4, 4, {format: THREE.RGBAFormat, type: half ? THREE.HalfFloatType : THREE.UnsignedByteType});
+    rt.samples = 4;
+    composer = new THREE.EffectComposer(renderer, rt);
+    renderPass = new THREE.RenderPass(K, kCam); composer.addPass(renderPass);
+    bloom = new THREE.UnrealBloomPass(new THREE.Vector2(256, 256), .2, .55, .82); composer.addPass(bloom);
+    composer.addPass(new THREE.ShaderPass(GradeShader));
+  } catch (e) { composer = null; }
+}
+
+/* =========================================================
+   scroll → progress
+   ========================================================= */
+var beats = Array.prototype.slice.call(document.querySelectorAll('.beat'));
+var anchors = [];
+function measure(){
+  anchors = beats.map(function(b){
+    var r = b.getBoundingClientRect(), top = r.top + scrollY;
+    return {y: b.classList.contains('hero') ? top + innerHeight*.5 : top + r.height*.5, m: +b.dataset.m, k: +b.dataset.k, s: +b.dataset.s, a: +b.dataset.a};
+  });
+}
+function target(){
+  var y = scrollY + innerHeight*.5, A = anchors;
+  if (y <= A[0].y) return {m: A[0].m, k: A[0].k, s: A[0].s, a: A[0].a};
+  for (var i = 0; i < A.length - 1; i++){
+    if (y <= A[i+1].y){
+      var t = (y - A[i].y) / (A[i+1].y - A[i].y);
+      var st = A[i].s === A[i+1].s ? A[i].s : lerp(A[i].s, A[i+1].s, clamp((t - .3) / .4));
+      return {m: lerp(A[i].m, A[i+1].m, t), k: lerp(A[i].k, A[i+1].k, t), s: st, a: lerp(A[i].a, A[i+1].a, t)};
+    }
+  }
+  var L = A[A.length - 1]; return {m: L.m, k: L.k, s: L.s, a: L.a};
+}
+var hud = document.getElementById('hud'), hTitle = document.getElementById('hudTitle'), hNum = document.getElementById('hudNum'), hStage = document.getElementById('hudStage'), hBar = document.getElementById('hudBar'), hRec = document.getElementById('hudRec'), fade = document.getElementById('fade');
+function _unusedMStage(m){ return m < .05 ? 'Site plan' : m < .16 ? 'Foundation drop' : m < .3 ? 'Ground floor' : m < .36 ? 'Floor deck' : m < .47 ? 'Upper floor' : m < .53 ? 'Roof' : m < .64 ? 'Terrace + pool' : m < .79 ? 'Landscape' : m < .83 ? 'Poolside details' : m < .97 ? 'Golden hour, lights on' : 'Complete'; }
+function kStage(k){ return k < .1 ? ['Before', 'Before video'] : k < .29 ? ['Demo', 'Progress clip'] : k < .44 ? ['Rough-in', 'Problem → solution'] : k < .58 ? ['Walls, window + floor', 'Progress clip'] : k < .68 ? ['Cabinets + island', 'Craft close-up'] : k < .8 ? ['Calacatta marble', 'Craft close-up'] : k < .9 ? ['Ceiling + lighting', 'Craft close-up'] : ['Final reveal', 'Reveal + review ask']; }
+
+var cur = null, last = {m: -1, k: -1, s: -1, a: -1};
+function resize(){
+  var w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h, false);
+  if (composer) composer.setSize(w, h);
+  [kCam].forEach(function(c){
+    c.aspect = w / h; if (c === kCam) c.fov = w / h < 1 ? 64 : 50;
+    hammer.position.x = w / h < 1 ? .14 : .36;   // portrait: swing closer to centre so it stays in frame
+    if (w >= 900) c.setViewOffset(w, h, -w*.13, 0, w, h);
+    else c.setViewOffset(w, h, 0, h*.2, w, h);
+    c.updateProjectionMatrix();
+  });
+  measure(); invalidate();
+}
+addEventListener('resize', resize);
+resize();
+function draw(scene, cam){
+  renderer.toneMappingExposure = scene.userData.exposure || .7;
+  if (composer){ renderPass.scene = scene; renderPass.camera = cam; bloom.strength = scene.userData.bloom || .2; composer.render(); }
+  else renderer.render(scene, cam);
+}
+var prevT = performance.now();
+function frame(now){
+  var dt = Math.min(.05, (now - prevT) / 1000); prevT = now;
+  var tg = target();
+  if (!cur || reduce || window.__lupeSnap) cur = {m: tg.m, k: tg.k, s: tg.s, a: tg.a};
+  else { var f = 1 - Math.exp(-dt*6); cur.m += (tg.m - cur.m)*f; cur.k += (tg.k - cur.k)*f; cur.s += (tg.s - cur.s)*f; cur.a += (tg.a - cur.a)*f; }
+  var changed = dirty || Math.abs(cur.m - last.m) > 1e-5 || Math.abs(cur.k - last.k) > 1e-5 || Math.abs(cur.s - last.s) > 1e-4 || Math.abs(cur.a - last.a) > 1e-5;
+  // the estate build is a photo sequence (build script); this canvas only renders the kitchen
+  if (changed && cur.s >= .5){
+    dirty = false;
+    var i, sh;
+    {
+      for (i = 0; i < KU.length; i++) KU[i](cur.k);
+      for (i = 0; i < KL.length; i++) applyLift(KL[i], seg(cur.k, KL[i].a, KL[i].b));
+      sh = 0; for (i = 0; i < KD.length; i++) sh += applyDrop(KD[i], seg(cur.k, KD[i].a, KD[i].b));
+      for (i = 0; i < DEMO.length; i++) applyShatter(DEMO[i], cur.k);
+      for (i = 0; i < strikes.length; i++){ var st = strikes[i], g = seg(cur.k, st.k, st.k + .03);
+        updateDust(st.dust, cur.k >= st.k ? g : 0);
+        if (cur.k >= st.k && g < 1) sh += 1.6*Math.exp(-g*7);
+        if (st.last < st.k && cur.k >= st.k && g < 1) thud(st.hammer === false ? 2 : 1.5);
+        st.last = cur.k; }
+      kShake = sh;
+      placeKitchenCam(cur.k); kCam.updateMatrixWorld(); swingAt(cur.k); draw(K, kCam);
+      var ks = kStage(cur.k);
+      hud.classList.add('kitchen'); hTitle.textContent = 'Kitchen remodel'; hNum.textContent = 'Day ' + (1 + Math.round(cur.k*41)) + ' / 42';
+      hStage.textContent = ks[0]; hRec.textContent = 'Filming: ' + ks[1]; hBar.style.width = (cur.k*100).toFixed(1) + '%';
+    }
+    last.m = cur.m; last.k = cur.k; last.s = cur.s; last.a = cur.a;
+  }
+  requestAnimationFrame(frame);
+}
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+addEventListener('load', measure);
+window.__lupeReady = true;
+requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
