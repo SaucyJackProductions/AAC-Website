@@ -284,6 +284,34 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .mf-foot{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:56px;font:400 11px var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-soft)}
 .mf-foot span::before{content:"◆";margin-right:12px;font-size:8px;color:var(--gold);vertical-align:2px}
 
+/* Growth Engine button: sits in the empty right column beside the manifesto; on phones it drops under the text, right-aligned */
+.mf{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(24px,4vw,80px);align-items:center}
+.mf>.kicker,.mf>.mf-text,.mf>.mf-foot{grid-column:1}
+.mf>.kicker{justify-self:start}
+.ge{grid-column:2;grid-row:1/4;justify-self:center;position:relative;display:grid;place-items:center;width:clamp(150px,15vw,220px);aspect-ratio:1;border-radius:50%;color:#120d05;-webkit-tap-highlight-color:transparent;touch-action:manipulation;isolation:isolate}
+.ge-halo{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,rgba(234,210,160,.34),rgba(201,166,107,.08) 45%,transparent 70%);animation:ge-breathe 2.6s ease-in-out infinite;z-index:-2}
+.ge-ring{position:absolute;inset:0;width:100%;height:100%;animation:ge-spin 16s linear infinite;overflow:visible}
+.ge-ring text{font:500 7.6px var(--font-mono);letter-spacing:.32em;text-transform:uppercase;fill:var(--gold-l)}
+.ge-core{position:absolute;inset:21%;border-radius:50%;display:grid;place-content:center;text-align:center;gap:6px;background:var(--gold-grad);box-shadow:0 0 0 1px rgba(255,240,205,.5) inset,0 -10px 24px rgba(90,60,20,.45) inset,0 18px 50px rgba(201,166,107,.35),0 0 0 6px rgba(7,8,7,.9),0 0 0 7px rgba(201,166,107,.5);transition:transform .35s var(--ease)}
+.ge-core b{font:600 clamp(17px,1.6vw,23px)/1 var(--serif);font-style:italic;letter-spacing:.01em}
+.ge-core small{font:600 7.5px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;opacity:.8}
+.ge-ping{position:absolute;inset:21%;border-radius:50%;border:1px solid var(--gold-l);animation:ge-ping 2.6s cubic-bezier(.2,.6,.3,1) infinite;z-index:-1}
+.ge:hover .ge-core{transform:scale(1.05)}
+.ge.is-press .ge-core{transform:scale(.86);transition:transform .09s}
+.ge.is-boom{visibility:hidden}
+@keyframes ge-spin{to{transform:rotate(360deg)}}
+@keyframes ge-breathe{50%{opacity:.55;transform:scale(.94)}}
+@keyframes ge-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.75);opacity:0}}
+.still .ge-ring,.still .ge-halo,.still .ge-ping{animation:none}
+.ge-fx{position:fixed;inset:0;z-index:6000;pointer-events:none;display:block;width:100%;height:100%}
+.ge-shake{animation:ge-shake .5s cubic-bezier(.36,.07,.19,.97)}
+@keyframes ge-shake{10%,90%{transform:translate3d(-2px,1px,0)}20%,80%{transform:translate3d(5px,-3px,0)}30%,50%,70%{transform:translate3d(-9px,4px,0)}40%,60%{transform:translate3d(9px,-5px,0)}}
+@media (max-width:760px){
+  .mf{grid-template-columns:minmax(0,1fr)}
+  .ge{grid-column:1;grid-row:auto;justify-self:end;width:172px;margin:36px 0 0 0}
+  .mf-foot{grid-row:auto}
+}
+
 .svc{padding-bottom:clamp(100px,12vw,180px)}
 .svc-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
 .svc-head h2{font-size:clamp(44px,5.6vw,96px);margin-top:18px}
@@ -1150,6 +1178,12 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <div class="wrap mf">
     <span class="kicker">Our point of view</span>
     <p class="mf-text" id="mf-text" data-gold="moment,one.,lead">We don&rsquo;t make content. We make the moment a client decides you&rsquo;re the one. Cinematic film, licensed aerial and social, crafted on Hilton Head for the brands that intend to lead.</p>
+    <a class="ge" id="ge" href="growth-engine/" data-cursor="Grow" aria-label="Growth Engine. Tap to grow.">
+      <span class="ge-halo" aria-hidden="true"></span>
+      <span class="ge-ping" aria-hidden="true"></span>
+      <svg class="ge-ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="ge-path" d="M50,50 m-39,0 a39,39 0 1,1 78,0 a39,39 0 1,1 -78,0"/></defs><text><textPath href="#ge-path" textLength="238">Growth Engine &#9670; Tap to Grow &#9670; Press Now &#9670;</textPath></text></svg>
+      <span class="ge-core" aria-hidden="true"><b>Growth<br>Engine</b><small>Tap to grow</small></span>
+    </a>
     <div class="mf-foot"><span>Film</span><span>Aerial</span><span>Social</span><span>Interactive 3D</span></div>
   </div>
 
@@ -3061,6 +3095,80 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     var f = g.querySelector('.gc-more'); if (f) { f.setAttribute('tabindex', '-1'); f.focus({ preventScroll: true }); }
     [].forEach.call(g.querySelectorAll('.gc-more.rv'), function (el) { el.classList.add('in'); });
     window.dispatchEvent(new Event('resize'));
+  });
+})();
+</script>
+<script>
+/* Growth Engine button: click, detonate, land on the proposal. Reduced motion skips straight to the page. */
+(function () {
+  var btn = document.getElementById('ge'); if (!btn) return;
+  var busy = false;
+  function sound() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      var ac = new AC(), t = ac.currentTime, out = ac.createGain(); out.gain.value = .9; out.connect(ac.destination);
+      // the click
+      var ck = ac.createOscillator(), cg = ac.createGain(); ck.type = 'square'; ck.frequency.setValueAtTime(1800, t); ck.frequency.exponentialRampToValueAtTime(400, t + .03);
+      cg.gain.setValueAtTime(.25, t); cg.gain.exponentialRampToValueAtTime(.001, t + .05); ck.connect(cg).connect(out); ck.start(t); ck.stop(t + .06);
+      // the boom: filtered noise burst plus a falling sub thump
+      var b = t + .16, len = ac.sampleRate * 1.6, buf = ac.createBuffer(1, len, ac.sampleRate), dat = buf.getChannelData(0);
+      for (var i = 0; i < len; i++) dat[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.4);
+      var n = ac.createBufferSource(); n.buffer = buf;
+      var lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(5200, b); lp.frequency.exponentialRampToValueAtTime(140, b + 1.2);
+      var ng = ac.createGain(); ng.gain.setValueAtTime(1.1, b); ng.gain.exponentialRampToValueAtTime(.001, b + 1.5);
+      n.connect(lp).connect(ng).connect(out); n.start(b);
+      var o = ac.createOscillator(), og = ac.createGain(); o.type = 'sine'; o.frequency.setValueAtTime(110, b); o.frequency.exponentialRampToValueAtTime(28, b + .8);
+      og.gain.setValueAtTime(1.2, b); og.gain.exponentialRampToValueAtTime(.001, b + 1); o.connect(og).connect(out); o.start(b); o.stop(b + 1.1);
+    } catch (e) {}
+  }
+  function boom(href) {
+    var r = btn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var cv = document.createElement('canvas'); cv.className = 'ge-fx'; document.body.appendChild(cv);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; var g = cv.getContext('2d'); g.scale(dpr, dpr);
+    var maxR = Math.hypot(Math.max(cx, W - cx), Math.max(cy, H - cy)), parts = [], i;
+    for (i = 0; i < 170; i++) {
+      var a = Math.random() * Math.PI * 2, sp = 4 + Math.random() * 22, big = Math.random() < .28;
+      parts.push({ x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 3, s: big ? 3 + Math.random() * 7 : 1 + Math.random() * 2.2, rot: Math.random() * 6, vr: (Math.random() - .5) * .5, big: big, life: 1, hue: 32 + Math.random() * 18 });
+    }
+    var shk = document.getElementById('capabilities'); btn.classList.add('is-boom'); if (shk) shk.classList.add('ge-shake');
+    if (navigator.vibrate) navigator.vibrate([30, 40, 90]);
+    var t0 = performance.now(), went = false;
+    (function frame(now) {
+      var t = (now - t0) / 1000; g.clearRect(0, 0, W, H);
+      // fireball core
+      var fr = 30 + Math.min(t, .5) * maxR * 1.1, fa = Math.max(0, 1 - t * 1.6);
+      var rg = g.createRadialGradient(cx, cy, 0, cx, cy, fr);
+      rg.addColorStop(0, 'rgba(255,252,235,' + fa + ')'); rg.addColorStop(.35, 'rgba(255,214,140,' + fa * .9 + ')'); rg.addColorStop(.7, 'rgba(201,120,40,' + fa * .45 + ')'); rg.addColorStop(1, 'rgba(120,50,10,0)');
+      g.fillStyle = rg; g.beginPath(); g.arc(cx, cy, fr, 0, 7); g.fill();
+      // two shockwave rings
+      [0, .12].forEach(function (d, k) { var tt = t - d; if (tt <= 0) return; var rr = tt * maxR * 2.2, aa = Math.max(0, 1 - tt * 1.5);
+        g.strokeStyle = 'rgba(234,210,160,' + aa + ')'; g.lineWidth = (k ? 2 : 6) * (1 - tt * .5); g.beginPath(); g.arc(cx, cy, rr, 0, 7); g.stroke(); });
+      // sparks and debris
+      parts.forEach(function (p) {
+        p.vx *= .965; p.vy = p.vy * .965 + (p.big ? .55 : .25); p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= p.big ? .007 : .014; if (p.life <= 0) return;
+        if (p.big) { g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.fillStyle = 'hsla(' + p.hue + ',35%,' + (18 + p.life * 30) + '%,' + p.life + ')'; g.fillRect(-p.s, -p.s * .6, p.s * 2, p.s * 1.2); g.restore(); }
+        else { g.strokeStyle = 'hsla(' + p.hue + ',95%,72%,' + p.life + ')'; g.lineWidth = p.s; g.beginPath(); g.moveTo(p.x, p.y); g.lineTo(p.x - p.vx * 1.8, p.y - p.vy * 1.8); g.stroke(); }
+      });
+      // white-out, then black, then go
+      var wo = t < .1 ? t / .1 : Math.max(0, 1 - (t - .1) / .35);
+      if (wo > 0) { g.fillStyle = 'rgba(255,246,225,' + wo * .85 + ')'; g.fillRect(0, 0, W, H); }
+      if (t > .75) { g.fillStyle = 'rgba(7,8,7,' + Math.min(1, (t - .75) / .4) + ')'; g.fillRect(0, 0, W, H); }
+      if (t > 1.15 && !went) { went = true; try { sessionStorage.setItem('ge-boom', '1'); } catch (e) {} location.href = href; }
+      if (t < 3) requestAnimationFrame(frame);
+    })(t0);
+  }
+  btn.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || busy) return;
+    if (document.documentElement.classList.contains('still')) return;
+    e.preventDefault(); busy = true; var href = btn.href;
+    btn.classList.add('is-press'); sound();
+    setTimeout(function () { btn.classList.remove('is-press'); boom(href); }, 160);
+  });
+  // coming back with the browser's back button: clear the blast
+  window.addEventListener('pageshow', function () {
+    busy = false; btn.classList.remove('is-boom', 'is-press'); var shk = document.getElementById('capabilities'); if (shk) shk.classList.remove('ge-shake');
+    Array.prototype.forEach.call(document.querySelectorAll('.ge-fx'), function (c) { c.remove(); });
   });
 })();
 </script>
