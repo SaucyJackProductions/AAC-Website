@@ -220,7 +220,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 <canvas id="stage" aria-hidden="true"></canvas>
 <div class="build" id="build" aria-hidden="true"><div class="build-bg"></div><div class="build-frame"></div><canvas class="build-dust"></canvas></div>
 <div id="fade"></div>
-<button id="sound" class="sound" type="button" aria-pressed="false" hidden>Sound off</button>
+<button id="sound" class="sound" type="button" aria-pressed="false" hidden>Tap for music</button>
+<script src="rock.js"></script>
 <div class="brand"><b></b>New Trust Services, LLC · Growth Engine</div>
 <div class="hud" id="hud" aria-hidden="true">
   <div class="hud-row"><span class="hud-title" id="hudTitle">Mansion · new build</span><span class="hud-num" id="hudNum">0%</span></div>
@@ -687,11 +688,12 @@ function setVisible(j){
   if (FRAMES[j].piece) place(j, 0, 1, 0, 1);   // the next piece waits above the frame
 }
 function startFall(i, now){
-  fall = {i: i, t0: now, hit: false};
+  // with the soundtrack on, hold the drop a beat so it lands on the music's grid
+  fall = {i: i, t0: now + (window.LupeRock ? LupeRock.delayToBeat(FALL) : 0), hit: false};
   setVisible(i);
 }
 function stepFall(now){
-  var i = fall.i, t = (now - fall.t0)/FALL;
+  var i = fall.i, t = Math.max(0, (now - fall.t0)/FALL);
   if (t < 1){ var g = t*t; place(i, g, 0, (1 - t)*fall.sway0, 1 + .03*g); return; }
   var a = (now - fall.t0 - FALL)/SETTLE;
   if (!fall.hit){
@@ -1099,16 +1101,20 @@ function thud(mass){
   var osc = actx.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(90/Math.sqrt(mass + .3), now); osc.frequency.exponentialRampToValueAtTime(32, now + .3);
   var og = actx.createGain(); og.gain.setValueAtTime(v*.9, now); og.gain.exponentialRampToValueAtTime(.001, now + .4);
   osc.connect(og); og.connect(actx.destination); osc.start(now); osc.stop(now + .45);
+  if (window.LupeRock) LupeRock.hit(mass);
 }
 window.__lupeThud = function(m){ thud(m); };
 var soundBtn = document.getElementById('sound');
 if (soundBtn){
   soundBtn.hidden = false;
+  var autoOn = function(e){ document.removeEventListener('click', autoOn, true); if (e.target !== soundBtn && !soundOn) soundBtn.click(); };
+  document.addEventListener('click', autoOn, true);
   soundBtn.addEventListener('click', function(){
     try {
       if (!actx){ var AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); noiseBuf = actx.createBuffer(1, actx.sampleRate*.6, actx.sampleRate); var ch = noiseBuf.getChannelData(0); for (var i = 0; i < ch.length; i++) ch[i] = (Math.random()*2 - 1)*Math.pow(1 - i/ch.length, 2); }
       soundOn = !soundOn; if (soundOn && actx.state === 'suspended') actx.resume();
       soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off';
+      if (window.LupeRock){ if (soundOn) LupeRock.start(actx); else LupeRock.stop(); }
       if (soundOn) thud(1.2);
     } catch (e) { soundBtn.hidden = true; }
   });
