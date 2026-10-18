@@ -551,6 +551,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
    drums, shaker, congas/bongos and a steel-pan accent. */
 (function () {
   var MUSIC_VOL = 0.33;
+  var TRACK = 'music/jam-rock.mp3';   // the recorded soundtrack; the synth band below only plays if it can't load
+  var trackBuf = null, trackSrc = null, trackLoad = null;
   var BPM = 110, BEAT = 60 / BPM, S16 = BEAT / 4, E8 = BEAT / 2, BAR = BEAT * 4;
   var SWO = (2 * 0.58 - 1) * S16;          // swing: odd 16ths land late
   var LOOK = 0.15, TICK = 25;
@@ -1027,21 +1029,41 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
   }
 
   // ---------- public API ----------
-  A.start = function (ctx) {
-    ctx = ctx || C; if (!ctx || (A.on && ctx === C)) return;
-    if (ctx !== C || !G) { C = ctx; build(); last = {}; }
-    offline = typeof OfflineAudioContext !== 'undefined' && C instanceof OfflineAudioContext;
+  function loadTrack() {
+    if (!trackLoad) trackLoad = fetch(TRACK).then(function (r) { if (!r.ok) throw r.status; return r.arrayBuffer(); })
+      .then(function (b) { return new Promise(function (ok, no) { C.decodeAudioData(b, ok, no); }); })
+      .then(function (buf) { trackBuf = buf; return buf; });
+    return trackLoad;
+  }
+  function playTrack() {
+    if (trackSrc || !A.on) return;
+    trackSrc = C.createBufferSource(); trackSrc.buffer = trackBuf; trackSrc.loop = true;
+    trackSrc.connect(G.mFade); trackSrc.start(); fade(1, 1.2);
+  }
+  function startSynth() {
     var t = now();
     A.on = true; seed = 7; step = 0; t0 = nextT = t + 0.08; plan = null; antic = false;
     leadLeft = 0; leadRest = 1; lvlT = t;
     fade(1, 1.5);
-    if (!offline) { if (C.state === 'suspended' && C.resume) C.resume(); clearInterval(timer); timer = setInterval(tick, TICK); tick(); }
+    if (!offline) { clearInterval(timer); timer = setInterval(tick, TICK); tick(); }
+  }
+  A.start = function (ctx) {
+    ctx = ctx || C; if (!ctx || (A.on && ctx === C)) return;
+    if (ctx !== C || !G) { C = ctx; build(); last = {}; trackLoad = null; trackBuf = null; }
+    offline = typeof OfflineAudioContext !== 'undefined' && C instanceof OfflineAudioContext;
+    A.on = true;
+    if (!offline && C.state === 'suspended' && C.resume) C.resume();
+    if (offline || !TRACK || !window.fetch) { startSynth(); return; }
+    A.beat = 0;   // the recorded track has no beat clock here: drops keep their own steady rhythm
+    if (trackBuf) playTrack();
+    else loadTrack().then(playTrack, function () { trackLoad = null; TRACK = ''; A.beat = BEAT; if (A.on) startSynth(); });
   };
   A.stop = function () {
     if (!A.on) return; A.on = false; clearInterval(timer); timer = null; fade(0, 0.6);
+    if (trackSrc) { var s = trackSrc; trackSrc = null; try { s.stop(now() + 0.7); } catch (e) {} }
   };
   A.delayToBeat = function (ms) {
-    if (!A.on || !C) return 0;
+    if (!A.on || !C || TRACK) return 0;
     var tn = now(), lat = offline ? 0 : Math.min(0.1, C.outputLatency || C.baseLatency || 0);
     var g = t0 + Math.ceil((tn + ms / 1000 - lat - t0) / E8 - 1e-6) * E8;
     return Math.max(0, (g - tn + lat) * 1000 - ms);
@@ -1055,8 +1077,9 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     if (!C || !G) return; mass = mass == null ? 1 : mass;
     A.sfx(kind || 'concrete', clamp(0.3 + 0.45 * mass, 0.25, 1.2));
     level = Math.min(1, level + 0.1); floor = Math.min(0.8, floor + 0.035); A.level = level;
-    if (A.on) accent(mass);
+    if (A.on && !TRACK) accent(mass);
   };
+  A._track = function () { return !!trackSrc; };   // test hook: is the recorded track playing
   A._pump = function () { if (A.on) schedule(now() + LOOK); };   // test hook: drive the scheduler manually (offline)
   document.addEventListener('visibilitychange', function () {
     if (!A.on || !C || offline) return;
