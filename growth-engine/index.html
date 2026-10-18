@@ -39,12 +39,13 @@ body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--body);-webkit-fon
 .build.off{opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .build-bg{position:absolute;inset:-60px;background:#14110d center/cover no-repeat;filter:blur(26px) brightness(.5) saturate(1.15)}
 .build-frame{position:absolute;top:0;bottom:0;right:0;left:14vw;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%);mask-image:linear-gradient(90deg,transparent,#000 18%)}
-.shot{position:absolute;inset:0;opacity:0;transition:opacity .85s ease;overflow:hidden}
+.shot{position:absolute;inset:0;opacity:0;transition:opacity .85s ease;overflow:hidden;background:#0f0e0c}
 .shot.on{opacity:1}
-.stagebox{position:absolute;transform-origin:60% 45%}
+.stagebox{position:absolute;left:0;top:0;transform-origin:60% 45%}
+.stagebox::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,14,12,0),rgba(15,14,12,.62) 55%,#0f0e0c)}
+.shot.short .stagebox::after{height:18%}
 .stagebox .plate{position:absolute;inset:0;display:block;width:100%;height:100%}
-.piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
-.drop-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(12,9,7,.8),rgba(12,9,7,0));opacity:0;pointer-events:none}
+.piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;backface-visibility:hidden}
 .build-dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .build::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 62% 45%,transparent 55%,rgba(8,7,6,.5))}
 #fade{position:fixed;inset:0;background:#050505;opacity:0;pointer-events:none;z-index:1}
@@ -238,7 +239,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="hero-in">
       <div class="tb"><span>Proposal</span><span>Sheet A-000</span><span>Prepared for New Trust Services, LLC</span></div>
       <h1>Lupe builds the work.<br><em>We build the demand.</em></h1>
-      <p class="lead">For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM and follow-up. Scroll, and watch it drop into place, piece by piece, from the slab up.</p>
+      <p class="lead">For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM, follow-up and 4K drone and video content. Scroll, and watch it drop into place, piece by piece, from the slab up.</p>
       <div class="cue">Scroll to start the build</div>
     </div>
   </section>
@@ -276,7 +277,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
       <div class="tb"><span>S-201</span><span>Exterior walls</span><span>Operating model</span></div>
       <h2>One side creates demand. <em>One side delivers.</em></h2>
       <div class="two">
-        <div><span class="kicker">Chandler</span><h3>Generates big jobs</h3><div class="chips"><span>Website</span><span>Google</span><span>Meta</span><span>Booking</span><span>CRM</span><span>Follow-up</span></div></div>
+        <div><span class="kicker">Chandler</span><h3>Generates big jobs</h3><div class="chips"><span>Website</span><span>Google</span><span>Meta</span><span>Booking</span><span>CRM</span><span>Follow-up</span><span>4K drone + video</span><span>Social content</span></div></div>
         <div><span class="kicker">Lupe · New Trust Services, LLC</span><h3>Knocks them out</h3><div class="chips"><span>Crews</span><span>Estimates</span><span>Licenses</span><span>Materials</span><span>Execution</span><span>Finishing</span></div></div>
       </div>
       <p>Clean and logical. Everybody stays in their lane, and Lupe never has to become a marketer to grow.</p>
@@ -316,19 +317,34 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     </div>
   </section>
 
+  <section class="beat" data-m="0.74" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-451</span><span>Pool + exteriors</span><span>4K media + content</span></div>
+      <h2>Shot like a luxury listing. <em>From the air and the ground.</em></h2>
+      <p>Chandler's team shoots it all: cinematic 4K drone flyovers, aerial photography and on-site camera work that make a finished New Trust Services, LLC project look like what it's worth.</p>
+      <ul class="spec">
+        <li><b>Drone</b><span>Cinematic 4K flyovers and ultra HD aerial photos of every build.</span></li>
+        <li><b>Camera work</b><span>4K on-site filming: before, progress, craft close-ups and walkthroughs.</span></li>
+        <li><b>Content library</b><span>Portfolio-grade photos and clips for the website, Google, ads and bids.</span></li>
+        <li><b>Social media</b><span>Optional: viral-format Reels, TikToks and Shorts, from drone reveals to before-and-afters.</span></li>
+      </ul>
+      <p class="loss">High-end clients judge the builder by the footage before they ever meet the crew. Ultra HD makes a six-figure price make sense before the first call.</p>
+    </div>
+  </section>
+
   <section class="beat" data-m="0.86" data-k="0" data-s="0" data-a="0">
     <div class="card">
       <div class="tb"><span>A-501</span><span>Landscape</span><span>CRM + clientele</span></div>
       <h2>The customer list <em>becomes an asset.</em></h2>
-      <p>Not scattered texts. Not forgotten names. A real database.</p>
+      <p>Not scattered texts. Not forgotten names. Every client, contact and job in one database that stays with the company.</p>
       <ul class="spec">
+        <li><b>Client list</b><span>Every name, number, address and project, in one place.</span></li>
         <li><b>Lead source</b><span>Where every opportunity came from.</span></li>
         <li><b>Project history</b><span>Photos, scope, estimate, invoice, completion.</span></li>
         <li><b>Follow-up</b><span>Reminders, nurture texts, missed-call recovery.</span></li>
-        <li><b>Reviews</b><span>Systemized requests after completed work.</span></li>
-        <li><b>Maintenance</b><span>Annual check-ins and service contracts.</span></li>
+        <li><b>Repeat clients</b><span>Review requests, annual check-ins and maintenance contracts.</span></li>
       </ul>
-      <p class="loss">If Lupe ever sells, a clean customer database and a repeat revenue system help prove New Trust Services, LLC is bigger than one man.</p>
+      <p class="loss">This is the exit plan. The day Lupe decides to sell, a buyer pays for recurring clients and a client list that keeps booking work without Lupe on every call. The CRM is where that value gets built, one contact at a time.</p>
     </div>
   </section>
 
@@ -342,7 +358,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
         <li><b>Priority service</b><span>Relationships, not one-off transactions.</span></li>
         <li><b>Seasonal</b><span>Inspections and punch lists.</span></li>
         <li><b>Upsell</b><span>More remodels, upgrades and referrals.</span></li>
-        <li><b>Valuation</b><span>Cleaner numbers for the day the company is worth more.</span></li>
+        <li><b>Valuation</b><span>Recurring revenue and a documented client list for the day the company sells.</span></li>
       </ul>
     </div>
   </section>
@@ -351,7 +367,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Content engine</span><span>Day 1</span><span>Before video</span></div>
       <h2>Now watch one kitchen <em>sell the next one.</em></h2>
-      <p>Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming on day one, while it still looks like this.</p>
+      <p>Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming in 4K on day one, while it still looks like this.</p>
     </div>
   </section>
 
@@ -383,7 +399,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Day 42</span><span>Final reveal</span></div>
       <h2>Reveal. Review. <em>Retarget.</em></h2>
-      <p>The reveal video goes out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.</p>
+      <p>The 4K reveal video and drone flyover go out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.</p>
       <p class="loss">Craftsmanship hidden in a phone gallery cannot create demand.</p>
     </div>
   </section>
@@ -441,7 +457,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
       <ol class="phases">
         <li><i>Phase 1</i><b>Foundation</b><span>Services, photos, territory, pricing rules, ideal customer.</span></li>
         <li><i>Phase 2</i><b>Build</b><span>Mobile website, booking, CRM, Google Business, social pages.</span></li>
-        <li><i>Phase 3</i><b>Launch</b><span>Content, Google and Meta tests, lead capture, follow-up.</span></li>
+        <li><i>Phase 3</i><b>Launch</b><span>4K drone and video content, Google and Meta tests, lead capture, follow-up.</span></li>
         <li><i>Phase 4</i><b>Measure</b><span>Booked calls, estimates, won jobs, revenue, reviews.</span></li>
       </ol>
       <p>At day 90 we keep what creates qualified work and cut what doesn't.</p>
@@ -461,7 +477,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
             <li>CRM: lead source, project history, follow-up, missed-call recovery, review requests</li>
             <li>Google Business Profile and social pages</li>
             <li>Google and Meta ad accounts with tracking to signed jobs</li>
-            <li>Content plan and photo library</li>
+            <li>Content plan and a 4K photo and drone library</li>
           </ul>
           <div class="price">Quoted at the Business Build Session</div>
         </div>
@@ -470,7 +486,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
           <h3>Run, measure, scale</h3>
           <ul>
             <li>Google and Meta campaigns, tested and tuned</li>
-            <li>Before, progress and reveal content every project</li>
+            <li>4K drone and camera coverage: before, progress and reveal on every project</li>
+            <li>Optional: social media management with viral-format Reels, TikToks and Shorts</li>
             <li>Retargeting ads to site visitors who haven't booked</li>
             <li>CRM nurture, reviews and maintenance-contract program</li>
             <li>Monthly report: booked calls, estimates, won jobs, revenue</li>
@@ -504,7 +521,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Next step</span><span>Business Build Session</span></div>
       <h2>New Trust Services, LLC builds the work. <em>Chandler builds the demand.</em></h2>
-      <p>Website. Booking. Google. Meta. CRM. Content. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.</p>
+      <p>Website. Booking. Google. Meta. CRM. 4K drone and video. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.</p>
       <ul class="spec">
         <li><b>Bring</b><span>Your best finished-project photos.</span></li>
         <li><b>Decide</b><span>The job types you want more of, and your minimum job size.</span></li>
@@ -552,7 +569,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 (function () {
   var MUSIC_VOL = 0.33;
   var TRACK = 'music/jam-rock.mp3';   // the recorded soundtrack; the synth band below only plays if it can't load
-  var trackBuf = null, trackSrc = null, trackLoad = null;
+  var trackBuf = null, trackSrc = null, trackLoad = null, trackT0 = 0;
+  var TRACK_BPM = 116, TRACK_OFF = 0.157;   // the recorded track's tempo and where its eighth-note grid starts (s)
   var BPM = 110, BEAT = 60 / BPM, S16 = BEAT / 4, E8 = BEAT / 2, BAR = BEAT * 4;
   var SWO = (2 * 0.58 - 1) * S16;          // swing: odd 16ths land late
   var LOOK = 0.15, TICK = 25;
@@ -1038,7 +1056,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
   function playTrack() {
     if (trackSrc || !A.on) return;
     trackSrc = C.createBufferSource(); trackSrc.buffer = trackBuf; trackSrc.loop = true;
-    trackSrc.connect(G.mFade); trackSrc.start(); fade(1, 1.2);
+    trackT0 = now() + 0.03; trackSrc.connect(G.mFade); trackSrc.start(trackT0); fade(1, 1.2);
+    A.beat = 60 / TRACK_BPM;   // landings follow the track's own beat
   }
   function startSynth() {
     var t = now();
@@ -1054,7 +1073,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     A.on = true;
     if (!offline && C.state === 'suspended' && C.resume) C.resume();
     if (offline || !TRACK || !window.fetch) { startSynth(); return; }
-    A.beat = 0;   // the recorded track has no beat clock here: drops keep their own steady rhythm
+    A.beat = 0;   // until the track is playing, drops keep their own steady rhythm
     if (trackBuf) playTrack();
     else loadTrack().then(playTrack, function () { trackLoad = null; TRACK = ''; A.beat = BEAT; if (A.on) startSynth(); });
   };
@@ -1063,8 +1082,18 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     if (trackSrc) { var s = trackSrc; trackSrc = null; try { s.stop(now() + 0.7); } catch (e) {} }
   };
   A.delayToBeat = function (ms) {
-    if (!A.on || !C || TRACK) return 0;
+    if (!A.on || !C) return 0;
     var tn = now(), lat = offline ? 0 : Math.min(0.1, C.outputLatency || C.baseLatency || 0);
+    if (TRACK) {
+      // the next eighth note of the recorded track, wherever its loop has got to
+      if (!trackSrc || !trackBuf) return 0;
+      var e8 = 30 / TRACK_BPM, dur = trackBuf.duration, pos = tn + ms / 1000 - lat - trackT0;
+      if (pos < 0) return 0;
+      pos %= dur;
+      var nx = TRACK_OFF + Math.ceil((pos - TRACK_OFF) / e8 - 1e-6) * e8;
+      if (nx > dur - 0.02) nx = dur + TRACK_OFF;
+      return Math.max(0, (nx - pos) * 1000);
+    }
     var g = t0 + Math.ceil((tn + ms / 1000 - lat - t0) / E8 - 1e-6) * E8;
     return Math.max(0, (g - tn + lat) * 1000 - ms);
   };
@@ -1092,19 +1121,19 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 <script>
 (function(){
 'use strict';
-/* Estate build: the real coastal estate, built piece by piece. Each stage is a clean photo
-   plate plus its piece, cut into a few sections. Scrolling lowers the sections in from above
-   the frame; then they let go one at a time, on the beat: a small lift, a smooth fall, a soft
-   landing with a little bounce, a puff of dust and a landing sound. Once the last one settles
-   the shot dissolves to the next stage with that piece installed. */
+/* Estate build, drop-in style: the real coastal estate, built piece by piece. Each stage is a clean photo
+   plate plus its piece, cut into a few sections. As the stage's card arrives, the sections fall in from
+   above the frame one at a time, landing on the beat: a gravity drop, a hard landing with a small squash and
+   rebound, a puff of dust and a landing sound. Once the last one settles the shot dissolves to the next
+   stage with that piece installed. The camera holds steady and only drifts part way toward the action. */
 var wrap = document.getElementById('build');
 if (!wrap) return;
 var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-// m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole hanging piece (fractions of the plate),
-// land: [dx, dy, scale] where it comes to rest, measured from its hanging spot. order: which section drops first.
+// m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole piece as it hung in the source photo
+// (fractions of the plate), land: [dx, dy, scale] that puts it in place on the house. order: which section drops first.
 var FRAMES = [
   {src: 'final',      m: 0,    stage: 'The vision',          w: 2412, h: 1328},
-  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.1484, .0428, .654, .2864],  land: [0, .45, 1.08],   order: [1, 0, 2],       kind: 'concrete'},
+  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.0998, .633, .7723, .2324],  land: [0, 0, 1],        order: [0, 1, 2],       kind: 'concrete'},
   {src: 'structure',  m: .145, stage: 'Structure',           w: 1600, h: 981,  piece: [.1388, .0265, .6538, .366],  land: [-.025, .15, .72], order: [1, 0, 2],       kind: 'steel'},
   {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74],    order: [0, 1, 2, 3, 4], kind: ['concrete', 'glass', 'glass', 'glass', 'concrete']},
   {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87],    order: [1, 0, 2],       kind: 'roof'},
@@ -1113,35 +1142,41 @@ var FRAMES = [
   {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15],   order: [0, 3, 1, 2],    kind: 'palm'},
   {src: 'final',      m: .96,  stage: 'The finished estate', w: 2412, h: 1328}
 ];
-// the sections of each piece: [x, y, w, h] as fractions of the plate (sr/split.py)
+// the sections of each piece: [x, y, w, h] as fractions of the plate (sr/split.py; palm crowns regrown by sr/palmfix.py;
+// the foundation slab is cut from its own plate by sr/slabcut.py, which leaves an empty lot for it to drop into)
 var PARTS = {
-  foundation: [[.1503, .0673, .2269, .2181], [.3772, .0459, .2089, .2803], [.5861, .1335, .2145, .1876]],
+  foundation: [[.0998, .6483, .2749, .1723], [.3741, .633, .2687, .2324], [.6421, .6534, .23, .1927]],
   structure: [[.1407, .1203, .2006, .1631], [.3413, .0296, .2156, .3282], [.5569, .0989, .2338, .2905]],
   walls: [[.1478, .1162, .0991, .2508], [.2712, .0755, .1347, .2661], [.4551, .1203, .1608, .2793], [.6259, .1336, .144, .2732], [.7993, .0765, .0536, .314]],
   roof: [[.0692, .128, .2843, .2274], [.3535, .0873, .2774, .2802], [.6309, .1686, .2762, .199]],
   interiors: [[.0975, 0, .2725, .4467], [.37, 0, .2669, .4741], [.6368, .0457, .2419, .4264]],
   pool: [[.1783, .0984, .331, .2355], [.5093, .1015, .3741, .2497]],
-  landscape: [[.1122, 0, .1683, .373], [.3291, 0, .1764, .2632], [.5286, .0951, .1128, .1985], [.6496, 0, .1802, .3675]]
+  landscape: [[.1122, -.0729, .1677, .3684], [.3291, -.072, .1764, .3352], [.5286, .0951, .1128, .1985], [.6496, -.0785, .1802, .446]]
 };
-var FALL = 900, SETTLE = 620, STAG = 540, HOLD = 160, RISE = .12;   // ms; RISE: most a set waits above its hanging spot, in plate heights
+var STAG = 520, SETTLE = 420, HOLD = 520;   // ms: gap between landings (the music's beat when it plays), settle, pause before the dissolve
+var ZOOM = 2.1;     // phones: the photo is this many screen widths wide, so most of the house is in view
+var FOLLOW = .5;    // how far the camera drifts toward the section that is dropping (0 = locked, 1 = centred on it)
+var GRAV = 2.4;     // fall acceleration, in frame heights per second squared
+var ENTRY = .3;     // pieces come in already falling: this share of the fall is covered at entry speed
 var bg = wrap.querySelector('.build-bg'), stack = wrap.querySelector('.build-frame'), dust = wrap.querySelector('.build-dust');
+function warm(im){ if (im.decode) im.decode().catch(function(){}); }
 var shots = FRAMES.map(function(f){
   var s = document.createElement('div'); s.className = 'shot';
   var box = document.createElement('div'); box.className = 'stagebox'; s.appendChild(box);
   var plate = new Image(); plate.alt = ''; plate.decoding = 'async'; plate.className = 'plate';
   plate.src = f.piece ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
-  box.appendChild(plate);
-  var o = {el: s, box: box, bw: 0, bh: 0, panX: null};
+  box.appendChild(plate); warm(plate);
+  var o = {el: s, box: box, bw: 0, bh: 0, top: 0, x: null, v: 0, hidden: false};
   if (f.piece){
-    var sh = document.createElement('div'); sh.className = 'drop-shadow'; box.appendChild(sh); o.shadow = sh;
-    var p = f.piece, gx = p[0] + p[2]/2, gy = p[1] + p[3];   // every section scales about the whole piece's bottom centre
+    var p = f.piece, L = f.land, gx = p[0] + p[2]/2, gy = p[1] + p[3];
     o.parts = PARTS[f.src].map(function(b, k){
       var im = new Image(); im.alt = ''; im.decoding = 'async'; im.className = 'piece'; im.src = 'estate3/' + f.src + '_' + k + '.webp';
       im.style.left = b[0]*100 + '%'; im.style.top = b[1]*100 + '%'; im.style.width = b[2]*100 + '%'; im.style.height = b[3]*100 + '%';
-      im.style.transformOrigin = ((gx - b[0])/b[2]*100).toFixed(2) + '% ' + ((gy - b[1])/b[3]*100).toFixed(2) + '%';
-      box.appendChild(im);
-      return {el: im, b: b, cx: b[0] + b[2]/2 - gx, cy: b[1] - gy, mass: Math.min(1.4, b[2]*b[3]*f.land[2]*f.land[2]*8),
-              kind: typeof f.kind === 'string' ? f.kind : f.kind[k], P: 0};
+      box.appendChild(im); warm(im);
+      // the whole piece lands scaled about its bottom centre and moved by land; each section keeps its place in it
+      var bx = b[0] + b[2]/2, by = b[1] + b[3];
+      return {el: im, dx: (bx - gx)*(L[2] - 1) + L[0], dy: (by - gy)*(L[2] - 1) + L[1], x: gx + (bx - gx)*L[2] + L[0], bot: gy + (by - gy)*L[2] + L[1],
+              mass: Math.min(1.4, b[2]*b[3]*L[2]*L[2]*8), kind: typeof f.kind === 'string' ? f.kind : f.kind[k]};
     });
   }
   stack.appendChild(s); return o;
@@ -1151,15 +1186,18 @@ var hud = document.getElementById('hud'), hTitle = document.getElementById('hudT
 
 function clamp(x, a, b){ return Math.min(b === undefined ? 1 : b, Math.max(a || 0, x)); }
 function lerp(a, b, t){ return a + (b - a)*t; }
-function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
-function easeInOut(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
 var beats = Array.prototype.slice.call(document.querySelectorAll('.beat')), anchors = [];
+var cardAt = [];   // phones: build progress at which each stage's card has come a quarter of the way up the screen
 function measure(){
   anchors = beats.map(function(b){ var r = b.getBoundingClientRect(), top = r.top + scrollY;
     return {y: b.classList.contains('hero') ? top + innerHeight*.5 : top + r.height*.5, m: +b.dataset.m, s: +b.dataset.s, a: +b.dataset.a}; });
+  cardAt = FRAMES.map(function(f){
+    var b = f.piece && beats.filter(function(x){ return +x.dataset.m === f.m && +x.dataset.s === 0; })[0], c = b && b.querySelector('.card');
+    return c ? target(c.getBoundingClientRect().top + scrollY - innerHeight*.76).m : null;
+  });
 }
-function target(){
-  var y = scrollY + innerHeight*.5, A = anchors;
+function target(sy){
+  var y = (sy === undefined ? scrollY : sy) + innerHeight*.5, A = anchors;
   if (y <= A[0].y) return {m: A[0].m, s: A[0].s, a: A[0].a};
   for (var i = 0; i < A.length - 1; i++) if (y <= A[i+1].y){
     var t = (y - A[i].y)/(A[i+1].y - A[i].y);
@@ -1169,76 +1207,58 @@ function target(){
 }
 function frameAt(m){ for (var i = FRAMES.length - 1; i > 0; i--) if (m >= (FRAMES[i].m + FRAMES[i-1].m)/2) return i; return 0; }
 function span(i){ return [i ? (FRAMES[i].m + FRAMES[i-1].m)/2 : 0, i < FRAMES.length - 1 ? (FRAMES[i].m + FRAMES[i+1].m)/2 : 1]; }
-// the sections come down from above the frame as the card scrolls in, and start dropping before it is centred
-// (on phones the card covers the lower half once centred, so the drop starts sooner)
-function dropAt(i){ var lo = span(i)[0]; return lo + (narrow() ? .4 : .7)*(FRAMES[i].m - lo); }
-
-/* each plate covers the frame; the camera glides sideways to keep the action in view */
-var FW = 0, FH = 0;
-function narrow(){ return FW/FH < 1.2; }
-// on a phone only part of the house fits, so sections drop left to right and the camera glides along with them
-function orderOf(i){ var f = FRAMES[i]; return narrow() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
-function partX(i, j, P){ var f = FRAMES[i], q = shots[i].parts[j], gx = f.piece[0] + f.piece[2]/2, t = clamp(P);
-  return gx + f.land[0]*t + q.cx*lerp(1, f.land[2], t); }
-function focus(i){ var f = FRAMES[i]; return f.piece ? f.piece[0] + f.piece[2]/2 : .45; }
-function pan(i, fx, snap){
-  var s = shots[i], c = FW/FH < 1.2 ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
-  var x = Math.max(FW - s.bw, Math.min(0, FW*c - fx*s.bw));
-  s.panX = snap || s.panX === null ? x : lerp(s.panX, x, .07);
-  s.box.style.left = s.panX.toFixed(1) + 'px';
+function dropAt(i){
+  var lo = span(i)[0], m = FRAMES[i].m;
+  // phones: drop while the card is still low, so the landings are never hidden behind it (taller cards start sooner)
+  return phone() && cardAt[i] !== null && cardAt[i] !== undefined ? clamp(cardAt[i], lo + .08*(m - lo), lo + .55*(m - lo)) : lo + .7*(m - lo);
 }
+
+/* framing: on wide screens each plate covers the frame; on phones it is zoomed out under the header and fades
+   into the page below, and the camera glides part way toward each section as it drops */
+var FW = 0, FH = 0;
+function phone(){ return FW/FH < 1.2; }
+function orderOf(i){ var f = FRAMES[i]; return phone() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
 function layout(){
   var fw = stack.clientWidth, fh = stack.clientHeight; FW = fw; FH = fh;
   shots.forEach(function(s, i){
-    var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h), w = f.w*k, h = f.h*k;
-    s.bw = w; s.bh = h;
-    s.box.style.width = w + 'px'; s.box.style.height = h + 'px';
-    s.box.style.top = (fh - h)*.3 + 'px'; pan(i, focus(i), true);
-    if (f.piece){
-      // the set waits a little above its spot, as high as the frame allows without cropping it
-      s.rise = clamp((f.piece[1]*h + (fh - h)*.3 - .06*fh)/h, 0, RISE);
-      s.lift = s.rise/(f.piece[1] + f.piece[3] + .12);
-      // soft contact shadow where the piece will land
-      var p = f.piece, L = f.land, sw = p[2]*L[2]*.92;
-      s.shadow.style.width = sw*100 + '%'; s.shadow.style.height = (p[3]*L[2]*.16)*100 + '%';
-      s.shadow.style.left = (p[0] + p[2]/2 + L[0] - sw/2)*100 + '%'; s.shadow.style.top = (p[1] + p[3] + L[1] - p[3]*L[2]*.1)*100 + '%';
-    }
+    var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h);
+    if (phone()) k = Math.min(k, ZOOM*fw/f.w);
+    var w = f.w*k, h = f.h*k, short = h < fh - 1;
+    s.bw = w; s.bh = h; s.top = short ? 0 : (fh - h)*.3;
+    s.box.style.width = w + 'px'; s.box.style.height = h + 'px'; s.box.style.top = s.top + 'px';
+    s.el.classList.toggle('short', short);
+    // how far above its spot each section starts: clear of the top of the frame, whatever the zoom
+    if (f.piece) s.parts.forEach(function(q){ q.clear = s.top + q.bot*h + 36 + .06*fh; });
   });
+}
+function camAim(i, j, P){
+  // desktop: the landing area, drifting half way to where the piece ends up; phones: the landing area, drifting toward section j
+  var s = shots[i], f = FRAMES[i];
+  if (!f.piece) return .45;
+  var gx = f.piece[0] + f.piece[2]/2;
+  if (!phone()) return gx + FOLLOW*f.land[0]*P;
+  var c = gx + f.land[0];
+  return j === undefined ? c : c + FOLLOW*(s.parts[j].x - c);
+}
+function camera(i, fx, dt, z, drift){
+  // a critically damped spring: the camera eases in and out of every move, and never snaps or overshoots
+  var s = shots[i], c = phone() ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
+  var slack = s.bw*(z - 1)*.4, want = clamp(FW*c - fx*s.bw - drift*s.bw, FW - s.bw - slack, slack);
+  if (s.x === null || dt === null){ s.x = want; s.v = 0; }
+  else {
+    var w = 5.2; dt = Math.min(dt, .05);
+    s.v += (w*w*(want - s.x) - 2*w*s.v)*dt; s.x += s.v*dt;
+  }
+  s.box.style.transform = 'translate3d(' + s.x.toFixed(2) + 'px,0,0) scale(' + z.toFixed(4) + ')';
 }
 
-/* one section. P is its progress from the hanging height (0) to the landing spot (1); lift (0..1) raises
-   the whole set above the frame; rot swings it on its cable; by lifts it a few px (bounce, bob); sq squashes it. */
-function put(i, j, P, lift, rot, by, sq){
-  var s = shots[i], f = FRAMES[i], p = f.piece, L = f.land, q = s.parts[j], t = Math.max(0, P);
-  var up = Math.max(lift, s.lift*(1 - P));
-  var x = L[0]*s.bw*t, y = L[1]*s.bh*t - up*(p[1] + p[3] + .12)*s.bh - (by || 0), k = lerp(1, L[2], t);
-  var cx = q.cx*s.bw, cy = q.cy*s.bh;   // swing about the section's own top centre
-  q.P = P;
-  q.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + k.toFixed(4) + ',' + (k*(sq || 1)).toFixed(4) + ')' +
-    (rot ? ' translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) rotate(' + rot.toFixed(3) + 'deg) translate(' + (-cx).toFixed(1) + 'px,' + (-cy).toFixed(1) + 'px)' : '');
+/* one section: off lifts it that many px above its spot; sx, sy squash or stretch it about its bottom centre */
+function put(i, j, off, sx, sy){
+  var s = shots[i], q = s.parts[j], k = FRAMES[i].land[2];
+  q.el.style.transform = 'translate3d(' + (q.dx*s.bw).toFixed(1) + 'px,' + (q.dy*s.bh - off).toFixed(1) + 'px,0) scale(' + (k*(sx || 1)).toFixed(4) + ',' + (k*(sy || 1)).toFixed(4) + ')';
 }
-function stageLook(i, j){
-  // camera and contact shadow follow how far the set has come down; on phones the camera follows section j
-  var s = shots[i], f = FRAMES[i], n = s.parts.length, P = 0, up = 1;
-  s.parts.forEach(function(q){ P += clamp(q.P)/n; });
-  up = s.hang === undefined ? 1 : s.hang;
-  pan(i, narrow() ? partX(i, j === undefined ? orderOf(i)[0] : j, s.parts[j === undefined ? orderOf(i)[0] : j].P) : focus(i) + f.land[0]*P);
-  s.shadow.style.opacity = (up > .98 ? 0 : (.12 + .5*P*P)*(1 - up*.9)).toFixed(3);
-  s.shadow.style.transform = 'scale(' + (1.35 - .35*P).toFixed(3) + ')';
-}
-function cable(i, j, now, lift){
-  var q = shots[i].parts[j], calm = reduce ? 0 : .35 + .65*lift;
-  q.rot0 = Math.sin(now/1050 + i + j*1.7)*.55*calm; q.by0 = Math.sin(now/1300 + j*2.1)*.006*shots[i].bh*calm;
-}
-function hangAll(i, lift, now){
-  var s = shots[i]; s.hang = lift;
-  s.parts.forEach(function(q, j){
-    // each section sways and bobs on its own cable, calming as it comes down
-    cable(i, j, now, lift); put(i, j, 0, lift, q.rot0, q.by0, 1);
-  });
-  stageLook(i);
-}
-function landAll(i){ var s = shots[i]; s.hang = 0; s.parts.forEach(function(q, j){ put(i, j, 1, 0, 0, 0, 1); }); stageLook(i); }
+function hideAll(i){ var s = shots[i]; s.hidden = true; s.parts.forEach(function(q, j){ q.landed = false; put(i, j, q.clear); }); }
+function landAll(i){ var s = shots[i]; s.hidden = false; s.parts.forEach(function(q, j){ q.landed = true; put(i, j, 0); }); }
 
 /* dust: a soft puff along the bottom edge of each section as it lands */
 var dctx = dust.getContext('2d'), puffs = [], dustT = 0;
@@ -1272,83 +1292,93 @@ function stepDust(now){
   });
   if (puffs.length) dustT = requestAnimationFrame(stepDust); else { dustT = 0; lastD = 0; dctx.clearRect(0, 0, dust.clientWidth, dust.clientHeight); }
 }
-// a gentle camera dip on each landing, not a shake
+// a short camera jolt on each landing, scaled to the piece
 function nudge(mass){
   if (!stack.animate || reduce) return;
-  var a = 1.5 + mass*3.5;
-  stack.animate([{transform: 'translateY(0)'}, {transform: 'translateY(' + a.toFixed(1) + 'px)', offset: .22}, {transform: 'translateY(' + (-a*.3).toFixed(1) + 'px)', offset: .6}, {transform: 'translateY(0)'}],
-    {duration: 460, easing: 'ease-out'});
+  var a = 2 + mass*3.5;
+  stack.animate([{transform: 'translateY(0)'}, {transform: 'translateY(' + a.toFixed(1) + 'px)', offset: .18}, {transform: 'translateY(' + (-a*.35).toFixed(1) + 'px)', offset: .5}, {transform: 'translateY(0)'}],
+    {duration: 380, easing: 'ease-out'});
 }
 function sfx(name, vol){ if (window.__lupeSfx) window.__lupeSfx(name, vol); }
 
-/* the drop: sections let go one at a time, a beat apart */
+/* the drop: sections fall in one at a time and land a beat apart */
 function beatMs(){ var A = window.LupeAudio, b = A && A.on && A.beat; if (!b) return 0; b = b < 10 ? b*1000 : b; while (b < 420) b *= 2; while (b > 900) b /= 2; return b; }
 var seq = null, done = [];
 function startSeq(i, now){
-  var s = shots[i], f = FRAMES[i], A = window.LupeAudio, gap = beatMs() || STAG, lead = 160;
-  // with the music on, the first section lands right on a beat and the rest follow on the next beats
-  var rel = [], dur = [];
-  // heavier drops take longer, like real gravity, but every fall stays smooth and readable
-  var fall = clamp(420 + 30*Math.sqrt((f.land[1] + s.rise)*s.bh), 560, FALL);
-  if (A && A.on && A.delayToBeat) lead += A.delayToBeat(lead + fall) || 0;
-  orderOf(i).forEach(function(j, n){ rel[j] = now + lead + n*gap; dur[j] = fall; });
-  s.parts.forEach(function(q){ q.landed = false; q.let = false; });
-  seq = {i: i, rel: rel, dur: dur};
+  var s = shots[i], A = window.LupeAudio, gap = beatMs() || STAG, order = orderOf(i), T = 0;
+  s.parts.forEach(function(q){
+    // one gravity for every piece: further to fall, longer in the air
+    q.T = clamp(1000*Math.sqrt(2*(1 - ENTRY)*q.clear/FH/GRAV), 420, 900); T = Math.max(T, q.T); q.landed = false; q.wh = false;
+  });
+  // with the music on, the first piece lands right on the beat and the rest follow on the next beats
+  var first = now + 120 + T;
+  if (A && A.on && A.delayToBeat) first += A.delayToBeat(first - now) || 0;
+  order.forEach(function(j, n){ s.parts[j].at = first + n*gap; });
+  s.hidden = false;
+  seq = {i: i, order: order, end: first + (order.length - 1)*gap + SETTLE};
 }
 function rush(now){
   // the reader scrolled on: bring the rest down quickly instead of cutting
   if (seq.rushed) return; seq.rushed = true;
   var n = 0, s = shots[seq.i];
-  orderOf(seq.i).forEach(function(j){
-    if (now < seq.rel[j]){ seq.rel[j] = now + n*110; seq.dur[j] = 460; n++; }
-  });
-  seq.hold = 200;
+  seq.order.forEach(function(j){ var q = s.parts[j]; if (now < q.at - q.T){ q.T = 380; q.at = now + 380 + n*100; n++; } });
+  seq.end = Math.max.apply(null, s.parts.map(function(q){ return q.at; })) + SETTLE;
+  seq.hold = 120;
 }
 function stepSeq(now){
-  var i = seq.i, s = shots[i], end = 0;
-  s.hang = 0;
+  var i = seq.i, s = shots[i];
   s.parts.forEach(function(q, j){
-    var u = (now - seq.rel[j])/seq.dur[j];
-    end = Math.max(end, seq.rel[j] + seq.dur[j] + SETTLE);
-    if (u < 0){   // still waiting on its cable
-      cable(i, j, now, 0); put(i, j, 0, 0, q.rot0, q.by0, 1); return;
-    }
-    if (!q.let){ q.let = true; if (!seq.rushed) sfx('whoosh', .16 + q.mass*.08); }
-    if (u < 1){
-      // a small lift as the hook lets go, then a smooth fall that speeds up into the landing
-      var P = u < .16 ? -.04*Math.sin(Math.PI*u/.16) : Math.pow((u - .16)/.84, 2.15);
-      put(i, j, P, 0, (q.rot0 || 0)*(1 - u), (q.by0 || 0)*(1 - u), 1 + .025*clamp(P));
+    var t = now - (q.at - q.T);
+    if (t < 0){ put(i, j, q.clear); return; }
+    if (t < q.T){
+      // gravity: it comes in already moving and keeps speeding up into the landing, a touch stretched by the speed
+      var u = t/q.T, e = ENTRY*u + (1 - ENTRY)*u*u, sp = ENTRY + 2*(1 - ENTRY)*u, off = q.clear*(1 - e);
+      if (!q.wh && off < q.clear - 26 - .06*FH){ q.wh = true; if (!seq.rushed) sfx('whoosh', .14 + q.mass*.08); }
+      put(i, j, off, 1 - .012*sp, 1 + .03*sp);
       return;
     }
     if (!q.landed){
-      q.landed = true; nudge(q.mass); puff(q.el, q.mass);
+      q.landed = true; put(i, j, 0); nudge(q.mass); puff(q.el, q.mass);
       if (window.__lupeLand) window.__lupeLand(q.mass, q.kind);
     }
-    var a = clamp((now - seq.rel[j] - seq.dur[j])/SETTLE);
-    // soft landing: a quick squash, then two little bounces that die away
-    var sq = a < .2 ? 1 - .045*Math.sin(Math.PI*a/.2)*(.6 + q.mass*.4) : 1;
-    var hop = .01*s.bh*(.5 + q.mass*.5)*Math.abs(Math.sin(Math.PI*2*a))*Math.pow(1 - a, 2.2)*(a > .2 ? 1 : 0);
-    put(i, j, 1, 0, 0, hop, sq);
+    var a = (t - q.T)/1000, hv = clamp(q.mass);
+    if (a > SETTLE/1000){ put(i, j, 0); return; }
+    // impact: a quick squash, a small rebound off the deck, a lighter second touch, settled
+    var sq = a < .09 ? .055*(.55 + .45*hv)*Math.sin(Math.PI*a/.09) : a > .25 && a < .31 ? .015*Math.sin(Math.PI*(a - .25)/.06) : 0;
+    var up = a > .07 && a < .25 ? FH*.011*(1.25 - .5*hv)*Math.sin(Math.PI*(a - .07)/.18) : 0;
+    put(i, j, up, 1 + sq*.55, 1 - sq + (up ? .012 : 0));
   });
-  // the camera follows the section that is falling now (or the next one to go)
-  var fj = orderOf(i).filter(function(j){ return now < seq.rel[j] + seq.dur[j] + 200; })[0];
-  stageLook(i, fj === undefined ? orderOf(i)[orderOf(i).length - 1] : fj);
-  if (now >= end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
+  if (now >= seq.end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
 }
+function focusPart(i, now){
+  // the section the camera leans toward: the one falling now, or the next to go
+  if (done[i]) return undefined;
+  var s = shots[i], o = seq && seq.i === i ? seq.order : orderOf(i);
+  if (!seq || seq.i !== i) return o[0];
+  for (var n = 0; n < o.length; n++) if (now < s.parts[o[n]].at + 120) return o[n];
+  return o[o.length - 1];
+}
+function landedShare(i){ var s = shots[i], n = 0; s.parts.forEach(function(q){ if (q.landed) n++; }); return n/s.parts.length; }
 
 /* scroll state */
-var cur = null, vis = -1, prevI = -1, lastKey = '', chained = [];
+var cur = null, vis = -1, prevI = -1, lastKey = '', swapT = 0, lastNow = 0;
 function setVisible(j){
-  if (j === vis) return; vis = j;
-  shots.forEach(function(s, k){ s.el.classList.toggle('on', k === j); });
+  if (j === vis) return;
+  var prev = vis; vis = j;
+  // the incoming shot fades in on top of the outgoing one, which stays solid underneath: no dip to black
+  shots.forEach(function(s, k){ s.el.style.zIndex = k === j ? 2 : k === prev ? 1 : 0; });
+  shots[j].el.classList.add('on');
+  clearTimeout(swapT);
+  swapT = setTimeout(function(){ shots.forEach(function(s, k){ if (k !== vis) s.el.classList.remove('on'); }); }, 950);
   bg.style.backgroundImage = 'url("estate/' + FRAMES[j].src + '_s.jpg")';
-  if (FRAMES[j].piece && !done[j] && !(seq && seq.i === j)) hangAll(j, 1, performance.now());   // the next piece waits above the frame
+  if (FRAMES[j].piece && !done[j] && !(seq && seq.i === j)) hideAll(j);   // its pieces wait above the frame
 }
 function frame(now){
   if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze a drop mid-air
+  var dt = lastNow && now > lastNow ? (now - lastNow)/1000 : null; lastNow = now;
   var tg = target();
-  if (!cur || reduce || window.__lupeSnap) cur = tg;
-  else { var f = .14; cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
+  if (!cur || reduce || window.__lupeSnap || dt === null) cur = tg;
+  else { var f = 1 - Math.exp(-dt/.11); cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
   var key = cur.m.toFixed(4) + cur.s.toFixed(3) + cur.a.toFixed(4);
   if (key !== lastKey){
     lastKey = key;
@@ -1358,8 +1388,8 @@ function frame(now){
   if (cur.s < .5){
     var i = frameAt(cur.m), sp = span(i), p = clamp((cur.m - sp[0])/Math.max(.001, sp[1] - sp[0])), F = FRAMES[i];
     var down = !!F.piece && cur.m >= dropAt(i);
-    // scrolling back up un-builds: later stages will build again on the way down
-    for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)){ done[k] = false; if (k > i) chained[k] = false; }
+    // scrolling back up un-builds: later stages build again on the way down
+    for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)) done[k] = false;
     if (seq && (seq.i > i || (seq.i === i && !down))) seq = null;
     if (seq && seq.i < i) rush(now);
     if (seq) stepSeq(now);
@@ -1370,28 +1400,29 @@ function frame(now){
         else { landAll(i); done[i] = true; }
       }
     }
+    var was = vis;
     setVisible(seq ? seq.i : down && done[i] ? i + 1 : i);
-    if (F.piece && !down && !seq){
-      // lowering in on the crane as the card scrolls up
-      var lo = sp[0], e = clamp((cur.m - lo)/Math.max(.001, .78*(dropAt(i) - lo))), lift = 1 - easeOut(e);
-      if (e > .02 && !chained[i]){ chained[i] = true; sfx('chain', .35); }
-      hangAll(i, lift, now);
-    }
+    if (F.piece && !down && !seq && !shots[i].hidden) hideAll(i);
     prevI = i;
-    // slow push-in inside each stage
-    var z = reduce ? 1 : 1.04 - .04*p, sb = shots[vis].box;
-    sb.style.transform = 'scale(' + z.toFixed(4) + ') translateX(' + (reduce ? 0 : -cur.a*.6).toFixed(2) + '%)';
+    // camera: a slow push-in through each stage, leaning toward the action
+    var vi = vis, z = reduce ? 1 : 1.04 - .04*(vi === i ? p : vi > i ? 0 : 1), drift = reduce ? 0 : cur.a*.006;
+    var aim = FRAMES[vi].piece ? camAim(vi, focusPart(vi, now), seq && seq.i === vi ? landedShare(vi) : done[vi] ? 1 : 0) : camAim(vi);
+    camera(vi, aim, was === vi ? dt : null, z, drift);
     hud.classList.remove('kitchen'); hTitle.textContent = 'Estate · new build'; hNum.textContent = Math.round(cur.m*100) + '%';
     hStage.textContent = cur.m >= .995 && !cur.a ? 'Complete' : F.stage; hBar.style.width = (cur.m*100).toFixed(1) + '%';
   }
   requestAnimationFrame(frame);
 }
-function resize(){ measure(); layout(); sizeDust(); lastKey = ''; }
+function resize(){
+  measure(); layout(); sizeDust(); lastKey = '';
+  shots.forEach(function(s, i){ if (FRAMES[i].piece && !(seq && seq.i === i)){ if (done[i]) landAll(i); else hideAll(i); } });
+}
 addEventListener('resize', resize);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 addEventListener('load', measure);
 resize();
 window.__lupeBuild = true;
+window.__lupeDrop = function(i){ return {at: dropAt(i), m: function(sy){ return target(sy).m; }}; };   // test hook
 requestAnimationFrame(frame);
 })();
 </script>
