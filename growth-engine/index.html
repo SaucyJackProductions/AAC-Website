@@ -3,9 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Lupe Growth Engine: a client-acquisition proposal for New Trust Services, LLC.">
+<meta name="description" content="Above All Media Proposals: a growth plan for New Trust Services, LLC.">
 <meta name="robots" content="noindex">
-<title>Lupe Growth Engine</title>
+<meta name="application-name" content="Above All Media Proposals">
+<meta name="apple-mobile-web-app-title" content="Above All Media Proposals">
+<meta property="og:site_name" content="Above All Media Proposals">
+<meta property="og:title" content="Above All Media Proposals">
+<meta property="og:description" content="A growth plan for New Trust Services, LLC, from Above All Media.">
+<title>Above All Media Proposals</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&display=swap">
@@ -39,12 +44,19 @@ body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--body);-webkit-fon
 .build.off{opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .build-bg{position:absolute;inset:-60px;background:#14110d center/cover no-repeat;filter:blur(26px) brightness(.5) saturate(1.15)}
 .build-frame{position:absolute;top:0;bottom:0;right:0;left:14vw;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%);mask-image:linear-gradient(90deg,transparent,#000 18%)}
-.shot{position:absolute;inset:0;opacity:0;transition:opacity .85s ease;overflow:hidden}
+.shot{position:absolute;inset:0;opacity:0;transition:opacity .85s ease;overflow:hidden;background:#0f0e0c}
 .shot.on{opacity:1}
-.stagebox{position:absolute;transform-origin:60% 45%}
+.stagebox{position:absolute;left:0;top:0;transform-origin:60% 45%}
+.stagebox::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:0;pointer-events:none;background:linear-gradient(180deg,rgba(15,14,12,0),rgba(15,14,12,.62) 55%,#0f0e0c)}
+.shot.short .stagebox::after{height:18%}
 .stagebox .plate{position:absolute;inset:0;display:block;width:100%;height:100%}
-.piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
-.drop-shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(12,9,7,.8),rgba(12,9,7,0));opacity:0;pointer-events:none}
+.piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;backface-visibility:hidden}
+.water{position:absolute;pointer-events:none}
+.water img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.water.moving{filter:drop-shadow(0 -1px 0 rgba(214,255,250,.5))}
+.water i{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,250,235,.6) 50%,rgba(255,255,255,0) 62%) no-repeat;background-size:60% 100%;background-position:-120% 0;opacity:0}
+.water.glint i{animation:glint 1.3s ease-out}
+@keyframes glint{0%{opacity:1;background-position:-120% 0}80%{opacity:1}100%{opacity:0;background-position:220% 0}}
 .build-dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .build::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 62% 45%,transparent 55%,rgba(8,7,6,.5))}
 #fade{position:fixed;inset:0;background:#050505;opacity:0;pointer-events:none;z-index:1}
@@ -62,7 +74,8 @@ body::after{content:"";position:fixed;inset:0 0 auto;height:calc(env(safe-area-i
 .brand b::after{content:"";position:absolute;left:3px;right:3px;bottom:3px;height:5px;background:var(--gold)}
 .hud{position:fixed;z-index:4;top:calc(env(safe-area-inset-top,0px) + 12px);right:max(16px,env(safe-area-inset-right,0px));width:250px;background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:10px 12px 12px;font:500 11px/1.35 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 .hud-row{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
-.hud-title{color:var(--muted)}
+.hud-title{color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hud-num{flex:none}
 .hud-stage{color:var(--fg);margin-top:4px;font-size:12px}
 .hud-num{color:var(--gold);font-variant-numeric:tabular-nums;font-size:12px}
 .hud-bar{height:3px;background:var(--line);margin-top:8px;position:relative;overflow:hidden}
@@ -72,6 +85,17 @@ body::after{content:"";position:fixed;inset:0 0 auto;height:calc(env(safe-area-i
 .sound[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
 .sound[aria-pressed="true"]::before{background:var(--gold);border-color:var(--gold)}
 .no-gl .sound{display:none}
+/* the music button arrives big, settles into place, then pulses until the music is on */
+.sound{transform-origin:100% 50%}
+.sound.pre{opacity:0}
+.sound.intro{animation:soundIn 1.5s cubic-bezier(.2,.85,.3,1.18) both}
+.sound[aria-pressed="false"]:not(.intro){animation:soundPulse 1.6s ease-in-out infinite}
+@keyframes soundIn{0%{transform:scale(1.9);opacity:0}18%{opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes soundPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(210,169,90,0)}50%{transform:scale(1.07);box-shadow:0 0 16px 1px rgba(210,169,90,.45)}}
+/* Español: up front, flashing gold until it is used */
+.lang{position:fixed;z-index:5;top:calc(env(safe-area-inset-top,0px) + 12px);right:calc(max(16px,env(safe-area-inset-right,0px)) + 262px);appearance:none;cursor:pointer;min-height:36px;padding:10px 14px;background:rgba(210,169,90,.14);color:#f3d48f;border:1px solid var(--gold);font:600 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:langFlash 1.4s ease-in-out infinite}
+.lang.calm{animation:none}
+@keyframes langFlash{0%,100%{background:rgba(210,169,90,.12);box-shadow:0 0 0 0 rgba(242,206,128,0);color:#f3d48f}50%{background:rgba(210,169,90,.55);box-shadow:0 0 22px 3px rgba(242,206,128,.6);color:#fff8e8}}
 .rec{display:none;align-items:center;gap:6px;margin-top:8px;color:#ff8b7a}
 .rec::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff5a45;box-shadow:0 0 8px #ff5a45}
 .hud.kitchen .rec{display:flex}
@@ -190,7 +214,9 @@ p{margin:0;max-width:62ch}
 @media (max-width:899px){
   .build-frame{left:0;right:0;bottom:0;top:calc(env(safe-area-inset-top,0px) + 100px);-webkit-mask-image:none;mask-image:none}
   body::after{height:calc(env(safe-area-inset-top,0px) + 112px);background:linear-gradient(180deg,#0f0e0c,#0f0e0c 76%,rgba(15,14,12,0))}
-  .sound{right:auto;left:max(16px,env(safe-area-inset-left,0px));bottom:auto;top:calc(env(safe-area-inset-top,0px) + 44px)}
+  .sound{right:auto;left:max(16px,env(safe-area-inset-left,0px));bottom:auto;top:calc(env(safe-area-inset-top,0px) + 44px);transform-origin:0 50%}
+  .lang{right:auto;left:max(16px,env(safe-area-inset-left,0px));top:calc(env(safe-area-inset-top,0px) + 88px);min-height:30px;padding:8px 12px}
+  html[lang="es"] .sound{letter-spacing:.03em;padding-inline:11px}
   .hud{width:auto;left:auto;top:calc(env(safe-area-inset-top,0px) + 44px);right:max(16px,env(safe-area-inset-right,0px));padding:8px 10px 10px;font-size:10px;min-width:200px}
   .beat{min-height:135vh;align-items:flex-end;padding-block:58vh 6vh}
   .beat[data-k="0"]:not(.hero){min-height:165vh}
@@ -207,7 +233,7 @@ p{margin:0;max-width:62ch}
   .phases li:nth-child(3){border-left:0}
   .phases li:nth-child(n+3){border-top:1px solid var(--line)}
 }
-@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}h1,h2,h1 em,h2 em{animation:none}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}h1,h2,h1 em,h2 em{animation:none}.sound.intro,.sound[aria-pressed="false"]:not(.intro),.lang{animation:none}}
 </style>
 </head>
 <body>
@@ -224,6 +250,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 <div class="build" id="build" aria-hidden="true"><div class="build-bg"></div><div class="build-frame"></div><canvas class="build-dust"></canvas></div>
 <div id="fade"></div>
 <button id="sound" class="sound" type="button" aria-pressed="false" hidden>Tap for music</button>
+<button id="lang" class="lang" type="button" aria-label="Ver en español" hidden>Español</button>
 <div class="brand"><b></b>New Trust Services, LLC · Growth Engine</div>
 <div class="hud" id="hud" aria-hidden="true">
   <div class="hud-row"><span class="hud-title" id="hudTitle">Mansion · new build</span><span class="hud-num" id="hudNum">0%</span></div>
@@ -238,7 +265,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="hero-in">
       <div class="tb"><span>Proposal</span><span>Sheet A-000</span><span>Prepared for New Trust Services, LLC</span></div>
       <h1>Lupe builds the work.<br><em>We build the demand.</em></h1>
-      <p class="lead">For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM and follow-up. Scroll, and watch it drop into place, piece by piece, from the slab up.</p>
+      <p class="lead">For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM, follow-up and 4K drone and video content. Scroll, and watch it drop into place, piece by piece, from the slab up.</p>
       <div class="cue">Scroll to start the build</div>
     </div>
   </section>
@@ -276,7 +303,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
       <div class="tb"><span>S-201</span><span>Exterior walls</span><span>Operating model</span></div>
       <h2>One side creates demand. <em>One side delivers.</em></h2>
       <div class="two">
-        <div><span class="kicker">Chandler</span><h3>Generates big jobs</h3><div class="chips"><span>Website</span><span>Google</span><span>Meta</span><span>Booking</span><span>CRM</span><span>Follow-up</span></div></div>
+        <div><span class="kicker">Chandler</span><h3>Generates big jobs</h3><div class="chips"><span>Website</span><span>Google</span><span>Meta</span><span>Booking</span><span>CRM</span><span>Follow-up</span><span>4K drone + video</span><span>Social content</span></div></div>
         <div><span class="kicker">Lupe · New Trust Services, LLC</span><h3>Knocks them out</h3><div class="chips"><span>Crews</span><span>Estimates</span><span>Licenses</span><span>Materials</span><span>Execution</span><span>Finishing</span></div></div>
       </div>
       <p>Clean and logical. Everybody stays in their lane, and Lupe never has to become a marketer to grow.</p>
@@ -316,19 +343,35 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     </div>
   </section>
 
+  <section class="beat" data-m="0.74" data-k="0" data-s="0" data-a="0">
+    <div class="card">
+      <div class="tb"><span>A-451</span><span>Pool + exteriors</span><span>4K media + content</span></div>
+      <h2>Shot like a luxury listing. <em>From the air and the ground.</em></h2>
+      <p>Even on your busiest weeks, Chandler's team captures every job in 4K, so your work and your experience are preserved and always on display.</p>
+      <ul class="spec">
+        <li><b>Drone</b><span>Cinematic 4K flyovers and ultra HD aerial photos of every build.</span></li>
+        <li><b>Camera work</b><span>4K on-site filming: before, progress, craft close-ups and walkthroughs.</span></li>
+        <li><b>Content library</b><span>Portfolio-grade photos and clips for the website, Google, ads and bids.</span></li>
+        <li><b>Commercials</b><span>Short HD commercials and ad spots for Google, Meta and YouTube.</span></li>
+        <li><b>Social media</b><span>Optional: viral-format Reels, TikToks and Shorts, from drone reveals to before-and-afters.</span></li>
+      </ul>
+      <p class="loss">Online, HD photos, video, commercials and ads make New Trust Services, LLC look like the number one builder in Hilton Head Island. That's what lands the bigger, more profitable jobs: work less, make more.</p>
+    </div>
+  </section>
+
   <section class="beat" data-m="0.86" data-k="0" data-s="0" data-a="0">
     <div class="card">
       <div class="tb"><span>A-501</span><span>Landscape</span><span>CRM + clientele</span></div>
       <h2>The customer list <em>becomes an asset.</em></h2>
-      <p>Not scattered texts. Not forgotten names. A real database.</p>
+      <p>Not scattered texts. Not forgotten names. Every client, contact and job in one database that stays with the company.</p>
       <ul class="spec">
+        <li><b>Client list</b><span>Every name, number, address and project, in one place.</span></li>
         <li><b>Lead source</b><span>Where every opportunity came from.</span></li>
         <li><b>Project history</b><span>Photos, scope, estimate, invoice, completion.</span></li>
         <li><b>Follow-up</b><span>Reminders, nurture texts, missed-call recovery.</span></li>
-        <li><b>Reviews</b><span>Systemized requests after completed work.</span></li>
-        <li><b>Maintenance</b><span>Annual check-ins and service contracts.</span></li>
+        <li><b>Repeat clients</b><span>Review requests, annual check-ins and maintenance contracts.</span></li>
       </ul>
-      <p class="loss">If Lupe ever sells, a clean customer database and a repeat revenue system help prove New Trust Services, LLC is bigger than one man.</p>
+      <p class="loss">This is the exit plan. The day Lupe decides to sell, a buyer pays for recurring clients and a client list that keeps booking work without Lupe on every call. The CRM is where that value gets built, one contact at a time.</p>
     </div>
   </section>
 
@@ -342,7 +385,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
         <li><b>Priority service</b><span>Relationships, not one-off transactions.</span></li>
         <li><b>Seasonal</b><span>Inspections and punch lists.</span></li>
         <li><b>Upsell</b><span>More remodels, upgrades and referrals.</span></li>
-        <li><b>Valuation</b><span>Cleaner numbers for the day the company is worth more.</span></li>
+        <li><b>Valuation</b><span>Recurring revenue and a documented client list for the day the company sells.</span></li>
       </ul>
     </div>
   </section>
@@ -351,7 +394,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Content engine</span><span>Day 1</span><span>Before video</span></div>
       <h2>Now watch one kitchen <em>sell the next one.</em></h2>
-      <p>Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming on day one, while it still looks like this.</p>
+      <p>Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming in 4K on day one, while it still looks like this.</p>
     </div>
   </section>
 
@@ -383,7 +426,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Day 42</span><span>Final reveal</span></div>
       <h2>Reveal. Review. <em>Retarget.</em></h2>
-      <p>The reveal video goes out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.</p>
+      <p>The 4K reveal video and drone flyover go out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.</p>
       <p class="loss">Craftsmanship hidden in a phone gallery cannot create demand.</p>
     </div>
   </section>
@@ -441,7 +484,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
       <ol class="phases">
         <li><i>Phase 1</i><b>Foundation</b><span>Services, photos, territory, pricing rules, ideal customer.</span></li>
         <li><i>Phase 2</i><b>Build</b><span>Mobile website, booking, CRM, Google Business, social pages.</span></li>
-        <li><i>Phase 3</i><b>Launch</b><span>Content, Google and Meta tests, lead capture, follow-up.</span></li>
+        <li><i>Phase 3</i><b>Launch</b><span>4K drone and video content, Google and Meta tests, lead capture, follow-up.</span></li>
         <li><i>Phase 4</i><b>Measure</b><span>Booked calls, estimates, won jobs, revenue, reviews.</span></li>
       </ol>
       <p>At day 90 we keep what creates qualified work and cut what doesn't.</p>
@@ -461,7 +504,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
             <li>CRM: lead source, project history, follow-up, missed-call recovery, review requests</li>
             <li>Google Business Profile and social pages</li>
             <li>Google and Meta ad accounts with tracking to signed jobs</li>
-            <li>Content plan and photo library</li>
+            <li>Content plan and a 4K photo and drone library</li>
           </ul>
           <div class="price">Quoted at the Business Build Session</div>
         </div>
@@ -470,7 +513,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
           <h3>Run, measure, scale</h3>
           <ul>
             <li>Google and Meta campaigns, tested and tuned</li>
-            <li>Before, progress and reveal content every project</li>
+            <li>4K drone and camera coverage: before, progress and reveal on every project</li>
+            <li>Optional: social media management with viral-format Reels, TikToks and Shorts</li>
             <li>Retargeting ads to site visitors who haven't booked</li>
             <li>CRM nurture, reviews and maintenance-contract program</li>
             <li>Monthly report: booked calls, estimates, won jobs, revenue</li>
@@ -504,7 +548,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>Next step</span><span>Business Build Session</span></div>
       <h2>New Trust Services, LLC builds the work. <em>Chandler builds the demand.</em></h2>
-      <p>Website. Booking. Google. Meta. CRM. Content. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.</p>
+      <p>Website. Booking. Google. Meta. CRM. 4K drone and video. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.</p>
       <ul class="spec">
         <li><b>Bring</b><span>Your best finished-project photos.</span></li>
         <li><b>Decide</b><span>The job types you want more of, and your minimum job size.</span></li>
@@ -522,6 +566,61 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <span>Job values and funnel numbers are examples and projections, not guarantees.</span>
   </footer>
 </main>
+<script>
+/* LUPE-LANG */
+(function(){
+'use strict';
+/* Español: the whole proposal in Mexican Spanish, swapped in place by the flashing button up front (and back to
+   English). The scripts that write their own words (the HUD, the music button) look them up through LupeT. */
+var ES = {"Proposal": "Propuesta","Sheet A-000": "Hoja A-000","Prepared for New Trust Services, LLC": "Preparada para New Trust Services, LLC","Lupe builds the work.": "Lupe construye la obra.","We build the demand.": "Nosotros construimos la demanda.","For Lupe and New Trust Services, LLC: a complete client-acquisition system for new builds and high-end remodels: website, booking, Google, Meta, CRM, follow-up and 4K drone and video content. Scroll, and watch it drop into place, piece by piece, from the slab up.": "Para Lupe y New Trust Services, LLC: un sistema completo para conseguir clientes de obra nueva y remodelaciones de alto nivel: página web, citas en línea, Google, Meta, CRM, seguimiento y contenido de video y dron en 4K. Deslice hacia abajo y vea cómo cada pieza cae en su lugar, desde la losa hasta el techo.","Scroll to start the build": "Deslice para empezar la obra","Foundation": "Cimentación","The work is already good.": "El trabajo ya es bueno.","Nobody can see it.": "Nadie lo ve.","Word of mouth proves people trust Lupe and New Trust Services, LLC. The hard part is done: craftsmanship, experience, a crew, licenses, insurance, referrals, and the ability to finish real construction jobs.": "Las recomendaciones de boca en boca demuestran que la gente confía en Lupe y en New Trust Services, LLC. Lo difícil ya está hecho: buena mano de obra, experiencia, cuadrilla, licencias, seguro, recomendaciones y la capacidad de terminar obras de verdad.","Already built": "Ya construido","Skill, crew, reputation, referrals.": "Oficio, cuadrilla, reputación, recomendaciones.","Missing": "Lo que falta","A clean website, online booking, Google and Meta lead flow, fast follow-up, organized customers.": "Una página web profesional, citas en línea, prospectos de Google y Meta, seguimiento rápido y clientes organizados.","Tonight, a homeowner planning a $90K kitchen will search, find three contractors with a real website and reviews, and call one of them. Every week without a system, that call goes to someone else.": "Esta noche, un propietario que planea una cocina de $90K va a buscar en internet, va a encontrar tres contratistas con buena página web y reseñas, y le va a llamar a uno de ellos. Cada semana sin un sistema, esa llamada se la lleva otro.","Structure": "Estructura","Phase 1 of 4": "Fase 1 de 4","Everything starts": "Todo empieza","below grade.": "desde los cimientos.","Before a single ad dollar is spent, we pour the foundation. We decide exactly which jobs Lupe wants more of, then build the machine to find those people and nobody else.": "Antes de gastar un solo dólar en anuncios, colamos la cimentación. Definimos exactamente de qué trabajos quiere más Lupe, y luego armamos la máquina para encontrar a esos clientes y a nadie más.","Services": "Servicios","What Lupe sells, ranked by margin.": "Lo que vende Lupe, ordenado por margen de ganancia.","Photos": "Fotos","Finished work that proves the quality.": "Trabajos terminados que demuestran la calidad.","Territory": "Zona de trabajo","Where the crew will drive, and where it won't.": "Hasta dónde va la cuadrilla, y hasta dónde no.","Pricing rules": "Reglas de precios","Minimum job size, so small jobs stop eating the calendar.": "Un monto mínimo por trabajo, para que los trabajos chicos dejen de llenar la agenda.","Ideal customer": "Cliente ideal","The homeowner with a real budget and a real timeline.": "El propietario con presupuesto real y fechas reales.","Exterior walls": "Muros exteriores","Operating model": "Modelo de trabajo","One side creates demand.": "Un lado genera la demanda.","One side delivers.": "El otro cumple.","Generates big jobs": "Genera trabajos grandes","Website": "Página web","Booking": "Citas","Follow-up": "Seguimiento","4K drone + video": "Dron + video 4K","Social content": "Contenido para redes","Knocks them out": "Los saca adelante","Crews": "Cuadrillas","Estimates": "Cotizaciones","Licenses": "Licencias","Materials": "Materiales","Execution": "Ejecución","Finishing": "Acabados","Clean and logical. Everybody stays in their lane, and Lupe never has to become a marketer to grow.": "Claro y lógico. Cada quien hace lo suyo, y Lupe nunca tiene que volverse experto en marketing para crecer.","Roofing": "Techado","Mobile-first website": "Página web para celular","A front door that books": "Una puerta de entrada que agenda citas","while Lupe is on site.": "mientras Lupe está en la obra.","lupe · home": "lupe · inicio","Book a Project Consultation": "Agende una consulta","Kitchen": "Cocina","Bath": "Baño","Remodel": "Remodelación","Addition": "Ampliación","Custom Build": "Obra a la medida","Fast booking": "Citas rápidas","Clients request appointments, upload photos and describe the project.": "Los clientes piden cita, suben fotos y describen su proyecto.","Trust proof": "Pruebas de confianza","Photos, reviews, specialties, licensing and insurance, finished work.": "Fotos, reseñas, especialidades, licencias y seguro, trabajos terminados.","Luxury position": "Imagen de lujo","The site sells quality, reliability and finish detail, never cheap labor.": "La página vende calidad, confianza y detalle en los acabados, nunca mano de obra barata.","Interiors": "Interiores","Lead flow": "Flujo de prospectos","No more hoping the": "Se acabó esperar a que","next job appears.": "salga el próximo trabajo.","Five predictable paths for serious homeowners to reach Lupe, all running into one system.": "Cinco caminos predecibles para que los propietarios serios lleguen a Lupe, todos conectados a un solo sistema.","People already searching": "Gente que ya está buscando","Before/after attention": "Atención con el antes y después","Referrals": "Recomendaciones","Trust gets forwarded": "La confianza se recomienda","Booking + project form": "Citas + formulario del proyecto","Follow-up + records": "Seguimiento + registros","Leads that wait go cold. Missed-call recovery texts back automatically, so the homeowner who calls while Lupe is on a ladder doesn't move on to the next name.": "Los prospectos que esperan se enfrían. La recuperación de llamadas perdidas contesta sola con un mensaje de texto, para que el propietario que llama mientras Lupe está arriba de una escalera no se vaya con el siguiente de la lista.","Pool + exteriors": "Alberca + exteriores","4K media + content": "Foto y video 4K","Shot like a luxury listing.": "Filmado como residencia de lujo.","From the air and the ground.": "Desde el aire y desde el suelo.","Even on your busiest weeks, Chandler's team captures every job in 4K, so your work and your experience are preserved and always on display.": "Aun en sus semanas más ocupadas, el equipo de Chandler graba cada trabajo en 4K, para que su trabajo y su experiencia queden guardados y siempre a la vista.","Drone": "Dron","Cinematic 4K flyovers and ultra HD aerial photos of every build.": "Vuelos de cine en 4K y fotos aéreas en ultra HD de cada obra.","Camera work": "Cámara en la obra","4K on-site filming: before, progress, craft close-ups and walkthroughs.": "Grabación en 4K en la obra: el antes, el avance, acercamientos a los detalles y recorridos.","Content library": "Biblioteca de contenido","Portfolio-grade photos and clips for the website, Google, ads and bids.": "Fotos y clips de nivel portafolio para la página web, Google, anuncios y cotizaciones.","Commercials": "Comerciales","Short HD commercials and ad spots for Google, Meta and YouTube.": "Comerciales cortos en HD y anuncios para Google, Meta y YouTube.","Social media": "Redes sociales","Optional: viral-format Reels, TikToks and Shorts, from drone reveals to before-and-afters.": "Opcional: Reels, TikToks y Shorts en formato viral, desde tomas con dron hasta videos de antes y después.","Online, HD photos, video, commercials and ads make New Trust Services, LLC look like the number one builder in Hilton Head Island. That's what lands the bigger, more profitable jobs: work less, make more.": "En internet, las fotos, videos, comerciales y anuncios en HD hacen que New Trust Services, LLC se vea como la constructora número uno de Hilton Head Island. Así llegan los trabajos más grandes y más rentables: trabaje menos, gane más.","Landscape": "Paisajismo","CRM + clientele": "CRM + clientela","The customer list": "La lista de clientes","becomes an asset.": "se convierte en un activo.","Not scattered texts. Not forgotten names. Every client, contact and job in one database that stays with the company.": "Nada de mensajes regados. Nada de nombres olvidados. Cada cliente, contacto y trabajo en una sola base de datos que se queda con la empresa.","Client list": "Lista de clientes","Every name, number, address and project, in one place.": "Cada nombre, número, dirección y proyecto, en un solo lugar.","Lead source": "Origen del prospecto","Where every opportunity came from.": "De dónde llegó cada oportunidad.","Project history": "Historial de proyectos","Photos, scope, estimate, invoice, completion.": "Fotos, alcance, cotización, factura, entrega.","Reminders, nurture texts, missed-call recovery.": "Recordatorios, mensajes de seguimiento, recuperación de llamadas perdidas.","Repeat clients": "Clientes recurrentes","Review requests, annual check-ins and maintenance contracts.": "Solicitudes de reseñas, revisiones anuales y contratos de mantenimiento.","This is the exit plan. The day Lupe decides to sell, a buyer pays for recurring clients and a client list that keeps booking work without Lupe on every call. The CRM is where that value gets built, one contact at a time.": "Este es el plan de salida. El día que Lupe decida vender, un comprador paga por los clientes recurrentes y por una lista de clientes que sigue generando trabajo sin que Lupe tenga que contestar cada llamada. En el CRM se construye ese valor, un contacto a la vez.","Finished estate": "Residencia terminada","Recurring revenue": "Ingresos recurrentes","Finished projects": "Los proyectos terminados","shouldn't go dark.": "no deben quedar en el olvido.","Maintenance contracts keep the lights on long after the crew leaves.": "Los contratos de mantenimiento mantienen el negocio activo mucho después de que se va la cuadrilla.","Repeat contact": "Contacto constante","Past clients hear from Lupe on a schedule.": "Los clientes anteriores saben de Lupe con regularidad.","Priority service": "Servicio preferente","Relationships, not one-off transactions.": "Relaciones, no ventas de una sola vez.","Seasonal": "Por temporada","Inspections and punch lists.": "Inspecciones y listas de pendientes.","Upsell": "Ventas adicionales","More remodels, upgrades and referrals.": "Más remodelaciones, mejoras y recomendaciones.","Valuation": "Valor de la empresa","Recurring revenue and a documented client list for the day the company sells.": "Ingresos recurrentes y una lista de clientes documentada para el día en que se venda la empresa.","Content engine": "Motor de contenido","Day 1": "Día 1","Before video": "Video del antes","Now watch one kitchen": "Ahora vea cómo una cocina","sell the next one.": "vende la siguiente.","Every project New Trust Services, LLC completes becomes content. This is a kitchen, the $35K–$100K+ tier. We start filming in 4K on day one, while it still looks like this.": "Cada proyecto que termina New Trust Services, LLC se convierte en contenido. Esta es una cocina del rango de $35K–$100K+. Empezamos a grabar en 4K desde el primer día, mientras todavía se ve así.","Demo": "Demolición","Progress clips": "Clips de avance","Demo day is": "El día de la demolición","pure attention.": "se roba la atención.","Before-and-after is what Meta is built for. Short progress clips keep Lupe's name in front of homeowners who are still deciding who to hire.": "El antes y después es justo para lo que está hecho Meta. Los clips cortos de avance mantienen el nombre de Lupe frente a los propietarios que todavía están decidiendo a quién contratar.","Rough-in": "Instalaciones","Problem → solution": "Problema → solución","Show the part": "Muestre la parte","nobody else shows.": "que nadie más enseña.","New plumbing and electrical, done right behind the wall. Problem-to-solution stories prove Lupe does the work cheap crews skip, which is exactly what high-end clients pay to avoid.": "Plomería y electricidad nuevas, bien hechas detrás del muro. Las historias de problema a solución demuestran que Lupe hace el trabajo que las cuadrillas baratas se saltan, y eso es justo lo que los clientes de alto nivel pagan por evitar.","Cabinets + marble": "Gabinetes + mármol","Craft close-ups": "Acercamientos al detalle","Sell the": "Venda","finish work.": "los acabados.","Tight reveals, clean scribe lines, Calacatta marble with a waterfall edge that meets the floor. Close-ups are where a six-figure client decides Lupe is the one.": "Juntas precisas, cortes limpios a la medida, mármol Calacatta con caída en cascada hasta el piso. En los acercamientos es donde un cliente de seis cifras decide que Lupe es el indicado.","Day 42": "Día 42","Final reveal": "La gran revelación","Reveal. Review.": "Revelación. Reseña.","Retarget.": "Retargeting.","The 4K reveal video and drone flyover go out. The CRM asks the happy client for a review. The footage becomes a retargeting ad shown to everyone who visited the site and hasn't booked yet. One finished job starts selling the next.": "Sale el video de la revelación en 4K y el vuelo con dron. El CRM le pide una reseña al cliente contento. Las tomas se vuelven un anuncio de retargeting para todos los que visitaron la página y todavía no agendan. Un trabajo terminado empieza a vender el siguiente.","Craftsmanship hidden in a phone gallery cannot create demand.": "La calidad escondida en la galería del celular no genera demanda.","Job strategy": "Estrategia de trabajos","Bigger, better jobs": "Trabajos más grandes y mejores","Aim for the big jobs,": "Apunte a los trabajos grandes,","not every job.": "no a cualquier trabajo.","Luxury bathrooms": "Baños de lujo","Kitchens": "Cocinas","Additions": "Ampliaciones","Whole-home remodels": "Remodelación de toda la casa","Custom builds": "Obras a la medida","Commercial upgrades": "Mejoras comerciales","Case by case": "Según el caso","What does a missed job cost?": "¿Cuánto cuesta un trabajo perdido?","Job type": "Tipo de trabajo","Luxury bathroom · from $15K": "Baño de lujo · desde $15K","Kitchen · from $35K": "Cocina · desde $35K","Addition · from $75K": "Ampliación · desde $75K","Whole-home remodel · from $150K": "Remodelación de toda la casa · desde $150K","Custom build · from $500K": "Obra a la medida · desde $500K","Jobs per quarter that go to someone else": "Trabajos por trimestre que se lleva otro","a year in project revenue Lupe never got the chance to bid. Uses the low end of each range. Examples only; Lupe approves pricing, scope and final estimates.": "al año en proyectos que Lupe ni siquiera pudo cotizar. Usa el valor más bajo de cada rango. Solo son ejemplos; Lupe aprueba los precios, el alcance y las cotizaciones finales.","The money logic": "La lógica del dinero","Ad dollar → signed job": "Dólar en anuncios → trabajo firmado","A few right jobs": "Unos cuantos trabajos bien escogidos","can change the month.": "pueden cambiar el mes.","New leads": "Prospectos nuevos","Qualified": "Calificados","Site visits": "Visitas a la obra","Signed jobs": "Trabajos firmados","Two or three signed kitchens at the low end of the range is $70K–$105K in projects for Lupe to price, approve and build. We track every step from ad dollar to signed contract, so nobody has to guess what's working.": "Dos o tres cocinas firmadas en el valor más bajo del rango son $70K–$105K en proyectos para que Lupe los cotice, apruebe y construya. Medimos cada paso, desde el dólar en anuncios hasta el contrato firmado, para que nadie tenga que adivinar qué está funcionando.","Illustrative only, not a revenue guarantee. The system wins when it produces qualified opportunities Lupe can price, approve and complete profitably.": "Solo es un ejemplo, no una garantía de ingresos. El sistema gana cuando genera oportunidades calificadas que Lupe puede cotizar, aprobar y terminar con ganancia.","Schedule": "Calendario","90-day build": "Arranque de 90 días","Start focused. Prove it.": "Empiece enfocado. Demuéstrelo.","Scale what works.": "Amplíe lo que funciona.","Phase 1": "Fase 1","Services, photos, territory, pricing rules, ideal customer.": "Servicios, fotos, zona de trabajo, reglas de precios, cliente ideal.","Phase 2": "Fase 2","Build": "Construcción","Mobile website, booking, CRM, Google Business, social pages.": "Página web para celular, citas, CRM, Google Business, páginas en redes sociales.","Phase 3": "Fase 3","Launch": "Lanzamiento","4K drone and video content, Google and Meta tests, lead capture, follow-up.": "Contenido de video y dron en 4K, pruebas en Google y Meta, captación de prospectos, seguimiento.","Phase 4": "Fase 4","Measure": "Medición","Booked calls, estimates, won jobs, revenue, reviews.": "Citas agendadas, cotizaciones, trabajos ganados, ingresos, reseñas.","At day 90 we keep what creates qualified work and cut what doesn't.": "Al día 90 nos quedamos con lo que genera trabajo calificado y quitamos lo que no.","Investment": "Inversión","Setup + monthly": "Arranque + mensualidad","Build it once.": "Constrúyalo una vez.","Run it every month.": "Opérelo cada mes.","One-time setup": "Arranque (pago único)","The Growth Engine build": "La construcción del Growth Engine","Mobile-first website with booking and project form": "Página web para celular, con citas y formulario del proyecto","CRM: lead source, project history, follow-up, missed-call recovery, review requests": "CRM: origen de cada prospecto, historial de proyectos, seguimiento, recuperación de llamadas perdidas, solicitudes de reseñas","Google Business Profile and social pages": "Perfil de Google Business y páginas en redes sociales","Google and Meta ad accounts with tracking to signed jobs": "Cuentas de anuncios en Google y Meta, con seguimiento hasta el trabajo firmado","Content plan and a 4K photo and drone library": "Plan de contenido y una biblioteca de fotos y tomas de dron en 4K","Quoted at the Business Build Session": "Se cotiza en la Sesión de Arranque del Negocio","Monthly retainer": "Mensualidad","Run, measure, scale": "Operar, medir, crecer","Google and Meta campaigns, tested and tuned": "Campañas en Google y Meta, probadas y ajustadas","4K drone and camera coverage: before, progress and reveal on every project": "Cobertura con dron y cámara en 4K: el antes, el avance y la revelación de cada proyecto","Optional: social media management with viral-format Reels, TikToks and Shorts": "Opcional: manejo de redes sociales con Reels, TikToks y Shorts en formato viral","Retargeting ads to site visitors who haven't booked": "Anuncios de retargeting para quienes visitaron la página y no han agendado","CRM nurture, reviews and maintenance-contract program": "Seguimiento en el CRM, reseñas y programa de contratos de mantenimiento","Monthly report: booked calls, estimates, won jobs, revenue": "Reporte mensual: citas agendadas, cotizaciones, trabajos ganados, ingresos","Measure the retainer against signed projects, not likes. A single extra kitchen at the low end of the range is a $35K project.": "Mida la mensualidad contra proyectos firmados, no contra likes. Una sola cocina extra en el valor más bajo del rango es un proyecto de $35K.","General notes": "Notas generales","Verified before launch": "Verificado antes del lanzamiento","What we lock down": "Lo que dejamos bien amarrado","before ads go live.": "antes de lanzar los anuncios.","Licenses, insurance and territory": "Licencias, seguro y zona de trabajo","Which job types have the best margin": "Qué tipos de trabajo dejan el mejor margen","Minimum job size": "Monto mínimo por trabajo","Who approves estimates and contracts": "Quién aprueba las cotizaciones y los contratos","How generated leads are tracked": "Cómo se da seguimiento a los prospectos generados","How payment and compensation are documented": "Cómo se documentan los pagos y la compensación","Maintenance contract offer and pricing": "Oferta y precio de los contratos de mantenimiento","The promise isn't magic. It's disciplined execution, measurement and follow-up.": "La promesa no es magia. Es ejecución disciplinada, medición y seguimiento.","Final terms should be reviewed by qualified legal and accounting professionals.": "Los términos finales deben revisarlos profesionales calificados en lo legal y lo contable.","Next step": "Siguiente paso","Business Build Session": "Sesión de Arranque del Negocio","New Trust Services, LLC builds the work.": "New Trust Services, LLC construye la obra.","Chandler builds the demand.": "Chandler construye la demanda.","Website. Booking. Google. Meta. CRM. 4K drone and video. Follow-up. Reviews. Maintenance contracts. One session to set the foundation, and the build starts.": "Página web. Citas. Google. Meta. CRM. Dron y video en 4K. Seguimiento. Reseñas. Contratos de mantenimiento. Una sesión para poner los cimientos, y arranca la obra.","Bring": "Traiga","Your best finished-project photos.": "Sus mejores fotos de proyectos terminados.","Decide": "Decida","The job types you want more of, and your minimum job size.": "Los tipos de trabajo de los que quiere más, y su monto mínimo por trabajo.","Draw": "Marque","The territory your crews will cover.": "La zona que van a cubrir sus cuadrillas.","Copy my “I'm in” text": "Copiar mi mensaje “Cuenta conmigo”","Chandler, I'm in. Let's book the Business Build Session and start the Growth Engine for New Trust Services, LLC.": "Chandler, cuenta conmigo. Agendemos la Sesión de Arranque del Negocio y arranquemos el Growth Engine para New Trust Services, LLC.","Paste it into a text to Chandler. Every week the system isn't live is another week of searches that land on someone else.": "Péguelo en un mensaje de texto para Chandler. Cada semana que el sistema no está funcionando es otra semana de búsquedas que terminan con alguien más.","Growth Engine proposal for New Trust Services, LLC · Prepared by Chandler, Above All Media": "Propuesta Growth Engine para New Trust Services, LLC · Preparada por Chandler, Above All Media","Job values and funnel numbers are examples and projections, not guarantees.": "Los valores de los trabajos y las cifras del embudo son ejemplos y proyecciones, no garantías.","Website preview": "Vista previa de la página web","Example job values": "Valores de trabajos de ejemplo","Illustrative lead funnel": "Embudo de prospectos de ejemplo","Estate · new build": "Obra nueva","Complete": "Terminada","The vision": "La visión","Landscaping": "Paisajismo","The finished estate": "La residencia terminada","Kitchen remodel": "Cocina","Day": "Día","Filming: ": "Grabando: ","Before": "Antes","Walls, window + floor": "Muros, ventana + piso","Cabinets + island": "Gabinetes + isla","Calacatta marble": "Mármol Calacatta","Ceiling + lighting": "Techo + iluminación","Progress clip": "Clip de avance","Craft close-up": "Acercamiento al detalle","Reveal + review ask": "Revelación + pedir reseña","Tap for music": "Activar música","Sound on": "Música activa","Copied. Paste it into a text to Chandler.": "Copiado. Péguelo en un mensaje para Chandler.","Selected. Press copy on your device.": "Seleccionado. Presione copiar en su dispositivo."};
+var SKIP = {hudTitle: 1, hudNum: 1, hudStage: 1, hudRec: 1, sound: 1, lang: 1, lostVal: 1, lossYear: 1, copied: 1};
+var lang = 'en', items = null, btn = document.getElementById('lang');
+function norm(s){ return s.replace(/\s+/g, ' ').trim(); }
+window.LupeT = function(s){ return lang === 'es' && ES[s] || s; };
+function collect(){
+  // every text on the page with a Spanish line, keeping its own spacing; plus the labels screen readers use
+  items = [];
+  var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n;
+  while ((n = w.nextNode())){
+    var v = n.nodeValue, k = norm(v);
+    if (!k || !ES[k]) continue;
+    for (var q = n.parentNode, skip = false; q && q !== document.body; q = q.parentNode)
+      if ((q.id && SKIP[q.id]) || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(q.tagName)){ skip = true; break; }
+    if (!skip) items.push({n: n, en: v, es: v.match(/^\s*/)[0] + ES[k] + v.match(/\s*$/)[0]});
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('main [aria-label]'), function(el){
+    var k = el.getAttribute('aria-label'); if (ES[k]) items.push({el: el, en: k, es: ES[k]});
+  });
+}
+function anchor(){
+  // the section in the middle of the screen, so switching languages keeps the reader where they were
+  var b = document.querySelectorAll('.beat, .foot'), mid = innerHeight*.5;
+  for (var i = 0; i < b.length; i++){ var r = b[i].getBoundingClientRect(); if (r.bottom > mid) return {el: b[i], top: r.top}; }
+  return null;
+}
+function set(l, keep){
+  if (l === lang) return;
+  var a = keep ? anchor() : null;
+  lang = l; if (!items) collect();
+  items.forEach(function(o){ if (o.n) o.n.nodeValue = o[l]; else o.el.setAttribute('aria-label', o[l]); });
+  document.documentElement.lang = l;
+  if (btn){ btn.textContent = l === 'es' ? 'English' : 'Español'; btn.setAttribute('aria-label', l === 'es' ? 'View in English' : 'Ver en español'); }
+  try { localStorage.setItem('lupe-lang', l); } catch (e) {}
+  dispatchEvent(new Event('resize'));     // Spanish lines run longer: the cards move, so the build re-measures its scroll map
+  if (a) scrollBy(0, a.el.getBoundingClientRect().top - a.top);
+  try { dispatchEvent(new CustomEvent('lupelang', {detail: l})); } catch (e) {}
+}
+var start = 'en';
+try { var m = /[?&]lang=(es|en)\b/.exec(location.search); start = m ? m[1] : localStorage.getItem('lupe-lang') === 'es' ? 'es' : 'en'; } catch (e) {}
+if (start === 'es') set('es');
+if (btn){
+  btn.hidden = false;
+  if (start === 'es') btn.classList.add('calm');
+  btn.addEventListener('click', function(){ btn.classList.add('calm'); set(lang === 'es' ? 'en' : 'es', true); });
+}
+window.__lupeLangSet = set;   // test hook
+})();
+</script>
 
 <script>
 /* calculator + copy: work with or without WebGL */
@@ -535,11 +634,12 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
   }
   job.addEventListener('change',calc); lost.addEventListener('input',calc); calc();
   var btn = document.getElementById('imIn'), txt = document.getElementById('imInText'), out = document.getElementById('copied');
+  var tx = function(s){ return window.LupeT ? window.LupeT(s) : s; };
   function selectText(){ var r=document.createRange(); r.selectNodeContents(txt); var s=getSelection(); s.removeAllRanges(); s.addRange(r); }
   btn.addEventListener('click',function(){
     try{
-      navigator.clipboard.writeText(txt.textContent).then(function(){ out.textContent='Copied. Paste it into a text to Chandler.'; },function(){ selectText(); out.textContent='Selected. Press copy on your device.'; });
-    }catch(e){ selectText(); out.textContent='Selected. Press copy on your device.'; }
+      navigator.clipboard.writeText(txt.textContent).then(function(){ out.textContent=tx('Copied. Paste it into a text to Chandler.'); },function(){ selectText(); out.textContent=tx('Selected. Press copy on your device.'); });
+    }catch(e){ selectText(); out.textContent=tx('Selected. Press copy on your device.'); }
   });
 })();
 </script>
@@ -552,7 +652,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 (function () {
   var MUSIC_VOL = 0.33;
   var TRACK = 'music/jam-rock.mp3';   // the recorded soundtrack; the synth band below only plays if it can't load
-  var trackBuf = null, trackSrc = null, trackLoad = null;
+  var trackBuf = null, trackSrc = null, trackLoad = null, trackT0 = 0;
+  var TRACK_BPM = 116, TRACK_OFF = 0.157;   // the recorded track's tempo and where its eighth-note grid starts (s)
   var BPM = 110, BEAT = 60 / BPM, S16 = BEAT / 4, E8 = BEAT / 2, BAR = BEAT * 4;
   var SWO = (2 * 0.58 - 1) * S16;          // swing: odd 16ths land late
   var LOOK = 0.15, TICK = 25;
@@ -1008,6 +1109,24 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
         osc('triangle', 320, 260, 0.03, t + o, 0.001, 0.3 * w, 0.03, d); nz(t + o, 0.001, 0.25 * w, 0.01, 'bandpass', 2000, 1, d);
       });
     },
+    drain: function (t, v, d) {                          // the pool draining: a swirl of water and a few glugs
+      nz(t, 0.35, 0.22 * v, 0.55, 'lowpass', 900, 0.8, d, 240, 1.6);
+      nz(t + 0.1, 0.3, 0.1 * v, 0.4, 'bandpass', 520, 1.6, d, 180, 1.3);
+      for (var k = 0; k < 7; k++) {
+        var tt = t + 0.25 + k * 0.17 + R() * 0.06, f = 260 + R() * 120;
+        osc('sine', f, f * 1.7, 0.05, tt, 0.003, (0.16 - k * 0.012) * v, 0.03, d);   // a bubble's rising bloop
+      }
+    },
+    fill: function (t, v, d) {                           // water rushing back in, its pitch rising as the pool fills
+      nz(t, 0.002, 0.3 * v, 0.06, 'bandpass', 1500, 0.8, d); grains(t + 0.01, 18, 0.35, 2200, 6000, 0.12 * v, d, 2);
+      nz(t, 0.4, 0.2 * v, 0.7, 'bandpass', 480, 0.9, d, 1500, 1.7);
+      nz(t, 0.3, 0.14 * v, 0.6, 'lowpass', 320, 0.7, d);
+      grains(t + 0.4, 26, 1.2, 1500, 4500, 0.06 * v, d, 3);
+    },
+    sparkle: function (t, v, d) {                        // a light chime as the full pool catches the light
+      metal(t, 2350, [1, 1.5, 2.01], [0.3, 0.22, 0.14], 0.07 * v, d);
+      metal(t + 0.09, 3140, [1, 1.5], [0.25, 0.16], 0.05 * v, d);
+    },
     whoosh: function (t, v, d) {
       var p = pn(-0.6, d), f = nz(t, 0.3, 0.9 * v, 0.07, 'bandpass', 350, 1.1, p);
       f.frequency.setValueAtTime(350, t); f.frequency.exponentialRampToValueAtTime(1700, t + 0.3); f.frequency.exponentialRampToValueAtTime(450, t + 0.55);
@@ -1038,7 +1157,8 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
   function playTrack() {
     if (trackSrc || !A.on) return;
     trackSrc = C.createBufferSource(); trackSrc.buffer = trackBuf; trackSrc.loop = true;
-    trackSrc.connect(G.mFade); trackSrc.start(); fade(1, 1.2);
+    trackT0 = now() + 0.03; trackSrc.connect(G.mFade); trackSrc.start(trackT0); fade(1, 1.2);
+    A.beat = 60 / TRACK_BPM;   // landings follow the track's own beat
   }
   function startSynth() {
     var t = now();
@@ -1054,7 +1174,7 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     A.on = true;
     if (!offline && C.state === 'suspended' && C.resume) C.resume();
     if (offline || !TRACK || !window.fetch) { startSynth(); return; }
-    A.beat = 0;   // the recorded track has no beat clock here: drops keep their own steady rhythm
+    A.beat = 0;   // until the track is playing, drops keep their own steady rhythm
     if (trackBuf) playTrack();
     else loadTrack().then(playTrack, function () { trackLoad = null; TRACK = ''; A.beat = BEAT; if (A.on) startSynth(); });
   };
@@ -1063,8 +1183,18 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     if (trackSrc) { var s = trackSrc; trackSrc = null; try { s.stop(now() + 0.7); } catch (e) {} }
   };
   A.delayToBeat = function (ms) {
-    if (!A.on || !C || TRACK) return 0;
+    if (!A.on || !C) return 0;
     var tn = now(), lat = offline ? 0 : Math.min(0.1, C.outputLatency || C.baseLatency || 0);
+    if (TRACK) {
+      // the next eighth note of the recorded track, wherever its loop has got to
+      if (!trackSrc || !trackBuf) return 0;
+      var e8 = 30 / TRACK_BPM, dur = trackBuf.duration, pos = tn + ms / 1000 - lat - trackT0;
+      if (pos < 0) return 0;
+      pos %= dur;
+      var nx = TRACK_OFF + Math.ceil((pos - TRACK_OFF) / e8 - 1e-6) * e8;
+      if (nx > dur - 0.02) nx = dur + TRACK_OFF;
+      return Math.max(0, (nx - pos) * 1000);
+    }
     var g = t0 + Math.ceil((tn + ms / 1000 - lat - t0) / E8 - 1e-6) * E8;
     return Math.max(0, (g - tn + lat) * 1000 - ms);
   };
@@ -1092,57 +1222,78 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 <script>
 (function(){
 'use strict';
-/* Estate build: the real coastal estate, built piece by piece. Each stage is a clean photo
-   plate plus its piece, cut into a few sections. Scrolling lowers the sections in from above
-   the frame; then they let go one at a time, on the beat: a small lift, a smooth fall, a soft
-   landing with a little bounce, a puff of dust and a landing sound. Once the last one settles
-   the shot dissolves to the next stage with that piece installed. */
+/* Estate build, drop-in style: the real coastal estate, built piece by piece. Each stage is a clean photo
+   plate plus its piece, cut into a few sections. As the stage's card arrives, the sections fall in from
+   above the frame one at a time, landing on the beat: a gravity drop, a hard landing with a small squash and
+   rebound, a puff of dust and a landing sound. Once the last one settles the shot dissolves to the next
+   stage with that piece installed. The camera holds steady and only drifts part way toward the action.
+   The pool is the one exception: it stays where it is in the photo and, on its turn, drains and fills back up. */
 var wrap = document.getElementById('build');
 if (!wrap) return;
 var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-// m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole hanging piece (fractions of the plate),
-// land: [dx, dy, scale] where it comes to rest, measured from its hanging spot. order: which section drops first.
+// m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole piece as it hung in the source photo
+// (fractions of the plate), land: [dx, dy, scale] that puts it in place on the house. order: which section drops first.
+// fill: [x, y, w, h] of the pool's water layer; line: its waterline, [x, top, bottom] as fractions of that box
+// (sr/poolfill.py cuts the water out and paints the empty basin under it)
 var FRAMES = [
   {src: 'final',      m: 0,    stage: 'The vision',          w: 2412, h: 1328},
-  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.1484, .0428, .654, .2864],  land: [0, .45, 1.08],   order: [1, 0, 2],       kind: 'concrete'},
+  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.0998, .633, .7723, .2324],  land: [0, 0, 1],        order: [0, 1, 2],       kind: 'concrete'},
   {src: 'structure',  m: .145, stage: 'Structure',           w: 1600, h: 981,  piece: [.1388, .0265, .6538, .366],  land: [-.025, .15, .72], order: [1, 0, 2],       kind: 'steel'},
   {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74],    order: [0, 1, 2, 3, 4], kind: ['concrete', 'glass', 'glass', 'glass', 'concrete']},
   {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87],    order: [1, 0, 2],       kind: 'roof'},
   {src: 'interiors',  m: .635, stage: 'Interiors',           w: 1600, h: 985,  piece: [.0956, 0, .785, .4772],      land: [0, .06, .95],    order: [0, 1, 2],       kind: 'wood'},
-  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  piece: [.1764, .0954, .7089, .2589], land: [.339, .391, .42], order: [0, 1],          kind: 'concrete'},
+  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  fill: [.7406, .8051, .1739, .0721],
+   line: [[0, .1056, .9366], [.125, .0915, .8662], [.25, .0775, .7817], [.375, .0493, .6972], [.5, .0352, .5986], [.625, .0352, .5423], [.75, .0352, .4437], [.875, .0634, .331], [1, .2042, .2324]]},
   {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15],   order: [0, 3, 1, 2],    kind: 'palm'},
   {src: 'final',      m: .96,  stage: 'The finished estate', w: 2412, h: 1328}
 ];
-// the sections of each piece: [x, y, w, h] as fractions of the plate (sr/split.py)
+// the sections of each piece: [x, y, w, h] as fractions of the plate (sr/split.py; palm crowns regrown by sr/palmfix.py;
+// the foundation slab is cut from its own plate by sr/slabcut.py, which leaves an empty lot for it to drop into)
 var PARTS = {
-  foundation: [[.1503, .0673, .2269, .2181], [.3772, .0459, .2089, .2803], [.5861, .1335, .2145, .1876]],
+  foundation: [[.0998, .6483, .2749, .1723], [.3741, .633, .2687, .2324], [.6421, .6534, .23, .1927]],
   structure: [[.1407, .1203, .2006, .1631], [.3413, .0296, .2156, .3282], [.5569, .0989, .2338, .2905]],
   walls: [[.1478, .1162, .0991, .2508], [.2712, .0755, .1347, .2661], [.4551, .1203, .1608, .2793], [.6259, .1336, .144, .2732], [.7993, .0765, .0536, .314]],
   roof: [[.0692, .128, .2843, .2274], [.3535, .0873, .2774, .2802], [.6309, .1686, .2762, .199]],
   interiors: [[.0975, 0, .2725, .4467], [.37, 0, .2669, .4741], [.6368, .0457, .2419, .4264]],
-  pool: [[.1783, .0984, .331, .2355], [.5093, .1015, .3741, .2497]],
-  landscape: [[.1122, 0, .1683, .373], [.3291, 0, .1764, .2632], [.5286, .0951, .1128, .1985], [.6496, 0, .1802, .3675]]
+  landscape: [[.1122, -.0729, .1677, .3684], [.3291, -.072, .1764, .3352], [.5286, .0951, .1128, .1985], [.6496, -.0785, .1802, .446]]
 };
-var FALL = 900, SETTLE = 620, STAG = 540, HOLD = 160, RISE = .12;   // ms; RISE: most a set waits above its hanging spot, in plate heights
+var STAG = 520, SETTLE = 420, HOLD = 520;   // ms: gap between landings (the music's beat when it plays), settle, pause before the dissolve
+var ZOOM = 2.1;     // phones: the photo is this many screen widths wide, so most of the house is in view
+var FOLLOW = .5;    // how far the camera drifts toward the section that is dropping (0 = locked, 1 = centred on it)
+var GRAV = 2.4;     // fall acceleration, in frame heights per second squared
+var ENTRY = .3;     // pieces come in already falling: this share of the fall is covered at entry speed
+var DRAIN = 3, DRY = 1, REFILL = 3, LOW = .9;   // the pool: beats to drain, to stand empty and to fill back up; how far down it goes
+function stage(f){ return !!(f.piece || f.fill); }   // a stage that builds something on its turn
+function tx(s){ return window.LupeT ? window.LupeT(s) : s; }   // the HUD's words in the reader's language
 var bg = wrap.querySelector('.build-bg'), stack = wrap.querySelector('.build-frame'), dust = wrap.querySelector('.build-dust');
+function warm(im){ if (im.decode) im.decode().catch(function(){}); }
 var shots = FRAMES.map(function(f){
   var s = document.createElement('div'); s.className = 'shot';
   var box = document.createElement('div'); box.className = 'stagebox'; s.appendChild(box);
   var plate = new Image(); plate.alt = ''; plate.decoding = 'async'; plate.className = 'plate';
-  plate.src = f.piece ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
-  box.appendChild(plate);
-  var o = {el: s, box: box, bw: 0, bh: 0, panX: null};
+  plate.src = stage(f) ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
+  box.appendChild(plate); warm(plate);
+  var o = {el: s, box: box, bw: 0, bh: 0, top: 0, x: null, v: 0, hidden: false};
   if (f.piece){
-    var sh = document.createElement('div'); sh.className = 'drop-shadow'; box.appendChild(sh); o.shadow = sh;
-    var p = f.piece, gx = p[0] + p[2]/2, gy = p[1] + p[3];   // every section scales about the whole piece's bottom centre
+    var p = f.piece, L = f.land, gx = p[0] + p[2]/2, gy = p[1] + p[3];
     o.parts = PARTS[f.src].map(function(b, k){
       var im = new Image(); im.alt = ''; im.decoding = 'async'; im.className = 'piece'; im.src = 'estate3/' + f.src + '_' + k + '.webp';
       im.style.left = b[0]*100 + '%'; im.style.top = b[1]*100 + '%'; im.style.width = b[2]*100 + '%'; im.style.height = b[3]*100 + '%';
-      im.style.transformOrigin = ((gx - b[0])/b[2]*100).toFixed(2) + '% ' + ((gy - b[1])/b[3]*100).toFixed(2) + '%';
-      box.appendChild(im);
-      return {el: im, b: b, cx: b[0] + b[2]/2 - gx, cy: b[1] - gy, mass: Math.min(1.4, b[2]*b[3]*f.land[2]*f.land[2]*8),
-              kind: typeof f.kind === 'string' ? f.kind : f.kind[k], P: 0};
+      box.appendChild(im); warm(im);
+      // the whole piece lands scaled about its bottom centre and moved by land; each section keeps its place in it
+      var bx = b[0] + b[2]/2, by = b[1] + b[3];
+      return {el: im, dx: (bx - gx)*(L[2] - 1) + L[0], dy: (by - gy)*(L[2] - 1) + L[1], x: gx + (bx - gx)*L[2] + L[0], bot: gy + (by - gy)*L[2] + L[1],
+              mass: Math.min(1.4, b[2]*b[3]*L[2]*L[2]*8), kind: typeof f.kind === 'string' ? f.kind : f.kind[k]};
     });
+  }
+  if (f.fill){
+    // the water, over the empty basin painted into the plate: its waterline is clipped down to drain it
+    var wv = document.createElement('div'); wv.className = 'water';
+    wv.style.left = f.fill[0]*100 + '%'; wv.style.top = f.fill[1]*100 + '%'; wv.style.width = f.fill[2]*100 + '%'; wv.style.height = f.fill[3]*100 + '%';
+    var wi = new Image(); wi.alt = ''; wi.decoding = 'async'; wi.src = 'estate3/' + f.src + '_water.webp';
+    var gl = document.createElement('i'); gl.style.webkitMaskImage = gl.style.maskImage = 'url("estate3/' + f.src + '_water.webp")';
+    wv.appendChild(wi); wv.appendChild(gl); box.appendChild(wv); warm(wi);
+    o.water = wv; o.wimg = wi; o.parts = []; o.level = 0;
   }
   stack.appendChild(s); return o;
 });
@@ -1151,15 +1302,18 @@ var hud = document.getElementById('hud'), hTitle = document.getElementById('hudT
 
 function clamp(x, a, b){ return Math.min(b === undefined ? 1 : b, Math.max(a || 0, x)); }
 function lerp(a, b, t){ return a + (b - a)*t; }
-function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
-function easeInOut(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
 var beats = Array.prototype.slice.call(document.querySelectorAll('.beat')), anchors = [];
+var cardAt = [];   // phones: build progress at which each stage's card has come a quarter of the way up the screen
 function measure(){
   anchors = beats.map(function(b){ var r = b.getBoundingClientRect(), top = r.top + scrollY;
     return {y: b.classList.contains('hero') ? top + innerHeight*.5 : top + r.height*.5, m: +b.dataset.m, s: +b.dataset.s, a: +b.dataset.a}; });
+  cardAt = FRAMES.map(function(f){
+    var b = stage(f) && beats.filter(function(x){ return +x.dataset.m === f.m && +x.dataset.s === 0; })[0], c = b && b.querySelector('.card');
+    return c ? target(c.getBoundingClientRect().top + scrollY - innerHeight*.76).m : null;
+  });
 }
-function target(){
-  var y = scrollY + innerHeight*.5, A = anchors;
+function target(sy){
+  var y = (sy === undefined ? scrollY : sy) + innerHeight*.5, A = anchors;
   if (y <= A[0].y) return {m: A[0].m, s: A[0].s, a: A[0].a};
   for (var i = 0; i < A.length - 1; i++) if (y <= A[i+1].y){
     var t = (y - A[i].y)/(A[i+1].y - A[i].y);
@@ -1169,76 +1323,68 @@ function target(){
 }
 function frameAt(m){ for (var i = FRAMES.length - 1; i > 0; i--) if (m >= (FRAMES[i].m + FRAMES[i-1].m)/2) return i; return 0; }
 function span(i){ return [i ? (FRAMES[i].m + FRAMES[i-1].m)/2 : 0, i < FRAMES.length - 1 ? (FRAMES[i].m + FRAMES[i+1].m)/2 : 1]; }
-// the sections come down from above the frame as the card scrolls in, and start dropping before it is centred
-// (on phones the card covers the lower half once centred, so the drop starts sooner)
-function dropAt(i){ var lo = span(i)[0]; return lo + (narrow() ? .4 : .7)*(FRAMES[i].m - lo); }
-
-/* each plate covers the frame; the camera glides sideways to keep the action in view */
-var FW = 0, FH = 0;
-function narrow(){ return FW/FH < 1.2; }
-// on a phone only part of the house fits, so sections drop left to right and the camera glides along with them
-function orderOf(i){ var f = FRAMES[i]; return narrow() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
-function partX(i, j, P){ var f = FRAMES[i], q = shots[i].parts[j], gx = f.piece[0] + f.piece[2]/2, t = clamp(P);
-  return gx + f.land[0]*t + q.cx*lerp(1, f.land[2], t); }
-function focus(i){ var f = FRAMES[i]; return f.piece ? f.piece[0] + f.piece[2]/2 : .45; }
-function pan(i, fx, snap){
-  var s = shots[i], c = FW/FH < 1.2 ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
-  var x = Math.max(FW - s.bw, Math.min(0, FW*c - fx*s.bw));
-  s.panX = snap || s.panX === null ? x : lerp(s.panX, x, .07);
-  s.box.style.left = s.panX.toFixed(1) + 'px';
+function dropAt(i){
+  var lo = span(i)[0], m = FRAMES[i].m;
+  // phones: drop while the card is still low, so the landings are never hidden behind it (taller cards start sooner)
+  return phone() && cardAt[i] !== null && cardAt[i] !== undefined ? clamp(cardAt[i], lo + .08*(m - lo), lo + .55*(m - lo)) : lo + .7*(m - lo);
 }
+
+/* framing: on wide screens each plate covers the frame; on phones it is zoomed out under the header and fades
+   into the page below, and the camera glides part way toward each section as it drops */
+var FW = 0, FH = 0;
+function phone(){ return FW/FH < 1.2; }
+function orderOf(i){ var f = FRAMES[i]; return !f.piece ? [] : phone() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
 function layout(){
   var fw = stack.clientWidth, fh = stack.clientHeight; FW = fw; FH = fh;
   shots.forEach(function(s, i){
-    var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h), w = f.w*k, h = f.h*k;
-    s.bw = w; s.bh = h;
-    s.box.style.width = w + 'px'; s.box.style.height = h + 'px';
-    s.box.style.top = (fh - h)*.3 + 'px'; pan(i, focus(i), true);
-    if (f.piece){
-      // the set waits a little above its spot, as high as the frame allows without cropping it
-      s.rise = clamp((f.piece[1]*h + (fh - h)*.3 - .06*fh)/h, 0, RISE);
-      s.lift = s.rise/(f.piece[1] + f.piece[3] + .12);
-      // soft contact shadow where the piece will land
-      var p = f.piece, L = f.land, sw = p[2]*L[2]*.92;
-      s.shadow.style.width = sw*100 + '%'; s.shadow.style.height = (p[3]*L[2]*.16)*100 + '%';
-      s.shadow.style.left = (p[0] + p[2]/2 + L[0] - sw/2)*100 + '%'; s.shadow.style.top = (p[1] + p[3] + L[1] - p[3]*L[2]*.1)*100 + '%';
-    }
+    var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h);
+    if (phone()) k = Math.min(k, ZOOM*fw/f.w);
+    var w = f.w*k, h = f.h*k, short = h < fh - 1;
+    s.bw = w; s.bh = h; s.top = short ? 0 : (fh - h)*.3;
+    s.box.style.width = w + 'px'; s.box.style.height = h + 'px'; s.box.style.top = s.top + 'px';
+    s.el.classList.toggle('short', short);
+    // how far above its spot each section starts: clear of the top of the frame, whatever the zoom
+    if (f.piece) s.parts.forEach(function(q){ q.clear = s.top + q.bot*h + 36 + .06*fh; });
   });
+}
+function camAim(i, j, P){
+  // desktop: the landing area, drifting half way to where the piece ends up; phones: the landing area, drifting toward section j
+  var s = shots[i], f = FRAMES[i];
+  if (f.fill){ var cx = f.fill[0] + f.fill[2]/2; return phone() ? cx : .5 + FOLLOW*(cx - .5); }   // the pool, held in view
+  if (!f.piece) return .45;
+  var gx = f.piece[0] + f.piece[2]/2;
+  if (!phone()) return gx + FOLLOW*f.land[0]*P;
+  var c = gx + f.land[0];
+  return j === undefined ? c : c + FOLLOW*(s.parts[j].x - c);
+}
+function camera(i, fx, dt, z, drift){
+  // a critically damped spring: the camera eases in and out of every move, and never snaps or overshoots
+  var s = shots[i], c = phone() ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
+  var slack = s.bw*(z - 1)*.4, want = clamp(FW*c - fx*s.bw - drift*s.bw, FW - s.bw - slack, slack);
+  if (s.x === null || dt === null){ s.x = want; s.v = 0; }
+  else {
+    var w = 5.2; dt = Math.min(dt, .05);
+    s.v += (w*w*(want - s.x) - 2*w*s.v)*dt; s.x += s.v*dt;
+  }
+  s.box.style.transform = 'translate3d(' + s.x.toFixed(2) + 'px,0,0) scale(' + z.toFixed(4) + ')';
 }
 
-/* one section. P is its progress from the hanging height (0) to the landing spot (1); lift (0..1) raises
-   the whole set above the frame; rot swings it on its cable; by lifts it a few px (bounce, bob); sq squashes it. */
-function put(i, j, P, lift, rot, by, sq){
-  var s = shots[i], f = FRAMES[i], p = f.piece, L = f.land, q = s.parts[j], t = Math.max(0, P);
-  var up = Math.max(lift, s.lift*(1 - P));
-  var x = L[0]*s.bw*t, y = L[1]*s.bh*t - up*(p[1] + p[3] + .12)*s.bh - (by || 0), k = lerp(1, L[2], t);
-  var cx = q.cx*s.bw, cy = q.cy*s.bh;   // swing about the section's own top centre
-  q.P = P;
-  q.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + k.toFixed(4) + ',' + (k*(sq || 1)).toFixed(4) + ')' +
-    (rot ? ' translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) rotate(' + rot.toFixed(3) + 'deg) translate(' + (-cx).toFixed(1) + 'px,' + (-cy).toFixed(1) + 'px)' : '');
+/* one section: off lifts it that many px above its spot; sx, sy squash or stretch it about its bottom centre */
+function put(i, j, off, sx, sy){
+  var s = shots[i], q = s.parts[j], k = FRAMES[i].land[2];
+  q.el.style.transform = 'translate3d(' + (q.dx*s.bw).toFixed(1) + 'px,' + (q.dy*s.bh - off).toFixed(1) + 'px,0) scale(' + (k*(sx || 1)).toFixed(4) + ',' + (k*(sy || 1)).toFixed(4) + ')';
 }
-function stageLook(i, j){
-  // camera and contact shadow follow how far the set has come down; on phones the camera follows section j
-  var s = shots[i], f = FRAMES[i], n = s.parts.length, P = 0, up = 1;
-  s.parts.forEach(function(q){ P += clamp(q.P)/n; });
-  up = s.hang === undefined ? 1 : s.hang;
-  pan(i, narrow() ? partX(i, j === undefined ? orderOf(i)[0] : j, s.parts[j === undefined ? orderOf(i)[0] : j].P) : focus(i) + f.land[0]*P);
-  s.shadow.style.opacity = (up > .98 ? 0 : (.12 + .5*P*P)*(1 - up*.9)).toFixed(3);
-  s.shadow.style.transform = 'scale(' + (1.35 - .35*P).toFixed(3) + ')';
+function hideAll(i){ var s = shots[i]; s.hidden = true; if (s.water) level(i, 0); s.parts.forEach(function(q, j){ q.landed = false; put(i, j, q.clear); }); }
+function landAll(i){ var s = shots[i]; s.hidden = false; if (s.water) level(i, 0); s.parts.forEach(function(q, j){ q.landed = true; put(i, j, 0); }); }
+/* the pool's water level: 0 full, 1 empty. The waterline runs through the traced points between the far coping and the near rim */
+function level(i, u){
+  var s = shots[i], L = FRAMES[i].line;
+  if (s.level === u) return; s.level = u;
+  var cp = u <= 0 ? 'none' : 'polygon(' + L.map(function(p){ return p[0]*100 + '% ' + ((p[1] + u*(p[2] - p[1]))*100).toFixed(2) + '%'; }).join(',') + ',100% 100%,0% 100%)';
+  s.wimg.style.webkitClipPath = s.wimg.style.clipPath = cp;
+  s.water.classList.toggle('moving', u > .01);
 }
-function cable(i, j, now, lift){
-  var q = shots[i].parts[j], calm = reduce ? 0 : .35 + .65*lift;
-  q.rot0 = Math.sin(now/1050 + i + j*1.7)*.55*calm; q.by0 = Math.sin(now/1300 + j*2.1)*.006*shots[i].bh*calm;
-}
-function hangAll(i, lift, now){
-  var s = shots[i]; s.hang = lift;
-  s.parts.forEach(function(q, j){
-    // each section sways and bobs on its own cable, calming as it comes down
-    cable(i, j, now, lift); put(i, j, 0, lift, q.rot0, q.by0, 1);
-  });
-  stageLook(i);
-}
-function landAll(i){ var s = shots[i]; s.hang = 0; s.parts.forEach(function(q, j){ put(i, j, 1, 0, 0, 0, 1); }); stageLook(i); }
+function glint(i){ var w = shots[i].water; w.classList.remove('glint'); void w.offsetWidth; w.classList.add('glint'); }
 
 /* dust: a soft puff along the bottom edge of each section as it lands */
 var dctx = dust.getContext('2d'), puffs = [], dustT = 0;
@@ -1272,83 +1418,122 @@ function stepDust(now){
   });
   if (puffs.length) dustT = requestAnimationFrame(stepDust); else { dustT = 0; lastD = 0; dctx.clearRect(0, 0, dust.clientWidth, dust.clientHeight); }
 }
-// a gentle camera dip on each landing, not a shake
+// a short camera jolt on each landing, scaled to the piece
 function nudge(mass){
   if (!stack.animate || reduce) return;
-  var a = 1.5 + mass*3.5;
-  stack.animate([{transform: 'translateY(0)'}, {transform: 'translateY(' + a.toFixed(1) + 'px)', offset: .22}, {transform: 'translateY(' + (-a*.3).toFixed(1) + 'px)', offset: .6}, {transform: 'translateY(0)'}],
-    {duration: 460, easing: 'ease-out'});
+  var a = 2 + mass*3.5;
+  stack.animate([{transform: 'translateY(0)'}, {transform: 'translateY(' + a.toFixed(1) + 'px)', offset: .18}, {transform: 'translateY(' + (-a*.35).toFixed(1) + 'px)', offset: .5}, {transform: 'translateY(0)'}],
+    {duration: 380, easing: 'ease-out'});
 }
 function sfx(name, vol){ if (window.__lupeSfx) window.__lupeSfx(name, vol); }
 
-/* the drop: sections let go one at a time, a beat apart */
+/* the drop: sections fall in one at a time and land a beat apart */
 function beatMs(){ var A = window.LupeAudio, b = A && A.on && A.beat; if (!b) return 0; b = b < 10 ? b*1000 : b; while (b < 420) b *= 2; while (b > 900) b /= 2; return b; }
 var seq = null, done = [];
 function startSeq(i, now){
-  var s = shots[i], f = FRAMES[i], A = window.LupeAudio, gap = beatMs() || STAG, lead = 160;
-  // with the music on, the first section lands right on a beat and the rest follow on the next beats
-  var rel = [], dur = [];
-  // heavier drops take longer, like real gravity, but every fall stays smooth and readable
-  var fall = clamp(420 + 30*Math.sqrt((f.land[1] + s.rise)*s.bh), 560, FALL);
-  if (A && A.on && A.delayToBeat) lead += A.delayToBeat(lead + fall) || 0;
-  orderOf(i).forEach(function(j, n){ rel[j] = now + lead + n*gap; dur[j] = fall; });
-  s.parts.forEach(function(q){ q.landed = false; q.let = false; });
-  seq = {i: i, rel: rel, dur: dur};
+  var s = shots[i], A = window.LupeAudio, gap = beatMs() || STAG, order = orderOf(i), T = 0;
+  if (FRAMES[i].fill){
+    // the pool: it starts draining on a beat, stands empty for a beat and fills back up
+    var t0 = now + 160;
+    if (A && A.on && A.delayToBeat) t0 += A.delayToBeat(t0 - now) || 0;
+    s.hidden = false;
+    seq = {i: i, fill: true, order: [], t0: t0, d: DRAIN*gap, dry: DRY*gap, f: REFILL*gap};
+    seq.end = t0 + seq.d + seq.dry + seq.f;
+    return;
+  }
+  s.parts.forEach(function(q){
+    // one gravity for every piece: further to fall, longer in the air
+    q.T = clamp(1000*Math.sqrt(2*(1 - ENTRY)*q.clear/FH/GRAV), 420, 900); T = Math.max(T, q.T); q.landed = false; q.wh = false;
+  });
+  // with the music on, the first piece lands right on the beat and the rest follow on the next beats
+  var first = now + 120 + T;
+  if (A && A.on && A.delayToBeat) first += A.delayToBeat(first - now) || 0;
+  order.forEach(function(j, n){ s.parts[j].at = first + n*gap; });
+  s.hidden = false;
+  seq = {i: i, order: order, end: first + (order.length - 1)*gap + SETTLE};
 }
 function rush(now){
   // the reader scrolled on: bring the rest down quickly instead of cutting
   if (seq.rushed) return; seq.rushed = true;
   var n = 0, s = shots[seq.i];
-  orderOf(seq.i).forEach(function(j){
-    if (now < seq.rel[j]){ seq.rel[j] = now + n*110; seq.dur[j] = 460; n++; }
-  });
-  seq.hold = 200;
+  if (seq.fill){ seq.ru = s.level; seq.rt = now; seq.end = now + 350; seq.hold = 120; return; }   // the water rushes back in
+  seq.order.forEach(function(j){ var q = s.parts[j]; if (now < q.at - q.T){ q.T = 380; q.at = now + 380 + n*100; n++; } });
+  seq.end = Math.max.apply(null, s.parts.map(function(q){ return q.at; })) + SETTLE;
+  seq.hold = 120;
 }
 function stepSeq(now){
-  var i = seq.i, s = shots[i], end = 0;
-  s.hang = 0;
-  s.parts.forEach(function(q, j){
-    var u = (now - seq.rel[j])/seq.dur[j];
-    end = Math.max(end, seq.rel[j] + seq.dur[j] + SETTLE);
-    if (u < 0){   // still waiting on its cable
-      cable(i, j, now, 0); put(i, j, 0, 0, q.rot0, q.by0, 1); return;
+  var i = seq.i, s = shots[i];
+  if (seq.fill){
+    var t = now - seq.t0, u = 0, k;
+    if (seq.rushed) u = seq.ru*(1 - clamp((now - seq.rt)/350));
+    else if (t < 0) u = 0;
+    else if (t < seq.d){
+      // draining: it starts slowly, picks up, and slows as the last of it goes
+      if (!seq.s1){ seq.s1 = true; sfx('drain', .55); }
+      k = t/seq.d; u = LOW*(.5 - .5*Math.cos(Math.PI*k));
     }
-    if (!q.let){ q.let = true; if (!seq.rushed) sfx('whoosh', .16 + q.mass*.08); }
-    if (u < 1){
-      // a small lift as the hook lets go, then a smooth fall that speeds up into the landing
-      var P = u < .16 ? -.04*Math.sin(Math.PI*u/.16) : Math.pow((u - .16)/.84, 2.15);
-      put(i, j, P, 0, (q.rot0 || 0)*(1 - u), (q.by0 || 0)*(1 - u), 1 + .025*clamp(P));
+    else if (t < seq.d + seq.dry) u = LOW;
+    else if (t < seq.d + seq.dry + seq.f){
+      if (!seq.s2){ seq.s2 = true; sfx('fill', .6); }
+      k = (t - seq.d - seq.dry)/seq.f; u = LOW*(1 - k*k*(3 - 2*k));
+    }
+    level(i, u);
+    if (u === 0 && t >= seq.d && !seq.s3){ seq.s3 = true; glint(i); if (!seq.rushed) sfx('sparkle', .5); }
+    if (now >= seq.end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
+    return;
+  }
+  s.parts.forEach(function(q, j){
+    var t = now - (q.at - q.T);
+    if (t < 0){ put(i, j, q.clear); return; }
+    if (t < q.T){
+      // gravity: it comes in already moving and keeps speeding up into the landing, a touch stretched by the speed
+      var u = t/q.T, e = ENTRY*u + (1 - ENTRY)*u*u, sp = ENTRY + 2*(1 - ENTRY)*u, off = q.clear*(1 - e);
+      if (!q.wh && off < q.clear - 26 - .06*FH){ q.wh = true; if (!seq.rushed) sfx('whoosh', .14 + q.mass*.08); }
+      put(i, j, off, 1 - .012*sp, 1 + .03*sp);
       return;
     }
     if (!q.landed){
-      q.landed = true; nudge(q.mass); puff(q.el, q.mass);
+      q.landed = true; put(i, j, 0); nudge(q.mass); puff(q.el, q.mass);
       if (window.__lupeLand) window.__lupeLand(q.mass, q.kind);
     }
-    var a = clamp((now - seq.rel[j] - seq.dur[j])/SETTLE);
-    // soft landing: a quick squash, then two little bounces that die away
-    var sq = a < .2 ? 1 - .045*Math.sin(Math.PI*a/.2)*(.6 + q.mass*.4) : 1;
-    var hop = .01*s.bh*(.5 + q.mass*.5)*Math.abs(Math.sin(Math.PI*2*a))*Math.pow(1 - a, 2.2)*(a > .2 ? 1 : 0);
-    put(i, j, 1, 0, 0, hop, sq);
+    var a = (t - q.T)/1000, hv = clamp(q.mass);
+    if (a > SETTLE/1000){ put(i, j, 0); return; }
+    // impact: a quick squash, a small rebound off the deck, a lighter second touch, settled
+    var sq = a < .09 ? .055*(.55 + .45*hv)*Math.sin(Math.PI*a/.09) : a > .25 && a < .31 ? .015*Math.sin(Math.PI*(a - .25)/.06) : 0;
+    var up = a > .07 && a < .25 ? FH*.011*(1.25 - .5*hv)*Math.sin(Math.PI*(a - .07)/.18) : 0;
+    put(i, j, up, 1 + sq*.55, 1 - sq + (up ? .012 : 0));
   });
-  // the camera follows the section that is falling now (or the next one to go)
-  var fj = orderOf(i).filter(function(j){ return now < seq.rel[j] + seq.dur[j] + 200; })[0];
-  stageLook(i, fj === undefined ? orderOf(i)[orderOf(i).length - 1] : fj);
-  if (now >= end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
+  if (now >= seq.end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
 }
+function focusPart(i, now){
+  // the section the camera leans toward: the one falling now, or the next to go
+  if (done[i] || !FRAMES[i].piece) return undefined;
+  var s = shots[i], o = seq && seq.i === i ? seq.order : orderOf(i);
+  if (!seq || seq.i !== i) return o[0];
+  for (var n = 0; n < o.length; n++) if (now < s.parts[o[n]].at + 120) return o[n];
+  return o[o.length - 1];
+}
+function landedShare(i){ var s = shots[i], n = 0; if (!s.parts.length) return done[i] ? 1 : 0; s.parts.forEach(function(q){ if (q.landed) n++; }); return n/s.parts.length; }
 
 /* scroll state */
-var cur = null, vis = -1, prevI = -1, lastKey = '', chained = [];
+var cur = null, vis = -1, prevI = -1, lastKey = '', swapT = 0, lastNow = 0;
 function setVisible(j){
-  if (j === vis) return; vis = j;
-  shots.forEach(function(s, k){ s.el.classList.toggle('on', k === j); });
+  if (j === vis) return;
+  var prev = vis; vis = j;
+  // the incoming shot fades in on top of the outgoing one, which stays solid underneath: no dip to black
+  shots.forEach(function(s, k){ s.el.style.zIndex = k === j ? 2 : k === prev ? 1 : 0; });
+  shots[j].el.classList.add('on');
+  clearTimeout(swapT);
+  swapT = setTimeout(function(){ shots.forEach(function(s, k){ if (k !== vis) s.el.classList.remove('on'); }); }, 950);
   bg.style.backgroundImage = 'url("estate/' + FRAMES[j].src + '_s.jpg")';
-  if (FRAMES[j].piece && !done[j] && !(seq && seq.i === j)) hangAll(j, 1, performance.now());   // the next piece waits above the frame
+  if (stage(FRAMES[j]) && !done[j] && !(seq && seq.i === j)) hideAll(j);   // its pieces wait above the frame
 }
 function frame(now){
   if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze a drop mid-air
+  var dt = lastNow && now > lastNow ? (now - lastNow)/1000 : null; lastNow = now;
   var tg = target();
-  if (!cur || reduce || window.__lupeSnap) cur = tg;
-  else { var f = .14; cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
+  if (!cur || reduce || window.__lupeSnap || dt === null) cur = tg;
+  else { var f = 1 - Math.exp(-dt/.11); cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
   var key = cur.m.toFixed(4) + cur.s.toFixed(3) + cur.a.toFixed(4);
   if (key !== lastKey){
     lastKey = key;
@@ -1357,41 +1542,42 @@ function frame(now){
   }
   if (cur.s < .5){
     var i = frameAt(cur.m), sp = span(i), p = clamp((cur.m - sp[0])/Math.max(.001, sp[1] - sp[0])), F = FRAMES[i];
-    var down = !!F.piece && cur.m >= dropAt(i);
-    // scrolling back up un-builds: later stages will build again on the way down
-    for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)){ done[k] = false; if (k > i) chained[k] = false; }
+    var down = stage(F) && cur.m >= dropAt(i);
+    // scrolling back up un-builds: later stages build again on the way down
+    for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)) done[k] = false;
     if (seq && (seq.i > i || (seq.i === i && !down))) seq = null;
     if (seq && seq.i < i) rush(now);
     if (seq) stepSeq(now);
     if (!seq){
-      for (k = 1; k < i; k++) if (FRAMES[k].piece && !done[k]){ landAll(k); done[k] = true; }   // skipped past: put it in place
+      for (k = 1; k < i; k++) if (stage(FRAMES[k]) && !done[k]){ landAll(k); done[k] = true; }   // skipped past: put it in place
       if (down && !done[i]){
         if (!reduce && (prevI === i || prevI === i - 1)) startSeq(i, now), stepSeq(now);
         else { landAll(i); done[i] = true; }
       }
     }
+    var was = vis;
     setVisible(seq ? seq.i : down && done[i] ? i + 1 : i);
-    if (F.piece && !down && !seq){
-      // lowering in on the crane as the card scrolls up
-      var lo = sp[0], e = clamp((cur.m - lo)/Math.max(.001, .78*(dropAt(i) - lo))), lift = 1 - easeOut(e);
-      if (e > .02 && !chained[i]){ chained[i] = true; sfx('chain', .35); }
-      hangAll(i, lift, now);
-    }
+    if (stage(F) && !down && !seq && !shots[i].hidden) hideAll(i);
     prevI = i;
-    // slow push-in inside each stage
-    var z = reduce ? 1 : 1.04 - .04*p, sb = shots[vis].box;
-    sb.style.transform = 'scale(' + z.toFixed(4) + ') translateX(' + (reduce ? 0 : -cur.a*.6).toFixed(2) + '%)';
-    hud.classList.remove('kitchen'); hTitle.textContent = 'Estate · new build'; hNum.textContent = Math.round(cur.m*100) + '%';
-    hStage.textContent = cur.m >= .995 && !cur.a ? 'Complete' : F.stage; hBar.style.width = (cur.m*100).toFixed(1) + '%';
+    // camera: a slow push-in through each stage, leaning toward the action
+    var vi = vis, z = reduce ? 1 : 1.04 - .04*(vi === i ? p : vi > i ? 0 : 1), drift = reduce ? 0 : cur.a*.006;
+    var aim = FRAMES[vi].piece ? camAim(vi, focusPart(vi, now), seq && seq.i === vi ? landedShare(vi) : done[vi] ? 1 : 0) : camAim(vi);
+    camera(vi, aim, was === vi ? dt : null, z, drift);
+    hud.classList.remove('kitchen'); hTitle.textContent = tx('Estate · new build'); hNum.textContent = Math.round(cur.m*100) + '%';
+    hStage.textContent = tx(cur.m >= .995 && !cur.a ? 'Complete' : F.stage); hBar.style.width = (cur.m*100).toFixed(1) + '%';
   }
   requestAnimationFrame(frame);
 }
-function resize(){ measure(); layout(); sizeDust(); lastKey = ''; }
+function resize(){
+  measure(); layout(); sizeDust(); lastKey = '';
+  shots.forEach(function(s, i){ if (stage(FRAMES[i]) && !(seq && seq.i === i)){ if (done[i]) landAll(i); else hideAll(i); } });
+}
 addEventListener('resize', resize);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
 addEventListener('load', measure);
 resize();
 window.__lupeBuild = true;
+window.__lupeDrop = function(i){ return {at: dropAt(i), m: function(sy){ return target(sy).m; }}; };   // test hook
 requestAnimationFrame(frame);
 })();
 </script>
@@ -1753,14 +1939,22 @@ window.__lupeThud = function(m){ thud(m); };
 window.__lupeLand = function(m, kind){ thud(m, kind); };
 window.__lupeSfx = function(name, vol){ if (soundOn && actx && window.LupeAudio) LupeAudio.sfx(name, vol); };
 var soundBtn = document.getElementById('sound');
+function tx(s){ return window.LupeT ? window.LupeT(s) : s; }   // words in the reader's language (the Español button)
+function soundLabel(){ soundBtn.textContent = tx(soundOn ? 'Sound on' : 'Tap for music'); }
 if (soundBtn){
-  soundBtn.hidden = false;
+  soundBtn.hidden = false; soundLabel();
+  // it arrives big and settles into place, then pulses until the music is on
+  soundBtn.classList.add('pre');
+  var goIntro = function(){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ soundBtn.classList.remove('pre'); soundBtn.classList.add('intro'); }); }); };
+  setTimeout(goIntro, 150);
+  soundBtn.addEventListener('animationend', function(e){ if (e.animationName === 'soundIn') soundBtn.classList.remove('intro'); });
+  addEventListener('lupelang', soundLabel);
   soundBtn.addEventListener('click', function(){
     try {
       if (!actx){ var AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); noiseBuf = actx.createBuffer(1, actx.sampleRate*.6, actx.sampleRate); var ch = noiseBuf.getChannelData(0); for (var i = 0; i < ch.length; i++) ch[i] = (Math.random()*2 - 1)*Math.pow(1 - i/ch.length, 2); }
       soundOn = !soundOn; if (soundOn && actx.state === 'suspended') actx.resume();
       if (window.LupeAudio){ if (soundOn) LupeAudio.start(actx); else LupeAudio.stop(); }
-      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundBtn.textContent = soundOn ? 'Sound on' : 'Tap for music';
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundLabel();
     } catch (e) { soundBtn.hidden = true; }
   });
   // browsers only allow audio after a tap: the first tap anywhere starts the music, unless the button was used
@@ -2197,8 +2391,8 @@ function frame(now){
       kShake = sh;
       placeKitchenCam(cur.k); kCam.updateMatrixWorld(); swingAt(cur.k); draw(K, kCam);
       var ks = kStage(cur.k);
-      hud.classList.add('kitchen'); hTitle.textContent = 'Kitchen remodel'; hNum.textContent = 'Day ' + (1 + Math.round(cur.k*41)) + ' / 42';
-      hStage.textContent = ks[0]; hRec.textContent = 'Filming: ' + ks[1]; hBar.style.width = (cur.k*100).toFixed(1) + '%';
+      hud.classList.add('kitchen'); hTitle.textContent = tx('Kitchen remodel'); hNum.textContent = tx('Day') + ' ' + (1 + Math.round(cur.k*41)) + ' / 42';
+      hStage.textContent = tx(ks[0]); hRec.textContent = tx('Filming: ') + tx(ks[1]); hBar.style.width = (cur.k*100).toFixed(1) + '%';
     }
     last.m = cur.m; last.k = cur.k; last.s = cur.s; last.a = cur.a;
   }
