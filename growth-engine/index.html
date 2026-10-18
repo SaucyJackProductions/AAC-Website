@@ -46,6 +46,12 @@ body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--body);-webkit-fon
 .shot.short .stagebox::after{height:18%}
 .stagebox .plate{position:absolute;inset:0;display:block;width:100%;height:100%}
 .piece{position:absolute;display:block;transform-origin:50% 100%;will-change:transform;backface-visibility:hidden}
+.water{position:absolute;pointer-events:none}
+.water img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.water.moving{filter:drop-shadow(0 -1px 0 rgba(214,255,250,.5))}
+.water i{position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;background:linear-gradient(105deg,rgba(255,255,255,0) 38%,rgba(255,250,235,.6) 50%,rgba(255,255,255,0) 62%) no-repeat;background-size:60% 100%;background-position:-120% 0;opacity:0}
+.water.glint i{animation:glint 1.3s ease-out}
+@keyframes glint{0%{opacity:1;background-position:-120% 0}80%{opacity:1}100%{opacity:0;background-position:220% 0}}
 .build-dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .build::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 62% 45%,transparent 55%,rgba(8,7,6,.5))}
 #fade{position:fixed;inset:0;background:#050505;opacity:0;pointer-events:none;z-index:1}
@@ -321,14 +327,15 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
     <div class="card">
       <div class="tb"><span>A-451</span><span>Pool + exteriors</span><span>4K media + content</span></div>
       <h2>Shot like a luxury listing. <em>From the air and the ground.</em></h2>
-      <p>Chandler's team shoots it all: cinematic 4K drone flyovers, aerial photography and on-site camera work that make a finished New Trust Services, LLC project look like what it's worth.</p>
+      <p>Even on your busiest weeks, Chandler's team captures every job in 4K, so your work and your experience are preserved and always on display.</p>
       <ul class="spec">
         <li><b>Drone</b><span>Cinematic 4K flyovers and ultra HD aerial photos of every build.</span></li>
         <li><b>Camera work</b><span>4K on-site filming: before, progress, craft close-ups and walkthroughs.</span></li>
         <li><b>Content library</b><span>Portfolio-grade photos and clips for the website, Google, ads and bids.</span></li>
+        <li><b>Commercials</b><span>Short HD commercials and ad spots for Google, Meta and YouTube.</span></li>
         <li><b>Social media</b><span>Optional: viral-format Reels, TikToks and Shorts, from drone reveals to before-and-afters.</span></li>
       </ul>
-      <p class="loss">High-end clients judge the builder by the footage before they ever meet the crew. Ultra HD makes a six-figure price make sense before the first call.</p>
+      <p class="loss">Online, HD photos, video, commercials and ads make New Trust Services, LLC look like the number one builder in Hilton Head Island. That's what lands the bigger, more profitable jobs: work less, make more.</p>
     </div>
   </section>
 
@@ -1026,6 +1033,24 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
         osc('triangle', 320, 260, 0.03, t + o, 0.001, 0.3 * w, 0.03, d); nz(t + o, 0.001, 0.25 * w, 0.01, 'bandpass', 2000, 1, d);
       });
     },
+    drain: function (t, v, d) {                          // the pool draining: a swirl of water and a few glugs
+      nz(t, 0.35, 0.22 * v, 0.55, 'lowpass', 900, 0.8, d, 240, 1.6);
+      nz(t + 0.1, 0.3, 0.1 * v, 0.4, 'bandpass', 520, 1.6, d, 180, 1.3);
+      for (var k = 0; k < 7; k++) {
+        var tt = t + 0.25 + k * 0.17 + R() * 0.06, f = 260 + R() * 120;
+        osc('sine', f, f * 1.7, 0.05, tt, 0.003, (0.16 - k * 0.012) * v, 0.03, d);   // a bubble's rising bloop
+      }
+    },
+    fill: function (t, v, d) {                           // water rushing back in, its pitch rising as the pool fills
+      nz(t, 0.002, 0.3 * v, 0.06, 'bandpass', 1500, 0.8, d); grains(t + 0.01, 18, 0.35, 2200, 6000, 0.12 * v, d, 2);
+      nz(t, 0.4, 0.2 * v, 0.7, 'bandpass', 480, 0.9, d, 1500, 1.7);
+      nz(t, 0.3, 0.14 * v, 0.6, 'lowpass', 320, 0.7, d);
+      grains(t + 0.4, 26, 1.2, 1500, 4500, 0.06 * v, d, 3);
+    },
+    sparkle: function (t, v, d) {                        // a light chime as the full pool catches the light
+      metal(t, 2350, [1, 1.5, 2.01], [0.3, 0.22, 0.14], 0.07 * v, d);
+      metal(t + 0.09, 3140, [1, 1.5], [0.25, 0.16], 0.05 * v, d);
+    },
     whoosh: function (t, v, d) {
       var p = pn(-0.6, d), f = nz(t, 0.3, 0.9 * v, 0.07, 'bandpass', 350, 1.1, p);
       f.frequency.setValueAtTime(350, t); f.frequency.exponentialRampToValueAtTime(1700, t + 0.3); f.frequency.exponentialRampToValueAtTime(450, t + 0.55);
@@ -1125,12 +1150,15 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
    plate plus its piece, cut into a few sections. As the stage's card arrives, the sections fall in from
    above the frame one at a time, landing on the beat: a gravity drop, a hard landing with a small squash and
    rebound, a puff of dust and a landing sound. Once the last one settles the shot dissolves to the next
-   stage with that piece installed. The camera holds steady and only drifts part way toward the action. */
+   stage with that piece installed. The camera holds steady and only drifts part way toward the action.
+   The pool is the one exception: it stays where it is in the photo and, on its turn, drains and fills back up. */
 var wrap = document.getElementById('build');
 if (!wrap) return;
 var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole piece as it hung in the source photo
 // (fractions of the plate), land: [dx, dy, scale] that puts it in place on the house. order: which section drops first.
+// fill: [x, y, w, h] of the pool's water layer; line: its waterline, [x, top, bottom] as fractions of that box
+// (sr/poolfill.py cuts the water out and paints the empty basin under it)
 var FRAMES = [
   {src: 'final',      m: 0,    stage: 'The vision',          w: 2412, h: 1328},
   {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.0998, .633, .7723, .2324],  land: [0, 0, 1],        order: [0, 1, 2],       kind: 'concrete'},
@@ -1138,7 +1166,8 @@ var FRAMES = [
   {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74],    order: [0, 1, 2, 3, 4], kind: ['concrete', 'glass', 'glass', 'glass', 'concrete']},
   {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87],    order: [1, 0, 2],       kind: 'roof'},
   {src: 'interiors',  m: .635, stage: 'Interiors',           w: 1600, h: 985,  piece: [.0956, 0, .785, .4772],      land: [0, .06, .95],    order: [0, 1, 2],       kind: 'wood'},
-  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  piece: [.1764, .0954, .7089, .2589], land: [.339, .391, .42], order: [0, 1],          kind: 'concrete'},
+  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  fill: [.7406, .8051, .1739, .0721],
+   line: [[0, .1056, .9366], [.125, .0915, .8662], [.25, .0775, .7817], [.375, .0493, .6972], [.5, .0352, .5986], [.625, .0352, .5423], [.75, .0352, .4437], [.875, .0634, .331], [1, .2042, .2324]]},
   {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15],   order: [0, 3, 1, 2],    kind: 'palm'},
   {src: 'final',      m: .96,  stage: 'The finished estate', w: 2412, h: 1328}
 ];
@@ -1150,7 +1179,6 @@ var PARTS = {
   walls: [[.1478, .1162, .0991, .2508], [.2712, .0755, .1347, .2661], [.4551, .1203, .1608, .2793], [.6259, .1336, .144, .2732], [.7993, .0765, .0536, .314]],
   roof: [[.0692, .128, .2843, .2274], [.3535, .0873, .2774, .2802], [.6309, .1686, .2762, .199]],
   interiors: [[.0975, 0, .2725, .4467], [.37, 0, .2669, .4741], [.6368, .0457, .2419, .4264]],
-  pool: [[.1783, .0984, .331, .2355], [.5093, .1015, .3741, .2497]],
   landscape: [[.1122, -.0729, .1677, .3684], [.3291, -.072, .1764, .3352], [.5286, .0951, .1128, .1985], [.6496, -.0785, .1802, .446]]
 };
 var STAG = 520, SETTLE = 420, HOLD = 520;   // ms: gap between landings (the music's beat when it plays), settle, pause before the dissolve
@@ -1158,13 +1186,15 @@ var ZOOM = 2.1;     // phones: the photo is this many screen widths wide, so mos
 var FOLLOW = .5;    // how far the camera drifts toward the section that is dropping (0 = locked, 1 = centred on it)
 var GRAV = 2.4;     // fall acceleration, in frame heights per second squared
 var ENTRY = .3;     // pieces come in already falling: this share of the fall is covered at entry speed
+var DRAIN = 3, DRY = 1, REFILL = 3, LOW = .9;   // the pool: beats to drain, to stand empty and to fill back up; how far down it goes
+function stage(f){ return !!(f.piece || f.fill); }   // a stage that builds something on its turn
 var bg = wrap.querySelector('.build-bg'), stack = wrap.querySelector('.build-frame'), dust = wrap.querySelector('.build-dust');
 function warm(im){ if (im.decode) im.decode().catch(function(){}); }
 var shots = FRAMES.map(function(f){
   var s = document.createElement('div'); s.className = 'shot';
   var box = document.createElement('div'); box.className = 'stagebox'; s.appendChild(box);
   var plate = new Image(); plate.alt = ''; plate.decoding = 'async'; plate.className = 'plate';
-  plate.src = f.piece ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
+  plate.src = stage(f) ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
   box.appendChild(plate); warm(plate);
   var o = {el: s, box: box, bw: 0, bh: 0, top: 0, x: null, v: 0, hidden: false};
   if (f.piece){
@@ -1179,6 +1209,15 @@ var shots = FRAMES.map(function(f){
               mass: Math.min(1.4, b[2]*b[3]*L[2]*L[2]*8), kind: typeof f.kind === 'string' ? f.kind : f.kind[k]};
     });
   }
+  if (f.fill){
+    // the water, over the empty basin painted into the plate: its waterline is clipped down to drain it
+    var wv = document.createElement('div'); wv.className = 'water';
+    wv.style.left = f.fill[0]*100 + '%'; wv.style.top = f.fill[1]*100 + '%'; wv.style.width = f.fill[2]*100 + '%'; wv.style.height = f.fill[3]*100 + '%';
+    var wi = new Image(); wi.alt = ''; wi.decoding = 'async'; wi.src = 'estate3/' + f.src + '_water.webp';
+    var gl = document.createElement('i'); gl.style.webkitMaskImage = gl.style.maskImage = 'url("estate3/' + f.src + '_water.webp")';
+    wv.appendChild(wi); wv.appendChild(gl); box.appendChild(wv); warm(wi);
+    o.water = wv; o.wimg = wi; o.parts = []; o.level = 0;
+  }
   stack.appendChild(s); return o;
 });
 var hud = document.getElementById('hud'), hTitle = document.getElementById('hudTitle'), hNum = document.getElementById('hudNum'),
@@ -1192,7 +1231,7 @@ function measure(){
   anchors = beats.map(function(b){ var r = b.getBoundingClientRect(), top = r.top + scrollY;
     return {y: b.classList.contains('hero') ? top + innerHeight*.5 : top + r.height*.5, m: +b.dataset.m, s: +b.dataset.s, a: +b.dataset.a}; });
   cardAt = FRAMES.map(function(f){
-    var b = f.piece && beats.filter(function(x){ return +x.dataset.m === f.m && +x.dataset.s === 0; })[0], c = b && b.querySelector('.card');
+    var b = stage(f) && beats.filter(function(x){ return +x.dataset.m === f.m && +x.dataset.s === 0; })[0], c = b && b.querySelector('.card');
     return c ? target(c.getBoundingClientRect().top + scrollY - innerHeight*.76).m : null;
   });
 }
@@ -1217,7 +1256,7 @@ function dropAt(i){
    into the page below, and the camera glides part way toward each section as it drops */
 var FW = 0, FH = 0;
 function phone(){ return FW/FH < 1.2; }
-function orderOf(i){ var f = FRAMES[i]; return phone() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
+function orderOf(i){ var f = FRAMES[i]; return !f.piece ? [] : phone() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
 function layout(){
   var fw = stack.clientWidth, fh = stack.clientHeight; FW = fw; FH = fh;
   shots.forEach(function(s, i){
@@ -1234,6 +1273,7 @@ function layout(){
 function camAim(i, j, P){
   // desktop: the landing area, drifting half way to where the piece ends up; phones: the landing area, drifting toward section j
   var s = shots[i], f = FRAMES[i];
+  if (f.fill){ var cx = f.fill[0] + f.fill[2]/2; return phone() ? cx : .5 + FOLLOW*(cx - .5); }   // the pool, held in view
   if (!f.piece) return .45;
   var gx = f.piece[0] + f.piece[2]/2;
   if (!phone()) return gx + FOLLOW*f.land[0]*P;
@@ -1257,8 +1297,17 @@ function put(i, j, off, sx, sy){
   var s = shots[i], q = s.parts[j], k = FRAMES[i].land[2];
   q.el.style.transform = 'translate3d(' + (q.dx*s.bw).toFixed(1) + 'px,' + (q.dy*s.bh - off).toFixed(1) + 'px,0) scale(' + (k*(sx || 1)).toFixed(4) + ',' + (k*(sy || 1)).toFixed(4) + ')';
 }
-function hideAll(i){ var s = shots[i]; s.hidden = true; s.parts.forEach(function(q, j){ q.landed = false; put(i, j, q.clear); }); }
-function landAll(i){ var s = shots[i]; s.hidden = false; s.parts.forEach(function(q, j){ q.landed = true; put(i, j, 0); }); }
+function hideAll(i){ var s = shots[i]; s.hidden = true; if (s.water) level(i, 0); s.parts.forEach(function(q, j){ q.landed = false; put(i, j, q.clear); }); }
+function landAll(i){ var s = shots[i]; s.hidden = false; if (s.water) level(i, 0); s.parts.forEach(function(q, j){ q.landed = true; put(i, j, 0); }); }
+/* the pool's water level: 0 full, 1 empty. The waterline runs through the traced points between the far coping and the near rim */
+function level(i, u){
+  var s = shots[i], L = FRAMES[i].line;
+  if (s.level === u) return; s.level = u;
+  var cp = u <= 0 ? 'none' : 'polygon(' + L.map(function(p){ return p[0]*100 + '% ' + ((p[1] + u*(p[2] - p[1]))*100).toFixed(2) + '%'; }).join(',') + ',100% 100%,0% 100%)';
+  s.wimg.style.webkitClipPath = s.wimg.style.clipPath = cp;
+  s.water.classList.toggle('moving', u > .01);
+}
+function glint(i){ var w = shots[i].water; w.classList.remove('glint'); void w.offsetWidth; w.classList.add('glint'); }
 
 /* dust: a soft puff along the bottom edge of each section as it lands */
 var dctx = dust.getContext('2d'), puffs = [], dustT = 0;
@@ -1306,6 +1355,15 @@ function beatMs(){ var A = window.LupeAudio, b = A && A.on && A.beat; if (!b) re
 var seq = null, done = [];
 function startSeq(i, now){
   var s = shots[i], A = window.LupeAudio, gap = beatMs() || STAG, order = orderOf(i), T = 0;
+  if (FRAMES[i].fill){
+    // the pool: it starts draining on a beat, stands empty for a beat and fills back up
+    var t0 = now + 160;
+    if (A && A.on && A.delayToBeat) t0 += A.delayToBeat(t0 - now) || 0;
+    s.hidden = false;
+    seq = {i: i, fill: true, order: [], t0: t0, d: DRAIN*gap, dry: DRY*gap, f: REFILL*gap};
+    seq.end = t0 + seq.d + seq.dry + seq.f;
+    return;
+  }
   s.parts.forEach(function(q){
     // one gravity for every piece: further to fall, longer in the air
     q.T = clamp(1000*Math.sqrt(2*(1 - ENTRY)*q.clear/FH/GRAV), 420, 900); T = Math.max(T, q.T); q.landed = false; q.wh = false;
@@ -1321,12 +1379,32 @@ function rush(now){
   // the reader scrolled on: bring the rest down quickly instead of cutting
   if (seq.rushed) return; seq.rushed = true;
   var n = 0, s = shots[seq.i];
+  if (seq.fill){ seq.ru = s.level; seq.rt = now; seq.end = now + 350; seq.hold = 120; return; }   // the water rushes back in
   seq.order.forEach(function(j){ var q = s.parts[j]; if (now < q.at - q.T){ q.T = 380; q.at = now + 380 + n*100; n++; } });
   seq.end = Math.max.apply(null, s.parts.map(function(q){ return q.at; })) + SETTLE;
   seq.hold = 120;
 }
 function stepSeq(now){
   var i = seq.i, s = shots[i];
+  if (seq.fill){
+    var t = now - seq.t0, u = 0, k;
+    if (seq.rushed) u = seq.ru*(1 - clamp((now - seq.rt)/350));
+    else if (t < 0) u = 0;
+    else if (t < seq.d){
+      // draining: it starts slowly, picks up, and slows as the last of it goes
+      if (!seq.s1){ seq.s1 = true; sfx('drain', .55); }
+      k = t/seq.d; u = LOW*(.5 - .5*Math.cos(Math.PI*k));
+    }
+    else if (t < seq.d + seq.dry) u = LOW;
+    else if (t < seq.d + seq.dry + seq.f){
+      if (!seq.s2){ seq.s2 = true; sfx('fill', .6); }
+      k = (t - seq.d - seq.dry)/seq.f; u = LOW*(1 - k*k*(3 - 2*k));
+    }
+    level(i, u);
+    if (u === 0 && t >= seq.d && !seq.s3){ seq.s3 = true; glint(i); if (!seq.rushed) sfx('sparkle', .5); }
+    if (now >= seq.end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
+    return;
+  }
   s.parts.forEach(function(q, j){
     var t = now - (q.at - q.T);
     if (t < 0){ put(i, j, q.clear); return; }
@@ -1352,13 +1430,13 @@ function stepSeq(now){
 }
 function focusPart(i, now){
   // the section the camera leans toward: the one falling now, or the next to go
-  if (done[i]) return undefined;
+  if (done[i] || !FRAMES[i].piece) return undefined;
   var s = shots[i], o = seq && seq.i === i ? seq.order : orderOf(i);
   if (!seq || seq.i !== i) return o[0];
   for (var n = 0; n < o.length; n++) if (now < s.parts[o[n]].at + 120) return o[n];
   return o[o.length - 1];
 }
-function landedShare(i){ var s = shots[i], n = 0; s.parts.forEach(function(q){ if (q.landed) n++; }); return n/s.parts.length; }
+function landedShare(i){ var s = shots[i], n = 0; if (!s.parts.length) return done[i] ? 1 : 0; s.parts.forEach(function(q){ if (q.landed) n++; }); return n/s.parts.length; }
 
 /* scroll state */
 var cur = null, vis = -1, prevI = -1, lastKey = '', swapT = 0, lastNow = 0;
@@ -1371,7 +1449,7 @@ function setVisible(j){
   clearTimeout(swapT);
   swapT = setTimeout(function(){ shots.forEach(function(s, k){ if (k !== vis) s.el.classList.remove('on'); }); }, 950);
   bg.style.backgroundImage = 'url("estate/' + FRAMES[j].src + '_s.jpg")';
-  if (FRAMES[j].piece && !done[j] && !(seq && seq.i === j)) hideAll(j);   // its pieces wait above the frame
+  if (stage(FRAMES[j]) && !done[j] && !(seq && seq.i === j)) hideAll(j);   // its pieces wait above the frame
 }
 function frame(now){
   if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze a drop mid-air
@@ -1387,14 +1465,14 @@ function frame(now){
   }
   if (cur.s < .5){
     var i = frameAt(cur.m), sp = span(i), p = clamp((cur.m - sp[0])/Math.max(.001, sp[1] - sp[0])), F = FRAMES[i];
-    var down = !!F.piece && cur.m >= dropAt(i);
+    var down = stage(F) && cur.m >= dropAt(i);
     // scrolling back up un-builds: later stages build again on the way down
     for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)) done[k] = false;
     if (seq && (seq.i > i || (seq.i === i && !down))) seq = null;
     if (seq && seq.i < i) rush(now);
     if (seq) stepSeq(now);
     if (!seq){
-      for (k = 1; k < i; k++) if (FRAMES[k].piece && !done[k]){ landAll(k); done[k] = true; }   // skipped past: put it in place
+      for (k = 1; k < i; k++) if (stage(FRAMES[k]) && !done[k]){ landAll(k); done[k] = true; }   // skipped past: put it in place
       if (down && !done[i]){
         if (!reduce && (prevI === i || prevI === i - 1)) startSeq(i, now), stepSeq(now);
         else { landAll(i); done[i] = true; }
@@ -1402,7 +1480,7 @@ function frame(now){
     }
     var was = vis;
     setVisible(seq ? seq.i : down && done[i] ? i + 1 : i);
-    if (F.piece && !down && !seq && !shots[i].hidden) hideAll(i);
+    if (stage(F) && !down && !seq && !shots[i].hidden) hideAll(i);
     prevI = i;
     // camera: a slow push-in through each stage, leaning toward the action
     var vi = vis, z = reduce ? 1 : 1.04 - .04*(vi === i ? p : vi > i ? 0 : 1), drift = reduce ? 0 : cur.a*.006;
@@ -1415,7 +1493,7 @@ function frame(now){
 }
 function resize(){
   measure(); layout(); sizeDust(); lastKey = '';
-  shots.forEach(function(s, i){ if (FRAMES[i].piece && !(seq && seq.i === i)){ if (done[i]) landAll(i); else hideAll(i); } });
+  shots.forEach(function(s, i){ if (stage(FRAMES[i]) && !(seq && seq.i === i)){ if (done[i]) landAll(i); else hideAll(i); } });
 }
 addEventListener('resize', resize);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
