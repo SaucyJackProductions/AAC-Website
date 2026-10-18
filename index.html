@@ -927,6 +927,27 @@ html.ready.sc-in .music-btn.ask{opacity:1;pointer-events:auto}
 .est-lightbox{padding:0;border:0;background:transparent;max-width:min(94vw,1600px);max-height:92vh;overflow:visible}
 .est-lightbox::backdrop{background:rgba(2,4,6,.9);backdrop-filter:blur(6px)}
 .est-lightbox img{display:block;max-width:min(94vw,1600px);max-height:88vh;border-radius:3px;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.film-play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 24px 0 18px;border-radius:999px;background:rgba(7,8,7,.55);border:1px solid rgba(234,210,160,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ink);font:500 11px var(--font-mono);letter-spacing:.22em;text-transform:uppercase;white-space:nowrap;transition:background .5s,transform .5s var(--ease);pointer-events:none}
+.film-play svg{width:20px;height:20px;color:var(--gold-l)}
+.hz-film{cursor:pointer}.has-cur .hz-film,.has-cur .est-feature{cursor:none}
+.hz-film:hover .film-play,.hz-film:focus-visible .film-play{background:rgba(7,8,7,.75);transform:translate(-50%,-50%) scale(1.06)}
+.hz-film:focus-visible{outline:1px solid var(--gold-l);outline-offset:6px}
+.est-feature{position:relative;display:block;width:100%;aspect-ratio:16/9;max-height:80vh;margin:0 0 clamp(60px,8vw,120px);padding:0;border:0;border-radius:3px;overflow:hidden;cursor:pointer;background:#0b0b0a;color:var(--ink);text-align:left}
+.est-feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.est-feature:hover img{transform:scale(1.04)}
+.est-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.66),transparent 50%);pointer-events:none}
+.est-feature-in{position:absolute;z-index:1;left:clamp(22px,4vw,64px);bottom:clamp(22px,4vw,56px);display:flex;flex-direction:column;gap:12px;max-width:min(720px,70%)}
+.est-feature-t{font:400 clamp(32px,4.4vw,72px)/1.02 var(--serif)}
+.est-feature-t em{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.est-feature-d{color:var(--muted);font-weight:300}
+.est-feature .film-play{left:auto;top:auto;right:clamp(18px,3vw,40px);bottom:clamp(22px,4vw,56px);transform:none}
+.est-feature:hover .film-play{background:rgba(7,8,7,.75);transform:scale(1.06)}
+.film-lb{margin:auto;padding:0;border:0;background:transparent;width:min(94vw,1600px);max-width:none;max-height:94vh;overflow:visible;color:var(--ink)}
+.film-lb::backdrop{background:rgba(2,4,6,.92);backdrop-filter:blur(6px)}
+.film-lb-in{position:relative}
+.film-lb video{outline:0;display:block;width:100%;max-height:82vh;aspect-ratio:16/9;background:#000;border-radius:3px;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.film-lb-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 2px 0;font:500 11px var(--font-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-l)}
+@media (max-width:720px){.est-feature{aspect-ratio:4/5}.est-feature-in{right:20px;bottom:90px;max-width:none}.est-feature .film-play{left:20px;right:auto;bottom:22px}.film-lb .est-lb-close{top:-54px;right:0}}
 .est-lb-close{position:absolute;top:-18px;right:-18px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(234,210,160,.4);background:rgba(10,15,20,.9);color:var(--ink);font-size:24px;line-height:1;cursor:pointer}
 
 @media (max-width:980px){
@@ -1263,8 +1284,9 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
           <span class="hz-hint" aria-hidden="true"><span class="hz-hint-d">Keep scrolling</span><span class="hz-hint-m">Swipe</span> &rarr;</span>
         </div>
 
-        <article class="hz-card rv" data-cursor="View">
-          <div class="hz-media"><span class="num" aria-hidden="true">01</span><img src="assets/lux/estate.webp" alt="Luxury home and pool at twilight" width="1284" height="831" loading="lazy" decoding="async"></div>
+        <article class="hz-card hz-film rv" data-cursor="Play" role="button" tabindex="0" aria-label="Play the 14 Juniper listing film"
+          data-film-4k="assets/estate/juniper-film-4k.mp4" data-film-hd="assets/estate/juniper-film-hd.mp4" data-film-poster="assets/estate/juniper-poster.webp" data-film-title="14 Juniper &middot; Listing film">
+          <div class="hz-media"><span class="num" aria-hidden="true">01</span><img src="assets/estate/juniper-poster-960.webp" alt="14 Juniper, an oceanside rental home with its pool, from the drone" width="960" height="540" loading="lazy" decoding="async"><span class="film-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Watch the film</span></span></div>
           <div class="hz-copy">
             <span class="cat">Real Estate &amp; Rentals</span>
             <h3>Listing &amp; rental video that converts</h3>
@@ -1384,6 +1406,17 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       </figure>
     </div>
 
+    <button type="button" class="est-feature rv" data-cursor="Play" aria-label="Play the 14 Juniper listing film"
+      data-film-4k="assets/estate/juniper-film-4k.mp4" data-film-hd="assets/estate/juniper-film-hd.mp4" data-film-poster="assets/estate/juniper-poster.webp" data-film-title="14 Juniper &middot; Listing film">
+      <img src="assets/estate/juniper-poster.webp" alt="14 Juniper, an oceanside rental home with its pool, from the drone" width="1600" height="900" loading="lazy" decoding="async">
+      <span class="est-feature-in">
+        <span class="kicker">Now showing &middot; 14 Juniper</span>
+        <span class="est-feature-t">The full <em>listing film.</em></span>
+        <span class="est-feature-d">Ocean, pool and every room, in 4K. A minute and a half.</span>
+      </span>
+      <span class="film-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Play with sound</span></span>
+    </button>
+
     <div class="est-head" id="est-collection">
       <span class="kicker">The collection</span>
       <h3 data-split>Every angle, <em>after dark.</em></h3>
@@ -1446,7 +1479,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       </div>
     </div>
     <button class="gc-film rv" id="gc-film" type="button" data-cursor="Sound" aria-label="Play the Hole 10 film with sound">
-      <video muted loop playsinline preload="none" data-poster="assets/lux/hole10-film.webp" data-src="assets/lux/hole10-film.mp4" data-webm="assets/lux/hole10-film.webm" aria-hidden="true" tabindex="-1"></video>
+      <video muted loop playsinline preload="none" data-poster="skycaddy/media/flyover_v13_poster.jpg" data-src="skycaddy/media/flyover_v13_hd.mp4" aria-hidden="true" tabindex="-1"></video>
       <span class="gc-film-in">
         <span class="kicker">Hole 10 &middot; The film</span>
         <span class="gc-film-t">Tee to ocean, <em>in one take of light.</em></span>
@@ -1698,6 +1731,14 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
   <a class="contact" href="#contact">Begin a Project</a>
 </aside>
 <button class="music-btn" id="music-btn" type="button" aria-pressed="false" data-bed="assets/audio/lofi-jazz.mp3" data-scene="assets/audio/swing-loop.m4a assets/audio/swing-loop.mp3" hidden><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl" id="music-lbl">Music</span></button>
+
+<dialog class="film-lb" id="film-lb" aria-label="Film" data-lenis-prevent>
+  <div class="film-lb-in">
+    <video id="film-lb-v" controls playsinline preload="none"></video>
+    <div class="film-lb-bar"><span id="film-lb-t"></span><a class="btn btn-gold" href="#contact" data-service="Real Estate / Rentals">Book a Listing Film <span class="arrow" aria-hidden="true">&rarr;</span></a></div>
+    <button type="button" class="est-lb-close" id="film-lb-close" aria-label="Close the film">&times;</button>
+  </div>
+</dialog>
 
 <dialog class="iq" id="inquire" aria-labelledby="iq-title" data-lenis-prevent>
   <div class="iq-panel">
@@ -3199,6 +3240,49 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     busy = false; btn.classList.remove('is-boom', 'is-press'); var shk = document.getElementById('capabilities'); if (shk) shk.classList.remove('ge-shake');
     Array.prototype.forEach.call(document.querySelectorAll('.ge-fx'), function (c) { c.remove(); });
   });
+})();
+</script>
+<script>
+/* ===== Films in a lightbox: anything with data-film-hd (the listing card in Selected work, the Estates feature) =====
+   4K on large high-resolution screens; 1080p on phones, 1080p monitors and slow or data-saver connections.
+   A 4K decode error falls back to 1080p. The site's music steps out on its own while a film plays with sound. */
+(function () {
+  var d = document, lb = d.getElementById('film-lb'), v = d.getElementById('film-lb-v'), t = d.getElementById('film-lb-t');
+  var opens = d.querySelectorAll('[data-film-hd]');
+  if (!lb || !v || !opens.length) return;
+  function pick(el) {
+    var s = window.screen || {}, c = navigator.connection || {}, dpr = window.devicePixelRatio || 1,
+        shortSide = Math.min(s.width || 0, s.height || 0), longPx = Math.max(s.width || 0, s.height || 0) * dpr;
+    var big = shortSide >= 700 && longPx >= 2400 && !c.saveData && !/2g|3g/.test(c.effectiveType || '');
+    return (big && el.getAttribute('data-film-4k')) || el.getAttribute('data-film-hd');
+  }
+  var hd = '';
+  v.addEventListener('error', function () {
+    if (!hd || v.getAttribute('src') === hd) return;
+    v.src = hd; var p = v.play(); if (p && p.catch) p.catch(function () {});
+  });
+  function open(el) {
+    var src = pick(el); hd = el.getAttribute('data-film-hd');
+    t.innerHTML = el.getAttribute('data-film-title') || '';
+    v.poster = el.getAttribute('data-film-poster') || '';
+    if (v.getAttribute('src') !== src) v.src = src;
+    try { v.currentTime = 0; } catch (e) {}
+    v.muted = false; v.volume = 1;
+    if (typeof lb.showModal === 'function') lb.showModal(); else lb.setAttribute('open', '');
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  }
+  function close() { v.pause(); if (lb.open) { if (typeof lb.close === 'function') lb.close(); else lb.removeAttribute('open'); } }
+  [].forEach.call(opens, function (el) {
+    el.addEventListener('click', function (e) { if (e.target.closest('a')) return; e.preventDefault(); open(el); });
+    if (el.tagName !== 'BUTTON') el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(el); }
+    });
+  });
+  d.getElementById('film-lb-close').addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  lb.addEventListener('close', function () { v.pause(); });
+  /* booking from the film: close it first, then the inquiry drawer opens as usual */
+  [].forEach.call(lb.querySelectorAll('a[href="#contact"]'), function (a) { a.addEventListener('click', close); });
 })();
 </script>
 </body>
