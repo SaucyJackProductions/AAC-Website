@@ -38,7 +38,7 @@
 <link rel="preload" as="image" href="assets/descent/m/001.webp" media="(max-aspect-ratio:4/5)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -288,27 +288,44 @@ html:not(.js) .ds-shade,.still .ds-shade{background:linear-gradient(90deg,rgba(0
 .mf{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(24px,4vw,80px);align-items:center}
 .mf>.kicker,.mf>.mf-text,.mf>.mf-foot{grid-column:1}
 .mf>.kicker{justify-self:start}
-.ge{grid-column:2;grid-row:1/4;justify-self:center;position:relative;display:grid;place-items:center;width:clamp(150px,15vw,220px);aspect-ratio:1;border-radius:50%;color:#120d05;-webkit-tap-highlight-color:transparent;touch-action:manipulation;isolation:isolate}
-.ge-halo{position:absolute;inset:-18%;border-radius:50%;background:radial-gradient(circle,rgba(234,210,160,.34),rgba(201,166,107,.08) 45%,transparent 70%);animation:ge-breathe 2.6s ease-in-out infinite;z-index:-2}
-.ge-ring{position:absolute;inset:0;width:100%;height:100%;animation:ge-spin 16s linear infinite;overflow:visible}
-.ge-ring text{font:500 7.6px var(--font-mono);letter-spacing:.32em;text-transform:uppercase;fill:var(--gold-l)}
-.ge-core{position:absolute;inset:21%;border-radius:50%;display:grid;place-content:center;text-align:center;gap:6px;background:var(--gold-grad);box-shadow:0 0 0 1px rgba(255,240,205,.5) inset,0 -10px 24px rgba(90,60,20,.45) inset,0 18px 50px rgba(201,166,107,.35),0 0 0 6px rgba(7,8,7,.9),0 0 0 7px rgba(201,166,107,.5);transition:transform .35s var(--ease)}
-.ge-core b{font:600 clamp(17px,1.6vw,23px)/1 var(--serif);font-style:italic;letter-spacing:.01em}
-.ge-core small{font:600 7.5px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;opacity:.8}
-.ge-ping{position:absolute;inset:21%;border-radius:50%;border:1px solid var(--gold-l);animation:ge-ping 2.6s cubic-bezier(.2,.6,.3,1) infinite;z-index:-1}
-.ge:hover .ge-core{transform:scale(1.05)}
-.ge.is-press .ge-core{transform:scale(.86);transition:transform .09s}
+.ge{grid-column:2;grid-row:1/4;justify-self:center;position:relative;display:block;width:min(100%,620px);aspect-ratio:1;border-radius:50%;-webkit-tap-highlight-color:transparent;touch-action:manipulation;isolation:isolate;container-type:inline-size;perspective:1400px}
+/* searchlight sunburst behind the medallion */
+.ge-rays{position:absolute;inset:-38%;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,226,160,.20) 0deg 2.2deg,transparent 2.2deg 12deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 68%);mask:radial-gradient(circle,#000 30%,transparent 68%);animation:ge-spin 60s linear infinite;z-index:-3;pointer-events:none}
+.ge-halo{position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.38),rgba(201,140,60,.12) 42%,transparent 68%);animation:ge-breathe 3.2s ease-in-out infinite;z-index:-2;pointer-events:none}
+/* the medallion itself is a real 3D stack: each layer floats at its own depth */
+.ge-tilt{position:absolute;inset:0;transform-style:preserve-3d;animation:ge-sway 7s ease-in-out infinite;transition:transform .5s var(--ease)}
+.ge.is-tilt .ge-tilt{animation:none;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.ge-edge,.ge-bezel,.ge-band,.ge-core,.ge-shine{position:absolute;border-radius:50%}
+.ge-edge{inset:0;transform:translateZ(-1px);background:#5a3f18;box-shadow:0 1.2cqw 0 #6e4f22,0 2.4cqw 0 #4a3312,0 3.4cqw 0 #2e1f0a,0 6cqw 9cqw rgba(0,0,0,.75),0 0 12cqw rgba(201,150,70,.28)}
+.ge-bezel{inset:0;background:conic-gradient(from 210deg,#fff3c9,#b98a3e 10%,#fff6d6 18%,#7a5622 30%,#e9c77e 40%,#8a6428 52%,#fff1c4 62%,#9b7134 74%,#f2d593 86%,#fff3c9);box-shadow:inset 0 0 0 .5cqw rgba(255,248,225,.7),inset 0 -1.6cqw 3cqw rgba(60,35,5,.55),inset 0 1.6cqw 2cqw rgba(255,250,230,.6)}
+.ge-band{inset:6%;transform:translateZ(6px);background:radial-gradient(circle at 50% 35%,#2a2218,#0d0a06 70%);box-shadow:inset 0 1cqw 2.4cqw rgba(0,0,0,.9),0 0 0 .35cqw #f6dfa0,0 .5cqw 1cqw rgba(0,0,0,.6)}
+.ge-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateZ(10px)}
+.ge-ring g{transform-origin:50px 50px;animation:ge-spin 30s linear infinite}
+.ge-ring text{font:700 5.3px 'Cinzel',var(--serif);letter-spacing:.24em;text-transform:uppercase}
+.ge-core{inset:19%;transform:translateZ(22px);display:grid;place-content:center;text-align:center;background:radial-gradient(circle at 38% 28%,#3a3024 0%,#16120c 45%,#050403 100%);box-shadow:0 0 0 1.1cqw #c99b52,0 0 0 1.5cqw #fff0c4,0 0 0 2.3cqw #7d5a26,0 2cqw 4cqw rgba(0,0,0,.8),inset 0 0 6cqw rgba(0,0,0,.9),inset 0 1cqw 3cqw rgba(255,220,150,.12)}
+.ge-core>*{transform:translateZ(0)}
+.ge-stars{font:400 3.2cqw/1 'Cinzel',serif;letter-spacing:1.4em;padding-left:1.4em;color:#e9c77e;margin-bottom:2.4cqw;text-shadow:0 0 1.6cqw rgba(255,210,130,.8)}
+.ge-t{display:block;font:800 9.4cqw/.98 'Cinzel',var(--serif);letter-spacing:.06em;background:linear-gradient(180deg,#fffaf0 0%,#f7e3ad 28%,#c99a4a 49%,#7d5a26 51%,#e7c57c 70%,#fff2c8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 .45cqw 0 #2a1c08) drop-shadow(0 1.4cqw 1.6cqw rgba(0,0,0,.85))}
+.ge-t+.ge-t{font-size:8.2cqw;letter-spacing:.11em;margin-top:.6cqw}
+.ge-rule{display:block;width:62%;height:.35cqw;margin:2.6cqw auto 2.2cqw;background:linear-gradient(90deg,transparent,#f6dfa0 30%,#fff 50%,#f6dfa0 70%,transparent)}
+.ge-cta{font:600 2.9cqw/1 var(--font-mono);letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;color:#f3dca0}
+.ge-shine{inset:0;transform:translateZ(30px);overflow:hidden;pointer-events:none;mix-blend-mode:screen}
+.ge-shine::before{content:"";position:absolute;inset:-20%;background:linear-gradient(105deg,transparent 42%,rgba(255,245,215,.0) 44%,rgba(255,245,215,.55) 50%,rgba(255,245,215,0) 56%,transparent 58%);transform:translateX(-120%);animation:ge-sweep 4.8s cubic-bezier(.5,0,.3,1) infinite}
+.ge-ping{position:absolute;inset:6%;border-radius:50%;border:1px solid rgba(246,223,160,.7);animation:ge-ping 3.2s cubic-bezier(.2,.6,.3,1) infinite;z-index:-1;pointer-events:none}
+.ge.is-press .ge-tilt{animation:none;transform:translateZ(-60px) scale(.9);transition:transform .1s}
 .ge.is-boom{visibility:hidden}
 @keyframes ge-spin{to{transform:rotate(360deg)}}
-@keyframes ge-breathe{50%{opacity:.55;transform:scale(.94)}}
-@keyframes ge-ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.75);opacity:0}}
-.still .ge-ring,.still .ge-halo,.still .ge-ping{animation:none}
+@keyframes ge-breathe{50%{opacity:.6;transform:scale(.95)}}
+@keyframes ge-ping{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+@keyframes ge-sway{0%,100%{transform:rotateX(8deg) rotateY(-14deg)}50%{transform:rotateX(-6deg) rotateY(14deg)}}
+@keyframes ge-sweep{0%,30%{transform:translateX(-120%)}70%,100%{transform:translateX(120%)}}
+.still .ge-rays,.still .ge-halo,.still .ge-ping,.still .ge-tilt,.still .ge-ring g,.still .ge-shine::before{animation:none}
 .ge-fx{position:fixed;inset:0;z-index:6000;pointer-events:none;display:block;width:100%;height:100%}
 .ge-shake{animation:ge-shake .5s cubic-bezier(.36,.07,.19,.97)}
 @keyframes ge-shake{10%,90%{transform:translate3d(-2px,1px,0)}20%,80%{transform:translate3d(5px,-3px,0)}30%,50%,70%{transform:translate3d(-9px,4px,0)}40%,60%{transform:translate3d(9px,-5px,0)}}
 @media (max-width:760px){
   .mf{grid-template-columns:minmax(0,1fr)}
-  .ge{grid-column:1;grid-row:auto;justify-self:end;width:172px;margin:36px 0 0 0}
+  .ge{grid-column:1;grid-row:auto;justify-self:center;width:min(100%,380px);margin:56px 0 24px}
   .mf-foot{grid-row:auto}
 }
 
@@ -1179,10 +1196,17 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     <span class="kicker">Our point of view</span>
     <p class="mf-text" id="mf-text" data-gold="moment,one.,lead">We don&rsquo;t make content. We make the moment a client decides you&rsquo;re the one. Cinematic film, licensed aerial and social, crafted on Hilton Head for the brands that intend to lead.</p>
     <a class="ge" id="ge" href="growth-engine/" data-cursor="Grow" aria-label="Growth Engine. Tap to grow.">
+      <span class="ge-rays" aria-hidden="true"></span>
       <span class="ge-halo" aria-hidden="true"></span>
       <span class="ge-ping" aria-hidden="true"></span>
-      <svg class="ge-ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="ge-path" d="M50,50 m-39,0 a39,39 0 1,1 78,0 a39,39 0 1,1 -78,0"/></defs><text><textPath href="#ge-path" textLength="238">Growth Engine &#9670; Tap to Grow &#9670; Press Now &#9670;</textPath></text></svg>
-      <span class="ge-core" aria-hidden="true"><b>Growth<br>Engine</b><small>Tap to grow</small></span>
+      <span class="ge-tilt" aria-hidden="true">
+        <span class="ge-edge"></span>
+        <span class="ge-bezel"></span>
+        <span class="ge-band"></span>
+        <svg class="ge-ring" viewBox="0 0 100 100"><defs><linearGradient id="ge-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset=".5" stop-color="#e2bd72"/><stop offset="1" stop-color="#a87b34"/></linearGradient><path id="ge-path" d="M50,50 m-37.6,0 a37.6,37.6 0 1,1 75.2,0 a37.6,37.6 0 1,1 -75.2,0"/></defs><g><text fill="url(#ge-gold)"><textPath href="#ge-path" textLength="232">Growth Engine &#10022; Tap to Grow &#10022; Press Now &#10022;</textPath></text></g></svg>
+        <span class="ge-core"><span class="ge-stars">&#9733;&#9733;&#9733;</span><b class="ge-t">Growth</b><b class="ge-t">Engine</b><span class="ge-rule"></span><span class="ge-cta">Tap to Grow</span></span>
+        <span class="ge-shine"></span>
+      </span>
     </a>
     <div class="mf-foot"><span>Film</span><span>Aerial</span><span>Social</span><span>Interactive 3D</span></div>
   </div>
@@ -3103,6 +3127,11 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 (function () {
   var btn = document.getElementById('ge'); if (!btn) return;
   var busy = false;
+  if (window.matchMedia && matchMedia('(hover: hover)').matches) {
+    btn.addEventListener('pointermove', function (e) { var r = btn.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      btn.style.setProperty('--ry', (x * 30).toFixed(1) + 'deg'); btn.style.setProperty('--rx', (-y * 30).toFixed(1) + 'deg'); btn.classList.add('is-tilt'); });
+    btn.addEventListener('pointerleave', function () { btn.classList.remove('is-tilt'); });
+  }
   function sound() {
     try {
       var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
