@@ -39,7 +39,7 @@ body{background:var(--ink);color:var(--fg);font:16px/1.6 var(--body);-webkit-fon
 .build.off{opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .build-bg{position:absolute;inset:-60px;background:#14110d center/cover no-repeat;filter:blur(26px) brightness(.5) saturate(1.15)}
 .build-frame{position:absolute;top:0;bottom:0;right:0;left:14vw;-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%);mask-image:linear-gradient(90deg,transparent,#000 18%)}
-.shot{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;overflow:hidden}
+.shot{position:absolute;inset:0;opacity:0;transition:opacity .85s ease;overflow:hidden}
 .shot.on{opacity:1}
 .stagebox{position:absolute;transform-origin:60% 45%}
 .stagebox .plate{position:absolute;inset:0;display:block;width:100%;height:100%}
@@ -79,6 +79,7 @@ body::after{content:"";position:fixed;inset:0 0 auto;height:calc(env(safe-area-i
 /* story */
 main{position:relative;z-index:2;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .beat{min-height:115vh;display:flex;align-items:center;padding-block:14vh}
+.beat[data-k="0"]:not(.hero){min-height:150vh}
 .card{width:100%;max-width:470px;background:linear-gradient(180deg,rgba(12,10,8,.5),rgba(12,10,8,.3));border:1px solid rgba(210,169,90,.3);box-shadow:0 30px 80px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,236,200,.1);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 20px rgba(0,0,0,.65);padding:26px 26px 28px;display:flex;flex-direction:column;gap:16px;min-width:0}
 .card.wide{max-width:560px}
 .tb{display:flex;flex-wrap:wrap;border:1px solid var(--line-strong);font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);width:max-content;max-width:100%}
@@ -192,6 +193,7 @@ p{margin:0;max-width:62ch}
   .sound{right:auto;left:max(16px,env(safe-area-inset-left,0px));bottom:auto;top:calc(env(safe-area-inset-top,0px) + 44px)}
   .hud{width:auto;left:auto;top:calc(env(safe-area-inset-top,0px) + 44px);right:max(16px,env(safe-area-inset-right,0px));padding:8px 10px 10px;font-size:10px;min-width:200px}
   .beat{min-height:135vh;align-items:flex-end;padding-block:58vh 6vh}
+  .beat[data-k="0"]:not(.hero){min-height:165vh}
   .hero{min-height:100vh;padding-block:30vh 8vh}
   .hero-in{background:linear-gradient(180deg,rgba(15,14,12,0),rgba(15,14,12,.72) 22%);padding-block:28px 12px;margin-inline:-16px;padding-inline:16px;width:calc(100% + 32px)}
   .card{background:linear-gradient(180deg,rgba(12,10,8,.56),rgba(12,10,8,.38));padding:20px 18px 22px}
@@ -217,11 +219,11 @@ if(!k)return;var el=document.getElementById('ge-in');el.style.display='block';
 if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.style.display='none';return;}
 el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',offset:.25},{opacity:0,transform:'scale(3)'}],{duration:1300,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'}).onfinish=function(){el.remove();};})();
 </script>
+
 <canvas id="stage" aria-hidden="true"></canvas>
 <div class="build" id="build" aria-hidden="true"><div class="build-bg"></div><div class="build-frame"></div><canvas class="build-dust"></canvas></div>
 <div id="fade"></div>
 <button id="sound" class="sound" type="button" aria-pressed="false" hidden>Tap for music</button>
-<script src="rock.js"></script>
 <div class="brand"><b></b>New Trust Services, LLC · Growth Engine</div>
 <div class="hud" id="hud" aria-hidden="true">
   <div class="hud-row"><span class="hud-title" id="hudTitle">Mansion · new build</span><span class="hud-num" id="hudNum">0%</span></div>
@@ -542,29 +544,561 @@ el.animate([{opacity:1,transform:'scale(1)'},{opacity:.9,transform:'scale(1.4)',
 })();
 </script>
 <script>
+/* LUPE-AUDIO */
+/* LupeAudio: a sunny jam-band groove plus construction SFX, synthesized live
+   with the Web Audio API. 110 BPM, swung 16ths, A major / A mixolydian.
+   Karplus-Strong rhythm + lead guitars, melodic bass, drawbar organ,
+   drums, shaker, congas/bongos and a steel-pan accent. */
+(function () {
+  var BPM = 110, BEAT = 60 / BPM, S16 = BEAT / 4, E8 = BEAT / 2, BAR = BEAT * 4;
+  var SWO = (2 * 0.58 - 1) * S16;          // swing: odd 16ths land late
+  var LOOK = 0.15, TICK = 25;
+  var C = null, G = null, timer = null, offline = false;
+  var step = 0, t0 = 0, nextT = 0, plan = null;
+  var level = 0.3, floor = 0.22, lvlT = 0, lastAcc = -9, last = {};
+  var antic = false, leadLeft = 0, leadRest = 1, leadM = 73, leadDir = 1;
+  var A = { on: false, beat: BEAT, level: level, _t: null };
+
+  // ---------- small helpers ----------
+  var seed = 7;
+  function rnd() {                                   // mulberry32, seeded so the jam is repeatable
+    seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+  var R = Math.random;
+  function pick(a) { return a[(rnd() * a.length) | 0]; }
+  function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
+  function smooth(a, b, x) { x = clamp((x - a) / (b - a), 0, 1); return x * x * (3 - 2 * x); }
+  function mtof(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  function now() { return A._t != null ? A._t : C.currentTime; }
+  function gn(v, dest) { var n = C.createGain(); n.gain.value = v; if (dest) n.connect(dest); return n; }
+  function bq(type, f, q, dest) {
+    var n = C.createBiquadFilter(); n.type = type; n.frequency.value = f; n.Q.value = q;
+    if (dest) n.connect(dest); return n;
+  }
+  function pn(p, dest) {
+    var n = C.createStereoPanner ? C.createStereoPanner() : C.createGain();
+    if (n.pan) n.pan.value = p; n.connect(dest); return n;
+  }
+  function lfo(f, depth, param) { var o = C.createOscillator(); o.frequency.value = f; o.connect(gn(depth, param)); o.start(); }
+  function comp(c, thr, knee, ratio, att, rel) {
+    c.threshold.value = thr; c.knee.value = knee; c.ratio.value = ratio; c.attack.value = att; c.release.value = rel; return c;
+  }
+  // ramp to peak over a, then exponential decay (time-constant dec)
+  function env(p, t, a, peak, dec) {
+    p.setValueAtTime(0, t); p.linearRampToValueAtTime(peak, t + a); p.setTargetAtTime(0, t + a, dec);
+  }
+  // oscillator hit, optional pitch glide f0 -> f1 over gl s
+  function osc(type, f0, f1, gl, t, a, peak, dec, dest) {
+    var o = C.createOscillator(), g = gn(0, dest); o.type = type;
+    o.frequency.setValueAtTime(f0, t);
+    if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + gl);
+    o.connect(g); env(g.gain, t, a, peak, dec); o.start(t); o.stop(t + a + dec * 7); return o;
+  }
+  // filtered noise hit, optional filter sweep to f1 over gl s
+  function nz(t, a, peak, dec, type, f, q, dest, f1, gl) {
+    var s = C.createBufferSource(), fl = bq(type, f, q), g = gn(0, dest);
+    s.buffer = G.noise; s.loop = true;
+    if (f1) { fl.frequency.setValueAtTime(f, t); fl.frequency.exponentialRampToValueAtTime(f1, t + gl); }
+    s.connect(fl); fl.connect(g); env(g.gain, t, a, peak, dec);
+    s.start(t, R() * 1.5); s.stop(t + a + dec * 7); return fl;
+  }
+  // noise hit into a bus that has its own filter (hats, shaker)
+  function nhit(t, a, peak, dec, dest) {
+    var s = C.createBufferSource(), g = gn(0, dest); s.buffer = G.noise; s.loop = true;
+    s.connect(g); env(g.gain, t, a, peak, dec); s.start(t, R() * 1.5); s.stop(t + a + dec * 7);
+  }
+  // inharmonic metal: sine partials at base*ratios, each with its own decay
+  function metal(t, base, ratios, decs, peak, dest) {
+    for (var i = 0; i < ratios.length; i++) osc('sine', base * ratios[i], 0, 0, t, 0.001, peak / (1 + i * 0.6), decs[i], dest);
+  }
+  // scatter of tiny band-passed noise grains (crumble, splinters, leaves)
+  function grains(t, n, span, lo, hi, peak, dest, q) {
+    for (var i = 0; i < n; i++) {
+      var u = Math.pow(R(), 1.5), tt = t + u * span;
+      nz(tt, 0.002, peak * Math.pow(1 - u, 1.4) * (0.4 + 0.6 * R()), 0.008 + 0.02 * R(), 'bandpass', lo + R() * (hi - lo), q || 2.5, dest);
+    }
+  }
+  function play(buf, t, v, dest) { var s = C.createBufferSource(), g = gn(v, dest); s.buffer = buf; s.connect(g); s.start(t); }
+
+  // ---------- harmony ----------
+  var MIX = [9, 11, 1, 2, 4, 6, 7], MAJ = [9, 11, 1, 2, 4, 6, 8], PENT = [9, 11, 1, 4, 6];
+  // r: root pc, g/c: guitar voicings (plain / add9-6 colour), o: organ voicing, t: chord tones, sc: lead scale
+  var CH = {
+    A:  { r: 9, g: [57, 64, 69, 73, 76], c: [57, 64, 71, 73, 76], o: [61, 64, 69], t: [9, 1, 4], sc: MIX },
+    D:  { r: 2, g: [50, 57, 62, 66, 69], c: [50, 57, 64, 66, 69], o: [62, 66, 69], t: [2, 6, 9], sc: MIX },
+    E:  { r: 4, g: [52, 59, 64, 68, 71], c: [52, 59, 66, 68, 71], o: [59, 64, 68], t: [4, 8, 11], sc: MAJ },
+    G:  { r: 7, g: [55, 59, 62, 67, 71], c: [55, 62, 67, 69, 71], o: [59, 62, 67], t: [7, 11, 2], sc: MIX },
+    Fm: { r: 6, g: [54, 61, 66, 69, 73], c: [54, 61, 68, 69, 73], o: [61, 66, 69], t: [6, 9, 1], sc: MAJ, m: 1 }
+  };
+  // two 8-bar sections: a sunny I-IV-I-V / I-bVII-IV-V, then a vi-IV-I-V lift
+  var SECT = [['A', 'D', 'A', 'E', 'A', 'G', 'D', 'E'], ['Fm', 'D', 'A', 'E', 'Fm', 'D', 'E', 'E']];
+  function chordAt(bar) { return CH[SECT[(bar >> 3) & 1][bar & 7]]; }
+  var LN = [];                                       // every note the lead may play
+  for (var m = 61; m <= 86; m++) if (MIX.indexOf(m % 12) >= 0 || m % 12 === 8) LN.push(m);
+  // bass templates: [step, role, length in 16ths]; 'A' = approach note into next chord
+  var BT = [
+    [[0, 'R', 5], [6, 'R', 2], [8, '5', 4], [12, '6', 2], [14, 'A', 2]],
+    [[0, 'R', 3], [3, 'R', 3], [6, '3', 2], [8, '5', 3], [11, '8', 3], [14, 'A', 2]],
+    [[0, 'R', 4], [4, '5', 4], [8, '8', 2], [10, '5', 2], [12, '3', 2], [14, 'A', 2]],
+    [[0, 'R', 2], [2, '2', 2], [4, '3', 2], [6, '5', 2], [8, '6', 2], [10, '5', 2], [12, '3', 2], [14, 'A', 2]],
+    [[0, 'R', 6], [6, '5', 2], [8, 'R', 2], [10, '8', 4], [14, 'A', 2]]
+  ];
+  // lead rhythm templates (16th-step onsets)
+  var LT = [[0, 2, 4, 6, 8, 10, 12, 14], [0, 2, 3, 4, 6, 8, 10, 11, 12, 14], [2, 4, 6, 7, 8, 10, 12],
+            [0, 3, 6, 8, 10, 12, 13, 14], [0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12], [0, 4, 6, 8, 12, 14]];
+  var CONGA = { 0: ['m', 0.45], 4: ['s', 0.75], 6: ['m', 0.3], 8: ['m', 0.4], 12: ['o', 0.75], 14: ['o', 0.65] };
+
+  // ---------- pre-rendered buffers ----------
+  function noiseBuf(sec) {
+    var b = C.createBuffer(1, (C.sampleRate * sec) | 0, C.sampleRate), d = b.getChannelData(0);
+    for (var i = 0; i < d.length; i++) d[i] = R() * 2 - 1; return b;
+  }
+  // Karplus-Strong string. s: loop damping (0.5 dull..0.3 bright), half: s to halve, br: pick brightness
+  function ks(f, sec, s, half, br) {
+    var sr = C.sampleRate, n = (sr * sec) | 0, y = new Float32Array(n), b = C.createBuffer(1, n, sr);
+    var P = sr / f - s, ip = P | 0, fr = P - ip, per = Math.round(sr / f), rho = Math.pow(0.5, 1 / (f * half));
+    var ex = new Float32Array(per), lp = 0, i, pk = Math.max(1, Math.round(per * 0.13)), prev = 0, peak = 0;
+    for (i = 0; i < per; i++) { lp += (R() * 2 - 1 - lp) * br; ex[i] = lp; }
+    for (i = per - 1; i >= pk; i--) ex[i] -= ex[i - pk];        // pick-position comb
+    for (i = 0; i < n; i++) {
+      var j = i - ip, d = (j >= 0 ? y[j] : 0) * (1 - fr) + (j > 0 ? y[j - 1] : 0) * fr;
+      y[i] = (i < per ? ex[i] : 0) + rho * ((1 - s) * d + s * prev); prev = d;
+    }
+    var o = b.getChannelData(0), x1 = 0, z = 0;                  // DC block + normalise
+    for (i = 0; i < n; i++) { z = y[i] - x1 + 0.995 * z; x1 = y[i]; o[i] = z; if (Math.abs(z) > peak) peak = Math.abs(z); }
+    var k = 0.6 / (peak || 1), fade = (sr * 0.05) | 0;
+    for (i = 0; i < n; i++) o[i] *= k * (i > n - fade ? (n - i) / fade : 1);
+    return b;
+  }
+  // cymbal: six square waves (808-style metal) + noise, high-passed
+  function cym(sec, tau, nzA, mul, ping) {
+    var sr = C.sampleRate, n = (sr * sec) | 0, b = C.createBuffer(1, n, sr), d = b.getChannelData(0);
+    var f8 = [205.3, 304.4, 369.6, 522.7, 540, 800], ph = [0, 0.3, 0.6, 0.1, 0.8, 0.5], prev = 0, peak = 0, i, k;
+    for (k = 0; k < 6; k++) f8[k] *= mul / sr;
+    for (i = 0; i < n; i++) {
+      var t = i / sr, mt = 0;
+      for (k = 0; k < 6; k++) { ph[k] += f8[k]; if (ph[k] >= 1) ph[k] -= 1; mt += ph[k] < 0.5 ? 1 : -1; }
+      var x = mt / 6 * (1 - nzA) + (R() * 2 - 1) * nzA, e = (1 - Math.exp(-t / 0.002)) * (Math.exp(-t / tau) + ping * Math.exp(-t / 0.03)) * (1 - t / sec);
+      d[i] = (x - prev) * e; prev = x; if (Math.abs(d[i]) > peak) peak = Math.abs(d[i]);
+    }
+    for (i = 0; i < n; i++) d[i] *= 0.7 / peak; return b;
+  }
+  // stereo reverb impulse: decaying noise that darkens over time
+  function impulse(sec) {
+    var sr = C.sampleRate, n = (sr * sec) | 0, b = C.createBuffer(2, n, sr), pre = (sr * 0.014) | 0;
+    for (var c = 0; c < 2; c++) {
+      var d = b.getChannelData(c), lp = 0;
+      for (var i = pre; i < n; i++) {
+        var u = i / n; lp += (R() * 2 - 1 - lp) * (0.75 - 0.6 * u);
+        d[i] = lp * Math.exp(-5.5 * u) * (1 - u);
+      }
+    }
+    return b;
+  }
+
+  // ---------- audio graph (built once per context) ----------
+  function build() {
+    var g = {}; G = g;
+    g.noise = noiseBuf(2);
+    g.lim = comp(C.createDynamicsCompressor(), -6, 0, 20, 0.002, 0.15); g.lim.connect(C.destination);
+    g.master = gn(0.85, g.lim);
+    g.mComp = comp(C.createDynamicsCompressor(), -18, 10, 2.5, 0.015, 0.3);
+    g.mFade = gn(0, g.master); g.mComp.connect(g.mFade);
+    g.mIn = gn(0.42, g.mComp);
+    g.verb = C.createConvolver(); g.verb.buffer = impulse(1.9); g.verb.connect(gn(0.55, g.master));
+    g.rFade = gn(0, g.verb);                              // music reverb send (fades with the music)
+    g.sfx = gn(0.9); g.sfx.connect(bq('lowpass', 8500, 0.5, g.master)); g.sfx.connect(gn(0.16, g.verb));
+    function bus(v, p, rv) { var o = gn(v); o.connect(pn(p, g.mIn)); if (rv) o.connect(gn(rv, g.rFade)); return o; }
+
+    // rhythm guitar: clean EQ, stereo chorus from two modulated short delays
+    var gq = bq('lowpass', 5200, 0.6, bus(0.6, -0.3, 0.22)); g.gtr = bq('highpass', 110, 0.7, gq);
+    [[0.011, 0.6, -0.75], [0.016, 0.83, 0.15]].forEach(function (c) {
+      var d = C.createDelay(0.05); d.delayTime.value = c[0]; gq.connect(d); lfo(c[1], 0.0022, d.delayTime);
+      d.connect(gn(0.26, pn(c[2], g.mIn)));
+    });
+    // lead guitar with a soft dotted-8th echo
+    g.lead = bq('lowpass', 6500, 0.5, bus(0.75, 0.28, 0.28));
+    var dl = C.createDelay(1), fb = bq('lowpass', 2600, 0.5); dl.delayTime.value = BEAT * 0.75;
+    g.lead.connect(dl); dl.connect(fb); fb.connect(gn(0.3, dl)); fb.connect(gn(0.14, pn(-0.35, g.mIn)));
+    g.bass = bq('lowpass', 1800, 0.5, bus(0.13, 0, 0.04));
+    // organ: drawbars as a periodic wave on the 16' fundamental, slow Leslie vibrato + tremolo
+    var trem = gn(0.82, bus(1, 0.18, 0.3)), vd = C.createDelay(0.02); vd.delayTime.value = 0.004;
+    lfo(0.9, 0.0008, vd.delayTime); lfo(0.9, 0.18, trem.gain); vd.connect(trem);
+    g.org = bq('lowpass', 3200, 0.5, vd);
+    var re = new Float32Array(9), im = new Float32Array(9);
+    im[1] = 0.55; im[2] = 1; im[4] = 0.6; im[6] = 0.3; im[8] = 0.28;     // 16', 8', 4', 2 2/3', 2'
+    g.orgW = C.createPeriodicWave(re, im);
+    // drums + percussion
+    g.kick = bus(0.45, 0, 0);
+    g.snr = bus(0.42, 0.06, 0.2);
+    g.hat = bq('highpass', 6500, 0.7, bq('lowpass', 11000, 0.5, bus(0.3, 0.25, 0.05)));
+    g.cym = bq('highpass', 350, 0.7, bq('lowpass', 8500, 0.5, bus(0.3, -0.2, 0.15)));
+    g.cga = bus(0.26, -0.42, 0.18);
+    g.shk = bq('bandpass', 5200, 1, bus(0.34, 0.48, 0.08));
+    g.stl = bus(0.16, 0.3, 0.42);
+
+    // pre-render string and cymbal buffers
+    g.gb = {}; g.lb = {}; var k;
+    for (k in CH) [CH[k].g, CH[k].c].forEach(function (vc) {
+      vc.forEach(function (m) { if (!g.gb[m]) g.gb[m] = ks(mtof(m), 1.3, 0.45, 0.55, 0.45); });
+    });
+    LN.forEach(function (m) { g.lb[m] = ks(mtof(m), 1.4, 0.38, 0.8, 0.65); });
+    g.ride = cym(1.4, 0.45, 0.35, 2.3, 0.6);
+    g.crash = cym(2.4, 0.9, 0.6, 1.7, 0);
+    g.ctx = C;
+  }
+
+  // ---------- instruments ----------
+  function pluck(buf, t, vel, len, dest) {
+    var s = C.createBufferSource(), g = gn(0, dest); s.buffer = buf; s.connect(g);
+    g.gain.setValueAtTime(vel, t); g.gain.setValueAtTime(vel, t + len); g.gain.setTargetAtTime(0, t + len, 0.025);
+    s.start(t); s.stop(t + len + 0.2); return s;
+  }
+  // strum a voicing: dir 1 = downstroke (low to high), -1 = upstroke; n = strings from the top
+  function strum(vc, t, dir, vel, len, n) {
+    var l = vc.slice(vc.length - n), gap = n > 3 ? 0.011 : 0.006;
+    if (dir < 0) l.reverse();
+    for (var i = 0; i < l.length; i++)
+      pluck(G.gb[l[i]], t + i * gap * (0.8 + 0.4 * rnd()), vel * (0.8 + 0.2 * rnd()) * (1 - i * 0.05), len, G.gtr);
+  }
+  function leadNote(m, t, len, vel, from, vib) {
+    var s = pluck(G.lb[m], t, vel, len, G.lead);
+    if (from) {                                           // slide into the note
+      var r0 = Math.pow(2, (from - m) / 12);
+      s.playbackRate.setValueAtTime(r0, t); s.playbackRate.setValueAtTime(r0, t + 0.02);
+      s.playbackRate.exponentialRampToValueAtTime(1, t + 0.09);
+    }
+    if (vib) {                                            // delayed finger vibrato
+      var o = C.createOscillator(), og = gn(0, s.playbackRate); o.frequency.value = 5.3; o.connect(og);
+      og.gain.setValueAtTime(0, t + 0.12); og.gain.linearRampToValueAtTime(0.006, t + 0.4); o.start(t); o.stop(t + len + 0.25);
+    }
+  }
+  function bassNote(m, t, len, vel) {
+    var f = mtof(m), g = gn(0, G.bass), lp = bq('lowpass', 900, 0.8, g), o1 = C.createOscillator(), o2 = C.createOscillator();
+    o1.frequency.value = f; o2.type = 'triangle'; o2.frequency.value = f; o1.connect(g); o2.connect(lp);
+    lp.frequency.setValueAtTime(1500, t); lp.frequency.setTargetAtTime(500, t, 0.08);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vel * 0.6, t + 0.007);
+    g.gain.setTargetAtTime(vel * 0.4, t + 0.01, 0.18); g.gain.setTargetAtTime(0, t + len, 0.03);
+    o1.start(t); o2.start(t); o1.stop(t + len + 0.25); o2.stop(t + len + 0.25);
+    osc('sine', f * 2, 0, 0, t, 0.002, vel * 0.12, 0.04, G.bass);   // finger "pluck"
+  }
+  function organ(notes, t, len, v) {
+    notes.forEach(function (m) {
+      var o = C.createOscillator(), g = gn(0, G.org); o.setPeriodicWave(G.orgW); o.frequency.value = mtof(m) / 2;
+      o.detune.value = (rnd() - 0.5) * 6; o.connect(g);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.05);
+      g.gain.setValueAtTime(v, t + len); g.gain.setTargetAtTime(0, t + len, 0.05);
+      o.start(t); o.stop(t + len + 0.4);
+    });
+  }
+  function panNote(m, t, v) {                             // FM steel-pan bell
+    var f = mtof(m), c = C.createOscillator(), mo = C.createOscillator(), mg = gn(0, c.frequency), g = gn(0, G.stl);
+    c.frequency.value = f; mo.frequency.value = f; mo.connect(mg); c.connect(g);
+    mg.gain.setValueAtTime(f * 2.2, t); mg.gain.setTargetAtTime(f * 0.25, t, 0.07);
+    env(g.gain, t, 0.004, v, 0.32); c.start(t); mo.start(t); c.stop(t + 2.5); mo.stop(t + 2.5);
+    osc('sine', f * 2, 0, 0, t, 0.003, v * 0.25, 0.12, G.stl);
+  }
+  function kick(t, v) { osc('sine', 115, 46, 0.09, t, 0.002, v, 0.12, G.kick); nz(t, 0.0005, v * 0.12, 0.004, 'lowpass', 2500, 0.7, G.kick); }
+  function snare(t, v) {
+    nz(t, 0.001, v * 0.7, 0.065, 'bandpass', 1900, 0.7, G.snr); nz(t, 0.001, v * 0.22, 0.05, 'highpass', 4200, 0.7, G.snr);
+    osc('triangle', 210, 175, 0.05, t, 0.001, v * 0.5, 0.045, G.snr);
+  }
+  function rim(t, v) {
+    osc('triangle', 1700, 1640, 0.01, t, 0.0005, v * 0.35, 0.012, G.snr); osc('sine', 820, 0, 0, t, 0.0005, v * 0.18, 0.02, G.snr);
+    nz(t, 0.0005, v * 0.3, 0.012, 'bandpass', 2800, 3, G.snr);
+  }
+  function tom(t, f, v) { osc('sine', f * 1.4, f, 0.05, t, 0.002, v, 0.13, G.snr); nz(t, 0.001, v * 0.2, 0.03, 'bandpass', f * 5, 1, G.snr); }
+  function conga(t, f, kind, v) {
+    if (kind === 'o') osc('sine', f * 1.3, f, 0.025, t, 0.001, v * 0.7, 0.11, G.cga);
+    else if (kind === 'm') { osc('sine', f * 1.2, f, 0.015, t, 0.001, v * 0.45, 0.03, G.cga); nz(t, 0.001, v * 0.15, 0.01, 'bandpass', 1200, 1, G.cga); }
+    else { osc('sine', f * 1.4, f * 1.05, 0.02, t, 0.001, v * 0.5, 0.04, G.cga); nz(t, 0.001, v * 0.5, 0.022, 'bandpass', 1800, 1.2, G.cga); }
+  }
+  function bongo(t, f, v) { osc('sine', f * 1.25, f, 0.015, t, 0.001, v * 0.45, 0.05, G.cga); nz(t, 0.001, v * 0.14, 0.01, 'bandpass', 3000, 1, G.cga); }
+
+  // ---------- composition ----------
+  function rootOf(ch) { var r = 33 + (ch.r + 3) % 12; return r > 41 ? r - 12 : r; }
+  function iv(ch, role) { return { R: 0, 2: 2, 3: ch.m ? 3 : 4, 5: 7, 6: ch.m ? 8 : 9, 8: 12 }[role]; }
+  function nearest(a, m) { var b = 0; for (var i = 1; i < a.length; i++) if (Math.abs(a[i] - m) < Math.abs(a[b] - m)) b = i; return b; }
+  function toChordTone(sc, i, ch) {
+    for (var d = 0; d < 4; d++) {
+      if (sc[i + d] && ch.t.indexOf(sc[i + d] % 12) >= 0) return i + d;
+      if (sc[i - d] && ch.t.indexOf(sc[i - d] % 12) >= 0) return i - d;
+    }
+    return i;
+  }
+  // one bar of Garcia-style noodling: stepwise flow, chord tones on strong beats
+  function leadBar(out, ch, end) {
+    var sc = LN.filter(function (m) { return ch.sc.indexOf(m % 12) >= 0; }), on = pick(LT), i, prev = 0;
+    if (end) on = on.filter(function (p) { return p <= 8; });
+    var idx = nearest(sc, leadM);
+    for (i = 0; i < on.length; i++) {
+      var p = on[i], st = pick([1, 1, 1, 2, 2, -1, 3, 0]) * leadDir;
+      if (rnd() < 0.15) leadDir = -leadDir;
+      idx = clamp(idx + st, 0, sc.length - 1);
+      if (idx < 3) leadDir = 1; if (idx > sc.length - 4) leadDir = -1;
+      if (PENT.indexOf(sc[idx] % 12) < 0 && rnd() < 0.5) idx = clamp(idx + leadDir, 0, sc.length - 1);
+      var lastN = i === on.length - 1;
+      if (p % 8 === 0 || (p % 4 === 0 && rnd() < 0.7) || (end && lastN)) idx = toChordTone(sc, idx, ch);
+      var m = sc[idx], len = (lastN ? 16 + (end ? 4 : 0) : on[i + 1]) - p;
+      var from = (i === 0 && rnd() < 0.3) ? m - 2 : (prev && prev !== m && Math.abs(m - prev) <= 3 && rnd() < 0.14 ? prev : 0);
+      out[p] = [m, len, (p % 4 === 0 ? 0.85 : 0.7) * (0.85 + 0.3 * rnd()), from, len >= 4];
+      prev = leadM = m;
+    }
+  }
+  function barPlan(bar, tb) {
+    var ch = chordAt(bar), nx = chordAt(bar + 1), L = level, P = { g: {}, b: {}, l: {}, s: {} };
+    // rhythm guitar [voicing, dir, vel, len16, strings]: ringing downstroke, offbeat chops, ghosts
+    var v = rnd() < 0.3 ? ch.c : ch.g;
+    if (!antic) P.g[0] = [v, 1, 0.9, 5.5, 5];
+    antic = false;
+    if (rnd() < 0.6) P.g[3] = [v, -1, 0.3, 1.5, 2];
+    P.g[6] = [v, -1, 0.7, 0.8, 3];
+    if (L > 0.45) P.g[8] = [v, 1, 0.55, 1.8, 4];
+    P.g[10] = [v, -1, 0.65, 0.8, 3];
+    if (L > 0.6 && rnd() < 0.5) P.g[11] = [v, -1, 0.3, 0.6, 2];
+    if (nx !== ch && rnd() < 0.3) { P.g[14] = [nx.g, -1, 0.75, 7.5, 5]; antic = true; }   // push into next chord
+    else P.g[14] = [v, -1, 0.62, 0.8, 3];
+    // bass: melodic line walking toward the next root
+    var r = rootOf(ch), nr = rootOf(nx), tp = BT[L < 0.5 ? pick([0, 2, 4]) : pick([0, 1, 2, 3, 4, 1, 3])];
+    tp.forEach(function (e) {
+      var m = e[1] === 'A' ? (nr === r ? r + pick([-5, 7, -1, 2]) : nr + pick([-1, 1, -2, 2])) : r + iv(ch, e[1]);
+      P.b[e[0]] = [m, e[2]];
+    });
+    // lead: phrases of 1-2 bars, then breathe
+    if (L > 0.48) {
+      if (leadRest > 0) leadRest--;
+      else if (leadLeft > 0 || rnd() < 0.3 + L * 0.6) {
+        if (leadLeft <= 0) { leadLeft = rnd() < 0.55 ? 2 : 1; leadDir = rnd() < 0.5 ? 1 : -1; }
+        leadLeft--; leadBar(P.l, ch, leadLeft === 0);
+        if (leadLeft === 0) leadRest = rnd() < 0.7 ? 1 : 2;
+      }
+    }
+    var oL = smooth(0.35, 0.7, L);
+    if (oL > 0.02) organ(ch.o, tb, BAR, 0.08 * oL);
+    if (L > 0.62 && (bar & 7) === 4) {                    // little steel-pan lick
+      var tones = []; for (var m = 76; m <= 90; m++) if (ch.t.indexOf(m % 12) >= 0) tones.push(m);
+      P.s[0] = tones[0]; P.s[3] = tones[1]; P.s[6] = tones[2]; P.s[10] = tones[1];
+    }
+    return P;
+  }
+  function drums(bar, p, t, L) {
+    var b8 = bar & 7, fillBar = (b8 === 7 && L > 0.4) || ((bar & 3) === 3 && L > 0.75);
+    var inFill = fillBar && p >= (b8 === 7 && L > 0.7 ? 8 : 12);
+    if (p === 0 || p === 8 || (p === 6 && rnd() < 0.3 * L) || (p === 11 && L > 0.6 && rnd() < 0.35))
+      kick(t, (p === 0 ? 0.85 : 0.7) * (0.7 + 0.3 * L));
+    if (p === 0 && b8 === 0 && bar > 0 && L > 0.5) play(G.crash, t, 0.5 * L, G.cym);
+    if (inFill) {
+      if (p >= 14 || (p & 1)) snare(t, 0.35 + 0.15 * (p & 1 ? 0 : 1));
+      else tom(t, [196, 165, 139, 117][(p >> 1) & 3], 0.6);
+    } else if (p === 4 || p === 12) {
+      var sn = smooth(0.35, 0.6, L);                     // rimshot at low level, snare as it builds
+      if (sn < 1) rim(t, 1.3 * (1 - sn)); if (sn > 0) snare(t, 0.9 * sn);
+    } else if ((p === 7 || p === 15) && L > 0.55 && rnd() < 0.25) snare(t, 0.12);
+    var rideA = smooth(0.62, 0.85, L);
+    if (!(p & 1)) {
+      nhit(t, 0.001, 0.55 * ((p & 2) ? 1 : 0.6) * (1 - 0.55 * rideA), (p === 14 && rnd() < 0.3) ? 0.15 : 0.035, G.hat);
+      if (rideA > 0) play(G.ride, t, rideA * ((p & 2) ? 0.35 : 0.5), G.cym);
+    } else if (rnd() < 0.15 + 0.3 * L) nhit(t, 0.001, 0.2, 0.025, G.hat);
+    nhit(t, 0.006, (0.35 + 0.5 * L) * (p & 1 ? 0.5 : (p & 2 ? 1 : 0.65)), 0.025, G.shk);
+    var cg = CONGA[p]; if (cg) conga(t, 330, cg[0], cg[1] * (0.6 + 0.4 * L));
+    if (p === 7 && rnd() < 0.4) conga(t, 220, 'o', 0.5);
+    if (L > 0.6 && !(p & 1)) bongo(t, p === 14 ? 400 : 600, (p === 14 ? 0.55 : (p & 2) ? 0.3 : 0.45) * smooth(0.6, 0.8, L));
+  }
+  function doStep(st, tg) {
+    var p = st & 15, bar = st >> 4, tb = tg - p * S16, t = tg + (p & 1 ? SWO : 0), e;
+    if (p === 0 || !plan) plan = barPlan(bar, tb);
+    if ((e = plan.g[p])) strum(e[0], t, e[1], e[2], e[3] * S16, e[4]);
+    if ((e = plan.b[p])) bassNote(e[0], t, e[1] * S16 - 0.02, p % 8 ? 0.8 : 0.95);
+    if ((e = plan.l[p])) leadNote(e[0], t, e[1] * S16, e[2], e[3], e[4]);
+    if ((e = plan.s[p])) panNote(e, t, 0.6);
+    drums(bar, p, t, level);
+  }
+  function schedule(until) {
+    var tn = now();
+    level = floor + (level - floor) * Math.exp(-Math.max(0, tn - lvlT) / 9); lvlT = tn; A.level = level;
+    while (nextT < tn - 0.02) { nextT += S16; step++; plan = (step & 15) ? plan : null; }   // fell behind: skip, don't burst
+    while (nextT < until) { doStep(step, nextT); nextT += S16; step++; }
+  }
+  function tick() { if (A.on) schedule(now() + LOOK); }
+  function fade(to, dur) {
+    var t = now();
+    [G.mFade.gain, G.rFade.gain].forEach(function (p) {
+      p.cancelScheduledValues(t); p.setValueAtTime(p.value, t); p.linearRampToValueAtTime(to, t + dur);
+    });
+  }
+  // band lift on a landing: crash + kick on the nearest 8th-note grid line
+  function accent(mass) {
+    var tn = now(); if (tn - lastAcc < BEAT * 0.95) return; lastAcc = tn;
+    var g = t0 + Math.ceil((tn - t0 - 0.03) / E8) * E8; if (g < tn + 0.005) g = tn + 0.005;
+    play(G.crash, g, clamp(0.3 + 0.3 * mass, 0.3, 0.85), G.cym); kick(g, 0.85);
+    if (level > 0.5) { var ch = chordAt(Math.floor((g - t0) / BAR)), m = 76 + (ch.r + 8) % 12; panNote(m, g, 0.45); panNote(m + 7, g + E8, 0.3); }
+  }
+
+  // ---------- construction SFX ----------
+  var SFX = {
+    concrete: function (t, v, d) {
+      osc('sine', 95, 34, 0.22, t, 0.004, 0.95 * v, 0.16, d); osc('triangle', 62, 40, 0.2, t, 0.003, 0.3 * v, 0.1, d);
+      nz(t, 0.002, 0.55 * v, 0.07, 'lowpass', 420, 0.7, d); nz(t + 0.02, 0.02, 0.1 * v, 0.18, 'bandpass', 1200, 0.8, d);
+      grains(t + 0.03, 16, 0.55, 700, 2600, 0.22 * v, d);
+    },
+    steel: function (t, v, d) {
+      osc('sine', 85, 36, 0.25, t, 0.003, 0.9 * v, 0.17, d); nz(t, 0.002, 0.45 * v, 0.05, 'lowpass', 500, 0.7, d);
+      metal(t + 0.005, 210, [1, 2.76, 5.4, 8.93], [0.5, 0.35, 0.2, 0.12], 0.28 * v, d);
+      metal(t + 0.13, 238, [1, 2.76, 5.4], [0.25, 0.18, 0.1], 0.12 * v, d);
+      osc('sine', 627, 0, 0, t, 0.002, 0.05 * v, 0.5, d); osc('sine', 633, 0, 0, t, 0.002, 0.04 * v, 0.5, d);
+    },
+    wood: function (t, v, d) {
+      osc('sine', 75, 45, 0.15, t, 0.003, 0.5 * v, 0.1, d); nz(t, 0.002, 0.5 * v, 0.035, 'bandpass', 950, 1.4, d);
+      osc('triangle', 440, 390, 0.08, t, 0.002, 0.35 * v, 0.05, d); osc('sine', 230, 210, 0.1, t, 0.002, 0.3 * v, 0.07, d);
+      nz(t + 0.09, 0.002, 0.22 * v, 0.025, 'bandpass', 1100, 1.4, d); osc('triangle', 470, 0, 0, t + 0.09, 0.002, 0.14 * v, 0.04, d);
+    },
+    glass: function (t, v, d) {
+      osc('sine', 80, 42, 0.2, t, 0.003, 0.6 * v, 0.1, d); nz(t, 0.002, 0.3 * v, 0.04, 'lowpass', 700, 0.7, d);
+      metal(t + 0.004, 1320, [1, 1.47, 2.09, 2.93], [0.18, 0.12, 0.08, 0.05], 0.16 * v, d);
+      metal(t + 0.075, 1580, [1, 1.47, 2.09], [0.12, 0.08, 0.05], 0.08 * v, d);
+      nz(t + 0.004, 0.001, 0.05 * v, 0.03, 'bandpass', 5000, 1.5, d);
+    },
+    roof: function (t, v, d) {
+      osc('sine', 100, 44, 0.2, t, 0.003, 0.8 * v, 0.14, d); nz(t, 0.003, 0.45 * v, 0.06, 'bandpass', 900, 0.7, d);
+      metal(t + 0.003, 180, [1, 1.04, 2.07, 3.13, 4.9], [0.45, 0.4, 0.3, 0.2, 0.12], 0.14 * v, d);
+      nz(t, 0.01, 0.12 * v, 0.25, 'bandpass', 3200, 3, d, 1600, 0.6);
+    },
+    palm: function (t, v, d) {
+      osc('sine', 70, 40, 0.15, t, 0.004, 0.35 * v, 0.09, d);
+      nz(t, 0.1, 0.1 * v, 0.2, 'bandpass', 3000, 0.6, d); grains(t, 22, 0.7, 2000, 5000, 0.12 * v, d, 1.5);
+    },
+    smash: function (t, v, d) {
+      nz(t, 0.001, 0.7 * v, 0.018, 'highpass', 1800, 0.7, d); osc('triangle', 170, 60, 0.06, t, 0.001, 0.25 * v, 0.03, d);
+      osc('sine', 85, 38, 0.2, t, 0.002, 0.75 * v, 0.12, d); nz(t, 0.002, 0.5 * v, 0.09, 'bandpass', 700, 0.8, d);
+      grains(t + 0.01, 26, 0.5, 1200, 4200, 0.3 * v, d); nz(t, 0.01, 0.15 * v, 0.2, 'lowpass', 2500, 0.7, d);
+    },
+    beep: function (t, v, d) {                           // backup alarm, three pulses
+      for (var k = 0; k < 3; k++) {
+        var tt = t + k * 0.42, o = C.createOscillator(), g = gn(0, bq('lowpass', 2200, 0.7, d));
+        o.type = 'square'; o.frequency.value = 1000; o.connect(g);
+        g.gain.setValueAtTime(0, tt); g.gain.linearRampToValueAtTime(0.07 * v, tt + 0.01);
+        g.gain.setValueAtTime(0.07 * v, tt + 0.24); g.gain.linearRampToValueAtTime(0, tt + 0.26);
+        o.start(tt); o.stop(tt + 0.3);
+      }
+    },
+    chain: function (t, v, d) {
+      for (var k = 0, tt = t; k < 9; k++, tt += 0.03 + R() * 0.045) {
+        metal(tt, 1500 + R() * 900, [1, 1.53, 2.31], [0.035, 0.025, 0.015], 0.1 * v * (0.6 + 0.4 * R()), d);
+        nz(tt, 0.001, 0.06 * v, 0.015, 'bandpass', 2500, 2, d);
+      }
+    },
+    drill: function (t, v, d) { motor(t, v, d, [140, 420, 440, 180], [0.15, 0.45, 0.62], 'square', 1400, 0.2); nz(t + 0.1, 0.02, 0.04 * v, 0.15, 'bandpass', 3000, 2, d); },
+    saw: function (t, v, d) { motor(t, v, d, [280, 880, 760, 500], [0.25, 0.7, 0.85], 'sawtooth', 2000, 0.16); nz(t + 0.25, 0.08, 0.12 * v, 0.2, 'bandpass', 3500, 1.2, d); },
+    nailgun: function (t, v, d) {
+      nz(t, 0.0005, 0.45 * v, 0.008, 'highpass', 2500, 0.7, d); osc('sine', 190, 55, 0.05, t, 0.001, 0.55 * v, 0.035, d);
+      nz(t, 0.001, 0.35 * v, 0.03, 'bandpass', 900, 1, d); nz(t + 0.03, 0.01, 0.06 * v, 0.05, 'highpass', 3500, 0.7, d);
+      metal(t + 0.002, 2100, [1, 2.7], [0.02, 0.01], 0.08 * v, d);
+    },
+    hammer: function (t, v, d) {
+      [0, 0.3, 0.52].forEach(function (o, k) {
+        var w = v * (0.7 + k * 0.15);
+        metal(t + o, 1250 + k * 30, [1, 2.43, 3.9], [0.06, 0.035, 0.02], 0.22 * w, d);
+        osc('triangle', 320, 260, 0.03, t + o, 0.001, 0.3 * w, 0.03, d); nz(t + o, 0.001, 0.25 * w, 0.01, 'bandpass', 2000, 1, d);
+      });
+    },
+    whoosh: function (t, v, d) {
+      var p = pn(-0.6, d), f = nz(t, 0.3, 0.9 * v, 0.07, 'bandpass', 350, 1.1, p);
+      f.frequency.setValueAtTime(350, t); f.frequency.exponentialRampToValueAtTime(1700, t + 0.3); f.frequency.exponentialRampToValueAtTime(450, t + 0.55);
+      if (p.pan) p.pan.linearRampToValueAtTime(0.6, t + 0.55);
+    }
+  };
+  // motor whine: two oscillators on pitch curve fs at times ts, band-passed, jittered
+  function motor(t, v, d, fs, ts, type, bp, peak) {
+    var g = gn(0, bq('lowpass', 4200, 0.5, d)), f = bq('bandpass', bp, 0.9, g);
+    [1, 2.01].forEach(function (mul) {
+      var o = C.createOscillator(); o.type = type; o.connect(f);
+      o.frequency.setValueAtTime(fs[0] * mul, t); o.frequency.exponentialRampToValueAtTime(fs[1] * mul, t + ts[0]);
+      o.frequency.linearRampToValueAtTime(fs[2] * mul, t + ts[1]); o.frequency.exponentialRampToValueAtTime(fs[3] * mul, t + ts[2]);
+      o.start(t); o.stop(t + ts[2] + 0.05);
+    });
+    var j = C.createOscillator(), jg = gn(peak * v * 0.15, g.gain); j.frequency.value = 31; j.connect(jg); j.start(t); j.stop(t + ts[2]);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak * v, t + 0.04);
+    g.gain.setValueAtTime(peak * v, t + ts[1]); g.gain.linearRampToValueAtTime(0, t + ts[2]);
+  }
+
+  // ---------- public API ----------
+  A.start = function (ctx) {
+    ctx = ctx || C; if (!ctx || (A.on && ctx === C)) return;
+    if (ctx !== C || !G) { C = ctx; build(); last = {}; }
+    offline = typeof OfflineAudioContext !== 'undefined' && C instanceof OfflineAudioContext;
+    var t = now();
+    A.on = true; seed = 7; step = 0; t0 = nextT = t + 0.08; plan = null; antic = false;
+    leadLeft = 0; leadRest = 1; lvlT = t;
+    fade(1, 1.5);
+    if (!offline) { if (C.state === 'suspended' && C.resume) C.resume(); clearInterval(timer); timer = setInterval(tick, TICK); tick(); }
+  };
+  A.stop = function () {
+    if (!A.on) return; A.on = false; clearInterval(timer); timer = null; fade(0, 0.6);
+  };
+  A.delayToBeat = function (ms) {
+    if (!A.on || !C) return 0;
+    var tn = now(), lat = offline ? 0 : Math.min(0.1, C.outputLatency || C.baseLatency || 0);
+    var g = t0 + Math.ceil((tn + ms / 1000 - lat - t0) / E8 - 1e-6) * E8;
+    return Math.max(0, (g - tn + lat) * 1000 - ms);
+  };
+  A.sfx = function (name, vol) {
+    if (!C || !G || !SFX[name]) return;
+    var t = now(); if (t - (last[name] == null ? -9 : last[name]) < 0.06) return; last[name] = t;
+    SFX[name](t + 0.005, vol == null ? 1 : vol, G.sfx);
+  };
+  A.land = function (mass, kind) {
+    if (!C || !G) return; mass = mass == null ? 1 : mass;
+    A.sfx(kind || 'concrete', clamp(0.3 + 0.45 * mass, 0.25, 1.2));
+    level = Math.min(1, level + 0.1); floor = Math.min(0.8, floor + 0.035); A.level = level;
+    if (A.on) accent(mass);
+  };
+  A._pump = function () { if (A.on) schedule(now() + LOOK); };   // test hook: drive the scheduler manually (offline)
+  document.addEventListener('visibilitychange', function () {
+    if (!A.on || !C || offline) return;
+    if (document.hidden) C.suspend && C.suspend(); else C.resume && C.resume();
+  });
+  window.LupeAudio = A;
+})();
+
+</script>
+<script>
 (function(){
 'use strict';
-/* Estate build: the real coastal estate, built piece by piece. Each stage is a clean
-   photo plate plus the cut-out piece: scrolling lowers the piece in from above the frame,
-   then it drops under gravity, slams onto the build (shake, dust, thud) and the shot cuts
-   to the next stage with that piece installed. Works with or without WebGL. */
+/* Estate build: the real coastal estate, built piece by piece. Each stage is a clean photo
+   plate plus its piece, cut into a few sections. Scrolling lowers the sections in from above
+   the frame; then they let go one at a time, on the beat: a small lift, a smooth fall, a soft
+   landing with a little bounce, a puff of dust and a landing sound. Once the last one settles
+   the shot dissolves to the next stage with that piece installed. */
 var wrap = document.getElementById('build');
 if (!wrap) return;
 var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-// m: scroll position the stage is centred on. piece: [x, y, w, h] of the hanging piece (fractions of the plate),
-// land: [dx, dy, scale] where it comes to rest, measured from its hanging spot
+// m: scroll position the stage is centred on. piece: [x, y, w, h] of the whole hanging piece (fractions of the plate),
+// land: [dx, dy, scale] where it comes to rest, measured from its hanging spot. order: which section drops first.
 var FRAMES = [
   {src: 'final',      m: 0,    stage: 'The vision',          w: 2412, h: 1328},
-  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.1484, .0428, .654, .2864],  land: [0, .45, 1.08]},
-  {src: 'structure',  m: .145, stage: 'Structure',           w: 1600, h: 981,  piece: [.1388, .0265, .6538, .366],  land: [-.025, .15, .72]},
-  {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74]},
-  {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87]},
-  {src: 'interiors',  m: .635, stage: 'Interiors',           w: 1600, h: 985,  piece: [.0956, 0, .785, .4772],      land: [0, .06, .95]},
-  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  piece: [.1764, .0954, .7089, .2589], land: [.339, .391, .42]},
-  {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15]},
+  {src: 'foundation', m: .04,  stage: 'Foundation',          w: 1604, h: 981,  piece: [.1484, .0428, .654, .2864],  land: [0, .45, 1.08],   order: [1, 0, 2],       kind: 'concrete'},
+  {src: 'structure',  m: .145, stage: 'Structure',           w: 1600, h: 981,  piece: [.1388, .0265, .6538, .366],  land: [-.025, .15, .72], order: [1, 0, 2],       kind: 'steel'},
+  {src: 'walls',      m: .3,   stage: 'Exterior walls',      w: 1604, h: 981,  piece: [.1459, .0724, .7089, .3374], land: [0, .29, .74],    order: [0, 1, 2, 3, 4], kind: ['concrete', 'glass', 'glass', 'glass', 'concrete']},
+  {src: 'roof',       m: .47,  stage: 'Roofing',             w: 1604, h: 985,  piece: [.0673, .0843, .8416, .2863], land: [0, .16, .87],    order: [1, 0, 2],       kind: 'roof'},
+  {src: 'interiors',  m: .635, stage: 'Interiors',           w: 1600, h: 985,  piece: [.0956, 0, .785, .4772],      land: [0, .06, .95],    order: [0, 1, 2],       kind: 'wood'},
+  {src: 'pool',       m: .74,  stage: 'Pool + exteriors',    w: 1604, h: 985,  piece: [.1764, .0954, .7089, .2589], land: [.339, .391, .42], order: [0, 1],          kind: 'concrete'},
+  {src: 'landscape',  m: .86,  stage: 'Landscaping',         w: 1604, h: 1083, piece: [.1103, 0, .7213, .3758],     land: [0, .45, 1.15],   order: [0, 3, 1, 2],    kind: 'palm'},
   {src: 'final',      m: .96,  stage: 'The finished estate', w: 2412, h: 1328}
 ];
-var FALL = 620, SETTLE = 420;   // fall + settle ms
+// the sections of each piece: [x, y, w, h] as fractions of the plate (sr/split.py)
+var PARTS = {
+  foundation: [[.1503, .0673, .2269, .2181], [.3772, .0459, .2089, .2803], [.5861, .1335, .2145, .1876]],
+  structure: [[.1407, .1203, .2006, .1631], [.3413, .0296, .2156, .3282], [.5569, .0989, .2338, .2905]],
+  walls: [[.1478, .1162, .0991, .2508], [.2712, .0755, .1347, .2661], [.4551, .1203, .1608, .2793], [.6259, .1336, .144, .2732], [.7993, .0765, .0536, .314]],
+  roof: [[.0692, .128, .2843, .2274], [.3535, .0873, .2774, .2802], [.6309, .1686, .2762, .199]],
+  interiors: [[.0975, 0, .2725, .4467], [.37, 0, .2669, .4741], [.6368, .0457, .2419, .4264]],
+  pool: [[.1783, .0984, .331, .2355], [.5093, .1015, .3741, .2497]],
+  landscape: [[.1122, 0, .1683, .373], [.3291, 0, .1764, .2632], [.5286, .0951, .1128, .1985], [.6496, 0, .1802, .3675]]
+};
+var FALL = 900, SETTLE = 620, STAG = 540, HOLD = 160, RISE = .12;   // ms; RISE: most a set waits above its hanging spot, in plate heights
 var bg = wrap.querySelector('.build-bg'), stack = wrap.querySelector('.build-frame'), dust = wrap.querySelector('.build-dust');
 var shots = FRAMES.map(function(f){
   var s = document.createElement('div'); s.className = 'shot';
@@ -572,12 +1106,18 @@ var shots = FRAMES.map(function(f){
   var plate = new Image(); plate.alt = ''; plate.decoding = 'async'; plate.className = 'plate';
   plate.src = f.piece ? 'estate2/' + f.src + '_plate.jpg' : 'estate/' + f.src + '.jpg';
   box.appendChild(plate);
-  var o = {el: s, box: box, bw: 0, bh: 0};
+  var o = {el: s, box: box, bw: 0, bh: 0, panX: null};
   if (f.piece){
-    var sh = document.createElement('div'); sh.className = 'drop-shadow'; box.appendChild(sh);
-    var pc = new Image(); pc.alt = ''; pc.decoding = 'async'; pc.className = 'piece'; pc.src = 'estate2/' + f.src + '_piece.webp';
-    pc.style.left = f.piece[0]*100 + '%'; pc.style.top = f.piece[1]*100 + '%'; pc.style.width = f.piece[2]*100 + '%'; pc.style.height = f.piece[3]*100 + '%';
-    box.appendChild(pc); o.piece = pc; o.shadow = sh;
+    var sh = document.createElement('div'); sh.className = 'drop-shadow'; box.appendChild(sh); o.shadow = sh;
+    var p = f.piece, gx = p[0] + p[2]/2, gy = p[1] + p[3];   // every section scales about the whole piece's bottom centre
+    o.parts = PARTS[f.src].map(function(b, k){
+      var im = new Image(); im.alt = ''; im.decoding = 'async'; im.className = 'piece'; im.src = 'estate3/' + f.src + '_' + k + '.webp';
+      im.style.left = b[0]*100 + '%'; im.style.top = b[1]*100 + '%'; im.style.width = b[2]*100 + '%'; im.style.height = b[3]*100 + '%';
+      im.style.transformOrigin = ((gx - b[0])/b[2]*100).toFixed(2) + '% ' + ((gy - b[1])/b[3]*100).toFixed(2) + '%';
+      box.appendChild(im);
+      return {el: im, b: b, cx: b[0] + b[2]/2 - gx, cy: b[1] - gy, mass: Math.min(1.4, b[2]*b[3]*f.land[2]*f.land[2]*8),
+              kind: typeof f.kind === 'string' ? f.kind : f.kind[k], P: 0};
+    });
   }
   stack.appendChild(s); return o;
 });
@@ -587,6 +1127,7 @@ var hud = document.getElementById('hud'), hTitle = document.getElementById('hudT
 function clamp(x, a, b){ return Math.min(b === undefined ? 1 : b, Math.max(a || 0, x)); }
 function lerp(a, b, t){ return a + (b - a)*t; }
 function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
+function easeInOut(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; }
 var beats = Array.prototype.slice.call(document.querySelectorAll('.beat')), anchors = [];
 function measure(){
   anchors = beats.map(function(b){ var r = b.getBoundingClientRect(), top = r.top + scrollY;
@@ -603,15 +1144,23 @@ function target(){
 }
 function frameAt(m){ for (var i = FRAMES.length - 1; i > 0; i--) if (m >= (FRAMES[i].m + FRAMES[i-1].m)/2) return i; return 0; }
 function span(i){ return [i ? (FRAMES[i].m + FRAMES[i-1].m)/2 : 0, i < FRAMES.length - 1 ? (FRAMES[i].m + FRAMES[i+1].m)/2 : 1]; }
-// the piece comes down from above the frame as its card scrolls in, and lets go just before the card is centred
-function dropAt(i){ var lo = span(i)[0]; return FRAMES[i].m - .15*(FRAMES[i].m - lo); }
+// the sections come down from above the frame as the card scrolls in, and start dropping before it is centred
+// (on phones the card covers the lower half once centred, so the drop starts sooner)
+function dropAt(i){ var lo = span(i)[0]; return lo + (narrow() ? .4 : .7)*(FRAMES[i].m - lo); }
 
-/* each plate covers the frame; the camera pans sideways to keep the action (the piece, then where it lands) in view */
+/* each plate covers the frame; the camera glides sideways to keep the action in view */
 var FW = 0, FH = 0;
+function narrow(){ return FW/FH < 1.2; }
+// on a phone only part of the house fits, so sections drop left to right and the camera glides along with them
+function orderOf(i){ var f = FRAMES[i]; return narrow() ? PARTS[f.src].map(function(b, k){ return k; }) : f.order; }
+function partX(i, j, P){ var f = FRAMES[i], q = shots[i].parts[j], gx = f.piece[0] + f.piece[2]/2, t = clamp(P);
+  return gx + f.land[0]*t + q.cx*lerp(1, f.land[2], t); }
 function focus(i){ var f = FRAMES[i]; return f.piece ? f.piece[0] + f.piece[2]/2 : .45; }
-function pan(i, fx){
-  var s = shots[i], narrow = FW/FH < 1.2, c = narrow ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
-  s.box.style.left = Math.max(FW - s.bw, Math.min(0, FW*c - fx*s.bw)).toFixed(1) + 'px';
+function pan(i, fx, snap){
+  var s = shots[i], c = FW/FH < 1.2 ? .5 : .57;   // wide screens: the copy sits on the left, so frame a bit right
+  var x = Math.max(FW - s.bw, Math.min(0, FW*c - fx*s.bw));
+  s.panX = snap || s.panX === null ? x : lerp(s.panX, x, .07);
+  s.box.style.left = s.panX.toFixed(1) + 'px';
 }
 function layout(){
   var fw = stack.clientWidth, fh = stack.clientHeight; FW = fw; FH = fh;
@@ -619,8 +1168,11 @@ function layout(){
     var f = FRAMES[i], k = Math.max(fw/f.w, fh/f.h), w = f.w*k, h = f.h*k;
     s.bw = w; s.bh = h;
     s.box.style.width = w + 'px'; s.box.style.height = h + 'px';
-    s.box.style.top = (fh - h)*.3 + 'px'; pan(i, focus(i));
+    s.box.style.top = (fh - h)*.3 + 'px'; pan(i, focus(i), true);
     if (f.piece){
+      // the set waits a little above its spot, as high as the frame allows without cropping it
+      s.rise = clamp((f.piece[1]*h + (fh - h)*.3 - .06*fh)/h, 0, RISE);
+      s.lift = s.rise/(f.piece[1] + f.piece[3] + .12);
       // soft contact shadow where the piece will land
       var p = f.piece, L = f.land, sw = p[2]*L[2]*.92;
       s.shadow.style.width = sw*100 + '%'; s.shadow.style.height = (p[3]*L[2]*.16)*100 + '%';
@@ -629,29 +1181,52 @@ function layout(){
   });
 }
 
-/* piece placement: y=0 is the hanging spot from the photo, 1 is the landing spot; `lift` raises it above the frame */
-function place(i, t, lift, sway, squash){
-  var s = shots[i], f = FRAMES[i], p = f.piece, L = f.land;
-  var x = L[0]*s.bw*t, y = L[1]*s.bh*t - lift*(p[1] + p[3] + .12)*s.bh, k = lerp(1, L[2], t);
-  pan(i, focus(i) + L[0]*t);
-  s.piece.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (sway || 0).toFixed(3) + 'deg) scale(' + k.toFixed(4) + ',' + (k*(squash || 1)).toFixed(4) + ')';
-  s.shadow.style.opacity = (lift > .98 ? 0 : (.16 + .5*t*t)*(1 - lift)).toFixed(3);
-  s.shadow.style.transform = 'scale(' + (1.35 - .35*t).toFixed(3) + ')';
+/* one section. P is its progress from the hanging height (0) to the landing spot (1); lift (0..1) raises
+   the whole set above the frame; rot swings it on its cable; by lifts it a few px (bounce, bob); sq squashes it. */
+function put(i, j, P, lift, rot, by, sq){
+  var s = shots[i], f = FRAMES[i], p = f.piece, L = f.land, q = s.parts[j], t = Math.max(0, P);
+  var up = Math.max(lift, s.lift*(1 - P));
+  var x = L[0]*s.bw*t, y = L[1]*s.bh*t - up*(p[1] + p[3] + .12)*s.bh - (by || 0), k = lerp(1, L[2], t);
+  var cx = q.cx*s.bw, cy = q.cy*s.bh;   // swing about the section's own top centre
+  q.P = P;
+  q.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + k.toFixed(4) + ',' + (k*(sq || 1)).toFixed(4) + ')' +
+    (rot ? ' translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) rotate(' + rot.toFixed(3) + 'deg) translate(' + (-cx).toFixed(1) + 'px,' + (-cy).toFixed(1) + 'px)' : '');
 }
+function stageLook(i, j){
+  // camera and contact shadow follow how far the set has come down; on phones the camera follows section j
+  var s = shots[i], f = FRAMES[i], n = s.parts.length, P = 0, up = 1;
+  s.parts.forEach(function(q){ P += clamp(q.P)/n; });
+  up = s.hang === undefined ? 1 : s.hang;
+  pan(i, narrow() ? partX(i, j === undefined ? orderOf(i)[0] : j, s.parts[j === undefined ? orderOf(i)[0] : j].P) : focus(i) + f.land[0]*P);
+  s.shadow.style.opacity = (up > .98 ? 0 : (.12 + .5*P*P)*(1 - up*.9)).toFixed(3);
+  s.shadow.style.transform = 'scale(' + (1.35 - .35*P).toFixed(3) + ')';
+}
+function cable(i, j, now, lift){
+  var q = shots[i].parts[j], calm = reduce ? 0 : .35 + .65*lift;
+  q.rot0 = Math.sin(now/1050 + i + j*1.7)*.55*calm; q.by0 = Math.sin(now/1300 + j*2.1)*.006*shots[i].bh*calm;
+}
+function hangAll(i, lift, now){
+  var s = shots[i]; s.hang = lift;
+  s.parts.forEach(function(q, j){
+    // each section sways and bobs on its own cable, calming as it comes down
+    cable(i, j, now, lift); put(i, j, 0, lift, q.rot0, q.by0, 1);
+  });
+  stageLook(i);
+}
+function landAll(i){ var s = shots[i]; s.hang = 0; s.parts.forEach(function(q, j){ put(i, j, 1, 0, 0, 0, 1); }); stageLook(i); }
 
-/* dust: soft puffs that burst sideways from the landing line */
+/* dust: a soft puff along the bottom edge of each section as it lands */
 var dctx = dust.getContext('2d'), puffs = [], dustT = 0;
 function sizeDust(){ var r = Math.min(devicePixelRatio || 1, 2); dust.width = dust.clientWidth*r; dust.height = dust.clientHeight*r; dctx.setTransform(r, 0, 0, r, 0, 0); }
-function burst(i){
-  var rect = shots[i].piece.getBoundingClientRect(), dr = dust.getBoundingClientRect();
+function puff(el, mass){
+  var rect = el.getBoundingClientRect(), dr = dust.getBoundingClientRect();
   if (!rect.width) return;
-  var y = rect.bottom - dr.top - rect.height*.06, x0 = rect.left - dr.left + rect.width*.04, x1 = rect.right - dr.left - rect.width*.04, n = Math.round(30 + rect.width/18);
+  var y = rect.bottom - dr.top - rect.height*.05, x0 = rect.left - dr.left + rect.width*.05, x1 = rect.right - dr.left - rect.width*.05, n = Math.round(10 + rect.width/26 + mass*8);
   for (var j = 0; j < n; j++){
     var x = lerp(x0, x1, Math.random()), dir = x < (x0 + x1)/2 ? -1 : 1;
-    puffs.push({x: x, y: y + (Math.random() - .5)*12, vx: dir*(40 + Math.random()*150), vy: -(15 + Math.random()*60), r: 10 + Math.random()*28, life: 0, max: .9 + Math.random()*.9});
+    puffs.push({x: x, y: y + (Math.random() - .5)*8, vx: dir*(25 + Math.random()*90), vy: -(10 + Math.random()*35), r: 8 + Math.random()*18 + mass*6, life: 0, max: 1 + Math.random()*.9});
   }
-  // a few chips of debris that pop up and fall back
-  for (j = 0; j < 14; j++) puffs.push({chip: 1, x: lerp(x0, x1, Math.random()), y: y, vx: (Math.random() - .5)*260, vy: -(120 + Math.random()*220), r: 1.5 + Math.random()*2.5, life: 0, max: .7 + Math.random()*.4});
+  for (j = 0; j < 5; j++) puffs.push({chip: 1, x: lerp(x0, x1, Math.random()), y: y, vx: (Math.random() - .5)*160, vy: -(80 + Math.random()*120), r: 1.5 + Math.random()*2, life: 0, max: .6 + Math.random()*.3});
   if (!dustT) dustT = requestAnimationFrame(stepDust);
 }
 var lastD = 0;
@@ -665,56 +1240,87 @@ function stepDust(now){
       p.vy += 900*dt; p.x += p.vx*dt; p.y += p.vy*dt;
       dctx.fillStyle = 'rgba(70,60,50,' + (1 - k).toFixed(3) + ')'; dctx.fillRect(p.x, p.y, p.r, p.r); return;
     }
-    p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= .965; p.vy *= .95;
-    var r = p.r*(1 + k*2.4), g = dctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r), a = .42*(1 - k)*Math.min(1, p.life*12);
+    p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= .96; p.vy *= .95;
+    var r = p.r*(1 + k*2.2), g = dctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r), a = .3*(1 - k)*Math.min(1, p.life*10);
     g.addColorStop(0, 'rgba(222,196,166,' + a + ')'); g.addColorStop(1, 'rgba(222,196,166,0)');
     dctx.fillStyle = g; dctx.fillRect(p.x - r, p.y - r, 2*r, 2*r);
   });
   if (puffs.length) dustT = requestAnimationFrame(stepDust); else { dustT = 0; lastD = 0; dctx.clearRect(0, 0, dust.clientWidth, dust.clientHeight); }
 }
-function shake(power){
-  if (!stack.animate) return;
-  var a = 4 + power*4;
-  stack.animate([{transform: 'translate(0,0)'}, {transform: 'translate(' + -a + 'px,' + a*.9 + 'px)'}, {transform: 'translate(' + a*.8 + 'px,' + -a*.7 + 'px)'},
-    {transform: 'translate(' + -a*.5 + 'px,' + a*.4 + 'px)'}, {transform: 'translate(' + a*.2 + 'px,' + -a*.2 + 'px)'}, {transform: 'translate(0,0)'}], {duration: 420, easing: 'ease-out'});
+// a gentle camera dip on each landing, not a shake
+function nudge(mass){
+  if (!stack.animate || reduce) return;
+  var a = 1.5 + mass*3.5;
+  stack.animate([{transform: 'translateY(0)'}, {transform: 'translateY(' + a.toFixed(1) + 'px)', offset: .22}, {transform: 'translateY(' + (-a*.3).toFixed(1) + 'px)', offset: .6}, {transform: 'translateY(0)'}],
+    {duration: 460, easing: 'ease-out'});
+}
+function sfx(name, vol){ if (window.__lupeSfx) window.__lupeSfx(name, vol); }
+
+/* the drop: sections let go one at a time, a beat apart */
+function beatMs(){ var A = window.LupeAudio, b = A && A.on && A.beat; if (!b) return 0; b = b < 10 ? b*1000 : b; while (b < 420) b *= 2; while (b > 900) b /= 2; return b; }
+var seq = null, done = [];
+function startSeq(i, now){
+  var s = shots[i], f = FRAMES[i], A = window.LupeAudio, gap = beatMs() || STAG, lead = 160;
+  // with the music on, the first section lands right on a beat and the rest follow on the next beats
+  var rel = [], dur = [];
+  // heavier drops take longer, like real gravity, but every fall stays smooth and readable
+  var fall = clamp(420 + 30*Math.sqrt((f.land[1] + s.rise)*s.bh), 560, FALL);
+  if (A && A.on && A.delayToBeat) lead += A.delayToBeat(lead + fall) || 0;
+  orderOf(i).forEach(function(j, n){ rel[j] = now + lead + n*gap; dur[j] = fall; });
+  s.parts.forEach(function(q){ q.landed = false; q.let = false; });
+  seq = {i: i, rel: rel, dur: dur};
+}
+function rush(now){
+  // the reader scrolled on: bring the rest down quickly instead of cutting
+  if (seq.rushed) return; seq.rushed = true;
+  var n = 0, s = shots[seq.i];
+  orderOf(seq.i).forEach(function(j){
+    if (now < seq.rel[j]){ seq.rel[j] = now + n*110; seq.dur[j] = 460; n++; }
+  });
+  seq.hold = 200;
+}
+function stepSeq(now){
+  var i = seq.i, s = shots[i], end = 0;
+  s.hang = 0;
+  s.parts.forEach(function(q, j){
+    var u = (now - seq.rel[j])/seq.dur[j];
+    end = Math.max(end, seq.rel[j] + seq.dur[j] + SETTLE);
+    if (u < 0){   // still waiting on its cable
+      cable(i, j, now, 0); put(i, j, 0, 0, q.rot0, q.by0, 1); return;
+    }
+    if (!q.let){ q.let = true; if (!seq.rushed) sfx('whoosh', .16 + q.mass*.08); }
+    if (u < 1){
+      // a small lift as the hook lets go, then a smooth fall that speeds up into the landing
+      var P = u < .16 ? -.04*Math.sin(Math.PI*u/.16) : Math.pow((u - .16)/.84, 2.15);
+      put(i, j, P, 0, (q.rot0 || 0)*(1 - u), (q.by0 || 0)*(1 - u), 1 + .025*clamp(P));
+      return;
+    }
+    if (!q.landed){
+      q.landed = true; nudge(q.mass); puff(q.el, q.mass);
+      if (window.__lupeLand) window.__lupeLand(q.mass, q.kind);
+    }
+    var a = clamp((now - seq.rel[j] - seq.dur[j])/SETTLE);
+    // soft landing: a quick squash, then two little bounces that die away
+    var sq = a < .2 ? 1 - .045*Math.sin(Math.PI*a/.2)*(.6 + q.mass*.4) : 1;
+    var hop = .01*s.bh*(.5 + q.mass*.5)*Math.abs(Math.sin(Math.PI*2*a))*Math.pow(1 - a, 2.2)*(a > .2 ? 1 : 0);
+    put(i, j, 1, 0, 0, hop, sq);
+  });
+  // the camera follows the section that is falling now (or the next one to go)
+  var fj = orderOf(i).filter(function(j){ return now < seq.rel[j] + seq.dur[j] + 200; })[0];
+  stageLook(i, fj === undefined ? orderOf(i)[orderOf(i).length - 1] : fj);
+  if (now >= end + (seq.hold === undefined ? HOLD : seq.hold)){ done[i] = true; seq = null; }
 }
 
-/* state: which stage, and whether its piece is hanging (phase 0) or down (phase 1). `fall` is the running drop. */
-var cur = null, st = {i: -1, down: false}, vis = -1, fall = null, lastKey = '';
+/* scroll state */
+var cur = null, vis = -1, prevI = -1, lastKey = '', chained = [];
 function setVisible(j){
   if (j === vis) return; vis = j;
   shots.forEach(function(s, k){ s.el.classList.toggle('on', k === j); });
   bg.style.backgroundImage = 'url("estate/' + FRAMES[j].src + '_s.jpg")';
-  if (FRAMES[j].piece) place(j, 0, 1, 0, 1);   // the next piece waits above the frame
-}
-function startFall(i, now){
-  // with the soundtrack on, hold the drop a beat so it lands on the music's grid
-  fall = {i: i, t0: now + (window.LupeRock ? LupeRock.delayToBeat(FALL) : 0), hit: false};
-  setVisible(i);
-}
-function stepFall(now){
-  var i = fall.i, t = Math.max(0, (now - fall.t0)/FALL);
-  if (t < 1){ var g = t*t; place(i, g, 0, (1 - t)*fall.sway0, 1 + .03*g); return; }
-  var a = (now - fall.t0 - FALL)/SETTLE;
-  if (!fall.hit){
-    fall.hit = true; var big = FRAMES[i].piece[2]*FRAMES[i].land[2];
-    shake(1 + big); burst(i);
-    if (window.__lupeThud) window.__lupeThud(1 + big*1.2);
-  }
-  // squash on impact, then rebound
-  var sq = a < 1 ? 1 - .05*Math.sin(Math.min(1, a*2.2)*Math.PI)*(1 - a) : 1;
-  place(i, 1, 0, 0, sq);
-  if (a >= 1){ fall = null; setVisible(i + 1); }
-}
-function hangAt(i, m, now){
-  var lo = span(i)[0], e = clamp((m - lo)/Math.max(.001, .6*(dropAt(i) - lo))), lift = 1 - easeOut(e);
-  // crane sway while it hangs; it settles as it comes down to its spot
-  var sway = reduce ? 0 : Math.sin(now/900 + i)*.5*(.4 + .6*lift);
-  place(i, 0, lift, sway, 1);
-  return sway;
+  if (FRAMES[j].piece && !done[j] && !(seq && seq.i === j)) hangAll(j, 1, performance.now());   // the next piece waits above the frame
 }
 function frame(now){
-  if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze the fall mid-air
+  if (window.__lupeClock) now = window.__lupeClock(now);   // test hook: lets a harness freeze a drop mid-air
   var tg = target();
   if (!cur || reduce || window.__lupeSnap) cur = tg;
   else { var f = .14; cur = {m: cur.m + (tg.m - cur.m)*f, s: cur.s + (tg.s - cur.s)*f, a: cur.a + (tg.a - cur.a)*f}; }
@@ -727,18 +1333,26 @@ function frame(now){
   if (cur.s < .5){
     var i = frameAt(cur.m), sp = span(i), p = clamp((cur.m - sp[0])/Math.max(.001, sp[1] - sp[0])), F = FRAMES[i];
     var down = !!F.piece && cur.m >= dropAt(i);
-    if (i !== st.i || down !== st.down){
-      var forward = i > st.i || (i === st.i && down && !st.down);
-      if (fall && fall.i !== i){ place(fall.i, 1, 0, 0, 1); fall = null; }
-      if (down && forward && !reduce && st.i !== -1 && i - st.i <= 1){
-        var sw = shots[i].piece ? hangAt(i, dropAt(i), now) : 0;
-        if (!fall){ startFall(i, now); fall.sway0 = sw; }
-      } else if (down){ fall = null; place(i, 1, 0, 0, 1); setVisible(i + 1); }
-      else { fall = null; setVisible(i); }
-      st = {i: i, down: down};
+    // scrolling back up un-builds: later stages will build again on the way down
+    for (var k = 1; k < FRAMES.length; k++) if (k > i || (k === i && !down)){ done[k] = false; if (k > i) chained[k] = false; }
+    if (seq && (seq.i > i || (seq.i === i && !down))) seq = null;
+    if (seq && seq.i < i) rush(now);
+    if (seq) stepSeq(now);
+    if (!seq){
+      for (k = 1; k < i; k++) if (FRAMES[k].piece && !done[k]){ landAll(k); done[k] = true; }   // skipped past: put it in place
+      if (down && !done[i]){
+        if (!reduce && (prevI === i || prevI === i - 1)) startSeq(i, now), stepSeq(now);
+        else { landAll(i); done[i] = true; }
+      }
     }
-    if (fall) stepFall(now);
-    else if (F.piece && !down) hangAt(i, cur.m, now);
+    setVisible(seq ? seq.i : down && done[i] ? i + 1 : i);
+    if (F.piece && !down && !seq){
+      // lowering in on the crane as the card scrolls up
+      var lo = sp[0], e = clamp((cur.m - lo)/Math.max(.001, .78*(dropAt(i) - lo))), lift = 1 - easeOut(e);
+      if (e > .02 && !chained[i]){ chained[i] = true; sfx('chain', .35); }
+      hangAll(i, lift, now);
+    }
+    prevI = i;
     // slow push-in inside each stage
     var z = reduce ? 1 : 1.04 - .04*p, sb = shots[vis].box;
     sb.style.transform = 'scale(' + z.toFixed(4) + ') translateX(' + (reduce ? 0 : -cur.a*.6).toFixed(2) + '%)';
@@ -1078,7 +1692,7 @@ function applyDrop(d, t){
   o.position.y = d.by + off + (d.piv - d.by)*(1 - s);
   o.rotation.x = d.rx + d.tx*tilt; o.rotation.z = d.rz + d.tz*tilt;
   if (d.dust) updateDust(d.dust, t >= IMP ? g : 0);
-  if (d.last < IMP && t >= IMP && t < 1 && d.mass > .25) thud(d.mass);
+  if (d.last < IMP && t >= IMP && t < 1 && d.mass > .25) thud(d.mass, 'kitchen');
   d.last = t;
   return (t >= IMP && g < 1) ? d.mass*Math.exp(-g*6) : 0;
 }
@@ -1088,11 +1702,18 @@ function seq(list, scene, items, a, b, o){
   var n = items.length; items.forEach(function(it, i){ var s = a + (b - a)*.72*i/Math.max(1, n - 1); addDrop(list, scene, it, s, s + (b - a)*.28, typeof o === 'function' ? o(it, i) : o); });
 }
 
-/* ---------- impact sound (opt-in) ---------- */
-var actx = null, soundOn = false, lastThud = 0, noiseBuf = null;
-function thud(mass){
+/* ---------- sound (opt-in): the jam-band groove plus construction sounds (window.LupeAudio) ---------- */
+var actx = null, soundOn = false, lastThud = 0, lastTool = 0, toolN = 0, noiseBuf = null, TOOLS = ['nailgun', 'drill', 'hammer', 'saw'];
+function thud(mass, kind){
   if (!soundOn || !actx) return;
   var now = actx.currentTime; if (now - lastThud < .06) return; lastThud = now;
+  var A = window.LupeAudio;
+  if (A){
+    A.land(mass, kind === 'kitchen' ? 'wood' : kind || 'concrete');
+    // the new kitchen goes in with a few power tools after the pieces land
+    if (kind === 'kitchen' && now - lastTool > .9){ lastTool = now; var tool = TOOLS[toolN++ % TOOLS.length]; setTimeout(function(){ if (soundOn) A.sfx(tool, .5); }, 180); }
+    return;
+  }
   var v = clamp(.18 + mass*.22, 0, .8);
   var src = actx.createBufferSource(); src.buffer = noiseBuf;
   var lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 380 + 300/mass;
@@ -1101,23 +1722,25 @@ function thud(mass){
   var osc = actx.createOscillator(); osc.type = 'sine'; osc.frequency.setValueAtTime(90/Math.sqrt(mass + .3), now); osc.frequency.exponentialRampToValueAtTime(32, now + .3);
   var og = actx.createGain(); og.gain.setValueAtTime(v*.9, now); og.gain.exponentialRampToValueAtTime(.001, now + .4);
   osc.connect(og); og.connect(actx.destination); osc.start(now); osc.stop(now + .45);
-  if (window.LupeRock) LupeRock.hit(mass);
 }
 window.__lupeThud = function(m){ thud(m); };
+// the estate build sends its landings and crane sounds through here, so they follow the sound button
+window.__lupeLand = function(m, kind){ thud(m, kind); };
+window.__lupeSfx = function(name, vol){ if (soundOn && actx && window.LupeAudio) LupeAudio.sfx(name, vol); };
 var soundBtn = document.getElementById('sound');
 if (soundBtn){
   soundBtn.hidden = false;
-  var autoOn = function(e){ document.removeEventListener('click', autoOn, true); if (e.target !== soundBtn && !soundOn) soundBtn.click(); };
-  document.addEventListener('click', autoOn, true);
   soundBtn.addEventListener('click', function(){
     try {
       if (!actx){ var AC = window.AudioContext || window.webkitAudioContext; actx = new AC(); noiseBuf = actx.createBuffer(1, actx.sampleRate*.6, actx.sampleRate); var ch = noiseBuf.getChannelData(0); for (var i = 0; i < ch.length; i++) ch[i] = (Math.random()*2 - 1)*Math.pow(1 - i/ch.length, 2); }
       soundOn = !soundOn; if (soundOn && actx.state === 'suspended') actx.resume();
-      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off';
-      if (window.LupeRock){ if (soundOn) LupeRock.start(actx); else LupeRock.stop(); }
-      if (soundOn) thud(1.2);
+      if (window.LupeAudio){ if (soundOn) LupeAudio.start(actx); else LupeAudio.stop(); }
+      soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); soundBtn.textContent = soundOn ? 'Sound on' : 'Tap for music';
     } catch (e) { soundBtn.hidden = true; }
   });
+  // browsers only allow audio after a tap: the first tap anywhere starts the music, unless the button was used
+  var firstTap = function(e){ removeEventListener('pointerdown', firstTap, true); if (!actx && e.target !== soundBtn && !soundBtn.hidden) soundBtn.click(); };
+  addEventListener('pointerdown', firstTap, true);
 }
 
 /* ---------- shared materials ---------- */
@@ -1544,7 +2167,7 @@ function frame(now){
       for (i = 0; i < strikes.length; i++){ var st = strikes[i], g = seg(cur.k, st.k, st.k + .03);
         updateDust(st.dust, cur.k >= st.k ? g : 0);
         if (cur.k >= st.k && g < 1) sh += 1.6*Math.exp(-g*7);
-        if (st.last < st.k && cur.k >= st.k && g < 1) thud(st.hammer === false ? 2 : 1.5);
+        if (st.last < st.k && cur.k >= st.k && g < 1) thud(st.hammer === false ? 2 : 1.5, 'smash');
         st.last = cur.k; }
       kShake = sh;
       placeKitchenCam(cur.k); kCam.updateMatrixWorld(); swingAt(cur.k); draw(K, kCam);
@@ -1562,6 +2185,5 @@ window.__lupeReady = true;
 requestAnimationFrame(frame);
 })();
 </script>
-
 </body>
 </html>
