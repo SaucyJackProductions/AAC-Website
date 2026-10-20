@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16182b">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="robots" content="noindex, nofollow">
+<title>Above All Media Proposal for Sheila Roemeling</title>
+<meta name="description" content="Photo and film for a November 14 dinner at the Omni Hilton Head Oceanfront Resort, 5:30 to 8:30 PM.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Above All Media">
+<meta property="og:title" content="Above All Media Proposal for Sheila Roemeling">
+<meta property="og:description" content="Photo and film for your November 14 dinner at the Omni Hilton Head Oceanfront Resort.">
+<meta property="og:image" content="https://aboveallmediasc.com/proposals/sheila-roemeling/media/dusk.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the page is the evening. A fixed sky behind it darkens from sunset to night as you scroll,
+   and the clock in the bar runs 5:30 to 8:30 PM with it. Content sits in a single centered column. */
+:root{
+  --ink:#10121f;        /* night over the Atlantic */
+  --dusk:#2a2440;       /* blue hour */
+  --ivory:#f1ebe1;      /* table linen, primary text */
+  --mist:#a9a7b8;       /* secondary text */
+  --candle:#e0b97c;     /* candlelight accent */
+  --rose:#d89a8c;       /* last of the sunset */
+  --line:rgba(241,235,225,.14);
+  --panel:rgba(18,19,34,.66);
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut:max(18px, env(safe-area-inset-left, 0px));
+  --gutR:max(18px, env(safe-area-inset-right, 0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{background:var(--ink);scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--ivory);font:300 17px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:var(--candle)}
+::selection{background:var(--candle);color:var(--ink)}
+:focus-visible{outline:2px solid var(--candle);outline-offset:3px}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--f-display);font-weight:400;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(36px,6vw,68px);line-height:1.02}
+h2 em,h1 em{font-style:italic;color:var(--candle)}
+h3{font-size:clamp(22px,2.4vw,27px);line-height:1.15}
+
+/* the sky */
+#sky{position:fixed;inset:0;z-index:0;background:var(--dusk)}
+#sky::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 50% at 50% 0%,rgba(224,185,124,var(--glow,.25)),transparent 70%)}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+.bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:14px var(--gutR) 14px var(--gut);font:400 11px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;
+  background:linear-gradient(rgba(16,18,31,.7),rgba(16,18,31,0))}
+.bar b{font:500 12px/1 var(--f-display);letter-spacing:.34em}
+.clock{display:flex;align-items:center;gap:10px;color:var(--mist)}
+.clock strong{color:var(--ivory);font-weight:500;font-variant-numeric:tabular-nums;min-width:7.2ch;text-align:right}
+.clock i{width:7px;height:7px;border-radius:50%;background:var(--candle);box-shadow:0 0 10px var(--candle)}
+
+main{position:relative;z-index:2}
+.wrap{max-width:1120px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutR)}
+section{padding-block:clamp(80px,13vh,150px)}
+.eyebrow{display:block;font:400 11px/1.4 var(--f-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--candle)}
+.lede{font-size:clamp(18px,1.7vw,21px);line-height:1.6;max-width:60ch}
+.muted{color:var(--mist)}
+.stack{display:grid;gap:20px}
+.panel{background:var(--panel);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.rv{transition:transform 1s cubic-bezier(.2,.7,.1,1),opacity 1s}
+.rv.pre{transform:translateY(22px);opacity:.4}
+
+/* HERO */
+.hero{position:relative;min-height:92svh;display:flex;align-items:flex-end;padding-block:120px 8vh;overflow:hidden}
+.hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;-webkit-mask-image:linear-gradient(#000 62%,transparent);mask-image:linear-gradient(#000 62%,transparent)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,18,31,.35) 0%,rgba(16,18,31,0) 30%,rgba(16,18,31,.2) 55%,rgba(16,18,31,0) 100%)}
+.hero .wrap{position:relative;z-index:1;width:100%;text-shadow:0 2px 28px rgba(10,10,20,.55)}
+.for{font:italic 400 clamp(22px,2.8vw,32px)/1.2 var(--f-display);margin-bottom:18px}
+.hero h1{font-size:clamp(58px,12vw,170px);line-height:.9;letter-spacing:-.025em}
+.hero h1 span{display:block}
+.meta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:28px;font:400 12px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ivory)}
+.meta span{opacity:.85}
+
+/* ASK */
+.ask{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,90px);align-items:start}
+.ask > *{min-width:0}
+blockquote{margin:0;padding:0 0 0 22px;border-left:1px solid var(--candle);font:italic 400 clamp(22px,2.6vw,30px)/1.35 var(--f-display)}
+blockquote cite{display:block;margin-top:14px;font:400 11px/1.4 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;font-style:normal;color:var(--mist)}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:8px}
+.num{padding:18px 12px 0 0}
+.num + .num{padding-left:16px;border-left:1px solid var(--line)}
+.num b{display:block;font:400 clamp(40px,5vw,58px)/1 var(--f-display);color:var(--candle)}
+.num small{display:block;margin-top:8px;font:400 11px/1.45 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+
+/* VENUE */
+.venue{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,70px);align-items:center}
+.venue > *{min-width:0}
+.venue figure{margin:0}
+.venue figure img{width:100%;aspect-ratio:4/5;object-fit:cover}
+figcaption{margin-top:10px;font:400 11px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+.rooms{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}
+.rooms li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rooms li span:last-child{font:400 12px/1.6 var(--f-mono);letter-spacing:.06em;color:var(--mist);text-align:right;white-space:nowrap}
+.omni{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:44px}
+.omni figure{margin:0}
+.omni img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.omni figure:first-child{grid-column:span 2;grid-row:span 2}
+.omni figure:first-child img{aspect-ratio:auto;height:100%}
+
+/* RUN OF SHOW: two tracks, side by side, all night */
+.ros-head{display:grid;grid-template-columns:96px 1fr 1fr;gap:0 28px;padding-bottom:14px;border-bottom:1px solid var(--line);font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
+.beat{position:relative;display:grid;grid-template-columns:96px 1fr 1fr;gap:6px 28px;padding:26px 0;border-bottom:1px solid var(--line)}
+.beat > *{min-width:0}
+.beat time{grid-column:1;grid-row:1 / span 2;font:400 clamp(20px,2vw,24px)/1.1 var(--f-display);color:var(--ivory);font-variant-numeric:lining-nums}
+.beat time small{display:block;margin-top:6px;font:400 10px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
+.beat h3{grid-column:2 / -1;grid-row:1;font-size:clamp(22px,2.3vw,26px)}
+.beat p{font-size:15.5px;line-height:1.6;color:var(--mist)}
+.beat p b{display:none;margin-bottom:2px;font:400 10px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
+.beat.key time{color:var(--candle)}
+.track-note{margin-top:22px;font-size:14px}
+
+/* CARE */
+.care{display:grid;align-items:start;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,80px)}
+.care > *{min-width:0}
+.rules{display:grid;gap:0;border-top:1px solid var(--line)}
+.rule{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.rule svg{width:18px;height:18px;margin-top:5px;stroke:var(--candle);fill:none;stroke-width:1.5}
+.rule h3{font-size:20px;margin-bottom:4px}
+.rule p{font-size:15.5px;color:var(--mist)}
+
+/* IDEAS */
+.ideas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.idea{padding:28px 26px 30px;display:grid;gap:10px;align-content:start}
+.idea .k{font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+.idea p{color:var(--mist);font-size:15.5px}
+
+/* DELIVER */
+.deliver{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:start}
+.deliver > *{min-width:0}
+.dl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.dl li{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.dl li span{font:400 12px/1.6 var(--f-mono);letter-spacing:.08em;color:var(--candle);text-align:right}
+.dl li small{grid-column:1 / -1;color:var(--mist);font-size:14.5px}
+.cal{display:grid;gap:0;border-left:1px solid var(--line)}
+.cal div{position:relative;padding:0 0 26px 24px}
+.cal div::before{content:"";position:absolute;left:-4px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--ink);border:1px solid var(--candle)}
+.cal div.on::before{background:var(--candle)}
+.cal b{display:block;font:400 11px/1.4 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--candle)}
+.cal span{font:400 20px/1.3 var(--f-display)}
+
+/* SAMPLES */
+.samples{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+.samples > *{min-width:0}
+.samples figure{margin:0}
+.samples video,.samples img{width:100%;aspect-ratio:16/10;object-fit:cover}
+
+/* QUOTE */
+.coupon{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 18px;padding:16px 18px;margin-bottom:16px;border:1px dashed var(--candle);font:400 12px/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.coupon b{color:var(--candle);letter-spacing:.16em}
+.coupon small{flex-basis:100%;color:var(--mist);letter-spacing:.06em;text-transform:none;font-size:12px}
+.quote{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start}
+.quote > *{min-width:0}
+.tiers{display:grid;gap:12px}
+.tier{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px 20px;padding:22px 22px 22px 54px;cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%}
+.tier::before{content:"";position:absolute;left:22px;top:28px;width:16px;height:16px;border-radius:50%;border:1px solid var(--mist)}
+.tier[aria-checked="true"]{border-color:var(--candle)}
+.tier[aria-checked="true"]::before{border-color:var(--candle);background:radial-gradient(circle,var(--candle) 45%,transparent 50%)}
+.tier h3{font-size:24px}
+.tier .badge{display:inline-block;margin-left:8px;padding:3px 8px;vertical-align:4px;font:500 9.5px/1.3 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;background:var(--candle);color:var(--ink)}
+.tier .price{text-align:right;font:400 26px/1 var(--f-display);color:var(--ivory);font-variant-numeric:lining-nums}
+.tier .price s{display:block;margin-bottom:6px;font:400 12px/1 var(--f-mono);color:var(--mist)}
+.tier p{grid-column:1 / -1;font-size:15px;color:var(--mist)}
+.addons{margin-top:12px;padding:22px}
+.addons h3{font-size:22px;margin-bottom:6px}
+.add{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:13px 0;border-top:1px solid var(--line);cursor:pointer}
+.add input{margin:4px 0 0;accent-color:var(--candle);width:16px;height:16px}
+.add span small{display:block;color:var(--mist);font-size:13.5px;line-height:1.5}
+.add em{font:400 13px/1.6 var(--f-mono);font-style:normal;color:var(--ivory);white-space:nowrap}
+.add.inc em{color:var(--candle)}
+.add.inc{cursor:default}
+.summary{position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);padding:24px;display:grid;gap:14px}
+.summary .big{font:400 clamp(48px,5vw,62px)/1 var(--f-display);color:var(--candle);font-variant-numeric:lining-nums}
+.summary ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.summary li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.summary li span:last-child{font-family:var(--f-mono);font-size:13px;white-space:nowrap}
+.summary li.off span:last-child{color:var(--candle)}
+.cta{display:block;padding:16px 18px;text-align:center;background:var(--candle);color:var(--ink);text-decoration:none;font:500 12px/1.2 var(--f-mono);letter-spacing:.2em;text-transform:uppercase}
+.cta:hover{background:var(--ivory)}
+.mail{display:flex;justify-content:space-between;align-items:center;gap:10px;font:400 13px/1.4 var(--f-mono);color:var(--mist)}
+.mail button{background:none;border:1px solid var(--line);color:var(--ivory);font:inherit;padding:6px 10px;cursor:pointer}
+.terms{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px;color:var(--mist)}
+.summary .terms li{display:block;padding:0;border:0;font-size:14px}
+.terms li::before{content:"·  ";color:var(--candle)}
+.fine{font-size:12.5px;line-height:1.55;color:var(--mist)}
+
+footer{position:relative;z-index:2;padding-block:70px calc(60px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+footer img{width:150px;height:auto}
+footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
+
+@media (max-width:860px){
+  .ask,.venue,.care,.deliver,.quote,.samples{grid-template-columns:1fr}
+  .venue figure img{aspect-ratio:4/3}
+  .summary{position:static}
+  .ideas{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .ros-head{display:none}
+  .beat{grid-template-columns:1fr;gap:10px}
+  .beat time,.beat h3{grid-column:auto;grid-row:auto}
+  .beat p b{display:block}
+  .beat time{display:flex;align-items:baseline;gap:12px}
+  .beat time small{margin:0}
+  .omni{grid-template-columns:1fr 1fr}
+  .omni figure:first-child{grid-column:1 / -1;grid-row:auto}
+  .omni figure:first-child img{aspect-ratio:3/2;height:auto}
+  .nums{grid-template-columns:1fr 1fr 1fr}
+  .num + .num{padding-left:12px}
+  .bar .clock span{display:none}
+  .tier{padding:20px 18px 20px 48px}
+  .tier::before{left:18px;top:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv,.rv.pre{transition:none;transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header class="bar">
+  <b>ABOVE ALL MEDIA</b>
+  <div class="clock" aria-label="Evening clock"><span>Sat · Nov 14</span><i></i><strong id="clock">5:30 PM</strong></div>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="poster" src="media/dusk.jpg" alt="">
+    <video id="heroVid" src="media/dusk.mp4" poster="media/dusk.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="wrap">
+      <p class="for">A proposal for Sheila Roemeling</p>
+      <h1><span>Walking</span><span><em>beside.</em></span></h1>
+      <div class="meta">
+        <span>Saturday, November 14</span><span>5:30 to 8:30 PM</span><span>Omni Hilton Head Oceanfront Resort</span><span>Photo and film</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="wrap ask">
+      <div class="stack rv">
+        <span class="eyebrow">What you asked for</span>
+        <blockquote>“Pictures and video. Video would not be of the whole night. Bits and pieces of the whole night.”<cite>Sheila, on Messenger</cite></blockquote>
+      </div>
+      <div class="stack rv">
+        <p class="lede">A dressy dinner, several speakers, and a story about walking beside survivors and growing to serve more of them. We'll photograph the whole evening and film the moments that carry that story, then cut them into a short film and reels you can use to raise support.</p>
+        <p class="muted">Thank you for including dinner for both of us. We'll take turns at the table so one camera is always on the room.</p>
+        <div class="nums">
+          <div class="num"><b>3</b><small>Hours of coverage</small></div>
+          <div class="num"><b>2</b><small>Shooters, photo and film</small></div>
+          <div class="num"><b>0</b><small>Frames shared without your OK</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="venue">
+    <div class="wrap">
+      <div class="venue">
+        <div class="stack rv">
+          <span class="eyebrow">The venue</span>
+          <h2>Oceanfront, <em>right at sunset.</em></h2>
+          <p class="lede">The sun sets over Hilton Head at about 5:24 PM that night, so your doors open into the last light and blue hour follows by 5:50. Those first twenty minutes are the best light of the evening, and we plan the arrival around them.</p>
+          <ul class="rooms">
+            <li><span>Shorehouse Oceanfront Deck</span><span>5,000 sq ft</span></li>
+            <li><span>Palmetto Ballroom</span><span>3,960 sq ft · dinner for 320</span></li>
+            <li><span>River Room glass porches</span><span>Ocean view</span></li>
+            <li><span>Sunset · blue hour ends</span><span>5:24 · 5:50 PM</span></li>
+          </ul>
+          <p class="muted" style="font-size:14px">We arrive at 4:45, at no charge, to walk your room with the Omni's event team, set our audio and find the angles before guests come in.</p>
+        </div>
+        <figure class="rv">
+          <img src="media/lighthouse.jpg" alt="Hilton Head harbor and lighthouse at sunset from the air" loading="lazy">
+          <figcaption>Hilton Head at last light · our drone footage</figcaption>
+        </figure>
+      </div>
+      <div class="omni" id="omni" hidden></div>
+    </div>
+  </section>
+
+  <section id="night">
+    <div class="wrap">
+      <div class="stack rv" style="max-width:760px;margin-bottom:40px">
+        <span class="eyebrow">The night, side by side</span>
+        <h2>Two cameras, <em>one evening.</em></h2>
+        <p class="lede">Chandler leads the stills and a second shooter runs film. Here is where each of us is through your three hours. We'll line it up with your real agenda once you have it.</p>
+      </div>
+      <div class="ros-head" aria-hidden="true"><span>Time</span><span>Photo</span><span>Film</span></div>
+      <div id="ros"></div>
+      <p class="track-note muted">Times are a plan based on a 5:30 start. Speaker order, dinner service and the program run on your schedule, not ours.</p>
+    </div>
+  </section>
+
+  <section id="care">
+    <div class="wrap care">
+      <div class="stack rv">
+        <span class="eyebrow">Survivor-first filming</span>
+        <h2>Some stories are told <em>without a face.</em></h2>
+        <p class="lede">Some of the people in the room have trusted you with their safety. Our cameras work around that, and you decide what anyone outside the room ever sees.</p>
+      </div>
+      <div class="rules rv" id="rules"></div>
+    </div>
+  </section>
+
+  <section id="ideas">
+    <div class="wrap">
+      <div class="stack rv" style="max-width:760px;margin-bottom:40px">
+        <span class="eyebrow">Ideas for the night</span>
+        <h2>Four ways to make it <em>more than a recap.</em></h2>
+        <p class="lede">These are included with the Evening package. Use the ones that fit the room and skip the rest.</p>
+      </div>
+      <div class="ideas" id="ideaList"></div>
+    </div>
+  </section>
+
+  <section id="deliver">
+    <div class="wrap deliver">
+      <div class="stack rv">
+        <span class="eyebrow">What you receive</span>
+        <h2>In your hands <em>before Giving Tuesday.</em></h2>
+        <ul class="dl" id="dl"></ul>
+      </div>
+      <div class="stack rv">
+        <span class="eyebrow">When</span>
+        <div class="cal">
+          <div class="on"><b>Sat, Nov 14</b><span>Your dinner, 5:30 to 8:30</span></div>
+          <div><b>Mon, Nov 16</b><span>Sneak peek: 15 photos to share that week</span></div>
+          <div><b>Thu, Nov 19</b><span>Draft film for your review and edits</span></div>
+          <div><b>Tue, Nov 24</b><span>Full gallery, final film and reels</span></div>
+          <div><b>Tue, Dec 1</b><span>Giving Tuesday, with everything ready to post</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="stack rv" style="max-width:760px;margin-bottom:34px">
+        <span class="eyebrow">Our island work</span>
+        <h2>Shot here, <em>by us.</em></h2>
+      </div>
+      <div class="samples rv">
+        <figure><video src="media/harbour.mp4" poster="media/harbour.jpg" muted loop playsinline preload="none" data-lazyplay aria-label="Drone film of Hilton Head harbor at sunset"></video><figcaption>Harbor and lighthouse at sunset</figcaption></figure>
+        <figure><img src="media/dusk.jpg" alt="Sunset over the water off Hilton Head" loading="lazy"><figcaption>Last light over the water</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote">
+    <div class="wrap">
+      <div class="stack rv" style="max-width:760px;margin-bottom:36px">
+        <span class="eyebrow">The quote</span>
+        <h2>Choose a package. <em>Add what fits.</em></h2>
+        <p class="lede">Your total updates as you choose. The Facebook coupon is already applied.</p>
+      </div>
+      <div class="quote">
+        <div>
+          <div class="coupon"><span>Your Facebook coupon <b>FACEBOOK20</b></span><span>20% off, one time</span><small>Applied below · good for your November 14 event</small></div>
+          <div class="tiers" id="tiers" role="radiogroup" aria-label="Packages"></div>
+          <div class="panel addons">
+            <h3>Add-ons</h3>
+            <p class="muted" style="font-size:14px">Anything already in your package is marked included.</p>
+            <div id="addList"></div>
+          </div>
+        </div>
+        <aside class="panel summary" aria-live="polite">
+          <span class="eyebrow">Your proposal</span>
+          <div><div class="big" id="total">$800</div><div class="muted" style="font-size:14px">for the whole evening</div></div>
+          <ul id="lines"></ul>
+          <a class="cta" id="cta" href="mailto:info@aboveallmediasc.com">Reserve November 14</a>
+          <div class="mail"><span id="addr">info@aboveallmediasc.com</span><button type="button" id="copy">Copy</button></div>
+          <ul class="terms">
+            <li>Half holds your date, half on delivery.</li>
+            <li>Nothing is posted until you approve it.</li>
+            <li>If a photo of a guest needs to come down, it comes down.</li>
+          </ul>
+          <p class="fine">Pricing is good for this event. Final scope is confirmed in writing. Drone flights depend on FAA rules, airspace near the island's airport, weather and the resort's approval.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="/above-all-media-logo-lighthouse.webp" alt="Above All Media">
+    <p>Above All Media · Hilton Head Island, SC<br><a href="https://aboveallmediasc.com">aboveallmediasc.com</a> · info@aboveallmediasc.com</p>
+  </div>
+</footer>
+
+<script>
+/* Omni photos: add files to media/omni/ and list them here. The gallery stays hidden while empty. */
+const OMNI = [];
+
+const ROS = [
+  {t:'4:45', s:'We arrive', h:'Walk the room', p:'Light the room for photos, check sightlines to the stage.', f:'Patch into the house sound board for clean speaker audio.'},
+  {t:'5:30', s:'Sunset 5:24', h:'Doors open in the last light', p:'Guests arriving dressed for the night, couples and friends on the deck.', f:'Slow arrival shots: the ocean, the doors, the first hellos.', key:true},
+  {t:'5:50', s:'Blue hour', h:'Reception and the details', p:'Tables before anyone sits: place cards, centerpieces, candles, the program.', f:'Close details and the room filling up. Your team before the night begins.'},
+  {t:'6:20', s:'Dinner', h:'Welcome and dinner', p:'Candid table moments: laughter, conversation, never mid-bite.', f:'The welcome in full. We break for our own dinner in shifts here.'},
+  {t:'7:00', s:'Program', h:'The speakers', p:'Every speaker from two angles, plus the room listening.', f:'The key lines from each talk, recorded with clean audio for the film.', key:true},
+  {t:'8:00', s:'Next step', h:'The ask and the expansion', p:'People responding: hands raised, cards filled in, quiet moments.', f:'The vision for serving more people, as it is said in the room.'},
+  {t:'8:20', s:'Close', h:'The last photo of the night', p:'Your team and speakers together, and guests heading out.', f:'Closing shot for the film: the room emptying, the candles still lit.'}
+];
+
+const RULES = [
+  ['Consent before the camera','Any survivor who speaks decides beforehand how they appear: on camera, in silhouette, from behind, or not at all.'],
+  ['Hands, light and silhouette','When someone should not be identified, we tell their part of the story through hands, backlight and the room listening, never a blurred face.'],
+  ['A no-photo sticker','A small gold dot on a name badge tells us to keep that guest out of every frame. No questions asked.'],
+  ['No names on screen','No name, place or detail goes on screen without written approval from the person and from you.'],
+  ['You approve every frame','We send the film as a private draft, and nothing is posted or shared until you sign off.'],
+  ['Private files','Galleries are password protected, and files are only shared with the people you choose.']
+];
+
+const IDEAS = [
+  ['Opening of the film','Walking beside','At blue hour we film two or three of your team walking side by side along the oceanfront deck, from behind. No faces are needed. It opens the film and says what you do without a word.'],
+  ['For the reels','One word of hope','Cards at each table ask guests to write one word for the survivors you serve. We film the cards as they are filled in and close the night with them for a reel.'],
+  ['For the expansion','The next chair','One empty place setting near the stage, photographed at the start and end of the night. It stands for the people you are growing to serve and gives your next appeal its image.'],
+  ['For your donors','A thank-you film','A 30-second cut that thanks the people in the room by showing them what their evening built, ready for your email and Giving Tuesday posts.']
+];
+
+const DL = [
+  ['Edited photo gallery','200+ photos','Every speaker, guest moments, details and the venue, color graded and in a private online gallery.'],
+  ['Highlight film','60 seconds','The story of the night: arrival, the speakers\' key lines, the room and the next step, with music.'],
+  ['Social reels','3 vertical','Shaped for Facebook and Instagram, with captions so they work on mute.'],
+  ['Sneak peek','15 photos in 48 hrs','So you can thank people while the night is still fresh.']
+];
+
+const TIERS = [
+  {id:'photo', name:'Photo Story', usual:600, desc:'One photographer for all three hours, a 150+ photo gallery, the sneak peek and one reel.'},
+  {id:'evening', name:'The Evening', usual:1000, rec:true, desc:'Two shooters, a 200+ photo gallery, the 60-second highlight film, three reels and the sneak peek. All four ideas included.'},
+  {id:'mission', name:'The Mission Film', usual:1600, desc:'Everything in The Evening, plus a 3-minute story film with two short interviews filmed that night and every speaker recorded in full.'}
+];
+const ADDS = [
+  {id:'time', name:'Extra 30 minutes', note:'If the program runs past 8:30.', price:100},
+  {id:'talks', name:'Full speaker recordings', note:'Each talk in full from two angles, lightly edited.', price:250, inc:['mission']},
+  {id:'thanks', name:'Giving Tuesday cut', note:'An extra 30-second film for your Dec 1 campaign.', price:150},
+  {id:'rush', name:'Next-morning reel', note:'One reel ready to post the morning after.', price:150},
+  {id:'portrait', name:'Guest portrait spot', note:'A lit portrait corner on the deck for guests who want one.', price:200},
+  {id:'drone', name:'Oceanfront drone at dusk', note:'The resort and beach from the air at sunset, if airspace and the resort allow.', price:200}
+];
+const COUPON = 0.20;
+
+const $ = s => document.querySelector(s);
+const money = n => '$' + Math.round(n).toLocaleString('en-US');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('#ros').innerHTML = ROS.map(b => `<div class="beat rv${b.key ? ' key' : ''}">
+  <time>${b.t}<small>${b.s}</small></time>
+  <h3>${esc(b.h)}</h3>
+  <p><b>Photo</b>${esc(b.p)}</p>
+  <p><b>Film</b>${esc(b.f)}</p></div>`).join('');
+
+const icon = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg>';
+$('#rules').innerHTML = RULES.map(([h, p]) => `<div class="rule">${icon}<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div></div>`).join('');
+$('#ideaList').innerHTML = IDEAS.map(([k, h, p]) => `<article class="panel idea rv"><span class="k">${esc(k)}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join('');
+$('#dl').innerHTML = DL.map(([a, b, c]) => `<li><b style="font-weight:400">${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></li>`).join('');
+
+if (OMNI.length) {
+  const g = $('#omni');
+  g.innerHTML = OMNI.map(o => `<figure><img src="media/omni/${o.f}" alt="${esc(o.c)}" loading="lazy"><figcaption>${esc(o.c)}</figcaption></figure>`).join('');
+  g.hidden = false;
+}
+
+/* quote */
+let tier = 'evening';
+const picked = new Set();
+function renderTiers(){
+  $('#tiers').innerHTML = TIERS.map(t => `<button type="button" class="panel tier" role="radio" id="tier-${t.id}" data-id="${t.id}" aria-checked="${t.id === tier}">
+    <h3>${esc(t.name)}${t.rec ? '<span class="badge">Recommended</span>' : ''}</h3>
+    <div class="price"><s>Usually ${money(t.usual)}</s>${money(t.usual * (1 - COUPON))}</div>
+    <p>${esc(t.desc)}</p></button>`).join('');
+  $('#addList').innerHTML = ADDS.map(a => {
+    const inc = (a.inc || []).includes(tier);
+    return `<label class="add${inc ? ' inc' : ''}" for="add-${a.id}">
+      <input type="checkbox" id="add-${a.id}" data-id="${a.id}" ${inc ? 'checked disabled' : (picked.has(a.id) ? 'checked' : '')}>
+      <span>${esc(a.name)}<small>${esc(a.note)}</small></span><em>${inc ? 'Included' : '+' + money(a.price)}</em></label>`;
+  }).join('');
+}
+function renderSum(){
+  const t = TIERS.find(x => x.id === tier);
+  const adds = ADDS.filter(a => picked.has(a.id) && !(a.inc || []).includes(tier));
+  const sub = t.usual + adds.reduce((s, a) => s + a.price, 0);
+  const off = sub * COUPON, total = sub - off;
+  const lines = [[t.name, money(t.usual)], ...adds.map(a => [a.name, money(a.price)]), ['Facebook coupon FACEBOOK20', '−' + money(off), 'off']];
+  $('#lines').innerHTML = lines.map(([a, b, c]) => `<li${c ? ' class="off"' : ''}><span>${esc(a)}</span><span>${b}</span></li>`).join('');
+  $('#total').textContent = money(total);
+  const body = 'Hi Chandler,\n\nWe would like to reserve November 14 at the Omni.\n\n' + lines.map(([a, b]) => a + ': ' + b).join('\n') + '\nTotal: ' + money(total) + '\n\nSheila';
+  $('#cta').href = 'mailto:info@aboveallmediasc.com?subject=' + encodeURIComponent('November 14 at the Omni: reserve our date') + '&body=' + encodeURIComponent(body);
+}
+$('#tiers').addEventListener('click', e => {
+  const b = e.target.closest('.tier'); if (!b) return;
+  tier = b.dataset.id; renderTiers(); renderSum();
+});
+$('#tiers').addEventListener('keydown', e => {
+  if (!['ArrowDown','ArrowUp','ArrowLeft','ArrowRight'].includes(e.key)) return;
+  e.preventDefault();
+  const i = TIERS.findIndex(x => x.id === tier), d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : -1;
+  tier = TIERS[(i + d + TIERS.length) % TIERS.length].id; renderTiers(); renderSum();
+  $('#tier-' + tier).focus();
+});
+$('#addList').addEventListener('change', e => {
+  const id = e.target.dataset.id; if (!id) return;
+  e.target.checked ? picked.add(id) : picked.delete(id); renderSum();
+});
+$('#copy').addEventListener('click', () => {
+  const done = () => { $('#copy').textContent = 'Copied'; setTimeout(() => $('#copy').textContent = 'Copy', 1600); };
+  const sel = () => { const r = document.createRange(); r.selectNodeContents($('#addr')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText('info@aboveallmediasc.com').then(done, sel); } catch (_) { sel(); }
+});
+renderTiers(); renderSum();
+
+/* the evening: sky color and clock follow the scroll */
+const STOPS = [[0,[58,42,70]],[.18,[42,36,64]],[.4,[26,27,50]],[.7,[17,19,36]],[1,[11,12,24]]];
+const lerp = (a, b, t) => a + (b - a) * t;
+function skyAt(p){
+  for (let i = 1; i < STOPS.length; i++) if (p <= STOPS[i][0]) {
+    const [p0, c0] = STOPS[i-1], [p1, c1] = STOPS[i], t = (p - p0) / (p1 - p0);
+    return c0.map((v, k) => Math.round(lerp(v, c1[k], t)));
+  }
+  return STOPS[STOPS.length - 1][1];
+}
+const sky = $('#sky'), clock = $('#clock'), stars = $('#stars');
+const ctx = stars.getContext('2d');
+function drawStars(){
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  stars.width = innerWidth * dpr; stars.height = innerHeight * dpr;
+  stars.style.width = innerWidth + 'px'; stars.style.height = innerHeight + 'px';
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  ctx.clearRect(0, 0, stars.width, stars.height);
+  const n = Math.round(innerWidth * innerHeight / 9000);
+  for (let i = 0; i < n; i++) {
+    ctx.fillStyle = `rgba(241,235,225,${.25 + rnd() * .6})`;
+    ctx.beginPath(); ctx.arc(rnd() * stars.width, rnd() * stars.height * .8, (rnd() * 1.1 + .3) * dpr, 0, 7); ctx.fill();
+  }
+}
+let ticking = false;
+function onScroll(){
+  ticking = false;
+  const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const p = Math.min(1, Math.max(0, scrollY / max));
+  const c = skyAt(p);
+  sky.style.background = `rgb(${c})`;
+  sky.style.setProperty('--glow', (.28 * (1 - Math.min(1, p / .35))).toFixed(3));
+  stars.style.opacity = Math.max(0, (p - .3) / .5).toFixed(3);
+  const mins = 330 + Math.round(p * 180 / 5) * 5;   /* 5:30 PM to 8:30 PM, in 5-minute steps */
+  clock.textContent = Math.floor(mins / 60) + ':' + String(mins % 60).padStart(2, '0') + ' PM';
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, {passive:true});
+addEventListener('resize', () => { drawStars(); onScroll(); });
+drawStars(); onScroll();
+
+/* reveals start visible; only items below the fold get the lift */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduce && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
+}
+/* sample film plays only while on screen */
+const vio = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }), {threshold:.25});
+document.querySelectorAll('[data-lazyplay]').forEach(v => vio.observe(v));
+if (reduce) { const h = $('#heroVid'); h.removeAttribute('autoplay'); h.pause(); }
+</script>
+</body>
+</html>
