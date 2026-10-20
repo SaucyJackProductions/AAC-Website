@@ -93,7 +93,7 @@ blockquote cite{display:block;margin-top:14px;font:400 11px/1.4 var(--f-mono);le
 .nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:8px}
 .num{padding:18px 12px 0 0}
 .num + .num{padding-left:16px;border-left:1px solid var(--line)}
-.num b{display:block;font:400 clamp(40px,5vw,58px)/1 var(--f-display);color:var(--candle)}
+.num b{display:block;font:400 clamp(32px,4vw,50px)/1 var(--f-display);white-space:nowrap;color:var(--candle)}
 .num small{display:block;margin-top:8px;font:400 11px/1.45 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
 
 /* VENUE */
@@ -109,46 +109,37 @@ figcaption{margin-top:10px;font:400 11px/1.5 var(--f-mono);letter-spacing:.12em;
 .omni figure{margin:0;min-width:0}
 .omni img{width:100%;aspect-ratio:16/10;object-fit:cover}
 
-/* RUN OF SHOW: photo and film tracks, side by side, all night */
-.ros-head{display:grid;grid-template-columns:96px 1fr 1fr;gap:0 28px;padding-bottom:14px;border-bottom:1px solid var(--line);font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
-.beat{position:relative;display:grid;grid-template-columns:96px 1fr 1fr;gap:6px 28px;padding:26px 0;border-bottom:1px solid var(--line)}
-.beat > *{min-width:0}
-.beat time{grid-column:1;grid-row:1 / span 2;font:400 clamp(20px,2vw,24px)/1.1 var(--f-display);color:var(--ivory);font-variant-numeric:lining-nums}
-.beat time small{display:block;margin-top:6px;font:400 10px/1.4 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--mist)}
-.beat h3{grid-column:2 / -1;grid-row:1;font-size:clamp(22px,2.3vw,26px)}
-.beat p{font-size:15.5px;line-height:1.6;color:var(--mist)}
-.beat p b{display:none;margin-bottom:2px;font:400 10px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
-.beat.key time{color:var(--candle)}
-.track-note{margin-top:22px;font-size:14px}
-
-/* CARE */
-.care{display:grid;align-items:start;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,80px)}
-.care > *{min-width:0}
-.rules{display:grid;gap:0;border-top:1px solid var(--line)}
-.rule{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
-.rule svg{width:18px;height:18px;margin-top:5px;stroke:var(--candle);fill:none;stroke-width:1.5}
-.rule h3{font-size:20px;margin-bottom:4px}
-.rule p{font-size:15.5px;color:var(--mist)}
-
-/* IDEAS */
-.ideas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.idea{padding:28px 26px 30px;display:grid;gap:10px;align-content:start}
-.idea .k{font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
-.idea p{color:var(--mist);font-size:15.5px}
+/* CRAFT: a live viewfinder over our own footage, then the craft notes */
+.vf{position:relative;margin-top:8px;aspect-ratio:16/9;max-width:100%;overflow:hidden;background:#000}
+.vf video{width:100%;height:100%;object-fit:cover}
+.vf::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.45))}
+.hud{position:absolute;inset:0;z-index:1;pointer-events:none;font:400 12px/1 var(--f-mono);letter-spacing:.14em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.hud .c{position:absolute;width:28px;height:28px;border:1.5px solid rgba(255,255,255,.85)}
+.hud .c1{top:18px;left:18px;border-right:0;border-bottom:0}.hud .c2{top:18px;right:18px;border-left:0;border-bottom:0}
+.hud .c3{bottom:18px;left:18px;border-right:0;border-top:0}.hud .c4{bottom:18px;right:18px;border-left:0;border-top:0}
+.hud .x{position:absolute;left:50%;top:50%;width:22px;height:22px;transform:translate(-50%,-50%)}
+.hud .x::before,.hud .x::after{content:"";position:absolute;background:rgba(255,255,255,.7)}
+.hud .x::before{left:50%;top:0;bottom:0;width:1px}.hud .x::after{top:50%;left:0;right:0;height:1px}
+.hud .tl{position:absolute;top:30px;left:58px;display:flex;align-items:center;gap:8px}
+.hud .tl i{width:9px;height:9px;border-radius:50%;background:#e5484d;animation:rec 1.2s steps(2,start) infinite}
+@keyframes rec{to{visibility:hidden}}
+.hud .tr{position:absolute;top:30px;right:58px}
+.hud .bl{position:absolute;bottom:30px;left:58px;font-variant-numeric:tabular-nums}
+.hud .br{position:absolute;bottom:30px;right:58px}
+.craft{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 34px;margin-top:44px;border-top:1px solid var(--line)}
+.craft article{padding:24px 0 26px;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start;min-width:0}
+.craft .k{font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
+.craft p{color:var(--mist);font-size:15.5px}
+.sig{margin-top:34px;font:italic 400 clamp(22px,2.4vw,28px)/1.3 var(--f-display)}
+.sig small{display:block;margin-top:8px;font:400 11px/1.4 var(--f-mono);font-style:normal;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
 
 /* DELIVER */
-.deliver{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:start}
+.deliver{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,80px);align-items:start}
 .deliver > *{min-width:0}
 .dl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .dl li{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:1px solid var(--line)}
 .dl li span{font:400 12px/1.6 var(--f-mono);letter-spacing:.08em;color:var(--candle);text-align:right}
 .dl li small{grid-column:1 / -1;color:var(--mist);font-size:14.5px}
-.cal{display:grid;gap:0;border-left:1px solid var(--line)}
-.cal div{position:relative;padding:0 0 26px 24px}
-.cal div::before{content:"";position:absolute;left:-4px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--ink);border:1px solid var(--candle)}
-.cal div.on::before{background:var(--candle)}
-.cal b{display:block;font:400 11px/1.4 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--candle)}
-.cal span{font:400 20px/1.3 var(--f-display)}
 
 /* SAMPLES */
 .samples{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
@@ -201,17 +192,15 @@ footer img{width:150px;height:auto}
 footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
 
 @media (max-width:860px){
-  .ask,.venue,.care,.deliver,.quote,.samples{grid-template-columns:1fr}
+  .ask,.venue,.deliver,.quote,.samples{grid-template-columns:1fr}
   .summary{position:static}
-  .ideas{grid-template-columns:1fr}
+  .craft{grid-template-columns:1fr 1fr}
 }
 @media (max-width:640px){
-  .ros-head{display:none}
-  .beat{grid-template-columns:1fr;gap:10px}
-  .beat time,.beat h3{grid-column:auto;grid-row:auto}
-  .beat p b{display:block}
-  .beat time{display:flex;align-items:baseline;gap:12px}
-  .beat time small{margin:0}
+  .craft{grid-template-columns:1fr}
+  .vf{aspect-ratio:4/5}
+  .hud .tl,.hud .tr{top:26px}.hud .bl,.hud .br{bottom:26px}
+  .hud .tl,.hud .bl{left:48px}.hud .tr,.hud .br{right:48px}
   .omni{grid-template-columns:1fr}
   .nums{grid-template-columns:1fr 1fr 1fr}
   .num + .num{padding-left:12px}
@@ -254,12 +243,12 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
         <blockquote>“Pictures and video. Video would not be of the whole night. Bits and pieces of the whole night.”<cite>Sheila, on Messenger</cite></blockquote>
       </div>
       <div class="stack rv">
-        <p class="lede">A dressy dinner, several speakers, and a story about walking beside survivors and growing to serve more of them. We'll photograph the whole evening and film the moments that carry that story, then cut them into a short film and reels you can use to raise support.</p>
-        <p class="muted">Thank you for including dinner. We'll take our break while the meal is served, so nothing on stage is missed.</p>
+        <p class="lede">Photos of your evening, and video of the moments that matter, cut into a short film and reels. Below is how I shoot, what you receive, and what it costs.</p>
+        <p class="muted">Thank you for the dinner invitation. It's very kind of you.</p>
         <div class="nums">
           <div class="num"><b>3</b><small>Hours of coverage</small></div>
+          <div class="num"><b>4K</b><small>Cinema-grade film</small></div>
           <div class="num"><b>200+</b><small>Edited photos</small></div>
-          <div class="num"><b>0</b><small>Frames shared without your OK</small></div>
         </div>
       </div>
     </div>
@@ -270,15 +259,8 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
       <div class="venue">
         <div class="stack rv">
           <span class="eyebrow">The venue</span>
-          <h2>Oceanfront, <em>right at sunset.</em></h2>
-          <p class="lede">The sun sets over Hilton Head at about 5:24 PM that night, so your doors open into the last light and blue hour follows by 5:50. Those first twenty minutes are the best light of the evening, and we plan the arrival around them.</p>
-          <ul class="rooms">
-            <li><span>Shorehouse Oceanfront Deck</span><span>5,000 sq ft</span></li>
-            <li><span>Palmetto Ballroom</span><span>3,960 sq ft · dinner for 320</span></li>
-            <li><span>River Room glass porches</span><span>Ocean view</span></li>
-            <li><span>Sunset · blue hour ends</span><span>5:24 · 5:50 PM</span></li>
-          </ul>
-          <p class="muted" style="font-size:14px">We arrive at 4:45, at no charge, to walk your room with the Omni's event team, set our audio and find the angles before guests come in.</p>
+          <h2>Oceanfront, <em>and made for film.</em></h2>
+          <p class="lede">Live oaks, firelight and the Atlantic. A setting like the Omni deserves to be captured at its best, and so does everyone who dresses up to be there.</p>
         </div>
         <figure class="rv">
           <img src="media/omni/firepit.jpg" alt="The Omni's fire pit circled by white rocking chairs at dusk" loading="lazy">
@@ -289,38 +271,23 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
     </div>
   </section>
 
-  <section id="night">
+  <section id="craft">
     <div class="wrap">
-      <div class="stack rv" style="max-width:760px;margin-bottom:40px">
-        <span class="eyebrow">The night, side by side</span>
-        <h2>Photos and film, <em>all evening.</em></h2>
-        <p class="lede">Here is what gets photographed and filmed through your three hours. We'll line it up with your real agenda once you have it.</p>
+      <div class="stack rv" style="max-width:780px">
+        <span class="eyebrow">How I film</span>
+        <h2>Shot like cinema. <em>Finished by hand.</em></h2>
+        <p class="lede">I shoot both the photos and the film, so every frame shares one look. This is my standard on every job, and it's what your evening gets.</p>
       </div>
-      <div class="ros-head" aria-hidden="true"><span>Time</span><span>Photo</span><span>Film</span></div>
-      <div id="ros"></div>
-      <p class="track-note muted">Times are a plan based on a 5:30 start. Speaker order, dinner service and the program run on your schedule, not ours.</p>
-    </div>
-  </section>
-
-  <section id="care">
-    <div class="wrap care">
-      <div class="stack rv">
-        <span class="eyebrow">Survivor-first filming</span>
-        <h2>Some stories are told <em>without a face.</em></h2>
-        <p class="lede">Some of the people in the room have trusted you with their safety. Our cameras work around that, and you decide what anyone outside the room ever sees.</p>
+      <div class="vf rv" aria-label="Sample of our film shown through a camera viewfinder">
+        <video id="vfVid" src="media/harbour.mp4" poster="media/harbour.jpg" muted loop playsinline preload="none" data-lazyplay></video>
+        <div class="hud" aria-hidden="true">
+          <span class="c c1"></span><span class="c c2"></span><span class="c c3"></span><span class="c c4"></span><span class="x"></span>
+          <span class="tl"><i></i>REC</span><span class="tr">4K</span>
+          <span class="bl" id="tc">00:00:00:00</span><span class="br">AAM</span>
+        </div>
       </div>
-      <div class="rules rv" id="rules"></div>
-    </div>
-  </section>
-
-  <section id="ideas">
-    <div class="wrap">
-      <div class="stack rv" style="max-width:760px;margin-bottom:40px">
-        <span class="eyebrow">Ideas for the night</span>
-        <h2>Four ways to make it <em>more than a recap.</em></h2>
-        <p class="lede">These are included with the Evening package. Use the ones that fit the room and skip the rest.</p>
-      </div>
-      <div class="ideas" id="ideaList"></div>
+      <div class="craft" id="craftList"></div>
+      <p class="sig rv">“The highest quality, every time. That's the only way I work.”<small>Chandler · Above All Media</small></p>
     </div>
   </section>
 
@@ -328,19 +295,10 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
     <div class="wrap deliver">
       <div class="stack rv">
         <span class="eyebrow">What you receive</span>
-        <h2>In your hands <em>before Giving Tuesday.</em></h2>
-        <ul class="dl" id="dl"></ul>
+        <h2>Everything, <em>edited by hand.</em></h2>
+        <p class="muted">Delivered in a private online gallery and ready to share.</p>
       </div>
-      <div class="stack rv">
-        <span class="eyebrow">When</span>
-        <div class="cal">
-          <div class="on"><b>Sat, Nov 14</b><span>Your dinner, 5:30 to 8:30</span></div>
-          <div><b>Mon, Nov 16</b><span>Sneak peek: 15 photos to share that week</span></div>
-          <div><b>Thu, Nov 19</b><span>Draft film for your review and edits</span></div>
-          <div><b>Tue, Nov 24</b><span>Full gallery, final film and reels</span></div>
-          <div><b>Tue, Dec 1</b><span>Giving Tuesday, with everything ready to post</span></div>
-        </div>
-      </div>
+      <ul class="dl rv" id="dl"></ul>
     </div>
   </section>
 
@@ -351,7 +309,7 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
         <h2>Shot here, <em>by us.</em></h2>
       </div>
       <div class="samples rv">
-        <figure><video src="media/harbour.mp4" poster="media/harbour.jpg" muted loop playsinline preload="none" data-lazyplay aria-label="Drone film of Hilton Head harbor at sunset"></video><figcaption>Harbor and lighthouse at sunset</figcaption></figure>
+        <figure><img src="media/lighthouse.jpg" alt="Hilton Head harbor and lighthouse at sunset from the air" loading="lazy"><figcaption>Harbor and lighthouse at sunset</figcaption></figure>
         <figure><img src="media/dusk.jpg" alt="Sunset over the water off Hilton Head" loading="lazy"><figcaption>Last light over the water</figcaption></figure>
       </div>
     </div>
@@ -406,50 +364,33 @@ const OMNI = [
   {f:'courtyard.jpg', c:'The courtyard and lawn · photo: Omni Hotels'}
 ];
 
-const ROS = [
-  {t:'4:45', s:'We arrive', h:'Walk the room', p:'Light the room for photos, check sightlines to the stage.', f:'Patch into the house sound board for clean speaker audio.'},
-  {t:'5:30', s:'Sunset 5:24', h:'Doors open in the last light', p:'Guests arriving dressed for the night, couples and friends on the deck.', f:'Slow arrival shots: the ocean, the doors, the first hellos.', key:true},
-  {t:'5:50', s:'Blue hour', h:'Reception and the details', p:'Tables before anyone sits: place cards, centerpieces, candles, the program.', f:'Close details and the room filling up. Your team before the night begins.'},
-  {t:'6:20', s:'Dinner', h:'Welcome and dinner', p:'Candid table moments: laughter, conversation, never mid-bite.', f:'The welcome in full, then the room at dinner.'},
-  {t:'7:00', s:'Program', h:'The speakers', p:'Every speaker, plus the room listening.', f:'The key lines from each talk, recorded with clean audio for the film.', key:true},
-  {t:'8:00', s:'Next step', h:'The ask and the expansion', p:'People responding: hands raised, cards filled in, quiet moments.', f:'The vision for serving more people, as it is said in the room.'},
-  {t:'8:20', s:'Close', h:'The last photo of the night', p:'Your team and speakers together, and guests heading out.', f:'Closing shot for the film: the room emptying, the candles still lit.'}
-];
-
-const RULES = [
-  ['Consent before the camera','Any survivor who speaks decides beforehand how they appear: on camera, in silhouette, from behind, or not at all.'],
-  ['Hands, light and silhouette','When someone should not be identified, we tell their part of the story through hands, backlight and the room listening, never a blurred face.'],
-  ['A no-photo sticker','A small gold dot on a name badge tells us to keep that guest out of every frame. No questions asked.'],
-  ['No names on screen','No name, place or detail goes on screen without written approval from the person and from you.'],
-  ['You approve every frame','We send the film as a private draft, and nothing is posted or shared until you sign off.'],
-  ['Private files','Galleries are password protected, and files are only shared with the people you choose.']
-];
-
-const IDEAS = [
-  ['Opening of the film','Walking beside','At blue hour we film two or three of your team walking side by side along the oceanfront deck, from behind. No faces are needed. It opens the film and says what you do without a word.'],
-  ['For the reels','One word of hope','Cards at each table ask guests to write one word for the survivors you serve. We film the cards as they are filled in and close the night with them for a reel.'],
-  ['For the expansion','The next chair','One empty place setting near the stage, photographed at the start and end of the night. It stands for the people you are growing to serve and gives your next appeal its image.'],
-  ['For your donors','A thank-you film','A 30-second cut that thanks the people in the room by showing them what their evening built, ready for your email and Giving Tuesday posts.']
+const CRAFT = [
+  ['Image','4K cinema film','Video recorded in 4K and finished in HD or 4K, sharp enough for a big screen at your next event.'],
+  ['Light','Beautiful in low light','Evening rooms are dim. Fast lenses keep skin tones warm and natural, with no harsh flash in anyone\'s face.'],
+  ['Motion','Smooth, steady movement','Stabilized camera moves that glide with the room, never shaky handheld footage.'],
+  ['Color','Graded like a film','Every photo and every clip is color graded by hand, so the whole set looks like one evening.'],
+  ['Sound','Clear voices','The words that matter are recorded clearly, so speakers can be heard in the film, not just seen.'],
+  ['Presence','Quiet and discreet','Dressed for the evening, a silent shutter during speeches, and out of the way. Anyone who would rather not be photographed is left out.']
 ];
 
 const DL = [
-  ['Edited photo gallery','200+ photos','Every speaker, guest moments, details and the venue, color graded and in a private online gallery.'],
-  ['Highlight film','60 seconds','The story of the night: arrival, the speakers\' key lines, the room and the next step, with music.'],
-  ['Social reels','3 vertical','Shaped for Facebook and Instagram, with captions so they work on mute.'],
-  ['Sneak peek','15 photos in 48 hrs','So you can thank people while the night is still fresh.']
+  ['Edited photo gallery','200+ photos','Guests, speakers, details and the venue, each one edited and color graded.'],
+  ['Highlight film','60 seconds','The best moments of the night cut to music.'],
+  ['Social reels','3 vertical','Made for Facebook and Instagram, with captions so they work on mute.'],
+  ['Sneak peek','15 photos first','A first set of favorites to share before the full gallery arrives.']
 ];
 
 const TIERS = [
-  {id:'photo', name:'Photo Story', usual:600, desc:'Photos for all three hours, a 150+ photo gallery, the sneak peek and one reel.'},
-  {id:'evening', name:'The Evening', usual:1000, rec:true, desc:'Photos and video for all three hours, a 200+ photo gallery, the 60-second highlight film, three reels and the sneak peek. All four ideas included.'},
-  {id:'mission', name:'The Mission Film', usual:1600, desc:'Everything in The Evening, plus a 3-minute story film with two short interviews filmed that night and every speaker recorded in full.'}
+  {id:'photo', name:'Photo Story', usual:600, desc:'Photos for all three hours: a 150+ photo gallery, the sneak peek and one reel.'},
+  {id:'evening', name:'The Evening', usual:1000, rec:true, desc:'Photos and video for all three hours: a 200+ photo gallery, the 60-second highlight film, three reels and the sneak peek.'},
+  {id:'mission', name:'The Mission Film', usual:1600, desc:'Everything in The Evening, plus a 3-minute story film and every presentation recorded in full.'}
 ];
 const ADDS = [
-  {id:'time', name:'Extra 30 minutes', note:'If the program runs past 8:30.', price:100},
-  {id:'talks', name:'Full speaker recordings', note:'Each talk recorded in full, lightly edited.', price:250, inc:['mission']},
-  {id:'thanks', name:'Giving Tuesday cut', note:'An extra 30-second film for your Dec 1 campaign.', price:150},
+  {id:'time', name:'Extra 30 minutes', note:'If the evening runs past 8:30.', price:100},
+  {id:'talks', name:'Full presentation recordings', note:'Each presentation recorded in full, lightly edited.', price:250, inc:['mission']},
+  {id:'thanks', name:'30-second cut', note:'A short extra film for email and social posts.', price:150},
   {id:'rush', name:'Next-morning reel', note:'One reel ready to post the morning after.', price:150},
-  {id:'portrait', name:'Guest portrait spot', note:'A lit portrait corner on the deck for guests who want one.', price:200},
+  {id:'portrait', name:'Guest portrait spot', note:'A lit portrait spot for guests who want one.', price:200},
   {id:'drone', name:'Oceanfront drone at dusk', note:'The resort and beach from the air at sunset, if airspace and the resort allow.', price:200}
 ];
 const COUPON = 0.20;
@@ -458,15 +399,7 @@ const $ = s => document.querySelector(s);
 const money = n => '$' + Math.round(n).toLocaleString('en-US');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-$('#ros').innerHTML = ROS.map(b => `<div class="beat rv${b.key ? ' key' : ''}">
-  <time>${b.t}<small>${b.s}</small></time>
-  <h3>${esc(b.h)}</h3>
-  <p><b>Photo</b>${esc(b.p)}</p>
-  <p><b>Film</b>${esc(b.f)}</p></div>`).join('');
-
-const icon = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9"/></svg>';
-$('#rules').innerHTML = RULES.map(([h, p]) => `<div class="rule">${icon}<div><h3>${esc(h)}</h3><p>${esc(p)}</p></div></div>`).join('');
-$('#ideaList').innerHTML = IDEAS.map(([k, h, p]) => `<article class="panel idea rv"><span class="k">${esc(k)}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join('');
+$('#craftList').innerHTML = CRAFT.map(([k, h, p]) => `<article class="rv"><span class="k">${esc(k)}</span><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join('');
 $('#dl').innerHTML = DL.map(([a, b, c]) => `<li><b style="font-weight:400">${esc(a)}</b><span>${esc(b)}</span><small>${esc(c)}</small></li>`).join('');
 
 if (OMNI.length) {
@@ -569,6 +502,12 @@ if (!reduce && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
 }
+/* viewfinder timecode follows the clip */
+const vfVid = $('#vfVid'), tc = $('#tc');
+vfVid.addEventListener('timeupdate', () => {
+  const t = vfVid.currentTime, f = Math.floor((t % 1) * 24), s2 = Math.floor(t);
+  tc.textContent = '00:00:' + String(s2).padStart(2, '0') + ':' + String(f).padStart(2, '0');
+});
 /* sample film plays only while on screen */
 const vio = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause(); }), {threshold:.25});
 document.querySelectorAll('[data-lazyplay]').forEach(v => vio.observe(v));
