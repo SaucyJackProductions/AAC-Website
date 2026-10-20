@@ -111,7 +111,7 @@ figcaption{margin-top:10px;font:400 11px/1.5 var(--f-mono);letter-spacing:.12em;
 .omni figure:first-child{grid-column:span 2;grid-row:span 2}
 .omni figure:first-child img{aspect-ratio:auto;height:100%}
 
-/* RUN OF SHOW: two tracks, side by side, all night */
+/* RUN OF SHOW: photo and film tracks, side by side, all night */
 .ros-head{display:grid;grid-template-columns:96px 1fr 1fr;gap:0 28px;padding-bottom:14px;border-bottom:1px solid var(--line);font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
 .beat{position:relative;display:grid;grid-template-columns:96px 1fr 1fr;gap:6px 28px;padding:26px 0;border-bottom:1px solid var(--line)}
 .beat > *{min-width:0}
@@ -260,10 +260,10 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
       </div>
       <div class="stack rv">
         <p class="lede">A dressy dinner, several speakers, and a story about walking beside survivors and growing to serve more of them. We'll photograph the whole evening and film the moments that carry that story, then cut them into a short film and reels you can use to raise support.</p>
-        <p class="muted">Thank you for including dinner for both of us. We'll take turns at the table so one camera is always on the room.</p>
+        <p class="muted">Thank you for including dinner. We'll take our break while the meal is served, so nothing on stage is missed.</p>
         <div class="nums">
           <div class="num"><b>3</b><small>Hours of coverage</small></div>
-          <div class="num"><b>2</b><small>Shooters, photo and film</small></div>
+          <div class="num"><b>200+</b><small>Edited photos</small></div>
           <div class="num"><b>0</b><small>Frames shared without your OK</small></div>
         </div>
       </div>
@@ -298,8 +298,8 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
     <div class="wrap">
       <div class="stack rv" style="max-width:760px;margin-bottom:40px">
         <span class="eyebrow">The night, side by side</span>
-        <h2>Two cameras, <em>one evening.</em></h2>
-        <p class="lede">Chandler leads the stills and a second shooter runs film. Here is where each of us is through your three hours. We'll line it up with your real agenda once you have it.</p>
+        <h2>Photos and film, <em>all evening.</em></h2>
+        <p class="lede">Here is what gets photographed and filmed through your three hours. We'll line it up with your real agenda once you have it.</p>
       </div>
       <div class="ros-head" aria-hidden="true"><span>Time</span><span>Photo</span><span>Film</span></div>
       <div id="ros"></div>
@@ -412,8 +412,8 @@ const ROS = [
   {t:'4:45', s:'We arrive', h:'Walk the room', p:'Light the room for photos, check sightlines to the stage.', f:'Patch into the house sound board for clean speaker audio.'},
   {t:'5:30', s:'Sunset 5:24', h:'Doors open in the last light', p:'Guests arriving dressed for the night, couples and friends on the deck.', f:'Slow arrival shots: the ocean, the doors, the first hellos.', key:true},
   {t:'5:50', s:'Blue hour', h:'Reception and the details', p:'Tables before anyone sits: place cards, centerpieces, candles, the program.', f:'Close details and the room filling up. Your team before the night begins.'},
-  {t:'6:20', s:'Dinner', h:'Welcome and dinner', p:'Candid table moments: laughter, conversation, never mid-bite.', f:'The welcome in full. We break for our own dinner in shifts here.'},
-  {t:'7:00', s:'Program', h:'The speakers', p:'Every speaker from two angles, plus the room listening.', f:'The key lines from each talk, recorded with clean audio for the film.', key:true},
+  {t:'6:20', s:'Dinner', h:'Welcome and dinner', p:'Candid table moments: laughter, conversation, never mid-bite.', f:'The welcome in full, then the room at dinner.'},
+  {t:'7:00', s:'Program', h:'The speakers', p:'Every speaker, plus the room listening.', f:'The key lines from each talk, recorded with clean audio for the film.', key:true},
   {t:'8:00', s:'Next step', h:'The ask and the expansion', p:'People responding: hands raised, cards filled in, quiet moments.', f:'The vision for serving more people, as it is said in the room.'},
   {t:'8:20', s:'Close', h:'The last photo of the night', p:'Your team and speakers together, and guests heading out.', f:'Closing shot for the film: the room emptying, the candles still lit.'}
 ];
@@ -442,13 +442,13 @@ const DL = [
 ];
 
 const TIERS = [
-  {id:'photo', name:'Photo Story', usual:600, desc:'One photographer for all three hours, a 150+ photo gallery, the sneak peek and one reel.'},
-  {id:'evening', name:'The Evening', usual:1000, rec:true, desc:'Two shooters, a 200+ photo gallery, the 60-second highlight film, three reels and the sneak peek. All four ideas included.'},
+  {id:'photo', name:'Photo Story', usual:600, desc:'Photos for all three hours, a 150+ photo gallery, the sneak peek and one reel.'},
+  {id:'evening', name:'The Evening', usual:1000, rec:true, desc:'Photos and video for all three hours, a 200+ photo gallery, the 60-second highlight film, three reels and the sneak peek. All four ideas included.'},
   {id:'mission', name:'The Mission Film', usual:1600, desc:'Everything in The Evening, plus a 3-minute story film with two short interviews filmed that night and every speaker recorded in full.'}
 ];
 const ADDS = [
   {id:'time', name:'Extra 30 minutes', note:'If the program runs past 8:30.', price:100},
-  {id:'talks', name:'Full speaker recordings', note:'Each talk in full from two angles, lightly edited.', price:250, inc:['mission']},
+  {id:'talks', name:'Full speaker recordings', note:'Each talk recorded in full, lightly edited.', price:250, inc:['mission']},
   {id:'thanks', name:'Giving Tuesday cut', note:'An extra 30-second film for your Dec 1 campaign.', price:150},
   {id:'rush', name:'Next-morning reel', note:'One reel ready to post the morning after.', price:150},
   {id:'portrait', name:'Guest portrait spot', note:'A lit portrait corner on the deck for guests who want one.', price:200},
