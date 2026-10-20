@@ -100,16 +100,14 @@ blockquote cite{display:block;margin-top:14px;font:400 11px/1.4 var(--f-mono);le
 .venue{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,70px);align-items:center}
 .venue > *{min-width:0}
 .venue figure{margin:0}
-.venue figure img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.venue figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
 figcaption{margin-top:10px;font:400 11px/1.5 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
 .rooms{list-style:none;margin:6px 0 0;padding:0;border-top:1px solid var(--line)}
 .rooms li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
 .rooms li span:last-child{font:400 12px/1.6 var(--f-mono);letter-spacing:.06em;color:var(--mist);text-align:right;white-space:nowrap}
-.omni{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:44px}
-.omni figure{margin:0}
-.omni img{width:100%;aspect-ratio:3/2;object-fit:cover}
-.omni figure:first-child{grid-column:span 2;grid-row:span 2}
-.omni figure:first-child img{aspect-ratio:auto;height:100%}
+.omni{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:44px}
+.omni figure{margin:0;min-width:0}
+.omni img{width:100%;aspect-ratio:16/10;object-fit:cover}
 
 /* RUN OF SHOW: photo and film tracks, side by side, all night */
 .ros-head{display:grid;grid-template-columns:96px 1fr 1fr;gap:0 28px;padding-bottom:14px;border-bottom:1px solid var(--line);font:400 11px/1.4 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--candle)}
@@ -204,7 +202,6 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
 
 @media (max-width:860px){
   .ask,.venue,.care,.deliver,.quote,.samples{grid-template-columns:1fr}
-  .venue figure img{aspect-ratio:4/3}
   .summary{position:static}
   .ideas{grid-template-columns:1fr}
 }
@@ -215,9 +212,7 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
   .beat p b{display:block}
   .beat time{display:flex;align-items:baseline;gap:12px}
   .beat time small{margin:0}
-  .omni{grid-template-columns:1fr 1fr}
-  .omni figure:first-child{grid-column:1 / -1;grid-row:auto}
-  .omni figure:first-child img{aspect-ratio:3/2;height:auto}
+  .omni{grid-template-columns:1fr}
   .nums{grid-template-columns:1fr 1fr 1fr}
   .num + .num{padding-left:12px}
   .bar .clock span{display:none}
@@ -286,8 +281,8 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
           <p class="muted" style="font-size:14px">We arrive at 4:45, at no charge, to walk your room with the Omni's event team, set our audio and find the angles before guests come in.</p>
         </div>
         <figure class="rv">
-          <img src="media/lighthouse.jpg" alt="Hilton Head harbor and lighthouse at sunset from the air" loading="lazy">
-          <figcaption>Hilton Head at last light · our drone footage</figcaption>
+          <img src="media/omni/firepit.jpg" alt="The Omni's fire pit circled by white rocking chairs at dusk" loading="lazy">
+          <figcaption>The Omni's fire pit at dusk · photo: Omni Hotels</figcaption>
         </figure>
       </div>
       <div class="omni" id="omni" hidden></div>
@@ -406,7 +401,10 @@ footer p{font:400 12px/1.6 var(--f-mono);letter-spacing:.1em;color:var(--mist)}
 
 <script>
 /* Omni photos: add files to media/omni/ and list them here. The gallery stays hidden while empty. */
-const OMNI = [];
+const OMNI = [
+  {f:'pool.jpg', c:'The oceanfront pool and beach · photo: Omni Hotels'},
+  {f:'courtyard.jpg', c:'The courtyard and lawn · photo: Omni Hotels'}
+];
 
 const ROS = [
   {t:'4:45', s:'We arrive', h:'Walk the room', p:'Light the room for photos, check sightlines to the stage.', f:'Patch into the house sound board for clean speaker audio.'},
