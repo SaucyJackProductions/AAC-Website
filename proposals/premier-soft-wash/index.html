@@ -1,0 +1,695 @@
+<!doctype html><html lang="en"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>The Premier #1 Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: alternating full-width bands (navy / paper) like a truck wrap; content column 1120px; charts are inline SVG on one scale each. Single committed brand look, so no theme switch. */
+:root{
+  --navy:#0E1A33; --navy2:#17284A; --navy3:#22355C;
+  --paper:#F4F6F9; --card:#FFFFFF; --line:#D9E0EA;
+  --blue:#2F6FE0; --sky:#5AA8FF; --yellow:#F2C230;
+  --ink:#0E1A33; --mute:#4A5670; --mute-d:#BFCBE0;
+  --good:#1E9E6A; --warn:#E08A1E; --bad:#D9483B;
+  --display:'Archivo Black', 'Arial Black', Impact, sans-serif;
+  --label:'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --body:'Public Sans', 'Segoe UI', Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+.band{padding-block:88px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band.dark{background:var(--navy);color:#F4F6F9}
+.band.light{background:var(--paper);color:var(--ink)}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.eyebrow{font:800 15px/1.2 var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.dark .eyebrow{color:var(--yellow)}
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,92px)}
+h2{font-size:clamp(32px,5vw,54px)}
+h3{font:800 24px/1.15 var(--label);text-transform:uppercase;letter-spacing:.04em;margin:0}
+p{margin:0}
+.lead{font-size:clamp(18px,2.2vw,22px);max-width:62ch;color:var(--mute)}
+.dark .lead{color:var(--mute-d)}
+.head{display:flex;flex-direction:column;gap:14px}
+.src{font-size:13px;color:var(--mute)}
+.dark .src{color:#8D9BB8}
+.src a{color:inherit}
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);border-bottom:1px solid var(--navy3);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+nav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;height:60px;overflow-x:auto}
+nav img{height:34px;flex:none}
+nav a{font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-d);text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{color:var(--yellow);outline:none}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:center}
+.hero .copy{display:flex;flex-direction:column;gap:24px;min-width:0}
+.hero h1 span{color:var(--yellow)}
+.phone{width:300px;max-width:100%;aspect-ratio:9/16;border-radius:34px;padding:10px;background:#050B17;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 2px var(--navy3)}
+.phone img{width:100%;height:100%;object-fit:cover;border-radius:26px;display:block}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--navy3);border-radius:18px;overflow:hidden}
+.stat{background:var(--navy2);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.stat b{font:800 clamp(34px,4.4vw,48px)/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.stat span{font-size:15px;color:var(--mute-d)}
+/* scorecard */
+.score{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.chip{align-self:flex-start;font:800 13px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px;color:#fff}
+.chip.good{background:var(--good)}.chip.fix{background:var(--warn)}.chip.miss{background:var(--bad)}
+.sc p{color:var(--mute);font-size:15.5px}
+.sc h3{font-size:22px}
+/* charts */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.dark .chart{background:var(--navy2);border-color:var(--navy3)}
+.chart svg{width:100%;height:auto;display:block}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+/* factor list */
+.factors{display:flex;flex-direction:column;gap:2px;background:var(--navy3);border-radius:16px;overflow:hidden}
+.fr{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.25fr);gap:18px;align-items:center;background:var(--navy2);padding:14px 20px}
+.fr .n{font:800 30px/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.fr .f{font-weight:700}
+.fr .m{color:var(--mute-d);font-size:15.5px}
+.fr.hd{background:var(--navy);padding-block:10px}
+.fr.hd span{font:800 13px var(--label);letter-spacing:.14em;text-transform:uppercase;color:#8D9BB8}
+.note{border-left:4px solid var(--yellow);background:var(--navy2);padding:18px 22px;border-radius:0 12px 12px 0;color:var(--mute-d)}
+.note b{color:#fff}
+/* big stats */
+.big{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bs{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:6px}
+.bs b{font:800 54px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.bs p{font-size:15.5px;color:var(--mute)}
+.bs .s{font-size:12.5px;color:#7C879C}
+/* lessons */
+.lessons{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.ls{background:var(--navy2);border:1px solid var(--navy3);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ls .k{font:800 40px/1 var(--label);color:var(--yellow)}
+.ls p{font-size:15px;color:var(--mute-d)}
+.ls .who{font:800 13px var(--label);letter-spacing:.1em;text-transform:uppercase;color:var(--sky)}
+/* channels */
+.chan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.ch{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ch .top{display:flex;align-items:center;gap:12px}
+.ch .ico{width:42px;height:42px;border-radius:10px;background:var(--navy);display:grid;place-items:center;flex:none}
+.ch ul{margin:0;padding-left:20px;color:var(--mute);font-size:15.5px;display:flex;flex-direction:column;gap:4px}
+.ch .goal{margin-top:auto;display:flex;gap:10px;align-items:baseline;border-top:1px dashed var(--line);padding-top:12px}
+.ch .goal b{font:800 15px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--blue);flex:none}
+.ch .goal span{font-weight:600;font-size:15.5px}
+/* flywheel */
+.fly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.spin{transform-origin:300px 300px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.step .d{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font:800 20px var(--label)}
+.step p{color:var(--mute-d);font-size:15.5px}
+.step h3{color:#fff;font-size:21px}
+/* gantt */
+.scroll{overflow-x:auto}
+.gantt{min-width:820px}
+/* kpi table */
+table{width:100%;border-collapse:collapse;font-size:15.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--navy3);vertical-align:top}
+th{font:800 13px var(--label);letter-spacing:.14em;text-transform:uppercase;color:#8D9BB8}
+.dark td{color:#F4F6F9}
+td.num{font:800 20px var(--label);color:var(--yellow);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.now{color:var(--mute-d);white-space:nowrap}
+/* brand */
+.brandrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:stretch}
+.brandrow img{width:100%;border-radius:16px;display:block;border:1px solid var(--line)}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ba figure{margin:0;position:relative}
+.ba img{aspect-ratio:3/4;object-fit:cover;height:100%}
+.ba figcaption{position:absolute;left:10px;top:10px;font:800 13px var(--label);letter-spacing:.14em;padding:5px 9px;border-radius:99px;background:var(--navy);color:#fff}
+.ba figure:last-child figcaption{background:var(--yellow);color:var(--navy)}
+/* invest */
+.price{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.pc{background:var(--navy2);border:1px solid var(--navy3);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.pc.hl{background:var(--paper);color:var(--ink);border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.pc b.amt{font:800 46px/1 var(--label);color:var(--yellow)}
+.pc.hl b.amt{color:var(--blue)}
+.pc ul{margin:0;padding-left:20px;font-size:15.5px;color:var(--mute-d);display:flex;flex-direction:column;gap:4px}
+.pc.hl ul{color:var(--mute)}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pr{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.pr.yes{background:var(--yellow);color:var(--navy)}
+.pr.no{background:var(--navy2);border:1px solid var(--navy3);color:var(--mute-d)}
+.pr ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15.5px}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--blue);border-radius:20px;padding:30px 32px}
+.cta h2{font-size:clamp(26px,4vw,40px);color:#fff}
+.cta p{color:#E4ECFB}
+.ph{background:rgba(242,194,48,.18);border-bottom:2px dashed var(--yellow);padding:0 4px;border-radius:3px}
+footer .src{line-height:1.8}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pills span{font:800 16px/1 var(--label);letter-spacing:.06em;text-transform:uppercase;padding:11px 15px;border-radius:99px;background:var(--navy2);border:1px solid var(--navy3);color:#F4F6F9}
+.pills span:nth-child(3n+1){border-color:var(--yellow);color:var(--yellow)}
+.light .steps h3,.light .step h3{color:var(--ink)}
+.light .step p{color:var(--mute)}
+.more{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.more .ls{border-top:4px solid var(--yellow)}
+@media (max-width:900px){.more{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.more{grid-template-columns:1fr}}
+.light table td,.light table th{border-bottom-color:var(--line)}
+.pkg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.pk{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pk.lead-pk{grid-column:span 2;background:linear-gradient(150deg,#22355C,#17284A);border-color:var(--yellow)}
+.pk .q{font:800 46px/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.pk .u{font:800 13px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--sky)}
+.pk p{font-size:15px;color:var(--mute-d)}
+.pk ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--mute-d);display:flex;flex-direction:column;gap:3px}
+@media (max-width:900px){.pkg{grid-template-columns:1fr 1fr}.pk.lead-pk{grid-column:1/-1}}
+@media (max-width:560px){.pkg{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}.phone{width:240px;justify-self:center}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .score,.big,.cols3,.price{grid-template-columns:1fr 1fr}
+  .lessons{grid-template-columns:1fr 1fr}
+  .cols,.chan,.fly,.brandrow,.promise{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .score,.big,.cols3,.price,.lessons{grid-template-columns:1fr}
+  .fr{grid-template-columns:40px minmax(0,1fr)}.fr .m{grid-column:2}
+  .fr.hd span:last-child{display:none}
+  .band{padding-block:60px}
+}
+.reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.reels figure{margin:0;display:flex;flex-direction:column;gap:8px}.reels video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#0E1A33;display:block}.reels figcaption{font:800 15px var(--label);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}@media (max-width:700px){.reels{grid-template-columns:1fr;max-width:340px;margin:0 auto;width:100%}}
+</style>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1A33">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="description" content="Above All Media's growth plan for Premier Soft Wash: hero film, reels, stills, a new website, ads into a CRM and SEO.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Above All Media">
+<meta property="og:title" content="The Premier #1 Plan · Above All Media">
+<meta property="og:description" content="Hero film, reels, stills, a new website, ads into a CRM and SEO for Premier Soft Wash.">
+<meta property="og:image" content="https://aboveallmediasc.com/proposals/premier-soft-wash/media/hero-poster.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head><body>
+<nav aria-label="Sections"><div class="in">
+<img src="media/logo-dark.svg" alt="Premier Soft Wash">
+<a href="#media">Watch</a><a href="#today">Today</a><a href="#maps">Google Maps</a><a href="#lessons">World’s best</a><a href="#plan">The plan</a><a href="#stepone">Step one</a><a href="#seo">SEO</a><a href="#system">Growth system</a><a href="#roadmap">Roadmap</a><a href="#targets">Targets</a><a href="#invest">Investment</a>
+</div></nav>
+
+<!-- HERO -->
+<section class="band dark" style="padding-block:72px 88px">
+<div class="wrap">
+<div class="hero">
+<div class="copy">
+<p class="eyebrow">Growth proposal · Above All Media for Premier Soft Wash · October 2026</p>
+<h1>The Premier <span>#1</span> Plan</h1>
+<p class="lead">Everything we will do to make Premier Soft Wash the first name homeowners see on Google Maps, Facebook and every feed, starting in Bluffton, Hilton Head and Beaufort and building out across South Carolina.</p>
+</div>
+<div class="phone"><img src="media/stripe.gif" alt="Animated Premier ad: a mildewed wall cleaned stripe by stripe, a 50/50 before and after, then the new shield logo and a free quote number"></div>
+</div>
+<div class="stats" role="list">
+<div class="stat" role="listitem"><b>29 → 200</b><span>Google reviews, 12-month target</span></div>
+<div class="stat" role="listitem"><b>4 / wk</b><span>short videos, filmed and edited for you</span></div>
+<div class="stat" role="listitem"><b>9</b><span>world-leading cleaning brands studied</span></div>
+<div class="stat" role="listitem"><b>30%</b><span>partner rate for Premier</span></div>
+</div>
+</div>
+</section>
+
+<!-- MEDIA -->
+<section class="band light" id="media">
+<div class="wrap">
+<div class="head"><p class="eyebrow">First cut from the Local Legend night</p><h2>Watch the work</h2>
+<p class="lead">The 30-second cut of the hero commercial and the first three vertical reels, filmed after closing at Local Legend Brewing on Hilton Head.</p></div>
+<video controls playsinline preload="metadata" poster="media/hero-poster.jpg" style="width:100%;border-radius:16px;background:#0E1A33;display:block" src="media/hero-30s.mp4"></video>
+<div class="reels">
+<figure><video controls playsinline preload="none" poster="media/reel1.jpg" src="media/reel1.mp4"></video><figcaption>Who cleans Local Legend at 2 a.m.?</figcaption></figure>
+<figure><video controls playsinline preload="none" poster="media/reel2.jpg" src="media/reel2.mp4"></video><figcaption>2 strangers. 1 boat. Costa Rica.</figcaption></figure>
+<figure><video controls playsinline preload="none" poster="media/reel3.jpg" src="media/reel3.mp4"></video><figcaption>Local Legends · Episode 1</figcaption></figure>
+</div>
+</div>
+</section>
+
+<!-- TODAY -->
+<section class="band light" id="today">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Where Premier stands today</p><h2>Great work, hidden online</h2>
+<p class="lead">Every customer gives Premier five stars. The problem is that too few people ever find out. Here is the audit, item by item.</p></div>
+<div class="score">
+<div class="sc"><span class="chip good">Strong</span><h3>5.0 stars</h3><p>Every Google review is five stars. The quality is already there.</p></div>
+<div class="sc"><span class="chip fix">Fix</span><h3>29 reviews</h3><p>The local leader shows 200+. Review count is a top-10 Maps ranking factor.</p></div>
+<div class="sc"><span class="chip miss">Missing</span><h3>No town pages</h3><p>No page per service per town. That is the #1 local organic factor in Google’s results.</p></div>
+<div class="sc"><span class="chip fix">Fix</span><h3>Template website</h3><p>49 auto-written generic blog posts, a broken Galleries menu and a “winow” typo.</p></div>
+<div class="sc"><span class="chip fix">Fix</span><h3>Two names</h3><p>“Softwash” and “Soft Wash” both appear, and the email sits on a different domain. Google wants one consistent name.</p></div>
+<div class="sc"><span class="chip miss">Missing</span><h3>No video engine</h3><p>No steady stream of before-and-after video, the format the biggest cleaning channels win with.</p></div>
+</div>
+<div class="chart" aria-label="Bar chart comparing Google reviews: Premier 29, local leader 200 plus">
+<h3>Google reviews today</h3>
+<svg viewBox="0 0 1000 150" role="img" aria-label="Premier has 29 reviews; the local leader shows 200 plus">
+<g font-family="Public Sans, Arial, sans-serif" font-size="18" fill="#4A5670">
+<text x="0" y="44">Mr. Softwash (leader)</text><text x="0" y="114">Premier Soft Wash</text></g>
+<rect x="230" y="20" width="700" height="38" rx="6" fill="#0E1A33"/><rect x="230" y="90" width="101.5" height="38" rx="6" fill="#2F6FE0"/>
+<g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="26"><text x="942" y="48" fill="#0E1A33">200+</text><text x="343" y="118" fill="#2F6FE0">29</text></g>
+</svg>
+<p class="src">Scale: one bar width = 200 reviews. Counts as shown on Google, October 2026.</p>
+</div>
+</div>
+</section>
+
+<!-- MAPS -->
+<section class="band dark" id="maps">
+<div class="wrap">
+<div class="head"><p class="eyebrow">How Google Maps picks #1</p><h2>The ten factors that decide the map</h2>
+<p class="lead">Each year Whitespark surveys the top local search experts on what moves the Google map pack. These are the ten factors at the top of the 2026 survey, and exactly what Premier does about each one.</p></div>
+<div class="factors" role="table" aria-label="Top ten map pack ranking factors and Premier's move">
+<div class="fr hd" role="row"><span>Rank</span><span>Ranking factor</span><span>Premier’s move</span></div>
+<div class="fr" role="row"><span class="n">1</span><span class="f">Primary Google Business Profile category</span><span class="m">Set to the category that matches “soft wash” and “pressure washing” searches; test against the leader’s.</span></div>
+<div class="fr" role="row"><span class="n">2</span><span class="f">Distance from the searcher</span><span class="m">Can’t be bought. We win each town with service areas, town pages and town-tagged reviews.</span></div>
+<div class="fr" role="row"><span class="n">3</span><span class="f">Keywords in the business name</span><span class="m">“Premier Soft Wash”, spelled one way everywhere. The service is already in the real name.</span></div>
+<div class="fr" role="row"><span class="n">4</span><span class="f">Address in the city searched</span><span class="m">Bluffton address verified and pinned correctly; town pages carry the other cities.</span></div>
+<div class="fr" role="row"><span class="n">5</span><span class="f">Open at the time of search</span><span class="m">Full hours, holiday hours and “text anytime” so Premier shows as open more often.</span></div>
+<div class="fr" role="row"><span class="n">6</span><span class="f">High Google star rating</span><span class="m">Already 5.0. The Proof Text after every job keeps it there.</span></div>
+<div class="fr" role="row"><span class="n">7</span><span class="f">Address shown on the profile</span><span class="m">Decide with Jeremy whether to show the address; it helps Maps rank in Bluffton.</span></div>
+<div class="fr" role="row"><span class="n">8</span><span class="f">Additional categories</span><span class="m">Add every honest secondary category: roof cleaning, gutter cleaning, window cleaning.</span></div>
+<div class="fr" role="row"><span class="n">9</span><span class="f">Number of Google reviews with text</span><span class="m">Review requests that ask for a sentence naming the town and the surface.</span></div>
+<div class="fr" role="row"><span class="n">10</span><span class="f">Map pin placed correctly</span><span class="m">Check the pin, the plus code and the Apple Maps and Bing listings.</span></div>
+</div>
+<div class="note"><b>The straight answer on “#1 in South Carolina”:</b> Google Maps ranks by distance, so no company is #1 on the map in every South Carolina town. What we can do is put Premier at the top of the map at home in Bluffton, Hilton Head and Beaufort, and make it the most-reviewed, most-watched soft wash brand in the state on Google search, Facebook and video. That’s the plan below.</div>
+<div class="cols">
+<div class="chart">
+<h3>Clicks by map pack position</h3>
+<svg viewBox="0 0 520 220" role="img" aria-label="Clicks by map pack position: first 17 percent, second 12 percent, third 3 percent">
+<g stroke="#22355C" stroke-width="1"><line x1="90" y1="16" x2="90" y2="176"/><line x1="230" y1="16" x2="230" y2="176"/><line x1="370" y1="16" x2="370" y2="176"/><line x1="510" y1="16" x2="510" y2="176"/></g>
+<rect x="90" y="24" width="357" height="40" rx="5" fill="#F2C230"/><rect x="90" y="78" width="252" height="40" rx="5" fill="#5AA8FF"/><rect x="90" y="132" width="63" height="40" rx="5" fill="#5AA8FF"/>
+<g font-family="Public Sans, Arial, sans-serif" font-size="16" fill="#BFCBE0"><text x="0" y="50">#1 spot</text><text x="0" y="104">#2 spot</text><text x="0" y="158">#3 spot</text>
+<text x="90" y="204" text-anchor="middle">0%</text><text x="230" y="204" text-anchor="middle">6.7%</text><text x="370" y="204" text-anchor="middle">13.3%</text><text x="512" y="204" text-anchor="end">20%</text></g>
+<g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="24"><text x="457" y="52" fill="#F2C230">17%</text><text x="352" y="106" fill="#5AA8FF">12%</text><text x="163" y="160" fill="#5AA8FF">3%</text></g>
+</svg>
+<p class="src">The #1 spot gets over five times the clicks of #3. Source: Sixth City Marketing, via Oneupweb.</p>
+</div>
+<div class="chart">
+<h3>Where local searchers click</h3>
+<svg viewBox="0 0 520 220" role="img" aria-label="Local searchers: 44 percent click the map pack, 29 percent organic results, 19 percent ads, 8 percent elsewhere">
+<rect x="0" y="40" width="228.8" height="70" fill="#F2C230"/><rect x="228.8" y="40" width="150.8" height="70" fill="#5AA8FF"/><rect x="379.6" y="40" width="98.8" height="70" fill="#2F6FE0"/><rect x="478.4" y="40" width="41.6" height="70" fill="#22355C"/>
+<g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="34" fill="#0E1A33"><text x="16" y="88">44%</text><text x="244" y="88">29%</text></g>
+<text x="392" y="88" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="34" fill="#FFFFFF">19%</text>
+<g font-family="Public Sans, Arial, sans-serif" font-size="16" fill="#BFCBE0"><text x="16" y="140">Map pack</text><text x="244" y="140">Organic</text><text x="392" y="140">Ads</text><text x="470" y="140">Other</text></g>
+<text x="0" y="190" font-family="Public Sans, Arial, sans-serif" font-size="15" fill="#8D9BB8">Calls, directions and website taps from the map all count.</text>
+</svg>
+<p class="src">Map pack share includes calls and direction requests. Source: Oneupweb (figures sum to 92%; the rest is unattributed).</p>
+</div>
+</div>
+<p class="src">Factor ranks: <a href="https://whitespark.ca/local-search-ranking-factors/">Whitespark 2026 Local Search Ranking Factors</a>, published November 2025.</p>
+</div>
+</section>
+
+<!-- WHY REVIEWS -->
+<section class="band light">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Why profiles and reviews win the click</p><h2>The numbers homeowners act on</h2></div>
+<div class="big">
+<div class="bs"><b>2.7×</b><p>more likely to consider a business reputable when its Google profile is complete</p><span class="s">Google</span></div>
+<div class="bs"><b>70%</b><p>more likely to visit, and 50% more likely to consider buying, from a complete profile</p><span class="s">Google</span></div>
+<div class="bs"><b>96%</b><p>of consumers are open to writing a review. Most just need to be asked.</p><span class="s">BrightLocal 2025</span></div>
+<div class="bs"><b>3 in 4</b><p>consumers watch video when researching a local business</p><span class="s">BrightLocal 2025</span></div>
+<div class="bs"><b>74%</b><p>check two or more review sites, so Facebook, Yelp and Nextdoor matter too</p><span class="s">BrightLocal 2025</span></div>
+<div class="bs"><b>93%</b><p>expect the business to reply to reviews. Premier answers every one within 48 hours.</p><span class="s">BrightLocal 2025 (7% don’t expect replies)</span></div>
+</div>
+<p class="src">Sources: <a href="https://support.google.com/business/answer/10515606">Google Business Profile Help</a> · <a href="https://brightlocal.com/research/local-consumer-review-survey-2025/">BrightLocal Local Consumer Review Survey 2025</a>.</p>
+</div>
+</section>
+
+<!-- LESSONS -->
+<section class="band dark" id="lessons">
+<div class="wrap">
+<div class="head"><p class="eyebrow">What the world’s best do</p><h2>Five lessons from the giants</h2>
+<p class="lead">We studied Kärcher, Fish Window Cleaning (275+ locations), Window Genie, Men In Kilts, Squeegee Squad, Shack Shine, Sparkle Wash and the biggest pressure-washing channels on YouTube (one has 1.55M subscribers and 336M views). They all do these five things.</p></div>
+<div class="lessons">
+<div class="ls"><span class="k">01</span><h3>One look you can’t miss</h3><p class="who">Men In Kilts · Kärcher yellow</p><p>Premier: the yellow-and-navy shield on the truck, shirts and posts.</p></div>
+<div class="ls"><span class="k">02</span><h3>Proof, not claims</h3><p class="who">Kärcher landmarks · top channels</p><p>Premier: the 50/50 Stripe in every video and ad.</p></div>
+<div class="ls"><span class="k">03</span><h3>A trust stack</h3><p class="who">Window Genie · Shack Shine</p><p>Premier: insured, uniformed, with a written Premier Promise.</p></div>
+<div class="ls"><span class="k">04</span><h3>One name, any size</h3><p class="who">Fish · Squeegee Squad</p><p>Premier: one spelling and a logo that reads as a phone avatar.</p></div>
+<div class="ls"><span class="k">05</span><h3>Easy to say yes</h3><p class="who">Shack Shine</p><p>Premier: text for a quote, done in one visit, pay when clean.</p></div>
+</div>
+</div>
+</section>
+
+<!-- PLAN -->
+<section class="band light" id="plan">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The plan, channel by channel</p><h2>Everything we do for Premier</h2>
+<p class="lead">Eight channels, one brand. Above All Media builds, films, writes and posts. Jeremy keeps doing the work and sends one text after each job.</p></div>
+<div class="chan">
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z" fill="#F2C230"/><circle cx="12" cy="9" r="2.6" fill="#0E1A33"/></svg></span><h3>Google Maps &amp; Business Profile</h3></div>
+<ul><li>Fix the categories, services, hours, service areas and map pin</li><li>A weekly Google post with a 50/50 photo</li><li>20+ new geotagged job photos a month</li><li>Q&amp;A seeded with the real questions homeowners ask</li></ul>
+<div class="goal"><b>Target</b><span>Top 3 on the map for core searches in Bluffton, Hilton Head and Beaufort</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="#F2C230"/></svg></span><h3>Review engine</h3></div>
+<ul><li>A “Proof Text” after every job: the before and after, plus a review link</li><li>Asks for a sentence naming the town and the surface</li><li>Every review answered within 48 hours</li><li>The best review of the week turned into a post</li></ul>
+<div class="goal"><b>Target</b><span>75 reviews by day 90, 200 by month 12</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" fill="#F2C230"/><rect x="3" y="4" width="18" height="4" fill="#5AA8FF"/></svg></span><h3>Website rebuild</h3></div>
+<ul><li>A fast new site in the new brand, built around texting for a quote</li><li>One page per service per town: house wash Bluffton, roof cleaning Hilton Head and more</li><li>Replace the 49 generic posts with real local guides</li><li>Before-and-after gallery, reviews and the Premier Promise on every page</li><li>Built on Above All Media’s own framework with free hosting, so Premier owns the code and stops paying for a template</li></ul>
+<div class="goal"><b>Target</b><span><span class="ph">[18]</span> service and town pages live by month 6</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.2V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z" fill="#F2C230"/></svg></span><h3>Facebook business page</h3></div>
+<ul><li>Rebuilt page: new logo, cover video, services, reviews and booking button</li><li>7 posts a week, cross-posted from the video engine</li><li>Recommendations turned on and requested in the Proof Text</li><li>Local Legend and Lowcountry partner collabs tagged every Friday</li></ul>
+<div class="goal"><b>Target</b><span>The most active soft wash page in the Lowcountry, every week</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3" fill="#F2C230"/><path d="M10 8.5v7l6-3.5z" fill="#0E1A33"/></svg></span><h3>Video: Reels, TikTok, Shorts</h3></div>
+<ul><li>4 short videos a week built on the 50/50 Stripe formula</li><li>Hook in the first second, 10 to 20 seconds, loops</li><li>One shoot day a month plus phone clips from jobs</li><li>Captions, sound and posting done by Above All Media</li></ul>
+<div class="goal"><b>Target</b><span>200+ videos in year one</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v3H4zM4 10.5h16v3H4zM4 16h16v3H4z" fill="#F2C230"/></svg></span><h3>Listings everywhere</h3></div>
+<ul><li>One name, address and phone on 40+ directories</li><li>Apple Maps, Bing Places, Yelp, Nextdoor, Angi, BBB and the chambers</li><li>Fix the Softwash vs Soft Wash split and the email domain</li><li>A quarterly check for duplicates and wrong info</li></ul>
+<div class="goal"><b>Target</b><span>100% consistent listings by month 2</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18v2H3zM5 10h3v8H5zM10.5 10h3v8h-3zM16 10h3v8h-3zM12 2l9 6H3z" fill="#F2C230"/></svg></span><h3>Press &amp; partnerships</h3></div>
+<ul><li>The Local Legend spot looping on 18 SERG restaurant screens</li><li>The Lowcountry Landmark Clean, once a quarter, borrowed from Kärcher</li><li>Press releases to local news and the town pages</li><li>Links from partners, sponsors and chambers</li></ul>
+<div class="goal"><b>Target</b><span>4 landmark cleans and 4 press hits in year one</span></div></article>
+<article class="ch"><div class="top"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" fill="#F2C230"/><path d="M12 2v20" stroke="#0E1A33" stroke-width="2"/></svg></span><h3>The new brand</h3></div>
+<ul><li>The 50/50 shield logo in every format, vector and one-color</li><li>Truck wrap, yard signs, shirts and hats</li><li>Profile avatars and covers across every platform</li><li>The animated logos and GIFs, already made</li></ul>
+<div class="goal"><b>Target</b><span>Rolled out on every surface by month 2</span></div></article>
+</div>
+</div>
+</section>
+
+<!-- SEO -->
+<section class="band dark" id="seo">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Search engine optimization</p><h2>Own every search a homeowner makes</h2>
+<p class="lead">Local SEO wins the map. Full SEO wins the rest of page one, YouTube and the new AI answers. Every service gets a page for every town, written for real searches and built to load fast.</p></div>
+<div class="cols">
+<div class="chart">
+<h3>The keyword map</h3>
+<div class="scroll"><table>
+<tr><th>Service</th><th>Bluffton · Hilton Head · Beaufort</th></tr>
+<tr><td>House washing / soft washing</td><td>house washing Bluffton SC · soft wash Hilton Head · house wash near me</td></tr>
+<tr><td>Roof cleaning</td><td>roof cleaning Hilton Head · black streaks on roof Bluffton · roof soft wash Beaufort</td></tr>
+<tr><td>Pressure washing</td><td>pressure washing Bluffton · driveway cleaning Hilton Head · power washing near me</td></tr>
+<tr><td>Window cleaning</td><td>window cleaning Hilton Head · streak-free window cleaning Bluffton</td></tr>
+<tr><td>Concrete &amp; pavers</td><td>concrete cleaning Bluffton · paver cleaning and sealing Hilton Head</td></tr>
+<tr><td>Commercial &amp; HOA</td><td>commercial pressure washing Hilton Head · HOA exterior cleaning Bluffton · restaurant pressure washing</td></tr>
+</table></div>
+<p class="src">Search volumes get pulled from Google Keyword Planner and Search Console in week one, and the pages are built around the winners.</p>
+</div>
+<div class="chart">
+<h3>The eight SEO pillars</h3>
+<div class="steps" style="gap:10px">
+<div class="step"><span class="d">1</span><div><h3>Technical SEO</h3><p>Fast load times (Core Web Vitals), mobile-first, a clean site map and no broken pages.</p></div></div>
+<div class="step"><span class="d">2</span><div><h3>On-page SEO</h3><p>One page per service per town, with titles, headings and FAQs written for real searches.</p></div></div>
+<div class="step"><span class="d">3</span><div><h3>Local SEO</h3><p>The Google Business Profile, matching listings and town-tagged reviews and photos.</p></div></div>
+<div class="step"><span class="d">4</span><div><h3>Schema markup</h3><p>Structured data so Google shows the stars, services, hours and FAQs right in the results.</p></div></div>
+</div></div>
+</div>
+<div class="cols">
+<div class="chart"><div class="steps" style="gap:10px">
+<div class="step"><span class="d">5</span><div><h3>Content &amp; E-E-A-T</h3><p>Real local guides written from Jeremy’s experience, which Google rewards over generic posts.</p></div></div>
+<div class="step"><span class="d">6</span><div><h3>Video SEO</h3><p>The hero film and every reel on YouTube with town keywords, chapters and captions, embedded on the matching pages.</p></div></div>
+</div></div>
+<div class="chart"><div class="steps" style="gap:10px">
+<div class="step"><span class="d">7</span><div><h3>Links &amp; digital PR</h3><p>Landmark Clean press, the chambers, SERG and partners linking back to Premier.</p></div></div>
+<div class="step"><span class="d">8</span><div><h3>AI search (GEO)</h3><p>Clear answers, reviews and schema so Premier gets named in Google’s AI Overviews and in ChatGPT-style answers.</p></div></div>
+</div></div>
+</div>
+</div>
+</section>
+
+<!-- SYSTEM -->
+<section class="band light" id="system">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The connected growth system</p><h2>Ads, website and CRM, wired together</h2>
+<p class="lead">Facebook and Instagram ads, Google Ads, the website and a CRM all talk to each other in the background. Every lead is captured and answered fast. Every booked job tells the ads who to find next. And every customer hears from Premier once a week with something worth opening.</p></div>
+<div class="chart scroll">
+<svg viewBox="0 -40 1000 470" style="min-width:760px" role="img" aria-label="Flow diagram: Meta ads, Google Ads and Local Services Ads, and Google Maps and SEO bring people to the Premier website, which feeds the CRM. The CRM sends booked jobs back to the ad platforms and sends a weekly email and text drop to customers, whose reviews and referrals feed Google Maps.">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#2F6FE0"/></marker>
+<marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#E0A800"/></marker></defs>
+<g font-family="Public Sans, Arial, sans-serif">
+<path d="M850,100 L850,-12 L135,-12 L135,26" fill="none" stroke="#E0A800" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#ay)"/>
+<text x="492" y="-20" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">Booked jobs sent back to Meta + Google, so the ads find more people like them</text>
+<rect x="20" y="30" width="230" height="64" rx="12" fill="#0E1A33"/><text x="135" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Meta ads</text><text x="135" y="80" text-anchor="middle" font-size="14" fill="#BFCBE0">Facebook + Instagram</text>
+<rect x="20" y="130" width="230" height="64" rx="12" fill="#0E1A33"/><text x="135" y="158" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Google Ads + LSA</text><text x="135" y="180" text-anchor="middle" font-size="14" fill="#BFCBE0">Search + Google Guaranteed</text>
+<rect x="20" y="230" width="230" height="64" rx="12" fill="#0E1A33"/><text x="135" y="258" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Google Maps + SEO</text><text x="135" y="280" text-anchor="middle" font-size="14" fill="#BFCBE0">Free search traffic</text>
+<g stroke="#2F6FE0" stroke-width="3" fill="none" marker-end="url(#ah)"><path d="M250,62 L356,130"/><path d="M250,162 L356,162"/><path d="M250,262 L356,194"/><path d="M610,160 L716,160"/><path d="M850,220 L850,296"/><path d="M720,340 L614,340"/></g>
+<rect x="360" y="100" width="250" height="120" rx="14" fill="#2F6FE0"/><text x="485" y="132" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">Premier website</text>
+<text x="485" y="158" text-anchor="middle" font-size="14" fill="#E4ECFB">Meta Pixel + Conversions API</text><text x="485" y="178" text-anchor="middle" font-size="14" fill="#E4ECFB">GA4 + Google Tag Manager</text><text x="485" y="198" text-anchor="middle" font-size="14" fill="#E4ECFB">Text-for-a-quote + call tracking</text>
+<rect x="720" y="100" width="260" height="120" rx="14" fill="#0E1A33" stroke="#F2C230" stroke-width="3"/><text x="850" y="132" text-anchor="middle" font-size="19" font-weight="700" fill="#F2C230">CRM</text>
+<text x="850" y="158" text-anchor="middle" font-size="14" fill="#BFCBE0">Instant text-back in 60 s</text><text x="850" y="178" text-anchor="middle" font-size="14" fill="#BFCBE0">Quotes, jobs, Proof Text</text><text x="850" y="198" text-anchor="middle" font-size="14" fill="#BFCBE0">Every customer on file</text>
+<rect x="720" y="300" width="260" height="80" rx="14" fill="#F2C230"/><text x="850" y="332" text-anchor="middle" font-size="18" font-weight="700" fill="#0E1A33">The Premier Weekly</text><text x="850" y="356" text-anchor="middle" font-size="14" fill="#0E1A33">Email + text: new video + a coupon</text>
+<rect x="360" y="300" width="250" height="80" rx="14" fill="#FFFFFF" stroke="#D9E0EA" stroke-width="2"/><text x="485" y="332" text-anchor="middle" font-size="18" font-weight="700" fill="#0E1A33">Customers</text><text x="485" y="356" text-anchor="middle" font-size="14" fill="#4A5670">Repeat jobs, reviews, referrals</text>
+<path d="M360,340 L135,340 L135,298" fill="none" stroke="#E0A800" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#ay)"/>
+<text x="248" y="368" text-anchor="middle" font-size="14" fill="#4A5670">Reviews lift the map rank</text>
+</g></svg>
+<p class="src">Solid lines: how a new customer flows in. Dashed lines: the feedback that makes each round cheaper. The ad budget is paid by Premier straight to Meta and Google, separate from our fee.</p>
+</div>
+<div class="head" style="gap:8px"><h3>The Premier Weekly: four weeks, for example</h3><p class="lead" style="font-size:17px">Not spam. Every send is something worth watching, plus a reason to book. One a week, to people who opted in, with one tap to stop.</p></div>
+<div class="score">
+<div class="sc"><span class="chip good">Week 1</span><h3>The 50/50 of the week</h3><p>The most satisfying clean from a real Lowcountry home. Offer: <span class="ph">[$25]</span> off a driveway with any house wash.</p></div>
+<div class="sc"><span class="chip good">Week 2</span><h3>Jeremy’s 8-second tip</h3><p>How to tell roof algae from roof damage. Offer: a free gutter flush with any roof clean.</p></div>
+<div class="sc"><span class="chip good">Week 3</span><h3>The Local Legend film</h3><p>The new hero spot or a Landmark Clean. Offer: refer a neighbor and you both get <span class="ph">[$25]</span>.</p></div>
+<div class="sc"><span class="chip good">Week 4</span><h3>The season checklist</h3><p>Pollen, hurricane prep or holiday guests. Offer: book ahead and lock in this season’s price.</p></div>
+<div class="sc"><span class="chip fix">Always</span><h3>Birthday + anniversary</h3><p>A thank-you on the anniversary of their first clean, with a returning-customer price.</p></div>
+<div class="sc"><span class="chip fix">Always</span><h3>Win-back</h3><p>Not booked in 12 months? A “your home is due” note with photos from their last clean.</p></div>
+</div>
+<div class="note" style="background:#0E1A33"><b>Done by the rules:</b> customers opt in to texts when they book, every message has an easy opt-out, and email follows CAN-SPAM. Texts stay to one a week so people keep opening them.</div>
+</div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="band dark">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Agency-grade, Lowcountry-sized</p><h2>Everything the world’s biggest agencies sell</h2>
+<p class="lead">The ten biggest agency groups in the world are Omnicom, Accenture Song, Publicis, WPP, Deloitte Digital, Dentsu, BlueFocus, IBM iX, Hakuhodo DY and TCS Interactive. Between them they sell the same core services. Premier gets every one, sized for a local business.</p></div>
+<div class="pills">
+<span>Brand strategy &amp; identity</span><span>Creative &amp; content production</span><span>Video &amp; motion design</span><span>Performance marketing</span><span>Paid social (Meta)</span><span>Paid search (Google Ads / PPC)</span><span>Local Services Ads</span><span>Local SEO</span><span>Technical SEO</span><span>Content marketing</span><span>AI search optimization (GEO)</span><span>Marketing automation</span><span>CRM &amp; lifecycle marketing</span><span>Email &amp; SMS marketing</span><span>Customer experience (CX)</span><span>Conversion rate optimization (CRO)</span><span>Retargeting &amp; lookalike audiences</span><span>Data, analytics &amp; attribution</span><span>Omnichannel, full-funnel campaigns</span><span>Reputation management</span><span>Influencer &amp; creator partnerships</span><span>Digital PR</span><span>Out-of-home &amp; venue screens (SERG)</span><span>Website design &amp; development</span>
+</div>
+<p class="src">Ranking: Ad Age Agency Report 2026, by 2025 global revenue, via <a href="https://www.meioemensagem.com.br/comunicacao/agency-report-omnicom-lidera-e-publicis-ultrapassa-wpp">Meio &amp; Mensagem</a>. The service names are the industry’s standard terms, not quotes from any one agency.</p>
+</div>
+</section>
+
+<!-- FLYWHEEL -->
+<section class="band dark">
+<div class="wrap">
+<div class="fly">
+<div class="chart" style="background:transparent;border:none;padding:0">
+<svg viewBox="0 0 600 600" role="img" aria-label="The Premier flywheel: search, top 3 on the map, text for a quote, job and Proof Text, review and video, higher rank, then back to search">
+<defs><radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#2F6FE0" stop-opacity=".5"/><stop offset="1" stop-color="#0E1A33" stop-opacity="0"/></radialGradient></defs>
+<circle cx="300" cy="300" r="250" fill="url(#glow)"/>
+<g class="spin"><circle cx="300" cy="300" r="210" fill="none" stroke="#2F6FE0" stroke-width="5" stroke-dasharray="14 12"/>
+<g fill="#F2C230"><polygon points="300,82 286,96 300,110" transform="rotate(30 300 300)"/><polygon points="300,82 286,96 300,110" transform="rotate(90 300 300)"/><polygon points="300,82 286,96 300,110" transform="rotate(150 300 300)"/><polygon points="300,82 286,96 300,110" transform="rotate(210 300 300)"/><polygon points="300,82 286,96 300,110" transform="rotate(270 300 300)"/><polygon points="300,82 286,96 300,110" transform="rotate(330 300 300)"/></g></g>
+<circle cx="300" cy="300" r="112" fill="#17284A" stroke="#F2C230" stroke-width="4"/>
+<text x="300" y="292" text-anchor="middle" font-family="Archivo Black, Arial Black, sans-serif" font-size="26" fill="#F2C230">PREMIER</text>
+<text x="300" y="326" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="26" fill="#FFFFFF" letter-spacing="2">FLYWHEEL</text>
+<g font-family="Public Sans, Arial, sans-serif" font-weight="700" font-size="17" text-anchor="middle">
+<rect x="210" y="68" width="180" height="40" rx="20" fill="#F4F6F9"/><text x="300" y="94" fill="#0E1A33">Homeowner searches</text>
+<rect x="400" y="176" width="180" height="40" rx="20" fill="#F4F6F9"/><text x="490" y="202" fill="#0E1A33">Top 3 on the map</text>
+<rect x="400" y="386" width="180" height="40" rx="20" fill="#F4F6F9"/><text x="490" y="412" fill="#0E1A33">Texts for a quote</text>
+<rect x="210" y="494" width="180" height="40" rx="20" fill="#F2C230"/><text x="300" y="520" fill="#0E1A33">Job + Proof Text</text>
+<rect x="20" y="386" width="180" height="40" rx="20" fill="#F4F6F9"/><text x="110" y="412" fill="#0E1A33">Review + video</text>
+<rect x="20" y="176" width="180" height="40" rx="20" fill="#F4F6F9"/><text x="110" y="202" fill="#0E1A33">Higher rank</text></g>
+</svg>
+</div>
+<div class="steps">
+<p class="eyebrow">The engine</p><h2>Every job wins the next one</h2>
+<div class="step"><span class="d">1</span><div><h3>Show up first</h3><p>The profile, town pages and reviews put Premier in the top 3 when a homeowner searches.</p></div></div>
+<div class="step"><span class="d">2</span><div><h3>Make it easy</h3><p>They text for a quote, get a fast answer, and pay when it’s clean.</p></div></div>
+<div class="step"><span class="d">3</span><div><h3>Capture the proof</h3><p>Every job sends a Proof Text: before, after and a review link.</p></div></div>
+<div class="step"><span class="d">4</span><div><h3>Feed the machine</h3><p>The review lifts the ranking, the clip becomes a video, and the next homeowner finds Premier first.</p></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ROADMAP -->
+<section class="band light" id="roadmap">
+<div class="wrap">
+<div class="head"><p class="eyebrow">12-month roadmap</p><h2>What happens, and when</h2>
+<p class="lead">The first 90 days fix the foundation and launch every engine. Months 4 to 12 compound: more reviews, more pages, more video, and a landmark every quarter.</p></div>
+<div class="chart scroll">
+<svg class="gantt" viewBox="0 0 1080 470" role="img" aria-label="Gantt chart of twelve months of work: brand rollout months 1 and 2; listings cleanup months 1 and 2; Google profile overhaul month 1 then weekly posts; review engine all year; website and town pages months 1 to 3 then new pages monthly; video engine all year; Facebook and Local Legend all year; landmark cleans in months 3, 6, 9 and 12">
+<g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="16" fill="#4A5670" text-anchor="middle">
+<text x="300" y="22">M1</text><text x="365" y="22">M2</text><text x="430" y="22">M3</text><text x="495" y="22">M4</text><text x="560" y="22">M5</text><text x="625" y="22">M6</text><text x="690" y="22">M7</text><text x="755" y="22">M8</text><text x="820" y="22">M9</text><text x="885" y="22">M10</text><text x="950" y="22">M11</text><text x="1015" y="22">M12</text></g>
+<g stroke="#D9E0EA"><line x1="267.5" y1="34" x2="267.5" y2="462"/><line x1="462.5" y1="34" x2="462.5" y2="462"/><line x1="1047.5" y1="34" x2="1047.5" y2="462"/></g>
+<rect x="268" y="34" width="194" height="428" fill="#2F6FE0" opacity=".06"/>
+<text x="365" y="456" text-anchor="middle" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="14" fill="#2F6FE0" letter-spacing="1.5">FIRST 90 DAYS</text>
+<g font-family="Public Sans, Arial, sans-serif" font-size="15" font-weight="600" fill="#0E1A33">
+<text x="0" y="66">Brand rollout</text><text x="0" y="116">Listings cleanup (40+)</text><text x="0" y="166">Google profile</text><text x="0" y="216">Review engine</text><text x="0" y="266">Website + town pages</text><text x="0" y="316">Video: 4 a week</text><text x="0" y="366">Facebook + Local Legend</text><text x="0" y="416">Landmark Clean</text></g>
+<rect x="270" y="48" width="126" height="26" rx="13" fill="#F2C230"/>
+<rect x="270" y="98" width="126" height="26" rx="13" fill="#0E1A33"/><g fill="#0E1A33" opacity=".35"><circle cx="560" cy="111" r="7"/><circle cx="755" cy="111" r="7"/><circle cx="950" cy="111" r="7"/></g>
+<rect x="270" y="148" width="61" height="26" rx="13" fill="#0E1A33"/><rect x="335" y="153" width="710" height="16" rx="8" fill="#5AA8FF"/>
+<rect x="270" y="198" width="775" height="26" rx="13" fill="#2F6FE0"/>
+<rect x="270" y="248" width="191" height="26" rx="13" fill="#0E1A33"/><rect x="465" y="253" width="580" height="16" rx="8" fill="#5AA8FF"/>
+<rect x="270" y="298" width="775" height="26" rx="13" fill="#2F6FE0"/>
+<rect x="270" y="348" width="775" height="26" rx="13" fill="#2F6FE0"/>
+<g fill="#F2C230" stroke="#0E1A33" stroke-width="3"><path d="M430 398l13 13-13 13-13-13z"/><path d="M625 398l13 13-13 13-13-13z"/><path d="M820 398l13 13-13 13-13-13z"/><path d="M1015 398l13 13-13 13-13-13z"/></g>
+</svg>
+<p class="src">Dark bars: build. Blue: always on. Light blue: ongoing upkeep. Dots: quarterly listing audits. Diamonds: Landmark Clean events.</p>
+</div>
+</div>
+</section>
+
+<!-- TARGETS -->
+<section class="band dark" id="targets">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Targets we report on every month</p><h2>Catching the leader in a year</h2></div>
+<div class="chart">
+<h3>Google reviews: target path</h3>
+<svg viewBox="0 -34 1000 394" role="img" aria-label="Review target path: 29 today, 75 at month 3, 120 at month 6, 160 at month 9, 200 at month 12, reaching the leader's 200 plus">
+<defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA8FF" stop-opacity=".45"/><stop offset="1" stop-color="#5AA8FF" stop-opacity="0"/></linearGradient></defs>
+<g stroke="#22355C"><line x1="70" y1="300" x2="980" y2="300"/><line x1="70" y1="225" x2="980" y2="225"/><line x1="70" y1="150" x2="980" y2="150"/><line x1="70" y1="75" x2="980" y2="75"/><line x1="70" y1="0.5" x2="980" y2="0.5"/></g>
+<g font-family="Public Sans, Arial, sans-serif" font-size="15" fill="#8D9BB8" text-anchor="end"><text x="58" y="305">0</text><text x="58" y="230">50</text><text x="58" y="155">100</text><text x="58" y="80">150</text><text x="58" y="14">200</text></g>
+<line x1="70" y1="0" x2="980" y2="0" stroke="#F4F6F9" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="80" y="-12" font-family="Public Sans, Arial, sans-serif" font-size="15" font-weight="700" fill="#F4F6F9">Leader today: 200+ reviews</text>
+<path d="M80,256.5 L305,187.5 L530,120 L755,60 L970,0 L970,300 L80,300Z" fill="url(#ar)"/>
+<path d="M80,256.5 L305,187.5 L530,120 L755,60 L970,0" fill="none" stroke="#5AA8FF" stroke-width="5" stroke-linejoin="round"/>
+<g fill="#F2C230" stroke="#0E1A33" stroke-width="3"><circle cx="80" cy="256.5" r="9"/><circle cx="305" cy="187.5" r="9"/><circle cx="530" cy="120" r="9"/><circle cx="755" cy="60" r="9"/><circle cx="970" cy="0" r="0"/></g>
+<g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="800" font-size="22" fill="#F2C230"><text x="92" y="250">29</text><text x="317" y="181">75</text><text x="542" y="114">120</text><text x="767" y="54">160</text></g>
+<g font-family="Public Sans, Arial, sans-serif" font-size="15" fill="#BFCBE0" text-anchor="middle"><text x="80" y="326">Today</text><text x="305" y="326">Month 3</text><text x="530" y="326">Month 6</text><text x="755" y="326">Month 9</text><text x="945" y="326">Month 12: 200</text></g>
+</svg>
+<p class="src">A target, not a forecast: about 4 new reviews a week.</p>
+</div>
+<div class="scroll">
+<table>
+<tr><th>What we measure</th><th>Today</th><th>Day 90</th><th>Month 12</th></tr>
+<tr><td>Google reviews</td><td class="now">29</td><td class="num">75</td><td class="num">200</td></tr>
+<tr><td>Google profile completeness</td><td class="now">Partial</td><td class="num">100%</td><td class="num">100%</td></tr>
+<tr><td>Map pack top 3, core searches in 3 towns</td><td class="now">To measure in week 1</td><td class="num">Top 3 in Bluffton</td><td class="num">Top 3 in all 3</td></tr>
+<tr><td>Service and town pages</td><td class="now">0</td><td class="num"><span class="ph">[9]</span></td><td class="num"><span class="ph">[18]+</span></td></tr>
+<tr><td>Short videos published</td><td class="now">Occasional</td><td class="num">52</td><td class="num">200+</td></tr>
+<tr><td>Consistent directory listings</td><td class="now">Mixed names</td><td class="num">40+</td><td class="num">40+</td></tr>
+<tr><td>Landmark Cleans and press hits</td><td class="now">0</td><td class="num">1</td><td class="num">4</td></tr>
+</table>
+</div>
+<p class="src">Every month Premier gets one page of results: rank grid screenshots for each town, review count, calls and texts from Google, video views and the top post.</p>
+</div>
+</section>
+
+<!-- STEP ONE -->
+<section class="band light" id="stepone">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Step one · the launch package</p><h2>Six things we build first</h2>
+<p class="lead">Media that stops the scroll, a website Premier owns, ads that feed a CRM on their own, and search done in order. Here is each piece and exactly how it gets done.</p></div>
+<div class="score">
+<div class="sc"><span class="chip good">3–6</span><h3>Vertical reels</h3><p>Hook in the first second, captions on every word, an ending that loops. Three are already cut from the Local Legend night.</p></div>
+<div class="sc"><span class="chip good">60–90 s</span><h3>Hero commercial</h3><p>Hook, who, why, the work, the call. Animated Stripe wipe, shield iris and squeegee wipe transitions, plus 30 s and 15 s cuts.</p></div>
+<div class="sc"><span class="chip good">~30</span><h3>Hero stills</h3><p>Sharpest frames from the films, upscaled, cleaned, dodged and burned for depth, then graded so the color jumps.</p></div>
+<div class="sc"><span class="chip fix">Site</span><h3>New website</h3><p>Our own framework, free hosting on GitHub Pages, Premier owns the code and stops paying for a rented template.</p></div>
+<div class="sc"><span class="chip fix">Ads</span><h3>Meta + Google into a CRM</h3><p>Every form, call and message lands in the CRM and gets a text back in 60 seconds.</p></div>
+<div class="sc"><span class="chip fix">SEO</span><h3>Search, step by step</h3><p>Nine steps over the first 90 days, then a monthly scoreboard.</p></div>
+</div>
+<div class="cols">
+<div class="chart">
+<h3>Website: today vs. new</h3>
+<div class="scroll"><table>
+<tr><th></th><th>Today</th><th>New</th></tr>
+<tr><td><b>Platform</b></td><td>Rented template, <span class="ph">[$____]</span>/yr</td><td><b>Free hosting (GitHub Pages)</b></td></tr>
+<tr><td><b>Domain</b></td><td><span class="ph">[$____]</span>/yr</td><td><b>Same domain, kept</b></td></tr>
+<tr><td><b>Ownership</b></td><td>The vendor’s</td><td><b>Premier owns the code</b></td></tr>
+<tr><td><b>Speed</b></td><td>Template scripts</td><td><b>Static pages, near-instant</b></td></tr>
+<tr><td><b>Content</b></td><td>49 robot blog posts</td><td><b>Town pages + real media</b></td></tr>
+</table></div>
+</div>
+<div class="chart"><h3>How the site gets built</h3><div class="steps" style="gap:10px">
+<div class="step"><span class="d">1</span><div><p>Copy the Above All Media framework into a Premier repository.</p></div></div>
+<div class="step"><span class="d">2</span><div><p>Swap in the new brand, the hero film, the reels and the stills.</p></div></div>
+<div class="step"><span class="d">3</span><div><p>Build the service × town pages and the before-and-after gallery.</p></div></div>
+<div class="step"><span class="d">4</span><div><p>Wire the quote and text forms into the CRM, Meta Pixel, GA4 and call tracking.</p></div></div>
+<div class="step"><span class="d">5</span><div><p>Redirect every old URL so the rankings Premier already has carry over.</p></div></div>
+<div class="step"><span class="d">6</span><div><p>Point the domain, launch, and submit the sitemap to Google Search Console.</p></div></div>
+</div></div>
+</div>
+<div class="chart">
+<h3>Meta + Google ads into the CRM, in eight steps</h3>
+<div class="scroll"><table>
+<tr><th>#</th><th>Step</th><th>What we do</th></tr>
+<tr><td>1</td><td><b>Set up the CRM</b></td><td>Lead pipeline, quote and review templates, automatic text-back in 60 seconds</td></tr>
+<tr><td>2</td><td><b>Install tracking</b></td><td>Meta Pixel + Conversions API, GA4, Google Tag Manager, call tracking numbers</td></tr>
+<tr><td>3</td><td><b>Verify accounts</b></td><td>Meta Business, Google Ads and Local Services Ads, all in Premier’s name</td></tr>
+<tr><td>4</td><td><b>Build audiences</b></td><td>Homeowners around Bluffton, Hilton Head and Beaufort, plus retargeting site visitors and video viewers</td></tr>
+<tr><td>5</td><td><b>Launch Meta ads</b></td><td>The reels and cutdowns as ads, one clear offer per campaign</td></tr>
+<tr><td>6</td><td><b>Launch Google ads</b></td><td>Service × town keywords, call ads and negative keywords</td></tr>
+<tr><td>7</td><td><b>Automate the flow</b></td><td>Every form, call and message lands in the CRM with no copy and paste</td></tr>
+<tr><td>8</td><td><b>Close the loop</b></td><td>Booked jobs sent back to Meta and Google; cost per booked job reported weekly</td></tr>
+</table></div>
+<p class="src">Ad spend is paid by Premier straight to Meta and Google, separate from our fee.</p>
+</div>
+<div class="chart">
+<h3>SEO, step by step</h3>
+<div class="scroll"><table>
+<tr><th>#</th><th>When</th><th>Step</th><th>What we do</th></tr>
+<tr><td>1</td><td>Week 1</td><td><b>Audit + keywords</b></td><td>Search Console, Keyword Planner, gap vs. the local leader</td></tr>
+<tr><td>2</td><td>Week 1</td><td><b>Google Business Profile</b></td><td>Categories, services, areas, photos, Q&amp;A, weekly posts</td></tr>
+<tr><td>3</td><td>Weeks 1–2</td><td><b>One name everywhere</b></td><td>Same name and phone on 40+ listings: Apple, Bing, Yelp, Nextdoor</td></tr>
+<tr><td>4</td><td>Weeks 2–3</td><td><b>Technical foundation</b></td><td>Fast site, sitemap, redirects, schema for stars and FAQs</td></tr>
+<tr><td>5</td><td>Weeks 2–6</td><td><b>Service × town pages</b></td><td>House washing Bluffton, roof cleaning Hilton Head, and more</td></tr>
+<tr><td>6</td><td>From week 2</td><td><b>Reviews engine</b></td><td>Proof Text after every job; every review answered</td></tr>
+<tr><td>7</td><td>From week 4</td><td><b>Video SEO</b></td><td>Hero and reels on YouTube, tagged by town, embedded on pages</td></tr>
+<tr><td>8</td><td>Month 2+</td><td><b>Links, PR + AI search</b></td><td>SERG, chambers, press; clear answers for Google’s AI Overviews</td></tr>
+<tr><td>9</td><td>Monthly</td><td><b>Scoreboard</b></td><td>Map rank, calls, leads, reviews and keyword positions</td></tr>
+</table></div>
+</div>
+<div class="note" style="background:#0E1A33"><b>Inspired by the best, built to be ours:</b> we study what the top pressure-washing channels do in their best videos (payoff in the first second, one repeatable format, real sound, overhead and POV angles, bold text hooks, loops). Footage, logo, music and animations are always original to Premier.</div>
+</div>
+</section>
+
+<!-- WHAT ELSE -->
+<section class="band dark" id="more">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Our recommendations</p><h2>Eight more moves to reach the very top</h2></div>
+<div class="more">
+<div class="ls"><h3>Local Services Ads</h3><p>The Google Guaranteed badge, above every other result, pay per lead.</p></div>
+<div class="ls"><h3>Speed to lead</h3><p>The first business to answer usually wins; the CRM replies in 60 seconds.</p></div>
+<div class="ls"><h3>The neighbor drop</h3><p>A yard sign and door hangers on five nearby homes after every job.</p></div>
+<div class="ls"><h3>Maintenance plans</h3><p>Yearly house wash, quarterly windows: income that repeats.</p></div>
+<div class="ls"><h3>HOA + commercial</h3><p>Property managers, HOAs and SERG’s 18 restaurants.</p></div>
+<div class="ls"><h3>Truck wrap + uniforms</h3><p>The 50/50 shield as a rolling billboard on every job.</p></div>
+<div class="ls"><h3>Referral rewards</h3><p>Give <span class="ph">[$25]</span>, get <span class="ph">[$25]</span>, built into the Premier Weekly.</p></div>
+<div class="ls"><h3>Drone + YouTube</h3><p>Big jobs filmed from above, on a channel Google can rank.</p></div>
+</div>
+</div>
+</section>
+
+<!-- BRAND -->
+<section class="band light" id="brand">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The new Premier brand</p><h2>Built to be remembered</h2>
+<p class="lead">The shield says “Protecting your assets” without a word. Inside it is the 50/50, the most-shared shot in the industry. Safety yellow is a color no local competitor uses.</p></div>
+<div class="brandrow">
+<img src="media/brand-sheet.png" alt="The new Premier Soft Wash logo set: horizontal on light and dark, stacked, round avatar and one-color white">
+<div class="ba">
+<figure><img src="media/before.jpg" alt="A Bluffton stucco wall covered in mildew streaks before cleaning"><figcaption>BEFORE</figcaption></figure>
+<figure><img src="media/after.jpg" alt="The same wall clean after a Premier soft wash"><figcaption>AFTER</figcaption></figure>
+</div>
+</div>
+<div class="chart"><h3>Three new logo directions to compare</h3><img src="media/logo-options.jpg" alt="Three Premier logo options: Lowcountry Seal badge, Split Drop monogram, Spray Arc wordmark, in dark and light versions" style="width:100%;border-radius:12px"><p class="src">1 · Lowcountry Seal &nbsp; 2 · Split Drop &nbsp; 3 · Spray Arc. Pick one, or keep the shield above.</p></div>
+</div>
+</section>
+
+<!-- INVEST -->
+<section class="band dark" id="invest">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The investment</p><h2>One partner, one monthly plan</h2>
+<p class="lead">Premier gets the Above All Media partner rate: 30% off every line below.</p></div>
+<h3 style="color:#fff">The Launch Package: everything below, delivered in the first 60 days</h3>
+<div class="pkg">
+<div class="pk lead-pk"><span class="u">Hero commercial · horizontal 16:9</span><b class="q">60–90 s</b><h3 style="color:#fff">The Premier story</h3><p>Who Premier is, how the company started, what they do, and real before-and-after examples. Built for the top of the website and YouTube, and easy to send to new customers.</p><ul><li>Interviews with Jeremy and the crew</li><li>Drone, gimbal and macro footage from real jobs</li><li>Original music, color grade, captions and animated transitions</li><li>Plus 30 s and 15 s cuts for SERG screens and ads</li></ul></div>
+<div class="pk"><span class="u">Vertical 9:16</span><b class="q">3–6</b><h3 style="color:#fff">Vertical reels</h3><p>Three cut from the Local Legend night (Who cleans Local Legend at 2 a.m.?, the Costa Rica origin story, Local Legends Ep. 1), plus up to three from real jobs. Ready for Reels, TikTok and Shorts.</p></div>
+<div class="pk"><span class="u">Edited photos</span><b class="q">~30</b><h3 style="color:#fff">Hero stills</h3><p>Pulled from the films, then retouched, dodged and burned and color graded: crew, trucks, 50/50 before-and-afters and finished homes. Made for the website, Google profile and social.</p></div>
+<div class="pk"><span class="u">Animated</span><b class="q">3</b><h3 style="color:#fff">GIF logos</h3><p>The new shield logo in motion: the 50/50 Stripe, the luxury window wash and a neon version. Each one comes square, vertical and wide.</p></div>
+</div>
+<p class="lead">Plus the rebuild: the new website and town pages, full SEO, the connected Meta, Google and CRM system, the brand rollout, the Google profile overhaul and 40+ consistent listings.</p>
+<div class="price">
+<div class="pc"><h3>Launch</h3><b class="amt"><span class="ph">$____</span></b><p style="color:var(--mute-d)">One time, first 60 days</p>
+<ul><li>60–90 s hero commercial, plus 30 s and 15 s cuts</li><li>3–6 vertical reels</li><li>About 30 retouched hero stills</li><li>3 animated GIF logos</li><li>Website rebuild on our framework (free hosting) and first town pages</li><li>New brand files, truck and sign art</li><li>Google profile overhaul and 40+ listings</li><li>SEO foundation: keyword map, schema, speed</li><li>Connected system: Meta Pixel + Conversions API, Google Ads, GA4 and CRM</li></ul></div>
+<div class="pc hl"><h3>Monthly growth</h3><b class="amt"><span class="ph">$____</span>/mo</b><p style="color:var(--mute)">Everything that runs every month</p>
+<ul><li>4 videos and 3 posts a week, edited and posted</li><li>Review engine and replies</li><li>Weekly Google posts and photos</li><li>New town pages and a monthly report</li><li>SEO: content, links and rank tracking</li><li>Meta + Google ads managed and optimized</li><li>The Premier Weekly email + text drop</li></ul></div>
+<div class="pc"><h3>Landmark Clean</h3><b class="amt">Quarterly</b><p style="color:var(--mute-d)">Included in monthly</p>
+<ul><li>Pick and permission the landmark</li><li>Drone and ground 50/50 film</li><li>Press release and partner screens</li><li>A series that grows each quarter</li></ul></div>
+</div>
+<div class="promise">
+<div class="pr yes"><h3>What we promise</h3><ul><li>Every deliverable above, on schedule</li><li>A monthly report with real rank and review numbers</li><li>Fast answers: same-day replies from Above All Media</li><li>You own every file, page and account</li></ul></div>
+<div class="pr no"><h3 style="color:#fff">What nobody can promise</h3><ul><li>A guaranteed #1 spot. Google decides rankings, and distance always counts.</li><li>What we do promise is the work that wins rankings, done every week, with the numbers to show it.</li></ul></div>
+</div>
+<div class="cta"><div><h2>Say yes and we start Monday</h2><p>Week one: the hero commercial interviews, the review requests and the Google profile fixes.</p></div>
+<img src="media/icon.svg" alt="" style="width:92px;height:auto"></div>
+</div>
+</section>
+
+<footer class="band light" style="padding-block:44px">
+<div class="wrap" style="gap:10px">
+<p class="eyebrow">Sources</p>
+<p class="src">Whitespark, <a href="https://whitespark.ca/local-search-ranking-factors/">Local Search Ranking Factors 2026</a> · Google, <a href="https://support.google.com/business/answer/10515606">Business Profile Help</a> · BrightLocal, <a href="https://brightlocal.com/research/local-consumer-review-survey-2025/">Local Consumer Review Survey 2025</a> · Oneupweb, <a href="https://www.oneupweb.com/blog/local-search-results-map-packs/">Local search results</a> · Franchise Dictionary (Fish Window Cleaning) · Franchise Times Top 400 2025 (Squeegee Squad) · Social Blade (SB Pressure Washing) · For Construction Pros (Kärcher at Mount Rushmore) · The Gazette (Men In Kilts) · Premier’s own Google profile and website, October 2026 · Ad Age Agency Report 2026 via <a href="https://www.meioemensagem.com.br/comunicacao/agency-report-omnicom-lidera-e-publicis-ultrapassa-wpp">Meio &amp; Mensagem</a> · Google, <a href="https://ads.google.com/intl/en_us/home/local-services-ads/">Local Services Ads</a>.</p>
+<p class="src">Highlighted figures in brackets are placeholders for Chandler and Jeremy to confirm. Prepared by Above All Media · aboveallmediasc.com</p>
+</div>
+</footer>
+<img src="media/aam-mark.png" alt="Above All Media" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
+
+</body></html>
