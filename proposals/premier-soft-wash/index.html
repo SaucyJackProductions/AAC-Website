@@ -173,6 +173,17 @@ footer .src{line-height:1.8}
   .band{padding-block:60px}
 }
 .reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.reels figure{margin:0;display:flex;flex-direction:column;gap:8px}.reels video{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#0E1A33;display:block}.reels figcaption{font:800 15px var(--label);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}@media (max-width:700px){.reels{grid-template-columns:1fr;max-width:340px;margin:0 auto;width:100%}}
+.cardrow{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start}
+.mock{width:300px;max-width:100%;margin:0 auto;aspect-ratio:9/16.5;border-radius:40px;padding:10px;background:#050B17;box-shadow:0 30px 70px rgba(14,26,51,.35)}
+.mock-in{height:100%;border-radius:31px;overflow:hidden;background:linear-gradient(180deg,#0E1A33,#17284A);display:flex;flex-direction:column;align-items:center;gap:9px;padding-bottom:14px;color:#F4F6F9}
+.mock-ban{width:100%;aspect-ratio:16/10;overflow:hidden}.mock-ban img{width:100%;height:100%;object-fit:cover;display:block}
+.mock-name{font:800 22px/1 var(--label);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}.mock-role{font-size:12.5px;color:var(--mute-d)}
+.mock-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:88%}.mock-btns span{background:#F2C230;color:#0E1A33;font:800 12.5px/1 var(--label);text-transform:uppercase;letter-spacing:.06em;text-align:center;padding:9px 0;border-radius:10px}
+.mock-soc{display:flex;gap:8px}.mock-soc i{font:800 11px/30px var(--label);font-style:normal;width:30px;height:30px;text-align:center;border-radius:50%;border:1px solid #5AA8FF;color:#BFCBE0}
+.mock-ba{display:grid;grid-template-columns:1fr 1fr;width:88%;border-radius:10px;overflow:hidden;height:74px}.mock-ba b{font:800 11px var(--label);letter-spacing:.1em;display:grid;place-items:center}.mock-ba b:first-child{background:#3a3f2c;color:#d6d0b4}.mock-ba b:last-child{background:#2F6FE0}
+.mock-cta{width:88%;text-align:center;font:800 13px/1 var(--label);text-transform:uppercase;letter-spacing:.06em;padding:11px 0;border:1px solid #F2C230;border-radius:10px;color:#F2C230}
+.mock-rev{font-size:12px;color:#F2C230}
+@media (max-width:760px){.cardrow{grid-template-columns:1fr}.mock{width:260px}}
 </style>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0E1A33">
@@ -187,7 +198,7 @@ footer .src{line-height:1.8}
 </head><body>
 <nav aria-label="Sections"><div class="in">
 <img src="media/logo-dark.svg" alt="Premier Soft Wash">
-<a href="#media">Watch</a><a href="#today">Today</a><a href="#maps">Google Maps</a><a href="#lessons">World’s best</a><a href="#plan">The plan</a><a href="#stepone">Step one</a><a href="#seo">SEO</a><a href="#system">Growth system</a><a href="#roadmap">Roadmap</a><a href="#targets">Targets</a><a href="#invest">Investment</a>
+<a href="#media">Watch</a><a href="#today">Today</a><a href="#maps">Google Maps</a><a href="#lessons">World’s best</a><a href="#plan">The plan</a><a href="#stepone">Step one</a><a href="#card">Digital card</a><a href="#live-logo">Live logo</a><a href="#seo">SEO</a><a href="#system">Growth system</a><a href="#roadmap">Roadmap</a><a href="#targets">Targets</a><a href="#invest">Investment</a>
 </div></nav>
 
 <!-- HERO -->
@@ -637,6 +648,69 @@ footer .src{line-height:1.8}
 </div>
 </section>
 
+<!-- DIGITAL CARD -->
+<section class="band light" id="card">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The Premier digital card</p><h2>Like Dot, but better, and it’s yours</h2>
+<p class="lead">Every Premier truck, shirt, yard sign and handshake points to one page: Premier’s own digital card and contact exchange, built on the same framework as the Above All Media card. Tap a card or scan a code and a homeowner has everything in one screen: the logo in motion, the work, one-tap call and text, a quote form and every social account.</p></div>
+<div class="cardrow">
+<div class="mock" aria-label="Mock-up of the Premier digital card on a phone">
+<div class="mock-in">
+<div class="mock-ban"><img src="media/live-logo-poster-sq.jpg" alt=""></div>
+<p class="mock-name">Jeremy Sorensen</p><p class="mock-role">COO · Premier Soft Wash</p>
+<div class="mock-btns"><span>Call</span><span>Text</span><span>Save</span><span>Quote</span></div>
+<div class="mock-soc"><i>IG</i><i>FB</i><i>TT</i><i>YT</i><i>G</i></div>
+<div class="mock-ba"><b>BEFORE</b><b>AFTER</b></div>
+<div class="mock-cta">Share my contact back</div>
+<div class="mock-rev">★★★★★ Leave a Google review</div>
+</div>
+</div>
+<div class="chan" style="grid-template-columns:1fr">
+<article class="ch"><h3>How people open it</h3><ul><li><b>Tap:</b> an NFC card or sticker. Tap it to any phone and the card opens, no app needed.</li><li><b>Scan:</b> QR codes on the truck wrap, yard signs, shirts, door hangers, invoices and table tents.</li><li><b>Lock screen:</b> a QR wallpaper on Jeremy’s and Brandon’s phones, so anyone can scan it on the spot.</li><li><b>Link:</b> one short link for texts, email signatures and every bio.</li></ul></article>
+<article class="ch"><h3>What’s on the page</h3><ul><li>The 3D logo and the hero film playing at the top, in Premier’s luxury look</li><li>One-tap call, text and email, plus <b>Save contact</b> with photo and logo</li><li>Get a quote form, and a Google review button with five stars one tap away</li><li>Instagram, Facebook, TikTok, YouTube and Google, all linked</li><li>Before-and-after gallery, the latest reels, service areas and the Premier Promise</li></ul></article>
+</div>
+</div>
+<div class="score">
+<div class="sc"><span class="chip good">Exchange</span><h3>Contact swap</h3><p>The other person leaves their name and number in one step. It lands in the CRM and they get a thank-you text with Premier’s card.</p></div>
+<div class="sc"><span class="chip good">Connected</span><h3>Tied to the website</h3><p>Same brand, same domain (premiersoftwashsc.com/connect), same quote form, so every visit also helps the website rank.</p></div>
+<div class="sc"><span class="chip good">Tracked</span><h3>Know what works</h3><p>Each QR code is tagged by where it lives, so the scoreboard shows whether the truck, the sign or the shirt brings the jobs.</p></div>
+<div class="sc"><span class="chip fix">Custom</span><h3>Change it any day</h3><p>Swap the video, the offer of the week or the photos whenever you want. Nothing is locked into a template.</p></div>
+<div class="sc"><span class="chip fix">One each</span><h3>A card per person</h3><p>Jeremy, Brandon and every crew lead get their own card and wallpaper, all in the same Premier look.</p></div>
+<div class="sc"><span class="chip fix">Like an app</span><h3>Home-screen ready</h3><p>Customers can add it to their home screen like an app, so Premier is one tap away next season.</p></div>
+</div>
+<div class="cols">
+<div class="chart"><h3>Dot-style card</h3><div class="steps" style="gap:8px">
+<p>A template on someone else’s platform and someone else’s link</p><p>Their layout, their branding limits, their feature tiers</p><p>Contacts live in their app, not your CRM</p></div></div>
+<div class="chart" style="border:2px solid var(--yellow)"><h3>Premier’s card</h3><div class="steps" style="gap:8px">
+<p><b>Premier’s own domain and design</b>, video and 3D logo included</p><p><b>Custom any day</b>, built and updated by Above All Media</p><p><b>Wired to the CRM, the ads and the website</b>, with scan tracking</p></div></div>
+</div>
+<div class="chart"><h3>How we build it</h3><div class="steps" style="gap:10px">
+<div class="step"><span class="d">1</span><div><p>Copy the Above All Media card framework into the new Premier site.</p></div></div>
+<div class="step"><span class="d">2</span><div><p>Drop in the 3D logo, hero film, stills, reels, socials and review link.</p></div></div>
+<div class="step"><span class="d">3</span><div><p>Build each person’s card, contact file and lock-screen QR wallpaper.</p></div></div>
+<div class="step"><span class="d">4</span><div><p>Connect the quote and contact-swap forms to the CRM with an instant text back.</p></div></div>
+<div class="step"><span class="d">5</span><div><p>Make tagged QR codes for the truck, signs, shirts and door hangers, and program the NFC tap cards.</p></div></div>
+</div></div>
+</div>
+</section>
+
+<!-- LIVE LOGO -->
+<section class="band dark" id="live-logo">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The logo, alive</p><h2>A 3D logo that comes off the screen</h2>
+<p class="lead">Premier’s shield, rebuilt in real 3D: it flies in from deep space, spins to show its depth, pulses with a neon blue-and-gold glow, then lunges toward the viewer and settles. It opens every video, the website header and the digital card.</p></div>
+<video autoplay muted loop playsinline preload="metadata" poster="media/live-logo-poster.jpg" style="width:100%;border-radius:16px;background:#050a16;display:block" src="media/live-logo-3d-wide.mp4"></video>
+<div class="lessons">
+<div class="ls"><span class="k">3D</span><h3>Real depth</h3><p>A thick shield with a gold back you see as it spins, not a flat sticker.</p></div>
+<div class="ls"><span class="k">Glow</span><h3>Neon pulse</h3><p>Blue and gold light that breathes on a steady beat, like a sign at night.</p></div>
+<div class="ls"><span class="k">Pop</span><h3>Off the screen</h3><p>It pushes toward the viewer, the moment that makes people stop scrolling.</p></div>
+<div class="ls"><span class="k">Loop</span><h3>Seamless</h3><p>Six seconds that loop cleanly as an intro, a sting or a profile video.</p></div>
+<div class="ls"><span class="k">Every size</span><h3>Square + wide</h3><p>Video for the site and YouTube, square for social, a GIF for email.</p></div>
+</div>
+<p class="src">Inspired by the way the best animated logos work (one simple mark, light that builds, motion that resolves on the logo), made entirely in Premier’s own shield and colors.</p>
+</div>
+</section>
+
 <!-- BRAND -->
 <section class="band light" id="brand">
 <div class="wrap">
@@ -668,7 +742,7 @@ footer .src{line-height:1.8}
 <p class="lead">Plus the rebuild: the new website and town pages, full SEO, the connected Meta, Google and CRM system, the brand rollout, the Google profile overhaul and 40+ consistent listings.</p>
 <div class="price">
 <div class="pc"><h3>Launch</h3><b class="amt"><span class="ph">$____</span></b><p style="color:var(--mute-d)">One time, first 60 days</p>
-<ul><li>60–90 s hero commercial, plus 30 s and 15 s cuts</li><li>3–6 vertical reels</li><li>About 30 retouched hero stills</li><li>3 animated GIF logos</li><li>Website rebuild on our framework (free hosting) and first town pages</li><li>New brand files, truck and sign art</li><li>Google profile overhaul and 40+ listings</li><li>SEO foundation: keyword map, schema, speed</li><li>Connected system: Meta Pixel + Conversions API, Google Ads, GA4 and CRM</li></ul></div>
+<ul><li>60–90 s hero commercial, plus 30 s and 15 s cuts</li><li>3–6 vertical reels</li><li>About 30 retouched hero stills</li><li>3 animated GIF logos</li><li>Website rebuild on our framework (free hosting) and first town pages</li><li>Premier digital card with tap cards, QR codes and contact exchange</li><li>3D animated live logo, square, wide and GIF</li><li>New brand files, truck and sign art</li><li>Google profile overhaul and 40+ listings</li><li>SEO foundation: keyword map, schema, speed</li><li>Connected system: Meta Pixel + Conversions API, Google Ads, GA4 and CRM</li></ul></div>
 <div class="pc hl"><h3>Monthly growth</h3><b class="amt"><span class="ph">$____</span>/mo</b><p style="color:var(--mute)">Everything that runs every month</p>
 <ul><li>4 videos and 3 posts a week, edited and posted</li><li>Review engine and replies</li><li>Weekly Google posts and photos</li><li>New town pages and a monthly report</li><li>SEO: content, links and rank tracking</li><li>Meta + Google ads managed and optimized</li><li>The Premier Weekly email + text drop</li></ul></div>
 <div class="pc"><h3>Landmark Clean</h3><b class="amt">Quarterly</b><p style="color:var(--mute-d)">Included in monthly</p>
