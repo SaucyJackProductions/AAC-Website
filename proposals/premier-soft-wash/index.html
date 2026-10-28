@@ -184,21 +184,81 @@ footer .src{line-height:1.8}
 .mock-cta{width:88%;text-align:center;font:800 13px/1 var(--label);text-transform:uppercase;letter-spacing:.06em;padding:11px 0;border:1px solid #F2C230;border-radius:10px;color:#F2C230}
 .mock-rev{font-size:12px;color:#F2C230}
 @media (max-width:760px){.cardrow{grid-template-columns:1fr}.mock{width:260px}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;font:800 16px/1 var(--label);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:13px 18px;border-radius:99px;background:var(--yellow);color:var(--navy);border:0;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn.sm{font-size:13.5px;padding:9px 13px}
+.btn:hover,.btn:focus-visible{filter:brightness(1.08);outline:2px solid var(--sky);outline-offset:2px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chapter{background:var(--yellow);color:var(--navy)}
+.chapter .wrap{flex-direction:row;align-items:center;gap:28px;flex-wrap:wrap}
+.chapter .num{font:400 clamp(64px,10vw,120px)/.85 var(--display)}
+.chapter h2{font-size:clamp(30px,4.6vw,50px)}
+.chapter p{font-size:18px;max-width:60ch}
+.chapter .eyebrow{color:var(--navy);opacity:.75}
+.pkgi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pi{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink);min-width:0;transition:transform .15s,box-shadow .15s}
+.pi:hover,.pi:focus-visible{transform:translateY(-2px);box-shadow:0 10px 30px rgba(14,26,51,.12);outline:none;border-color:var(--blue)}
+.pi b{font:800 34px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.pi h3{font-size:19px}
+.pi span{font-size:14.5px;color:var(--mute)}
+.pi .go{margin-top:auto;font:800 13px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.pi.part{background:var(--navy);color:#F4F6F9;border-color:var(--navy)}.pi.part b{color:var(--yellow)}.pi.part span{color:var(--mute-d)}.pi.part .go{color:var(--yellow)}
+.vid{display:flex;flex-direction:column;gap:10px}
+.vid video{width:100%;border-radius:16px;background:#0E1A33;display:block}
+.vmeta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.vmeta h3{font-size:21px}.vmeta p{color:var(--mute);font-size:15px;max-width:70ch}
+.dark .vmeta p{color:var(--mute-d)}
+.cuts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.reels figure .btn{align-self:flex-start}
+.dark .reels figcaption{color:var(--mute-d)}
+.grid-st{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.grid-st button{padding:0;border:0;background:none;cursor:zoom-in;border-radius:10px;overflow:hidden;aspect-ratio:3/2;display:block;width:100%}
+.grid-st img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.grid-st button:hover img,.grid-st button:focus-visible img{transform:scale(1.06)}
+.grid-st button:focus-visible{outline:3px solid var(--yellow)}
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1400px);width:100%;color:#fff}
+dialog.lb::backdrop{background:rgba(5,10,22,.92)}
+.lb figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.lb img{width:100%;max-height:80vh;object-fit:contain;border-radius:10px;display:block}
+.lb .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.lb .cap{font:800 16px var(--label);letter-spacing:.06em;text-transform:uppercase}
+.loops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.loops figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.loops video{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#0E1A33;display:block}
+.loops figcaption{font:800 14px var(--label);letter-spacing:.06em;text-transform:uppercase;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.loops figcaption a{color:var(--blue);font-size:12.5px;text-decoration:none}
+.deckv{position:relative}
+.track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;padding-bottom:8px}
+.track figure{margin:0;flex:0 0 100%;scroll-snap-align:center}
+.track img{width:100%;aspect-ratio:16/9;border-radius:14px;display:block;background:var(--navy2);box-shadow:0 18px 50px rgba(14,26,51,.18)}
+.dctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.dctl .ct{font:800 18px var(--label);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.thumbs button{padding:0;border:2px solid transparent;border-radius:6px;overflow:hidden;background:none;cursor:pointer;display:block}
+.thumbs button[aria-current=true]{border-color:var(--yellow)}
+.thumbs img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.dl{width:100%}
+.dl td:last-child{text-align:right;white-space:nowrap}
+.dl td a{color:var(--blue);font-weight:700}
+.dl .sz{color:var(--mute);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:900px){.pkgi{grid-template-columns:1fr 1fr}.loops{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.cuts{grid-template-columns:1fr}.pkgi{grid-template-columns:1fr 1fr;gap:10px}.pi{padding:14px}.loops{grid-template-columns:1fr 1fr}.dl .hide-s{display:none}}
 </style>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0E1A33">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<meta name="description" content="Above All Media's growth plan for Premier Soft Wash: hero film, reels, stills, a new website, ads into a CRM and SEO.">
+<meta name="description" content="Everything Above All Media built for Premier Soft Wash in one place: hero film, reels, 29 stills, the 3D logo, brand kit, digital card, the #1 plan and the pitch deck.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Above All Media">
 <meta property="og:title" content="The Premier #1 Plan · Above All Media">
-<meta property="og:description" content="Hero film, reels, stills, a new website, ads into a CRM and SEO for Premier Soft Wash.">
+<meta property="og:description" content="Hero film, reels, 29 stills, the 3D logo, brand kit, digital card, the #1 plan and the pitch deck for Premier Soft Wash.">
 <meta property="og:image" content="https://aboveallmediasc.com/proposals/premier-soft-wash/media/hero-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head><body>
 <nav aria-label="Sections"><div class="in">
 <img src="media/logo-dark.svg" alt="Premier Soft Wash">
-<a href="#media">Watch</a><a href="#today">Today</a><a href="#maps">Google Maps</a><a href="#lessons">World’s best</a><a href="#plan">The plan</a><a href="#stepone">Step one</a><a href="#card">Digital card</a><a href="#live-logo">Live logo</a><a href="#seo">SEO</a><a href="#system">Growth system</a><a href="#roadmap">Roadmap</a><a href="#targets">Targets</a><a href="#invest">Investment</a>
+<a href="#package">Package</a><a href="#media">Watch</a><a href="#stills">Stills</a><a href="#brand">Brand</a><a href="#live-logo">Live logo</a><a href="#loops">Loops</a><a href="#card">Digital card</a><a href="#today">The plan</a><a href="#stepone">Step one</a><a href="#deck">Pitch deck</a><a href="#invest">Investment</a><a href="#downloads">Downloads</a>
 </div></nav>
 
 <!-- HERO -->
@@ -206,9 +266,10 @@ footer .src{line-height:1.8}
 <div class="wrap">
 <div class="hero">
 <div class="copy">
-<p class="eyebrow">Growth proposal · Above All Media for Premier Soft Wash · October 2026</p>
+<p class="eyebrow">The complete package · Above All Media for Premier Soft Wash · October 2026</p>
 <h1>The Premier <span>#1</span> Plan</h1>
-<p class="lead">Everything we will do to make Premier Soft Wash the first name homeowners see on Google Maps, Facebook and every feed, starting in Bluffton, Hilton Head and Beaufort and building out across South Carolina.</p>
+<p class="lead">Everything we built for Premier Soft Wash, on one page: the finished films and reels, 29 retouched stills, the 3D logo, the brand kit, the digital card, the plan to become the first name homeowners see in Bluffton, Hilton Head and Beaufort, and the full pitch deck.</p>
+<div class="btns"><a class="btn" href="#media">▶ Watch the film</a><a class="btn ghost" href="#downloads">Download everything</a></div>
 </div>
 <div class="phone"><img src="media/stripe.gif" alt="Animated Premier ad: a mildewed wall cleaned stripe by stripe, a 50/50 before and after, then the new shield logo and a free quote number"></div>
 </div>
@@ -221,18 +282,202 @@ footer .src{line-height:1.8}
 </div>
 </section>
 
+<!-- PACKAGE -->
+<section class="band light" id="package">
+<div class="wrap">
+<div class="head"><p class="eyebrow">How this page is organized</p><h2>Everything in this package</h2>
+<p class="lead">One link holds it all. Part 1 is the finished media and brand, Part 2 is the plan to reach #1, and Part 3 is the pitch deck, the investment and every download.</p></div>
+<div class="pkgi">
+<a class="pi part" href="#media"><b>1:30</b><h3>Hero commercial</h3><span>The full story, plus 30 s and 15 s cuts</span><span class="go">Open →</span></a>
+<a class="pi" href="#reels"><b>3</b><h3>Vertical reels</h3><span>Ready for Reels, TikTok and Shorts</span><span class="go">Open →</span></a>
+<a class="pi" href="#stills"><b>29</b><h3>Retouched stills</h3><span>Graded, full size, one zip</span><span class="go">Open →</span></a>
+<a class="pi" href="#brand"><b>3</b><h3>New logo directions</h3><span>Plus the shield logo set and brand kit</span><span class="go">Open →</span></a>
+<a class="pi" href="#live-logo"><b>3D</b><h3>Live logo</h3><span>Neon, spinning, off the screen</span><span class="go">Open →</span></a>
+<a class="pi" href="#loops"><b>10</b><h3>Animated loops</h3><span>Logo spins, wipes and the 50/50</span><span class="go">Open →</span></a>
+<a class="pi" href="#card"><b>1</b><h3>Digital card</h3><span>Tap, QR, contact swap, CRM</span><span class="go">Open →</span></a>
+<a class="pi" href="#today"><b>#1</b><h3>The plan</h3><span>Google, website, video, ads, SEO</span><span class="go">Open →</span></a>
+<a class="pi" href="#stepone"><b>6</b><h3>Step one</h3><span>What we build first, step by step</span><span class="go">Open →</span></a>
+<a class="pi part" href="#deck"><b>42</b><h3>Pitch deck</h3><span>Slide by slide, plus the PDF</span><span class="go">Open →</span></a>
+<a class="pi" href="#invest"><b>$</b><h3>Investment</h3><span>Launch and monthly plans</span><span class="go">Open →</span></a>
+<a class="pi" href="#downloads"><b>All</b><h3>Downloads</h3><span>Every file, one click each</span><span class="go">Open →</span></a>
+</div>
+</div>
+</section>
+
+<!-- CHAPTER 1 -->
+<section class="band chapter" style="padding-block:56px">
+<div class="wrap"><span class="num" aria-hidden="true">01</span><div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:260px"><p class="eyebrow">Part 1 · The media and the brand</p><h2>Finished and ready to use</h2><p>The films, reels, stills, logo, loops and the digital card, all made from Premier’s own work.</p></div></div>
+</section>
+
 <!-- MEDIA -->
 <section class="band light" id="media">
 <div class="wrap">
-<div class="head"><p class="eyebrow">First cut from the Local Legend night</p><h2>Watch the work</h2>
-<p class="lead">The 30-second cut of the hero commercial and the first three vertical reels, filmed after closing at Local Legend Brewing on Hilton Head.</p></div>
-<video controls playsinline preload="metadata" poster="media/hero-poster.jpg" style="width:100%;border-radius:16px;background:#0E1A33;display:block" src="media/hero-30s.mp4"></video>
+<div class="head"><p class="eyebrow">Final cut · Filmed after closing at Local Legend Brewing, Hilton Head</p><h2>Watch the work</h2>
+<p class="lead">The 90-second hero commercial, its 30 and 15-second cuts, and three vertical reels. Every file is final, with sound, color and animated transitions.</p></div>
+<div class="vid">
+<video controls playsinline preload="metadata" poster="media/video/premier-hero-90s.jpg" src="media/video/premier-hero-90s.mp4"></video>
+<div class="vmeta"><div><h3>Hero commercial · 1:30</h3><p>The full story: neon facade, the rise to the sign, the spray orbit, the bar fly-in, the back-window ladder and the full squeegee pass.</p></div><a class="btn sm" href="media/video/premier-hero-90s.mp4" download>↓ Download <span style="opacity:.6">14.3 MB</span></a></div>
+</div>
+<div class="cuts">
+<div class="vid"><video controls playsinline preload="none" poster="media/video/premier-cut-30s.jpg" src="media/video/premier-cut-30s.mp4"></video>
+<div class="vmeta"><div><h3>30-second cut</h3><p>Hook, intro, services, detail shot, the Local Legend line, end card.</p></div><a class="btn sm" href="media/video/premier-cut-30s.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></div></div>
+<div class="vid"><video controls playsinline preload="none" poster="media/video/premier-cut-15s.jpg" src="media/video/premier-cut-15s.mp4"></video>
+<div class="vmeta"><div><h3>15-second cut</h3><p>The fastest version, for pre-roll and Stories ads.</p></div><a class="btn sm" href="media/video/premier-cut-15s.mp4" download>↓ Download <span style="opacity:.6">14.1 MB</span></a></div></div>
+</div>
+<div class="head" id="reels" style="scroll-margin-top:80px"><h3>Three vertical reels</h3></div>
 <div class="reels">
-<figure><video controls playsinline preload="none" poster="media/reel1.jpg" src="media/reel1.mp4"></video><figcaption>Who cleans Local Legend at 2 a.m.?</figcaption></figure>
-<figure><video controls playsinline preload="none" poster="media/reel2.jpg" src="media/reel2.mp4"></video><figcaption>2 strangers. 1 boat. Costa Rica.</figcaption></figure>
-<figure><video controls playsinline preload="none" poster="media/reel3.jpg" src="media/reel3.mp4"></video><figcaption>Local Legends · Episode 1</figcaption></figure>
+<figure><video controls playsinline preload="none" poster="media/video/premier-reel-1-who-cleans.jpg" src="media/video/premier-reel-1-who-cleans.mp4"></video><figcaption>Reel 1 · Who cleans Local Legend at 2 a.m.? · 0:27</figcaption><a class="btn sm" href="media/video/premier-reel-1-who-cleans.mp4" download>↓ Download <span style="opacity:.6">14.1 MB</span></a></figure>
+<figure><video controls playsinline preload="none" poster="media/video/premier-reel-2-origin.jpg" src="media/video/premier-reel-2-origin.mp4"></video><figcaption>Reel 2 · 2 strangers. 1 boat. Costa Rica. · 0:35</figcaption><a class="btn sm" href="media/video/premier-reel-2-origin.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></figure>
+<figure><video controls playsinline preload="none" poster="media/video/premier-reel-3-local-legends.jpg" src="media/video/premier-reel-3-local-legends.mp4"></video><figcaption>Reel 3 · Local Legends, Episode 1 · 0:22</figcaption><a class="btn sm" href="media/video/premier-reel-3-local-legends.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></figure>
 </div>
 </div>
+</section>
+
+<!-- STILLS -->
+<section class="band dark" id="stills">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Pulled from the films · retouched and graded</p><h2>29 stills that jump off the screen</h2>
+<p class="lead">The sharpest frames from the hero film and drone passes, upscaled, cleaned, dodged and burned, then graded. Tap any photo to see it full size and save it.</p></div>
+<div class="grid-st" id="stgrid">
+<button type="button" data-full="media/stills/premier-ll-01-duo-under-local-legend-sign-aam.jpg" data-cap="Duo under Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-01-duo-under-local-legend-sign-aam.jpg" alt="Duo under Local Legend sign"></button>
+<button type="button" data-full="media/stills/premier-ll-02-duo-wide-local-legend-sign-aam.jpg" data-cap="Duo wide Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-02-duo-wide-local-legend-sign-aam.jpg" alt="Duo wide Local Legend sign"></button>
+<button type="button" data-full="media/stills/premier-ll-03-duo-medium-aam.jpg" data-cap="Duo medium"><img loading="lazy" src="media/stills/thumbs/premier-ll-03-duo-medium-aam.jpg" alt="Duo medium"></button>
+<button type="button" data-full="media/stills/premier-ll-04-brandon-portrait-aam.jpg" data-cap="Brandon portrait"><img loading="lazy" src="media/stills/thumbs/premier-ll-04-brandon-portrait-aam.jpg" alt="Brandon portrait"></button>
+<button type="button" data-full="media/stills/premier-ll-05-jeremy-portrait-sign-bg-aam.jpg" data-cap="Jeremy portrait sign bg"><img loading="lazy" src="media/stills/thumbs/premier-ll-05-jeremy-portrait-sign-bg-aam.jpg" alt="Jeremy portrait sign bg"></button>
+<button type="button" data-full="media/stills/premier-ll-06-walk-and-talk-truck-aam.jpg" data-cap="Walk and talk truck"><img loading="lazy" src="media/stills/thumbs/premier-ll-06-walk-and-talk-truck-aam.jpg" alt="Walk and talk truck"></button>
+<button type="button" data-full="media/stills/premier-ll-07-duo-string-lights-aam.jpg" data-cap="Duo string lights"><img loading="lazy" src="media/stills/thumbs/premier-ll-07-duo-string-lights-aam.jpg" alt="Duo string lights"></button>
+<button type="button" data-full="media/stills/premier-ll-08-brandon-closeup-rig-aam.jpg" data-cap="Brandon closeup rig"><img loading="lazy" src="media/stills/thumbs/premier-ll-08-brandon-closeup-rig-aam.jpg" alt="Brandon closeup rig"></button>
+<button type="button" data-full="media/stills/premier-ll-09-jeremy-closeup-rig-aam.jpg" data-cap="Jeremy closeup rig"><img loading="lazy" src="media/stills/thumbs/premier-ll-09-jeremy-closeup-rig-aam.jpg" alt="Jeremy closeup rig"></button>
+<button type="button" data-full="media/stills/premier-ll-10-spray-under-local-legend-sign-aam.jpg" data-cap="Spray under Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-10-spray-under-local-legend-sign-aam.jpg" alt="Spray under Local Legend sign"></button>
+<button type="button" data-full="media/stills/premier-ll-11-local-legend-sign-full-facade-aam.jpg" data-cap="Local Legend sign full facade"><img loading="lazy" src="media/stills/thumbs/premier-ll-11-local-legend-sign-full-facade-aam.jpg" alt="Local Legend sign full facade"></button>
+<button type="button" data-full="media/stills/premier-ll-12-local-legend-sign-beer-garden-aam.jpg" data-cap="Local Legend sign beer garden"><img loading="lazy" src="media/stills/thumbs/premier-ll-12-local-legend-sign-beer-garden-aam.jpg" alt="Local Legend sign beer garden"></button>
+<button type="button" data-full="media/stills/premier-ll-13-local-legend-sign-restaurant-aam.jpg" data-cap="Local Legend sign restaurant"><img loading="lazy" src="media/stills/thumbs/premier-ll-13-local-legend-sign-restaurant-aam.jpg" alt="Local Legend sign restaurant"></button>
+<button type="button" data-full="media/stills/premier-ll-14-spray-arc-facade-aam.jpg" data-cap="Spray arc facade"><img loading="lazy" src="media/stills/thumbs/premier-ll-14-spray-arc-facade-aam.jpg" alt="Spray arc facade"></button>
+<button type="button" data-full="media/stills/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" data-cap="Surface cleaner Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" alt="Surface cleaner Local Legend sign"></button>
+<button type="button" data-full="media/stills/premier-ll-16-operator-local-legend-bg-aam.jpg" data-cap="Operator Local Legend bg"><img loading="lazy" src="media/stills/thumbs/premier-ll-16-operator-local-legend-bg-aam.jpg" alt="Operator Local Legend bg"></button>
+<button type="button" data-full="media/stills/premier-ll-17-surface-cleaner-patio-lights-aam.jpg" data-cap="Surface cleaner patio lights"><img loading="lazy" src="media/stills/thumbs/premier-ll-17-surface-cleaner-patio-lights-aam.jpg" alt="Surface cleaner patio lights"></button>
+<button type="button" data-full="media/stills/premier-ll-18-local-legend-mural-full-aam.jpg" data-cap="Local Legend mural full"><img loading="lazy" src="media/stills/thumbs/premier-ll-18-local-legend-mural-full-aam.jpg" alt="Local Legend mural full"></button>
+<button type="button" data-full="media/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" data-cap="Drone neon windows full sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" alt="Drone neon windows full sign"></button>
+<button type="button" data-full="media/stills/premier-ll-20-drone-facade-full-sign-aam.jpg" data-cap="Drone facade full sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-20-drone-facade-full-sign-aam.jpg" alt="Drone facade full sign"></button>
+<button type="button" data-full="media/stills/premier-ll-21-drone-facade-beer-garden-aam.jpg" data-cap="Drone facade beer garden"><img loading="lazy" src="media/stills/thumbs/premier-ll-21-drone-facade-beer-garden-aam.jpg" alt="Drone facade beer garden"></button>
+<button type="button" data-full="media/stills/premier-ll-22-drone-lawn-wash-orbit-aam.jpg" data-cap="Drone lawn wash orbit"><img loading="lazy" src="media/stills/thumbs/premier-ll-22-drone-lawn-wash-orbit-aam.jpg" alt="Drone lawn wash orbit"></button>
+<button type="button" data-full="media/stills/premier-ll-23-drone-bar-lights-aam.jpg" data-cap="Drone bar lights"><img loading="lazy" src="media/stills/thumbs/premier-ll-23-drone-bar-lights-aam.jpg" alt="Drone bar lights"></button>
+<button type="button" data-full="media/stills/premier-ll-24-drone-llbc-sign-aam.jpg" data-cap="Drone LLBC sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-24-drone-llbc-sign-aam.jpg" alt="Drone LLBC sign"></button>
+<button type="button" data-full="media/stills/premier-ll-25-drone-mural-ladder-high-aam.jpg" data-cap="Drone mural ladder high"><img loading="lazy" src="media/stills/thumbs/premier-ll-25-drone-mural-ladder-high-aam.jpg" alt="Drone mural ladder high"></button>
+<button type="button" data-full="media/stills/premier-ll-26-drone-squeegee-window-aam.jpg" data-cap="Drone squeegee window"><img loading="lazy" src="media/stills/thumbs/premier-ll-26-drone-squeegee-window-aam.jpg" alt="Drone squeegee window"></button>
+<button type="button" data-full="media/stills/premier-ll-27-drone-squeegee-detail-aam.jpg" data-cap="Drone squeegee detail"><img loading="lazy" src="media/stills/thumbs/premier-ll-27-drone-squeegee-detail-aam.jpg" alt="Drone squeegee detail"></button>
+<button type="button" data-full="media/stills/premier-ll-28-trucks-under-the-oaks-aam.jpg" data-cap="Trucks under the oaks"><img loading="lazy" src="media/stills/thumbs/premier-ll-28-trucks-under-the-oaks-aam.jpg" alt="Trucks under the oaks"></button>
+<button type="button" data-full="media/stills/premier-ll-29-rig-at-the-beer-garden-aam.jpg" data-cap="Rig at the beer garden"><img loading="lazy" src="media/stills/thumbs/premier-ll-29-rig-at-the-beer-garden-aam.jpg" alt="Rig at the beer garden"></button>
+</div>
+<div class="btns"><a class="btn sm" href="media/premier-stills-29.zip" download>↓ All 29 stills (zip) <span style="opacity:.6">8.4 MB</span></a></div>
+</div>
+</section>
+
+<!-- BRAND -->
+<section class="band light" id="brand">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The new Premier brand</p><h2>Built to be remembered</h2>
+<p class="lead">The shield says “Protecting your assets” without a word. Inside it is the 50/50, the most-shared shot in the industry. Safety yellow is a color no local competitor uses.</p></div>
+<div class="brandrow">
+<img src="media/brand-sheet.png" alt="The new Premier Soft Wash logo set: horizontal on light and dark, stacked, round avatar and one-color white">
+<div class="ba">
+<figure><img src="media/before.jpg" alt="A Bluffton stucco wall covered in mildew streaks before cleaning"><figcaption>BEFORE</figcaption></figure>
+<figure><img src="media/after.jpg" alt="The same wall clean after a Premier soft wash"><figcaption>AFTER</figcaption></figure>
+</div>
+</div>
+<div class="chart"><h3>Three new logo directions to compare</h3><img src="media/logo-options.jpg" alt="Three Premier logo options: Lowcountry Seal badge, Split Drop monogram, Spray Arc wordmark, in dark and light versions" style="width:100%;border-radius:12px"><p class="src">1 · Lowcountry Seal &nbsp; 2 · Split Drop &nbsp; 3 · Spray Arc. Pick one, or keep the shield above.</p></div>
+<div class="btns"><a class="btn sm" href="media/premier-brand-kit.zip" download>↓ Brand kit (zip) <span style="opacity:.6">8.1 MB</span></a><a class="btn sm ghost" href="media/logo-options.jpg" target="_blank" rel="noopener">View the logo board</a></div>
+<p class="src">Colors: Navy #0E1A33 · Blue #2F6FE0 · Sky #5AA8FF · Safety yellow #F2C230 · Paper #F4F6F9. Fonts: Archivo Black and Barlow Condensed. The kit holds the shield logo set, the three new directions, the brand sheet and the live logo videos.</p>
+</div>
+</section>
+
+<!-- LIVE LOGO -->
+<section class="band dark" id="live-logo">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The logo, alive</p><h2>A 3D logo that comes off the screen</h2>
+<p class="lead">Premier’s shield, rebuilt in real 3D: it flies in from deep space, spins to show its depth, pulses with a neon blue-and-gold glow, then lunges toward the viewer and settles. It opens every video, the website header and the digital card.</p></div>
+<video autoplay muted loop playsinline preload="metadata" poster="media/live-logo-poster.jpg" style="width:100%;border-radius:16px;background:#050a16;display:block" src="media/live-logo-3d-wide.mp4"></video>
+<div class="lessons">
+<div class="ls"><span class="k">3D</span><h3>Real depth</h3><p>A thick shield with a gold back you see as it spins, not a flat sticker.</p></div>
+<div class="ls"><span class="k">Glow</span><h3>Neon pulse</h3><p>Blue and gold light that breathes on a steady beat, like a sign at night.</p></div>
+<div class="ls"><span class="k">Pop</span><h3>Off the screen</h3><p>It pushes toward the viewer, the moment that makes people stop scrolling.</p></div>
+<div class="ls"><span class="k">Loop</span><h3>Seamless</h3><p>Six seconds that loop cleanly as an intro, a sting or a profile video.</p></div>
+<div class="ls"><span class="k">Every size</span><h3>Square + wide</h3><p>Video for the site and YouTube, square for social, a GIF for email.</p></div>
+</div>
+<div class="btns"><a class="btn sm" href="media/live-logo-3d-wide.mp4" download>↓ Wide video <span style="opacity:.6">3.0 MB</span></a><a class="btn sm" href="media/loops/live-logo-3d-square.mp4" download>↓ Square video <span style="opacity:.6">2.2 MB</span></a></div>
+<p class="src">Inspired by the way the best animated logos work (one simple mark, light that builds, motion that resolves on the logo), made entirely in Premier’s own shield and colors.</p>
+</div>
+</section>
+
+<!-- LOOPS -->
+<section class="band light" id="loops">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The brand in motion</p><h2>Ten loops, ready to post</h2>
+<p class="lead">Transitions cut from the Local Legend footage and animated logo pieces. Use them as Stories, ad openers, website headers and profile videos.</p></div>
+<div class="loops">
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/spray-arc-reveal.jpg" src="media/loops/spray-arc-reveal.mp4" aria-label="Spray arc reveal animation"></video><figcaption>Spray arc reveal<a href="media/loops/spray-arc-reveal.mp4" download>↓ 556 KB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/surface-cleaner-iris.jpg" src="media/loops/surface-cleaner-iris.mp4" aria-label="Surface cleaner iris animation"></video><figcaption>Surface cleaner iris<a href="media/loops/surface-cleaner-iris.mp4" download>↓ 681 KB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/squeegee-wipe.jpg" src="media/loops/squeegee-wipe.mp4" aria-label="Squeegee wipe animation"></video><figcaption>Squeegee wipe<a href="media/loops/squeegee-wipe.mp4" download>↓ 441 KB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/5050-stripe.jpg" src="media/loops/5050-stripe.mp4" aria-label="50/50 Stripe animation"></video><figcaption>50/50 Stripe<a href="media/loops/5050-stripe.mp4" download>↓ 1.6 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/window-wash.jpg" src="media/loops/window-wash.mp4" aria-label="Window wash animation"></video><figcaption>Window wash<a href="media/loops/window-wash.mp4" download>↓ 1.7 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/luxury-window-wash.jpg" src="media/loops/luxury-window-wash.mp4" aria-label="Luxury window wash animation"></video><figcaption>Luxury window wash<a href="media/loops/luxury-window-wash.mp4" download>↓ 4.6 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/island-spin.jpg" src="media/loops/island-spin.mp4" aria-label="Island spin animation"></video><figcaption>Island spin<a href="media/loops/island-spin.mp4" download>↓ 6.3 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-spin.jpg" src="media/loops/neon-spin.mp4" aria-label="Neon spin animation"></video><figcaption>Neon spin<a href="media/loops/neon-spin.mp4" download>↓ 3.0 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-draw.jpg" src="media/loops/neon-draw.mp4" aria-label="Neon draw animation"></video><figcaption>Neon draw<a href="media/loops/neon-draw.mp4" download>↓ 1.5 MB</a></figcaption></figure>
+<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-orbit.jpg" src="media/loops/neon-orbit.mp4" aria-label="Neon orbit animation"></video><figcaption>Neon orbit<a href="media/loops/neon-orbit.mp4" download>↓ 2.2 MB</a></figcaption></figure>
+</div>
+</div>
+</section>
+
+<!-- DIGITAL CARD -->
+<section class="band dark" id="card">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The Premier digital card</p><h2>Like Dot, but better, and it’s yours</h2>
+<p class="lead">Every Premier truck, shirt, yard sign and handshake points to one page: Premier’s own digital card and contact exchange, built on the same framework as the Above All Media card. Tap a card or scan a code and a homeowner has everything in one screen: the logo in motion, the work, one-tap call and text, a quote form and every social account.</p></div>
+<div class="cardrow">
+<div class="mock" aria-label="Mock-up of the Premier digital card on a phone">
+<div class="mock-in">
+<div class="mock-ban"><img src="media/live-logo-poster-sq.jpg" alt=""></div>
+<p class="mock-name">Jeremy Sorensen</p><p class="mock-role">COO · Premier Soft Wash · 843-816-6523</p>
+<div class="mock-btns"><span>Call</span><span>Text</span><span>Save</span><span>Quote</span></div>
+<div class="mock-soc"><i>IG</i><i>FB</i><i>TT</i><i>YT</i><i>G</i></div>
+<div class="mock-ba"><b>BEFORE</b><b>AFTER</b></div>
+<div class="mock-cta">Share my contact back</div>
+<div class="mock-rev">★★★★★ Leave a Google review</div>
+</div>
+</div>
+<div class="chan" style="grid-template-columns:1fr">
+<article class="ch"><h3>How people open it</h3><ul><li><b>Tap:</b> an NFC card or sticker. Tap it to any phone and the card opens, no app needed.</li><li><b>Scan:</b> QR codes on the truck wrap, yard signs, shirts, door hangers, invoices and table tents.</li><li><b>Lock screen:</b> a QR wallpaper on Jeremy’s and Brandon’s phones, so anyone can scan it on the spot.</li><li><b>Link:</b> one short link for texts, email signatures and every bio.</li></ul></article>
+<article class="ch"><h3>What’s on the page</h3><ul><li>The 3D logo and the hero film playing at the top, in Premier’s luxury look</li><li>One-tap call, text and email, plus <b>Save contact</b> with photo and logo</li><li>Get a quote form, and a Google review button with five stars one tap away</li><li>Instagram, Facebook, TikTok, YouTube and Google, all linked</li><li>Before-and-after gallery, the latest reels, service areas and the Premier Promise</li></ul></article>
+</div>
+</div>
+<div class="score">
+<div class="sc"><span class="chip good">Exchange</span><h3>Contact swap</h3><p>The other person leaves their name and number in one step. It lands in the CRM and they get a thank-you text with Premier’s card.</p></div>
+<div class="sc"><span class="chip good">Connected</span><h3>Tied to the website</h3><p>Same brand, same domain (premiersoftwashsc.com/connect), same quote form, so every visit also helps the website rank.</p></div>
+<div class="sc"><span class="chip good">Tracked</span><h3>Know what works</h3><p>Each QR code is tagged by where it lives, so the scoreboard shows whether the truck, the sign or the shirt brings the jobs.</p></div>
+<div class="sc"><span class="chip fix">Custom</span><h3>Change it any day</h3><p>Swap the video, the offer of the week or the photos whenever you want. Nothing is locked into a template.</p></div>
+<div class="sc"><span class="chip fix">One each</span><h3>A card per person</h3><p>Jeremy, Brandon and every crew lead get their own card and wallpaper, all in the same Premier look.</p></div>
+<div class="sc"><span class="chip fix">Like an app</span><h3>Home-screen ready</h3><p>Customers can add it to their home screen like an app, so Premier is one tap away next season.</p></div>
+</div>
+<div class="cols">
+<div class="chart"><h3>Dot-style card</h3><div class="steps" style="gap:8px">
+<p>A template on someone else’s platform and someone else’s link</p><p>Their layout, their branding limits, their feature tiers</p><p>Contacts live in their app, not your CRM</p></div></div>
+<div class="chart" style="border:2px solid var(--yellow)"><h3>Premier’s card</h3><div class="steps" style="gap:8px">
+<p><b>Premier’s own domain and design</b>, video and 3D logo included</p><p><b>Custom any day</b>, built and updated by Above All Media</p><p><b>Wired to the CRM, the ads and the website</b>, with scan tracking</p></div></div>
+</div>
+<div class="chart"><h3>How we build it</h3><div class="steps" style="gap:10px">
+<div class="step"><span class="d">1</span><div><p>Copy the Above All Media card framework into the new Premier site.</p></div></div>
+<div class="step"><span class="d">2</span><div><p>Drop in the 3D logo, hero film, stills, reels, socials and review link.</p></div></div>
+<div class="step"><span class="d">3</span><div><p>Build each person’s card, contact file and lock-screen QR wallpaper.</p></div></div>
+<div class="step"><span class="d">4</span><div><p>Connect the quote and contact-swap forms to the CRM with an instant text back.</p></div></div>
+<div class="step"><span class="d">5</span><div><p>Make tagged QR codes for the truck, signs, shirts and door hangers, and program the NFC tap cards.</p></div></div>
+</div></div>
+</div>
+</section>
+
+<!-- CHAPTER 2 -->
+<section class="band chapter" style="padding-block:56px">
+<div class="wrap"><span class="num" aria-hidden="true">02</span><div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:260px"><p class="eyebrow">Part 2 · The plan</p><h2>How Premier becomes #1</h2><p>Where Premier stands today, what the world’s best do, and the system that puts Premier first on Google and every feed.</p></div></div>
 </section>
 
 <!-- TODAY -->
@@ -648,82 +893,107 @@ footer .src{line-height:1.8}
 </div>
 </section>
 
-<!-- DIGITAL CARD -->
-<section class="band light" id="card">
-<div class="wrap">
-<div class="head"><p class="eyebrow">The Premier digital card</p><h2>Like Dot, but better, and it’s yours</h2>
-<p class="lead">Every Premier truck, shirt, yard sign and handshake points to one page: Premier’s own digital card and contact exchange, built on the same framework as the Above All Media card. Tap a card or scan a code and a homeowner has everything in one screen: the logo in motion, the work, one-tap call and text, a quote form and every social account.</p></div>
-<div class="cardrow">
-<div class="mock" aria-label="Mock-up of the Premier digital card on a phone">
-<div class="mock-in">
-<div class="mock-ban"><img src="media/live-logo-poster-sq.jpg" alt=""></div>
-<p class="mock-name">Jeremy Sorensen</p><p class="mock-role">COO · Premier Soft Wash</p>
-<div class="mock-btns"><span>Call</span><span>Text</span><span>Save</span><span>Quote</span></div>
-<div class="mock-soc"><i>IG</i><i>FB</i><i>TT</i><i>YT</i><i>G</i></div>
-<div class="mock-ba"><b>BEFORE</b><b>AFTER</b></div>
-<div class="mock-cta">Share my contact back</div>
-<div class="mock-rev">★★★★★ Leave a Google review</div>
-</div>
-</div>
-<div class="chan" style="grid-template-columns:1fr">
-<article class="ch"><h3>How people open it</h3><ul><li><b>Tap:</b> an NFC card or sticker. Tap it to any phone and the card opens, no app needed.</li><li><b>Scan:</b> QR codes on the truck wrap, yard signs, shirts, door hangers, invoices and table tents.</li><li><b>Lock screen:</b> a QR wallpaper on Jeremy’s and Brandon’s phones, so anyone can scan it on the spot.</li><li><b>Link:</b> one short link for texts, email signatures and every bio.</li></ul></article>
-<article class="ch"><h3>What’s on the page</h3><ul><li>The 3D logo and the hero film playing at the top, in Premier’s luxury look</li><li>One-tap call, text and email, plus <b>Save contact</b> with photo and logo</li><li>Get a quote form, and a Google review button with five stars one tap away</li><li>Instagram, Facebook, TikTok, YouTube and Google, all linked</li><li>Before-and-after gallery, the latest reels, service areas and the Premier Promise</li></ul></article>
-</div>
-</div>
-<div class="score">
-<div class="sc"><span class="chip good">Exchange</span><h3>Contact swap</h3><p>The other person leaves their name and number in one step. It lands in the CRM and they get a thank-you text with Premier’s card.</p></div>
-<div class="sc"><span class="chip good">Connected</span><h3>Tied to the website</h3><p>Same brand, same domain (premiersoftwashsc.com/connect), same quote form, so every visit also helps the website rank.</p></div>
-<div class="sc"><span class="chip good">Tracked</span><h3>Know what works</h3><p>Each QR code is tagged by where it lives, so the scoreboard shows whether the truck, the sign or the shirt brings the jobs.</p></div>
-<div class="sc"><span class="chip fix">Custom</span><h3>Change it any day</h3><p>Swap the video, the offer of the week or the photos whenever you want. Nothing is locked into a template.</p></div>
-<div class="sc"><span class="chip fix">One each</span><h3>A card per person</h3><p>Jeremy, Brandon and every crew lead get their own card and wallpaper, all in the same Premier look.</p></div>
-<div class="sc"><span class="chip fix">Like an app</span><h3>Home-screen ready</h3><p>Customers can add it to their home screen like an app, so Premier is one tap away next season.</p></div>
-</div>
-<div class="cols">
-<div class="chart"><h3>Dot-style card</h3><div class="steps" style="gap:8px">
-<p>A template on someone else’s platform and someone else’s link</p><p>Their layout, their branding limits, their feature tiers</p><p>Contacts live in their app, not your CRM</p></div></div>
-<div class="chart" style="border:2px solid var(--yellow)"><h3>Premier’s card</h3><div class="steps" style="gap:8px">
-<p><b>Premier’s own domain and design</b>, video and 3D logo included</p><p><b>Custom any day</b>, built and updated by Above All Media</p><p><b>Wired to the CRM, the ads and the website</b>, with scan tracking</p></div></div>
-</div>
-<div class="chart"><h3>How we build it</h3><div class="steps" style="gap:10px">
-<div class="step"><span class="d">1</span><div><p>Copy the Above All Media card framework into the new Premier site.</p></div></div>
-<div class="step"><span class="d">2</span><div><p>Drop in the 3D logo, hero film, stills, reels, socials and review link.</p></div></div>
-<div class="step"><span class="d">3</span><div><p>Build each person’s card, contact file and lock-screen QR wallpaper.</p></div></div>
-<div class="step"><span class="d">4</span><div><p>Connect the quote and contact-swap forms to the CRM with an instant text back.</p></div></div>
-<div class="step"><span class="d">5</span><div><p>Make tagged QR codes for the truck, signs, shirts and door hangers, and program the NFC tap cards.</p></div></div>
-</div></div>
-</div>
+<!-- CHAPTER 3 -->
+<section class="band chapter" style="padding-block:56px">
+<div class="wrap"><span class="num" aria-hidden="true">03</span><div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:260px"><p class="eyebrow">Part 3 · Deck, investment and files</p><h2>Present it, price it, take it with you</h2><p>The full pitch deck, the investment and every file to download.</p></div></div>
 </section>
 
-<!-- LIVE LOGO -->
-<section class="band dark" id="live-logo">
+<!-- DECK -->
+<section class="band light" id="deck">
 <div class="wrap">
-<div class="head"><p class="eyebrow">The logo, alive</p><h2>A 3D logo that comes off the screen</h2>
-<p class="lead">Premier’s shield, rebuilt in real 3D: it flies in from deep space, spins to show its depth, pulses with a neon blue-and-gold glow, then lunges toward the viewer and settles. It opens every video, the website header and the digital card.</p></div>
-<video autoplay muted loop playsinline preload="metadata" poster="media/live-logo-poster.jpg" style="width:100%;border-radius:16px;background:#050a16;display:block" src="media/live-logo-3d-wide.mp4"></video>
-<div class="lessons">
-<div class="ls"><span class="k">3D</span><h3>Real depth</h3><p>A thick shield with a gold back you see as it spins, not a flat sticker.</p></div>
-<div class="ls"><span class="k">Glow</span><h3>Neon pulse</h3><p>Blue and gold light that breathes on a steady beat, like a sign at night.</p></div>
-<div class="ls"><span class="k">Pop</span><h3>Off the screen</h3><p>It pushes toward the viewer, the moment that makes people stop scrolling.</p></div>
-<div class="ls"><span class="k">Loop</span><h3>Seamless</h3><p>Six seconds that loop cleanly as an intro, a sting or a profile video.</p></div>
-<div class="ls"><span class="k">Every size</span><h3>Square + wide</h3><p>Video for the site and YouTube, square for social, a GIF for email.</p></div>
+<div class="head"><p class="eyebrow">The presentation</p><h2>The pitch deck, all 42 slides</h2>
+<p class="lead">The same story as this page, built to present in the room: where Premier stands, what the world’s best do, the plan, step one and the investment. Swipe through it here or download the PDF.</p></div>
+<div class="deckv">
+<div class="track" id="track" tabindex="0" aria-label="Pitch deck slides">
+<figure><img loading="lazy" src="media/deck/slide-01.jpg" alt="Pitch deck slide 1 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-02.jpg" alt="Pitch deck slide 2 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-03.jpg" alt="Pitch deck slide 3 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-04.jpg" alt="Pitch deck slide 4 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-05.jpg" alt="Pitch deck slide 5 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-06.jpg" alt="Pitch deck slide 6 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-07.jpg" alt="Pitch deck slide 7 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-08.jpg" alt="Pitch deck slide 8 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-09.jpg" alt="Pitch deck slide 9 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-10.jpg" alt="Pitch deck slide 10 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-11.jpg" alt="Pitch deck slide 11 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-12.jpg" alt="Pitch deck slide 12 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-13.jpg" alt="Pitch deck slide 13 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-14.jpg" alt="Pitch deck slide 14 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-15.jpg" alt="Pitch deck slide 15 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-16.jpg" alt="Pitch deck slide 16 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-17.jpg" alt="Pitch deck slide 17 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-18.jpg" alt="Pitch deck slide 18 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-19.jpg" alt="Pitch deck slide 19 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-20.jpg" alt="Pitch deck slide 20 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-21.jpg" alt="Pitch deck slide 21 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-22.jpg" alt="Pitch deck slide 22 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-23.jpg" alt="Pitch deck slide 23 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-24.jpg" alt="Pitch deck slide 24 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-25.jpg" alt="Pitch deck slide 25 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-26.jpg" alt="Pitch deck slide 26 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-27.jpg" alt="Pitch deck slide 27 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-28.jpg" alt="Pitch deck slide 28 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-29.jpg" alt="Pitch deck slide 29 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-30.jpg" alt="Pitch deck slide 30 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-31.jpg" alt="Pitch deck slide 31 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-32.jpg" alt="Pitch deck slide 32 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-33.jpg" alt="Pitch deck slide 33 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-34.jpg" alt="Pitch deck slide 34 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-35.jpg" alt="Pitch deck slide 35 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-36.jpg" alt="Pitch deck slide 36 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-37.jpg" alt="Pitch deck slide 37 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-38.jpg" alt="Pitch deck slide 38 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-39.jpg" alt="Pitch deck slide 39 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-40.jpg" alt="Pitch deck slide 40 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-41.jpg" alt="Pitch deck slide 41 of 42"></figure>
+<figure><img loading="lazy" src="media/deck/slide-42.jpg" alt="Pitch deck slide 42 of 42"></figure>
 </div>
-<p class="src">Inspired by the way the best animated logos work (one simple mark, light that builds, motion that resolves on the logo), made entirely in Premier’s own shield and colors.</p>
 </div>
-</section>
-
-<!-- BRAND -->
-<section class="band light" id="brand">
-<div class="wrap">
-<div class="head"><p class="eyebrow">The new Premier brand</p><h2>Built to be remembered</h2>
-<p class="lead">The shield says “Protecting your assets” without a word. Inside it is the 50/50, the most-shared shot in the industry. Safety yellow is a color no local competitor uses.</p></div>
-<div class="brandrow">
-<img src="media/brand-sheet.png" alt="The new Premier Soft Wash logo set: horizontal on light and dark, stacked, round avatar and one-color white">
-<div class="ba">
-<figure><img src="media/before.jpg" alt="A Bluffton stucco wall covered in mildew streaks before cleaning"><figcaption>BEFORE</figcaption></figure>
-<figure><img src="media/after.jpg" alt="The same wall clean after a Premier soft wash"><figcaption>AFTER</figcaption></figure>
+<div class="dctl"><div class="btns"><button class="btn sm ghost" type="button" id="dprev">← Prev</button><span class="ct" id="dct">1 / 42</span><button class="btn sm ghost" type="button" id="dnext">Next →</button></div><a class="btn sm" href="media/premier-pitch-deck.pdf" download>↓ Pitch deck PDF <span style="opacity:.6">6.7 MB</span></a></div>
+<div class="thumbs" id="dthumbs">
+<button type="button" aria-label="Slide 1"><img loading="lazy" src="media/deck/slide-01.jpg" alt=""></button>
+<button type="button" aria-label="Slide 2"><img loading="lazy" src="media/deck/slide-02.jpg" alt=""></button>
+<button type="button" aria-label="Slide 3"><img loading="lazy" src="media/deck/slide-03.jpg" alt=""></button>
+<button type="button" aria-label="Slide 4"><img loading="lazy" src="media/deck/slide-04.jpg" alt=""></button>
+<button type="button" aria-label="Slide 5"><img loading="lazy" src="media/deck/slide-05.jpg" alt=""></button>
+<button type="button" aria-label="Slide 6"><img loading="lazy" src="media/deck/slide-06.jpg" alt=""></button>
+<button type="button" aria-label="Slide 7"><img loading="lazy" src="media/deck/slide-07.jpg" alt=""></button>
+<button type="button" aria-label="Slide 8"><img loading="lazy" src="media/deck/slide-08.jpg" alt=""></button>
+<button type="button" aria-label="Slide 9"><img loading="lazy" src="media/deck/slide-09.jpg" alt=""></button>
+<button type="button" aria-label="Slide 10"><img loading="lazy" src="media/deck/slide-10.jpg" alt=""></button>
+<button type="button" aria-label="Slide 11"><img loading="lazy" src="media/deck/slide-11.jpg" alt=""></button>
+<button type="button" aria-label="Slide 12"><img loading="lazy" src="media/deck/slide-12.jpg" alt=""></button>
+<button type="button" aria-label="Slide 13"><img loading="lazy" src="media/deck/slide-13.jpg" alt=""></button>
+<button type="button" aria-label="Slide 14"><img loading="lazy" src="media/deck/slide-14.jpg" alt=""></button>
+<button type="button" aria-label="Slide 15"><img loading="lazy" src="media/deck/slide-15.jpg" alt=""></button>
+<button type="button" aria-label="Slide 16"><img loading="lazy" src="media/deck/slide-16.jpg" alt=""></button>
+<button type="button" aria-label="Slide 17"><img loading="lazy" src="media/deck/slide-17.jpg" alt=""></button>
+<button type="button" aria-label="Slide 18"><img loading="lazy" src="media/deck/slide-18.jpg" alt=""></button>
+<button type="button" aria-label="Slide 19"><img loading="lazy" src="media/deck/slide-19.jpg" alt=""></button>
+<button type="button" aria-label="Slide 20"><img loading="lazy" src="media/deck/slide-20.jpg" alt=""></button>
+<button type="button" aria-label="Slide 21"><img loading="lazy" src="media/deck/slide-21.jpg" alt=""></button>
+<button type="button" aria-label="Slide 22"><img loading="lazy" src="media/deck/slide-22.jpg" alt=""></button>
+<button type="button" aria-label="Slide 23"><img loading="lazy" src="media/deck/slide-23.jpg" alt=""></button>
+<button type="button" aria-label="Slide 24"><img loading="lazy" src="media/deck/slide-24.jpg" alt=""></button>
+<button type="button" aria-label="Slide 25"><img loading="lazy" src="media/deck/slide-25.jpg" alt=""></button>
+<button type="button" aria-label="Slide 26"><img loading="lazy" src="media/deck/slide-26.jpg" alt=""></button>
+<button type="button" aria-label="Slide 27"><img loading="lazy" src="media/deck/slide-27.jpg" alt=""></button>
+<button type="button" aria-label="Slide 28"><img loading="lazy" src="media/deck/slide-28.jpg" alt=""></button>
+<button type="button" aria-label="Slide 29"><img loading="lazy" src="media/deck/slide-29.jpg" alt=""></button>
+<button type="button" aria-label="Slide 30"><img loading="lazy" src="media/deck/slide-30.jpg" alt=""></button>
+<button type="button" aria-label="Slide 31"><img loading="lazy" src="media/deck/slide-31.jpg" alt=""></button>
+<button type="button" aria-label="Slide 32"><img loading="lazy" src="media/deck/slide-32.jpg" alt=""></button>
+<button type="button" aria-label="Slide 33"><img loading="lazy" src="media/deck/slide-33.jpg" alt=""></button>
+<button type="button" aria-label="Slide 34"><img loading="lazy" src="media/deck/slide-34.jpg" alt=""></button>
+<button type="button" aria-label="Slide 35"><img loading="lazy" src="media/deck/slide-35.jpg" alt=""></button>
+<button type="button" aria-label="Slide 36"><img loading="lazy" src="media/deck/slide-36.jpg" alt=""></button>
+<button type="button" aria-label="Slide 37"><img loading="lazy" src="media/deck/slide-37.jpg" alt=""></button>
+<button type="button" aria-label="Slide 38"><img loading="lazy" src="media/deck/slide-38.jpg" alt=""></button>
+<button type="button" aria-label="Slide 39"><img loading="lazy" src="media/deck/slide-39.jpg" alt=""></button>
+<button type="button" aria-label="Slide 40"><img loading="lazy" src="media/deck/slide-40.jpg" alt=""></button>
+<button type="button" aria-label="Slide 41"><img loading="lazy" src="media/deck/slide-41.jpg" alt=""></button>
+<button type="button" aria-label="Slide 42"><img loading="lazy" src="media/deck/slide-42.jpg" alt=""></button>
 </div>
-</div>
-<div class="chart"><h3>Three new logo directions to compare</h3><img src="media/logo-options.jpg" alt="Three Premier logo options: Lowcountry Seal badge, Split Drop monogram, Spray Arc wordmark, in dark and light versions" style="width:100%;border-radius:12px"><p class="src">1 · Lowcountry Seal &nbsp; 2 · Split Drop &nbsp; 3 · Spray Arc. Pick one, or keep the shield above.</p></div>
 </div>
 </section>
 
@@ -757,7 +1027,39 @@ footer .src{line-height:1.8}
 </div>
 </section>
 
-<footer class="band light" style="padding-block:44px">
+<!-- DOWNLOADS -->
+<section class="band light" id="downloads">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Every file in one place</p><h2>Downloads</h2>
+<p class="lead">Tap any file to save it. These are watermarked previews; clean, full-resolution masters and editable logo files are handed over on approval.</p></div>
+<div class="chart"><div class="scroll"><table class="dl">
+<tr><th>File</th><th class="hide-s">Format</th><th>Size</th><th></th></tr>
+<tr><td>Hero commercial · 1:30</td><td class="hide-s sz">1920×1080</td><td class="sz">14.3 MB</td><td><a href="media/video/premier-hero-90s.mp4" download>Download</a></td></tr>
+<tr><td>30-second cut</td><td class="hide-s sz">1920×1080</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-cut-30s.mp4" download>Download</a></td></tr>
+<tr><td>15-second cut</td><td class="hide-s sz">1920×1080</td><td class="sz">14.1 MB</td><td><a href="media/video/premier-cut-15s.mp4" download>Download</a></td></tr>
+<tr><td>Reel 1 · Who cleans Local Legend</td><td class="hide-s sz">1080×1920</td><td class="sz">14.1 MB</td><td><a href="media/video/premier-reel-1-who-cleans.mp4" download>Download</a></td></tr>
+<tr><td>Reel 2 · Costa Rica origin</td><td class="hide-s sz">1080×1920</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-reel-2-origin.mp4" download>Download</a></td></tr>
+<tr><td>Reel 3 · Local Legends Ep. 1</td><td class="hide-s sz">1080×1920</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-reel-3-local-legends.mp4" download>Download</a></td></tr>
+<tr><td>All 29 stills</td><td class="hide-s sz">Zip of JPGs</td><td class="sz">8.4 MB</td><td><a href="media/premier-stills-29.zip" download>Download</a></td></tr>
+<tr><td>Brand kit: logos, 3 directions, brand sheet, live logo</td><td class="hide-s sz">Zip</td><td class="sz">8.1 MB</td><td><a href="media/premier-brand-kit.zip" download>Download</a></td></tr>
+<tr><td>3D live logo · wide</td><td class="hide-s sz">Video</td><td class="sz">3.0 MB</td><td><a href="media/live-logo-3d-wide.mp4" download>Download</a></td></tr>
+<tr><td>3D live logo · square</td><td class="hide-s sz">Video</td><td class="sz">2.2 MB</td><td><a href="media/loops/live-logo-3d-square.mp4" download>Download</a></td></tr>
+<tr><td>Pitch deck · 42 slides</td><td class="hide-s sz">PDF</td><td class="sz">6.7 MB</td><td><a href="media/premier-pitch-deck.pdf" download>Download</a></td></tr>
+<tr><td>Spray arc reveal loop</td><td class="hide-s sz">Square video</td><td class="sz">556 KB</td><td><a href="media/loops/spray-arc-reveal.mp4" download>Download</a></td></tr>
+<tr><td>Surface cleaner iris loop</td><td class="hide-s sz">Square video</td><td class="sz">681 KB</td><td><a href="media/loops/surface-cleaner-iris.mp4" download>Download</a></td></tr>
+<tr><td>Squeegee wipe loop</td><td class="hide-s sz">Square video</td><td class="sz">441 KB</td><td><a href="media/loops/squeegee-wipe.mp4" download>Download</a></td></tr>
+<tr><td>50/50 Stripe loop</td><td class="hide-s sz">Square video</td><td class="sz">1.6 MB</td><td><a href="media/loops/5050-stripe.mp4" download>Download</a></td></tr>
+<tr><td>Window wash loop</td><td class="hide-s sz">Square video</td><td class="sz">1.7 MB</td><td><a href="media/loops/window-wash.mp4" download>Download</a></td></tr>
+<tr><td>Luxury window wash loop</td><td class="hide-s sz">Square video</td><td class="sz">4.6 MB</td><td><a href="media/loops/luxury-window-wash.mp4" download>Download</a></td></tr>
+<tr><td>Island spin loop</td><td class="hide-s sz">Square video</td><td class="sz">6.3 MB</td><td><a href="media/loops/island-spin.mp4" download>Download</a></td></tr>
+<tr><td>Neon spin loop</td><td class="hide-s sz">Square video</td><td class="sz">3.0 MB</td><td><a href="media/loops/neon-spin.mp4" download>Download</a></td></tr>
+<tr><td>Neon draw loop</td><td class="hide-s sz">Square video</td><td class="sz">1.5 MB</td><td><a href="media/loops/neon-draw.mp4" download>Download</a></td></tr>
+<tr><td>Neon orbit loop</td><td class="hide-s sz">Square video</td><td class="sz">2.2 MB</td><td><a href="media/loops/neon-orbit.mp4" download>Download</a></td></tr>
+</table></div></div>
+</div>
+</section>
+
+<footer class="band dark" style="padding-block:44px">
 <div class="wrap" style="gap:10px">
 <p class="eyebrow">Sources</p>
 <p class="src">Whitespark, <a href="https://whitespark.ca/local-search-ranking-factors/">Local Search Ranking Factors 2026</a> · Google, <a href="https://support.google.com/business/answer/10515606">Business Profile Help</a> · BrightLocal, <a href="https://brightlocal.com/research/local-consumer-review-survey-2025/">Local Consumer Review Survey 2025</a> · Oneupweb, <a href="https://www.oneupweb.com/blog/local-search-results-map-packs/">Local search results</a> · Franchise Dictionary (Fish Window Cleaning) · Franchise Times Top 400 2025 (Squeegee Squad) · Social Blade (SB Pressure Washing) · For Construction Pros (Kärcher at Mount Rushmore) · The Gazette (Men In Kilts) · Premier’s own Google profile and website, October 2026 · Ad Age Agency Report 2026 via <a href="https://www.meioemensagem.com.br/comunicacao/agency-report-omnicom-lidera-e-publicis-ultrapassa-wpp">Meio &amp; Mensagem</a> · Google, <a href="https://ads.google.com/intl/en_us/home/local-services-ads/">Local Services Ads</a>.</p>
@@ -766,4 +1068,22 @@ footer .src{line-height:1.8}
 </footer>
 <img src="media/aam-mark.png" alt="Above All Media" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
 
+<dialog class="lb" id="lb" aria-label="Photo viewer"><figure><img id="lbimg" alt=""><div class="bar"><span class="cap" id="lbcap"></span><div class="btns"><button class="btn sm ghost" type="button" id="lbp">←</button><button class="btn sm ghost" type="button" id="lbn">→</button><a class="btn sm" id="lbdl" download>↓ Save</a><button class="btn sm ghost" type="button" id="lbx">Close</button></div></div></figure></dialog>
+<script>
+(function(){
+var b=[].slice.call(document.querySelectorAll('#stgrid button')),d=document.getElementById('lb'),im=document.getElementById('lbimg'),c=document.getElementById('lbcap'),dl=document.getElementById('lbdl'),k=0;
+function show(i){k=(i+b.length)%b.length;var e=b[k];im.src=e.dataset.full;im.alt=e.dataset.cap;c.textContent=(k+1)+' / '+b.length+' · '+e.dataset.cap;dl.href=e.dataset.full}
+b.forEach(function(e,i){e.addEventListener('click',function(){show(i);if(d.showModal)d.showModal();else window.open(e.dataset.full)})});
+document.getElementById('lbp').onclick=function(){show(k-1)};document.getElementById('lbn').onclick=function(){show(k+1)};document.getElementById('lbx').onclick=function(){d.close()};
+d.addEventListener('click',function(e){if(e.target===d)d.close()});
+d.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(k-1);if(e.key==='ArrowRight')show(k+1)});
+var t=document.getElementById('track'),f=t.querySelectorAll('figure'),ct=document.getElementById('dct'),tb=[].slice.call(document.querySelectorAll('#dthumbs button')),cur=0;
+function go(i){i=Math.max(0,Math.min(f.length-1,i));t.scrollTo({left:f[i].offsetLeft-t.offsetLeft,behavior:'smooth'})}
+function upd(){var i=Math.round(t.scrollLeft/(f[0].offsetWidth+16));if(i===cur&&ct.textContent!=='')return;cur=i;ct.textContent=(i+1)+' / '+f.length;tb.forEach(function(x,j){x.setAttribute('aria-current',j===i)})}
+t.addEventListener('scroll',function(){requestAnimationFrame(upd)});upd();
+document.getElementById('dprev').onclick=function(){go(cur-1)};document.getElementById('dnext').onclick=function(){go(cur+1)};
+t.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}});
+tb.forEach(function(x,j){x.addEventListener('click',function(){go(j)})});
+})();
+</script>
 </body></html>
