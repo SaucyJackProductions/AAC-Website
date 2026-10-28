@@ -214,6 +214,7 @@ footer .src{line-height:1.8}
 .dark .reels figcaption{color:var(--mute-d)}
 .grid-st{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
 .grid-st button{padding:0;border:0;background:none;cursor:zoom-in;border-radius:10px;overflow:hidden;aspect-ratio:3/2;display:block;width:100%}
+.grid-st img,.track img,.lb img{-webkit-user-drag:none;-webkit-touch-callout:none}
 .grid-st img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
 .grid-st button:hover img,.grid-st button:focus-visible img{transform:scale(1.06)}
 .grid-st button:focus-visible{outline:3px solid var(--yellow)}
@@ -258,7 +259,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 </head><body>
 <nav aria-label="Sections"><div class="in">
 <img src="media/logo-dark.svg" alt="Premier Soft Wash">
-<a href="#package">Package</a><a href="#media">Watch</a><a href="#stills">Stills</a><a href="#brand">Brand</a><a href="#live-logo">Live logo</a><a href="#loops">Loops</a><a href="#card">Digital card</a><a href="#today">The plan</a><a href="#stepone">Step one</a><a href="#deck">Pitch deck</a><a href="#invest">Investment</a><a href="#downloads">Downloads</a>
+<a href="#package">Package</a><a href="#media">Watch</a><a href="#stills">Stills</a><a href="#brand">Brand</a><a href="#live-logo">Live logo</a><a href="#loops">Loops</a><a href="#card">Digital card</a><a href="#today">The plan</a><a href="#stepone">Step one</a><a href="#deck">Pitch deck</a><a href="#invest">Investment</a>
 </div></nav>
 
 <!-- HERO -->
@@ -269,7 +270,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <p class="eyebrow">The complete package · Above All Media for Premier Soft Wash · October 2026</p>
 <h1>The Premier <span>#1</span> Plan</h1>
 <p class="lead">Everything we built for Premier Soft Wash, on one page: the finished films and reels, 29 retouched stills, the 3D logo, the brand kit, the digital card, the plan to become the first name homeowners see in Bluffton, Hilton Head and Beaufort, and the full pitch deck.</p>
-<div class="btns"><a class="btn" href="#media">▶ Watch the film</a><a class="btn ghost" href="#downloads">Download everything</a></div>
+<div class="btns"><a class="btn" href="#media">▶ Watch the film</a><a class="btn ghost" href="#package">See everything</a></div>
 </div>
 <div class="phone"><img src="media/stripe.gif" alt="Animated Premier ad: a mildewed wall cleaned stripe by stripe, a 50/50 before and after, then the new shield logo and a free quote number"></div>
 </div>
@@ -286,20 +287,19 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <section class="band light" id="package">
 <div class="wrap">
 <div class="head"><p class="eyebrow">How this page is organized</p><h2>Everything in this package</h2>
-<p class="lead">One link holds it all. Part 1 is the finished media and brand, Part 2 is the plan to reach #1, and Part 3 is the pitch deck, the investment and every download.</p></div>
+<p class="lead">One link holds it all. Part 1 is the finished media and brand, Part 2 is the plan to reach #1, and Part 3 is the pitch deck and the investment.</p></div>
 <div class="pkgi">
 <a class="pi part" href="#media"><b>1:30</b><h3>Hero commercial</h3><span>The full story, plus 30 s and 15 s cuts</span><span class="go">Open →</span></a>
 <a class="pi" href="#reels"><b>3</b><h3>Vertical reels</h3><span>Ready for Reels, TikTok and Shorts</span><span class="go">Open →</span></a>
-<a class="pi" href="#stills"><b>29</b><h3>Retouched stills</h3><span>Graded, full size, one zip</span><span class="go">Open →</span></a>
+<a class="pi" href="#stills"><b>29</b><h3>Retouched stills</h3><span>Graded and retouched</span><span class="go">Open →</span></a>
 <a class="pi" href="#brand"><b>3</b><h3>New logo directions</h3><span>Plus the shield logo set and brand kit</span><span class="go">Open →</span></a>
 <a class="pi" href="#live-logo"><b>3D</b><h3>Live logo</h3><span>Neon, spinning, off the screen</span><span class="go">Open →</span></a>
 <a class="pi" href="#loops"><b>10</b><h3>Animated loops</h3><span>Logo spins, wipes and the 50/50</span><span class="go">Open →</span></a>
 <a class="pi" href="#card"><b>1</b><h3>Digital card</h3><span>Tap, QR, contact swap, CRM</span><span class="go">Open →</span></a>
 <a class="pi" href="#today"><b>#1</b><h3>The plan</h3><span>Google, website, video, ads, SEO</span><span class="go">Open →</span></a>
 <a class="pi" href="#stepone"><b>6</b><h3>Step one</h3><span>What we build first, step by step</span><span class="go">Open →</span></a>
-<a class="pi part" href="#deck"><b>42</b><h3>Pitch deck</h3><span>Slide by slide, plus the PDF</span><span class="go">Open →</span></a>
+<a class="pi part" href="#deck"><b>42</b><h3>Pitch deck</h3><span>Slide by slide</span><span class="go">Open →</span></a>
 <a class="pi" href="#invest"><b>$</b><h3>Investment</h3><span>Launch and monthly plans</span><span class="go">Open →</span></a>
-<a class="pi" href="#downloads"><b>All</b><h3>Downloads</h3><span>Every file, one click each</span><span class="go">Open →</span></a>
 </div>
 </div>
 </section>
@@ -315,20 +315,20 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <div class="head"><p class="eyebrow">Final cut · Filmed after closing at Local Legend Brewing, Hilton Head</p><h2>Watch the work</h2>
 <p class="lead">The 90-second hero commercial, its 30 and 15-second cuts, and three vertical reels. Every file is final, with sound, color and animated transitions.</p></div>
 <div class="vid">
-<video controls playsinline preload="metadata" poster="media/video/premier-hero-90s.jpg" src="media/video/premier-hero-90s.mp4"></video>
-<div class="vmeta"><div><h3>Hero commercial · 1:30</h3><p>The full story: neon facade, the rise to the sign, the spray orbit, the bar fly-in, the back-window ladder and the full squeegee pass.</p></div><a class="btn sm" href="media/video/premier-hero-90s.mp4" download>↓ Download <span style="opacity:.6">14.3 MB</span></a></div>
+<video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="metadata" poster="media/video/premier-hero-90s.jpg" src="media/video/premier-hero-90s.mp4"></video>
+<div class="vmeta"><div><h3>Hero commercial · 1:30</h3><p>The full story: neon facade, the rise to the sign, the spray orbit, the bar fly-in, the back-window ladder and the full squeegee pass.</p></div></div>
 </div>
 <div class="cuts">
-<div class="vid"><video controls playsinline preload="none" poster="media/video/premier-cut-30s.jpg" src="media/video/premier-cut-30s.mp4"></video>
-<div class="vmeta"><div><h3>30-second cut</h3><p>Hook, intro, services, detail shot, the Local Legend line, end card.</p></div><a class="btn sm" href="media/video/premier-cut-30s.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></div></div>
-<div class="vid"><video controls playsinline preload="none" poster="media/video/premier-cut-15s.jpg" src="media/video/premier-cut-15s.mp4"></video>
-<div class="vmeta"><div><h3>15-second cut</h3><p>The fastest version, for pre-roll and Stories ads.</p></div><a class="btn sm" href="media/video/premier-cut-15s.mp4" download>↓ Download <span style="opacity:.6">14.1 MB</span></a></div></div>
+<div class="vid"><video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="none" poster="media/video/premier-cut-30s.jpg" src="media/video/premier-cut-30s.mp4"></video>
+<div class="vmeta"><div><h3>30-second cut</h3><p>Hook, intro, services, detail shot, the Local Legend line, end card.</p></div></div></div>
+<div class="vid"><video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="none" poster="media/video/premier-cut-15s.jpg" src="media/video/premier-cut-15s.mp4"></video>
+<div class="vmeta"><div><h3>15-second cut</h3><p>The fastest version, for pre-roll and Stories ads.</p></div></div></div>
 </div>
 <div class="head" id="reels" style="scroll-margin-top:80px"><h3>Three vertical reels</h3></div>
 <div class="reels">
-<figure><video controls playsinline preload="none" poster="media/video/premier-reel-1-who-cleans.jpg" src="media/video/premier-reel-1-who-cleans.mp4"></video><figcaption>Reel 1 · Who cleans Local Legend at 2 a.m.? · 0:27</figcaption><a class="btn sm" href="media/video/premier-reel-1-who-cleans.mp4" download>↓ Download <span style="opacity:.6">14.1 MB</span></a></figure>
-<figure><video controls playsinline preload="none" poster="media/video/premier-reel-2-origin.jpg" src="media/video/premier-reel-2-origin.mp4"></video><figcaption>Reel 2 · 2 strangers. 1 boat. Costa Rica. · 0:35</figcaption><a class="btn sm" href="media/video/premier-reel-2-origin.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></figure>
-<figure><video controls playsinline preload="none" poster="media/video/premier-reel-3-local-legends.jpg" src="media/video/premier-reel-3-local-legends.mp4"></video><figcaption>Reel 3 · Local Legends, Episode 1 · 0:22</figcaption><a class="btn sm" href="media/video/premier-reel-3-local-legends.mp4" download>↓ Download <span style="opacity:.6">14.2 MB</span></a></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="none" poster="media/video/premier-reel-1-who-cleans.jpg" src="media/video/premier-reel-1-who-cleans.mp4"></video><figcaption>Reel 1 · Who cleans Local Legend at 2 a.m.? · 0:27</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="none" poster="media/video/premier-reel-2-origin.jpg" src="media/video/premier-reel-2-origin.mp4"></video><figcaption>Reel 2 · 2 strangers. 1 boat. Costa Rica. · 0:35</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture controls playsinline preload="none" poster="media/video/premier-reel-3-local-legends.jpg" src="media/video/premier-reel-3-local-legends.mp4"></video><figcaption>Reel 3 · Local Legends, Episode 1 · 0:22</figcaption></figure>
 </div>
 </div>
 </section>
@@ -337,7 +337,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <section class="band dark" id="stills">
 <div class="wrap">
 <div class="head"><p class="eyebrow">Pulled from the films · retouched and graded</p><h2>29 stills that jump off the screen</h2>
-<p class="lead">The sharpest frames from the hero film and drone passes, upscaled, cleaned, dodged and burned, then graded. Tap any photo to see it full size and save it.</p></div>
+<p class="lead">The sharpest frames from the hero film and drone passes, upscaled, cleaned, dodged and burned, then graded. Tap any photo to see it larger.</p></div>
 <div class="grid-st" id="stgrid">
 <button type="button" data-full="media/stills/premier-ll-01-duo-under-local-legend-sign-aam.jpg" data-cap="Duo under Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-01-duo-under-local-legend-sign-aam.jpg" alt="Duo under Local Legend sign"></button>
 <button type="button" data-full="media/stills/premier-ll-02-duo-wide-local-legend-sign-aam.jpg" data-cap="Duo wide Local Legend sign"><img loading="lazy" src="media/stills/thumbs/premier-ll-02-duo-wide-local-legend-sign-aam.jpg" alt="Duo wide Local Legend sign"></button>
@@ -369,7 +369,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <button type="button" data-full="media/stills/premier-ll-28-trucks-under-the-oaks-aam.jpg" data-cap="Trucks under the oaks"><img loading="lazy" src="media/stills/thumbs/premier-ll-28-trucks-under-the-oaks-aam.jpg" alt="Trucks under the oaks"></button>
 <button type="button" data-full="media/stills/premier-ll-29-rig-at-the-beer-garden-aam.jpg" data-cap="Rig at the beer garden"><img loading="lazy" src="media/stills/thumbs/premier-ll-29-rig-at-the-beer-garden-aam.jpg" alt="Rig at the beer garden"></button>
 </div>
-<div class="btns"><a class="btn sm" href="media/premier-stills-29.zip" download>↓ All 29 stills (zip) <span style="opacity:.6">8.4 MB</span></a></div>
+
 </div>
 </section>
 
@@ -386,8 +386,8 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 </div>
 </div>
 <div class="chart"><h3>Three new logo directions to compare</h3><img src="media/logo-options.jpg" alt="Three Premier logo options: Lowcountry Seal badge, Split Drop monogram, Spray Arc wordmark, in dark and light versions" style="width:100%;border-radius:12px"><p class="src">1 · Lowcountry Seal &nbsp; 2 · Split Drop &nbsp; 3 · Spray Arc. Pick one, or keep the shield above.</p></div>
-<div class="btns"><a class="btn sm" href="media/premier-brand-kit.zip" download>↓ Brand kit (zip) <span style="opacity:.6">8.1 MB</span></a><a class="btn sm ghost" href="media/logo-options.jpg" target="_blank" rel="noopener">View the logo board</a></div>
-<p class="src">Colors: Navy #0E1A33 · Blue #2F6FE0 · Sky #5AA8FF · Safety yellow #F2C230 · Paper #F4F6F9. Fonts: Archivo Black and Barlow Condensed. The kit holds the shield logo set, the three new directions, the brand sheet and the live logo videos.</p>
+<div class="btns"><a class="btn sm ghost" href="media/logo-options.jpg" target="_blank" rel="noopener">View the logo board</a></div>
+<p class="src">Colors: Navy #0E1A33 · Blue #2F6FE0 · Sky #5AA8FF · Safety yellow #F2C230 · Paper #F4F6F9. Fonts: Archivo Black and Barlow Condensed.</p>
 </div>
 </section>
 
@@ -396,7 +396,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <div class="wrap">
 <div class="head"><p class="eyebrow">The logo, alive</p><h2>A 3D logo that comes off the screen</h2>
 <p class="lead">Premier’s shield, rebuilt in real 3D: it flies in from deep space, spins to show its depth, pulses with a neon blue-and-gold glow, then lunges toward the viewer and settles. It opens every video, the website header and the digital card.</p></div>
-<video autoplay muted loop playsinline preload="metadata" poster="media/live-logo-poster.jpg" style="width:100%;border-radius:16px;background:#050a16;display:block" src="media/live-logo-3d-wide.mp4"></video>
+<video controlslist="nodownload noremoteplayback" disablepictureinpicture autoplay muted loop playsinline preload="metadata" poster="media/live-logo-poster.jpg" style="width:100%;border-radius:16px;background:#050a16;display:block" src="media/live-logo-3d-wide.mp4"></video>
 <div class="lessons">
 <div class="ls"><span class="k">3D</span><h3>Real depth</h3><p>A thick shield with a gold back you see as it spins, not a flat sticker.</p></div>
 <div class="ls"><span class="k">Glow</span><h3>Neon pulse</h3><p>Blue and gold light that breathes on a steady beat, like a sign at night.</p></div>
@@ -404,7 +404,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <div class="ls"><span class="k">Loop</span><h3>Seamless</h3><p>Six seconds that loop cleanly as an intro, a sting or a profile video.</p></div>
 <div class="ls"><span class="k">Every size</span><h3>Square + wide</h3><p>Video for the site and YouTube, square for social, a GIF for email.</p></div>
 </div>
-<div class="btns"><a class="btn sm" href="media/live-logo-3d-wide.mp4" download>↓ Wide video <span style="opacity:.6">3.0 MB</span></a><a class="btn sm" href="media/loops/live-logo-3d-square.mp4" download>↓ Square video <span style="opacity:.6">2.2 MB</span></a></div>
+
 <p class="src">Inspired by the way the best animated logos work (one simple mark, light that builds, motion that resolves on the logo), made entirely in Premier’s own shield and colors.</p>
 </div>
 </section>
@@ -415,16 +415,16 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <div class="head"><p class="eyebrow">The brand in motion</p><h2>Ten loops, ready to post</h2>
 <p class="lead">Transitions cut from the Local Legend footage and animated logo pieces. Use them as Stories, ad openers, website headers and profile videos.</p></div>
 <div class="loops">
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/spray-arc-reveal.jpg" src="media/loops/spray-arc-reveal.mp4" aria-label="Spray arc reveal animation"></video><figcaption>Spray arc reveal<a href="media/loops/spray-arc-reveal.mp4" download>↓ 556 KB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/surface-cleaner-iris.jpg" src="media/loops/surface-cleaner-iris.mp4" aria-label="Surface cleaner iris animation"></video><figcaption>Surface cleaner iris<a href="media/loops/surface-cleaner-iris.mp4" download>↓ 681 KB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/squeegee-wipe.jpg" src="media/loops/squeegee-wipe.mp4" aria-label="Squeegee wipe animation"></video><figcaption>Squeegee wipe<a href="media/loops/squeegee-wipe.mp4" download>↓ 441 KB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/5050-stripe.jpg" src="media/loops/5050-stripe.mp4" aria-label="50/50 Stripe animation"></video><figcaption>50/50 Stripe<a href="media/loops/5050-stripe.mp4" download>↓ 1.6 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/window-wash.jpg" src="media/loops/window-wash.mp4" aria-label="Window wash animation"></video><figcaption>Window wash<a href="media/loops/window-wash.mp4" download>↓ 1.7 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/luxury-window-wash.jpg" src="media/loops/luxury-window-wash.mp4" aria-label="Luxury window wash animation"></video><figcaption>Luxury window wash<a href="media/loops/luxury-window-wash.mp4" download>↓ 4.6 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/island-spin.jpg" src="media/loops/island-spin.mp4" aria-label="Island spin animation"></video><figcaption>Island spin<a href="media/loops/island-spin.mp4" download>↓ 6.3 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-spin.jpg" src="media/loops/neon-spin.mp4" aria-label="Neon spin animation"></video><figcaption>Neon spin<a href="media/loops/neon-spin.mp4" download>↓ 3.0 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-draw.jpg" src="media/loops/neon-draw.mp4" aria-label="Neon draw animation"></video><figcaption>Neon draw<a href="media/loops/neon-draw.mp4" download>↓ 1.5 MB</a></figcaption></figure>
-<figure><video muted loop playsinline autoplay preload="none" poster="media/loops/neon-orbit.jpg" src="media/loops/neon-orbit.mp4" aria-label="Neon orbit animation"></video><figcaption>Neon orbit<a href="media/loops/neon-orbit.mp4" download>↓ 2.2 MB</a></figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/spray-arc-reveal.jpg" src="media/loops/spray-arc-reveal.mp4" aria-label="Spray arc reveal animation"></video><figcaption>Spray arc reveal</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/surface-cleaner-iris.jpg" src="media/loops/surface-cleaner-iris.mp4" aria-label="Surface cleaner iris animation"></video><figcaption>Surface cleaner iris</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/squeegee-wipe.jpg" src="media/loops/squeegee-wipe.mp4" aria-label="Squeegee wipe animation"></video><figcaption>Squeegee wipe</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/5050-stripe.jpg" src="media/loops/5050-stripe.mp4" aria-label="50/50 Stripe animation"></video><figcaption>50/50 Stripe</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/window-wash.jpg" src="media/loops/window-wash.mp4" aria-label="Window wash animation"></video><figcaption>Window wash</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/luxury-window-wash.jpg" src="media/loops/luxury-window-wash.mp4" aria-label="Luxury window wash animation"></video><figcaption>Luxury window wash</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/island-spin.jpg" src="media/loops/island-spin.mp4" aria-label="Island spin animation"></video><figcaption>Island spin</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/neon-spin.jpg" src="media/loops/neon-spin.mp4" aria-label="Neon spin animation"></video><figcaption>Neon spin</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/neon-draw.jpg" src="media/loops/neon-draw.mp4" aria-label="Neon draw animation"></video><figcaption>Neon draw</figcaption></figure>
+<figure><video controlslist="nodownload noremoteplayback" disablepictureinpicture muted loop playsinline autoplay preload="none" poster="media/loops/neon-orbit.jpg" src="media/loops/neon-orbit.mp4" aria-label="Neon orbit animation"></video><figcaption>Neon orbit</figcaption></figure>
 </div>
 </div>
 </section>
@@ -895,14 +895,14 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 
 <!-- CHAPTER 3 -->
 <section class="band chapter" style="padding-block:56px">
-<div class="wrap"><span class="num" aria-hidden="true">03</span><div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:260px"><p class="eyebrow">Part 3 · Deck, investment and files</p><h2>Present it, price it, take it with you</h2><p>The full pitch deck, the investment and every file to download.</p></div></div>
+<div class="wrap"><span class="num" aria-hidden="true">03</span><div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:260px"><p class="eyebrow">Part 3 · Deck and investment</p><h2>Present it and price it</h2><p>The full pitch deck and the investment.</p></div></div>
 </section>
 
 <!-- DECK -->
 <section class="band light" id="deck">
 <div class="wrap">
 <div class="head"><p class="eyebrow">The presentation</p><h2>The pitch deck, all 42 slides</h2>
-<p class="lead">The same story as this page, built to present in the room: where Premier stands, what the world’s best do, the plan, step one and the investment. Swipe through it here or download the PDF.</p></div>
+<p class="lead">The same story as this page, built to present in the room: where Premier stands, what the world’s best do, the plan, step one and the investment. Swipe through it here.</p></div>
 <div class="deckv">
 <div class="track" id="track" tabindex="0" aria-label="Pitch deck slides">
 <figure><img loading="lazy" src="media/deck/slide-01.jpg" alt="Pitch deck slide 1 of 42"></figure>
@@ -949,7 +949,7 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 <figure><img loading="lazy" src="media/deck/slide-42.jpg" alt="Pitch deck slide 42 of 42"></figure>
 </div>
 </div>
-<div class="dctl"><div class="btns"><button class="btn sm ghost" type="button" id="dprev">← Prev</button><span class="ct" id="dct">1 / 42</span><button class="btn sm ghost" type="button" id="dnext">Next →</button></div><a class="btn sm" href="media/premier-pitch-deck.pdf" download>↓ Pitch deck PDF <span style="opacity:.6">6.7 MB</span></a></div>
+<div class="dctl"><div class="btns"><button class="btn sm ghost" type="button" id="dprev">← Prev</button><span class="ct" id="dct">1 / 42</span><button class="btn sm ghost" type="button" id="dnext">Next →</button></div></div>
 <div class="thumbs" id="dthumbs">
 <button type="button" aria-label="Slide 1"><img loading="lazy" src="media/deck/slide-01.jpg" alt=""></button>
 <button type="button" aria-label="Slide 2"><img loading="lazy" src="media/deck/slide-02.jpg" alt=""></button>
@@ -1027,37 +1027,6 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 </div>
 </section>
 
-<!-- DOWNLOADS -->
-<section class="band light" id="downloads">
-<div class="wrap">
-<div class="head"><p class="eyebrow">Every file in one place</p><h2>Downloads</h2>
-<p class="lead">Tap any file to save it. These are watermarked previews; clean, full-resolution masters and editable logo files are handed over on approval.</p></div>
-<div class="chart"><div class="scroll"><table class="dl">
-<tr><th>File</th><th class="hide-s">Format</th><th>Size</th><th></th></tr>
-<tr><td>Hero commercial · 1:30</td><td class="hide-s sz">1920×1080</td><td class="sz">14.3 MB</td><td><a href="media/video/premier-hero-90s.mp4" download>Download</a></td></tr>
-<tr><td>30-second cut</td><td class="hide-s sz">1920×1080</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-cut-30s.mp4" download>Download</a></td></tr>
-<tr><td>15-second cut</td><td class="hide-s sz">1920×1080</td><td class="sz">14.1 MB</td><td><a href="media/video/premier-cut-15s.mp4" download>Download</a></td></tr>
-<tr><td>Reel 1 · Who cleans Local Legend</td><td class="hide-s sz">1080×1920</td><td class="sz">14.1 MB</td><td><a href="media/video/premier-reel-1-who-cleans.mp4" download>Download</a></td></tr>
-<tr><td>Reel 2 · Costa Rica origin</td><td class="hide-s sz">1080×1920</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-reel-2-origin.mp4" download>Download</a></td></tr>
-<tr><td>Reel 3 · Local Legends Ep. 1</td><td class="hide-s sz">1080×1920</td><td class="sz">14.2 MB</td><td><a href="media/video/premier-reel-3-local-legends.mp4" download>Download</a></td></tr>
-<tr><td>All 29 stills</td><td class="hide-s sz">Zip of JPGs</td><td class="sz">8.4 MB</td><td><a href="media/premier-stills-29.zip" download>Download</a></td></tr>
-<tr><td>Brand kit: logos, 3 directions, brand sheet, live logo</td><td class="hide-s sz">Zip</td><td class="sz">8.1 MB</td><td><a href="media/premier-brand-kit.zip" download>Download</a></td></tr>
-<tr><td>3D live logo · wide</td><td class="hide-s sz">Video</td><td class="sz">3.0 MB</td><td><a href="media/live-logo-3d-wide.mp4" download>Download</a></td></tr>
-<tr><td>3D live logo · square</td><td class="hide-s sz">Video</td><td class="sz">2.2 MB</td><td><a href="media/loops/live-logo-3d-square.mp4" download>Download</a></td></tr>
-<tr><td>Pitch deck · 42 slides</td><td class="hide-s sz">PDF</td><td class="sz">6.7 MB</td><td><a href="media/premier-pitch-deck.pdf" download>Download</a></td></tr>
-<tr><td>Spray arc reveal loop</td><td class="hide-s sz">Square video</td><td class="sz">556 KB</td><td><a href="media/loops/spray-arc-reveal.mp4" download>Download</a></td></tr>
-<tr><td>Surface cleaner iris loop</td><td class="hide-s sz">Square video</td><td class="sz">681 KB</td><td><a href="media/loops/surface-cleaner-iris.mp4" download>Download</a></td></tr>
-<tr><td>Squeegee wipe loop</td><td class="hide-s sz">Square video</td><td class="sz">441 KB</td><td><a href="media/loops/squeegee-wipe.mp4" download>Download</a></td></tr>
-<tr><td>50/50 Stripe loop</td><td class="hide-s sz">Square video</td><td class="sz">1.6 MB</td><td><a href="media/loops/5050-stripe.mp4" download>Download</a></td></tr>
-<tr><td>Window wash loop</td><td class="hide-s sz">Square video</td><td class="sz">1.7 MB</td><td><a href="media/loops/window-wash.mp4" download>Download</a></td></tr>
-<tr><td>Luxury window wash loop</td><td class="hide-s sz">Square video</td><td class="sz">4.6 MB</td><td><a href="media/loops/luxury-window-wash.mp4" download>Download</a></td></tr>
-<tr><td>Island spin loop</td><td class="hide-s sz">Square video</td><td class="sz">6.3 MB</td><td><a href="media/loops/island-spin.mp4" download>Download</a></td></tr>
-<tr><td>Neon spin loop</td><td class="hide-s sz">Square video</td><td class="sz">3.0 MB</td><td><a href="media/loops/neon-spin.mp4" download>Download</a></td></tr>
-<tr><td>Neon draw loop</td><td class="hide-s sz">Square video</td><td class="sz">1.5 MB</td><td><a href="media/loops/neon-draw.mp4" download>Download</a></td></tr>
-<tr><td>Neon orbit loop</td><td class="hide-s sz">Square video</td><td class="sz">2.2 MB</td><td><a href="media/loops/neon-orbit.mp4" download>Download</a></td></tr>
-</table></div></div>
-</div>
-</section>
 
 <footer class="band dark" style="padding-block:44px">
 <div class="wrap" style="gap:10px">
@@ -1068,12 +1037,12 @@ dialog.lb::backdrop{background:rgba(5,10,22,.92)}
 </footer>
 <img src="media/aam-mark.png" alt="Above All Media" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
 
-<dialog class="lb" id="lb" aria-label="Photo viewer"><figure><img id="lbimg" alt=""><div class="bar"><span class="cap" id="lbcap"></span><div class="btns"><button class="btn sm ghost" type="button" id="lbp">←</button><button class="btn sm ghost" type="button" id="lbn">→</button><a class="btn sm" id="lbdl" download>↓ Save</a><button class="btn sm ghost" type="button" id="lbx">Close</button></div></div></figure></dialog>
+<dialog class="lb" id="lb" aria-label="Photo viewer"><figure><img id="lbimg" alt=""><div class="bar"><span class="cap" id="lbcap"></span><div class="btns"><button class="btn sm ghost" type="button" id="lbp">←</button><button class="btn sm ghost" type="button" id="lbn">→</button><button class="btn sm ghost" type="button" id="lbx">Close</button></div></div></figure></dialog>
 <script>
 (function(){
-var b=[].slice.call(document.querySelectorAll('#stgrid button')),d=document.getElementById('lb'),im=document.getElementById('lbimg'),c=document.getElementById('lbcap'),dl=document.getElementById('lbdl'),k=0;
-function show(i){k=(i+b.length)%b.length;var e=b[k];im.src=e.dataset.full;im.alt=e.dataset.cap;c.textContent=(k+1)+' / '+b.length+' · '+e.dataset.cap;dl.href=e.dataset.full}
-b.forEach(function(e,i){e.addEventListener('click',function(){show(i);if(d.showModal)d.showModal();else window.open(e.dataset.full)})});
+var b=[].slice.call(document.querySelectorAll('#stgrid button')),d=document.getElementById('lb'),im=document.getElementById('lbimg'),c=document.getElementById('lbcap'),k=0;
+function show(i){k=(i+b.length)%b.length;var e=b[k];im.src=e.dataset.full;im.alt=e.dataset.cap;c.textContent=(k+1)+' / '+b.length+' · '+e.dataset.cap}
+b.forEach(function(e,i){e.addEventListener('click',function(){show(i);if(d.showModal)d.showModal();})});
 document.getElementById('lbp').onclick=function(){show(k-1)};document.getElementById('lbn').onclick=function(){show(k+1)};document.getElementById('lbx').onclick=function(){d.close()};
 d.addEventListener('click',function(e){if(e.target===d)d.close()});
 d.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')show(k-1);if(e.key==='ArrowRight')show(k+1)});
@@ -1085,5 +1054,6 @@ document.getElementById('dprev').onclick=function(){go(cur-1)};document.getEleme
 t.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1)}if(e.key==='ArrowRight'){e.preventDefault();go(cur+1)}});
 tb.forEach(function(x,j){x.addEventListener('click',function(){go(j)})});
 })();
+document.addEventListener('contextmenu',function(e){if(e.target.closest('video,img,.grid-st,.track'))e.preventDefault()});
 </script>
 </body></html>
