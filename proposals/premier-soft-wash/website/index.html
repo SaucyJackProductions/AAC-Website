@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  PREMIER SOFT WASH — website preview by Above All Media
+  Built on the Above All Media "ABOVE" framework (one rAF loop, Lenis smooth scroll, word-split reveals, pinned scroll scenes),
+  with the light-to-dark tricks turned into grime-to-clean: the hero washes a dirty facade clean as you scroll (and wherever
+  the cursor sprays), the manifesto words get washed as you read, a squeegee clears the glass, a rinse wave turns the night
+  page into a clean one, and drag sliders wash surfaces by hand.
+  Layout and conversion pattern follow the category leaders (utility bar with tap-to-call, repeated Free Estimate CTA,
+  trust strip, services grid, featured job, process, reviews, service areas, FAQ, short estimate wizard, sticky mobile bar).
+  All media is watermarked (Above All Media) until Premier signs off. No download links. No fabricated reviews or stats.
+  Every effect is optional: reduced motion, save-data and no-JS all get a calm, complete page.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Premier Soft Wash | Soft Washing &amp; Pressure Washing, Hilton Head &amp; Bluffton</title>
+<meta name="description" content="Low-pressure soft washing for Hilton Head Island, Bluffton and Beaufort homes and businesses. House and roof washing, driveways, patios, gutters and windows. Residential and commercial, licensed and insured. Call 843-816-6523.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070d1c">
+<link rel="icon" type="image/svg+xml" href="assets/shield.svg">
+<meta property="og:title" content="Premier Soft Wash | Protecting your assets">
+<meta property="og:description" content="Soft washing and pressure washing for Hilton Head Island and Bluffton. Residential and commercial, licensed and insured.">
+<meta property="og:image" content="https://aboveallmediasc.com/proposals/premier-soft-wash/local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preload" as="image" href="../local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" media="(min-aspect-ratio:4/5)" fetchpriority="high">
+<link rel="preload" as="image" href="../local-legend/stills/premier-ll-29-rig-at-the-beer-garden-aam.jpg" media="(max-aspect-ratio:4/5)" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"HomeAndConstructionBusiness",
+  "name":"Premier Soft Wash",
+  "slogan":"Protecting your assets",
+  "telephone":"+1-843-816-6523",
+  "url":"https://premiersoftwashsc.com/",
+  "image":"https://aboveallmediasc.com/proposals/premier-soft-wash/local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg",
+  "address":{"@type":"PostalAddress","addressLocality":"Bluffton","addressRegion":"SC","addressCountry":"US"},
+  "areaServed":["Hilton Head Island","Bluffton","Okatie","Hardeeville","Ridgeland","Beaufort","Port Royal","Daufuskie Island"],
+  "founder":[{"@type":"Person","name":"Brandon Williams","jobTitle":"President"},{"@type":"Person","name":"Jerahmy Sorensen","jobTitle":"Chief Operating Officer"}],
+  "sameAs":["https://www.instagram.com/premiersoftwashllc/"],
+  "knowsAbout":["House soft washing","Roof soft washing","Driveway and concrete cleaning","Brick patio and paver cleaning","Gutter cleaning","Window cleaning","Commercial exterior cleaning"]
+}</script>
+<script>(function(){var c=document.documentElement,m=window.matchMedia,n=navigator.connection||{};c.className+=' js';if((m&&m('(prefers-reduced-motion: reduce)').matches)||n.saveData)c.className+=' still';})()</script>
+
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --night:#060b18; --navy:#0E1A33; --navy-2:#132448; --navy-3:#1b3163;
+  --blue:#2F6FE0; --sky:#5AA8FF; --foam:#dff0ff; --yellow:#F2C230; --yellow-l:#ffd95e;
+  --ink:#eef4ff; --muted:rgba(238,244,255,.74); --muted-soft:rgba(238,244,255,.5);
+  --line:rgba(238,244,255,.12); --line-2:rgba(238,244,255,.24);
+  --grime:#7b7d4c; --grime-d:#454528; --mud:#2a2717;
+  --clean:#f6faff; --clean-2:#e9f2fd; --clean-3:#d6e6fa; --ink-d:#0E1A33; --muted-d:rgba(14,26,51,.72); --line-d:rgba(14,26,51,.12);
+  --water:linear-gradient(100deg,#bfe3ff 0%,#5AA8FF 40%,#2F6FE0 75%,#8fd0ff 100%);
+  --sun:linear-gradient(100deg,#ffe58a 0%,#F2C230 50%,#ffcf3d 100%);
+  --ease:cubic-bezier(.22,1,.36,1); --ease-io:cubic-bezier(.76,0,.24,1);
+  --display:'Archivo','Arial Narrow',Impact,system-ui,sans-serif;
+  --body:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --wrap:1380px; --gut:clamp(16px,4.2vw,64px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html:not(.lenis){scroll-behavior:smooth}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:clip}
+body{font-family:var(--body);background:var(--night);color:var(--ink);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body.nav-open{overflow:hidden}
+main{overflow-x:clip}
+a{color:inherit;text-decoration:none}
+img,video,canvas{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:850;font-stretch:78%;line-height:.94;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+h1 em,h2 em,h3 em{font-style:normal;color:var(--yellow)}
+.lt h2 em,.lt h3 em{color:var(--blue)}
+::selection{background:rgba(90,168,255,.35);color:#fff}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:4px}
+.wrap{width:min(var(--wrap),100% - var(--gut)*2);margin-inline:auto;position:relative}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:fixed;left:14px;top:-80px;z-index:5000;padding:12px 18px;border-radius:999px;background:var(--yellow);color:var(--navy);font-weight:700;transition:top .25s}
+.skip:focus{top:14px}
+
+/* shared */
+.kicker{display:inline-flex;align-items:center;gap:12px;font:500 11px/1.4 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--sky)}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor;opacity:.8}
+.lt .kicker{color:var(--blue)}
+.lede{font-size:clamp(16px,1.25vw,19px);font-weight:300;color:var(--muted);max-width:58ch;line-height:1.7}
+.lt .lede{color:var(--muted-d);font-weight:400}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 28px;border-radius:999px;border:0;cursor:pointer;font:700 13px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;isolation:isolate;overflow:hidden;translate:var(--tx,0) var(--ty,0);transition:translate .5s var(--ease),box-shadow .5s var(--ease),color .4s}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#fff;transform:translateY(101%);transition:transform .6s var(--ease)}
+.btn:hover::after{transform:translateY(0)}
+.btn-sun{background:var(--sun);color:var(--navy);box-shadow:0 10px 40px rgba(242,194,48,.28)}
+.btn-water{background:var(--blue);color:#fff;box-shadow:0 10px 40px rgba(47,111,224,.35)}
+.btn-water:hover{color:var(--navy)}
+.btn-line{color:var(--ink);background:rgba(6,11,24,.25);box-shadow:inset 0 0 0 1px var(--line-2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-line:hover{color:var(--navy)}
+.lt .btn-line{color:var(--ink-d);background:rgba(255,255,255,.6);box-shadow:inset 0 0 0 1px rgba(14,26,51,.2)}
+.lt .btn-line::after{background:var(--navy)}
+.lt .btn-line:hover{color:#fff}
+.btn-sm{min-height:44px;padding:0 18px;font-size:11px}
+.arrow{display:inline-block;transition:transform .5s var(--ease)}
+a:hover .arrow{transform:translateX(5px)}
+.ic{width:18px;height:18px;flex:none}
+
+/* word-split reveal: words rise in, and grimy words wash clean */
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wd>i{display:inline-block;font-style:inherit;transform:translateY(105%);transition:transform 1.1s var(--ease),filter 1.4s var(--ease),color 1.4s var(--ease);transition-delay:calc(var(--i,0)*55ms)}
+.in .wd>i,.still .wd>i{transform:none}
+[data-wash] .wd>i{filter:blur(3px) sepia(.9) saturate(.6) brightness(.7);}
+[data-wash].in .wd>i{filter:none;transition-delay:calc(var(--i,0)*55ms),calc(.35s + var(--i,0)*90ms),calc(.35s + var(--i,0)*90ms)}
+.rv{opacity:0;translate:0 34px;transition:opacity 1.1s var(--ease),translate 1.2s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
+.rv.in,.still .rv,html:not(.js) .rv{opacity:1;translate:0 0}
+html:not(.js) .wd>i{transform:none;filter:none}
+
+.progress{position:fixed;left:0;top:0;right:0;height:3px;z-index:2500;background:var(--water);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+
+/* cursor: a nozzle ring with a label */
+.cur{position:fixed;left:0;top:0;z-index:4000;pointer-events:none;display:none}
+.has-cur .cur{display:block}
+.cur-dot{position:absolute;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--sky)}
+.cur-ring{position:absolute;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:1.5px solid rgba(90,168,255,.6);display:grid;place-items:center;transition:width .5s var(--ease),height .5s var(--ease),margin .5s var(--ease),background-color .4s,border-color .4s}
+.cur-ring span{font:600 10px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--navy);opacity:0;transition:opacity .3s}
+.cur.big .cur-ring{width:92px;height:92px;margin:-46px 0 0 -46px;background:var(--yellow);border-color:transparent}
+.cur.big .cur-ring span{opacity:1}
+.cur.big .cur-dot{opacity:0}
+.cur.hover .cur-ring{width:62px;height:62px;margin:-31px 0 0 -31px;border-color:var(--yellow)}
+.cur.spray .cur-ring{width:120px;height:120px;margin:-60px 0 0 -60px;border:1.5px dashed rgba(191,227,255,.7)}
+
+/* ---------- loader: the shield washes itself ---------- */
+.loader{position:fixed;inset:0;z-index:4500;background:var(--night);display:grid;place-items:center;transition:clip-path 1.1s var(--ease-io),visibility 0s 1.1s;clip-path:inset(0 0 0 0)}
+html:not(.js) .loader,.still .loader{display:none}
+.loaded .loader{clip-path:inset(0 0 100% 0);visibility:hidden}
+.ld-in{width:min(360px,78vw);text-align:center}
+.ld-shield{position:relative;width:110px;margin:0 auto 22px}
+.ld-shield img{width:100%}
+.ld-shield .dirt{position:absolute;inset:0;background:url(assets/grime-tall.webp) center/cover;mix-blend-mode:multiply;-webkit-mask:url(assets/shield.svg) center/contain no-repeat;mask:url(assets/shield.svg) center/contain no-repeat;clip-path:inset(0 0 0 calc(var(--lp,0)*100%));opacity:.95}
+.ld-k{font:500 10px var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--muted-soft)}
+.ld-bar{height:3px;margin-top:18px;background:var(--line);border-radius:3px;overflow:hidden}
+.ld-bar i{display:block;height:100%;background:var(--water);transform-origin:0 50%;transform:scaleX(var(--lp,0));transition:transform .4s var(--ease)}
+.ld-row{display:flex;justify-content:space-between;margin-top:12px;font:400 10px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted-soft)}
+
+/* ---------- utility bar + header ---------- */
+.hdr{position:fixed;inset:0 0 auto;z-index:2000;transition:transform .8s var(--ease),background-color .5s,color .5s}
+.hdr.is-hidden{transform:translateY(-110%)}
+.util{display:flex;align-items:center;justify-content:center;gap:22px;height:34px;padding:0 var(--gut);background:var(--blue);color:#fff;font:600 12px/1 var(--body);letter-spacing:.02em;overflow:hidden;transition:height .5s var(--ease)}
+.util a{display:inline-flex;align-items:center;gap:8px}
+.util .stars{color:var(--yellow);letter-spacing:.1em}
+.util .sep{opacity:.5}
+.hdr.is-scrolled .util{height:0}
+.hdr-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(var(--wrap),100% - var(--gut)*2);margin:0 auto;height:80px;transition:height .5s var(--ease)}
+.hdr.is-scrolled{background:rgba(6,11,24,.7);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 1px 0 var(--line)}
+.hdr.is-scrolled .hdr-bar{height:66px}
+.hdr.on-light.is-scrolled{background:rgba(246,250,255,.82);box-shadow:0 1px 0 var(--line-d);color:var(--ink-d)}
+.logo{position:relative;display:flex;align-items:center;min-height:44px}
+.logo img{height:44px;width:auto;transition:opacity .4s}
+.logo .lg-l{position:absolute;left:0;top:50%;translate:0 -50%;opacity:0}
+.hdr.on-light.is-scrolled .logo .lg-d{opacity:0}
+.hdr.on-light.is-scrolled .logo .lg-l{opacity:1}
+nav.primary{display:flex;gap:clamp(14px,2vw,30px)}
+nav.primary a{position:relative;font:600 13px var(--body);letter-spacing:.02em;opacity:.86;padding:8px 0;transition:opacity .3s}
+nav.primary a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--sky);transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease)}
+nav.primary a:hover,nav.primary a.on{opacity:1}
+nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
+.hdr-cta{display:flex;align-items:center;gap:10px}
+.hdr-call{display:inline-flex;align-items:center;gap:8px;font:800 15px var(--body);letter-spacing:.01em;padding:8px 6px}
+.hdr-call small{display:block;font:500 9px var(--mono);letter-spacing:.2em;text-transform:uppercase;opacity:.65}
+.menu-btn{display:none;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.08);cursor:pointer;position:relative}
+.hdr.on-light.is-scrolled .menu-btn{background:rgba(14,26,51,.08)}
+.menu-btn i{position:absolute;left:14px;right:14px;height:2px;background:currentColor;border-radius:2px;transition:transform .5s var(--ease),top .5s var(--ease)}
+.menu-btn i:nth-child(1){top:18px}.menu-btn i:nth-child(2){top:26px}
+.menu-btn.active i:nth-child(1){top:22px;transform:rotate(45deg)}
+.menu-btn.active i:nth-child(2){top:22px;transform:rotate(-45deg)}
+.mmenu{position:fixed;inset:0;z-index:1900;background:var(--navy);display:flex;flex-direction:column;justify-content:center;padding:110px var(--gut) 40px;clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .9s var(--ease-io);visibility:hidden}
+.mmenu.open{clip-path:circle(150% at calc(100% - 40px) 40px);visibility:visible}
+.mmenu a{font:850 clamp(34px,9vw,64px)/1.08 var(--display);font-stretch:78%;text-transform:uppercase}
+.mmenu .mm-foot{margin-top:34px;display:grid;gap:12px}
+@media (max-width:1080px){nav.primary{display:none}.menu-btn{display:block}.hdr-call small{display:none}}
+@media (max-width:640px){.util .hide-s{display:none}.hdr-cta .btn{display:none}.hdr-call span{display:none}.logo img{height:38px}.util{gap:12px;font-size:11px}}
+
+/* ---------- 1. THE WASH (hero) ---------- */
+.wash{position:relative;height:340vh;background:var(--night)}
+.still .wash,html:not(.js) .wash{height:auto}
+.wash-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.still .wash-stick,html:not(.js) .wash-stick{position:relative;min-height:100svh;height:auto}
+.wash-poster,#wash-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wash-poster{object-position:58% 50%}
+#wash-canvas{opacity:0;transition:opacity .8s}
+.wash.live #wash-canvas{opacity:1}
+.wash-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,11,24,.55) 0%,rgba(6,11,24,0) 28%,rgba(6,11,24,0) 55%,rgba(6,11,24,.8) 100%),radial-gradient(ellipse at 20% 60%,rgba(6,11,24,.5),transparent 60%)}
+.wash.at-end .wash-shade{background:linear-gradient(180deg,rgba(6,11,24,.5),rgba(6,11,24,.72))}
+.wash-shade{transition:background .8s}
+.wash-intro{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(110px,16vh,170px);max-width:900px;will-change:transform,opacity}
+.wash-intro h1{font-size:clamp(54px,9.4vw,150px);margin:16px 0 18px;text-shadow:0 10px 50px rgba(0,0,0,.45)}
+.wash-intro p{font-size:clamp(16px,1.35vw,20px);font-weight:400;color:var(--muted);max-width:44ch}
+.wash-intro .actions,.wash-end .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.wash-caps{position:absolute;left:var(--gut);bottom:clamp(120px,18vh,180px);max-width:520px;pointer-events:none}
+.wash-cap{position:absolute;left:0;bottom:0;width:min(520px,82vw);opacity:0;font:850 clamp(28px,3.6vw,52px)/1 var(--display);font-stretch:80%;text-transform:uppercase;text-shadow:0 8px 40px rgba(0,0,0,.6)}
+.wash-cap span{display:block;margin-bottom:12px;font:500 11px var(--mono);letter-spacing:.24em;color:var(--yellow)}
+.wash-cap small{display:block;margin-top:12px;font:400 clamp(14px,1.1vw,17px)/1.55 var(--body);text-transform:none;color:var(--muted);max-width:40ch}
+.wash-hud{position:absolute;right:var(--gut);top:50%;translate:0 -50%;display:grid;justify-items:end;gap:8px;font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.wash-hud b{font:850 clamp(40px,4.4vw,64px)/1 var(--display);font-stretch:80%;color:#fff;letter-spacing:0}
+.wash-hud b sup{font-size:.45em;vertical-align:top;color:var(--sky)}
+.wash-hud .gauge{position:relative;width:4px;height:160px;border-radius:4px;background:linear-gradient(180deg,var(--grime),var(--grime-d))}
+.wash-hud .gauge i{position:absolute;left:0;right:0;bottom:0;height:100%;border-radius:4px;background:linear-gradient(180deg,#bfe3ff,var(--blue));transform-origin:50% 100%;transform:scaleY(0)}
+.wash-hud .psi{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(6,11,24,.5);box-shadow:inset 0 0 0 1px var(--line-2);color:#fff}
+.wash-hud .psi::before{content:"";width:7px;height:7px;border-radius:50%;background:#46e38a;box-shadow:0 0 10px #46e38a}
+.wash-end{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;text-align:center;padding:120px var(--gut) 90px;opacity:0;visibility:hidden;transition:opacity .9s var(--ease),visibility 0s .9s}
+.wash-end.on{opacity:1;visibility:visible;transition:opacity .9s var(--ease)}
+.wash-end h2{font-size:clamp(46px,8vw,124px);margin:18px 0 18px;text-shadow:0 10px 50px rgba(0,0,0,.5)}
+.wash-end p{max-width:52ch;color:var(--muted);font-size:clamp(16px,1.3vw,19px)}
+.wash-end .actions{justify-content:center}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin-top:28px;font:600 12px var(--body);letter-spacing:.04em;color:#fff}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+.trust .ok{color:var(--sky)}
+.trust .st{color:var(--yellow);letter-spacing:.12em}
+.wash-cue{position:absolute;left:50%;bottom:26px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:10px;font:500 10px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);pointer-events:none;text-align:center}
+.wash-cue::after{content:"";width:2px;height:40px;background:linear-gradient(var(--sky),transparent);animation:cue 2.2s var(--ease) infinite;transform-origin:50% 0}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:50% 0}51%{transform-origin:50% 100%}100%{transform:scaleY(0);transform-origin:50% 100%}}
+.still .wash-caps,.still .wash-hud,.still .wash-cue,html:not(.js) .wash-caps,html:not(.js) .wash-hud,html:not(.js) .wash-cue{display:none}
+.still .wash-end,html:not(.js) .wash-end{position:relative;opacity:1;visibility:visible;padding-top:40px}
+.still .wash-intro,html:not(.js) .wash-intro{position:relative;left:auto;right:auto;bottom:auto;padding:160px var(--gut) 0}
+@media (max-width:720px){
+  .wash-hud{top:128px;translate:0 0;grid-auto-flow:column;align-items:center;gap:10px}
+  .wash-hud .gauge{display:none}
+  .wash-hud b{font-size:30px}
+  .wash-cap{width:calc(100vw - var(--gut)*2)}
+}
+
+/* ---------- marquee ---------- */
+.mq{position:relative;z-index:2;overflow:hidden;padding:22px 0;background:var(--yellow);color:var(--navy);transform:rotate(-1.2deg) scale(1.03);margin:-10px 0}
+.mq-row{display:flex;width:max-content;will-change:transform}
+.mq-set{display:flex;align-items:center;gap:30px;padding-right:30px}
+.mq-item{font:900 clamp(26px,3.2vw,46px)/1 var(--display);font-stretch:75%;text-transform:uppercase;white-space:nowrap}
+.mq-item.o{color:transparent;-webkit-text-stroke:1.5px var(--navy)}
+.mq-set i{width:22px;height:22px;flex:none;background:url(assets/shield.svg) center/contain no-repeat}
+
+/* ---------- 2. MANIFESTO + SEAL ---------- */
+.mf{overflow:hidden;padding:clamp(110px,15vw,200px) 0 clamp(80px,10vw,130px);background:radial-gradient(ellipse at 80% 20%,rgba(47,111,224,.18),transparent 55%),var(--night)}
+.mf-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(30px,5vw,90px);align-items:center}
+.mf-text{margin-top:26px;font:800 clamp(30px,3.9vw,60px)/1.08 var(--display);font-stretch:82%;text-transform:uppercase;letter-spacing:-.005em}
+.mf-text .w{color:#6f7149;filter:blur(1.4px);text-shadow:0 0 0 transparent;transition:color .6s var(--ease),filter .6s var(--ease),text-shadow .6s}
+.mf-text .w.on{color:#fff;filter:none}
+.mf-text .w.g.on{color:var(--sky);text-shadow:0 0 24px rgba(90,168,255,.45)}
+.still .mf-text .w,html:not(.js) .mf-text .w{color:#fff;filter:none}
+.mf-foot{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.mf-foot span{padding:9px 16px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line-2);font:500 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.seal{position:relative;display:block;width:min(100%,420px);aspect-ratio:1;justify-self:center;border-radius:50%;isolation:isolate}
+.seal-ring{position:absolute;inset:0;animation:spin 26s linear infinite}
+.seal-ring text{font:700 7.2px var(--mono);letter-spacing:.32em;text-transform:uppercase;fill:var(--sky)}
+.seal-core{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--navy-3),var(--navy) 70%);box-shadow:0 30px 90px rgba(47,111,224,.35),inset 0 0 0 1px rgba(90,168,255,.35);display:grid;place-items:center;overflow:hidden;transition:transform .8s var(--ease)}
+.seal-core img{width:52%}
+.seal-core .dirt{position:absolute;inset:0;background:url(assets/grime-tall.webp) center/cover;mix-blend-mode:multiply;clip-path:inset(0 0 0 calc(var(--sp,0)*100%));opacity:.92}
+.seal-core .sheen{position:absolute;top:0;bottom:0;width:30%;left:calc(var(--sp,0)*100% - 15%);background:linear-gradient(90deg,transparent,rgba(191,227,255,.55),transparent);mix-blend-mode:screen;opacity:calc(1 - var(--sp,0))}
+.seal:hover .seal-core{transform:scale(1.04)}
+.seal-cta{position:absolute;left:50%;bottom:22%;translate:-50% 0;font:700 10px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--yellow);white-space:nowrap}
+@keyframes spin{to{transform:rotate(360deg)}}
+.still .seal-ring{animation:none}
+@media (max-width:900px){.mf-grid{grid-template-columns:1fr}.seal{width:min(80vw,360px)}}
+
+/* ---------- 3. SERVICES ---------- */
+.svc{padding:clamp(70px,9vw,130px) 0 clamp(90px,11vw,150px);background:var(--night)}
+.svc-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.svc-head h2{font-size:clamp(46px,6.4vw,104px);margin-top:16px}
+.svc-list{list-style:none;border-top:1px solid var(--line)}
+.svc-row a{position:relative;display:grid;grid-template-columns:60px 1.1fr 1.3fr 40px;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);transition:padding .6s var(--ease),background-color .5s}
+.svc-row a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(47,111,224,.22),transparent 70%);transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--ease);z-index:-1}
+.svc-row a:hover::before{transform:scaleX(1)}
+.svc-row a:hover{padding-left:18px}
+.svc-row .n{font:500 12px var(--mono);letter-spacing:.2em;color:var(--sky)}
+.svc-row .t{font:850 clamp(24px,2.5vw,38px)/1 var(--display);font-stretch:80%;text-transform:uppercase}
+.svc-row .t .tag{display:inline-block;margin-left:10px;padding:5px 9px;border-radius:999px;background:var(--yellow);color:var(--navy);font:700 9px var(--mono);letter-spacing:.16em;vertical-align:middle}
+.svc-row .d{color:var(--muted);font-size:15px;line-height:1.6}
+.svc-row .ar{font-size:22px;color:var(--sky);transition:transform .5s var(--ease)}
+.svc-row a:hover .ar{transform:translateX(6px)}
+.svc-row .svc-thumb{display:none}
+.svc-float{position:fixed;left:0;top:0;z-index:50;width:340px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;pointer-events:none;opacity:0;scale:.6;transition:opacity .4s,scale .6s var(--ease);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.svc-float.on{opacity:1;scale:1}
+.svc-float img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.svc-float img.on{opacity:1}
+.svc-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;align-items:center}
+.svc-cta p{color:var(--muted);margin-right:12px}
+@media (max-width:900px){
+  .svc-head{grid-template-columns:1fr}
+  .svc-row a{grid-template-columns:1fr;gap:10px;padding:22px 0}
+  .svc-row .n,.svc-row .ar{display:none}
+  .svc-row .svc-thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;order:-1}
+  .svc-float{display:none}
+}
+
+/* ---------- 4. THE GLASS (squeegee scene) ---------- */
+.gl{position:relative;height:260vh;background:var(--night)}
+.still .gl,html:not(.js) .gl{height:auto}
+.gl-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.still .gl-stick,html:not(.js) .gl-stick{position:relative;height:90svh}
+.gl-img,.gl-dirt{position:absolute;inset:0}
+.gl-img img,.gl-dirt img{width:100%;height:100%;object-fit:cover}
+.gl-dirt{clip-path:inset(0 0 0 var(--gx,0%))}
+.gl-dirt img{filter:saturate(.35) sepia(.45) brightness(.62) contrast(.85) blur(2px)}
+.gl-dirt::after{content:"";position:absolute;inset:0;background:url(assets/grime-wide.webp) center/cover;mix-blend-mode:multiply;opacity:.95}
+.gl-dirt::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 30% 30%,rgba(255,255,240,.12),transparent 50%);mix-blend-mode:screen}
+.still .gl-dirt,html:not(.js) .gl-dirt{display:none}
+.gl-blade{position:absolute;top:-2%;bottom:-2%;left:var(--gx,0%);width:26px;margin-left:-13px;z-index:2;pointer-events:none}
+.gl-blade::before{content:"";position:absolute;inset:0 6px 0 4px;background:linear-gradient(90deg,#9aa3b5,#eef2f8 40%,#7b8597 70%,#c9d0db);border-radius:3px;box-shadow:0 0 30px rgba(0,0,0,.5)}
+.gl-blade::after{content:"";position:absolute;top:0;bottom:0;left:-2px;width:6px;background:#111;border-radius:2px}
+.gl-sheet{position:absolute;top:0;bottom:0;left:calc(var(--gx,0%) - 22vw);width:22vw;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(191,227,255,.08) 60%,rgba(223,240,255,.3));mix-blend-mode:screen}
+.gl-handle{position:absolute;left:var(--gx,0%);top:50%;width:min(36vw,420px);height:12px;margin-top:-6px;z-index:2;transform-origin:0 50%;transform:rotate(-14deg) translateX(-100%);background:linear-gradient(180deg,#f2c230,#b88c12);border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.5);pointer-events:none}
+.still .gl-blade,.still .gl-sheet,.still .gl-handle,html:not(.js) .gl-blade,html:not(.js) .gl-sheet,html:not(.js) .gl-handle{display:none}
+.gl-shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(6,11,24,.75),transparent 35%,transparent 65%,rgba(6,11,24,.8))}
+.gl-copy{position:absolute;z-index:4;left:var(--gut);right:var(--gut);top:clamp(100px,14vh,150px);display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.gl-copy h2{font-size:clamp(42px,6.4vw,104px)}
+.gl-copy p{color:var(--muted);max-width:38ch;margin-top:14px}
+.gl-meter{position:absolute;z-index:4;left:var(--gut);right:var(--gut);bottom:clamp(30px,6vh,60px);display:flex;justify-content:space-between;align-items:end;font:500 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.gl-meter b{font:850 clamp(44px,5vw,80px)/1 var(--display);font-stretch:80%;color:#fff;letter-spacing:0}
+@media (max-width:720px){.gl-copy{flex-direction:column}.gl-handle{width:46vw}}
+
+/* ---------- 5. FEATURED JOB (horizontal) ---------- */
+.hz{position:relative;background:var(--navy)}
+.hz-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hz-track{display:flex;gap:clamp(16px,2vw,28px);padding:0 var(--gut);will-change:transform;align-items:center}
+.hz-intro{flex:none;width:min(520px,82vw);padding-right:30px}
+.hz-intro h2{font-size:clamp(44px,5.6vw,92px);margin:16px 0 18px}
+.hz-intro p{color:var(--muted)}
+.hz-hint{display:inline-flex;margin-top:26px;font:500 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--yellow)}
+.hz-card{flex:none;width:min(560px,80vw);position:relative}
+.hz-card.tall{width:min(340px,62vw)}
+.hz-media{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:16/10;background:var(--navy-2)}
+.hz-card.tall .hz-media{aspect-ratio:9/14}
+.hz-media img,.hz-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.hz-media video{opacity:0;transition:opacity .6s}
+.hz-media video.is-playing{opacity:1}
+.hz-card:hover .hz-media img{transform:scale(1.05)}
+.hz-num{position:absolute;left:14px;top:12px;z-index:2;font:850 34px var(--display);font-stretch:80%;color:#fff;text-shadow:0 4px 20px rgba(0,0,0,.5)}
+.hz-card h3{font-size:clamp(22px,2vw,30px);margin-top:16px}
+.hz-card p{color:var(--muted);font-size:14px;margin-top:6px;max-width:44ch}
+.hz-end{flex:none;width:min(440px,80vw);padding:40px;border-radius:20px;background:var(--blue);display:grid;gap:18px}
+.hz-end h3{font-size:clamp(34px,3.4vw,52px)}
+.hz-bar{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(24px,5vh,48px);display:flex;gap:16px;align-items:center;font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hz-bar .tr{position:relative;flex:1;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--grime-d),var(--grime));overflow:hidden}
+.hz-bar .tr i{position:absolute;inset:0;background:var(--water);transform-origin:0 50%;transform:scaleX(0)}
+@media (max-width:999px),(prefers-reduced-motion:reduce){
+  .hz{height:auto!important}
+  .hz-stick{position:relative;height:auto;padding:90px 0 80px}
+  .hz-track{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;transform:none!important;align-items:stretch}
+  .hz-track::-webkit-scrollbar{display:none}
+  .hz-intro,.hz-card,.hz-end{scroll-snap-align:start}
+  .hz-intro{width:84vw}
+  .hz-bar{position:relative;left:auto;right:auto;bottom:auto;margin:26px var(--gut) 0}
+}
+
+/* ---------- 6. THE FILM (window opens to full screen) ---------- */
+.fw{position:relative;height:240vh;background:var(--night)}
+.still .fw,html:not(.js) .fw{height:auto}
+.fw-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.still .fw-stick,html:not(.js) .fw-stick{position:relative;padding:100px 0}
+.fw-win{position:absolute;inset:0;clip-path:inset(var(--wy,22%) var(--wx,24%) round var(--wr,22px));will-change:clip-path}
+.fw-win img,.fw-win video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;scale:var(--ws,1.2)}
+.fw-win video{opacity:0;transition:opacity .6s}
+.fw-win video.is-playing{opacity:1}
+.fw-win::after{content:"";position:absolute;inset:0;background:rgba(6,11,24,var(--wd,.0))}
+.fw-l,.fw-r{position:absolute;top:50%;translate:0 -50%;font:900 clamp(40px,7vw,120px)/.9 var(--display);font-stretch:75%;text-transform:uppercase;z-index:2;pointer-events:none;white-space:nowrap}
+.fw-l{right:calc(50% + 21vw)}.fw-r{left:calc(50% + 21vw);color:var(--yellow)}
+.fw-cap{position:relative;z-index:3;text-align:center;padding:0 var(--gut);opacity:var(--wc,0)}
+.fw-cap h2{font-size:clamp(44px,7vw,112px);margin:14px 0 22px;text-shadow:0 10px 40px rgba(0,0,0,.5)}
+.fw-cap .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.still .fw-win,html:not(.js) .fw-win{clip-path:none}
+.still .fw-cap,html:not(.js) .fw-cap{opacity:1}
+.still .fw-l,.still .fw-r,html:not(.js) .fw-l,html:not(.js) .fw-r{display:none}
+@media (max-width:720px){.fw-l,.fw-r{font-size:34px}.fw-l{right:auto;left:var(--gut);top:16%;translate:0 0}.fw-r{left:auto;right:var(--gut);top:auto;bottom:16%;translate:0 0}}
+.player{padding:0;border:0;background:transparent;max-width:min(96vw,1500px);width:100%;overflow:visible;margin:auto}
+.player::backdrop{background:rgba(3,6,14,.92);backdrop-filter:blur(6px)}
+.player video{width:100%;max-height:86vh;border-radius:10px;background:#000;box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.player .x{position:absolute;right:0;top:-54px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--navy);font:700 20px var(--body);cursor:pointer}
+.player .tabs{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.player .tabs button{padding:10px 16px;border-radius:999px;border:0;background:rgba(255,255,255,.1);color:#fff;font:600 12px var(--body);letter-spacing:.06em;cursor:pointer}
+.player .tabs button[aria-pressed="true"]{background:var(--yellow);color:var(--navy)}
+
+/* ---------- 7. THE RINSE (night page turns clean) ---------- */
+.rinse{position:relative;height:260vh;background:var(--night)}
+.still .rinse,html:not(.js) .rinse{height:auto}
+.rinse-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.still .rinse-stick,html:not(.js) .rinse-stick{position:relative;height:60svh;background:var(--clean)}
+.rinse-dirt{position:absolute;inset:0;background:url(assets/grime-wide.webp) center/cover;opacity:.16;mix-blend-mode:screen}
+.rinse-water{position:absolute;inset:0;background:linear-gradient(180deg,#cfe8ff 0%,var(--clean) 22%);clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%)}
+.rinse-bub{position:absolute;inset:0;pointer-events:none}
+.rinse-bub i{position:absolute;bottom:-40px;width:var(--s,12px);height:var(--s,12px);border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.95),rgba(191,227,255,.35) 60%,rgba(90,168,255,.15));box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);translate:0 calc(var(--rp,0) * -130vh * var(--k,1))}
+.rinse-copy{position:relative;z-index:2;text-align:center;padding:0 var(--gut)}
+.rinse-copy h2{font-size:clamp(60px,13vw,220px);color:var(--rc,#fff);transition:color .2s}
+.rinse-copy p{margin-top:14px;font:500 12px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--rcp,var(--muted))}
+.still .rinse-water,html:not(.js) .rinse-water{clip-path:none}
+.still .rinse-copy h2,html:not(.js) .rinse-copy h2{color:var(--ink-d)}
+
+/* ---------- LIGHT (clean) half ---------- */
+.lt{background:var(--clean);color:var(--ink-d);color-scheme:light}
+.lt .muted{color:var(--muted-d)}
+
+/* reels */
+.reels{padding:clamp(40px,6vw,80px) 0 clamp(90px,11vw,150px)}
+.reels-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:40px}
+.reels-head h2{font-size:clamp(44px,6vw,96px);margin-top:16px}
+.reels-row{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,28px)}
+.reel{position:relative}
+.reel-frame{position:relative;aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:var(--navy);box-shadow:0 30px 70px rgba(14,26,51,.25),0 0 0 8px #fff,0 0 0 9px var(--line-d)}
+.reel-frame video{width:100%;height:100%;object-fit:cover}
+.reel-play{position:absolute;inset:0;display:grid;place-items:center;border:0;background:linear-gradient(180deg,transparent 55%,rgba(6,11,24,.7));cursor:pointer;color:#fff}
+.reel-play span{display:grid;place-items:center;width:74px;height:74px;border-radius:50%;background:var(--yellow);color:var(--navy);box-shadow:0 10px 40px rgba(0,0,0,.35);transition:transform .5s var(--ease)}
+.reel-play:hover span{transform:scale(1.1)}
+.reel-play[hidden]{display:none}
+.reel h3{font-size:clamp(20px,1.8vw,28px);margin-top:22px}
+.reel p{color:var(--muted-d);font-size:14px;margin-top:6px}
+@media (max-width:820px){.reels-row{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:74%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:12px 4px 20px}.reels-row::-webkit-scrollbar{display:none}.reel{scroll-snap-align:start}}
+
+/* about */
+.ab{padding:clamp(90px,11vw,150px) 0;background:var(--clean-2)}
+.ab-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(30px,5vw,90px);align-items:center}
+.ab-pics{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ab-pics figure{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:9/14;background:var(--clean-3)}
+.ab-pics figure:nth-child(2){margin-top:60px}
+.ab-pics img{width:100%;height:100%;object-fit:cover}
+.ab-pics figcaption{position:absolute;left:12px;right:12px;bottom:12px;padding:12px 14px;border-radius:12px;background:rgba(246,250,255,.92);backdrop-filter:blur(8px);font-size:13px;line-height:1.3;color:var(--muted-d)}
+.ab-pics figcaption b{display:block;font:850 18px var(--display);font-stretch:80%;text-transform:uppercase;color:var(--ink-d)}
+.ab h2{font-size:clamp(44px,5.6vw,92px);margin:16px 0 22px}
+.ab p{color:var(--muted-d);font-size:17px;line-height:1.75;max-width:56ch}
+.ab p+p{margin-top:14px}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.val{padding:18px 18px 16px;border-radius:14px;background:#fff;box-shadow:0 1px 0 var(--line-d),0 10px 30px rgba(14,26,51,.06)}
+.val b{display:block;font:850 18px var(--display);font-stretch:82%;text-transform:uppercase}
+.val span{font-size:14px;color:var(--muted-d)}
+@media (max-width:900px){.ab-grid{grid-template-columns:1fr}.ab-pics{max-width:560px}}
+
+/* process */
+.pr{padding:clamp(90px,11vw,150px) 0;background:var(--clean)}
+.pr-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:50px}
+.pr-head h2{font-size:clamp(44px,6vw,96px);margin-top:16px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.steps-line{position:absolute;left:0;right:0;top:27px;height:4px;border-radius:4px;background:var(--clean-3)}
+.steps-line i{position:absolute;inset:0;border-radius:4px;background:var(--water);transform-origin:0 50%;transform:scaleX(var(--sf,0))}
+.step{position:relative;padding-top:0}
+.step .dot{position:relative;z-index:1;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--clean-3);font:850 20px var(--display);transition:background-color .5s,color .5s,box-shadow .5s}
+.step.on .dot{background:var(--blue);color:#fff;box-shadow:0 10px 30px rgba(47,111,224,.35)}
+.step h3{font-size:clamp(22px,2vw,30px);margin:22px 0 10px}
+.step p{color:var(--muted-d);font-size:15px}
+@media (max-width:900px){.pr-head{grid-template-columns:1fr}.steps{grid-template-columns:1fr;gap:30px;padding-left:76px}.steps-line{left:27px;right:auto;top:0;bottom:0;width:4px;height:auto}.steps-line i{transform-origin:50% 0;transform:scaleY(var(--sf,0))}.step .dot{position:absolute;left:-76px;top:0}.step h3{margin-top:12px}}
+
+/* compare (drag to wash) */
+.cmp{padding:clamp(90px,11vw,150px) 0;background:var(--clean-2)}
+.cmp-head{max-width:820px;margin-bottom:44px}
+.cmp-head h2{font-size:clamp(44px,6vw,96px);margin:16px 0 18px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cmp-box{position:relative;margin:0;border-radius:18px;overflow:hidden;aspect-ratio:16/10;--x:50%;--glow:0;user-select:none;-webkit-user-select:none;touch-action:pan-y;cursor:ew-resize;box-shadow:0 30px 70px rgba(14,26,51,.2)}
+.cmp-box>img,.cmp-dirt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmp-dirt{position:absolute;inset:0;clip-path:inset(0 0 0 var(--x))}
+.cmp-dirt img{filter:saturate(.35) sepia(.45) brightness(.66) contrast(.85)}
+.cmp-dirt::after{content:"";position:absolute;inset:0;background:url(assets/grime-wide.webp) center/cover;mix-blend-mode:multiply}
+.cmp-foam{position:absolute;top:0;bottom:0;left:var(--x);width:140px;margin-left:-140px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(223,240,255,.55));mix-blend-mode:screen;opacity:calc(.35 + var(--glow)*.65)}
+.cmp-line{position:absolute;top:0;bottom:0;left:var(--x);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 20px rgba(191,227,255,.9);pointer-events:none}
+.cmp-knob{position:absolute;top:50%;left:var(--x);width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.35);pointer-events:none;font:700 18px var(--body)}
+.cmp-tag{position:absolute;bottom:14px;padding:7px 12px;border-radius:999px;font:600 10px var(--mono);letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+.cmp-tag.l{left:14px;background:var(--blue);color:#fff}.cmp-tag.r{right:14px;background:rgba(42,39,23,.85);color:#e8e2c4}
+.cmp-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.cmp-cap{margin-top:12px;font-size:14px;color:var(--muted-d)}
+.cmp-note{margin-top:26px;font-size:13px;color:var(--muted-d);max-width:70ch}
+@media (max-width:820px){.cmp-grid{grid-template-columns:1fr}}
+
+/* reviews */
+.rvw{padding:clamp(90px,11vw,140px) 0;background:var(--navy);color:var(--ink)}
+.rvw-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(30px,6vw,100px);align-items:center}
+.rvw-score{display:grid;justify-items:start;gap:8px}
+.rvw-score b{font:900 clamp(110px,14vw,220px)/.8 var(--display);font-stretch:75%;background:var(--water);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rvw-score .st{font-size:34px;letter-spacing:.12em;color:var(--yellow)}
+.rvw-score span{font:500 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.rvw h2{font-size:clamp(40px,5vw,80px);margin:16px 0 18px}
+.rvw p{color:var(--muted);max-width:56ch}
+.rvw .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:820px){.rvw-grid{grid-template-columns:1fr}}
+
+/* areas */
+.areas{padding:clamp(90px,11vw,140px) 0;background:var(--clean)}
+.areas-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,5vw,80px);align-items:start}
+.areas h2{font-size:clamp(44px,5.6vw,92px);margin:16px 0 18px}
+.areas-chips{display:flex;flex-wrap:wrap;gap:10px}
+.areas-chips a{display:inline-flex;align-items:center;gap:10px;padding:16px 22px;border-radius:999px;background:#fff;box-shadow:0 1px 0 var(--line-d),0 10px 30px rgba(14,26,51,.07);font:850 clamp(18px,1.6vw,24px)/1 var(--display);font-stretch:82%;text-transform:uppercase;transition:background-color .4s,color .4s,transform .5s var(--ease)}
+.areas-chips a::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.areas-chips a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.areas-chips a:hover::before{background:var(--yellow)}
+@media (max-width:900px){.areas-grid{grid-template-columns:1fr}}
+
+/* faq */
+.fq{padding:clamp(80px,10vw,130px) 0;background:var(--clean-2)}
+.fq-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(30px,5vw,80px)}
+.fq h2{font-size:clamp(44px,5.6vw,92px);margin-top:16px}
+.fq details{border-bottom:1px solid var(--line-d)}
+.fq summary{list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;cursor:pointer;font:850 clamp(19px,1.7vw,26px)/1.15 var(--display);font-stretch:85%;text-transform:uppercase}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"+";flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--blue);font:500 24px var(--body);transition:transform .5s var(--ease),background-color .4s,color .4s}
+.fq details[open] summary::after{transform:rotate(45deg);background:var(--blue);color:#fff}
+.fq details p{padding:0 50px 24px 0;color:var(--muted-d);font-size:16px;line-height:1.7}
+@media (max-width:900px){.fq-grid{grid-template-columns:1fr}}
+
+/* estimate */
+.est{position:relative;padding:clamp(90px,11vw,150px) 0;background:var(--night);color:var(--ink);overflow:hidden}
+.est-bg{position:absolute;inset:0;opacity:.28}
+.est-bg video,.est-bg img{width:100%;height:100%;object-fit:cover}
+.est-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--night) 30%,rgba(6,11,24,.5))}
+.est-grid{position:relative;display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,5vw,80px);align-items:start}
+.est h2{font-size:clamp(46px,6vw,100px);margin:16px 0 20px}
+.est-side p{color:var(--muted);max-width:46ch}
+.est-call{display:inline-flex;flex-direction:column;margin-top:30px;padding:22px 26px;border-radius:18px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--line-2)}
+.est-call small{font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.est-call b{font:900 clamp(34px,3.6vw,54px)/1.05 var(--display);font-stretch:80%;color:var(--yellow)}
+.est-call span{font-size:13px;color:var(--muted)}
+.est-list{list-style:none;margin-top:26px;display:grid;gap:10px}
+.est-list li{display:flex;gap:10px;align-items:center;color:var(--ink)}
+.est-list li::before{content:"✓";display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--blue);font-size:12px;font-weight:700}
+.wiz{position:relative;padding:clamp(24px,3vw,40px);border-radius:24px;background:var(--clean);color:var(--ink-d);box-shadow:0 40px 100px rgba(0,0,0,.45)}
+.wiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;font:600 11px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d)}
+.wiz-dots{display:flex;gap:6px}
+.wiz-dots i{width:28px;height:5px;border-radius:5px;background:var(--clean-3);transition:background-color .4s}
+.wiz-dots i.on{background:var(--blue)}
+.wiz fieldset{border:0;display:none}
+.wiz fieldset.on{display:block;animation:wizIn .6s var(--ease)}
+@keyframes wizIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.wiz legend{font:850 clamp(24px,2.3vw,34px)/1.05 var(--display);font-stretch:80%;text-transform:uppercase;margin-bottom:6px}
+.wiz .hint{color:var(--muted-d);font-size:14px;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--clean-3);font-weight:600;font-size:14px;cursor:pointer;transition:background-color .3s,color .3s,box-shadow .3s}
+.chip input:checked+span{background:var(--blue);color:#fff;box-shadow:none}
+.chip input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.f-row.one{grid-template-columns:1fr}
+.fld{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted-d)}
+.fld input,.fld select,.fld textarea{width:100%;padding:14px 16px;border-radius:12px;border:0;background:#fff;box-shadow:inset 0 0 0 1.5px var(--clean-3);font-size:16px;color:var(--ink-d);font-weight:500}
+.fld textarea{min-height:90px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--blue)}
+.wiz-sub{margin-top:18px;font-size:13px;font-weight:600;color:var(--muted-d)}
+.wiz-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px}
+.wiz-back{background:none;border:0;cursor:pointer;font-weight:700;color:var(--blue);padding:8px 0}
+.wiz-back[hidden]{visibility:hidden;display:block}
+.wiz-err{margin-top:12px;color:#c0392b;font-size:14px;font-weight:600;min-height:1em}
+.wiz-done{display:none;text-align:center;padding:30px 10px}
+.wiz.done form{display:none}
+.wiz.done .wiz-done{display:block;animation:wizIn .6s var(--ease)}
+.wiz-done img{width:84px;margin:0 auto 18px}
+.wiz-done h3{font-size:clamp(30px,3vw,44px);margin-bottom:12px}
+.wiz-done p{color:var(--muted-d)}
+.wiz-done .note{margin-top:16px;font-size:13px;padding:12px;border-radius:12px;background:var(--clean-2)}
+@media (max-width:900px){.est-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.f-row{grid-template-columns:1fr}}
+
+/* brand sign-off */
+.sign{position:relative;padding:clamp(80px,10vw,130px) 0 clamp(60px,8vw,100px);background:var(--night)}
+.sign-stage{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;background:#000;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.sign-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.sign-stage video.on{opacity:1}
+.sign-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.sign-tabs button{padding:11px 18px;border-radius:999px;border:0;background:rgba(255,255,255,.08);color:#fff;font:600 12px var(--body);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background-color .3s,color .3s}
+.sign-tabs button[aria-pressed="true"]{background:var(--yellow);color:var(--navy)}
+.sign-sound{position:absolute;right:16px;bottom:16px;z-index:2;padding:10px 16px;border-radius:999px;border:0;background:rgba(6,11,24,.6);backdrop-filter:blur(8px);color:#fff;font:600 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+
+/* footer */
+.ft{padding:70px 0 40px;background:var(--night);border-top:1px solid var(--line)}
+.ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.ft-brand img{height:64px;width:auto}
+.ft-brand p{margin-top:16px;color:var(--muted);font-size:14px;max-width:34ch}
+.ft h4{font:500 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:14px}
+.ft ul{list-style:none;display:grid;gap:8px;font-size:14px;color:var(--muted)}
+.ft ul a:hover{color:#fff}
+.ft-phone{font:900 30px var(--display);font-stretch:80%;color:var(--yellow)}
+.ft-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted-soft)}
+.ft-aam{display:inline-flex;align-items:center;gap:10px}
+.ft-aam img{height:26px;width:auto}
+@media (max-width:900px){.ft-grid{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}}
+
+/* sticky mobile bar + watermark + to top */
+.mbar{position:fixed;left:10px;right:10px;bottom:10px;z-index:1800;display:none;grid-template-columns:1fr 1fr 1.3fr;gap:8px;padding:8px;border-radius:18px;background:rgba(6,11,24,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 0 0 1px var(--line-2);transform:translateY(140%);transition:transform .6s var(--ease)}
+.mbar.on{transform:none}
+.mbar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:12px;font:700 13px var(--body);color:#fff;background:rgba(255,255,255,.08)}
+.mbar a.go{background:var(--yellow);color:var(--navy)}
+@media (max-width:820px){.mbar{display:grid}.ft{padding-bottom:110px}}
+.aam-wm{position:fixed;left:14px;bottom:14px;z-index:1700;width:110px;opacity:.32;pointer-events:none}
+@media (max-width:820px){.aam-wm{bottom:88px;width:86px}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-in">
+    <div class="ld-shield"><img src="assets/shield.svg" alt="" width="240" height="280"><span class="dirt"></span></div>
+    <div class="ld-k">Premier Soft Wash &middot; Protecting your assets</div>
+    <div class="ld-bar"><i></i></div>
+    <div class="ld-row"><span>Pre-soaking</span><span id="ld-pct">000</span></div>
+  </div>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cur" id="cur" aria-hidden="true"><div class="cur-ring"><span id="cur-label"></span></div><div class="cur-dot"></div></div>
+<img class="aam-wm" src="assets/aam-mark.png" alt="" width="400" height="164">
+
+<header class="hdr" id="site-header">
+  <div class="util">
+    <a href="tel:+18438166523"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>843-816-6523</a>
+    <span class="sep hide-s">|</span>
+    <span><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 on Google</span>
+    <span class="sep hide-s">|</span>
+    <span class="hide-s">Residential &amp; commercial &middot; Licensed &amp; insured</span>
+  </div>
+  <div class="hdr-bar">
+    <a class="logo" href="#top" aria-label="Premier Soft Wash, back to top">
+      <img class="lg-d" src="assets/logo-on-dark.svg" alt="Premier Soft Wash" width="810" height="280">
+      <img class="lg-l" src="assets/logo-on-light.svg" alt="" width="810" height="280">
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#areas">Areas</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="hdr-call" href="tel:+18438166523"><svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span><small>Call or text</small>843-816-6523</span></a>
+      <a class="btn btn-sun btn-sm" href="#estimate">Free Estimate</a>
+      <button class="menu-btn" id="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu">
+  <a href="#services">Services</a>
+  <a href="#work">Our Work</a>
+  <a href="#about">About</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#areas">Areas</a>
+  <a href="#faq">FAQ</a>
+  <div class="mm-foot">
+    <a class="btn btn-sun" href="#estimate">Get a Free Estimate</a>
+    <a class="btn btn-line" href="tel:+18438166523">Call 843-816-6523</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- 1. THE WASH: scroll (and the cursor's spray) wash the facade clean -->
+<section id="top" class="wash" aria-labelledby="hero-title">
+  <div class="wash-stick">
+    <picture>
+      <source media="(max-aspect-ratio:4/5)" srcset="../local-legend/stills/premier-ll-29-rig-at-the-beer-garden-aam.jpg">
+      <img class="wash-poster" src="../local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" alt="A Premier Soft Wash crew washing a Hilton Head brewery facade at night" width="1600" height="900" fetchpriority="high">
+    </picture>
+    <canvas id="wash-canvas" aria-hidden="true"></canvas>
+    <div class="wash-shade" aria-hidden="true"></div>
+
+    <div class="wash-intro" id="wash-intro">
+      <span class="kicker">Hilton Head Island &middot; Bluffton &middot; Beaufort</span>
+      <h1 id="hero-title" data-split data-wash>From grime <em>to Premier.</em></h1>
+      <p>Low-pressure soft washing for Lowcountry homes and businesses. Residential and commercial, licensed and insured.</p>
+      <div class="actions">
+        <a class="btn btn-sun" href="#estimate">Get a Free Estimate <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-line" href="tel:+18438166523">Call 843-816-6523</a>
+      </div>
+    </div>
+
+    <div class="wash-caps" aria-hidden="true">
+      <p class="wash-cap" data-a="10" data-b="28"><span>I &middot; Mildew</span>Salt air turns it green.<small>Pollen, humidity and salt feed the algae and mildew that streak Lowcountry siding, roofs and concrete.</small></p>
+      <p class="wash-cap" data-a="28" data-b="52"><span>II &middot; Soft wash</span>Low pressure. Right chemistry.<small>We lift the growth at the root instead of blasting the surface, so siding, paint and seals stay intact.</small></p>
+      <p class="wash-cap" data-a="54" data-b="76"><span>III &middot; Rinse</span>Gardens protected.<small>Plants and shrubs get rinsed and cared for while we work. Nothing gets left behind.</small></p>
+      <p class="wash-cap" data-a="78" data-b="92"><span>IV &middot; Premier clean</span>Back to new.</p>
+    </div>
+
+    <div class="wash-hud" aria-hidden="true">
+      <span>Surface clean</span>
+      <b id="wash-pct">0<sup>%</sup></b>
+      <span class="gauge"><i id="wash-gauge"></i></span>
+      <span class="psi">Pressure &middot; Low</span>
+      <span id="wash-stage">Mildew</span>
+    </div>
+
+    <div class="wash-end" id="wash-end">
+      <span class="kicker">Protecting your assets</span>
+      <h2 data-split>Clean is the new <em>curb appeal.</em></h2>
+      <p>House and roof soft washing, driveways, patios, gutters and windows for homes and businesses from Hilton Head Island to Beaufort.</p>
+      <div class="actions">
+        <a class="btn btn-sun" href="#estimate">Get a Free Estimate <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-line" href="#services">See Services</a>
+      </div>
+      <div class="trust">
+        <span><span class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 on Google</span>
+        <span><span class="ok" aria-hidden="true">&#10003;</span> Licensed &amp; insured</span>
+        <span><span class="ok" aria-hidden="true">&#10003;</span> Residential &amp; commercial</span>
+        <span><span class="ok" aria-hidden="true">&#10003;</span> Locally owned</span>
+      </div>
+    </div>
+
+    <div class="wash-cue" id="wash-cue" aria-hidden="true"><span id="cue-text">Scroll to wash</span></div>
+  </div>
+</section>
+
+<div class="mq" aria-hidden="true">
+  <div class="mq-row" data-mq data-base="-0.7" data-k="1">
+    <div class="mq-set">
+      <span class="mq-item">House Washing</span><i></i>
+      <span class="mq-item o">Roof Soft Wash</span><i></i>
+      <span class="mq-item">Driveways</span><i></i>
+      <span class="mq-item o">Brick Patios</span><i></i>
+      <span class="mq-item">Gutters</span><i></i>
+      <span class="mq-item o">Windows</span><i></i>
+      <span class="mq-item">Storefronts</span><i></i>
+      <span class="mq-item o">Restaurants</span><i></i>
+    </div>
+  </div>
+</div>
+
+<!-- 2. POINT OF VIEW: the words get washed as you read -->
+<section class="mf" id="why" aria-labelledby="why-title" data-tone="dark">
+  <div class="wrap mf-grid">
+    <div>
+      <span class="kicker" id="why-title">Why soft wash</span>
+      <p class="mf-text" id="mf-text" data-gold="soft,clean,satisfied.">Salt air, pollen and Lowcountry humidity turn every surface green. We don&rsquo;t blast it off. We soft wash it clean, protect the gardens around it, and don&rsquo;t leave until you&rsquo;re satisfied.</p>
+      <div class="mf-foot"><span>Soft wash</span><span>Pressure wash</span><span>Windows</span><span>Commercial plans</span></div>
+    </div>
+    <a class="seal" id="seal" href="#estimate" data-cursor="Wash" aria-label="Protecting your assets. Get a free estimate.">
+      <svg class="seal-ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="seal-path" d="M50,50 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs><text><textPath href="#seal-path" textLength="272">Protecting your assets &#10022; Premier Soft Wash &#10022; Hilton Head &#10022;</textPath></text></svg>
+      <span class="seal-core" aria-hidden="true"><img src="assets/shield.svg" alt="" width="240" height="280"><span class="dirt"></span><span class="sheen"></span></span>
+      <span class="seal-cta" aria-hidden="true">Free estimate</span>
+    </a>
+  </div>
+</section>
+
+<!-- 3. SERVICES -->
+<section class="svc" id="services" aria-labelledby="svc-title" data-tone="dark">
+  <div class="wrap">
+    <div class="svc-head">
+      <div>
+        <span class="kicker">Services</span>
+        <h2 id="svc-title" data-split data-wash>Every surface. <em>One crew.</em></h2>
+      </div>
+      <p class="lede rv">From the roofline to the driveway, Premier cleans the whole exterior of your home or business, using the right pressure and the right solution for each surface.</p>
+    </div>
+    <ol class="svc-list" id="svc-list">
+      <li class="svc-row rv"><a href="#estimate" data-img="0" data-cursor="Quote"><span class="n">01</span><span class="t">House Soft Washing</span><span class="d">Siding, stucco and brick brought back to new with low pressure that won&rsquo;t etch the surface or force water behind it.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-14-spray-arc-facade-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="1" data-cursor="Quote"><span class="n">02</span><span class="t">Roof Soft Washing</span><span class="d">Black streaks, algae and lichen lifted off shingle and tile roofs without the damage high pressure can cause.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-10-spray-under-local-legend-sign-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="2" data-cursor="Quote"><span class="n">03</span><span class="t">Driveways &amp; Concrete</span><span class="d">Surface-cleaner precision for driveways, sidewalks and pool decks, so you get an even finish with no stripes.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="3" data-cursor="Quote"><span class="n">04</span><span class="t">Brick Patios &amp; Pavers</span><span class="d">Patios, pavers and outdoor dining areas cleaned and ready for guests.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-17-surface-cleaner-patio-lights-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="4" data-cursor="Quote"><span class="n">05</span><span class="t">Gutters</span><span class="d">Gutter faces brightened and the stripes removed, so the roofline looks sharp from the street.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-25-drone-mural-ladder-high-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="5" data-cursor="Quote"><span class="n">06</span><span class="t">Window Cleaning</span><span class="d">Streak-free glass by hand and squeegee, from storefront windows to second-story panes.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-26-drone-squeegee-window-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+      <li class="svc-row rv"><a href="#estimate" data-img="6" data-cursor="Quote"><span class="n">07</span><span class="t">Commercial &amp; Restaurants<span class="tag">Plans</span></span><span class="d">Storefronts, patios and dining areas kept guest-ready on a monthly, quarterly or six-month schedule.</span><span class="ar" aria-hidden="true">&rarr;</span><img class="svc-thumb" src="../local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" alt="" loading="lazy" decoding="async"></a></li>
+    </ol>
+    <div class="svc-cta rv">
+      <p>Not sure what you need? Send a photo and we&rsquo;ll tell you.</p>
+      <a class="btn btn-sun" href="#estimate">Get a Free Estimate</a>
+      <a class="btn btn-line" href="sms:+18438166523">Text a Photo</a>
+    </div>
+  </div>
+  <div class="svc-float" id="svc-float" aria-hidden="true">
+    <img src="../local-legend/stills/premier-ll-14-spray-arc-facade-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-10-spray-under-local-legend-sign-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-17-surface-cleaner-patio-lights-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-25-drone-mural-ladder-high-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-26-drone-squeegee-window-aam.jpg" alt="" loading="lazy" decoding="async">
+    <img src="../local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" alt="" loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- 4. THE GLASS: a squeegee clears the window as you scroll -->
+<section class="gl" id="glass" aria-labelledby="glass-title" data-tone="dark">
+  <div class="gl-stick">
+    <div class="gl-img"><img src="../local-legend/stills/premier-ll-27-drone-squeegee-detail-aam.jpg" alt="A Premier crew member squeegeeing a storefront window" width="1600" height="900" loading="lazy" decoding="async"></div>
+    <div class="gl-dirt" aria-hidden="true"><img src="../local-legend/stills/premier-ll-27-drone-squeegee-detail-aam.jpg" alt="" loading="lazy" decoding="async"></div>
+    <div class="gl-sheet" aria-hidden="true"></div>
+    <div class="gl-handle" aria-hidden="true"></div>
+    <div class="gl-blade" aria-hidden="true"></div>
+    <div class="gl-shade" aria-hidden="true"></div>
+    <div class="gl-copy">
+      <div>
+        <span class="kicker">Window cleaning</span>
+        <h2 id="glass-title" data-split>The detail is <em>the difference.</em></h2>
+      </div>
+      <p class="rv">Every pane by hand, edge to edge. Keep scrolling and watch the glass clear.</p>
+    </div>
+    <div class="gl-meter" aria-hidden="true"><span>Glass clarity</span><b id="gl-pct">0%</b></div>
+  </div>
+</section>
+
+<!-- 5. FEATURED JOB: horizontal gallery -->
+<section class="hz" id="work" aria-labelledby="work-title" data-tone="dark">
+  <div class="hz-stick">
+    <div class="hz-track" id="hz-track">
+      <div class="hz-intro">
+        <span class="kicker">Featured job</span>
+        <h2 id="work-title" data-split data-wash>One night. <em>One brewery.</em> Spotless.</h2>
+        <p>After closing time at Local Legend Brewing Co. on Hilton Head Island, two Premier trucks and a four-person crew washed the facade, beer garden, patios and every pane of glass before opening.</p>
+        <span class="hz-hint" aria-hidden="true">Keep scrolling &rarr;</span>
+      </div>
+      <article class="hz-card"><div class="hz-media"><span class="hz-num">01</span><img src="../local-legend/stills/premier-ll-19-drone-neon-windows-full-sign-aam.jpg" alt="Drone view of the brewery facade at night during the wash" width="1600" height="900" loading="lazy" decoding="async"></div><h3>The facade</h3><p>Low-pressure soft wash on the full storefront, signage and all.</p></article>
+      <article class="hz-card tall"><div class="hz-media"><span class="hz-num">02</span><img src="../media/loops/spray-arc-reveal.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="../media/loops/spray-arc-reveal.mp4" aria-hidden="true" tabindex="-1"></video></div><h3>Spray arc</h3><p>Reach without ladders where we don&rsquo;t need them.</p></article>
+      <article class="hz-card"><div class="hz-media"><span class="hz-num">03</span><img src="../local-legend/stills/premier-ll-17-surface-cleaner-patio-lights-aam.jpg" alt="Surface cleaner on the patio under string lights" width="1600" height="900" loading="lazy" decoding="async"></div><h3>The beer garden</h3><p>Patios and walkways surface-cleaned to an even finish.</p></article>
+      <article class="hz-card tall"><div class="hz-media"><span class="hz-num">04</span><img src="../media/loops/surface-cleaner-iris.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="../media/loops/surface-cleaner-iris.mp4" aria-hidden="true" tabindex="-1"></video></div><h3>Surface cleaner</h3><p>Even, stripe-free concrete.</p></article>
+      <article class="hz-card"><div class="hz-media"><span class="hz-num">05</span><img src="../local-legend/stills/premier-ll-25-drone-mural-ladder-high-aam.jpg" alt="Crew member high on a ladder cleaning windows by the mural" width="1600" height="900" loading="lazy" decoding="async"></div><h3>High glass</h3><p>Back windows cleaned beside the brewery mural.</p></article>
+      <article class="hz-card tall"><div class="hz-media"><span class="hz-num">06</span><img src="../media/loops/squeegee-wipe.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="../media/loops/squeegee-wipe.mp4" aria-hidden="true" tabindex="-1"></video></div><h3>Squeegee finish</h3><p>Streak-free, edge to edge.</p></article>
+      <article class="hz-card"><div class="hz-media"><span class="hz-num">07</span><img src="../local-legend/stills/premier-ll-02-duo-wide-local-legend-sign-aam.jpg" alt="Brandon Williams and Jerahmy Sorensen in front of the brewery" width="900" height="1600" loading="lazy" decoding="async" style="object-position:50% 30%"></div><h3>Owners on site</h3><p>Brandon and Jerahmy run their jobs in person.</p></article>
+      <div class="hz-end">
+        <span class="kicker" style="color:#fff">Your property is next</span>
+        <h3>Homes, storefronts and restaurants.</h3>
+        <p>Monthly, quarterly and six-month plans keep it looking like this.</p>
+        <a class="btn btn-sun" href="#estimate">Get a Free Estimate</a>
+      </div>
+    </div>
+    <div class="hz-bar" aria-hidden="true"><span>Job progress</span><span class="tr"><i id="hz-fill"></i></span><span id="hz-pct">0%</span></div>
+  </div>
+</section>
+
+<!-- 6. THE FILM: a window opens to full screen -->
+<section class="fw" id="film" aria-labelledby="film-title" data-tone="dark">
+  <div class="fw-stick">
+    <div class="fw-win" id="fw-win">
+      <img src="../media/video/premier-cut-30s.jpg?v=7" alt="" loading="lazy" decoding="async">
+      <video muted loop playsinline preload="none" data-src="../media/video/premier-cut-15s.mp4?v=7" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <span class="fw-l" id="fw-l" aria-hidden="true">One night.</span>
+    <span class="fw-r" id="fw-r" aria-hidden="true">One crew.</span>
+    <div class="fw-cap">
+      <span class="kicker">The film</span>
+      <h2 id="film-title">Premier <em>&times;</em> Local Legend</h2>
+      <div class="actions">
+        <button class="btn btn-sun" type="button" data-film="hero" data-cursor="Play">&#9654;&nbsp; Watch the Film</button>
+        <button class="btn btn-line" type="button" data-film="30">30-second cut</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog class="player" id="player" aria-label="Premier Soft Wash film">
+  <button class="x" type="button" id="player-x" aria-label="Close">&times;</button>
+  <video id="player-video" controls playsinline preload="none"></video>
+  <div class="tabs" role="group" aria-label="Choose a cut">
+    <button type="button" data-cut="hero" aria-pressed="true">Full film</button>
+    <button type="button" data-cut="30" aria-pressed="false">30 s</button>
+    <button type="button" data-cut="15" aria-pressed="false">15 s</button>
+  </div>
+</dialog>
+
+<!-- 7. THE RINSE: the night page washes into a clean one -->
+<section class="rinse" id="rinse" aria-label="Rinse" data-tone="dark">
+  <div class="rinse-stick">
+    <div class="rinse-dirt" aria-hidden="true"></div>
+    <div class="rinse-water" id="rinse-water" aria-hidden="true"></div>
+    <div class="rinse-bub" id="rinse-bub" aria-hidden="true"></div>
+    <div class="rinse-copy">
+      <h2 id="rinse-word">Rinse.</h2>
+      <p id="rinse-sub">Now everything&rsquo;s clean</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. REELS -->
+<section class="lt reels" id="reels" aria-labelledby="reels-title" data-tone="light">
+  <div class="wrap">
+    <div class="reels-head">
+      <div>
+        <span class="kicker">Meet the crew</span>
+        <h2 id="reels-title" data-split>Short films. <em>Real jobs.</em></h2>
+      </div>
+      <p class="lede rv">Tap to play with sound.</p>
+    </div>
+    <div class="reels-row">
+      <article class="reel rv">
+        <div class="reel-frame"><video playsinline preload="none" poster="../media/video/premier-reel-1-who-cleans.jpg?v=7" data-src="../media/video/premier-reel-1-who-cleans.mp4?v=7"></video><button class="reel-play" type="button" aria-label="Play: Who cleans the Local Legend?"><span><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+        <h3>Who cleans the Local Legend?</h3><p>A night on the job at a Hilton Head brewery.</p>
+      </article>
+      <article class="reel rv" style="--d:1">
+        <div class="reel-frame"><video playsinline preload="none" poster="../media/video/premier-reel-2-origin.jpg?v=7" data-src="../media/video/premier-reel-2-origin.mp4?v=7"></video><button class="reel-play" type="button" aria-label="Play: It started in Costa Rica"><span><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+        <h3>It started in Costa Rica</h3><p>How two strangers on a boat built Premier.</p>
+      </article>
+      <article class="reel rv" style="--d:2">
+        <div class="reel-frame"><video playsinline preload="none" poster="../media/video/premier-reel-3-local-legends.jpg?v=7" data-src="../media/video/premier-reel-3-local-legends.mp4?v=7"></video><button class="reel-play" type="button" aria-label="Play: Local Legends, episode 1"><span><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button></div>
+        <h3>Local Legends &middot; Ep. 1</h3><p>The island businesses we keep spotless.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 9. ABOUT -->
+<section class="lt ab" id="about" aria-labelledby="about-title" data-tone="light">
+  <div class="wrap ab-grid">
+    <div class="ab-pics">
+      <figure class="rv"><img src="../local-legend/stills/premier-ll-04-brandon-portrait-aam.jpg" alt="Brandon Williams, President of Premier Soft Wash" width="900" height="1600" loading="lazy" decoding="async"><figcaption><b>Brandon Williams</b>President &amp; co-owner</figcaption></figure>
+      <figure class="rv" style="--d:1"><img src="../local-legend/stills/premier-ll-05-jerahmy-portrait-sign-bg-aam.jpg" alt="Jerahmy Sorensen, COO of Premier Soft Wash" width="900" height="1600" loading="lazy" decoding="async"><figcaption><b>Jerahmy Sorensen</b>COO &amp; co-owner</figcaption></figure>
+    </div>
+    <div>
+      <span class="kicker">Our story</span>
+      <h2 id="about-title" data-split>Born on a boat. <em>Built on the island.</em></h2>
+      <p class="rv">Brandon and Jerahmy met on a friends&rsquo; trip to Costa Rica. They had never met before, and by the end of a day on the water they had a plan. Jerahmy, born and raised on Hilton Head, brought 20 years in the trade. Brandon brought the business background.</p>
+      <p class="rv">Three years later, Premier Soft Wash protects homes and businesses across the island every day, with one simple standard: take care of the customer, and don&rsquo;t leave until you&rsquo;re satisfied.</p>
+      <div class="vals">
+        <div class="val rv"><b>On time</b><span>We show up when we say we will.</span></div>
+        <div class="val rv" style="--d:1"><b>We call back</b><span>Calls, texts and emails answered fast.</span></div>
+        <div class="val rv" style="--d:2"><b>Gardens protected</b><span>Plants and shrubs looked after on every job.</span></div>
+        <div class="val rv" style="--d:3"><b>Satisfied, guaranteed</b><span>We walk it with you before we pack up.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. PROCESS -->
+<section class="lt pr" id="process" aria-labelledby="process-title" data-tone="light">
+  <div class="wrap">
+    <div class="pr-head">
+      <div>
+        <span class="kicker">How it works</span>
+        <h2 id="process-title" data-split>Four steps <em>to spotless.</em></h2>
+      </div>
+      <p class="lede rv">No pressure, in every sense. You get a clear price up front and a crew that treats your property like their own.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="steps-line" aria-hidden="true"><i id="steps-fill"></i></div>
+      <div class="step"><span class="dot">1</span><h3>Free estimate</h3><p>Call, text a photo, or fill in the form. We&rsquo;ll get back to you quickly with a clear price.</p></div>
+      <div class="step"><span class="dot">2</span><h3>Wash day</h3><p>We arrive on time, protect your plants, and soft wash each surface with the right pressure and solution.</p></div>
+      <div class="step"><span class="dot">3</span><h3>Walkthrough</h3><p>We walk the property with you and don&rsquo;t pack up until you&rsquo;re happy with every surface.</p></div>
+      <div class="step"><span class="dot">4</span><h3>Stay clean</h3><p>Optional monthly, quarterly or six-month plans keep homes and businesses guest-ready all year.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. DRAG TO WASH -->
+<section class="lt cmp" id="compare" aria-labelledby="cmp-title" data-tone="light">
+  <div class="wrap">
+    <div class="cmp-head">
+      <span class="kicker">Try it yourself</span>
+      <h2 id="cmp-title" data-split>Drag to <em>wash.</em></h2>
+      <p class="lede rv">Pull the handle across each photo to wash the grime away.</p>
+    </div>
+    <div class="cmp-grid">
+      <div class="rv">
+        <div class="cmp-box" data-cmp>
+          <img src="../local-legend/stills/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" alt="Concrete walkway after a Premier surface clean" width="1600" height="900" loading="lazy" decoding="async">
+          <div class="cmp-dirt" aria-hidden="true"><img src="../local-legend/stills/premier-ll-15-surface-cleaner-local-legend-sign-aam.jpg" alt="" loading="lazy" decoding="async"></div>
+          <span class="cmp-foam" aria-hidden="true"></span><span class="cmp-line" aria-hidden="true"></span><span class="cmp-knob" aria-hidden="true">&harr;</span>
+          <span class="cmp-tag l">Premier clean</span><span class="cmp-tag r">Grime</span>
+          <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Wash the concrete photo">
+        </div>
+        <p class="cmp-cap">Concrete &amp; walkways</p>
+      </div>
+      <div class="rv" style="--d:1">
+        <div class="cmp-box" data-cmp>
+          <img src="../local-legend/stills/premier-ll-21-drone-facade-beer-garden-aam.jpg" alt="Brewery facade and beer garden entrance after a Premier soft wash" width="1600" height="900" loading="lazy" decoding="async">
+          <div class="cmp-dirt" aria-hidden="true"><img src="../local-legend/stills/premier-ll-21-drone-facade-beer-garden-aam.jpg" alt="" loading="lazy" decoding="async"></div>
+          <span class="cmp-foam" aria-hidden="true"></span><span class="cmp-line" aria-hidden="true"></span><span class="cmp-knob" aria-hidden="true">&harr;</span>
+          <span class="cmp-tag l">Premier clean</span><span class="cmp-tag r">Grime</span>
+          <input class="cmp-range" type="range" min="0" max="100" value="50" aria-label="Wash the facade photo">
+        </div>
+        <p class="cmp-cap">Commercial facades</p>
+      </div>
+    </div>
+    <p class="cmp-note">Preview note: the grime side is a simulated effect over our own job photos. Real before-and-after pairs from Premier jobs go here at launch.</p>
+  </div>
+</section>
+
+<!-- 12. REVIEWS -->
+<section class="rvw" id="reviews" aria-labelledby="reviews-title" data-tone="dark">
+  <div class="wrap rvw-grid">
+    <div class="rvw-score rv">
+      <b>5.0</b>
+      <span class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span>Every Google review, five stars</span>
+    </div>
+    <div>
+      <span class="kicker">Reviews</span>
+      <h2 id="reviews-title" data-split>Five stars, <em>every time.</em></h2>
+      <p class="rv">Every review Premier has on Google is five stars. Read what Hilton Head and Bluffton customers say, then see for yourself.</p>
+      <div class="actions rv">
+        <a class="btn btn-sun" href="https://www.google.com/search?q=Premier+Soft+Wash+Bluffton+SC+reviews" target="_blank" rel="noopener">Read Our Google Reviews</a>
+        <a class="btn btn-line" href="#estimate">Get a Free Estimate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. AREAS -->
+<section class="lt areas" id="areas" aria-labelledby="areas-title" data-tone="light">
+  <div class="wrap areas-grid">
+    <div>
+      <span class="kicker">Service areas</span>
+      <h2 id="areas-title" data-split>Proudly <em>Lowcountry.</em></h2>
+      <p class="lede rv">Based in Bluffton and born on Hilton Head, we serve homes and businesses across Beaufort and Jasper counties.</p>
+    </div>
+    <div class="areas-chips rv">
+      <a href="#estimate">Hilton Head Island</a>
+      <a href="#estimate">Bluffton</a>
+      <a href="#estimate">Okatie</a>
+      <a href="#estimate">Hardeeville</a>
+      <a href="#estimate">Ridgeland</a>
+      <a href="#estimate">Beaufort</a>
+      <a href="#estimate">Port Royal</a>
+      <a href="#estimate">Daufuskie Island</a>
+    </div>
+  </div>
+</section>
+
+<!-- 14. FAQ -->
+<section class="lt fq" id="faq" aria-labelledby="faq-title" data-tone="light">
+  <div class="wrap fq-grid">
+    <div>
+      <span class="kicker">FAQ</span>
+      <h2 id="faq-title" data-split>Good <em>questions.</em></h2>
+    </div>
+    <div class="rv">
+      <details open><summary>What&rsquo;s the difference between soft washing and pressure washing?</summary><p>Pressure washing uses high-pressure water to blast dirt off hard surfaces like concrete. Soft washing uses low pressure with a cleaning solution that kills mildew and algae at the root, which is safer for siding, stucco, roofs and paint and keeps it clean longer. We use each where it fits.</p></details>
+      <details><summary>Is soft washing safe for my plants and pets?</summary><p>Yes. We wet and rinse the plants and shrubs around the work area and take care with landscaping on every job. We&rsquo;ll let you know if pets should stay inside while we work.</p></details>
+      <details><summary>How often should I wash my house?</summary><p>In the Lowcountry&rsquo;s humidity, most homes look their best with a soft wash every year or two. Roofs, decks and driveways vary with shade and tree cover. We&rsquo;ll recommend a schedule for your property.</p></details>
+      <details><summary>Do you clean businesses and restaurants?</summary><p>Yes. We clean storefronts, patios, dining areas and windows, and offer monthly, quarterly and six-month plans so your business always looks ready for guests.</p></details>
+      <details><summary>Are you licensed and insured?</summary><p>Yes. Premier Soft Wash is licensed and insured for residential and commercial work.</p></details>
+      <details><summary>How do I get a price?</summary><p>Call or text 843-816-6523, send us a photo, or use the free estimate form below. There&rsquo;s no cost and no obligation.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 15. ESTIMATE -->
+<section class="est" id="estimate" aria-labelledby="est-title" data-tone="dark">
+  <div class="est-bg" aria-hidden="true"><img src="../media/live-logo-poster.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="../media/live-logo-3d-wide.mp4" tabindex="-1" style="position:absolute;inset:0"></video></div>
+  <div class="wrap est-grid">
+    <div class="est-side">
+      <span class="kicker">Free estimate</span>
+      <h2 id="est-title" data-split data-wash>Let&rsquo;s get you <em>clean.</em></h2>
+      <p class="rv">Tell us what needs washing. It takes about a minute, and we&rsquo;ll get back to you quickly with a clear price.</p>
+      <a class="est-call rv" href="tel:+18438166523"><small>Rather talk? Call or text</small><b>843-816-6523</b><span>Brandon &amp; Jerahmy pick up.</span></a>
+      <ul class="est-list rv">
+        <li>Residential and commercial, licensed and insured</li>
+        <li>Free, no-obligation estimates</li>
+        <li>5.0 stars on Google</li>
+      </ul>
+    </div>
+    <div class="wiz rv" id="wiz">
+      <form id="wiz-form" novalidate>
+        <div class="wiz-top"><span id="wiz-step">Step 1 of 3</span><span class="wiz-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
+        <fieldset class="on" data-step="1">
+          <legend>What needs washing?</legend>
+          <p class="hint">Pick everything that applies.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="service" value="House"><span>House</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Roof"><span>Roof</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Driveway / concrete"><span>Driveway / concrete</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Patio / pavers"><span>Patio / pavers</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Gutters"><span>Gutters</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Windows"><span>Windows</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Commercial property"><span>Commercial property</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="Not sure"><span>Not sure</span></label>
+          </div>
+        </fieldset>
+        <fieldset data-step="2">
+          <legend>About the property</legend>
+          <p class="hint">So we can plan the right crew and equipment.</p>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="type" value="Residential" checked><span>Residential</span></label>
+            <label class="chip"><input type="radio" name="type" value="Commercial"><span>Commercial</span></label>
+          </div>
+          <div class="f-row">
+            <label class="fld">Town<select name="town"><option>Hilton Head Island</option><option>Bluffton</option><option>Okatie</option><option>Hardeeville</option><option>Ridgeland</option><option>Beaufort</option><option>Port Royal</option><option>Daufuskie Island</option><option>Somewhere else</option></select></label>
+            <label class="fld">When?<select name="when"><option>As soon as possible</option><option>Within 2 weeks</option><option>This month</option><option>Just pricing it out</option></select></label>
+          </div>
+          <div class="f-row one">
+            <label class="fld">Interested in a maintenance plan?<select name="plan"><option>Not right now</option><option>Monthly</option><option>Quarterly</option><option>Every six months</option></select></label>
+          </div>
+        </fieldset>
+        <fieldset data-step="3">
+          <legend>Where do we send your price?</legend>
+          <p class="hint">We never share your details.</p>
+          <div class="f-row">
+            <label class="fld">Name<input name="name" autocomplete="name" required></label>
+            <label class="fld">Phone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          </div>
+          <div class="f-row">
+            <label class="fld">Email<input name="email" type="email" autocomplete="email"></label>
+            <label class="fld">Property address<input name="address" autocomplete="street-address"></label>
+          </div>
+          <div class="f-row one"><label class="fld">Anything we should know?<textarea name="notes" placeholder="Gate code, problem spots, best time to call..."></textarea></label></div>
+          <p class="wiz-sub">Best way to reach you?</p>
+          <div class="chips" style="margin-top:8px">
+            <label class="chip"><input type="radio" name="contact" value="Call" checked><span>Call</span></label>
+            <label class="chip"><input type="radio" name="contact" value="Text"><span>Text</span></label>
+            <label class="chip"><input type="radio" name="contact" value="Email"><span>Email</span></label>
+          </div>
+        </fieldset>
+        <p class="wiz-err" id="wiz-err" role="alert"></p>
+        <div class="wiz-nav">
+          <button class="wiz-back" type="button" id="wiz-back" hidden>&larr; Back</button>
+          <button class="btn btn-water" type="submit" id="wiz-next">Next <span class="arrow" aria-hidden="true">&rarr;</span></button>
+        </div>
+      </form>
+      <div class="wiz-done" role="status">
+        <img src="assets/shield.svg" alt="" width="240" height="280">
+        <h3>You&rsquo;re on the list<span id="wiz-name"></span>.</h3>
+        <p>We&rsquo;ll be in touch quickly with your free estimate. Need us sooner? Call or text 843-816-6523.</p>
+        <p class="note">Website preview: on the live site this request goes straight to Premier&rsquo;s phone and CRM. Nothing was sent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 16. BRAND SIGN-OFF -->
+<section class="sign" id="brand" aria-labelledby="brand-title" data-tone="dark">
+  <div class="wrap">
+    <span class="kicker" id="brand-title">Premier Soft Wash &middot; Protecting your assets</span>
+    <div class="sign-stage rv" style="margin-top:24px">
+      <video id="sign-v0" class="on" muted playsinline preload="none" poster="../media/logo-build/logo-3d-poster.jpg" data-src="../media/logo-build/logo-3d-wide.mp4" aria-label="The Premier shield logo assembling in 3D"></video>
+      <video id="sign-v1" muted playsinline loop preload="none" poster="../media/sunset-logo/sunset-logo-poster.jpg" data-src="../media/sunset-logo/sunset-logo-wide.mp4" aria-label="The Premier logo at sunset"></video>
+      <video id="sign-v2" muted playsinline loop preload="none" poster="../media/live-logo-poster.jpg" data-src="../media/live-logo-3d-wide.mp4" aria-label="The live 3D Premier logo"></video>
+      <button class="sign-sound" id="sign-sound" type="button" aria-pressed="false">Sound on</button>
+    </div>
+    <div class="sign-tabs" role="group" aria-label="Choose a logo animation">
+      <button type="button" data-sign="0" aria-pressed="true">3D reveal</button>
+      <button type="button" data-sign="1" aria-pressed="false">Sunset</button>
+      <button type="button" data-sign="2" aria-pressed="false">Live logo</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft" data-tone="dark">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <img src="assets/logo-on-dark.svg" alt="Premier Soft Wash" width="810" height="280" loading="lazy">
+        <p>Soft washing and pressure washing for the Lowcountry. Residential and commercial, licensed and insured.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a class="ft-phone" href="tel:+18438166523">843-816-6523</a></li>
+          <li><a href="sms:+18438166523">Text us a photo</a></li>
+          <li><a href="https://www.instagram.com/premiersoftwashllc/" target="_blank" rel="noopener">Instagram @premiersoftwashllc</a></li>
+          <li>Bluffton, SC</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">House soft washing</a></li>
+          <li><a href="#services">Roof soft washing</a></li>
+          <li><a href="#services">Driveways &amp; concrete</a></li>
+          <li><a href="#services">Patios &amp; pavers</a></li>
+          <li><a href="#services">Gutters &amp; windows</a></li>
+          <li><a href="#services">Commercial plans</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Areas</h4>
+        <ul>
+          <li>Hilton Head Island</li><li>Bluffton</li><li>Okatie &amp; Hardeeville</li><li>Ridgeland</li><li>Beaufort &amp; Port Royal</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-base">
+      <span>&copy; 2026 Premier Soft Wash LLC. Residential and commercial, licensed and insured.</span>
+      <a class="ft-aam" href="https://aboveallmediasc.com/" target="_blank" rel="noopener"><span>Website preview by</span><img src="assets/aam-mark.png" alt="Above All Media" width="400" height="164" loading="lazy"></a>
+    </div>
+  </div>
+</footer>
+
+<nav class="mbar" id="mbar" aria-label="Quick contact">
+  <a href="tel:+18438166523">Call</a>
+  <a href="sms:+18438166523">Text</a>
+  <a class="go" href="#estimate">Free Estimate</a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script src="assets/wash.js" defer></script>
+</body>
+</html>
