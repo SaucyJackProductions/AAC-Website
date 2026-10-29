@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex, nofollow">
+<title>Premier Service Agreement</title><link rel="icon" href="../media/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Same system as the hub: alternating navy / paper bands, 1120px column. One committed brand look, so no theme switch. */
+:root{
+  --navy:#0E1A33; --navy2:#17284A; --navy3:#22355C;
+  --paper:#F4F6F9; --card:#FFFFFF; --line:#D9E0EA;
+  --blue:#2F6FE0; --sky:#5AA8FF; --yellow:#F2C230;
+  --ink:#0E1A33; --mute:#4A5670; --mute-d:#BFCBE0;
+  --good:#1E9E6A; --warn:#E08A1E; --bad:#D9483B;
+  --display:'Archivo Black','Arial Black',Impact,sans-serif;
+  --label:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --body:'Public Sans','Segoe UI',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 20.5px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+img{max-width:100%}
+a{color:var(--blue)}
+.dark a{color:var(--sky)}
+.band{padding-block:80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band.dark{background:var(--navy);color:#F4F6F9}
+.band.light{background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font:800 18px/1.2 var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin:0}
+.dark .eyebrow{color:var(--yellow)}
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,7.4vw,86px)}
+h1 span,h2 span{color:var(--yellow)}
+.light h2 span{color:var(--blue)}
+h2{font-size:clamp(30px,5vw,52px)}
+h3{font:800 27.5px/1.15 var(--label);text-transform:uppercase;letter-spacing:.04em;margin:0}
+p{margin:0}
+.lead{font-size:clamp(20px,2.4vw,23px);max-width:66ch;color:var(--mute)}
+.dark .lead{color:var(--mute-d)}
+.head{display:flex;flex-direction:column;gap:14px}
+.src{font-size:18.5px;color:var(--mute)}
+.dark .src{color:#8D9BB8}
+.src a{color:inherit}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);border-bottom:1px solid var(--navy3);padding-inline:16px}
+nav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;height:60px;overflow-x:auto}
+nav img{height:34px;flex:none}
+nav a{font:800 18px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-d);text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{color:var(--yellow);outline:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--navy3);border-radius:18px;overflow:hidden}
+.stat{background:var(--navy2);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.stat b{font:800 clamp(32px,4.2vw,46px)/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.stat span{font-size:18px;color:var(--mute-d)}
+.stat.bad b{color:#FF8A7E}
+.note{border-left:4px solid var(--yellow);background:var(--navy2);padding:18px 22px;border-radius:0 12px 12px 0;color:var(--mute-d)}
+.note b{color:#fff}
+.light .note{background:#FFF8E1;color:var(--ink)}
+.light .note b{color:var(--ink)}
+.ph{background:rgba(242,194,48,.22);border-bottom:2px dashed var(--yellow);padding:0 4px;border-radius:3px}
+.chip{display:inline-block;font:800 15px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;color:#fff;vertical-align:middle}
+.chip.good{background:var(--good)}.chip.fix{background:var(--warn)}.chip.miss{background:var(--bad)}.chip.same{background:#6B7690}
+/* comparison table */
+.cmp{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr) minmax(0,1.15fr);background:var(--card)}
+.row>div{padding:16px 18px;min-width:0}
+.row .n{font:800 33.5px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums;padding-right:0}
+.row .t b{display:block;font-weight:700;margin-bottom:4px}
+.row .t p{color:var(--mute);font-size:18px}
+.row .u{background:#F0F6FF;border-left:3px solid var(--blue)}
+.row .u b{display:block;font-weight:700;margin-bottom:4px;color:var(--navy)}
+.row .u p{color:var(--ink);font-size:18px}
+.row.hd>div{background:var(--navy);color:#fff;font:800 17px var(--label);letter-spacing:.14em;text-transform:uppercase;padding-block:12px}
+.row.hd .u{border-left-color:var(--yellow)}
+.grp{background:var(--paper);padding:10px 18px;font:800 17px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(120px,240px) minmax(0,1fr);gap:14px;align-items:center}
+.bar .lab{font-size:18px;color:var(--mute-d)}
+.bar .lab b{color:#fff}
+.bar .tr{height:26px;background:var(--navy3);border-radius:6px;overflow:hidden;position:relative}
+.bar .fill{height:100%;background:#7E8BA6;border-radius:6px}
+.bar .fill.me{background:var(--yellow)}
+.bar .val{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:800 19px var(--label);color:#fff;font-variant-numeric:tabular-nums}
+.chart{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dark .card{background:var(--navy2);border-color:var(--navy3)}
+.card ul,.pc ul,.pr ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:18.5px}
+.card ul{color:var(--mute)}
+.dark .card ul{color:var(--mute-d)}
+.card .k{font:800 48px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.dark .card .k{color:var(--yellow)}
+.card p{color:var(--mute);font-size:18.5px}
+.dark .card p{color:var(--mute-d)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vs .card h3 .chip{margin-left:6px}
+.pros li::marker{content:"+  ";color:var(--good);font-weight:700}
+.cons li::marker{content:"–  ";color:var(--bad);font-weight:700}
+/* price */
+.price{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.pc{background:var(--navy2);border:1px solid var(--navy3);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pc.hl{background:var(--paper);color:var(--ink);border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.pc .amt{font:800 60px/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.pc.hl .amt{color:var(--blue)}
+.pc .was{font-size:17.5px;color:var(--mute-d)}
+.pc.hl .was{color:var(--mute)}
+.pc ul{color:var(--mute-d)}
+.pc.hl ul{color:var(--mute)}
+.pc .tag{align-self:flex-start;font:800 15.5px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:var(--yellow);color:var(--navy)}
+.pc .be{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:12px;font-size:18px;color:var(--mute-d)}
+.pc.hl .be{border-color:var(--line);color:var(--ink)}
+.pc .be b{font:800 26.5px var(--label);color:var(--yellow)}
+.pc.hl .be b{color:var(--blue)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:18.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.dark th{color:#8D9BB8}
+.dark td{border-color:var(--navy3);color:#F4F6F9}
+.dark th{border-color:var(--navy3)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.big{font:800 24px var(--label)}
+tr.tot td{font-weight:700;border-top:2px solid var(--ink)}
+.dark tr.tot td{border-top-color:var(--yellow)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 8px}
+.dark .tbl{background:var(--navy2);border-color:var(--navy3)}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.dark .pos{color:#5FD3A0} .dark .neg{color:#FF8A7E}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.ctl{display:flex;flex-direction:column;gap:18px}
+.ctl label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:18.5px}
+.ctl label span.v{font:800 26.5px var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.ctl input[type=range]{width:100%;accent-color:var(--blue)}
+.ctl select{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:800 18px var(--label);letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.out{background:var(--navy);color:#fff;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.out .ln{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--navy3);padding-bottom:10px;font-size:18.5px;color:var(--mute-d)}
+.out .ln b{font:800 26.5px var(--label);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .ln.hi b{color:var(--yellow);font-size:36px}
+.out .ln.gd b{color:#5FD3A0}
+.out .ln.bd b{color:#FF8A7E}
+/* steps */
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.step .d{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font:800 24px var(--label)}
+.step p{color:var(--mute);font-size:18.5px}
+.dark .step p{color:var(--mute-d)}
+.step code{font-size:17px;background:rgba(47,111,224,.1);padding:1px 5px;border-radius:4px}
+/* value stack */
+.vstack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vi{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#F4F6F9;min-width:0}
+.vi img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.vi div{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.vi b{color:#fff;font:800 25px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em}
+.vi span{font-size:17.5px;color:var(--mute-d)}
+.vi em{font-style:normal;font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.vi:hover,.vi:focus-visible{border-color:var(--yellow);outline:none}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pr{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.pr.yes{background:var(--yellow);color:var(--navy)}
+.pr.no{background:var(--navy2);border:1px solid var(--navy3);color:var(--mute-d)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--blue);border-radius:20px;padding:30px 32px}
+.cta h2{font-size:clamp(26px,4vw,40px);color:#fff}
+.cta p{color:#E4ECFB}
+.btn{display:inline-block;font:800 20.5px var(--label);letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;border-radius:12px;background:var(--yellow);color:var(--navy)!important;text-decoration:none}
+footer .src{line-height:1.8}
+/* outlook */
+.lg{display:flex;gap:18px;font-size:16px;color:var(--mute);margin:0}
+.lg i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.chartL{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.chartL svg{width:100%;height:auto;display:block}
+.chartL .sx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){.chartL .sx svg{min-width:600px}}
+.chartL .cap{font-size:16px;color:var(--mute)}
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.phase{background:var(--navy2);border:1px solid var(--navy3);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.phase .w{font:800 16px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow)}
+.phase h3{color:#fff;font-size:24px}
+.phase ul{margin:0;padding-left:18px;color:var(--mute-d);font-size:17px;display:flex;flex-direction:column;gap:4px}
+.phase .m{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:10px;font-size:16px;color:#fff}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:800 19px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em;color:var(--navy)}
+.flow span:nth-child(4n+1){background:var(--navy);color:var(--yellow);border-color:var(--navy)}
+.flow b{color:var(--blue);font-size:22px}
+.ups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.up{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.up .ic{font:800 15px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.up ul{margin:0;padding-left:20px;color:var(--mute);font-size:17.5px;display:flex;flex-direction:column;gap:5px}
+.up li::marker{content:"✓  ";color:var(--good);font-weight:700}
+@media (max-width:900px){.phases,.ups{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .price,.cols3,.vstack{grid-template-columns:1fr}
+  .cols,.vs,.calc,.promise{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:19px}
+  .pc .amt{font-size:46px}
+
+  .band{padding-block:56px}
+  .row{grid-template-columns:40px minmax(0,1fr)}
+  .row .u{grid-column:1/-1;border-left:0;border-top:3px solid var(--blue)}
+  .row.hd .u{display:none}
+  .row .n{font-size:26.5px}
+  .bar{grid-template-columns:1fr;gap:4px}
+}
+</style>
+<style>
+.doc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(20px,4vw,44px);display:flex;flex-direction:column;gap:28px}
+.parties{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.parties div{border:1px solid var(--line);border-radius:12px;padding:16px;font-size:18px}
+.parties b{display:block;font:800 16px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.terms{counter-reset:t;display:flex;flex-direction:column;gap:14px;font-size:18.5px}
+.terms h3{counter-increment:t;font-size:24px}
+.terms h3::before{content:counter(t) ". ";color:var(--blue)}
+.terms p{color:var(--ink)}
+.sig{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.sig div{display:flex;flex-direction:column;gap:30px;font-size:17px}
+.sig span{border-top:1.5px solid var(--ink);padding-top:6px}
+.draft{background:#FFF8E1;border:2px dashed var(--yellow);border-radius:12px;padding:14px 18px;font-size:17.5px}
+.printbtn{font:800 17px var(--label);letter-spacing:.1em;text-transform:uppercase;padding:12px 18px;border-radius:12px;border:0;background:var(--yellow);color:var(--navy);cursor:pointer;align-self:flex-start}
+@media (max-width:640px){.parties,.sig{grid-template-columns:1fr}}
+@media print{nav,.printbtn,.noprint{display:none!important} body{background:#fff} .band{padding:0} .doc{border:0;padding:0} .band.dark{background:#fff;color:#000} .dark .lead,.dark .eyebrow{color:#000} h1 span{color:#2F6FE0}}
+</style></head><body>
+<nav aria-label="Sections"><div class="in"><a href="../"><img src="../media/logo-dark.svg" alt="Premier Soft Wash: back to the hub"></a><a href="#scope-a">Launch</a><a href="#scope-b">Monthly</a><a href="#addons">Add-ons</a><a href="#costs">At cost</a><a href="#terms">Terms</a><a href="#sign">Sign</a><a href="../retainer/">Plans + ROI</a><a href="../">← Hub</a></div></nav>
+<section class="band dark" style="padding-block:56px">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Above All Media × Premier Soft Wash · Estimate and service agreement</p><h1>Every piece of work, <span>priced</span></h1>
+<p class="lead">Part A is the one-time launch. Part B is the monthly Growth plan. Prices are Premier's partner rate (30% off list).</p></div>
+</div></section>
+<section class="band light" style="padding-top:40px">
+<div class="wrap">
+<div class="doc">
+<p class="draft noprint"><b>Draft for review.</b> Prices are proposals for Chandler to confirm, and the terms should be reviewed by a South Carolina attorney before anyone signs.</p>
+<button class="printbtn" type="button" onclick="window.print()">Print or save as PDF</button>
+<div class="parties">
+<div><b>Provider</b>Above All Media (Chandler Pirie)<br>Hilton Head Island, SC · aboveallmediasc.com</div>
+<div><b>Client</b>Premier Soft Wash LLC<br>Brandon Williams, President · Jerahmy Sorensen, COO<br>Bluffton, SC · 843-816-6523</div>
+</div>
+<p style="font-size:18px">Estimate date: <span class="ph">October 29, 2026</span> · Valid for 30 days · Agreement start date: <span class="ph">________</span></p>
+
+<div id="scope-a" class="head"><p class="eyebrow">Part A</p><h2>One-time launch setup</h2></div>
+<div class="scroll"><table>
+<thead><tr><th class="num">#</th><th>Work</th><th class="num">List</th><th class="num">Partner price</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td>Hero commercial: 90 s film + 30 s and 15 s cuts (v7) <span class="chip good">Delivered</span></td><td class="num">$4,500</td><td class="num big">$3,150</td></tr>
+<tr><td class="num">2</td><td>3 vertical reels <span class="chip good">Delivered</span></td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td class="num">3</td><td>Drone aerial filming and edit <span class="chip good">Delivered</span></td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td class="num">4</td><td>38 retouched, color-graded stills <span class="chip good">Delivered</span></td><td class="num">$950</td><td class="num big">$665</td></tr>
+<tr><td class="num">5</td><td>3 footage GIFs and web loops <span class="chip good">Delivered</span></td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td class="num">6</td><td>3D shield logo reveal animation <span class="chip good">Delivered</span></td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td class="num">7</td><td>Sunset logo animation, with sound <span class="chip good">Delivered</span></td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">8</td><td>Neon live logo loop (square, wide, GIF) <span class="chip good">Delivered</span></td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td class="num">9</td><td>New shield logo, 3 alternative styles and brand kit <span class="chip good">Delivered</span></td><td class="num">$1,500</td><td class="num big">$1,050</td></tr>
+<tr><td class="num">10</td><td>Digital business card design (tap card + QR) <span class="chip good">Delivered</span></td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td class="num">11</td><td>Custom website with grime-to-clean effects <span class="chip good">Delivered</span></td><td class="num">$3,500</td><td class="num big">$2,450</td></tr>
+<tr><td class="num">12</td><td>SEO + growth plan: keyword map, 8 pillars, 12-month roadmap <span class="chip good">Delivered</span></td><td class="num">$900</td><td class="num big">$630</td></tr>
+<tr><td class="num">13</td><td>42-slide pitch deck <span class="chip good">Delivered</span></td><td class="num">–</td><td class="num big"><span class="pos">No charge</span></td></tr>
+<tr><td class="num">14</td><td>Proposal hub and Local Legend page <span class="chip good">Delivered</span></td><td class="num">–</td><td class="num big"><span class="pos">No charge</span></td></tr>
+<tr><td class="num">15</td><td>Topline comparison and ROI analysis <span class="chip good">Delivered</span></td><td class="num">–</td><td class="num big"><span class="pos">No charge</span></td></tr>
+<tr><td class="num">16</td><td>Website launch: domain switch, first 5 service × town pages, redirects, schema, speed</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td class="num">17</td><td>Real before-and-after shoot for the website and Google</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td class="num">18</td><td>Google Business Profile overhaul</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td class="num">19</td><td>40+ directory listings created or corrected</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td class="num">20</td><td>CRM build (Google Workspace CRM) or Jobber setup, contact import</td><td class="num">$800</td><td class="num big">$560</td></tr>
+<tr><td class="num">21</td><td>Every past client imported: Topline, invoices and phone contacts, cleaned and enriched (property, services, job value, profit, referral source)</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td class="num">22</td><td>Referral program: unique codes, "give 15%, get 15%" coupons, reward tracking</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">23</td><td>Review engine + 134-contact review campaign</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">24</td><td>Missed-call text-back and quote follow-ups, incl. texting registration</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">25</td><td>Tracking: GA4, Tag Manager, Meta Pixel + Conversions API, call tracking</td><td class="num">$700</td><td class="num big">$490</td></tr>
+<tr><td class="num">26</td><td>Google Ads rebuild + Local Services Ads setup</td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td class="num">27</td><td>Meta ads account and retargeting setup</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">28</td><td>The Premier Weekly email + text setup and templates</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td class="num">29</td><td>Account moves into Premier's name + Topline data export</td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td class="num">30</td><td>Brand rollout art: truck, yard sign, door hanger, shirts</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr class="tot"><td></td><td>Part A total</td><td class="num">$23,850</td><td class="num big">$16,695</td></tr>
+</tbody></table></div>
+<p style="font-size:18px">Payment: 50% ($8,347) at signing and 50% ($8,348) when the new website goes live; or 3 monthly payments of $5,565. <span class="ph">Confirm</span></p>
+
+<div id="scope-b" class="head"><p class="eyebrow">Part B</p><h2>Monthly Growth plan</h2></div>
+<div class="scroll"><table>
+<thead><tr><th class="num">#</th><th>Monthly work</th><th class="num">Each month</th><th class="num">Monthly price</th></tr></thead>
+<tbody>
+<tr><td class="num">M1</td><td>Filming half-day each month + 8 edited vertical videos</td><td class="num">8 videos</td><td class="num big">$450</td></tr>
+<tr><td class="num">M2</td><td>Social posting: 3 posts a week across Facebook and Instagram</td><td class="num">12+ posts</td><td class="num big">$100</td></tr>
+<tr><td class="num">M3</td><td>Google Business Profile: 3 real-job posts a week, photos, Q&amp;A</td><td class="num">12 posts</td><td class="num big">$50</td></tr>
+<tr><td class="num">M4</td><td>Review engine running + personal replies within 48 hours</td><td class="num">Every job</td><td class="num big">$75</td></tr>
+<tr><td class="num">M5</td><td>SEO: 2 new service × town pages, citations, links, Maps rank tracking</td><td class="num">2 pages</td><td class="num big">$175</td></tr>
+<tr><td class="num">M6</td><td>Google Ads + Local Services Ads management (no % of spend)</td><td class="num">Weekly</td><td class="num big">$100</td></tr>
+<tr><td class="num">M7</td><td>Meta ads + retargeting management</td><td class="num">Weekly</td><td class="num big">$50</td></tr>
+<tr><td class="num">M8</td><td>The Premier Weekly email (with rotating coupon and referral offer) + 1–2 texts</td><td class="num">4 sends</td><td class="num big">$25</td></tr>
+<tr><td class="num">M9</td><td>CRM automations, website hosting care and updates</td><td class="num">Ongoing</td><td class="num big">$25</td></tr>
+<tr class="tot"><td></td><td>Part B total, per month (list $1,500)</td><td></td><td class="num big">$1,050</td></tr>
+</tbody></table></div>
+<p style="font-size:18px">Billed on the 1st of each month in advance, starting the month the launch begins. Optional upgrade to the Dominate plan (4 videos a week, quarterly Landmark Clean film, SERG screen spot refresh, 4 town pages a month): +$700 a month.</p>
+
+
+<div id="addons" class="head"><p class="eyebrow">Part C · optional</p><h2>Add-ons, only if chosen</h2></div>
+<div class="scroll"><table>
+<thead><tr><th>Add-on</th><th class="num">Billing</th><th class="num">Partner price</th></tr></thead>
+<tbody>
+<tr><td>AI search optimization (ChatGPT, Google AI answers)</td><td class="num">Monthly</td><td class="num big">$150/mo</td></tr>
+<tr><td>Commercial outreach to HOAs, property managers, restaurants</td><td class="num">Monthly</td><td class="num big">$400/mo</td></tr>
+<tr><td>2 long-form blog articles</td><td class="num">Monthly</td><td class="num big">$200/mo</td></tr>
+<tr><td>Lead platforms: Nextdoor, Yelp, Angi, Thumbtack</td><td class="num">Monthly</td><td class="num big">$100/mo</td></tr>
+<tr><td>Traditional media buying: radio, billboards, mailers</td><td class="num">Monthly</td><td class="num big">$250/mo + spend</td></tr>
+<tr><td>Extra film day (full day, 2 cameras + drone) <span class="chip good">Filmed by Chandler</span></td><td class="num">Per day</td><td class="num big">$750</td></tr>
+<tr><td>Customer testimonial video (60 s) <span class="chip good">Filmed by Chandler</span></td><td class="num">Each</td><td class="num big">$300</td></tr>
+<tr><td>Event, sponsorship or crew photography <span class="chip good">Shot by Chandler</span></td><td class="num">Per event</td><td class="num big">$500</td></tr>
+<tr><td>Commercial pitch video for a property manager or HOA bid <span class="chip good">Filmed by Chandler</span></td><td class="num">Each</td><td class="num big">$600</td></tr>
+<tr><td>Drone before-and-after for a large property <span class="chip good">Flown by Chandler</span></td><td class="num">Each</td><td class="num big">$350</td></tr>
+<tr><td>Press release + local media pitch</td><td class="num">Each</td><td class="num big">$350</td></tr>
+<tr><td>Landing page with A/B testing</td><td class="num">Each</td><td class="num big">$400</td></tr>
+</tbody></table></div>
+<p style="font-size:18px">Add-ons are chosen in writing (email is fine) and billed with the next monthly invoice. Prices are proposals to confirm.</p>
+<div id="costs" class="head"><p class="eyebrow">Paid directly by Premier, never marked up</p><h2>At cost</h2></div>
+<div class="scroll"><table>
+<thead><tr><th>Item</th><th>Paid to</th><th class="num">Estimate</th></tr></thead>
+<tbody>
+<tr><td>Google ad spend</td><td>Google, on Premier's card</td><td class="num">$500–$1,000/mo</td></tr>
+<tr><td>Meta ad spend (optional)</td><td>Meta, on Premier's card</td><td class="num">Premier's choice</td></tr>
+<tr><td>CRM: Google Workspace build, or Jobber Core</td><td>Google / Twilio, or Jobber</td><td class="num">~$10–$49/mo</td></tr>
+<tr><td>Domain renewal</td><td>Premier's registrar</td><td class="num">~$12–$20/yr</td></tr>
+<tr><td>Printing (tap cards, yard signs, door hangers, shirts, truck wrap)</td><td>Local printer</td><td class="num">Quoted per job</td></tr>
+<tr><td>Website hosting</td><td>GitHub Pages</td><td class="num">$0</td></tr>
+</tbody></table></div>
+
+<div id="terms" class="head"><p class="eyebrow">Terms</p><h2>The agreement</h2></div>
+<div class="terms">
+<h3>Term</h3><p>An initial 90-day launch term from the start date. After that, the monthly plan continues month to month until either party gives 30 days' written notice.</p>
+<h3>Payment</h3><p>Part A as above. Part B invoices are due within 7 days. Work pauses if an invoice is more than 15 days late. Pass-through costs are paid by Premier directly.</p>
+<h3>Ownership of work</h3><p>When each invoice is paid in full, Premier owns the final films, photos, logos, website files and written content delivered under it, and receives clean, unwatermarked masters. Until then, previews carry the Above All Media watermark. Above All Media may show the work in its portfolio unless Premier asks in writing that it not.</p>
+<h3>Accounts stay in Premier's name</h3><p>The domain, Google Business Profile, Google Ads, Google Analytics, Meta business portfolio, ad accounts, Pixel and CRM are owned by Premier. Above All Media is added as a manager or partner and removes its own access when the agreement ends.</p>
+<h3>Premier's part</h3><p>Give account access in the first week, approve content within 3 business days (silence counts as approval for routine posts), provide job-site access for film days, and send real job photos when possible.</p>
+<h3>Likeness and release</h3><p>Brandon Williams, Jerahmy Sorensen and any crew who appear on camera agree that their name, image and voice may be used in Premier's marketing. Customers and their homes appear only with permission. Footage of partner businesses (for example Local Legend and SERG Group) is used only with their written approval.</p>
+<h3>Music and media</h3><p>Music, footage and fonts are original or properly licensed. Spots shown on restaurant screens or broadcast use music licensed for public playback.</p>
+<h3>No ranking guarantee</h3><p>Google and Meta decide rankings and reach. Above All Media commits to doing the work in this agreement on schedule and reporting real results every month; it does not guarantee a specific rank, number of leads or revenue. The projections shared with Premier are estimates, not promises.</p>
+<h3>Customer data and messages</h3><p>Premier owns its customer list. Above All Media uses it only to run Premier's marketing, keeps it private, and returns or deletes its copies when the agreement ends. Marketing emails include an unsubscribe link and Premier's address; texts go only to customers who agreed to receive them.</p>
+<h3>Confidentiality</h3><p>Each party keeps the other's customer lists, pricing and business information private.</p>
+<h3>Ending the agreement</h3><p>On notice, Above All Media finishes or hands over work in progress, delivers all paid-for files, and confirms Premier holds every account. Fees paid for completed months are not refunded.</p>
+<h3>Liability</h3><p>Each party's total liability under this agreement is limited to the fees paid in the 3 months before a claim, except for unpaid fees or misuse of the other's confidential information.</p>
+<h3>Governing law</h3><p>South Carolina law applies. The parties will try to settle any disagreement in good faith before taking other action.</p>
+</div>
+
+<div id="sign" class="head"><p class="eyebrow">Signatures</p><h2>Agreed</h2></div>
+<div class="sig">
+<div><b>Premier Soft Wash LLC</b><span>Signature</span><span>Name and title</span><span>Date</span></div>
+<div><b>Above All Media</b><span>Signature</span><span>Chandler Pirie</span><span>Date</span></div>
+</div>
+</div>
+</div></section>
+<img src="../media/aam-mark.png" alt="Above All Media" class="noprint" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
+</body></html>

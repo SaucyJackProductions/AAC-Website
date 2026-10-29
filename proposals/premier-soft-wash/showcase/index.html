@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Premier × Above All Media</title>
+<link rel="icon" href="../media/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Same system as the hub: alternating navy / paper bands, 1120px column. One committed brand look, so no theme switch. */
+:root{
+  --navy:#0E1A33; --navy2:#17284A; --navy3:#22355C;
+  --paper:#F4F6F9; --card:#FFFFFF; --line:#D9E0EA;
+  --blue:#2F6FE0; --sky:#5AA8FF; --yellow:#F2C230;
+  --ink:#0E1A33; --mute:#4A5670; --mute-d:#BFCBE0;
+  --good:#1E9E6A; --warn:#E08A1E; --bad:#D9483B;
+  --display:'Archivo Black','Arial Black',Impact,sans-serif;
+  --label:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --body:'Public Sans','Segoe UI',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 20.5px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+img{max-width:100%}
+a{color:var(--blue)}
+.dark a{color:var(--sky)}
+.band{padding-block:80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band.dark{background:var(--navy);color:#F4F6F9}
+.band.light{background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font:800 18px/1.2 var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin:0}
+.dark .eyebrow{color:var(--yellow)}
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,7.4vw,86px)}
+h1 span,h2 span{color:var(--yellow)}
+.light h2 span{color:var(--blue)}
+h2{font-size:clamp(30px,5vw,52px)}
+h3{font:800 27.5px/1.15 var(--label);text-transform:uppercase;letter-spacing:.04em;margin:0}
+p{margin:0}
+.lead{font-size:clamp(20px,2.4vw,23px);max-width:66ch;color:var(--mute)}
+.dark .lead{color:var(--mute-d)}
+.head{display:flex;flex-direction:column;gap:14px}
+.src{font-size:18.5px;color:var(--mute)}
+.dark .src{color:#8D9BB8}
+.src a{color:inherit}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);border-bottom:1px solid var(--navy3);padding-inline:16px}
+nav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;height:60px;overflow-x:auto}
+nav img{height:34px;flex:none}
+nav a{font:800 18px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-d);text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{color:var(--yellow);outline:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--navy3);border-radius:18px;overflow:hidden}
+.stat{background:var(--navy2);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.stat b{font:800 clamp(32px,4.2vw,46px)/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.stat span{font-size:18px;color:var(--mute-d)}
+.stat.bad b{color:#FF8A7E}
+.note{border-left:4px solid var(--yellow);background:var(--navy2);padding:18px 22px;border-radius:0 12px 12px 0;color:var(--mute-d)}
+.note b{color:#fff}
+.light .note{background:#FFF8E1;color:var(--ink)}
+.light .note b{color:var(--ink)}
+.ph{background:rgba(242,194,48,.22);border-bottom:2px dashed var(--yellow);padding:0 4px;border-radius:3px}
+.chip{display:inline-block;font:800 15px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;color:#fff;vertical-align:middle}
+.chip.good{background:var(--good)}.chip.fix{background:var(--warn)}.chip.miss{background:var(--bad)}.chip.same{background:#6B7690}
+/* comparison table */
+.cmp{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr) minmax(0,1.15fr);background:var(--card)}
+.row>div{padding:16px 18px;min-width:0}
+.row .n{font:800 33.5px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums;padding-right:0}
+.row .t b{display:block;font-weight:700;margin-bottom:4px}
+.row .t p{color:var(--mute);font-size:18px}
+.row .u{background:#F0F6FF;border-left:3px solid var(--blue)}
+.row .u b{display:block;font-weight:700;margin-bottom:4px;color:var(--navy)}
+.row .u p{color:var(--ink);font-size:18px}
+.row.hd>div{background:var(--navy);color:#fff;font:800 17px var(--label);letter-spacing:.14em;text-transform:uppercase;padding-block:12px}
+.row.hd .u{border-left-color:var(--yellow)}
+.grp{background:var(--paper);padding:10px 18px;font:800 17px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(120px,240px) minmax(0,1fr);gap:14px;align-items:center}
+.bar .lab{font-size:18px;color:var(--mute-d)}
+.bar .lab b{color:#fff}
+.bar .tr{height:26px;background:var(--navy3);border-radius:6px;overflow:hidden;position:relative}
+.bar .fill{height:100%;background:#7E8BA6;border-radius:6px}
+.bar .fill.me{background:var(--yellow)}
+.bar .val{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:800 19px var(--label);color:#fff;font-variant-numeric:tabular-nums}
+.chart{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dark .card{background:var(--navy2);border-color:var(--navy3)}
+.card ul,.pc ul,.pr ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:18.5px}
+.card ul{color:var(--mute)}
+.dark .card ul{color:var(--mute-d)}
+.card .k{font:800 48px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.dark .card .k{color:var(--yellow)}
+.card p{color:var(--mute);font-size:18.5px}
+.dark .card p{color:var(--mute-d)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vs .card h3 .chip{margin-left:6px}
+.pros li::marker{content:"+  ";color:var(--good);font-weight:700}
+.cons li::marker{content:"–  ";color:var(--bad);font-weight:700}
+/* price */
+.price{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.pc{background:var(--navy2);border:1px solid var(--navy3);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pc.hl{background:var(--paper);color:var(--ink);border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.pc .amt{font:800 60px/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.pc.hl .amt{color:var(--blue)}
+.pc .was{font-size:17.5px;color:var(--mute-d)}
+.pc.hl .was{color:var(--mute)}
+.pc ul{color:var(--mute-d)}
+.pc.hl ul{color:var(--mute)}
+.pc .tag{align-self:flex-start;font:800 15.5px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:var(--yellow);color:var(--navy)}
+.pc .be{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:12px;font-size:18px;color:var(--mute-d)}
+.pc.hl .be{border-color:var(--line);color:var(--ink)}
+.pc .be b{font:800 26.5px var(--label);color:var(--yellow)}
+.pc.hl .be b{color:var(--blue)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:18.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.dark th{color:#8D9BB8}
+.dark td{border-color:var(--navy3);color:#F4F6F9}
+.dark th{border-color:var(--navy3)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.big{font:800 24px var(--label)}
+tr.tot td{font-weight:700;border-top:2px solid var(--ink)}
+.dark tr.tot td{border-top-color:var(--yellow)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 8px}
+.dark .tbl{background:var(--navy2);border-color:var(--navy3)}
+table.mkt{min-width:980px}
+table.mkt td:nth-child(n+3),table.mkt th:nth-child(n+3){white-space:nowrap}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.dark .pos{color:#5FD3A0} .dark .neg{color:#FF8A7E}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.ctl{display:flex;flex-direction:column;gap:18px}
+.ctl label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:18.5px}
+.ctl label span.v{font:800 26.5px var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.ctl input[type=range]{width:100%;accent-color:var(--blue)}
+.ctl select{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:800 18px var(--label);letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.out{background:var(--navy);color:#fff;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.out .ln{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--navy3);padding-bottom:10px;font-size:18.5px;color:var(--mute-d)}
+.out .ln b{font:800 26.5px var(--label);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .ln.hi b{color:var(--yellow);font-size:36px}
+.out .ln.gd b{color:#5FD3A0}
+.out .ln.bd b{color:#FF8A7E}
+/* steps */
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.step .d{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font:800 24px var(--label)}
+.step p{color:var(--mute);font-size:18.5px}
+.dark .step p{color:var(--mute-d)}
+.step code{font-size:17px;background:rgba(47,111,224,.1);padding:1px 5px;border-radius:4px}
+/* value stack */
+.vstack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vi{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#F4F6F9;min-width:0}
+.vi img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.vi div{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.vi b{color:#fff;font:800 25px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em}
+.vi span{font-size:17.5px;color:var(--mute-d)}
+.vi em{font-style:normal;font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.vi:hover,.vi:focus-visible{border-color:var(--yellow);outline:none}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pr{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.pr.yes{background:var(--yellow);color:var(--navy)}
+.pr.no{background:var(--navy2);border:1px solid var(--navy3);color:var(--mute-d)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--blue);border-radius:20px;padding:30px 32px}
+.cta h2{font-size:clamp(26px,4vw,40px);color:#fff}
+.cta p{color:#E4ECFB}
+.btn{display:inline-block;font:800 20.5px var(--label);letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;border-radius:12px;background:var(--yellow);color:var(--navy)!important;text-decoration:none}
+footer .src{line-height:1.8}
+/* outlook */
+.lg{display:flex;gap:18px;font-size:16px;color:var(--mute);margin:0}
+.lg i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.chartL{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.chartL svg{width:100%;height:auto;display:block}
+.chartL .sx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){.chartL .sx svg{min-width:600px}}
+.chartL .cap{font-size:16px;color:var(--mute)}
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.phase{background:var(--navy2);border:1px solid var(--navy3);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.phase .w{font:800 16px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow)}
+.phase h3{color:#fff;font-size:24px}
+.phase ul{margin:0;padding-left:18px;color:var(--mute-d);font-size:17px;display:flex;flex-direction:column;gap:4px}
+.phase .m{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:10px;font-size:16px;color:#fff}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:800 19px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em;color:var(--navy)}
+.flow span:nth-child(4n+1){background:var(--navy);color:var(--yellow);border-color:var(--navy)}
+.flow b{color:var(--blue);font-size:22px}
+.ups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.up{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.up .ic{font:800 15px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.up ul{margin:0;padding-left:20px;color:var(--mute);font-size:17.5px;display:flex;flex-direction:column;gap:5px}
+.up li::marker{content:"✓  ";color:var(--good);font-weight:700}
+@media (max-width:900px){.phases,.ups{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .price,.cols3,.vstack{grid-template-columns:1fr}
+  .cols,.vs,.calc,.promise{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:19px}
+  .pc .amt{font-size:46px}
+
+  .band{padding-block:56px}
+  .row{grid-template-columns:40px minmax(0,1fr)}
+  .row .u{grid-column:1/-1;border-left:0;border-top:3px solid var(--blue)}
+  .row.hd .u{display:none}
+  .row .n{font-size:26.5px}
+  .bar{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+<nav aria-label="Sections"><div class="in">
+<img src="../media/logo-dark.svg" alt="Premier Soft Wash">
+<a href="#built">Already built</a><a href="#setup">The launch</a><a href="#market">Regional field</a><a href="#upside">Every upside</a><a href="#access">Access</a><a href="#save">Hosting + CRM</a>
+</div></nav>
+
+<!-- BUILT -->
+<section class="band dark" id="built">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The value stack · already delivered</p><h2>Before the first invoice</h2>
+<p class="lead">Before anything is signed, Above All Media has already built all of this for Premier, and it is live to review now.</p></div>
+<div class="vstack">
+<a class="vi" href="../website/"><img src="../local-legend/stills/premier-ll-20-drone-facade-full-sign-aam.jpg" alt=""><div><em>Preview</em><b>The new website</b><span>Grime-to-clean scroll, real film and stills, estimate form, town-page ready.</span></div></a>
+<a class="vi" href="../local-legend/#spots"><img src="../media/video/premier-hero-90s.jpg" alt=""><div><em>v7 · watch</em><b>Hero film + cutdowns</b><span>90 s commercial, 30 s and 15 s cuts for ads and SERG screens.</span></div></a>
+<a class="vi" href="../local-legend/#reels"><img src="../media/video/premier-reel-1-who-cleans.jpg" alt=""><div><em>3 reels</em><b>Vertical reels</b><span>Who cleans Local Legend at 2 a.m., the Costa Rica origin story, Local Legends Ep. 1.</span></div></a>
+<div class="vi"><img src="../media/live-logo-poster.jpg" alt=""><div><em>3 animations</em><b>3D, sunset + live logos</b><span>The 3D shield reveal, the original logo at sunset, the neon live logo.</span></div></div>
+<a class="vi" href="../local-legend/#stills"><img src="../local-legend/stills/premier-ll-01-duo-under-local-legend-sign-aam.jpg" alt=""><div><em>38 graded</em><b>Retouched stills</b><span>Brandon and Jerahmy, the rigs, drone and detail shots, ready for Google and the site.</span></div></a>
+<a class="vi" href="../local-legend/"><img src="../local-legend/stills/premier-ll-11-local-legend-sign-full-facade-aam.jpg" alt=""><div><em>Case study</em><b>Premier × Local Legend</b><span>The night shoot that opens the door to SERG's 18 restaurants.</span></div></a>
+<div class="vi"><img src="../media/brand-sheet.png" alt=""><div><em>Strategy</em><b>SEO + growth plan</b><span>Keyword map per service and town, 8 SEO pillars, the 12-month roadmap.</span></div></div>
+<div class="vi"><img src="../local-legend/stills/premier-ll-28-trucks-under-the-oaks-aam.jpg" alt=""><div><em>Brand</em><b>Digital card + brand kit</b><span>Tap card, QR, truck and sign art.</span></div></div>
+</div>
+</div>
+</section>
+
+
+
+<!-- SETUP -->
+<section class="band light" id="setup">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The launch, piece by piece</p><h2>What's built, <span>what's next</span></h2>
+<p class="lead">Every component of the launch. The built pieces are ready to review now; the rest goes live in the first 30 days.</p></div>
+<div class="stats" role="list" style="background:var(--line)">
+<div class="stat" role="listitem"><b>14</b><span>components already built</span></div>
+<div class="stat" role="listitem"><b>15</b><span>components in the first 30 days</span></div>
+<div class="stat" role="listitem"><b>1</b><span>local team, on Hilton Head</span></div>
+<div class="stat" role="listitem"><b>100%</b><span>owned by Premier</span></div>
+</div>
+<div class="tbl scroll"><table>
+<thead><tr><th>Status</th><th>Component</th></tr></thead>
+<tbody>
+<tr><td><span class="chip good">✓ Built</span></td><td>Hero commercial: 90 s film + 30 s and 15 s cuts (v7)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 vertical reels (who cleans Local Legend, origin story, Local Legends Ep. 1)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Drone aerial filming and edit, Local Legend night</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>38 retouched, color-graded stills</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 footage GIFs and web loops</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3D shield logo reveal animation</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Sunset logo animation (original logo, with sound)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Neon live logo loop (square, wide, GIF)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New shield logo, 3 alternative styles and brand kit</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Digital business card design (tap card + QR)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New custom website with grime-to-clean effects (preview)</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>SEO + growth plan: keyword map, 8 pillars, 12-month roadmap</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>42-slide pitch deck</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Proposal hub and Local Legend page</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Website launch: domain switch, first 5 service × town pages, redirects, schema, speed</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Real before-and-after shoot for the website and Google</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Business Profile overhaul: categories, services, areas, photos, Q&amp;A</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>40+ directory listings created or corrected (name, phone, address match)</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>CRM build (Google Workspace CRM) or Jobber setup, with contact import from Topline</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Every past client imported: Topline, invoices and phone contacts, cleaned and enriched (property, services, job value, profit, referral source)</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Referral program: unique codes, "give 15%, get 15%" coupons, reward tracking</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Review engine + the 134-contact review campaign</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Missed-call text-back and quote follow-ups, incl. texting registration</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Tracking: GA4, Tag Manager, Meta Pixel + Conversions API, call tracking</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Ads rebuild + Local Services Ads setup</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Meta ads account and retargeting setup</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>The Premier Weekly email + text setup and templates</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Account moves into Premier's name + Topline data export</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Brand rollout art: truck, yard sign, door hanger, shirts (printed at cost)</td></tr>
+</tbody></table></div>
+<div class="cols">
+<div class="card"><h3>What Premier gets on day one</h3><ul><li>Clean, unwatermarked masters of every film, photo and logo</li><li>The website files and domain in Premier's name</li><li>All accounts owned by Premier, with Above All Media as manager</li></ul></div>
+<div class="card"><h3>Printing, ads and software</h3><ul><li>Paid by Premier directly, at cost</li><li>Never marked up</li><li>No percentage taken on ad spend</li></ul></div>
+</div>
+</div>
+</section>
+
+<!-- MARKET -->
+<section class="band light" id="market" style="padding-top:24px">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The regional field</p><h2>Savannah, Charleston, <span>Hilton Head</span></h2>
+<p class="lead">The leading marketing agencies in the three nearest markets, and what each one lists as its focus. None of them pairs a local film crew with a restaurant-screen network.</p></div>
+<div class="tbl scroll"><table style="min-width:820px">
+<thead><tr><th>Market</th><th>Agency</th><th>Focus</th><th>Own film crew</th><th>Restaurant screens</th></tr></thead>
+<tbody>
+<tr style="background:#F0F6FF"><td>Hilton Head</td><td><b>Above All Media</b><br><span class="src" style="font-size:15px">Hilton Head Island, SC</span></td><td>Film crew, drone, web, SEO, ads, CRM and reviews, all in-house</td><td><span class="chip good">Yes</span></td><td><span class="chip good">SERG, 18 locations</span></td></tr>
+<tr><td>Savannah</td><td><b>Electric Lemonade</b><br><span class="src" style="font-size:15px">Savannah, GA</span></td><td>Content, SEO, PPC; no in-house film crew listed</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Savannah</td><td><b>Orange Bird</b><br><span class="src" style="font-size:15px">Pooler, GA</span></td><td>Strategy and content; video not a listed focus</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Savannah</td><td><b>Sugoi</b><br><span class="src" style="font-size:15px">Savannah, GA</span></td><td>Social, content, design, SEO, some video (15%)</td><td><span class="chip good">Some</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Charleston</td><td><b>Lounge Lizard</b><br><span class="src" style="font-size:15px">Charleston, SC office</span></td><td>Web, branding, SEO, PPC, social; national agency pricing</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Charleston</td><td><b>Colophon New Media</b><br><span class="src" style="font-size:15px">Charleston, SC</span></td><td>Web, SEO, social; video not listed</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Charleston</td><td><b>Q4Launch</b><br><span class="src" style="font-size:15px">Charleston, SC</span></td><td>Marketing, branding, web, social; video not listed</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Tucker Marketing Group</b><br><span class="src" style="font-size:15px">Hilton Head Island, SC</span></td><td>SEO, ads, social, web, email, branding; video talent only</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Coastal Marketing Strategies</b><br><span class="src" style="font-size:15px">Bluffton, SC</span></td><td>SEO and digital marketing for contractors; video not listed</td><td><span class="chip fix">Not listed</span></td><td><span class="chip fix">None</span></td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Hello Sidestreet</b><br><span class="src" style="font-size:15px">Serves Hilton Head + Bluffton</span></td><td>Digital marketing, web, video production</td><td><span class="chip good">Some</span></td><td><span class="chip fix">None</span></td></tr>
+</tbody></table></div>
+<p class="src">From each agency's own site and its Clutch or DesignRush listing, October 2026: <a href="https://clutch.co/agencies/digital-marketing/savannah">Clutch Savannah</a>; <a href="https://www.designrush.com/agency/digital-marketing/south-carolina/charleston">DesignRush Charleston</a>; <a href="https://www.tuckermg.com/">Tucker Marketing Group</a>; <a href="https://coastalmarketingstrategies.com/digital-marketing-agency/hilton-head-island-sc/">Coastal Marketing Strategies</a>; <a href="https://hellosidestreet.com/hilton-head-sc">Hello Sidestreet</a>.</p>
+</div>
+</section>
+
+<!-- UPSIDE -->
+<section class="band light" id="upside">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Everything Above All Media brings</p><h2>Every service, <span>every upside</span></h2>
+<p class="lead">All 18 parts of the program and what each one does for Premier. The theme across all of them: real people, real jobs and real video, owned by Premier.</p></div>
+<div class="ups">
+<div class="up"><span class="ic">Brandon + Jerahmy on camera</span><h3>Owner interviews</h3><ul><li>People hire people: homeowners meet the owners before they open the door</li><li>Turns a faceless brand into neighbors, and makes the price conversation easier</li><li>85% of people say a video convinced them to buy (Wyzowl 2026)</li><li>Clips reused in ads, the website, Google and the SERG screens</li></ul></div>
+<div class="up"><span class="ic">90 s + 30 s + 15 s cuts</span><h3>Hero film</h3><ul><li>Top of the website and YouTube, so the first visit feels premium</li><li>Doubles as the TV spot on SERG restaurant screens</li><li>Ready-made ad creative for Google and Meta</li><li>Sent with every quote to win the close</li></ul></div>
+<div class="up"><span class="ic">8–16 a month</span><h3>Vertical reels</h3><ul><li>The single biggest driver of reach on Facebook, Instagram, TikTok and YouTube Shorts</li><li>Real jobs and real results, not AI images</li><li>Every reel can name a town, which helps local relevance</li><li>Builds a following Premier owns and can sell to directly</li></ul></div>
+<div class="up"><span class="ic">Every film day</span><h3>Retouched stills</h3><ul><li>Weekly Google profile photos, which keep the listing active</li><li>Website, flyers, truck art and ads all look like one brand</li><li>Real before-and-afters prove the work</li></ul></div>
+<div class="up"><span class="ic">Motion brand</span><h3>3D, sunset + live logos</h3><ul><li>End card on every video, so the brand sticks</li><li>Looks bigger than the competition</li><li>Square, wide and GIF versions for every platform</li></ul></div>
+<div class="up"><span class="ic">Owned, not rented</span><h3>New website</h3><ul><li>Premier owns every page and file</li><li>Fast static hosting with nothing rented</li><li>Estimate form feeds the CRM with an instant text back</li><li>Built to add a page for every service in every town</li></ul></div>
+<div class="up"><span class="ic">2–4 new pages a month</span><h3>SEO + town pages</h3><ul><li>Ranks for the searches people make when ready to buy</li><li>Each page is a permanent asset that keeps working</li><li>Schema, video and local proof on every page</li></ul></div>
+<div class="up"><span class="ic">3 posts a week</span><h3>Google Business Profile</h3><ul><li>Maps is where most local calls start</li><li>Real job photos and services, kept current</li><li>Q&A, categories and service areas tuned for each town</li></ul></div>
+<div class="up"><span class="ic">Every job, automatically</span><h3>Review engine</h3><ul><li>134 unasked customers asked in week one</li><li>A request and reminder after every job keeps reviews recent</li><li>Personal replies within 48 hours</li><li>47% of people skip businesses with under 20 reviews (BrightLocal 2026)</li></ul></div>
+<div class="up"><span class="ic">No % fee</span><h3>Google Ads + Local Services Ads</h3><ul><li>Every ad dollar buys clicks, with no percentage fee on top</li><li>Pay-per-lead LSA with the Google Guaranteed badge</li><li>Weekly tuning with call tracking, so spend follows jobs</li></ul></div>
+<div class="up"><span class="ic">Pixel + Conversions API</span><h3>Meta ads + retargeting</h3><ul><li>Shows Premier's video to people who visited the site</li><li>Lookalike audiences of past customers</li><li>Cheap reach in the exact neighborhoods Premier serves</li></ul></div>
+<div class="up"><span class="ic">Email + text</span><h3>The Premier Weekly</h3><ul><li>New media plus one offer a week, made to feel like a gift</li><li>Brings back past customers for repeat and add-on jobs</li><li>An audience Premier owns, no algorithm needed</li></ul></div>
+<div class="up"><span class="ic">Never miss a lead</span><h3>CRM automation</h3><ul><li>Missed-call text-back in seconds</li><li>Quote follow-ups so no estimate goes cold</li><li>Review requests triggered when a job is marked done</li></ul></div>
+<div class="up"><span class="ic">On every truck and shirt</span><h3>Digital card + tap cards</h3><ul><li>One tap shares contact, reviews and a quote link</li><li>QR on yard signs turns each job into a lead</li><li>Tracks which jobs bring new customers</li></ul></div>
+<div class="up"><span class="ic">18 restaurants</span><h3>SERG screens + Local Legend</h3><ul><li>The Premier spot loops where locals eat and drink (subject to the SERG agreement)</li><li>Opens doors to commercial accounts worth many house washes</li><li>A case study no Topline customer can copy</li></ul></div>
+<div class="up"><span class="ic">Quarterly</span><h3>Landmark Clean</h3><ul><li>A drone film of a well-known local building, cleaned</li><li>Press, partner screens and shares</li><li>A series that grows every quarter</li></ul></div>
+<div class="up"><span class="ic">Accountability</span><h3>Monthly report + local partner</h3><ul><li>Real numbers: rank, reviews, calls, jobs</li><li>Chandler is on Hilton Head and films the jobs himself</li><li>Same-day answers</li></ul></div>
+<div class="up"><span class="ic">Premier keeps everything</span><h3>Ownership</h3><ul><li>Domain, profiles, ad accounts and Pixel in Premier's name</li><li>Every film, photo and page belongs to Premier</li><li>Month-to-month after 90 days; no hostage accounts</li></ul></div>
+</div>
+<p class="src">Wyzowl, <a href="https://wyzowl.com/sovm-results-2025/">State of Video Marketing 2026</a> (85% convinced to buy by a video; 89% say video quality affects trust in a brand). BrightLocal, <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">Local Consumer Review Survey 2026</a>.</p>
+</div>
+</section>
+
+<!-- ACCESS -->
+<section class="band light" id="access">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Ownership stays with Premier</p><h2>How Chandler gets access</h2>
+<p class="lead">Every account is created or kept in Premier's name, on Premier's login and card. Above All Media is added as a manager or partner, so access can be removed with one click.</p></div>
+<div class="cols">
+<div class="card"><h3>1 · Google Business Profile</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Check who is the <b>Primary Owner</b> today. If it is a Topline login, Premier's Gmail is made Primary Owner first.</p></div>
+<div class="step"><span class="d">b</span><p>On Google, search "Premier Soft Wash", open the profile menu ⋮, then <code>Business Profile settings → Managers → Add</code>, and add Chandler's email as <b>Manager</b>.</p></div>
+</div></div>
+<div class="card"><h3>2 · Domain (premiersoftwashsc.com)</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Look up the registrar (ICANN lookup). Confirm the registrant is Premier. Topline's help center says Premier keeps the domain on cancel; if Topline registered it, ask for the transfer code first.</p></div>
+<div class="step"><span class="d">b</span><p>Add Chandler with the registrar's delegate access (GoDaddy "Delegate Access", Namecheap "Share Access", Cloudflare "Members"). No password sharing.</p></div>
+</div></div>
+<div class="card"><h3>3 · Google Ads</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Ask Topline whether the ad account sits under its manager account. If it does, request admin rights or create a new account on Premier's Google login with Premier's card.</p></div>
+<div class="step"><span class="d">b</span><p>Chandler sends a link request from the Above All Media manager account; Brandon accepts it under <code>Admin → Access and security → Managers</code>. Google Analytics 4 and Tag Manager work the same way.</p></div>
+</div></div>
+<div class="card"><h3>4 · Meta (Facebook + Instagram)</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Make sure the Page, Instagram and ad account sit in a Meta business portfolio owned by Premier.</p></div>
+<div class="step"><span class="d">b</span><p>In <code>Business settings → Partners</code>, add Above All Media's business ID as a partner with access to the Page, ad account and Pixel.</p></div>
+</div></div>
+</div>
+<div class="note"><b>Before cancelling Topline:</b> export every customer contact (including the 134 unasked), download all job photos, copy any posts worth keeping, and set redirects from the old page addresses so Google keeps the ranking history. Cancel only after the new site is live and the domain points to it.</div>
+</div>
+</section>
+
+<!-- HOSTING + CRM -->
+<section class="band dark" id="save">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Owned, not rented</p><h2>Hosting + CRM <span>Premier owns</span></h2>
+<p class="lead">Instead of a bundled template and app, each piece is chosen on its own, and Premier owns all of it.</p></div>
+<div class="tbl scroll"><table>
+<thead><tr><th>Piece</th><th>Best option</th><th>Why it's better</th></tr></thead>
+<tbody>
+<tr><td>Website hosting</td><td>GitHub Pages (or Cloudflare Pages / Netlify)</td><td>Static site on a global network: fast, secure, nothing to patch. Speed helps rankings and conversions.</td></tr>
+<tr><td>Domain</td><td>Keep premiersoftwashsc.com at its registrar</td><td>Already owned by Premier.</td></tr>
+<tr><td>Forms + booking</td><td>Estimate form posts straight into the CRM</td><td>Every web lead lands in one place with a text-back.</td></tr>
+<tr><td>CRM, Google build</td><td>Google Workspace + Sheets CRM, built by Above All Media</td><td>Web form → Sheet, Gmail auto-reply in seconds, follow-ups and review requests by Apps Script, bookings on Google Calendar.</td></tr>
+<tr><td>CRM, lean</td><td>Jobber Core</td><td>Scheduling, quotes, invoices, card payments, client hub.</td></tr>
+<tr><td>CRM, team</td><td>Housecall Pro</td><td>Adds more users, dispatch and review requests as crews grow.</td></tr>
+<tr><td>Marketing automation</td><td>Above All Media's CRM</td><td>Review texts, missed-call text-back and the Premier Weekly.</td></tr>
+</tbody></table></div>
+<div class="cols">
+<div class="card"><h3>Google Workspace CRM: the near-free option</h3><ul class="pros"><li>Runs on the Google Workspace account Premier already uses</li><li>Every lead in one Sheet Premier owns, viewable on any phone</li><li>Instant email and text replies, quote follow-ups, review requests after each job</li><li>Built and run by Above All Media</li></ul></div>
+<div class="card"><h3>The trade-offs, honestly</h3><ul class="cons"><li>No built-in crew scheduling app, quotes or invoices; use Google Calendar plus Square or QuickBooks invoices</li><li>Chandler maintains the scripts; if a Google quota or setting changes, we fix it</li><li>Business texting needs a one-time carrier registration (A2P 10DLC) before texts go out</li><li>If Premier grows past 2–3 crews, moving to Jobber later is easy, because the data is already in a Sheet</li></ul></div>
+</div>
+<div class="cols">
+<div class="card"><h3>What Premier's CRM keeps on every client</h3><ul><li>Name, phone, email, address and neighborhood</li><li>Property type (home, condo, HOA, commercial), stories, size, surfaces</li><li>Every service bought, dates, photos, crew notes (gate codes, pets)</li><li>Job value, cost and profit per job, payment status</li><li>How they found Premier and who referred them</li><li>Review left (yes/no), next service due date</li><li>Email and text consent, with date</li></ul><p>We leave out race, color, ethnicity and similar personal traits: they don't help sell a house wash and can create legal risk.</p></div>
+<div class="card"><h3>The Premier Weekly + referrals</h3><ul><li>One email a week: new before-and-after video, a seasonal tip, and one offer</li><li>Offers rotate: referral "give 15%, get 15%", seasonal bundles, annual-rinse reminders, a monthly coupon</li><li>Texts kept to 1–2 a month for the best offers, so people don't opt out</li><li>Every email has an unsubscribe link and Premier's address (CAN-SPAM); texts go only to people who agreed to them in writing (TCPA)</li><li>Referral codes tracked in the CRM, so Premier sees which customers bring the most work</li></ul></div>
+</div>
+<div class="note"><b>How it turns into results:</b> real filmed video, a review engine that runs after every job, and ads without a markup. Premier keeps a faster site it owns, one CRM for jobs, and every lead followed up automatically.</div>
+</div>
+</section>
+
+<!-- CLOSE -->
+<section class="band light">
+<div class="wrap">
+<div class="promise">
+<div class="pr yes"><h3>What we promise</h3><ul><li>Every deliverable in the plan, on schedule</li><li>A monthly report with real rank, review, call and booking numbers</li><li>Same-day answers from Chandler</li><li>Premier owns every file, page and account</li><li>No percentage on ad spend, ever</li></ul></div>
+<div class="pr no"><h3 style="color:#fff">What nobody can promise</h3><ul><li>A guaranteed #1 spot. Google decides rankings, and distance from the searcher always counts.</li><li>What we promise is the work that wins rankings, done every week, with numbers to prove it. The goal: top 3 on Maps in Bluffton, Hilton Head and Beaufort, and the most-reviewed, most-watched soft wash brand in the Lowcountry.</li></ul></div>
+</div>
+<div class="cta"><div><h2>Judge us at 90 days</h2><p>Week one: the 134 review requests, the Google profile fixes, account access, and the first film day.</p></div>
+</div>
+</div>
+</section>
+
+<footer class="band dark" style="padding-block:44px">
+<div class="wrap" style="gap:10px">
+<p class="eyebrow">Sources</p>
+<p class="src">Wyzowl, <a href="https://wyzowl.com/sovm-results-2025/">State of Video Marketing 2026</a> · BrightLocal, <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">Local Consumer Review Survey 2026</a> · Topline Pro help center, <a href="https://help.toplinepro.com/en/articles/6566449-what-if-i-want-to-cancel-my-subscription">"What if I want to cancel my subscription?"</a> · Agency listings as linked above. Prepared by Above All Media, October 2026.</p>
+</div>
+</footer>
+
+<img src="../media/aam-mark.png" alt="Above All Media" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
+</body>
+</html>

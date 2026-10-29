@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Premier Monthly Partnership</title>
+<link rel="icon" href="../media/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow+Condensed:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap">
+<style>
+/* Same system as the hub: alternating navy / paper bands, 1120px column. One committed brand look, so no theme switch. */
+:root{
+  --navy:#0E1A33; --navy2:#17284A; --navy3:#22355C;
+  --paper:#F4F6F9; --card:#FFFFFF; --line:#D9E0EA;
+  --blue:#2F6FE0; --sky:#5AA8FF; --yellow:#F2C230;
+  --ink:#0E1A33; --mute:#4A5670; --mute-d:#BFCBE0;
+  --good:#1E9E6A; --warn:#E08A1E; --bad:#D9483B;
+  --display:'Archivo Black','Arial Black',Impact,sans-serif;
+  --label:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --body:'Public Sans','Segoe UI',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 20.5px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+img{max-width:100%}
+a{color:var(--blue)}
+.dark a{color:var(--sky)}
+.band{padding-block:80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band.dark{background:var(--navy);color:#F4F6F9}
+.band.light{background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font:800 18px/1.2 var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin:0}
+.dark .eyebrow{color:var(--yellow)}
+h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(40px,7.4vw,86px)}
+h1 span,h2 span{color:var(--yellow)}
+.light h2 span{color:var(--blue)}
+h2{font-size:clamp(30px,5vw,52px)}
+h3{font:800 27.5px/1.15 var(--label);text-transform:uppercase;letter-spacing:.04em;margin:0}
+p{margin:0}
+.lead{font-size:clamp(20px,2.4vw,23px);max-width:66ch;color:var(--mute)}
+.dark .lead{color:var(--mute-d)}
+.head{display:flex;flex-direction:column;gap:14px}
+.src{font-size:18.5px;color:var(--mute)}
+.dark .src{color:#8D9BB8}
+.src a{color:inherit}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);border-bottom:1px solid var(--navy3);padding-inline:16px}
+nav .in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:20px;height:60px;overflow-x:auto}
+nav img{height:34px;flex:none}
+nav a{font:800 18px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--mute-d);text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{color:var(--yellow);outline:none}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;background:var(--navy3);border-radius:18px;overflow:hidden}
+.stat{background:var(--navy2);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.stat b{font:800 clamp(32px,4.2vw,46px)/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.stat span{font-size:18px;color:var(--mute-d)}
+.stat.bad b{color:#FF8A7E}
+.note{border-left:4px solid var(--yellow);background:var(--navy2);padding:18px 22px;border-radius:0 12px 12px 0;color:var(--mute-d)}
+.note b{color:#fff}
+.light .note{background:#FFF8E1;color:var(--ink)}
+.light .note b{color:var(--ink)}
+.ph{background:rgba(242,194,48,.22);border-bottom:2px dashed var(--yellow);padding:0 4px;border-radius:3px}
+.chip{display:inline-block;font:800 15px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:99px;color:#fff;vertical-align:middle}
+.chip.good{background:var(--good)}.chip.fix{background:var(--warn)}.chip.miss{background:var(--bad)}.chip.same{background:#6B7690}
+/* comparison table */
+.cmp{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr) minmax(0,1.15fr);background:var(--card)}
+.row>div{padding:16px 18px;min-width:0}
+.row .n{font:800 33.5px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums;padding-right:0}
+.row .t b{display:block;font-weight:700;margin-bottom:4px}
+.row .t p{color:var(--mute);font-size:18px}
+.row .u{background:#F0F6FF;border-left:3px solid var(--blue)}
+.row .u b{display:block;font-weight:700;margin-bottom:4px;color:var(--navy)}
+.row .u p{color:var(--ink);font-size:18px}
+.row.hd>div{background:var(--navy);color:#fff;font:800 17px var(--label);letter-spacing:.14em;text-transform:uppercase;padding-block:12px}
+.row.hd .u{border-left-color:var(--yellow)}
+.grp{background:var(--paper);padding:10px 18px;font:800 17px var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(120px,240px) minmax(0,1fr);gap:14px;align-items:center}
+.bar .lab{font-size:18px;color:var(--mute-d)}
+.bar .lab b{color:#fff}
+.bar .tr{height:26px;background:var(--navy3);border-radius:6px;overflow:hidden;position:relative}
+.bar .fill{height:100%;background:#7E8BA6;border-radius:6px}
+.bar .fill.me{background:var(--yellow)}
+.bar .val{position:absolute;right:8px;top:50%;transform:translateY(-50%);font:800 19px var(--label);color:#fff;font-variant-numeric:tabular-nums}
+.chart{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dark .card{background:var(--navy2);border-color:var(--navy3)}
+.card ul,.pc ul,.pr ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:18.5px}
+.card ul{color:var(--mute)}
+.dark .card ul{color:var(--mute-d)}
+.card .k{font:800 48px/1 var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.dark .card .k{color:var(--yellow)}
+.card p{color:var(--mute);font-size:18.5px}
+.dark .card p{color:var(--mute-d)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vs .card h3 .chip{margin-left:6px}
+.pros li::marker{content:"+  ";color:var(--good);font-weight:700}
+.cons li::marker{content:"–  ";color:var(--bad);font-weight:700}
+/* price */
+.price{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.pc{background:var(--navy2);border:1px solid var(--navy3);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pc.hl{background:var(--paper);color:var(--ink);border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.pc .amt{font:800 60px/1 var(--label);color:var(--yellow);font-variant-numeric:tabular-nums}
+.pc.hl .amt{color:var(--blue)}
+.pc .was{font-size:17.5px;color:var(--mute-d)}
+.pc.hl .was{color:var(--mute)}
+.pc ul{color:var(--mute-d)}
+.pc.hl ul{color:var(--mute)}
+.pc .tag{align-self:flex-start;font:800 15.5px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px;background:var(--yellow);color:var(--navy)}
+.pc .be{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:12px;font-size:18px;color:var(--mute-d)}
+.pc.hl .be{border-color:var(--line);color:var(--ink)}
+.pc .be b{font:800 26.5px var(--label);color:var(--yellow)}
+.pc.hl .be b{color:var(--blue)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:18.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.dark th{color:#8D9BB8}
+.dark td{border-color:var(--navy3);color:#F4F6F9}
+.dark th{border-color:var(--navy3)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.big{font:800 24px var(--label)}
+tr.tot td{font-weight:700;border-top:2px solid var(--ink)}
+.dark tr.tot td{border-top-color:var(--yellow)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 8px}
+.dark .tbl{background:var(--navy2);border-color:var(--navy3)}
+table.mkt{min-width:980px}
+table.mkt td:nth-child(n+3),table.mkt th:nth-child(n+3){white-space:nowrap}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.dark .pos{color:#5FD3A0} .dark .neg{color:#FF8A7E}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.ctl{display:flex;flex-direction:column;gap:18px}
+.ctl label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:18.5px}
+.ctl label span.v{font:800 26.5px var(--label);color:var(--blue);font-variant-numeric:tabular-nums}
+.ctl input[type=range]{width:100%;accent-color:var(--blue)}
+.ctl select{font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:800 18px var(--label);letter-spacing:.08em;text-transform:uppercase;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.out{background:var(--navy);color:#fff;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.out .ln{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--navy3);padding-bottom:10px;font-size:18.5px;color:var(--mute-d)}
+.out .ln b{font:800 26.5px var(--label);color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .ln.hi b{color:var(--yellow);font-size:36px}
+.out .ln.gd b{color:#5FD3A0}
+.out .ln.bd b{color:#FF8A7E}
+/* steps */
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.step .d{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font:800 24px var(--label)}
+.step p{color:var(--mute);font-size:18.5px}
+.dark .step p{color:var(--mute-d)}
+.step code{font-size:17px;background:rgba(47,111,224,.1);padding:1px 5px;border-radius:4px}
+/* value stack */
+.vstack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vi{background:var(--navy2);border:1px solid var(--navy3);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:#F4F6F9;min-width:0}
+.vi img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.vi div{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.vi b{color:#fff;font:800 25px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em}
+.vi span{font-size:17.5px;color:var(--mute-d)}
+.vi em{font-style:normal;font:800 15.5px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.vi:hover,.vi:focus-visible{border-color:var(--yellow);outline:none}
+.promise{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pr{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.pr.yes{background:var(--yellow);color:var(--navy)}
+.pr.no{background:var(--navy2);border:1px solid var(--navy3);color:var(--mute-d)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--blue);border-radius:20px;padding:30px 32px}
+.cta h2{font-size:clamp(26px,4vw,40px);color:#fff}
+.cta p{color:#E4ECFB}
+.btn{display:inline-block;font:800 20.5px var(--label);letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;border-radius:12px;background:var(--yellow);color:var(--navy)!important;text-decoration:none}
+footer .src{line-height:1.8}
+/* outlook */
+.lg{display:flex;gap:18px;font-size:16px;color:var(--mute);margin:0}
+.lg i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.chartL{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.chartL svg{width:100%;height:auto;display:block}
+.chartL .sx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media (max-width:640px){.chartL .sx svg{min-width:600px}}
+.chartL .cap{font-size:16px;color:var(--mute)}
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.phase{background:var(--navy2);border:1px solid var(--navy3);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.phase .w{font:800 16px var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--yellow)}
+.phase h3{color:#fff;font-size:24px}
+.phase ul{margin:0;padding-left:18px;color:var(--mute-d);font-size:17px;display:flex;flex-direction:column;gap:4px}
+.phase .m{margin-top:auto;border-top:1px dashed var(--navy3);padding-top:10px;font-size:16px;color:#fff}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:800 19px/1.1 var(--label);text-transform:uppercase;letter-spacing:.04em;color:var(--navy)}
+.flow span:nth-child(4n+1){background:var(--navy);color:var(--yellow);border-color:var(--navy)}
+.flow b{color:var(--blue);font-size:22px}
+.ups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.up{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.up .ic{font:800 15px var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.up ul{margin:0;padding-left:20px;color:var(--mute);font-size:17.5px;display:flex;flex-direction:column;gap:5px}
+.up li::marker{content:"✓  ";color:var(--good);font-weight:700}
+@media (max-width:900px){.phases,.ups{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .price,.cols3,.vstack{grid-template-columns:1fr}
+  .cols,.vs,.calc,.promise{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  body{font-size:19px}
+  .pc .amt{font-size:46px}
+
+  .band{padding-block:56px}
+  .row{grid-template-columns:40px minmax(0,1fr)}
+  .row .u{grid-column:1/-1;border-left:0;border-top:3px solid var(--blue)}
+  .row.hd .u{display:none}
+  .row .n{font-size:26.5px}
+  .bar{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Sections"><div class="in">
+<a href="../"><img src="../media/logo-dark.svg" alt="Premier Soft Wash: back to the hub"></a>
+<a href="#today">Today</a><a href="#services">Every service</a><a href="#results">Results</a><a href="#stay-switch">Stay or switch</a><a href="#plans">Monthly plans</a><a href="#roi">ROI</a><a href="#calc">Calculator</a><a href="#outlook">1-year outlook</a><a href="#built">Already built</a><a href="#upside">Every upside</a><a href="#setup">Setup price</a><a href="#market">vs. agencies</a><a href="../agreement/" style="color:var(--yellow)">Agreement</a><a href="#access">Access</a><a href="#save">Hosting + CRM</a><a href="../showcase/">Share version</a><a href="../">← Hub</a>
+</div></nav>
+
+<!-- HERO -->
+<section class="band dark" style="padding-block:64px 80px">
+<div class="wrap">
+<div class="head">
+<p class="eyebrow">For Brandon Williams · Above All Media × Premier Soft Wash · October 2026</p>
+<h1>Same budget logic. <span>Real</span> results.</h1>
+<p class="lead">Premier pays Topline Pro every month for a rented website, AI-written posts and a 20% cut of any Google Ads spend. This page lists every one of those services, puts what Above All Media does beside each one, and shows the math on whether switching pays for itself.</p>
+</div>
+<div class="stats" role="list">
+<div class="stat" role="listitem"><b>$299/mo</b><span>Topline Pro plan Premier pays today</span></div>
+<div class="stat bad" role="listitem"><b>−61%</b><span>Facebook views, last 28 days</span></div>
+<div class="stat bad" role="listitem"><b>34 vs 867</b><span>Google reviews: Premier vs. the local leader</span></div>
+<div class="stat" role="listitem"><b>~5 jobs</b><span>a month pays for the recommended plan (math below)</span></div>
+</div>
+<p class="src">Topline figures come from Premier's own Topline and Facebook dashboards (Jul 21 to Aug 19, 2026). Every price on this page marked <span class="ph">like this</span> is a proposal for Chandler and Brandon to confirm.</p>
+</div>
+</section>
+
+<!-- TODAY -->
+<section class="band light" id="today">
+<div class="wrap">
+<div class="head"><p class="eyebrow">What Premier pays today</p><h2>The current bill, line by line</h2>
+<p class="lead">Chandler's estimate is anywhere from $7 to about $1,000 a month across vendors. Topline's own pricing explains most of that spread: the plan fee is fixed, and the Google Ads add-on grows with ad spend.</p></div>
+<div class="tbl scroll"><table>
+<thead><tr><th>Line</th><th>What it is</th><th class="num">Monthly</th></tr></thead>
+<tbody>
+<tr><td>Topline Pro plan</td><td>Premier's current plan: 4 blogs a month, 4 social posts a week, reputation management, digital media, printing, Google Ads add-on, insights. New customers now pay $399/mo list for Pro ($319 for the first 3 months).</td><td class="num big">$299</td></tr>
+<tr><td>Google Ads add-on</td><td>Topline charges 20% of ad spend, with a $150/mo minimum, on top of the spend itself.</td><td class="num big">$150–$200</td></tr>
+<tr><td>Google ad spend</td><td>Paid to Google through Topline: $500 to $1,000 a month, per Chandler. <span class="ph">Confirm whether Topline's fee is on top of this or inside it</span>.</td><td class="num big">$500–$1,000</td></tr>
+<tr><td>Small vendor line(s)</td><td>The "$7" is likely a Google Workspace seat or similar for the premiersoftwash.org email. <span class="ph">To confirm</span>.</td><td class="num big">~$7</td></tr>
+<tr><td>Card processing</td><td>If invoices are paid through Topline: 2.9% + $0.30 per payment.</td><td class="num">varies</td></tr>
+<tr class="tot"><td colspan="2">Total: $299 plan + $150–$200 fee + $500–$1,000 spend + ~$7</td><td class="num big">$956–$1,506</td></tr>
+</tbody></table></div>
+<div class="note"><b>Bring to the meeting:</b> the last three Topline invoices and the Google Ads billing page. That turns every estimate on this page into a real number in five minutes.</div>
+<p class="src">Sources: <a href="https://toplinepro.com/pricing">Topline Pro pricing page</a> (plan prices, "Google Ads: 20% of ad spend, $150 minimum", processing fees, "No contracts"); Premier's Topline "Edit Subscription" screen.</p>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section class="band light" id="services" style="padding-top:0">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Every service, numbered</p><h2>What Topline does. <span>What we do instead.</span></h2>
+<p class="lead">All 19 services in Premier's Topline plan and its add-ons, from Premier's plan screen and Topline's pricing page. Where Topline's version is fine, we say so.</p></div>
+
+<div class="cmp" role="table" aria-label="Topline Pro services compared with Above All Media">
+<div class="row hd" role="row"><div role="columnheader">#</div><div role="columnheader">Topline Pro today</div><div class="u" role="columnheader">Above All Media</div></div>
+
+<div class="grp">Get found</div>
+<div class="row" role="row"><div class="n">1</div><div class="t"><b>Website + hosting</b><p>A Topline template on premiersoftwashsc.com. Per Topline's help center, if Premier cancels "you will no longer have access to the website design."</p></div><div class="u"><b>A custom site Premier owns <span class="chip good">Better</span></b><p>Already built: grime-to-clean scroll effects, real Premier film and stills, town pages. Hosted free; Premier gets the files. Nothing is rented.</p></div></div>
+<div class="row" role="row"><div class="n">2</div><div class="t"><b>Domain connection</b><p>Topline connects the domain. Premier keeps the domain if it cancels.</p></div><div class="u"><b>Domain verified in Premier's name <span class="chip same">Same + check</span></b><p>We confirm the registrar account belongs to Premier, then point it at the new site with zero downtime.</p></div></div>
+<div class="row" role="row"><div class="n">3</div><div class="t"><b>Local search setup (Google Business Profile) + "SEO-optimized site"</b><p>A one-time profile setup. 270 map appearances in 30 days (67 a week).</p></div><div class="u"><b>Full Maps program <span class="chip good">Better</span></b><p>Categories, services, service areas, Q&amp;A, weekly real-job photos, 40+ matching listings, and a page for every service in every town (Bluffton, Hilton Head, Beaufort, Okatie, Hardeeville).</p></div></div>
+<div class="row" role="row"><div class="n">4</div><div class="t"><b>4 SEO blog posts a month</b><p>AI-written. The site already carries 49 generic posts and no town pages.</p></div><div class="u"><b>Pages that rank for buying searches <span class="chip good">Better</span></b><p>"Soft wash Bluffton SC", "roof cleaning Hilton Head": service × town pages with local proof, schema and video, instead of generic blogs.</p></div></div>
+<div class="row" role="row"><div class="n">5</div><div class="t"><b>Google Business Profile posts (2 a week)</b><p>Scheduled AI copy such as "Is your driveway looking dull?"</p></div><div class="u"><b>3 posts a week from real jobs <span class="chip good">Better</span></b><p>Before-and-afters from that week's work, with the town named, plus the films we already made.</p></div></div>
+<div class="row" role="row"><div class="n">6</div><div class="t"><b>Social posts (4 a week on Pro)</b><p>Generic captions and stock-style images. Result: 1,562 views (−61%), 14 engagements (−74%), latest post 9 views.</p></div><div class="u"><b>Filmed, edited short video <span class="chip good">Better</span></b><p>4 to 16 vertical videos a month depending on plan, shot on Premier's jobs. The same team gets Chandler's page 345,429 views in 28 days.</p></div></div>
+<div class="row" role="row"><div class="n">7</div><div class="t"><b>Sidekick AI captions (DIY)</b><p>Premier writes posts with an AI helper. In practice this is Jerahmy's evenings.</p></div><div class="u"><b>Done for you <span class="chip good">Better</span></b><p>No one at Premier writes a caption. Approve with a thumbs-up by text.</p></div></div>
+
+<div class="grp">Reputation</div>
+<div class="row" role="row"><div class="n">8</div><div class="t"><b>Review request blasts + reminders</b><p>The tool exists, but 134 contacts have never been sent a request. Premier sits at 34 reviews; Topline itself says 834 more are needed to lead.</p></div><div class="u"><b>A review engine that actually runs <span class="chip good">Better</span></b><p>Week one: ask all 134 contacts. After that, an automatic text after every finished job, with a follow-up. Target: 34 → 200 in 12 months.</p></div></div>
+<div class="row" role="row"><div class="n">9</div><div class="t"><b>Written review replies</b><p>Templated replies.</p></div><div class="u"><b>Personal replies within 48 hours <span class="chip good">Better</span></b><p>Every reply names the service and town, which also helps Maps relevance.</p></div></div>
+<div class="row" role="row"><div class="n">10</div><div class="t"><b>Review tap card</b><p>An NFC card that opens the review page.</p></div><div class="u"><b>Premier digital card + tap cards <span class="chip good">Better</span></b><p>Already designed: contact exchange, reviews, quote link, QR on trucks and yard signs.</p></div></div>
+<div class="row" role="row"><div class="n">11</div><div class="t"><b>Project showcases + service-map showcases</b><p>Auto-built cards from reviews and photos.</p></div><div class="u"><b>Real before-and-after stories <span class="chip good">Better</span></b><p>Drag-to-wash before/after pairs on the site and a map of jobs by neighborhood.</p></div></div>
+
+<div class="grp">Media and print</div>
+<div class="row" role="row"><div class="n">12</div><div class="t"><b>"Digital media creation"</b><p>AI-generated graphics inside the app ("Generate Media").</p></div><div class="u"><b>A film studio <span class="chip good">Better</span></b><p>Hero commercial, reels, drone, 3D and sunset logos, graded stills. Already delivered for Local Legend.</p></div></div>
+<div class="row" role="row"><div class="n">13</div><div class="t"><b>Printing</b><p>Flyers and postcards through Topline.</p></div><div class="u"><b>Print design, printed at cost <span class="chip same">Same</span></b><p>Door hangers, yard signs, truck art and table tents for the SERG partnership, printed locally at cost with no markup.</p></div></div>
+
+<div class="grp">Paid ads</div>
+<div class="row" role="row"><div class="n">14</div><div class="t"><b>Google Ads add-on</b><p>20% of spend, $150 minimum, every month. At $750 of spend that is $150; at $2,000 it is $400.</p></div><div class="u"><b>Google Ads + Local Services Ads, no % fee <span class="chip good">Better</span></b><p>Management is included in the plan. Spend goes straight from Premier's card to Google. Plus Local Services Ads (pay per lead, "Google Guaranteed" badge) and Meta retargeting with our video.</p></div></div>
+
+<div class="grp">Running the business</div>
+<div class="row" role="row"><div class="n">15</div><div class="t"><b>Tailored insights + dedicated coach</b><p>A remote account manager and dashboard tips.</p></div><div class="u"><b>A local partner who shows up <span class="chip good">Better</span></b><p>Chandler is on Hilton Head, films the jobs, and sends a one-page monthly report with real rank, review, call and booking numbers.</p></div></div>
+<div class="row" role="row"><div class="n">16</div><div class="t"><b>Lead pipeline, customers, scheduling</b><p>Request pipeline, contact import, Google Calendar booking.</p></div><div class="u"><b>A real field-service CRM <span class="chip same">Replace</span></b><p>Topline does this well enough. We replace it with Jobber or Housecall Pro (about $49–$79/mo, see the hosting and CRM section) plus our marketing automations.</p></div></div>
+<div class="row" role="row"><div class="n">17</div><div class="t"><b>Quotes, invoices, payments</b><p>AI quotes and invoices, 2.9% + $0.30 per card payment.</p></div><div class="u"><b>Handled by the same CRM <span class="chip same">Replace</span></b><p>Jobber and Housecall Pro both do quotes, invoices and card payments, with similar processing rates.</p></div></div>
+<div class="row" role="row"><div class="n">18</div><div class="t"><b>Prospect feed (Nextdoor)</b><p>Limited view on lower plans.</p></div><div class="u"><b>Nextdoor + neighborhood campaigns <span class="chip good">Better</span></b><p>Neighborhood posts and "we're on your street this week" door hangers in Sun City, Palmetto Dunes and Hampton Lake.</p></div></div>
+<div class="row" role="row"><div class="n">19</div><div class="t"><b>AI text + voice responder ($200/mo add-on)</b><p>Answers missed calls and forms automatically, if Premier ever turns it on.</p></div><div class="u"><b>Missed-call text-back, included <span class="chip good">Better</span></b><p>In the Growth plan: every missed call gets a text in seconds, and every quote gets a follow-up.</p></div></div>
+</div>
+<p class="src">Sources: <a href="https://toplinepro.com/pricing">Topline Pro pricing and plan features</a>; <a href="https://help.toplinepro.com/en/articles/6566449-what-if-i-want-to-cancel-my-subscription">Topline help center: cancelling</a>; Premier's Topline dashboard and plan screens; Premier and Chandler Pirie Facebook professional dashboards (28 days).</p>
+</div>
+</section>
+
+<!-- RESULTS -->
+<section class="band dark" id="results">
+<div class="wrap">
+<div class="head"><p class="eyebrow">What the money is buying now</p><h2>The scoreboard</h2>
+<p class="lead">Topline is cheap. The question for a finance lead is the cost per result, and the results are flat or falling.</p></div>
+<div class="cols">
+<div class="chart">
+<h3>Google reviews: the local field</h3>
+<div class="bars">
+<div class="bar"><span class="lab">Sunco Exterior Solutions · 4.9★</span><div class="tr"><div class="fill" style="width:100%"></div><span class="val">867</span></div></div>
+<div class="bar"><span class="lab">Reflections Window Cleaning · 5.0★</span><div class="tr"><div class="fill" style="width:78.3%"></div><span class="val">679</span></div></div>
+<div class="bar"><span class="lab">Southern Style SoftWash · 5.0★</span><div class="tr"><div class="fill" style="width:38.5%"></div><span class="val">334</span></div></div>
+<div class="bar"><span class="lab"><b>Premier Soft Wash · 5.0★</b></span><div class="tr"><div class="fill me" style="width:3.9%"></div><span class="val">34</span></div></div>
+<div class="bar"><span class="lab"><b>Premier, 12-month target</b></span><div class="tr"><div class="fill me" style="width:23.1%;opacity:.55"></div><span class="val">200</span></div></div>
+</div>
+<p class="src">Source: Premier's Topline reviews leaderboard. 47% of consumers won't use a business with fewer than 20 reviews, and 74% only consider reviews from the last three months (BrightLocal 2026).</p>
+</div>
+<div class="chart">
+<h3>Facebook, last 28 days</h3>
+<div class="bars">
+<div class="bar"><span class="lab">Chandler's page · views</span><div class="tr"><div class="fill me" style="width:100%"></div><span class="val">345,429</span></div></div>
+<div class="bar"><span class="lab"><b>Premier · views</b></span><div class="tr"><div class="fill" style="width:1%;min-width:4px"></div><span class="val">1,562</span></div></div>
+<div class="bar"><span class="lab">Chandler's page · engagements</span><div class="tr"><div class="fill me" style="width:100%"></div><span class="val">23,684</span></div></div>
+<div class="bar"><span class="lab"><b>Premier · engagements</b></span><div class="tr"><div class="fill" style="width:1%;min-width:4px"></div><span class="val">14</span></div></div>
+</div>
+<p class="src">Same 28-day window. Not an apples-to-apples comparison (different pages and audiences), but it shows what our content does on the same platform: views up 134% on Chandler's page while Premier's fell 61%.</p>
+</div>
+</div>
+<div class="stats" role="list">
+<div class="stat" role="listitem"><b>1,534</b><span>website views in 30 days</span></div>
+<div class="stat" role="listitem"><b>67 / wk</b><span>Google Maps appearances</span></div>
+<div class="stat" role="listitem"><b>198</b><span>social followers</span></div>
+<div class="stat bad" role="listitem"><b>134</b><span>past customers never asked for a review</span></div>
+</div>
+</div>
+</section>
+
+<!-- STAY OR SWITCH -->
+<section class="band light" id="stay-switch">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The honest version</p><h2>Stay with Topline, or <span>switch</span></h2></div>
+<div class="vs">
+<div class="card">
+<h3>Stay with Topline</h3>
+<ul class="pros">
+<li>Known cost today ($299/mo)</li>
+<li>One app for website, CRM, invoices and payments</li>
+<li>Month-to-month, no contract, nothing to move</li>
+</ul>
+<ul class="cons">
+<li>Generic AI content, and the numbers are falling (−61% views, −74% engagement)</li>
+<li>No one films Premier's jobs; no real video at all</li>
+<li>The site design is rented and goes away on cancel</li>
+<li>20% of every ad dollar, forever, with a $150 floor</li>
+<li>34 reviews vs. 867, with 134 customers never asked</li>
+<li>Price risk: the same Pro plan now lists at $399/mo for new customers</li>
+<li>Same template and same posts as every other Topline customer in town</li>
+</ul>
+</div>
+<div class="card" style="border:2px solid var(--blue)">
+<h3>Switch to Above All Media</h3>
+<ul class="pros">
+<li>Premier owns the site, domain, profiles, ad accounts and every file</li>
+<li>Real local film and video every month, from the team behind the SERG screen spots</li>
+<li>No percentage on ad spend; management is in the plan</li>
+<li>Review engine starts week one with the 134 unasked customers</li>
+<li>One local person accountable, with a monthly numbers report</li>
+<li>The website, films, logos and stills are already built</li>
+<li>Software drops to about $51–$81/mo (see hosting and CRM)</li>
+</ul>
+<ul class="cons">
+<li>Higher monthly cost than Topline's plan fee alone</li>
+<li>2 to 3 weeks of switchover (site, CRM, contacts)</li>
+<li>SEO and Maps gains take 60 to 90 days to show; video and reviews move faster</li>
+<li>Smaller team. Covered by Premier owning every account, so it can leave any time after the first 90 days</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PLANS -->
+<section class="band dark" id="plans">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The proposal · prices for Chandler to confirm</p><h2>Three monthly plans</h2>
+<p class="lead">Partner rate shown (30% off list). Ad spend and CRM software are paid by Premier directly, with no markup. 90-day launch term, then month-to-month with 30 days' notice. <span class="ph">Terms to confirm</span></p></div>
+<div class="price">
+<div class="pc">
+<h3>Foundation</h3>
+<b class="amt"><span class="ph">$595</span>/mo</b>
+<p class="was">List $850 · replaces Topline's marketing side</p>
+<ul>
+<li>Website hosting, care and updates</li>
+<li>Google Business Profile: 3 real-job posts a week, photos, Q&amp;A</li>
+<li>Review engine: request after every job, replies to every review</li>
+<li>4 edited vertical videos a month</li>
+<li>12 social posts a month</li>
+<li>Google Ads + Local Services Ads managed, no % fee (spend up to $1,500)</li>
+<li>Monthly one-page report</li>
+</ul>
+<p class="be">Break-even: <b>2.6 jobs/mo</b></p>
+</div>
+<div class="pc hl">
+<span class="tag">Recommended</span>
+<h3>Growth</h3>
+<b class="amt"><span class="ph">$1,050</span>/mo</b>
+<p class="was">List $1,500 · everything in Foundation, plus</p>
+<ul>
+<li>A filming half-day every month</li>
+<li>8 vertical videos a month + 3 posts a week</li>
+<li>2 new service × town pages a month</li>
+<li>SEO: citations, links, Maps rank grid tracking</li>
+<li>Meta ads + Pixel and Conversions API retargeting</li>
+<li>"The Premier Weekly" email + text drop</li>
+<li>Missed-call text-back and quote follow-ups</li>
+<li>Quarterly numbers meeting with Brandon</li>
+</ul>
+<p class="be">Break-even: <b>4.7 jobs/mo</b>, about one a week</p>
+</div>
+<div class="pc">
+<h3>Dominate</h3>
+<b class="amt"><span class="ph">$1,750</span>/mo</b>
+<p class="was">List $2,500 · everything in Growth, plus</p>
+<ul>
+<li>4 videos a week (16 a month)</li>
+<li>Quarterly "Landmark Clean" drone film</li>
+<li>SERG restaurant-screen spot refreshed quarterly (subject to the SERG agreement)</li>
+<li>4 new town pages a month</li>
+<li>Ad management up to $5,000 spend</li>
+<li>Weekly 15-minute call, same-day priority</li>
+</ul>
+<p class="be">Break-even: <b>7.8 jobs/mo</b></p>
+</div>
+</div>
+<p class="src">Break-even = plan price ÷ profit per job, using a $450 average job and 50% gross margin ($225 per job). Both are assumptions for Brandon to replace with Premier's real numbers in the calculator below.</p>
+</div>
+</section>
+
+<!-- ROI -->
+<section class="band light" id="roi">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Return on investment · Growth plan</p><h2>The math, at both ends of the range</h2>
+<p class="lead">Same ad spend under each setup, at both ends of Premier's $500–$1,000 range. Topline columns use Premier's current $299 Pro plan.</p></div>
+<div class="tbl scroll"><table>
+<thead><tr><th>Monthly</th><th class="num">Topline + $500 ads</th><th class="num">AAM Growth + $500 ads</th><th class="num">Topline + $1,000 ads</th><th class="num">AAM Growth + $1,000 ads</th></tr></thead>
+<tbody>
+<tr><td>Platform / plan</td><td class="num">$299</td><td class="num">$1,050</td><td class="num">$299</td><td class="num">$1,050</td></tr>
+<tr><td>Ads management fee</td><td class="num">$150</td><td class="num pos">$0</td><td class="num">$200</td><td class="num pos">$0</td></tr>
+<tr><td>Ad spend (to Google)</td><td class="num">$500</td><td class="num">$500</td><td class="num">$1,000</td><td class="num">$1,000</td></tr>
+<tr><td>CRM software</td><td class="num">incl.</td><td class="num">$49</td><td class="num">incl.</td><td class="num">$49</td></tr>
+<tr><td>Hosting + domain</td><td class="num">incl.</td><td class="num">~$2</td><td class="num">incl.</td><td class="num">~$2</td></tr>
+<tr class="tot"><td>Total</td><td class="num">$949</td><td class="num">$1,601</td><td class="num">$1,499</td><td class="num">$2,101</td></tr>
+<tr><td>Extra cost vs. today</td><td class="num">–</td><td class="num neg">+$652</td><td class="num">–</td><td class="num neg">+$602</td></tr>
+<tr><td>Extra jobs to cover it ($225 profit each)</td><td class="num">–</td><td class="num">2.9 a month</td><td class="num">–</td><td class="num">2.7 a month</td></tr>
+</tbody></table></div>
+
+<div class="cols3">
+<div class="card"><span class="k">~36</span><h3>Reviews from one text</h3><p>134 never-asked customers. BrightLocal finds most people who are asked go on to leave a review (65–83%). Even at a cautious 27%, that is about 36 reviews, taking Premier from 34 to ~70 in the first month.</p></div>
+<div class="card"><span class="k">5–21</span><h3>Leads from $500–$1,000 of ads</h3><p>Home-services Google Ads leads average about $47 (cleaning) to $91 (all home services). $500 to $1,000 buys roughly 5 to 21 leads; closing 40% is 2 to 8 jobs, enough on its own to cover the extra cost at the top of the range.</p></div>
+<div class="card"><span class="k">$1,800–$2,400</span><h3>Fee saved per year</h3><p>Topline's fee is $150 a month at $500 of spend and $200 at $1,000. With us that money buys more clicks instead.</p></div>
+</div>
+
+<div class="tbl scroll"><table>
+<thead><tr><th>Extra jobs a month (Growth plan)</th><th class="num">Extra revenue</th><th class="num">Extra profit</th><th class="num">Net after plan + CRM (Topline savings not counted)</th><th class="num">ROI</th></tr></thead>
+<tbody>
+<tr><td>3 (slow start)</td><td class="num">$1,350</td><td class="num">$675</td><td class="num neg">−$424</td><td class="num neg">−39%</td></tr>
+<tr><td>5 (one a week)</td><td class="num">$2,250</td><td class="num">$1,125</td><td class="num pos">+$26</td><td class="num pos">2%</td></tr>
+<tr><td>10</td><td class="num">$4,500</td><td class="num">$2,250</td><td class="num pos">+$1,151</td><td class="num pos">105%</td></tr>
+<tr><td>20</td><td class="num">$9,000</td><td class="num">$4,500</td><td class="num pos">+$3,401</td><td class="num pos">309%</td></tr>
+</tbody></table></div>
+<div class="note"><b>Not counted above:</b> repeat customers. A soft wash is a yearly service, so every new customer booked this year is likely worth a second job next year at almost no marketing cost. Commercial accounts (SERG has 18 restaurants) are worth many times a house wash.</div>
+<p class="src">Sources: BrightLocal, <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">Local Consumer Review Survey 2026</a>; Webtonic, <a href="https://www.webtonic.io/blog/cleaning-services-google-ads-statistics">Cleaning Services Google Ads Statistics 2026</a> (citing WordStream/LocaliQ); Search Engine Land, <a href="https://searchengineland.com/google-ads-costs-rising-but-conversion-rates-improved-in-2025-477927">Google Ads benchmarks 2025</a> (all-industry cost per lead $70.11); ThePricer, <a href="https://www.thepricer.org/how-much-does-it-cost-to-pressure-wash-a-house/">house washing cost</a> ($275–$650 typical). The 40% close rate is an assumption.</p>
+</div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="band light" id="calc" style="padding-top:0">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Plug in Premier's real numbers</p><h2>The break-even calculator</h2></div>
+<div class="calc">
+<div class="ctl card">
+<label>Plan
+<div class="seg" id="tier" role="group" aria-label="Plan">
+<button type="button" data-p="595" aria-pressed="false">Foundation</button>
+<button type="button" data-p="1050" aria-pressed="true">Growth</button>
+<button type="button" data-p="1750" aria-pressed="false">Dominate</button>
+</div></label>
+<label for="spend">Google ad spend a month <span class="v" id="spendV"></span>
+<input type="range" id="spend" min="0" max="3000" step="10" value="750"></label>
+<label for="top">Topline plan fee today <span class="v" id="topV"></span>
+<input type="range" id="top" min="7" max="399" step="1" value="299"></label>
+<label for="ticket">Average job <span class="v" id="ticketV"></span>
+<input type="range" id="ticket" min="150" max="1500" step="10" value="450"></label>
+<label for="margin">Gross margin <span class="v" id="marginV"></span>
+<input type="range" id="margin" min="20" max="80" step="1" value="50"></label>
+<label for="jobs">Extra jobs a month we bring in <span class="v" id="jobsV"></span>
+<input type="range" id="jobs" min="0" max="40" step="1" value="8"></label>
+</div>
+<div class="out" aria-live="polite">
+<div class="ln"><span>Today with Topline (plan + 20% ads fee, $150 min + spend)</span><b id="oNow"></b></div>
+<div class="ln"><span>With Above All Media (plan + $49 CRM + $2 hosting + spend)</span><b id="oNew"></b></div>
+<div class="ln"><span>Extra monthly cost</span><b id="oDiff"></b></div>
+<div class="ln"><span>Ads fee no longer paid, per year</span><b id="oFee" style="color:#5FD3A0"></b></div>
+<div class="ln"><span>Jobs a month to break even</span><b id="oBE"></b></div>
+<div class="ln" id="netRow"><span>Net profit a month after the extra cost</span><b id="oNet"></b></div>
+<div class="ln hi"><span>Net a year</span><b id="oYr"></b></div>
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- OUTLOOK -->
+<section class="band dark" id="outlook">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The first year with Above All Media · Growth plan</p><h2>60 days, 90 days, <span>6 months, 1 year</span></h2>
+<p class="lead">What happens when, and what it builds. Every number here is a projection with two lines: a conservative case and the target we work toward. Neither is a guarantee; the monthly report shows the real numbers against both.</p></div>
+<div class="phases">
+<div class="phase"><span class="w">Days 1–30</span><h3>Switch on</h3><ul><li>Accounts moved into Premier's name</li><li>134 review requests sent</li><li>New website live, Google profile rebuilt</li><li>First film day; hero film and reels posted</li><li>Ads relaunched with no % fee</li></ul><p class="m">Reviews 34 → ~70</p></div>
+<div class="phase"><span class="w">Days 31–60</span><h3>Show up</h3><ul><li>8 videos a month posting on schedule</li><li>First town pages indexed</li><li>Meta retargeting with our video</li><li>Missed-call text-back catching lost calls</li></ul><p class="m">2–4 extra jobs a month</p></div>
+<div class="phase"><span class="w">Days 61–90</span><h3>Pay back</h3><ul><li>Maps rank grid improving town by town</li><li>Brandon and Jerahmy recognized from the reels</li><li>First Premier Weekly offers bringing repeat work</li></ul><p class="m">Target plan pays for itself in month 3</p></div>
+<div class="phase"><span class="w">Months 4–6</span><h3>Compound</h3><ul><li>100+ reviews, fresh every week</li><li>Commercial leads from SERG screens and the Local Legend story</li><li>Landmark Clean film #1</li></ul><p class="m">Conservative case pays back by month 6</p></div>
+<div class="phase"><span class="w">Months 7–12</span><h3>Own the area</h3><ul><li>Top-3 Maps target in Bluffton, Hilton Head, Beaufort</li><li>The most-watched soft wash brand in the Lowcountry</li><li>Year-two repeat customers already booked</li></ul><p class="m">9–18 extra jobs a month</p></div>
+</div>
+</div>
+</section>
+<section class="band light" style="padding-top:56px">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The waterfall effect</p><h2>One film day turns into <span>jobs</span></h2>
+<p class="lead">Each step feeds the next, and the last step creates the footage for the next film day. That is why the curves below bend upward instead of staying flat.</p></div>
+<div class="flow" aria-label="Growth cascade"><span>Film day</span><b>→</b><span>8–16 real videos</span><b>→</b><span>Views + reach</span><b>→</b><span>Followers</span><b>→</b><span>Trust in the owners</span><b>→</b><span>Reviews</span><b>→</b><span>Maps + ads rank</span><b>→</b><span>Calls</span><b>→</b><span>Jobs</span><b>→</b><span>New footage</span></div>
+<div class="cols">
+<div class="chartL"><h3>Social followers</h3><p class="lg"><span><i style="background:#2F6FE0"></i>Target</span><span><i style="background:#8F9AB2"></i>Conservative</span></p><div class="sx"><svg viewBox="0 0 640 300" role="img" aria-label="Social followers over 12 months" font-family="Public Sans, Arial, sans-serif"><line x1="58" x2="624" y1="262.0" y2="262.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="267.0" text-anchor="end" font-size="13" fill="#4A5670">0</text><line x1="58" x2="624" y1="216.0" y2="216.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="221.0" text-anchor="end" font-size="13" fill="#4A5670">1,000</text><line x1="58" x2="624" y1="170.0" y2="170.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="175.0" text-anchor="end" font-size="13" fill="#4A5670">2,000</text><line x1="58" x2="624" y1="124.0" y2="124.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="129.0" text-anchor="end" font-size="13" fill="#4A5670">3,000</text><line x1="58" x2="624" y1="78.0" y2="78.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="83.0" text-anchor="end" font-size="13" fill="#4A5670">4,000</text><line x1="58" x2="624" y1="32.0" y2="32.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="37.0" text-anchor="end" font-size="13" fill="#4A5670">5,000</text><text x="58.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">Today</text><text x="199.5" y="288" text-anchor="middle" font-size="13" fill="#4A5670">90 days</text><text x="341.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">6 mo</text><text x="624.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">1 yr</text><polyline points="58.0,252.9 105.2,251.0 152.3,248.2 199.5,245.0 246.7,241.3 293.8,237.2 341.0,232.6 388.2,227.5 435.3,222.0 482.5,216.0 529.7,209.6 576.8,202.7 624.0,195.3" fill="none" stroke="#8F9AB2" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 6"/><polyline points="58.0,252.9 105.2,247.3 152.3,238.1 199.5,225.2 246.7,209.1 293.8,190.7 341.0,170.0 388.2,147.0 435.3,124.0 482.5,101.0 529.7,78.0 576.8,55.0 624.0,32.0" fill="none" stroke="#2F6FE0" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="199.5" cy="225.2" r="5" fill="#2F6FE0"/><text x="193.5" y="214.2" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">800</text><circle cx="341.0" cy="170.0" r="5" fill="#2F6FE0"/><text x="335.0" y="159.0" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">2,000</text><circle cx="624.0" cy="32.0" r="5" fill="#2F6FE0"/><text x="618.0" y="21.0" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">5,000</text><circle cx="624.0" cy="195.3" r="5" fill="#6B7690"/><text x="618.0" y="184.3" text-anchor="end" font-size="15" font-weight="700" fill="#6B7690">1,450</text></svg></div><p class="cap">Facebook + Instagram combined, from 198 today. Target: 800 at 90 days, 2,000 at 6 months, 5,000 at a year. Conservative: about 1,450.</p></div>
+<div class="chartL"><h3>Google reviews</h3><p class="lg"><span><i style="background:#2F6FE0"></i>Target</span><span><i style="background:#8F9AB2"></i>Conservative</span></p><div class="sx"><svg viewBox="0 0 640 300" role="img" aria-label="Google reviews over 12 months" font-family="Public Sans, Arial, sans-serif"><line x1="58" x2="624" y1="262.0" y2="262.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="267.0" text-anchor="end" font-size="13" fill="#4A5670">0</text><line x1="58" x2="624" y1="216.0" y2="216.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="221.0" text-anchor="end" font-size="13" fill="#4A5670">50</text><line x1="58" x2="624" y1="170.0" y2="170.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="175.0" text-anchor="end" font-size="13" fill="#4A5670">100</text><line x1="58" x2="624" y1="124.0" y2="124.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="129.0" text-anchor="end" font-size="13" fill="#4A5670">150</text><line x1="58" x2="624" y1="78.0" y2="78.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="83.0" text-anchor="end" font-size="13" fill="#4A5670">200</text><line x1="58" x2="624" y1="32.0" y2="32.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="37.0" text-anchor="end" font-size="13" fill="#4A5670">250</text><text x="58.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">Today</text><text x="199.5" y="288" text-anchor="middle" font-size="13" fill="#4A5670">90 days</text><text x="341.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">6 mo</text><text x="624.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">1 yr</text><polyline points="58.0,230.7 105.2,197.6 152.3,190.2 199.5,182.9 246.7,175.5 293.8,168.2 341.0,160.8 388.2,153.4 435.3,146.1 482.5,138.7 529.7,131.4 576.8,124.0 624.0,116.6" fill="none" stroke="#8F9AB2" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 6"/><polyline points="58.0,230.7 105.2,193.0 152.3,181.0 199.5,169.1 246.7,157.1 293.8,145.2 341.0,133.2 388.2,121.2 435.3,109.3 482.5,97.3 529.7,85.4 576.8,73.4 624.0,61.4" fill="none" stroke="#2F6FE0" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="105.2" cy="193.0" r="5" fill="#2F6FE0"/><text x="99.2" y="182.0" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">75</text><circle cx="199.5" cy="169.1" r="5" fill="#2F6FE0"/><text x="193.5" y="158.1" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">101</text><circle cx="341.0" cy="133.2" r="5" fill="#2F6FE0"/><text x="335.0" y="122.2" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">140</text><circle cx="624.0" cy="61.4" r="5" fill="#2F6FE0"/><text x="618.0" y="50.4" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">218</text><circle cx="624.0" cy="116.6" r="5" fill="#6B7690"/><text x="618.0" y="105.6" text-anchor="end" font-size="15" font-weight="700" fill="#6B7690">158</text></svg></div><p class="cap">Jump in month one from the 134 unasked customers, then a request after every job. Target passes 200 by month 11.</p></div>
+<div class="chartL"><h3>Extra jobs a month</h3><p class="lg"><span><i style="background:#2F6FE0"></i>Target</span><span><i style="background:#8F9AB2"></i>Conservative</span></p><div class="sx"><svg viewBox="0 0 640 300" role="img" aria-label="Extra jobs per month" font-family="Public Sans, Arial, sans-serif"><line x1="58" x2="624" y1="262.0" y2="262.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="267.0" text-anchor="end" font-size="13" fill="#4A5670">0</text><line x1="58" x2="624" y1="204.5" y2="204.5" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="209.5" text-anchor="end" font-size="13" fill="#4A5670">5</text><line x1="58" x2="624" y1="147.0" y2="147.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="152.0" text-anchor="end" font-size="13" fill="#4A5670">10</text><line x1="58" x2="624" y1="89.5" y2="89.5" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="94.5" text-anchor="end" font-size="13" fill="#4A5670">15</text><line x1="58" x2="624" y1="32.0" y2="32.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="37.0" text-anchor="end" font-size="13" fill="#4A5670">20</text><rect x="64.6" y="239.0" width="16.0" height="23.0" rx="3" fill="#2F6FE0"/><rect x="82.5" y="250.5" width="16.0" height="11.5" rx="3" fill="#8F9AB2"/><text x="81.6" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M1</text><rect x="111.8" y="216.0" width="16.0" height="46.0" rx="3" fill="#2F6FE0"/><rect x="129.7" y="239.0" width="16.0" height="23.0" rx="3" fill="#8F9AB2"/><text x="128.8" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M2</text><rect x="158.9" y="193.0" width="16.0" height="69.0" rx="3" fill="#2F6FE0"/><rect x="176.9" y="227.5" width="16.0" height="34.5" rx="3" fill="#8F9AB2"/><text x="175.9" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M3</text><rect x="206.1" y="170.0" width="16.0" height="92.0" rx="3" fill="#2F6FE0"/><rect x="224.0" y="216.0" width="16.0" height="46.0" rx="3" fill="#8F9AB2"/><text x="223.1" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M4</text><rect x="253.3" y="147.0" width="16.0" height="115.0" rx="3" fill="#2F6FE0"/><rect x="271.2" y="204.5" width="16.0" height="57.5" rx="3" fill="#8F9AB2"/><text x="270.2" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M5</text><rect x="300.4" y="124.0" width="16.0" height="138.0" rx="3" fill="#2F6FE0"/><rect x="318.4" y="193.0" width="16.0" height="69.0" rx="3" fill="#8F9AB2"/><text x="317.4" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M6</text><rect x="347.6" y="112.5" width="16.0" height="149.5" rx="3" fill="#2F6FE0"/><rect x="365.5" y="181.5" width="16.0" height="80.5" rx="3" fill="#8F9AB2"/><text x="364.6" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M7</text><rect x="394.8" y="101.0" width="16.0" height="161.0" rx="3" fill="#2F6FE0"/><rect x="412.7" y="181.5" width="16.0" height="80.5" rx="3" fill="#8F9AB2"/><text x="411.7" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M8</text><rect x="441.9" y="89.5" width="16.0" height="172.5" rx="3" fill="#2F6FE0"/><rect x="459.9" y="170.0" width="16.0" height="92.0" rx="3" fill="#8F9AB2"/><text x="458.9" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M9</text><rect x="489.1" y="78.0" width="16.0" height="184.0" rx="3" fill="#2F6FE0"/><rect x="507.0" y="170.0" width="16.0" height="92.0" rx="3" fill="#8F9AB2"/><text x="506.1" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M10</text><rect x="536.3" y="66.5" width="16.0" height="195.5" rx="3" fill="#2F6FE0"/><rect x="554.2" y="158.5" width="16.0" height="103.5" rx="3" fill="#8F9AB2"/><text x="553.2" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M11</text><rect x="583.4" y="55.0" width="16.0" height="207.0" rx="3" fill="#2F6FE0"/><rect x="601.4" y="158.5" width="16.0" height="103.5" rx="3" fill="#8F9AB2"/><text x="600.4" y="288" text-anchor="middle" font-size="13" fill="#4A5670">M12</text><text x="600.4" y="47.0" text-anchor="middle" font-size="15" font-weight="700" fill="#2F6FE0">18</text></svg></div><p class="cap">Jobs on top of today's volume, from ads without the fee, Maps, reels, reviews and repeat offers. Year one: 135 extra jobs (target) or 69 (conservative).</p></div>
+<div class="chartL"><h3>Profit after every cost</h3><p class="lg"><span><i style="background:#2F6FE0"></i>Target</span><span><i style="background:#8F9AB2"></i>Conservative</span></p><div class="sx"><svg viewBox="0 0 640 300" role="img" aria-label="Cumulative net profit after all costs" font-family="Public Sans, Arial, sans-serif"><line x1="58" x2="624" y1="247.6" y2="247.6" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="252.6" text-anchor="end" font-size="13" fill="#4A5670">$0k</text><line x1="58" x2="624" y1="175.8" y2="175.8" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="180.8" text-anchor="end" font-size="13" fill="#4A5670">$10k</text><line x1="58" x2="624" y1="103.9" y2="103.9" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="108.9" text-anchor="end" font-size="13" fill="#4A5670">$20k</text><line x1="58" x2="624" y1="32.0" y2="32.0" stroke="#D9E0EA" stroke-width="1"/><text x="50" y="37.0" text-anchor="end" font-size="13" fill="#4A5670">$30k</text><text x="58.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">Today</text><text x="199.5" y="288" text-anchor="middle" font-size="13" fill="#4A5670">90 days</text><text x="341.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">6 mo</text><text x="624.0" y="288" text-anchor="middle" font-size="13" fill="#4A5670">1 yr</text><line x1="58" x2="624" y1="247.6" y2="247.6" stroke="#0E1A33" stroke-width="1.5"/><polyline points="58.0,247.6 105.2,250.9 152.3,252.5 199.5,252.5 246.7,250.9 293.8,247.7 341.0,242.9 388.2,236.5 435.3,230.0 482.5,221.9 529.7,213.9 576.8,204.2 624.0,194.5" fill="none" stroke="#8F9AB2" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 6"/><polyline points="58.0,247.6 105.2,249.3 152.3,247.7 199.5,242.8 246.7,234.8 293.8,223.5 341.0,208.9 388.2,192.8 435.3,175.0 482.5,155.6 529.7,134.6 576.8,112.0 624.0,87.8" fill="none" stroke="#2F6FE0" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="624.0" cy="87.8" r="5" fill="#2F6FE0"/><text x="618.0" y="76.8" text-anchor="end" font-size="15" font-weight="700" fill="#2F6FE0">$22,239</text><circle cx="624.0" cy="194.5" r="5" fill="#6B7690"/><text x="618.0" y="183.5" text-anchor="end" font-size="15" font-weight="700" fill="#6B7690">$7,389</text><line x1="199.5" x2="199.5" y1="187.6" y2="253.6" stroke="#2F6FE0" stroke-width="2" stroke-dasharray="3 3"/><text x="203.5" y="183.6" font-size="13" font-weight="700" fill="#2F6FE0">month 3</text><line x1="341.0" x2="341.0" y1="187.6" y2="253.6" stroke="#6B7690" stroke-width="2" stroke-dasharray="3 3"/><text x="345.0" y="183.6" font-size="13" font-weight="700" fill="#6B7690">month 6</text></svg></div><p class="cap">Running total of extra profit ($225 a job) minus the extra monthly cost vs. today (~$678 after Topline and its fee are gone). Ends year one at +$22,239 (target) or +$7,389 (conservative).</p></div>
+</div>
+<div class="cols">
+<div class="chartL"><h3>Year one, target case</h3><div class="sx"><svg viewBox="0 0 640 320" role="img" aria-label="Year one waterfall, target scenario" font-family="Public Sans, Arial, sans-serif"><rect x="38.0" y="85.3" width="84.0" height="174.7" rx="4" fill="#2F6FE0"/><text x="80.0" y="77.3" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">+$30,375</text><text x="80.0" y="282.0" text-anchor="middle" font-size="13" fill="#4A5670">Extra-job</text><text x="80.0" y="298.0" text-anchor="middle" font-size="13" fill="#4A5670">profit</text><rect x="158.0" y="73.3" width="84.0" height="12.1" rx="4" fill="#2F6FE0"/><text x="200.0" y="65.3" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">+$2,100</text><text x="200.0" y="282.0" text-anchor="middle" font-size="13" fill="#4A5670">Ads</text><text x="200.0" y="298.0" text-anchor="middle" font-size="13" fill="#4A5670">fee saved</text><rect x="278.0" y="56.2" width="84.0" height="17.1" rx="4" fill="#2F6FE0"/><text x="320.0" y="48.2" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">+$2,976</text><text x="320.0" y="282.0" text-anchor="middle" font-size="13" fill="#4A5670">Software</text><text x="320.0" y="298.0" text-anchor="middle" font-size="13" fill="#4A5670">saved</text><rect x="398.0" y="56.2" width="84.0" height="76.0" rx="4" fill="#D9483B"/><text x="440.0" y="48.2" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">−$13,212</text><text x="440.0" y="282.0" text-anchor="middle" font-size="13" fill="#4A5670">Plan + CRM</text><rect x="518.0" y="132.1" width="84.0" height="127.9" rx="4" fill="#1E9E6A"/><text x="560.0" y="124.1" text-anchor="middle" font-size="15" font-weight="700" fill="#0E1A33">+$22,239</text><text x="560.0" y="282.0" text-anchor="middle" font-size="13" fill="#4A5670">Net, year 1</text><line x1="20" x2="620" y1="260.0" y2="260.0" stroke="#0E1A33" stroke-width="1.5"/></svg></div><p class="cap">Where the money comes from and goes. Conservative case nets +$7,389.</p></div>
+<div class="card" style="justify-content:center"><span class="k">+$37k to +$93k</span><h3>Added value of the business</h3><p>Cleaning businesses sold in 2025 at an average of 2.3× yearly owner earnings (BizBuySell). Year-one ending profit run-rate × 2.3 adds roughly $37k (conservative) to $93k (target) to what Premier is worth. Reviews, an owned website, a following and a film library also make a business easier to sell or finance.</p>
+<span class="k" style="margin-top:12px">2nd year</span><h3>Repeat customers</h3><p>A soft wash is yearly. If half of year one's 135 new customers rebook, that is about $15,200 of profit in year two with almost no ad cost.</p></div>
+</div>
+<p class="src">Assumptions: $450 average job, 50% gross margin, Growth plan, $500–$1,000 ad spend continued, Topline cancelled. Valuation: BizBuySell, <a href="https://www.bizbuysell.com/learning-center/valuation-benchmarks/cleaning-janitorial/">Cleaning &amp; janitorial valuation benchmarks</a> (2025 average earnings multiple 2.30). Projections, not promises.</p>
+</div>
+</section>
+
+<!-- BUILT -->
+<section class="band dark" id="built">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The value stack · already delivered</p><h2>Before the first invoice</h2>
+<p class="lead">Topline gives Premier a template on day one. Above All Media has already built all of this, and it is live to review now.</p></div>
+<div class="vstack">
+<a class="vi" href="../website/"><img src="../local-legend/stills/premier-ll-20-drone-facade-full-sign-aam.jpg" alt=""><div><em>Preview</em><b>The new website</b><span>Grime-to-clean scroll, real film and stills, estimate form, town-page ready.</span></div></a>
+<a class="vi" href="../#media"><img src="../media/video/premier-hero-90s.jpg" alt=""><div><em>v7 · watch</em><b>Hero film + cutdowns</b><span>90 s commercial, 30 s and 15 s cuts for ads and SERG screens.</span></div></a>
+<a class="vi" href="../#reels"><img src="../media/video/premier-reel-1-who-cleans.jpg" alt=""><div><em>3 reels</em><b>Vertical reels</b><span>Who cleans Local Legend at 2 a.m., the Costa Rica origin story, Local Legends Ep. 1.</span></div></a>
+<a class="vi" href="../#live-logo"><img src="../media/live-logo-poster.jpg" alt=""><div><em>3 animations</em><b>3D, sunset + live logos</b><span>The 3D shield reveal, the original logo at sunset, the neon live logo.</span></div></a>
+<a class="vi" href="../#stills"><img src="../local-legend/stills/premier-ll-01-duo-under-local-legend-sign-aam.jpg" alt=""><div><em>38 graded</em><b>Retouched stills</b><span>Brandon and Jerahmy, the rigs, drone and detail shots, ready for Google and the site.</span></div></a>
+<a class="vi" href="../local-legend/"><img src="../local-legend/stills/premier-ll-11-local-legend-sign-full-facade-aam.jpg" alt=""><div><em>Case study</em><b>Premier × Local Legend</b><span>The night shoot that opens the door to SERG's 18 restaurants.</span></div></a>
+<a class="vi" href="../#plan"><img src="../media/brand-sheet.png" alt=""><div><em>Strategy</em><b>SEO + growth plan</b><span>Keyword map per service and town, 8 SEO pillars, the 12-month roadmap.</span></div></a>
+<a class="vi" href="../#card"><img src="../local-legend/stills/premier-ll-28-trucks-under-the-oaks-aam.jpg" alt=""><div><em>Brand</em><b>Digital card + brand kit</b><span>Tap card, QR, truck and sign art.</span></div></a>
+<a class="vi" href="../"><img src="../local-legend/stills/premier-ll-29-rig-at-the-beer-garden-aam.jpg" alt=""><div><em>Everything</em><b>The proposal hub</b><span>aboveallmediasc.com/proposals/premier-soft-wash</span></div></a>
+</div>
+</div>
+</section>
+
+
+
+<!-- SETUP -->
+<section class="band light" id="setup">
+<div class="wrap">
+<div class="head"><p class="eyebrow">The one-time launch setup · prices for Chandler to confirm</p><h2>What's built, what's next, <span>what it costs</span></h2>
+<p class="lead">Every component of the launch, priced on its own, beside what the same work would cost from an agency in Savannah, Charleston and Hilton Head. Then our list price, and Premier's partner price at 30% off. The pitch materials are free.</p></div>
+<div class="stats" role="list" style="background:var(--line)">
+<div class="stat" role="listitem"><b>12</b><span>components already built</span></div>
+<div class="stat" role="listitem"><b>15</b><span>components left to build</span></div>
+<div class="stat" role="listitem"><b>$16,695</b><span>total launch, partner price</span></div>
+<div class="stat" role="listitem"><b>$7,155</b><span>partner discount</span></div>
+</div>
+<div class="tbl scroll"><table class="mkt">
+<thead><tr><th>Status</th><th>Component</th><th class="num">Hours</th><th class="num">Savannah</th><th class="num">Charleston</th><th class="num">Hilton Head</th><th class="num">Our list</th><th class="num">Partner</th></tr></thead>
+<tbody>
+<tr><td><span class="chip good">✓ Built</span></td><td>Hero commercial: 90 s film + 30 s and 15 s cuts (v7)</td><td class="num">35 h</td><td class="num">$6,400</td><td class="num">$3,500</td><td class="num">$3,800</td><td class="num">$4,500</td><td class="num big">$3,150</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 vertical reels (who cleans Local Legend, origin story, Local Legends Ep. 1)</td><td class="num">15 h</td><td class="num">$2,750</td><td class="num">$1,500</td><td class="num">$1,600</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Drone aerial filming and edit, Local Legend night</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>38 retouched, color-graded stills</td><td class="num">12 h</td><td class="num">$2,200</td><td class="num">$1,200</td><td class="num">$1,300</td><td class="num">$950</td><td class="num big">$665</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 footage GIFs and web loops</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3D shield logo reveal animation</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Sunset logo animation (original logo, with sound)</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Neon live logo loop (square, wide, GIF)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New shield logo, 3 alternative styles and brand kit</td><td class="num">15 h</td><td class="num">$2,750</td><td class="num">$1,500</td><td class="num">$1,600</td><td class="num">$1,500</td><td class="num big">$1,050</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Digital business card design (tap card + QR)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New custom website with grime-to-clean effects (preview)</td><td class="num">30 h</td><td class="num">$5,500</td><td class="num">$3,000</td><td class="num">$3,250</td><td class="num">$3,500</td><td class="num big">$2,450</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>SEO + growth plan: keyword map, 8 pillars, 12-month roadmap</td><td class="num">9 h</td><td class="num">$1,650</td><td class="num">$900</td><td class="num">$950</td><td class="num">$900</td><td class="num big">$630</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>42-slide pitch deck</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Proposal hub and Local Legend page</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>This Topline comparison and ROI page</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr class="tot"><td colspan="2">Already built</td><td class="num">149 h</td><td class="num">$27,300</td><td class="num">$14,900</td><td class="num">$16,100</td><td class="num">$15,300</td><td class="num big">$10,710</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Website launch: domain switch, first 5 service × town pages, redirects, schema, speed</td><td class="num">12 h</td><td class="num">$2,200</td><td class="num">$1,200</td><td class="num">$1,300</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Real before-and-after shoot for the website and Google</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Business Profile overhaul: categories, services, areas, photos, Q&amp;A</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>40+ directory listings created or corrected (name, phone, address match)</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>CRM build (Google Workspace CRM) or Jobber setup, with contact import from Topline</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$800</td><td class="num big">$560</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Every past client imported: Topline, invoices and phone contacts, cleaned and enriched (property, services, job value, profit, referral source)</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Referral program: unique codes, "give 15%, get 15%" coupons, reward tracking</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Review engine + the 134-contact review campaign</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Missed-call text-back and quote follow-ups, incl. texting registration</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Tracking: GA4, Tag Manager, Meta Pixel + Conversions API, call tracking</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$700</td><td class="num big">$490</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Ads rebuild + Local Services Ads setup</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Meta ads account and retargeting setup</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>The Premier Weekly email + text setup and templates</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Account moves into Premier's name + Topline data export</td><td class="num">3 h</td><td class="num">$550</td><td class="num">$300</td><td class="num">$300</td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Brand rollout art: truck, yard sign, door hanger, shirts (printed at cost)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr class="tot"><td colspan="2">Left to build (first 30 days)</td><td class="num">83 h</td><td class="num">$15,250</td><td class="num">$8,300</td><td class="num">$9,050</td><td class="num">$8,550</td><td class="num big">$5,985</td></tr>
+<tr class="tot"><td colspan="2">Total launch setup</td><td class="num">232 h</td><td class="num">$42,550</td><td class="num">$23,200</td><td class="num">$25,150</td><td class="num">$23,850</td><td class="num big">$16,695</td></tr>
+</tbody></table></div>
+<p class="src">How the city columns are worked out: hours for each item × the average published hourly rate of the three agencies on this page for that city (see <a href="#market">vs. agencies</a>). Savannah $183/hr (Electric Lemonade, Orange Bird, Sugoi), Charleston $100/hr (Lounge Lizard, Colophon, Q4Launch), Hilton Head $108/hr (Tucker, Coastal Marketing, Hello Sidestreet; no published rates, so estimated). These are estimates of what each market would bill, not quotes. As a cross-check on the film work, Savannah and Charleston crews list $1,500 to $5,000 per shoot day before editing (Beverly Boy Productions), and a single 60-second commercial typically runs $3,500 to $8,000 (Advids).</p>
+<div class="stats" role="list" style="background:var(--line);margin-top:18px">
+<div class="stat" role="listitem"><b>$25,855</b><span>less than the Savannah average</span></div>
+<div class="stat" role="listitem"><b>$6,505</b><span>less than the Charleston average</span></div>
+<div class="stat" role="listitem"><b>$8,455</b><span>less than the Hilton Head average</span></div>
+<div class="stat" role="listitem"><b>$10,710</b><span>of the partner price is work already built</span></div>
+</div>
+<div class="cols">
+<div class="card"><h3>Payment options <span class="ph">to confirm</span></h3><ul><li>50% at signing, 50% when the new site goes live</li><li>Or 3 monthly payments of $5,565</li><li>Print, ad spend and software are paid at cost, never marked up</li></ul></div>
+<div class="card"><h3>What Premier gets on day one</h3><ul><li>Clean, unwatermarked masters of every film, photo and logo</li><li>The website files and domain in Premier's name</li><li>All accounts owned by Premier, with Above All Media as manager</li></ul></div>
+</div>
+<p class="src">Built items are delivered and viewable on the <a href="../">proposal hub</a>; watermarks come off and downloads open on payment. Prices are proposals for Chandler to confirm.</p>
+</div>
+</section>
+
+
+<!-- MARKET -->
+<section class="band light" id="market" style="padding-top:24px">
+<div class="wrap">
+<div class="head"><p class="eyebrow">What the same work costs elsewhere</p><h2>Savannah, Charleston, <span>Hilton Head</span></h2>
+<p class="lead">Agencies rarely publish package prices, so this uses each agency's published hourly rate (Clutch, DesignRush) on the same scope: about 230 hours for the launch and 22 hours a month for the Growth plan. Where no rate is published, a regional rate is assumed and marked "est."</p></div>
+<div class="tbl scroll"><table style="min-width:900px">
+<thead><tr><th>Market</th><th>Agency</th><th>Published rate + focus</th><th class="num">Launch</th><th class="num">Monthly</th><th class="num">Year one</th></tr></thead>
+<tbody>
+<tr style="background:#F0F6FF"><td>Hilton Head</td><td><b>Above All Media</b><br><span class="src" style="font-size:15px">Hilton Head Island, SC</span></td><td>Partner price · film crew, drone, web, SEO, ads in-house<br><span class="src" style="font-size:15px">12 launch items already delivered</span></td><td class="num">$16,695</td><td class="num">$1,050/mo</td><td class="num big pos">$29,295</td></tr>
+<tr><td>Savannah</td><td><b>Electric Lemonade</b><br><span class="src" style="font-size:15px">Savannah, GA</span></td><td>$300+/hr · $10,000+ minimum · 10–49 staff<br><span class="src" style="font-size:15px">Content, SEO, PPC; no in-house film crew listed</span></td><td class="num">$69,000</td><td class="num">$6,600/mo</td><td class="num big">$148,200</td></tr>
+<tr><td>Savannah</td><td><b>Orange Bird</b><br><span class="src" style="font-size:15px">Pooler, GA</span></td><td>$100–$149/hr · $5,000+ minimum · 10–49 staff · 5.0 (13 reviews)<br><span class="src" style="font-size:15px">Strategy and content; video not a listed focus</span></td><td class="num">$28,750</td><td class="num">$2,750/mo</td><td class="num big">$61,750</td></tr>
+<tr><td>Savannah</td><td><b>Sugoi</b><br><span class="src" style="font-size:15px">Savannah, GA</span></td><td>$100–$149/hr · $1,000+ minimum · 2–9 staff<br><span class="src" style="font-size:15px">Social, content, design, SEO, some video (15%)</span></td><td class="num">$28,750</td><td class="num">$2,750/mo</td><td class="num big">$61,750</td></tr>
+<tr><td>Charleston</td><td><b>Lounge Lizard</b><br><span class="src" style="font-size:15px">Charleston, SC office</span></td><td>Rate not published · 50–99 staff · 4.8 (10 reviews)<br><span class="src" style="font-size:15px">Web, branding, SEO, PPC, social; national agency pricing</span></td><td class="num">$34,500 <span class="ph">est.</span></td><td class="num">$3,300/mo</td><td class="num big">$74,100</td></tr>
+<tr><td>Charleston</td><td><b>Colophon New Media</b><br><span class="src" style="font-size:15px">Charleston, SC</span></td><td>$100/hr · $1,000–$10,000 minimum · Google 5.0 (57)<br><span class="src" style="font-size:15px">Web, SEO, social; video not listed</span></td><td class="num">$23,000</td><td class="num">$2,200/mo</td><td class="num big">$49,400</td></tr>
+<tr><td>Charleston</td><td><b>Q4Launch</b><br><span class="src" style="font-size:15px">Charleston, SC</span></td><td>$50/hr · $1,000–$10,000 minimum · Google 4.8 (44)<br><span class="src" style="font-size:15px">Marketing, branding, web, social; video not listed</span></td><td class="num">$11,500</td><td class="num">$1,100/mo</td><td class="num big">$24,700</td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Tucker Marketing Group</b><br><span class="src" style="font-size:15px">Hilton Head Island, SC</span></td><td>No public pricing (listed as $$$) · since 1999<br><span class="src" style="font-size:15px">SEO, ads, social, web, email, branding; video talent only</span></td><td class="num">$28,750 <span class="ph">est.</span></td><td class="num">$2,750/mo</td><td class="num big">$61,750</td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Coastal Marketing Strategies</b><br><span class="src" style="font-size:15px">Bluffton, SC</span></td><td>No public pricing<br><span class="src" style="font-size:15px">SEO and digital marketing for contractors; video not listed</span></td><td class="num">$23,000 <span class="ph">est.</span></td><td class="num">$2,200/mo</td><td class="num big">$49,400</td></tr>
+<tr><td>Hilton Head + Bluffton</td><td><b>Hello Sidestreet</b><br><span class="src" style="font-size:15px">Serves Hilton Head + Bluffton</span></td><td>No public pricing<br><span class="src" style="font-size:15px">Digital marketing, web, video production</span></td><td class="num">$23,000 <span class="ph">est.</span></td><td class="num">$2,200/mo</td><td class="num big">$49,400</td></tr>
+</tbody></table></div>
+<div class="cols3">
+<div class="card"><span class="k">$3.5k–$8k</span><h3>One 60 s commercial</h3><p>Typical small-business price for a single professionally shot 60-second video (Advids 2026). The launch here includes a 90 s film, two cutdowns, three reels and drone.</p></div>
+<div class="card"><span class="k">$500–$1k</span><h3>SEO alone, per month</h3><p>The most common agency SEO retainer (Ahrefs survey). National firms such as WebFX start around $2,500–$3,000 a month for SEO only.</p></div>
+<div class="card"><span class="k">0</span><h3>Local film + screens</h3><p>None of these agencies lists a monthly on-site film crew together with a restaurant-screen network like SERG's 18 locations.</p></div>
+</div>
+<p class="src">Hours × rate is an estimate of what each agency would bill for this scope, not a quote from them; real quotes vary. Sources: Clutch, <a href="https://clutch.co/agencies/digital-marketing/savannah">Savannah digital marketing agencies</a>; DesignRush, <a href="https://www.designrush.com/agency/digital-marketing/south-carolina/charleston">Charleston digital marketing companies</a>; <a href="https://www.tuckermg.com/">Tucker Marketing Group</a>; <a href="https://coastalmarketingstrategies.com/digital-marketing-agency/hilton-head-island-sc/">Coastal Marketing Strategies</a>; <a href="https://hellosidestreet.com/hilton-head-sc">Hello Sidestreet</a>; Advids, <a href="https://advids.co/pricing/how-much-small-business-video-creation-cost">small business video cost</a>; Ahrefs, <a href="https://ahrefs.com/blog/seo-pricing">SEO pricing survey</a>; WebFX via <a href="https://www.g2.com/compare/mayple-vs-webfx">G2</a>.</p>
+<div class="cta noprint"><div><h2>Ready to sign?</h2><p>Every piece of work, priced line by line, with the terms.</p></div><a class="btn" href="../agreement/">Open the agreement</a></div>
+</div>
+</section>
+
+<!-- UPSIDE -->
+<section class="band light" id="upside">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Everything Above All Media brings</p><h2>Every service, <span>every upside</span></h2>
+<p class="lead">All 18 parts of the program and what each one does for Premier. The theme across all of them: real people, real jobs and real video, owned by Premier.</p></div>
+<div class="ups">
+<div class="up"><span class="ic">Brandon + Jerahmy on camera</span><h3>Owner interviews</h3><ul><li>People hire people: homeowners meet the owners before they open the door</li><li>Turns a faceless brand into neighbors, and makes the price conversation easier</li><li>85% of people say a video convinced them to buy (Wyzowl 2026)</li><li>Clips reused in ads, the website, Google and the SERG screens</li></ul></div>
+<div class="up"><span class="ic">90 s + 30 s + 15 s cuts</span><h3>Hero film</h3><ul><li>Top of the website and YouTube, so the first visit feels premium</li><li>Doubles as the TV spot on SERG restaurant screens</li><li>Ready-made ad creative for Google and Meta</li><li>Sent with every quote to win the close</li></ul></div>
+<div class="up"><span class="ic">8–16 a month</span><h3>Vertical reels</h3><ul><li>The single biggest driver of reach on Facebook, Instagram, TikTok and YouTube Shorts</li><li>Real jobs and real results, not AI images</li><li>Every reel can name a town, which helps local relevance</li><li>Builds a following Premier owns and can sell to directly</li></ul></div>
+<div class="up"><span class="ic">Every film day</span><h3>Retouched stills</h3><ul><li>Weekly Google profile photos, which keep the listing active</li><li>Website, flyers, truck art and ads all look like one brand</li><li>Real before-and-afters prove the work</li></ul></div>
+<div class="up"><span class="ic">Motion brand</span><h3>3D, sunset + live logos</h3><ul><li>End card on every video, so the brand sticks</li><li>Looks bigger than the competition</li><li>Square, wide and GIF versions for every platform</li></ul></div>
+<div class="up"><span class="ic">Owned, not rented</span><h3>New website</h3><ul><li>Premier owns every page and file</li><li>Fast static hosting, $0 a month</li><li>Estimate form feeds the CRM with an instant text back</li><li>Built to add a page for every service in every town</li></ul></div>
+<div class="up"><span class="ic">2–4 new pages a month</span><h3>SEO + town pages</h3><ul><li>Ranks for the searches people make when ready to buy</li><li>Each page is a permanent asset that keeps working</li><li>Schema, video and local proof on every page</li></ul></div>
+<div class="up"><span class="ic">3 posts a week</span><h3>Google Business Profile</h3><ul><li>Maps is where most local calls start</li><li>Real job photos and services, kept current</li><li>Q&A, categories and service areas tuned for each town</li></ul></div>
+<div class="up"><span class="ic">Every job, automatically</span><h3>Review engine</h3><ul><li>134 unasked customers asked in week one</li><li>A request and reminder after every job keeps reviews recent</li><li>Personal replies within 48 hours</li><li>47% of people skip businesses with under 20 reviews (BrightLocal 2026)</li></ul></div>
+<div class="up"><span class="ic">No % fee</span><h3>Google Ads + Local Services Ads</h3><ul><li>$1,800–$2,400 a year back that Topline kept</li><li>Pay-per-lead LSA with the Google Guaranteed badge</li><li>Weekly tuning with call tracking, so spend follows jobs</li></ul></div>
+<div class="up"><span class="ic">Pixel + Conversions API</span><h3>Meta ads + retargeting</h3><ul><li>Shows Premier's video to people who visited the site</li><li>Lookalike audiences of past customers</li><li>Cheap reach in the exact neighborhoods Premier serves</li></ul></div>
+<div class="up"><span class="ic">Email + text</span><h3>The Premier Weekly</h3><ul><li>New media plus one offer a week, made to feel like a gift</li><li>Brings back past customers for repeat and add-on jobs</li><li>An audience Premier owns, no algorithm needed</li></ul></div>
+<div class="up"><span class="ic">Never miss a lead</span><h3>CRM automation</h3><ul><li>Missed-call text-back in seconds</li><li>Quote follow-ups so no estimate goes cold</li><li>Review requests triggered when a job is marked done</li></ul></div>
+<div class="up"><span class="ic">On every truck and shirt</span><h3>Digital card + tap cards</h3><ul><li>One tap shares contact, reviews and a quote link</li><li>QR on yard signs turns each job into a lead</li><li>Tracks which jobs bring new customers</li></ul></div>
+<div class="up"><span class="ic">18 restaurants</span><h3>SERG screens + Local Legend</h3><ul><li>The Premier spot loops where locals eat and drink (subject to the SERG agreement)</li><li>Opens doors to commercial accounts worth many house washes</li><li>A case study no Topline customer can copy</li></ul></div>
+<div class="up"><span class="ic">Quarterly</span><h3>Landmark Clean</h3><ul><li>A drone film of a well-known local building, cleaned</li><li>Press, partner screens and shares</li><li>A series that grows every quarter</li></ul></div>
+<div class="up"><span class="ic">Accountability</span><h3>Monthly report + local partner</h3><ul><li>Real numbers: rank, reviews, calls, jobs</li><li>Chandler is on Hilton Head and films the jobs himself</li><li>Same-day answers</li></ul></div>
+<div class="up"><span class="ic">Premier keeps everything</span><h3>Ownership</h3><ul><li>Domain, profiles, ad accounts and Pixel in Premier's name</li><li>Every film, photo and page belongs to Premier</li><li>Month-to-month after 90 days; no hostage accounts</li></ul></div>
+</div>
+<p class="src">Wyzowl, <a href="https://wyzowl.com/sovm-results-2025/">State of Video Marketing 2026</a> (85% convinced to buy by a video; 89% say video quality affects trust in a brand). BrightLocal, <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">Local Consumer Review Survey 2026</a>.</p>
+</div>
+</section>
+
+<!-- ACCESS -->
+<section class="band light" id="access">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Ownership stays with Premier</p><h2>How Chandler gets access</h2>
+<p class="lead">Every account is created or kept in Premier's name, on Premier's login and card. Above All Media is added as a manager or partner, so access can be removed with one click.</p></div>
+<div class="cols">
+<div class="card"><h3>1 · Google Business Profile</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Check who is the <b>Primary Owner</b> today. If it is a Topline login, Premier's Gmail is made Primary Owner first.</p></div>
+<div class="step"><span class="d">b</span><p>On Google, search "Premier Soft Wash", open the profile menu ⋮, then <code>Business Profile settings → Managers → Add</code>, and add Chandler's email as <b>Manager</b>.</p></div>
+</div></div>
+<div class="card"><h3>2 · Domain (premiersoftwashsc.com)</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Look up the registrar (ICANN lookup). Confirm the registrant is Premier. Topline's help center says Premier keeps the domain on cancel; if Topline registered it, ask for the transfer code first.</p></div>
+<div class="step"><span class="d">b</span><p>Add Chandler with the registrar's delegate access (GoDaddy "Delegate Access", Namecheap "Share Access", Cloudflare "Members"). No password sharing.</p></div>
+</div></div>
+<div class="card"><h3>3 · Google Ads</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Ask Topline whether the ad account sits under its manager account. If it does, request admin rights or create a new account on Premier's Google login with Premier's card.</p></div>
+<div class="step"><span class="d">b</span><p>Chandler sends a link request from the Above All Media manager account; Brandon accepts it under <code>Admin → Access and security → Managers</code>. Google Analytics 4 and Tag Manager work the same way.</p></div>
+</div></div>
+<div class="card"><h3>4 · Meta (Facebook + Instagram)</h3><div class="steps">
+<div class="step"><span class="d">a</span><p>Make sure the Page, Instagram and ad account sit in a Meta business portfolio owned by Premier.</p></div>
+<div class="step"><span class="d">b</span><p>In <code>Business settings → Partners</code>, add Above All Media's business ID as a partner with access to the Page, ad account and Pixel.</p></div>
+</div></div>
+</div>
+<div class="note"><b>Before cancelling Topline:</b> export every customer contact (including the 134 unasked), download all job photos, copy any posts worth keeping, and set redirects from the old page addresses so Google keeps the ranking history. Cancel only after the new site is live and the domain points to it.</div>
+</div>
+</section>
+
+<!-- HOSTING + CRM -->
+<section class="band dark" id="save">
+<div class="wrap">
+<div class="head"><p class="eyebrow">Saving money every month</p><h2>Hosting + CRM for <span>a fraction</span> of the bill</h2>
+<p class="lead">Topline bundles a website and a CRM into Premier's $299 plan ($399 at today's list price). Unbundled, the same jobs cost much less, and Premier owns all of it.</p></div>
+<div class="tbl scroll"><table>
+<thead><tr><th>Piece</th><th>Best-value option</th><th class="num">Monthly</th><th>Why it's better</th></tr></thead>
+<tbody>
+<tr><td>Website hosting</td><td>GitHub Pages (or Cloudflare Pages / Netlify free tier)</td><td class="num">$0</td><td>Static site on a global CDN: fast, secure, nothing to patch. Speed helps rankings and conversions.</td></tr>
+<tr><td>Domain</td><td>Keep premiersoftwashsc.com at its registrar</td><td class="num">~$1–2</td><td>About $12–$20 a year, already owned by Premier.</td></tr>
+<tr><td>Forms + booking</td><td>Estimate form posts straight into the CRM</td><td class="num">$0</td><td>Every web lead lands in one place with a text-back.</td></tr>
+<tr><td>CRM, Google build</td><td>Google Workspace + Sheets CRM, built by Above All Media</td><td class="num">~$10–$20</td><td>Web form → Sheet, Gmail auto-reply in seconds, follow-ups and review requests by Apps Script, bookings on Google Calendar. Texts through Twilio at about a cent each. Uses the Workspace seat Premier likely already pays for.</td></tr>
+<tr><td>CRM, lean</td><td>Jobber Core</td><td class="num">$49</td><td>Scheduling, quotes, invoices, card payments, client hub.</td></tr>
+<tr><td>CRM, team</td><td>Housecall Pro Basic → Essentials</td><td class="num">$59–$189</td><td>Basic $59–$79 for one user; Essentials ($149–$189) adds up to 5 users, dispatch and review requests.</td></tr>
+<tr><td>Marketing automation</td><td>Above All Media's CRM (GoHighLevel sub-account)</td><td class="num">in plan</td><td>Review texts, missed-call text-back, the Premier Weekly. Included in Growth and Dominate; text and call usage passed through at cost.</td></tr>
+<tr class="tot"><td colspan="2">Recommended stack: GitHub Pages + domain + Jobber Core</td><td class="num">~$51</td><td></td></tr>
+</tbody></table></div>
+<div class="cols3">
+<div class="card"><span class="k">$248/mo</span><h3>Saved vs. today</h3><p>$299 Topline vs. ~$51 for hosting, domain and Jobber Core: about $2,976 a year.</p></div>
+<div class="card"><span class="k">$348/mo</span><h3>Saved vs. list price</h3><p>If Topline moves Premier to its current $399 Pro list price, the gap grows to about $4,176 a year.</p></div>
+<div class="card"><span class="k">+20%</span><h3>More ad budget working</h3><p>No percentage fee, so every ad dollar buys clicks. On $1,000 a month of spend that is $2,400 a year back.</p></div>
+</div>
+<div class="cols">
+<div class="card"><h3>Google Workspace CRM: the near-free option</h3><ul class="pros"><li>About $10–$20 a month: the ~$7 Workspace seat plus Twilio texting</li><li>Every lead in one Sheet Premier owns, viewable on any phone</li><li>Instant email and text replies, quote follow-ups, review requests after each job</li><li>Built and run by Above All Media inside the Growth plan</li></ul></div>
+<div class="card"><h3>The trade-offs, honestly</h3><ul class="cons"><li>No built-in crew scheduling app, quotes or invoices; use Google Calendar plus Square or QuickBooks invoices (card fees similar)</li><li>Chandler maintains the scripts; if a Google quota or setting changes, we fix it</li><li>Business texting needs a one-time carrier registration (A2P 10DLC) before texts go out</li><li>If Premier grows past 2–3 crews, moving to Jobber later is easy, because the data is already in a Sheet</li></ul></div>
+</div>
+<div class="cols">
+<div class="card"><h3>What Premier's CRM keeps on every client</h3><ul><li>Name, phone, email, address and neighborhood</li><li>Property type (home, condo, HOA, commercial), stories, size, surfaces</li><li>Every service bought, dates, photos, crew notes (gate codes, pets)</li><li>Job value, cost and profit per job, payment status</li><li>How they found Premier and who referred them</li><li>Review left (yes/no), next service due date</li><li>Email and text consent, with date</li></ul><p>We leave out race, color, ethnicity and similar personal traits: they don't help sell a house wash and can create legal risk.</p></div>
+<div class="card"><h3>The Premier Weekly + referrals</h3><ul><li>One email a week: new before-and-after video, a seasonal tip, and one offer</li><li>Offers rotate: referral "give 15%, get 15%", seasonal bundles, annual-rinse reminders, a monthly coupon</li><li>Texts kept to 1–2 a month for the best offers, so people don't opt out</li><li>Every email has an unsubscribe link and Premier's address (CAN-SPAM); texts go only to people who agreed to them in writing (TCPA)</li><li>Referral codes tracked in the CRM, so Premier sees which customers bring the most work</li></ul></div>
+</div>
+<div class="note"><b>How the savings turn into results:</b> the money that used to buy a rented template and AI posts goes into filmed video, a review engine and ads without a markup. Premier keeps a faster site it owns, one CRM for jobs, and every lead followed up automatically.</div>
+<p class="src">Prices from third-party 2026 pricing guides; confirm on each vendor's site before signing: Jobber (<a href="https://www.getonecrew.com/post/jobber-pricing">OneCrew</a>, <a href="https://pricingsaas.com/companies/jobber/diffs/2026W15">PricingSaaS</a>: Core $49, Connect $139, Grow $199 monthly); Housecall Pro (<a href="https://projul.com/blog/housecall-pro-pricing-analysis-2026">Projul</a>, <a href="https://schedulingkit.com/pricing-guides/housecall-pro-pricing">SchedulingKit</a>); GoHighLevel (<a href="https://schedulingkit.com/pricing-guides/gohighlevel-pricing">SchedulingKit</a>: agency plans $97–$497); GitHub Pages is free for public sites. Google Workspace Business Starter is about $7 per user a month; Twilio texting runs about a cent per message plus a small monthly number and registration fee. Confirm current rates.</p>
+</div>
+</section>
+
+<!-- CLOSE -->
+<section class="band light">
+<div class="wrap">
+<div class="promise">
+<div class="pr yes"><h3>What we promise</h3><ul><li>Every deliverable in the plan, on schedule</li><li>A monthly report with real rank, review, call and booking numbers</li><li>Same-day answers from Chandler</li><li>Premier owns every file, page and account</li><li>No percentage on ad spend, ever</li></ul></div>
+<div class="pr no"><h3 style="color:#fff">What nobody can promise</h3><ul><li>A guaranteed #1 spot. Google decides rankings, and distance from the searcher always counts.</li><li>What we promise is the work that wins rankings, done every week, with numbers to prove it. The goal: top 3 on Maps in Bluffton, Hilton Head and Beaufort, and the most-reviewed, most-watched soft wash brand in the Lowcountry.</li></ul></div>
+</div>
+<div class="cta"><div><h2>Start with Growth, judge us at 90 days</h2><p>Week one: the 134 review requests, the Google profile fixes, account access, and the first film day.</p></div>
+<a class="btn" href="../">Back to the full proposal</a></div>
+</div>
+</section>
+
+<footer class="band dark" style="padding-block:44px">
+<div class="wrap" style="gap:10px">
+<p class="eyebrow">Sources</p>
+<p class="src">Topline Pro, <a href="https://toplinepro.com/pricing">Pricing</a> and <a href="https://help.toplinepro.com/en/articles/6566449-what-if-i-want-to-cancel-my-subscription">"What if I want to cancel my subscription?"</a> · BrightLocal, <a href="https://www.brightlocal.com/research/local-consumer-review-survey/">Local Consumer Review Survey 2026</a> · Search Engine Land, <a href="https://searchengineland.com/google-ads-costs-rising-but-conversion-rates-improved-in-2025-477927">Google Ads benchmarks 2025</a> · Webtonic, <a href="https://www.webtonic.io/blog/cleaning-services-google-ads-statistics">Cleaning Services Google Ads Statistics</a> · ThePricer, <a href="https://www.thepricer.org/how-much-does-it-cost-to-pressure-wash-a-house/">House washing cost</a> · Jobber, Housecall Pro and GoHighLevel pricing guides linked above · Premier's Topline and Facebook dashboards (Jul 21 to Aug 19, 2026). Prepared by Above All Media, October 2026. Figures marked as proposals are not final.</p>
+</div>
+</footer>
+
+<img src="../media/aam-mark.png" alt="Above All Media" style="position:fixed;right:16px;bottom:16px;width:140px;height:auto;opacity:.3;pointer-events:none;z-index:9999">
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var money=function(n){var s=Math.round(Math.abs(n)).toLocaleString('en-US');return (n<0?'−$':'$')+s};
+  var plan=1050;
+  document.querySelectorAll('#tier button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#tier button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');plan=+b.dataset.p;run();
+    });
+  });
+  function run(){
+    var spend=+$('spend').value, top=+$('top').value, ticket=+$('ticket').value, m=+$('margin').value/100, jobs=+$('jobs').value;
+    $('spendV').textContent=money(spend);$('topV').textContent=money(top);$('ticketV').textContent=money(ticket);$('marginV').textContent=Math.round(m*100)+'%';$('jobsV').textContent=jobs;
+    var fee=spend>0?Math.max(150,spend*0.2):0;
+    var now=top+fee+spend, neu=plan+49+2+spend, diff=neu-now, per=ticket*m;
+    var be=per>0?diff/per:0, net=jobs*per-diff;
+    $('oNow').textContent=money(now);$('oNew').textContent=money(neu);
+    $('oDiff').textContent=(diff>=0?'+':'')+money(diff);
+    $('oFee').textContent=money(fee*12);
+    $('oBE').textContent=be<=0?'0':be.toFixed(1);
+    $('oNet').textContent=(net>=0?'+':'')+money(net);
+    $('netRow').className='ln '+(net>=0?'gd':'bd');
+    $('oYr').textContent=(net>=0?'+':'')+money(net*12);
+  }
+  ['spend','top','ticket','margin','jobs'].forEach(function(id){$(id).addEventListener('input',run)});
+  run();
+})();
+</script>
+</body>
+</html>
