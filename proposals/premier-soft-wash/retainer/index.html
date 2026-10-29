@@ -132,6 +132,8 @@ tr.tot td{font-weight:700;border-top:2px solid var(--ink)}
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tbl{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 8px}
 .dark .tbl{background:var(--navy2);border-color:var(--navy3)}
+table.mkt{min-width:980px}
+table.mkt td:nth-child(n+3),table.mkt th:nth-child(n+3){white-space:nowrap}
 .pos{color:var(--good)} .neg{color:var(--bad)}
 .dark .pos{color:#5FD3A0} .dark .neg{color:#FF8A7E}
 /* calculator */
@@ -575,50 +577,57 @@ footer .src{line-height:1.8}
 <section class="band light" id="setup">
 <div class="wrap">
 <div class="head"><p class="eyebrow">The one-time launch setup · prices for Chandler to confirm</p><h2>What's built, what's next, <span>what it costs</span></h2>
-<p class="lead">Every component of the launch, priced on its own. List price, then Premier's partner price at 30% off. The pitch materials are free.</p></div>
+<p class="lead">Every component of the launch, priced on its own, beside what the same work would cost from an agency in Savannah, Charleston and Hilton Head. Then our list price, and Premier's partner price at 30% off. The pitch materials are free.</p></div>
 <div class="stats" role="list" style="background:var(--line)">
 <div class="stat" role="listitem"><b>12</b><span>components already built</span></div>
 <div class="stat" role="listitem"><b>15</b><span>components left to build</span></div>
 <div class="stat" role="listitem"><b>$16,695</b><span>total launch, partner price</span></div>
 <div class="stat" role="listitem"><b>$7,155</b><span>partner discount</span></div>
 </div>
-<div class="tbl scroll"><table>
-<thead><tr><th>Status</th><th>Component</th><th class="num">List</th><th class="num">Partner</th></tr></thead>
+<div class="tbl scroll"><table class="mkt">
+<thead><tr><th>Status</th><th>Component</th><th class="num">Hours</th><th class="num">Savannah</th><th class="num">Charleston</th><th class="num">Hilton Head</th><th class="num">Our list</th><th class="num">Partner</th></tr></thead>
 <tbody>
-<tr><td><span class="chip good">✓ Built</span></td><td>Hero commercial: 90 s film + 30 s and 15 s cuts (v7)</td><td class="num">$4,500</td><td class="num big">$3,150</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>3 vertical reels (who cleans Local Legend, origin story, Local Legends Ep. 1)</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>Drone aerial filming and edit, Local Legend night</td><td class="num">$750</td><td class="num big">$525</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>38 retouched, color-graded stills</td><td class="num">$950</td><td class="num big">$665</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>3 footage GIFs and web loops</td><td class="num">$300</td><td class="num big">$210</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>3D shield logo reveal animation</td><td class="num">$600</td><td class="num big">$420</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>Sunset logo animation (original logo, with sound)</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>Neon live logo loop (square, wide, GIF)</td><td class="num">$350</td><td class="num big">$245</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>New shield logo, 3 alternative styles and brand kit</td><td class="num">$1,500</td><td class="num big">$1,050</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>Digital business card design (tap card + QR)</td><td class="num">$350</td><td class="num big">$245</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>New custom website with grime-to-clean effects (preview)</td><td class="num">$3,500</td><td class="num big">$2,450</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>SEO + growth plan: keyword map, 8 pillars, 12-month roadmap</td><td class="num">$900</td><td class="num big">$630</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>42-slide pitch deck</td><td class="num">–</td><td class="num big pos">Free</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>Proposal hub and Local Legend page</td><td class="num">–</td><td class="num big pos">Free</td></tr>
-<tr><td><span class="chip good">✓ Built</span></td><td>This Topline comparison and ROI page</td><td class="num">–</td><td class="num big pos">Free</td></tr>
-<tr class="tot"><td colspan="2">Already built</td><td class="num">$15,300</td><td class="num big">$10,710</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Website launch: domain switch, first 5 service × town pages, redirects, schema, speed</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Real before-and-after shoot for the website and Google</td><td class="num">$500</td><td class="num big">$350</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Google Business Profile overhaul: categories, services, areas, photos, Q&amp;A</td><td class="num">$500</td><td class="num big">$350</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>40+ directory listings created or corrected (name, phone, address match)</td><td class="num">$600</td><td class="num big">$420</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>CRM build (Google Workspace CRM) or Jobber setup, with contact import from Topline</td><td class="num">$800</td><td class="num big">$560</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Every past client imported: Topline, invoices and phone contacts, cleaned and enriched (property, services, job value, profit, referral source)</td><td class="num">$600</td><td class="num big">$420</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Referral program: unique codes, "give 15%, get 15%" coupons, reward tracking</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Review engine + the 134-contact review campaign</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Missed-call text-back and quote follow-ups, incl. texting registration</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Tracking: GA4, Tag Manager, Meta Pixel + Conversions API, call tracking</td><td class="num">$700</td><td class="num big">$490</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Google Ads rebuild + Local Services Ads setup</td><td class="num">$750</td><td class="num big">$525</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Meta ads account and retargeting setup</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>The Premier Weekly email + text setup and templates</td><td class="num">$400</td><td class="num big">$280</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Account moves into Premier's name + Topline data export</td><td class="num">$300</td><td class="num big">$210</td></tr>
-<tr><td><span class="chip fix">To build</span></td><td>Brand rollout art: truck, yard sign, door hanger, shirts (printed at cost)</td><td class="num">$600</td><td class="num big">$420</td></tr>
-<tr class="tot"><td colspan="2">Left to build (first 30 days)</td><td class="num">$8,550</td><td class="num big">$5,985</td></tr>
-<tr class="tot"><td colspan="2">Total launch setup</td><td class="num">$23,850</td><td class="num big">$16,695</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Hero commercial: 90 s film + 30 s and 15 s cuts (v7)</td><td class="num">35 h</td><td class="num">$6,400</td><td class="num">$3,500</td><td class="num">$3,800</td><td class="num">$4,500</td><td class="num big">$3,150</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 vertical reels (who cleans Local Legend, origin story, Local Legends Ep. 1)</td><td class="num">15 h</td><td class="num">$2,750</td><td class="num">$1,500</td><td class="num">$1,600</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Drone aerial filming and edit, Local Legend night</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>38 retouched, color-graded stills</td><td class="num">12 h</td><td class="num">$2,200</td><td class="num">$1,200</td><td class="num">$1,300</td><td class="num">$950</td><td class="num big">$665</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3 footage GIFs and web loops</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>3D shield logo reveal animation</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Sunset logo animation (original logo, with sound)</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Neon live logo loop (square, wide, GIF)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New shield logo, 3 alternative styles and brand kit</td><td class="num">15 h</td><td class="num">$2,750</td><td class="num">$1,500</td><td class="num">$1,600</td><td class="num">$1,500</td><td class="num big">$1,050</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Digital business card design (tap card + QR)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$350</td><td class="num big">$245</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>New custom website with grime-to-clean effects (preview)</td><td class="num">30 h</td><td class="num">$5,500</td><td class="num">$3,000</td><td class="num">$3,250</td><td class="num">$3,500</td><td class="num big">$2,450</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>SEO + growth plan: keyword map, 8 pillars, 12-month roadmap</td><td class="num">9 h</td><td class="num">$1,650</td><td class="num">$900</td><td class="num">$950</td><td class="num">$900</td><td class="num big">$630</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>42-slide pitch deck</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>Proposal hub and Local Legend page</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr><td><span class="chip good">✓ Built</span></td><td>This Topline comparison and ROI page</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num">–</td><td class="num big pos">Free</td></tr>
+<tr class="tot"><td colspan="2">Already built</td><td class="num">149 h</td><td class="num">$27,300</td><td class="num">$14,900</td><td class="num">$16,100</td><td class="num">$15,300</td><td class="num big">$10,710</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Website launch: domain switch, first 5 service × town pages, redirects, schema, speed</td><td class="num">12 h</td><td class="num">$2,200</td><td class="num">$1,200</td><td class="num">$1,300</td><td class="num">$1,200</td><td class="num big">$840</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Real before-and-after shoot for the website and Google</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Business Profile overhaul: categories, services, areas, photos, Q&amp;A</td><td class="num">5 h</td><td class="num">$900</td><td class="num">$500</td><td class="num">$550</td><td class="num">$500</td><td class="num big">$350</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>40+ directory listings created or corrected (name, phone, address match)</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>CRM build (Google Workspace CRM) or Jobber setup, with contact import from Topline</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$800</td><td class="num big">$560</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Every past client imported: Topline, invoices and phone contacts, cleaned and enriched (property, services, job value, profit, referral source)</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Referral program: unique codes, "give 15%, get 15%" coupons, reward tracking</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Review engine + the 134-contact review campaign</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Missed-call text-back and quote follow-ups, incl. texting registration</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Tracking: GA4, Tag Manager, Meta Pixel + Conversions API, call tracking</td><td class="num">6 h</td><td class="num">$1,100</td><td class="num">$600</td><td class="num">$650</td><td class="num">$700</td><td class="num big">$490</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Google Ads rebuild + Local Services Ads setup</td><td class="num">8 h</td><td class="num">$1,450</td><td class="num">$800</td><td class="num">$850</td><td class="num">$750</td><td class="num big">$525</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Meta ads account and retargeting setup</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>The Premier Weekly email + text setup and templates</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$400</td><td class="num big">$280</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Account moves into Premier's name + Topline data export</td><td class="num">3 h</td><td class="num">$550</td><td class="num">$300</td><td class="num">$300</td><td class="num">$300</td><td class="num big">$210</td></tr>
+<tr><td><span class="chip fix">To build</span></td><td>Brand rollout art: truck, yard sign, door hanger, shirts (printed at cost)</td><td class="num">4 h</td><td class="num">$750</td><td class="num">$400</td><td class="num">$450</td><td class="num">$600</td><td class="num big">$420</td></tr>
+<tr class="tot"><td colspan="2">Left to build (first 30 days)</td><td class="num">83 h</td><td class="num">$15,250</td><td class="num">$8,300</td><td class="num">$9,050</td><td class="num">$8,550</td><td class="num big">$5,985</td></tr>
+<tr class="tot"><td colspan="2">Total launch setup</td><td class="num">232 h</td><td class="num">$42,550</td><td class="num">$23,200</td><td class="num">$25,150</td><td class="num">$23,850</td><td class="num big">$16,695</td></tr>
 </tbody></table></div>
+<p class="src">How the city columns are worked out: hours for each item × the average published hourly rate of the three agencies on this page for that city (see <a href="#market">vs. agencies</a>). Savannah $183/hr (Electric Lemonade, Orange Bird, Sugoi), Charleston $100/hr (Lounge Lizard, Colophon, Q4Launch), Hilton Head $108/hr (Tucker, Coastal Marketing, Hello Sidestreet; no published rates, so estimated). These are estimates of what each market would bill, not quotes. As a cross-check on the film work, Savannah and Charleston crews list $1,500 to $5,000 per shoot day before editing (Beverly Boy Productions), and a single 60-second commercial typically runs $3,500 to $8,000 (Advids).</p>
+<div class="stats" role="list" style="background:var(--line);margin-top:18px">
+<div class="stat" role="listitem"><b>$25,855</b><span>less than the Savannah average</span></div>
+<div class="stat" role="listitem"><b>$6,505</b><span>less than the Charleston average</span></div>
+<div class="stat" role="listitem"><b>$8,455</b><span>less than the Hilton Head average</span></div>
+<div class="stat" role="listitem"><b>$10,710</b><span>of the partner price is work already built</span></div>
+</div>
 <div class="cols">
 <div class="card"><h3>Payment options <span class="ph">to confirm</span></h3><ul><li>50% at signing, 50% when the new site goes live</li><li>Or 3 monthly payments of $5,565</li><li>Print, ad spend and software are paid at cost, never marked up</li></ul></div>
 <div class="card"><h3>What Premier gets on day one</h3><ul><li>Clean, unwatermarked masters of every film, photo and logo</li><li>The website files and domain in Premier's name</li><li>All accounts owned by Premier, with Above All Media as manager</li></ul></div>
