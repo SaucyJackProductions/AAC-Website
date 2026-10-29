@@ -293,6 +293,120 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
   .svc-float{display:none}
 }
 
+/* ---------- 3b. THE STRIPE (real driveway footage, scrubbed by scroll) ---------- */
+.st{position:relative;height:320vh;background:radial-gradient(ellipse at 50% 40%,rgba(47,111,224,.16),transparent 60%),var(--night)}
+.still .st,html:not(.js) .st{height:auto}
+.st-stick{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(20px,4vw,70px);padding:96px var(--gut) 40px}
+.still .st-stick,html:not(.js) .st-stick{position:relative;height:auto;padding:100px var(--gut)}
+.st-frame{position:relative;height:min(76vh,800px);aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:#111;box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.14)}
+.st-frame img,.st-frame canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.st-frame canvas{opacity:0;transition:opacity .5s}
+.st.live .st-frame canvas{opacity:1}
+.st-badge{position:absolute;left:14px;top:14px;z-index:2;display:flex;gap:8px;align-items:center;padding:7px 12px;border-radius:999px;background:rgba(6,11,24,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:600 10px var(--mono);letter-spacing:.18em;text-transform:uppercase}
+.st-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 10px #ff4d4d}
+.st-copy h2{font-size:clamp(44px,5.2vw,90px);margin:16px 0 18px}
+.st-copy p{color:var(--muted);max-width:34ch}
+.st-caps{position:relative;min-height:190px}
+.st-cap{position:absolute;left:0;top:0;opacity:0;transform:translateY(16px);transition:opacity .5s,transform .6s var(--ease)}
+.st-cap.on{opacity:1;transform:none}
+.st-cap span{display:block;margin-bottom:10px;font:500 11px var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--yellow)}
+.st-cap b{display:block;font:850 clamp(26px,2.6vw,40px)/1 var(--display);font-stretch:80%;text-transform:uppercase}
+.st-cap small{display:block;margin-top:10px;max-width:30ch;color:var(--muted);font-size:15px;line-height:1.55}
+.st-meter{display:grid;gap:10px;margin-top:26px;font:500 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.st-meter b{font:850 clamp(44px,4.6vw,72px)/1 var(--display);font-stretch:80%;color:#fff;letter-spacing:0}
+.st-meter .tr{width:min(260px,100%);height:6px;border-radius:6px;background:linear-gradient(90deg,var(--grime-d),var(--grime));overflow:hidden}
+.st-meter .tr i{display:block;height:100%;background:var(--water);transform-origin:0 50%;transform:scaleX(0)}
+.still .st-cap,html:not(.js) .st-cap{position:relative;opacity:1;transform:none;margin-bottom:22px}
+.still .st-caps,html:not(.js) .st-caps{min-height:0}
+.still .st-meter,html:not(.js) .st-meter{display:none}
+@media (max-width:900px){
+  .st-stick{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;gap:14px;padding:100px var(--gut) 96px}
+  .st-copy h2{font-size:40px;margin:10px 0 0}
+  .st-copy p{display:none}
+  .st-frame{position:absolute;inset:0;height:auto;aspect-ratio:auto;border-radius:0;box-shadow:none}
+  .st-frame::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,11,24,.82),transparent 32%,transparent 50%,rgba(6,11,24,.88))}
+  .st-badge{top:auto;left:auto;right:14px;bottom:14px}
+  .st-copy,.st-side{position:relative;z-index:2}
+  .st-side{align-self:end}
+  .st-caps{min-height:150px}
+  .st-meter{margin-top:6px}
+  .st-meter b{font-size:34px}
+  .still .st-stick{padding-top:110px}
+  .still .st-frame{position:relative;height:70svh;border-radius:20px}
+}
+
+/* ---------- PROOF (real during / after photos) ---------- */
+.pf{padding:clamp(60px,8vw,110px) 0 clamp(70px,9vw,120px);background:var(--clean)}
+.pf-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+.pf-head h2{font-size:clamp(44px,6vw,96px);margin-top:16px}
+.pf-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(14px,2.4vw,34px);align-items:center}
+.pf-shot{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:var(--navy);box-shadow:0 30px 70px rgba(14,26,51,.22)}
+.pf-shot img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.pf-shot:hover img{transform:scale(1.04)}
+.pf-shot figcaption{position:absolute;left:14px;right:14px;bottom:14px;padding:14px 16px;border-radius:14px;background:rgba(246,250,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:14px;line-height:1.45;color:var(--muted-d)}
+.pf-shot figcaption b{display:block;font:850 22px/1.05 var(--display);font-stretch:80%;text-transform:uppercase;color:var(--ink-d)}
+.pf-time{position:absolute;left:14px;top:14px;padding:8px 12px;border-radius:999px;background:rgba(14,26,51,.85);color:#fff;font:600 12px var(--mono);letter-spacing:.12em}
+.pf-shot.after .pf-time{background:var(--blue)}
+.pf-clock{position:relative;width:124px;height:124px;display:grid;place-content:center;text-align:center}
+.pf-clock svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.pf-clock circle{fill:none;stroke-width:6}
+.pf-clock .bg{stroke:var(--clean-3)}
+.pf-clock .fg{stroke:var(--blue);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:calc(327 - 327 * var(--ck,0))}
+.pf-clock b{font:900 42px/1 var(--display);font-stretch:80%;color:var(--ink-d)}
+.pf-clock span{font:600 10px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted-d)}
+.still .pf-clock,html:not(.js) .pf-clock{--ck:1}
+.pf-wide{display:grid;grid-template-columns:minmax(0,.8fr) 1fr;gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(56px,7vw,100px)}
+.pf-wide figure{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:3/4;background:var(--navy);box-shadow:0 30px 70px rgba(14,26,51,.22)}
+.pf-wide img{width:100%;height:100%;object-fit:cover}
+.pf-pin{position:absolute;translate:-50% -50%;padding:9px 14px;border-radius:999px;background:var(--yellow);color:var(--navy);font:700 12px var(--body);white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.35);scale:0;transition:scale .7s var(--ease) .3s}
+.pf-pin.dk{background:rgba(42,39,23,.92);color:#e8e2c4}
+.in .pf-pin,.still .pf-pin,html:not(.js) .pf-pin{scale:1}
+.pf-wide h3{font-size:clamp(36px,4vw,64px);margin:14px 0 16px}
+.pf-wide p{color:var(--muted-d);font-size:17px;line-height:1.7;max-width:44ch}
+@media (max-width:820px){
+  .pf-head,.pf-wide{grid-template-columns:1fr}
+  .pf-pair{grid-template-columns:1fr 1fr;gap:12px}
+  .pf-clock{grid-column:1/-1;order:-1;justify-self:center;width:100px;height:100px}
+  .pf-clock b{font-size:34px}
+  .pf-shot{aspect-ratio:3/4;border-radius:16px}
+  .pf-shot figcaption{left:8px;right:8px;bottom:8px;padding:10px;font-size:12px}
+  .pf-shot figcaption b{font-size:17px}
+  .pf-time{left:8px;top:8px;font-size:11px}
+  .pf-wide figure{max-width:480px}
+}
+
+/* ---------- JOB FILES (stacking cards) ---------- */
+.jf{padding:clamp(40px,6vw,80px) 0 clamp(70px,9vw,120px);background:var(--clean)}
+.jf-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:40px}
+.jf-head h2{font-size:clamp(44px,6vw,96px);margin-top:16px}
+.jf-stack{display:grid;gap:30px}
+.jf-card{position:sticky;top:calc(96px + var(--i) * 22px);display:grid;grid-template-columns:1.1fr 1fr;min-height:min(70vh,640px);border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 30px 80px rgba(14,26,51,.16),0 0 0 1px var(--line-d);transform-origin:50% 0;transform:scale(var(--js,1));filter:brightness(var(--jb,1));will-change:transform}
+.jf-card:nth-child(even){grid-template-columns:1fr 1.1fr}
+.jf-card:nth-child(even) .jf-media{order:2}
+.jf-media{position:relative;min-height:300px;background:var(--navy)}
+.jf-media img,.jf-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.jf-media video{opacity:0;transition:opacity .6s}
+.jf-media video.is-playing{opacity:1}
+.jf-body{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:clamp(24px,4vw,56px)}
+.jf-no{font:600 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+.jf-body h3{font-size:clamp(34px,3.6vw,60px)}
+.jf-body p{max-width:40ch;color:var(--muted-d);font-size:17px;line-height:1.65}
+.jf-tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none}
+.jf-tags li{padding:8px 14px;border-radius:999px;background:var(--clean-2);font:600 12px var(--body)}
+.jf-body .btn{align-self:flex-start;margin-top:6px}
+.jf-play{position:absolute;left:14px;bottom:14px;z-index:2;padding:8px 12px;border-radius:999px;background:rgba(6,11,24,.6);color:#fff;font:600 10px var(--mono);letter-spacing:.16em;text-transform:uppercase}
+.still .jf-card,html:not(.js) .jf-card{position:relative;top:auto}
+@media (max-width:820px){
+  .jf-head{grid-template-columns:1fr}
+  .jf-card,.jf-card:nth-child(even){grid-template-columns:1fr;grid-template-rows:42vh auto;min-height:0;top:calc(78px + var(--i) * 12px);border-radius:22px}
+  .jf-card:nth-child(even) .jf-media{order:0}
+  .jf-media{min-height:0}
+  .jf-body{gap:10px;padding:20px 20px 24px}
+  .jf-body h3{font-size:30px}
+  .jf-body p{font-size:15px}
+  .jf-body .btn{display:none}
+}
+
 /* ---------- 4. THE GLASS (squeegee scene) ---------- */
 .gl{position:relative;height:260vh;background:var(--night)}
 .still .gl,html:not(.js) .gl{height:auto}
@@ -620,6 +734,7 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
     </a>
     <nav class="primary" aria-label="Primary">
       <a href="#services">Services</a>
+      <a href="#proof">Results</a>
       <a href="#work">Our Work</a>
       <a href="#about">About</a>
       <a href="#reviews">Reviews</a>
@@ -636,6 +751,7 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
 
 <div class="mmenu" id="mmenu">
   <a href="#services">Services</a>
+  <a href="#proof">Results</a>
   <a href="#work">Our Work</a>
   <a href="#about">About</a>
   <a href="#reviews">Reviews</a>
@@ -771,6 +887,30 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
   </div>
 </section>
 
+<!-- 3b. THE STRIPE: real job footage, scrubbed by scroll -->
+<section class="st" id="stripe" aria-labelledby="stripe-title" data-tone="dark">
+  <div class="st-stick">
+    <div class="st-copy">
+      <span class="kicker">Real job &middot; Real footage</span>
+      <h2 id="stripe-title" data-split>Watch the stripe <em>disappear.</em></h2>
+      <p class="rv">Straight off the crew&rsquo;s phone: one driveway, one surface cleaner. Scroll to run the job.</p>
+    </div>
+    <div class="st-frame">
+      <img src="assets/jobs/stripe-poster.webp" alt="A Premier crew member running a surface cleaner over a stained concrete driveway" width="540" height="960" loading="lazy" decoding="async">
+      <canvas id="st-canvas" aria-hidden="true"></canvas>
+      <span class="st-badge" aria-hidden="true">Job footage</span>
+    </div>
+    <div class="st-side">
+      <div class="st-caps">
+        <p class="st-cap" data-a="0" data-b="0.3"><span>Before</span><b>Years of grime.</b><small>Dirt, mildew and tire marks worked into the concrete.</small></p>
+        <p class="st-cap" data-a="0.3" data-b="0.68"><span>The pass</span><b>Even, overlapping passes.</b><small>The surface cleaner holds the spray at one height, so there are no wand stripes.</small></p>
+        <p class="st-cap" data-a="0.68" data-b="2"><span>After</span><b>One even finish.</b><small>Edge to edge, back to bright, even concrete.</small></p>
+      </div>
+      <div class="st-meter" aria-hidden="true"><span>Driveway progress</span><b id="st-pct">0%</b><span class="tr"><i id="st-fill"></i></span></div>
+    </div>
+  </div>
+</section>
+
 <!-- 4. THE GLASS: a squeegee clears the window as you scroll -->
 <section class="gl" id="glass" aria-labelledby="glass-title" data-tone="dark">
   <div class="gl-stick">
@@ -862,6 +1002,64 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
   </div>
 </section>
 
+<!-- 7b. PROOF: real during and after photos -->
+<section class="lt pf" id="proof" aria-labelledby="proof-title" data-tone="light">
+  <div class="wrap">
+    <div class="pf-head">
+      <div>
+        <span class="kicker">Proof, not promises</span>
+        <h2 id="proof-title" data-split>Mid-wash. <em>Six minutes later.</em></h2>
+      </div>
+      <p class="lede rv">Real photos from a 2&nbsp;AM commercial job: the glass garage doors in the middle of the wash, then rinsed down.</p>
+    </div>
+    <div class="pf-pair">
+      <figure class="pf-shot rv"><img src="assets/jobs/glass-doors-during-aam.jpg" alt="Glass garage doors mid-wash, with soap and grime running down the panes" width="1200" height="1600" loading="lazy" decoding="async"><span class="pf-time">2:40 AM</span><figcaption><b>Mid-wash</b>Soap and grime running down the glass.</figcaption></figure>
+      <div class="pf-clock rv" id="pf-clock" aria-label="Six minutes apart"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52"/></svg><b>+6</b><span>minutes</span></div>
+      <figure class="pf-shot after rv" style="--d:1"><img src="assets/jobs/glass-doors-after-aam.jpg" alt="The same glass garage doors rinsed down, with the walkway washed" width="1200" height="1600" loading="lazy" decoding="async"><span class="pf-time">2:46 AM</span><figcaption><b>Rinsed</b>Doors rinsed down and the walkway washed.</figcaption></figure>
+    </div>
+    <div class="pf-wide">
+      <figure class="rv"><img src="assets/jobs/concrete-mid-wash-aam.jpg" alt="Concrete mid-wash at night: a clean strip down the middle, untouched concrete either side" width="1200" height="1600" loading="lazy" decoding="async"><span class="pf-pin" style="left:54%;top:56%">One pass</span><span class="pf-pin dk" style="left:16%;top:30%">Not yet</span></figure>
+      <div>
+        <span class="kicker">Caught mid-job</span>
+        <h3 data-split>The line between grimy <em>and Premier.</em></h3>
+        <p class="rv">The strip down the middle has had one pass. The concrete on either side hasn&rsquo;t been touched yet. That&rsquo;s the difference, in one photo.</p>
+        <div class="rv" style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-water" href="#estimate">Get a Free Estimate</a><a class="btn btn-line" href="sms:+18438166523">Text a Photo</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7c. JOB FILES: stacking cards -->
+<section class="lt jf" id="jobs" aria-labelledby="jobs-title" data-tone="light">
+  <div class="wrap">
+    <div class="jf-head">
+      <div>
+        <span class="kicker">Job files</span>
+        <h2 id="jobs-title" data-split>Homes, storefronts <em>and the rig.</em></h2>
+      </div>
+      <p class="lede rv">A few recent jobs, straight from the crew. Keep scrolling and they stack up.</p>
+    </div>
+    <div class="jf-stack" id="jf-stack">
+      <article class="jf-card" style="--i:0">
+        <div class="jf-media"><img src="assets/jobs/two-story-home-pavers-aam.jpg" alt="A two-story green home with a brick paver driveway and the Premier trailer at the curb" width="1200" height="1600" loading="lazy" decoding="async"></div>
+        <div class="jf-body"><span class="jf-no">File 01 &middot; Residential</span><h3>Two-story home</h3><p>Siding, porch and the brick paver driveway, with the rig parked right at the curb.</p><ul class="jf-tags"><li>House soft wash</li><li>Pavers</li><li>Porch</li></ul><a class="btn btn-water btn-sm" href="#estimate">Price my home</a></div>
+      </article>
+      <article class="jf-card" style="--i:1">
+        <div class="jf-media"><img src="assets/jobs/vinyl-siding-soft-wash-aam.jpg" alt="Clean vinyl lap siding and dark shutters after a soft wash" width="1200" height="1250" loading="lazy" decoding="async"></div>
+        <div class="jf-body"><span class="jf-no">File 02 &middot; Residential</span><h3>Vinyl siding</h3><p>Lap siding and shutters, soft washed at low pressure so nothing is forced behind the panels.</p><ul class="jf-tags"><li>Soft wash</li><li>Siding</li><li>Shutters</li></ul><a class="btn btn-water btn-sm" href="#estimate">Price my siding</a></div>
+      </article>
+      <article class="jf-card" style="--i:2">
+        <div class="jf-media"><img src="assets/jobs/walkthrough-aam.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="assets/jobs/walkthrough-aam.mp4" aria-label="Walkthrough of a washed screened porch, windows and siding"></video><span class="jf-play" aria-hidden="true">&#9654; Walkthrough</span></div>
+        <div class="jf-body"><span class="jf-no">File 03 &middot; The walkthrough</span><h3>Screened porch</h3><p>Every job ends with a walkthrough. Here&rsquo;s the screened porch, the windows and the siding at the finish.</p><ul class="jf-tags"><li>Screens</li><li>Windows</li><li>Porch floor</li></ul><a class="btn btn-water btn-sm" href="#estimate">Book a walkthrough</a></div>
+      </article>
+      <article class="jf-card" style="--i:3">
+        <div class="jf-media"><img src="assets/jobs/rig-at-local-legend-aam.jpg" alt="The Premier truck and trailer rig outside Local Legend Brewing in daylight" width="1600" height="1200" loading="lazy" decoding="async"></div>
+        <div class="jf-body"><span class="jf-no">File 04 &middot; The rig</span><h3>Fully equipped</h3><p>Truck, trailer, tank, hose reels and ladders. Everything the crew needs rolls up in one trip, for homes and storefronts alike.</p><ul class="jf-tags"><li>Commercial</li><li>Self-contained rig</li><li>Ladders</li></ul><a class="btn btn-water btn-sm" href="#estimate">Book the crew</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- 8. REELS -->
 <section class="lt reels" id="reels" aria-labelledby="reels-title" data-tone="light">
   <div class="wrap">
@@ -935,7 +1133,7 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
 <section class="lt cmp" id="compare" aria-labelledby="cmp-title" data-tone="light">
   <div class="wrap">
     <div class="cmp-head">
-      <span class="kicker">Try it yourself</span>
+      <span class="kicker">Your turn</span>
       <h2 id="cmp-title" data-split>Drag to <em>wash.</em></h2>
       <p class="lede rv">Pull the handle across each photo to wash the grime away.</p>
     </div>
@@ -961,7 +1159,7 @@ nav.primary a:hover::after,nav.primary a.on::after{transform:scaleX(1)}
         <p class="cmp-cap">Commercial facades</p>
       </div>
     </div>
-    <p class="cmp-note">Preview note: the grime side is a simulated effect over our own job photos. Real before-and-after pairs from Premier jobs go here at launch.</p>
+    <p class="cmp-note">Just for fun: the grime on these two is a simulated effect. The real mid-wash and after photos are in Proof, above.</p>
   </div>
 </section>
 

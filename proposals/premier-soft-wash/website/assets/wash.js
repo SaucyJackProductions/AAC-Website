@@ -320,6 +320,46 @@
       return { el: el, set: set, base: parseFloat(el.getAttribute('data-base')), k: parseFloat(el.getAttribute('data-k')), x: 0, w: 1 };
     });
 
+    /* ---------- the stripe: real job footage, 173 frames drawn to canvas, scrubbed by scroll ---------- */
+    var stS = $('#stripe'), stCv = $('#st-canvas'), stCtx = null, stN = 173, stF = [], stOk = [], stCur = 0, stDrawn = -1, stLoading = false, stW = 0, stH = 0;
+    var stCaps = $$('.st-cap').map(function (el) { return { el: el, a: +el.getAttribute('data-a'), b: +el.getAttribute('data-b') }; }), stPct = $('#st-pct'), stFill = $('#st-fill'), stLastPct = -1;
+    try { stCtx = stCv.getContext('2d'); } catch (e) { stCtx = null; }
+    function stSrc(i) { return 'assets/jobs/stripe/' + ('00' + (i + 1)).slice(-3) + '.webp'; }
+    function stLoad() {
+      if (stLoading) return; stLoading = true;
+      var order = [], seen = {};
+      [24, 8, 4, 2, 1].forEach(function (step) { for (var i = 0; i < stN; i += step) if (!seen[i]) { seen[i] = 1; order.push(i); } });
+      if (!seen[stN - 1]) order.push(stN - 1);
+      var active = 0;
+      function next() {
+        while (active < 6 && order.length) {
+          (function (i) {
+            active++;
+            var im = new Image(); im.decoding = 'async';
+            im.onload = function () { stOk[i] = true; active--; if (i === 0) stS.classList.add('live'); stDrawn = -1; next(); };
+            im.onerror = function () { active--; next(); };
+            im.src = stSrc(i); stF[i] = im;
+          })(order.shift());
+        }
+      }
+      next();
+    }
+    function stSize() {
+      if (!stCtx) return;
+      var r = stCv.getBoundingClientRect(), k = Math.min(W.devicePixelRatio || 1, 2), w = Math.round(r.width * k), h = Math.round(r.height * k);
+      if (w && h && (w !== stW || h !== stH)) { stW = stCv.width = w; stH = stCv.height = h; stDrawn = -1; }
+    }
+    function stDraw(i) {
+      var j = -1;
+      if (stOk[i]) j = i; else for (var k = 1; k < stN; k++) { if (i - k >= 0 && stOk[i - k]) { j = i - k; break; } if (i + k < stN && stOk[i + k]) { j = i + k; break; } }
+      if (j < 0 || j === stDrawn || !stW) return;
+      var im = stF[j], s = Math.max(stW / im.naturalWidth, stH / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
+      stCtx.drawImage(im, (stW - w) / 2, (stH - h) / 2, w, h); stDrawn = j;
+    }
+
+    /* ---------- job files: cards stack and settle back ---------- */
+    var jfCards = $$('.jf-card'), jfTops = [], pfClock = $('#pf-clock');
+
     /* ---------- the other scenes ---------- */
     var seal = $('#seal'), gl = $('#glass'), glStick = $('.gl-stick', gl), glPct = $('#gl-pct');
     var fw = $('#film'), fwWin = $('#fw-win'), fwL = $('#fw-l'), fwR = $('#fw-r'), fwCap = $('.fw-cap', fw);
@@ -343,6 +383,8 @@
       mq.forEach(function (m) { m.w = Math.max(1, m.set.getBoundingClientRect().width); });
       var y0 = lenis ? lenis.scroll : W.pageYOffset;
       toneBox = tones.map(function (el) { var r = el.getBoundingClientRect(); return { el: el, a: r.top + y0, b: r.bottom + y0, light: el.getAttribute('data-tone') === 'light' }; });
+      stSize();
+      jfTops = jfCards.map(function (c) { return parseFloat(getComputedStyle(c).top) || 0; });
       lastY = -1; needDraw = true;
     }
     W.addEventListener('resize', measure);
@@ -406,6 +448,20 @@
         if (m.x <= -m.w) m.x += m.w;
         m.el.style.transform = 'translate3d(' + m.x.toFixed(1) + 'px,0,0)';
       });
+
+      /* the stripe */
+      if (!still && stCtx) {
+        var sr2 = stS.getBoundingClientRect();
+        if (sr2.top < vh * 2.5 && sr2.bottom > -vh) stLoad();
+        if (sr2.bottom > 0 && sr2.top < vh) {
+          var spp = clamp(prog(stS) / 0.9, 0, 1), stT = spp * (stN - 1);
+          stCur = Math.abs(stT - stCur) < 0.05 ? stT : lerp(stCur, stT, 0.2);
+          stDraw(Math.round(stCur));
+          for (var sc = 0; sc < stCaps.length; sc++) stCaps[sc].el.classList.toggle('on', spp >= stCaps[sc].a && spp < stCaps[sc].b);
+          var spc = Math.round(spp * 100);
+          if (spc !== stLastPct) { stLastPct = spc; stPct.textContent = spc + '%'; stFill.style.transform = 'scaleX(' + spp.toFixed(3) + ')'; }
+        }
+      }
 
       /* the rinse wave moves even when the page is still */
       if (!still && rinse) {
@@ -485,6 +541,15 @@
             fwL.style.transform = 'translate3d(' + (-op * 40) + 'vw,' + (narrow ? 0 : -50) + '%,0)'; fwL.style.opacity = (1 - op).toFixed(3);
             fwR.style.transform = 'translate3d(' + (op * 40) + 'vw,' + (narrow ? 0 : -50) + '%,0)'; fwR.style.opacity = (1 - op).toFixed(3);
           }
+
+          /* job files: each card shrinks and dims a touch as the next one slides over it */
+          for (var jc = 0; jc < jfCards.length - 1; jc++) {
+            var nt = jfCards[jc + 1].getBoundingClientRect().top, jt = clamp((vh - nt) / Math.max(1, vh - jfTops[jc]), 0, 1);
+            jfCards[jc].style.setProperty('--js', (1 - 0.06 * jt).toFixed(4));
+            jfCards[jc].style.setProperty('--jb', (1 - 0.14 * jt).toFixed(3));
+          }
+          /* the six-minute clock fills */
+          if (pfClock) { var pc0 = pfClock.getBoundingClientRect(); pfClock.style.setProperty('--ck', smooth((vh * 0.9 - pc0.top) / (vh * 0.45)).toFixed(3)); }
 
           /* process line fills */
           var sr1 = stepsWrap.getBoundingClientRect(), spf = clamp((vh * 0.75 - sr1.top) / (sr1.height + vh * 0.2), 0, 1);
