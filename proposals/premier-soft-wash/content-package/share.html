@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The Above All Media content package for Premier Soft Wash: brand film, commercials, reels, stills, logo animations and the launch plan.">
+<meta property="og:title" content="Above All Media Content Package for Premier Soft Wash">
+<meta property="og:description" content="Brand film, commercials, reels, stills, logo animations and the launch plan.">
+<meta property="og:image" content="https://aboveallmediasc.com/proposals/premier-soft-wash/content-package/f1/poster.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico">
+<style>html{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Above All Media Content Package for Premier Soft Wash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout: a night screening in walkthrough order. Each section is a chapter Arabella narrates; the live chapter lights up in safety yellow. */
+:root{
+  --bg:#08101f; --panel:#0f1a31; --panel-2:#14223f; --line:#22325a;
+  --fg:#eef2fa; --muted:#97a3bf; --yellow:#f2c230; --blue:#2f6fe0; --ink:#0e1a33;
+  --display:"Archivo Black",Impact,"Arial Black",system-ui,sans-serif;
+  --body:Barlow,"Segoe UI",system-ui,-apple-system,sans-serif;
+  --label:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--label);font-weight:700;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:.005em}
+h2{font-size:clamp(1.6rem,4.2vw,2.5rem);line-height:1.08}
+h3{font-size:1.05rem;line-height:1.2}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch}
+.y{color:var(--yellow)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0;background:url("f1/poster.jpg") center/cover no-repeat;opacity:.5}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,31,.35) 0%,rgba(8,16,31,.75) 60%,var(--bg) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-block:clamp(56px,10vw,120px) clamp(40px,7vw,80px);display:flex;flex-direction:column;gap:18px}
+.hero h1{font-size:clamp(2.3rem,7.4vw,5rem);line-height:.98;max-width:14ch}
+.hero .lede{font-size:1.1rem;color:#c9d2e6}
+.start{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px}
+.btn{font:inherit;font-family:var(--label);font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;border:0;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px}
+.btn-y{background:var(--yellow);color:var(--ink);box-shadow:0 10px 30px -10px rgba(242,194,48,.6)}
+.btn:focus-visible,.play:focus-visible,.bar button:focus-visible,.bar input:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.tri{width:0;height:0;border-left:12px solid currentColor;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.start small{color:var(--muted);font-size:.95rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{color:var(--fg);text-decoration:none;font-family:var(--label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:rgba(15,26,49,.6)}
+.toc a.on{border-color:var(--yellow);color:var(--yellow)}
+
+/* chapters */
+.chap{padding-block:clamp(48px,7vw,84px);border-bottom:1px solid var(--line);scroll-margin-top:12px;transition:background .6s}
+.chap.live{background:linear-gradient(180deg,rgba(47,111,224,.07),transparent 70%)}
+.chap-head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.num{display:flex;align-items:center;gap:10px}
+.num .dot{width:10px;height:10px;border-radius:50%;background:var(--line);transition:background .4s,box-shadow .4s}
+.chap.live .num .dot{background:var(--yellow);box-shadow:0 0 0 6px rgba(242,194,48,.18)}
+.chap.live .num .label{color:var(--yellow)}
+
+/* players */
+.player{position:relative;background:#000;border-radius:14px;overflow:hidden;border:1px solid var(--line);max-width:100%}
+.player video{display:block;width:100%;height:100%;background:#000;object-fit:contain}
+.r169{aspect-ratio:16/9}.r916{aspect-ratio:9/16}.r11{aspect-ratio:1/1}
+.play{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.play .disc{position:relative;width:68px;height:68px;border-radius:50%;background:rgba(242,194,48,.94);color:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.5);transition:transform .2s}
+.play .disc .tri{border-left-width:20px;border-top-width:12px;border-bottom-width:12px;margin-left:5px}
+.play:hover .disc{transform:scale(1.07)}
+.meta{display:flex;flex-direction:column;gap:2px;padding-top:12px}
+.meta .t{font-weight:700;font-size:1.05rem}
+.meta .s{color:var(--muted);font-size:.92rem}
+.err{color:#ff9b8f;font-size:.88rem;padding-top:6px}
+
+.films{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.films .main{grid-column:1/-1}
+@media (max-width:640px){.films{grid-template-columns:1fr}}
+.reels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:820px){.reels{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
+.logos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:820px){.logos{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
+.logos .wide{grid-column:span 1}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:36px}
+@media (max-width:640px){.gallery{grid-template-columns:1fr}}
+.gallery figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.gallery img{display:block;width:100%;height:auto}
+.gallery figcaption{padding:12px 14px;font-weight:600}
+.gallery figcaption span{display:block;color:var(--muted);font-weight:400;font-size:.92rem}
+
+/* pride */
+.pride{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.pride{grid-template-columns:1fr}}
+.pride blockquote{margin:0;font-family:var(--display);font-size:clamp(1.7rem,4.6vw,3rem);line-height:1.04;text-wrap:balance}
+.people{display:flex;flex-direction:column;gap:14px}
+.person{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.person b{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;font-size:1.05rem}
+.person span{color:var(--muted)}
+.stat{font-family:var(--display);color:var(--yellow);font-size:1.4rem}
+
+/* services */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:10px 16px;font-weight:600}
+.chip i{font-style:normal;color:var(--yellow);margin-right:8px}
+.badge{margin-top:18px;display:inline-flex;flex-wrap:wrap;gap:10px 18px;font-family:var(--label);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow)}
+
+/* growth */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-bottom:28px}
+.step{flex:1 1 130px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0;position:relative}
+.step b{display:block;font-family:var(--label);letter-spacing:.06em;text-transform:uppercase}
+.step span{color:var(--muted);font-size:.9rem;line-height:1.35;display:block}
+.step.meta-s{border-color:var(--blue);background:linear-gradient(180deg,rgba(47,111,224,.18),var(--panel))}
+.loopnote{color:var(--muted);font-size:.92rem;margin:-14px 0 28px}
+.engines{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:640px){.engines{grid-template-columns:1fr}}
+.engine{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.engine.hl{border-color:var(--blue)}
+.engine ul{margin:0;padding-left:1.1em;color:var(--muted)}
+.engine li{margin:2px 0}
+
+/* close */
+.close{text-align:left}
+.close .big{font-family:var(--display);font-size:clamp(2rem,6vw,3.6rem);line-height:1}
+.call{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:22px}
+.phone{font-family:var(--display);font-size:clamp(1.5rem,4vw,2.2rem);color:var(--yellow);user-select:all}
+.copy{font:inherit;font-weight:600;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;min-height:40px}
+.credit{display:flex;align-items:center;gap:14px;margin-top:40px;color:var(--muted);font-size:.92rem;flex-wrap:wrap}
+.credit img{height:44px;width:auto}
+footer{padding-block:24px 140px;color:var(--muted);font-size:.85rem}
+
+/* stills */
+.team{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;max-width:900px}
+.masonry{columns:3 260px;column-gap:14px}
+.shot{margin:0 0 14px;break-inside:avoid;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.team .shot{margin:0}
+.zoom{display:block;width:100%;padding:0;border:0;background:#000;cursor:zoom-in}
+.zoom img{display:block;width:100%;height:auto;transition:transform .35s}
+.zoom:hover img{transform:scale(1.02)}
+.zoom:focus-visible{outline:3px solid var(--yellow);outline-offset:-3px}
+.shot figcaption{padding:9px 12px;font-size:.92rem;font-weight:600}
+.shot figcaption b{font-family:var(--label);color:var(--yellow);margin-right:6px;letter-spacing:.06em}
+.lb{position:fixed;inset:0;z-index:40;background:rgba(4,8,16,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.lb img{max-width:100%;max-height:calc(100% - 70px);object-fit:contain;border-radius:8px}
+.lb-bar{display:flex;align-items:center;gap:10px;max-width:100%}
+.lb-bar p{color:var(--fg);font-weight:600;min-width:0;text-align:center;flex:1 1 auto}
+.lb button{font:inherit;font-weight:700;background:var(--panel-2);color:var(--fg);border:1px solid var(--line);border-radius:999px;min-width:44px;min-height:44px;padding:0 14px;cursor:pointer}
+.lb button:focus-visible{outline:3px solid var(--yellow)}
+
+/* numbers for Brandon */
+.eco{display:grid;grid-template-columns:1fr auto 1.1fr auto 1fr;gap:12px;align-items:stretch;margin-bottom:34px}
+@media (max-width:860px){.eco{grid-template-columns:1fr}.eco .arrow{transform:rotate(90deg);justify-self:center}}
+.eco-col{display:flex;flex-direction:column;gap:8px;min-width:0}
+.eco-col .label{margin-bottom:2px}
+.node{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-weight:600;font-size:.95rem}
+.node span{display:block;color:var(--muted);font-weight:400;font-size:.85rem}
+.hub{background:linear-gradient(180deg,rgba(47,111,224,.22),var(--panel));border:1px solid var(--blue);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:0}
+.hub b{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem}
+.hub p{color:#c9d2e6;font-size:.95rem}
+.arrow{align-self:center;color:var(--yellow);font-family:var(--display);font-size:1.6rem}
+.feedback{grid-column:1/-1;color:var(--muted);font-size:.92rem;border-top:1px dashed var(--line);padding-top:10px}
+.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:640px){.compare{grid-template-columns:1fr}}
+.cost{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cost.new{border-color:var(--yellow)}
+.cost .row{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cost .row b{color:var(--fg);font-weight:600}
+.cost .tot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:8px;margin-top:4px;font-weight:700;font-variant-numeric:tabular-nums}
+.saves{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 36px}
+@media (max-width:760px){.saves{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.tile .big{font-family:var(--display);font-size:clamp(1.3rem,3.4vw,1.9rem);color:var(--yellow);line-height:1.1;font-variant-numeric:tabular-nums}
+.tile span{display:block;color:var(--muted);font-size:.88rem;margin-top:4px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+.track{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:560px}
+.track th,.track td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.track th:first-child,.track td:first-child{text-align:left}
+.track thead th{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-size:.85rem;background:var(--panel)}
+.track tr:last-child td{border-bottom:0}
+.track td.hi{color:var(--yellow);font-weight:700}
+.fine{color:var(--muted);font-size:.86rem;max-width:80ch}
+.h3gap{margin:0 0 14px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+@media (max-width:700px){.plans{grid-template-columns:1fr}}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.plan.rec{border-color:var(--yellow)}
+.plan b{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase}
+.plan .p{font-family:var(--display);font-size:1.4rem}
+.plan span{display:block;color:var(--muted);font-size:.88rem}
+
+/* narration bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(10,18,36,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:10px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+.bar-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.bar .pp{flex:0 0 auto;width:46px;height:46px;border-radius:50%;border:0;background:var(--yellow);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.bar .pp .tri{margin-left:4px}
+.bars{display:flex;gap:4px}.bars i{display:block;width:4px;height:16px;background:currentColor;border-radius:1px}
+.bar .info{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px}
+.bar .now{display:flex;gap:8px;align-items:baseline;min-width:0}
+.bar .now b{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .now span{color:var(--muted);font-size:.85rem;white-space:nowrap}
+.bar input[type=range]{width:100%;accent-color:var(--yellow);margin:0;height:18px}
+.bar .opt{flex:0 0 auto;display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.85rem;cursor:pointer}
+.bar .opt input{accent-color:var(--yellow);width:18px;height:18px}
+@media (max-width:520px){.bar .opt span{display:none}}
+/* finance charts: gold/blue/brick pass the categorical checks on the navy panel (validated) */
+:root{--c1:#c08a12;--c2:#5b8def;--c3:#c9634b;--grid:#1d2b4d}
+.kpis{margin-top:0}
+.kpis .tile{border-color:rgba(242,194,48,.45)}
+.fin-part{display:flex;flex-direction:column;gap:8px;margin:44px 0 16px}
+.fin-part h3{font-size:clamp(1.2rem,2.6vw,1.6rem)}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px;min-width:0;position:relative}
+.ch-head{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.ch-head b{font-family:var(--label);letter-spacing:.06em;text-transform:uppercase;font-size:1.02rem}
+.ch-head span{color:var(--muted);font-size:.86rem}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:8px;color:var(--muted);font-size:.85rem}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend i.dash-i{height:0;border-top:2px dashed var(--fg);border-radius:0;opacity:.7;width:16px}
+.ch-body{width:100%;min-width:0}
+.ch-body svg{display:block;width:100%;height:auto;overflow:visible}
+.ch-body text{font-family:var(--body);font-size:12px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.ch-body text.v{fill:var(--fg);font-weight:600}
+.ch-body .hit{fill:transparent;cursor:pointer}
+.ch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ch-grid>.chart{margin:0}
+.ch-grid+.chart,.ch-grid+.fine{margin-top:16px}
+@media (max-width:820px){.ch-grid{grid-template-columns:1fr}}
+.tip{position:fixed;z-index:60;pointer-events:none;background:#050b17;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.85rem;line-height:1.35;color:var(--fg);box-shadow:0 10px 30px -10px #000;max-width:240px;font-variant-numeric:tabular-nums}
+.tip b{font-family:var(--label);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:2px}
+.tip .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:6px}
+.fstep{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 10px}
+.fstep .bar{grid-column:1/-1;height:26px;border-radius:4px;background:var(--c1);min-width:6px}
+.fstep .nm{color:var(--fg);font-weight:600;font-size:.92rem}
+.fstep .nv{font-variant-numeric:tabular-nums;font-weight:700}
+.fstep .rate{grid-column:1/-1;color:var(--muted);font-size:.8rem;padding-left:2px}
+/* dashboard */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tabs button{font:inherit;font-family:var(--label);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.88rem;background:var(--panel-2);color:var(--muted);border:1px solid var(--line);border-radius:999px;min-height:40px;padding:0 14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.tabs button:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.dash-kpis div{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.dash-kpis b{display:block;font-family:var(--display);font-weight:400;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.dash-kpis span{color:var(--muted);font-size:.8rem}
+.dash-kpis .up{color:#7fd3a0}
+@media (max-width:640px){.dash-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cadence{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cadence .step{background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--yellow);border-radius:10px;padding:12px 14px;min-width:0}
+.cadence b{font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;display:block}
+.cadence span{color:var(--muted);font-size:.88rem}
+@media (max-width:820px){.cadence{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.cadence{grid-template-columns:1fr}}
+.rule{border-top:1px solid var(--line);margin-top:14px;padding-top:12px;display:flex;flex-direction:column;gap:2px}
+.rule b{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--yellow);font-variant-numeric:tabular-nums}
+.rule span{color:var(--muted);font-size:.86rem}
+.drivers{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0}
+.drivers ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.drivers li{display:flex;flex-direction:column;padding-left:22px;position:relative}
+.drivers li::before{content:"";position:absolute;left:0;top:.45em;width:10px;height:10px;border-radius:2px;background:var(--yellow)}
+.drivers li b{font-weight:700}
+.drivers li span{color:var(--muted);font-size:.88rem}
+.incl .wrap{padding-block:clamp(36px,6vw,64px) 8px;display:flex;flex-direction:column;gap:10px}
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px;margin-top:8px}
+.inc{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--fg);text-decoration:none;min-width:0;transition:border-color .2s}
+.inc:hover,.inc:focus-visible{border-color:var(--yellow);outline:none}
+.inc .n{font-family:var(--label);font-weight:700;letter-spacing:.12em;color:var(--yellow);font-size:.85rem}
+.inc b{font-family:var(--label);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:1.08rem;line-height:1.2}
+.inc span:last-child{color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+
+
+<header class="hero" id="top" data-chap="0">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="label y">Above All Media &middot; Content Package</div>
+    <h1>Premier Soft Wash Content Package</h1>
+    <p class="lede">Everything Above All Media has produced for Premier, in one place: a 2:02 brand film with 60- and 30-second commercial cuts, six vertical reels, 30 retouched stills and team portraits, 2D and 3D logo animations, new brand designs alongside a refresh of the original logo, and the playbook for launching the campaign.</p>
+    <div class="start">
+      <button class="btn btn-y" id="startBtn" type="button"><span class="tri"></span><span id="startTxt">Play the walkthrough</span></button>
+      <small>1:51 &middot; narrated by Arabella, with music</small>
+    </div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#films" data-c="1">Films</a><a href="#pride" data-c="2">Local pride</a><a href="#reels" data-c="3">Reels</a><a href="#stills" data-c="10">Stills</a><a href="#services" data-c="4">Services</a><a href="#logos" data-c="5">Logos</a><a href="#growth" data-c="6">Growth plan</a>
+    </nav>
+  </div>
+</header>
+<section class="incl" aria-labelledby="incl-h">
+  <div class="wrap">
+    <div class="label y">The deliverables</div>
+    <h2 id="incl-h">What's in the package</h2>
+    <div class="inc-grid"><a class="inc" href="#films"><span class="n">01</span><b>Brand film &middot; 2:02</b><span>The flagship Premier Soft Wash story, filmed on location at Local Legend Brewing</span></a><a class="inc" href="#films"><span class="n">02</span><b>60-second commercial</b><span>A broadcast-length cut for the website, YouTube and paid social</span></a><a class="inc" href="#films"><span class="n">03</span><b>30-second commercial</b><span>A tight cut for ads, restaurant screens and pre-roll</span></a><a class="inc" href="#reels"><span class="n">04</span><b>Six vertical reels</b><span>Short-form social cuts built for reach on Instagram, Facebook and TikTok</span></a><a class="inc" href="#stills"><span class="n">05</span><b>30 retouched stills</b><span>Crew in action, close-ups and drone angles, graded to match the film</span></a><a class="inc" href="#stills"><span class="n">06</span><b>Team portraits</b><span>Jerahmey Sorensen and Brandon Williams, with branded lower thirds</span></a><a class="inc" href="#logos"><span class="n">07</span><b>Logo animations</b><span>Animated intros and end cards, in vertical and wide formats</span></a><a class="inc" href="#logos"><span class="n">08</span><b>3D logo animations</b><span>The Premier shield rendered in 3D for intros, screens and social</span></a><a class="inc" href="#logos"><span class="n">09</span><b>New brand designs</b><span>New logo directions and a complete brand sheet</span></a><a class="inc" href="#logos"><span class="n">10</span><b>Original logo, refreshed and kept</b><span>The original Premier mark modernized, with the original preserved as part of the brand</span></a><a class="inc" href="#growth"><span class="n">11</span><b>Launch campaign playbook</b><span>The step-by-step plan to launch: channels, posting schedule, ads, tracking and the first 90 days</span></a></div>
+  </div>
+</section>
+
+
+<main>
+<section class="chap" id="films" data-chap="1">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">1 &middot; The films</span></div>
+      <h2>After closing time at Local Legend</h2>
+      <p class="lede">The full brand film, then two cut-downs for ads, social and the TV screens around the island. Shot by drone and on the ground in Hilton Head.</p>
+    </div>
+    <div class="films">
+      <div class="main">
+        <div class="player r169" data-src="f1/index.m3u8" data-poster="f1/poster.jpg" data-name="The brand film"></div>
+        <div class="meta"><span class="t">The brand film</span><span class="s">2:02 &middot; website header, YouTube, Local Legend screens</span></div>
+      </div>
+      <div>
+        <div class="player r169" data-src="f2/index.m3u8" data-poster="f2/poster.jpg" data-name="60-second cut"></div>
+        <div class="meta"><span class="t">60-second cut</span><span class="s">0:59 &middot; Facebook, YouTube and TV loop</span></div>
+      </div>
+      <div>
+        <div class="player r169" data-src="f3/index.m3u8" data-poster="f3/poster.jpg" data-name="30-second cut"></div>
+        <div class="meta"><span class="t">30-second cut</span><span class="s">0:38 &middot; paid ads and quick social</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="pride" data-chap="2">
+  <div class="wrap pride">
+    <div class="chap-head" style="margin:0">
+      <div class="num"><span class="dot"></span><span class="label">2 &middot; Local pride</span></div>
+      <blockquote>Born and raised on Hilton Head. <span class="y">Protecting the island they call home.</span></blockquote>
+    </div>
+    <div class="people">
+      <div class="person"><b>Jerahmey Sorensen</b><span>Chief Operating Officer. Born and raised on Hilton Head Island.</span><span class="stat">17+ years in the trade</span></div>
+      <div class="person"><b>Brandon Williams</b><span>President. Saw the vision three years ago.</span></div>
+      <div class="person"><b>Costa Rica</b><span>Where two strangers on a boat became one team.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="reels" data-chap="3">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">3 &middot; Six reels</span></div>
+      <h2>Built on the formats getting the most views in home services</h2>
+      <p class="lede">Vertical for Instagram, TikTok, Facebook and YouTube Shorts. Each one hooks in under two seconds and ends on the phone number.</p>
+    </div>
+    <div class="reels">
+      <div><div class="player r916" data-src="r1/index.m3u8" data-poster="r1/poster.jpg" data-name="Wait for the last swipe"></div><div class="meta"><span class="t">Wait for the last swipe</span><span class="s">Satisfying ASMR &middot; 0:24</span></div></div>
+      <div><div class="player r916" data-src="r2/index.m3u8" data-poster="r2/poster.jpg" data-name="How Local Legend stays this clean"></div><div class="meta"><span class="t">How Local Legend stays this clean</span><span class="s">Result first, then 3 hours earlier &middot; 0:24</span></div></div>
+      <div><div class="player r916" data-src="r3/index.m3u8" data-poster="r3/poster.jpg" data-name="POV: closing time"></div><div class="meta"><span class="t">POV: closing time</span><span class="s">Jerahmey's quarterly-clean offer &middot; 0:20</span></div></div>
+      <div><div class="player r916" data-src="r4/index.m3u8" data-poster="r4/poster.jpg" data-name="2 strangers, 1 boat, Costa Rica"></div><div class="meta"><span class="t">2 strangers, 1 boat, Costa Rica</span><span class="s">Storytime &middot; 0:22</span></div></div>
+      <div><div class="player r916" data-src="r5/index.m3u8" data-poster="r5/poster.jpg" data-name="The Hilton Head local who answers his own phone"></div><div class="meta"><span class="t">The Hilton Head local who answers his own phone</span><span class="s">Meet the owners &middot; 0:31</span></div></div>
+      <div><div class="player r916" data-src="r6/index.m3u8" data-poster="r6/poster.jpg" data-name="One call, everything clean"></div><div class="meta"><span class="t">One call, everything clean</span><span class="s">Services checklist over their real jobs &middot; 0:22</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="stills" data-chap="9">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">4 &middot; The stills</span></div>
+      <h2>30 stills and the team portraits</h2>
+      <p class="lede">Pulled from the 4K film, the drone and the phone footage, graded to match the film and retouched one by one. Tap any photo to see it large.</p>
+    </div>
+    <h3 class="h3gap">The showcase stills</h3>
+    <div class="team">
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/team-portrait.jpg" data-cap="Jerahmey Sorensen and Brandon Williams" aria-label="Open Jerahmey Sorensen and Brandon Williams"><img src="stills/team-portrait.jpg" width="1536" height="1024" alt="Jerahmey Sorensen, owner and operator, and Brandon Williams, founder and owner, with the Premier Soft Wash logo" loading="lazy"></button><figcaption>Jerahmey Sorensen and Brandon Williams</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/showcase-action.jpg" data-cap="Nighttime Local Legend cleaning showcase" aria-label="Open Nighttime Local Legend cleaning showcase"><img src="stills/showcase-action.jpg" width="1536" height="1024" alt="21-photo collage of the Premier crew cleaning Local Legend at night" loading="lazy"></button><figcaption>Nighttime Local Legend cleaning showcase</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/night-crew.jpg" data-cap="Premier Soft Wash night crew showcase" aria-label="Open Premier Soft Wash night crew showcase"><img src="stills/night-crew.jpg" width="1672" height="941" alt="Eight-panel collage of Jerahmey and Brandon at night, portraits and window work" loading="lazy"></button><figcaption>Premier Soft Wash night crew showcase</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/team-3.jpg" data-cap="Team portraits" aria-label="Open Team portraits"><img src="stills/team-3.jpg" width="1536" height="1024" alt="Jerahmey Sorensen and Brandon Williams team portrait set" loading="lazy"></button><figcaption>Team portraits</figcaption></figure>
+    </div>
+    <h3 class="h3gap" style="margin-top:34px">On the job</h3>
+    <div class="masonry">
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s01.jpg" data-cap="1. Surface cleaner, from the drone" aria-label="Open still 1: Surface cleaner, from the drone"><img src="stills/t01.jpg" width="576" height="720" alt="Surface cleaner, from the drone" loading="lazy"></button><figcaption><b>01</b> Surface cleaner, from the drone</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s02.jpg" data-cap="2. Brandon on the pole squeegee" aria-label="Open still 2: Brandon on the pole squeegee"><img src="stills/t02.jpg" width="720" height="405" alt="Brandon on the pole squeegee" loading="lazy"></button><figcaption><b>02</b> Brandon on the pole squeegee</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s03.jpg" data-cap="3. Jerahmey on the inside glass" aria-label="Open still 3: Jerahmey on the inside glass"><img src="stills/t03.jpg" width="720" height="405" alt="Jerahmey on the inside glass" loading="lazy"></button><figcaption><b>03</b> Jerahmey on the inside glass</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s04.jpg" data-cap="4. Night wash at Local Legend" aria-label="Open still 4: Night wash at Local Legend"><img src="stills/t04.jpg" width="720" height="405" alt="Night wash at Local Legend" loading="lazy"></button><figcaption><b>04</b> Night wash at Local Legend</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s05.jpg" data-cap="5. Spray gun ready" aria-label="Open still 5: Spray gun ready"><img src="stills/t05.jpg" width="576" height="720" alt="Spray gun ready" loading="lazy"></button><figcaption><b>05</b> Spray gun ready</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s06.jpg" data-cap="6. Squeegee sheeting water" aria-label="Open still 6: Squeegee sheeting water"><img src="stills/t06.jpg" width="720" height="405" alt="Squeegee sheeting water" loading="lazy"></button><figcaption><b>06</b> Squeegee sheeting water</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s07.jpg" data-cap="7. Brandon at the garage doors" aria-label="Open still 7: Brandon at the garage doors"><img src="stills/t07.jpg" width="720" height="405" alt="Brandon at the garage doors" loading="lazy"></button><figcaption><b>07</b> Brandon at the garage doors</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s08.jpg" data-cap="8. Jerahmey under the LEGEND mural" aria-label="Open still 8: Jerahmey under the LEGEND mural"><img src="stills/t08.jpg" width="576" height="720" alt="Jerahmey under the LEGEND mural" loading="lazy"></button><figcaption><b>08</b> Jerahmey under the LEGEND mural</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s09.jpg" data-cap="9. Surface cleaner at the storefront" aria-label="Open still 9: Surface cleaner at the storefront"><img src="stills/t09.jpg" width="720" height="405" alt="Surface cleaner at the storefront" loading="lazy"></button><figcaption><b>09</b> Surface cleaner at the storefront</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s10.jpg" data-cap="10. High glass by the Sundays sign" aria-label="Open still 10: High glass by the Sundays sign"><img src="stills/t10.jpg" width="576" height="720" alt="High glass by the Sundays sign" loading="lazy"></button><figcaption><b>10</b> High glass by the Sundays sign</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s11.jpg" data-cap="11. Spraying the Local Legend facade" aria-label="Open still 11: Spraying the Local Legend facade"><img src="stills/t11.jpg" width="720" height="405" alt="Spraying the Local Legend facade" loading="lazy"></button><figcaption><b>11</b> Spraying the Local Legend facade</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s12.jpg" data-cap="12. Overhead at the Brewery doors" aria-label="Open still 12: Overhead at the Brewery doors"><img src="stills/t12.jpg" width="720" height="405" alt="Overhead at the Brewery doors" loading="lazy"></button><figcaption><b>12</b> Overhead at the Brewery doors</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s13.jpg" data-cap="13. Ladder work by the LLBC bar" aria-label="Open still 13: Ladder work by the LLBC bar"><img src="stills/t13.jpg" width="720" height="405" alt="Ladder work by the LLBC bar" loading="lazy"></button><figcaption><b>13</b> Ladder work by the LLBC bar</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s14.jpg" data-cap="14. Jerahmey with the scrubber" aria-label="Open still 14: Jerahmey with the scrubber"><img src="stills/t14.jpg" width="576" height="720" alt="Jerahmey with the scrubber" loading="lazy"></button><figcaption><b>14</b> Jerahmey with the scrubber</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s15.jpg" data-cap="15. Squeegee on the big L window" aria-label="Open still 15: Squeegee on the big L window"><img src="stills/t15.jpg" width="720" height="405" alt="Squeegee on the big L window" loading="lazy"></button><figcaption><b>15</b> Squeegee on the big L window</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s16.jpg" data-cap="16. Top-down in the light" aria-label="Open still 16: Top-down in the light"><img src="stills/t16.jpg" width="576" height="720" alt="Top-down in the light" loading="lazy"></button><figcaption><b>16</b> Top-down in the light</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s17.jpg" data-cap="17. Facade spray, wide" aria-label="Open still 17: Facade spray, wide"><img src="stills/t17.jpg" width="720" height="405" alt="Facade spray, wide" loading="lazy"></button><figcaption><b>17</b> Facade spray, wide</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s18.jpg" data-cap="18. Jerahmey on the arcade glass" aria-label="Open still 18: Jerahmey on the arcade glass"><img src="stills/t18.jpg" width="576" height="720" alt="Jerahmey on the arcade glass" loading="lazy"></button><figcaption><b>18</b> Jerahmey on the arcade glass</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s19.jpg" data-cap="19. Ladder under the mural" aria-label="Open still 19: Ladder under the mural"><img src="stills/t19.jpg" width="720" height="405" alt="Ladder under the mural" loading="lazy"></button><figcaption><b>19</b> Ladder under the mural</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s20.jpg" data-cap="20. Arcade high glass" aria-label="Open still 20: Arcade high glass"><img src="stills/t20.jpg" width="720" height="405" alt="Arcade high glass" loading="lazy"></button><figcaption><b>20</b> Arcade high glass</figcaption></figure>
+      <figure class="shot"><button type="button" class="zoom" data-full="stills/s21.jpg" data-cap="21. High glass under the BREWERY sign" aria-label="Open still 21: High glass under the BREWERY sign"><img src="stills/t21.jpg" width="720" height="405" alt="High glass under the BREWERY sign" loading="lazy"></button><figcaption><b>21</b> High glass under the BREWERY sign</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="services" data-chap="4">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">5 &middot; What Premier does</span></div>
+      <h2>Every video sells the full service list</h2>
+    </div>
+    <div class="chips">
+      <span class="chip"><i>&#10003;</i>Exterior soft washing</span>
+      <span class="chip"><i>&#10003;</i>Roof soft washing</span>
+      <span class="chip"><i>&#10003;</i>Driveway cleaning</span>
+      <span class="chip"><i>&#10003;</i>Patio cleaning</span>
+      <span class="chip"><i>&#10003;</i>Screened patios</span>
+      <span class="chip"><i>&#10003;</i>Interior &amp; exterior windows</span>
+      <span class="chip"><i>&#10003;</i>Roof blows &amp; gutter clean-outs</span>
+    </div>
+    <div class="badge"><span>Residential &amp; commercial</span><span>Licensed &amp; insured</span><span>Hilton Head &middot; Bluffton</span></div>
+  </div>
+</section>
+
+<section class="chap" id="logos" data-chap="5">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">6 &middot; The brand</span></div>
+      <h2>Logo animations and new designs</h2>
+      <p class="lede">Five animated logos for end cards, intros, the Local Legend screens and social, each also delivered in vertical and wide. Below them, the new logo designs.</p>
+    </div>
+    <div class="logos">
+      <div><div class="player r11" data-src="l1/index.m3u8" data-poster="l1/poster.jpg" data-name="3D bubble reveal"></div><div class="meta"><span class="t">3D bubble reveal</span><span class="s">0:10</span></div></div>
+      <div><div class="player r11" data-src="l2/index.m3u8" data-poster="l2/poster.jpg" data-name="3D spinning shield"></div><div class="meta"><span class="t">3D spinning shield</span><span class="s">0:06 loop</span></div></div>
+      <div><div class="player r11" data-src="l3/index.m3u8" data-poster="l3/poster.jpg" data-name="Neon sign flicker spin"></div><div class="meta"><span class="t">Neon sign flicker spin</span><span class="s">0:08</span></div></div>
+      <div><div class="player r11" data-src="l4/index.m3u8" data-poster="l4/poster.jpg" data-name="Squeegee build"></div><div class="meta"><span class="t">Squeegee build</span><span class="s">0:10</span></div></div>
+      <div><div class="player r11" data-src="l5/index.m3u8" data-poster="l5/poster.jpg" data-name="Sunset palms"></div><div class="meta"><span class="t">Sunset palms</span><span class="s">The original logo, animated &middot; 0:12</span></div></div>
+      <div><div class="player r11" style="background:var(--ink)"><img src="img/shield-stacked.jpg" alt="Premier Soft Wash shield logo, stacked" style="width:100%;height:100%;object-fit:contain;display:block"></div><div class="meta"><span class="t">The new shield</span><span class="s">Dirty-to-clean split, navy and safety yellow</span></div></div>
+    </div>
+    <div class="gallery">
+      <figure><img src="img/brand-sheet.jpg" alt="Premier Soft Wash brand sheet with logo versions and colors" loading="lazy"><figcaption>Brand sheet<span>Logo versions, colors and type</span></figcaption></figure>
+      <figure><img src="img/logo-options.jpg" alt="Three alternative Premier logo styles" loading="lazy"><figcaption>Logo options<span>Lowcountry Seal, Split Drop and Spray Arc</span></figcaption></figure>
+      <figure style="grid-column:1/-1"><img src="img/original-palms.jpg" alt="The original Premier Soft Wash palm logo" loading="lazy"><figcaption>The original logo<span>Kept and animated at sunset for the people who already know it</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="growth" data-chap="6">
+  <div class="wrap">
+    <div class="chap-head">
+      <div class="num"><span class="dot"></span><span class="label">7 &middot; The growth plan</span></div>
+      <h2>How the videos turn into booked jobs</h2>
+      <p class="lede">The goal: make Premier the number one name in exterior cleaning on Hilton Head, and one of the most recognized soft wash brands in South Carolina.</p>
+    </div>
+    <div class="flow" aria-label="How a reel becomes a booked job">
+      <div class="step"><b>Reel</b><span>New video every week</span></div>
+      <div class="step meta-s"><b>Meta ad</b><span>Hilton Head and Bluffton homeowners</span></div>
+      <div class="step"><b>Website</b><span>Text for a quote</span></div>
+      <div class="step"><b>CRM</b><span>Every lead tracked</span></div>
+      <div class="step"><b>Job done</b><span>Before and after photos</span></div>
+      <div class="step"><b>5-star review</b><span>Feeds the next video</span></div>
+    </div>
+    <p class="loopnote">Every finished job feeds the next reel, so the loop keeps itself going.</p>
+    <div class="engines">
+      <div class="engine hl"><h3>Meta: Facebook and Instagram</h3><ul><li>Website, Facebook and Instagram linked through the Meta Pixel and Conversions API</li><li>Every reel runs as an ad to local homeowners</li><li>We see which videos bring in calls and put the budget there</li></ul></div>
+      <div class="engine"><h3>Google</h3><ul><li>Full Google Business Profile with every service and town</li><li>Google Ads and Local Services Ads</li><li>A page for each service in each town</li></ul></div>
+      <div class="engine"><h3>Reviews</h3><ul><li>The Proof Text: before and after photos sent before leaving the job</li><li>A one-tap review link that turns happy customers into five stars</li></ul></div>
+      <div class="engine"><h3>The Premier Weekly</h3><ul><li>A weekly drop of fresh videos with a coupon or referral offer</li><li>Same name and look on every platform</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="chap close" id="close" data-chap="7">
+  <div class="wrap">
+    <div class="big">Premier Soft Wash.<br><span class="y">Hometown roots. Premier results.</span></div>
+    <div class="call"><span class="label">Call or text</span><span class="phone" id="phone">843-816-6523</span><button class="copy" id="copyBtn" type="button">Copy number</button></div>
+    <div class="credit"><img src="img/aam.png" alt="Above All Media"><span>Created by Above All Media. These are review copies with the Above All Media watermark.</span></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">premiersoftwashsc.com &middot; Hilton Head &middot; Bluffton</div></footer>
+
+<div class="bar" role="region" aria-label="Walkthrough narration">
+  <div class="bar-in">
+    <button class="pp" id="pp" type="button" aria-label="Play the walkthrough"><span class="tri"></span></button>
+    <div class="info">
+      <div class="now"><b id="chapName">Walkthrough with Arabella</b><span id="clock">0:00 / 1:51</span></div>
+      <input type="range" id="seek" min="0" max="111" step="0.1" value="0" aria-label="Walkthrough position">
+    </div>
+    <label class="opt"><input type="checkbox" id="follow" checked><span>Follow along</span></label>
+  </div>
+</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <img id="lbImg" alt="">
+  <div class="lb-bar"><button type="button" id="lbPrev" aria-label="Previous photo">&larr;</button><p id="lbCap"></p><button type="button" id="lbNext" aria-label="Next photo">&rarr;</button><button type="button" id="lbClose">Close</button></div>
+</div>
+<audio id="vo" src="walkthrough.mp4" preload="metadata"></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.13/hls.min.js"></script>
+<script>
+(function(){
+  var CH=[{t:0,id:"top",n:"Welcome"},{t:14.0,id:"films",n:"The films"},{t:24.3,id:"pride",n:"Local pride"},{t:36.8,id:"reels",n:"Six reels"},
+          {t:51.3,id:"services",n:"What Premier does"},{t:65.2,id:"logos",n:"The brand"},{t:75.6,id:"growth",n:"The growth plan"},{t:102.6,id:"close",n:"Hometown roots"}];
+  var vo=document.getElementById("vo"), pp=document.getElementById("pp"), seek=document.getElementById("seek"),
+      chapName=document.getElementById("chapName"), clock=document.getElementById("clock"), follow=document.getElementById("follow"),
+      startTxt=document.getElementById("startTxt");
+  var cur=-1, resumeVO=false, seeking=false;
+  function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");}
+  function setPP(){
+    var playing=!vo.paused;
+    pp.innerHTML=playing?'<span class="bars"><i></i><i></i></span>':'<span class="tri"></span>';
+    pp.setAttribute("aria-label",playing?"Pause the walkthrough":"Play the walkthrough");
+    startTxt.textContent=playing?"Pause the walkthrough":(vo.currentTime>0.5&&!vo.ended?"Resume the walkthrough":"Play the walkthrough");
+  }
+  function chapAt(t){var i=0;for(var k=0;k<CH.length;k++){if(t>=CH[k].t)i=k;}return i;}
+  function showChap(i,scroll){
+    if(i===cur)return; cur=i;
+    chapName.textContent=CH[i].n;
+    document.querySelectorAll(".chap,.hero").forEach(function(s){s.classList.toggle("live",s.id===CH[i].id);});
+    document.querySelectorAll(".toc a").forEach(function(a){a.classList.toggle("on",+a.dataset.c===i);});
+    if(scroll&&follow.checked&&!vo.paused){var el=document.getElementById(CH[i].id);if(el)el.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});}
+  }
+  function toggleVO(){
+    if(vo.paused){pauseAllVideos();resumeVO=false;var p=vo.play();if(p&&p.catch)p.catch(function(){});}
+    else{vo.pause();}
+  }
+  pp.addEventListener("click",toggleVO);
+  document.getElementById("startBtn").addEventListener("click",toggleVO);
+  vo.addEventListener("play",setPP);vo.addEventListener("pause",setPP);
+  vo.addEventListener("ended",function(){setPP();});
+  vo.addEventListener("loadedmetadata",function(){seek.max=vo.duration||111;clock.textContent="0:00 / "+fmt(vo.duration);});
+  vo.addEventListener("timeupdate",function(){
+    if(!seeking)seek.value=vo.currentTime;
+    clock.textContent=fmt(vo.currentTime)+" / "+fmt(vo.duration||111);
+    showChap(chapAt(vo.currentTime),true);
+  });
+  seek.addEventListener("input",function(){seeking=true;clock.textContent=fmt(+seek.value)+" / "+fmt(vo.duration||111);});
+  seek.addEventListener("change",function(){vo.currentTime=+seek.value;seeking=false;cur=-1;showChap(chapAt(+seek.value),true);});
+
+  /* videos: attach HLS only when tapped, one plays at a time, narration pauses while a video plays */
+  var videos=[];
+  function pauseAllVideos(except){videos.forEach(function(v){if(v!==except&&!v.paused)v.pause();});}
+  function anyPlaying(){return videos.some(function(v){return !v.paused&&!v.ended;});}
+  document.querySelectorAll(".player[data-src]").forEach(function(box){
+    var src=box.dataset.src, poster=box.dataset.poster;
+    var b=document.createElement("button"); b.className="play"; b.type="button"; b.setAttribute("aria-label","Play "+box.dataset.name);
+    b.innerHTML='<img alt="" loading="lazy" src="'+poster+'"><span class="disc"><span class="tri"></span></span>';
+    box.appendChild(b);
+    b.addEventListener("click",function(){
+      var v=document.createElement("video"); v.controls=true; v.playsInline=true; v.setAttribute("playsinline",""); v.poster=poster; v.preload="auto";
+      box.insertBefore(v,b); b.remove(); videos.push(v);
+      function fail(){var e=document.createElement("p");e.className="err";e.textContent="This video couldn't load. Refresh the page and tap play again.";box.after(e);}
+      v.addEventListener("play",function(){pauseAllVideos(v);if(!vo.paused){resumeVO=true;vo.pause();}});
+      function maybeResume(){setTimeout(function(){if(resumeVO&&!anyPlaying()){resumeVO=false;var p=vo.play();if(p&&p.catch)p.catch(function(){});}},500);}
+      v.addEventListener("pause",maybeResume); v.addEventListener("ended",maybeResume);
+      if(window.Hls&&Hls.isSupported()){
+        var h=new Hls({maxBufferLength:20,capLevelToPlayerSize:false});
+        h.on(Hls.Events.ERROR,function(e,d){if(d.fatal)fail();});
+        h.loadSource(src); h.attachMedia(v);
+        h.on(Hls.Events.MANIFEST_PARSED,function(){var p=v.play();if(p&&p.catch)p.catch(function(){});});
+      } else if(v.canPlayType("application/vnd.apple.mpegurl")){
+        v.src=src; v.addEventListener("error",fail); var p=v.play(); if(p&&p.catch)p.catch(function(){});
+      } else fail();
+    });
+  });
+
+  document.getElementById("copyBtn").addEventListener("click",function(){
+    var btn=this, num="843-816-6523";
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById("phone"));var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent="Selected";}
+    try{navigator.clipboard.writeText(num).then(function(){btn.textContent="Copied";},sel);}catch(e){sel();}
+  });
+  showChap(0,false); setPP();
+  var zs=[].slice.call(document.querySelectorAll(".zoom")), lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg"), lbCap=document.getElementById("lbCap"), li=0, lastFocus=null;
+  function openLB(i){li=(i+zs.length)%zs.length;var z=zs[li];lbImg.src=z.dataset.full;lbImg.alt=z.dataset.cap;lbCap.textContent=z.dataset.cap;if(lb.hidden){lastFocus=document.activeElement;lb.hidden=false;document.getElementById("lbClose").focus();}}
+  function closeLB(){lb.hidden=true;lbImg.removeAttribute("src");if(lastFocus)lastFocus.focus();}
+  zs.forEach(function(z,i){z.addEventListener("click",function(){openLB(i);});});
+  document.getElementById("lbPrev").addEventListener("click",function(){openLB(li-1);});
+  document.getElementById("lbNext").addEventListener("click",function(){openLB(li+1);});
+  document.getElementById("lbClose").addEventListener("click",closeLB);
+  lb.addEventListener("click",function(e){if(e.target===lb)closeLB();});
+  document.addEventListener("keydown",function(e){if(lb.hidden)return;if(e.key==="Escape")closeLB();else if(e.key==="ArrowLeft")openLB(li-1);else if(e.key==="ArrowRight")openLB(li+1);});
+})();
+</script>
+
+
+
+</body>
+</html>
