@@ -148,6 +148,35 @@ a:hover .arrow{transform:translateX(5px)}
 .rv{opacity:0;translate:0 34px;transition:opacity 1.1s var(--ease),translate 1.2s var(--ease);transition-delay:calc(var(--d,0)*90ms)}
 .rv.in,.still .rv,html:not(.js) .rv{opacity:1;translate:0 0}
 html:not(.js) .wd>i{transform:none}
+/* live logo (assets/js/logo-motion.js) */
+html{overflow-x:clip}.loader{overflow:hidden}.hdr{overflow-x:clip}
+.ld-logo{width:min(460px,78vw);margin:22px auto 30px}
+.ld-logo img{display:block;width:100%;height:auto}
+html.js:not(.still) .ld-logo>img{animation:ldLogo .9s var(--ease) 1s both}
+@keyframes ldLogo{from{opacity:0;transform:translateY(10px)}}
+.aam-logo{position:relative;isolation:isolate;--br:120vmax}
+.aam-live>img,.aam-tw img{animation:none!important}
+.aam-live>.aam-base{opacity:0}
+.aam-live>img:not(.aam-base),.aam-tw,.aam-tw img{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;user-select:none;pointer-events:none}
+.aam-tw{overflow:hidden}
+.aam-tw img{clip-path:polygon(0 0,31.85% 0,31.85% 31%,23.17% 31%,23.17% 100%,0 100%)}
+.aam-above{clip-path:polygon(31.85% 0%,100% 0%,100% 60.1%,23.17% 60.1%,23.17% 31%,31.85% 31%)}
+.aam-media{clip-path:polygon(23.17% 60.1%,100% 60.1%,100% 100%,23.17% 100%);transform-origin:62% 80%}
+.aam-beam{position:absolute;left:13.9%;top:16.9%;width:0;height:0;z-index:-1;pointer-events:none}
+.aam-beam i{position:absolute;left:calc(var(--br) * -1);top:calc(var(--br) * -1);width:calc(var(--br) * 2);height:calc(var(--br) * 2);border-radius:50%;opacity:0;
+  background:conic-gradient(from 0deg,transparent 0 82deg,rgba(255,214,130,.34) 90deg,transparent 98deg 262deg,rgba(255,214,130,.2) 270deg,transparent 278deg);
+  -webkit-mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 12%,transparent 46%);mask:radial-gradient(circle,#000 0,rgba(0,0,0,.55) 12%,transparent 46%)}
+.aam-glow{position:absolute;left:13.9%;top:16.9%;width:22%;aspect-ratio:1;margin:-11% 0 0 -11%;border-radius:50%;pointer-events:none;opacity:0;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,226,150,.95),rgba(255,200,110,.35) 35%,transparent 70%)}
+.aam-edge{position:absolute;top:1%;height:58%;width:2px;left:31%;margin-left:-1px;border-radius:2px;opacity:0;pointer-events:none;
+  background:linear-gradient(transparent,#fff1c6 30%,#ffd98a 70%,transparent);box-shadow:0 0 12px 3px rgba(255,200,110,.65)}
+.aam-shine{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;clip-path:inset(0 0 0 23.17%);
+  -webkit-mask:var(--logo) center/100% 100% no-repeat;mask:var(--logo) center/100% 100% no-repeat;
+  background:linear-gradient(105deg,transparent calc(var(--sx,-60%) - 14%),rgba(255,244,210,.95) var(--sx,-60%),transparent calc(var(--sx,-60%) + 14%))}
+.logo.aam-logo{display:block;height:38px;aspect-ratio:518/213;--br:30vmax}
+.logo.aam-logo>.aam-base{height:100%;width:auto}
+.logo.aam-logo .aam-beam i{background:conic-gradient(from 0deg,transparent 0 84deg,rgba(255,214,130,.22) 90deg,transparent 96deg 264deg,rgba(255,214,130,.12) 270deg,transparent 276deg)}
+@media (max-width:720px){.logo.aam-logo{height:32px}}
 /* GSAP layer (assets/js/motion-gsap.js): only active once html.gs is set, so a failed load changes nothing */
 html.gs .gx.rv,html.gs .gx-clip.rv{opacity:1;translate:none;transition:none}
 html.gs .gx .wd>i{transition:none}
@@ -1072,7 +1101,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 <div class="loader" id="loader" aria-hidden="true">
   <div class="ld-in">
     <span class="ld-k">Hilton Head Island &middot; 32.2163&deg; N</span>
-    <div class="ld-mark">Above <em>All</em></div>
+    <div class="ld-mark ld-logo" id="ld-logo"><img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" srcset="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp 1x, assets/logo/aam-logo@2x.webp 2x" alt="Above All Media" width="518" height="213" decoding="async" fetchpriority="high"></div>
     <div class="ld-bar"><i id="ld-fill"></i></div>
     <div class="ld-row" aria-hidden="true"><span>Descending from orbit</span><span id="ld-pct">000</span></div>
   </div>
@@ -1084,7 +1113,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 <header class="hdr" id="site-header">
   <div class="hdr-bar">
     <a class="logo" href="#top" aria-label="Above All Media home">
-      <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" alt="Above All Media" width="220" height="50" onerror="this.parentNode.classList.add('no-img')">
+      <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" srcset="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp 1x, assets/logo/aam-logo@2x.webp 2x" alt="Above All Media" width="220" height="50" onerror="this.parentNode.classList.add('no-img')">
       <span class="logo-fb">Above All Media</span>
     </a>
     <nav class="primary" id="site-nav" aria-label="Primary navigation">
@@ -1732,7 +1761,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
     </a>
     <div class="ft-row">
       <div class="ft-brand">
-        <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" alt="Above All Media" width="220" height="50" loading="lazy">
+        <img src="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp" srcset="assets/images/logo/above-all-media-logo-lighthouse-CROPPED-tight-transparent.webp 1x, assets/logo/aam-logo@2x.webp 2x" alt="Above All Media" width="220" height="50" loading="lazy">
         <p>Cinematic film, licensed aerial and social for Hilton Head Island, Bluffton, Beaufort and the Lowcountry.</p>
       </div>
       <div>
@@ -1773,6 +1802,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+<script src="assets/js/logo-motion.js" defer></script>
 <script src="assets/js/motion-gsap.js" defer></script>
 <script>
 /* Above All Media v5 — motion engine. One rAF loop; every effect degrades to a calm, complete page. */
@@ -1949,7 +1979,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       if (p >= 1) finishLoader();
     }
     /* No entry gate: the site opens on its own once the first frames are in. Films get their music after the visitor's first tap, or from their sound buttons. */
-    function finishLoader() { enter(undefined); }
+    /* the live logo in the loader (assets/js/logo-motion.js) may ask for a moment to finish its build */
+    function finishLoader() { var w = W.__aamLogoWait ? W.__aamLogoWait() : 0; if (w > 30) { setTimeout(finishLoader, w); return; } enter(undefined); }
     function enter(sound) {
       if (loaderDone) return; loaderDone = true;
       W.__aamSound = sound;
