@@ -1094,6 +1094,132 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 .ct-card.is-away{display:flex;flex-direction:column;justify-content:center;min-height:320px}
 @media (max-width:720px){.iq{width:100vw}.iq-head h2{font-size:40px}}
 @media (prefers-reduced-motion:reduce){.iq{transition:none}}
+/* ---------- THE TRAILER: a screening room for the 30-second pitch film ---------- */
+.tr{position:relative;padding:clamp(90px,12vw,170px) 0 clamp(80px,10vw,140px);background:var(--bg);overflow:clip;isolation:isolate}
+.tr-amb{position:absolute;left:50%;top:52%;width:min(1500px,130vw);height:auto;aspect-ratio:16/9;translate:-50% -50%;z-index:-1;filter:blur(70px) saturate(1.5);opacity:0;transition:opacity 1.6s var(--ease);pointer-events:none}
+.tr.lit .tr-amb{opacity:.42}
+.tr.rolling .tr-amb{opacity:.62}
+.tr::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,var(--bg) 0%,transparent 22%,transparent 78%,var(--bg) 100%)}
+.tr-top{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,90px);align-items:end;margin-bottom:clamp(34px,4.5vw,64px)}
+.tr-top h2{font-size:clamp(46px,6.4vw,104px);margin-top:18px}
+.tr-top .lede{justify-self:end}
+
+.tr-stage{position:relative}
+.tr-screen{position:relative;aspect-ratio:16/9;border-radius:clamp(10px,1.4vw,22px);overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(234,210,160,.16),0 60px 140px -40px rgba(0,0,0,.9);transform:translateZ(0)}
+.tr-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.tr-veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 55%,rgba(7,8,7,.25),rgba(7,8,7,.78));transition:opacity .9s var(--ease);pointer-events:none}
+.tr.rolling .tr-veil,.tr.held .tr-veil{opacity:0}
+.tr.held .tr-veil{opacity:.55}
+/* the projector light: a gold iris that opens from wherever the screen was tapped */
+.tr-iris{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--ix,50%) var(--iy,50%),rgba(255,244,214,.95) 0,rgba(234,210,160,.55) 9%,rgba(201,166,107,.0) 34%)}
+.tr-iris.go{animation:trIris 1.1s var(--ease) forwards}
+@keyframes trIris{0%{opacity:1;transform:scale(.2)}35%{opacity:.9}100%{opacity:0;transform:scale(2.6)}}
+
+/* the slate under the screen: what's on, and where we are */
+.tr-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;font:500 10px/1 var(--font-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.tr-rec{display:flex;align-items:center;gap:10px;color:var(--gold-l)}
+.tr-rec b{width:7px;height:7px;border-radius:50%;background:#ff4b3a;box-shadow:0 0 10px #ff4b3a;opacity:.35}
+.tr.rolling .tr-rec b{opacity:1;animation:trBlink 1.2s steps(2,end) infinite}
+@keyframes trBlink{50%{opacity:.2}}
+.tr-tc{font-variant-numeric:tabular-nums}
+.tr-of{opacity:.5}
+/* the roll button: the whole screen is the target */
+.tr-roll{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;background:none;cursor:pointer;color:var(--ink);transition:opacity .6s var(--ease)}
+.tr.rolling .tr-roll{opacity:0;pointer-events:none}
+.tr-ring{position:relative;width:clamp(74px,8vw,118px);aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:rgba(7,8,7,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .6s var(--ease)}
+.tr-roll:hover .tr-ring{transform:scale(1.07)}
+.tr-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.tr-ring circle{fill:none;stroke:rgba(234,210,160,.3);stroke-width:1.5}
+.tr-ring .tr-ring-run{stroke:var(--gold-l);stroke-width:2;stroke-dasharray:352;stroke-dashoffset:352;animation:trRing 3.2s var(--ease-io) infinite}
+@keyframes trRing{0%{stroke-dashoffset:352}55%{stroke-dashoffset:0}100%{stroke-dashoffset:-352}}
+.still .tr-ring .tr-ring-run{animation:none;stroke-dashoffset:0}
+.tr-tri{width:0;height:0;margin-left:6px;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent var(--gold-l)}
+.tr-roll-t{font:600 clamp(15px,1.6vw,24px)/1 'Cinzel',var(--serif);letter-spacing:.2em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+.tr-roll-s{font:500 10px/1 var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l)}
+
+/* the pause card and the end card */
+.tr-ask,.tr-end{position:absolute;z-index:3;display:flex;flex-direction:column;gap:8px;animation:trCard .7s var(--ease) both}
+.tr-ask[hidden],.tr-end[hidden]{display:none}
+.tr-ask{left:clamp(14px,3vw,40px);bottom:clamp(14px,3vw,40px);max-width:min(420px,calc(100% - 28px));padding:clamp(16px,2vw,26px);border-radius:16px;background:rgba(7,8,7,.62);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);box-shadow:inset 0 0 0 1px rgba(234,210,160,.24)}
+.tr-ask-k{font:500 10px/1 var(--font-mono);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l)}
+.tr-ask-n{font:600 clamp(24px,3vw,40px)/1.05 'Cinzel',var(--serif);letter-spacing:.06em;text-transform:uppercase}
+.tr-ask-s{font-size:14px;color:var(--muted)}
+.tr-ask-a{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.tr-end{inset:0;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at center,rgba(7,8,7,.55),rgba(7,8,7,.88))}
+.tr-end b{font:500 clamp(40px,6vw,92px)/1 var(--serif)}
+.tr-end .tr-ask-a{justify-content:center}
+@keyframes trCard{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+
+.tr-ctl{position:absolute;z-index:4;right:clamp(10px,2vw,26px);bottom:clamp(10px,2vw,26px);display:flex;gap:8px;opacity:0;transition:opacity .5s}
+.tr.rolling .tr-ctl,.tr.held .tr-ctl,.tr-screen:hover .tr-ctl{opacity:1}
+.tr-ctl button{height:36px;padding:0 14px;border:0;border-radius:999px;cursor:pointer;background:rgba(7,8,7,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(234,210,160,.35);font:500 10px/1 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l)}
+.tr-ctl button[hidden]{display:none}
+
+/* the film strip: every half second of the film, drag it like a reel of celluloid */
+.tr-strip{position:relative;height:clamp(56px,6vw,84px);margin-top:12px;border-radius:10px;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;outline-offset:6px}
+.tr-strip canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:inherit;filter:saturate(.55) brightness(.62);transition:filter .5s}
+.tr-strip:hover canvas,.tr-strip.drag canvas{filter:saturate(1) brightness(.9)}
+.tr-strip::before,.tr-strip::after{content:"";position:absolute;left:0;right:0;height:7px;z-index:2;pointer-events:none;background:radial-gradient(circle,rgba(7,8,7,.95) 1.6px,transparent 2.2px) 0 50%/12px 7px repeat-x}
+.tr-strip::before{top:3px}.tr-strip::after{bottom:3px}
+.tr-played{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:linear-gradient(90deg,rgba(234,210,160,.0),rgba(234,210,160,.16));box-shadow:inset 0 -2px 0 var(--gold);pointer-events:none}
+.tr-marks{position:absolute;inset:0;pointer-events:none}
+.tr-marks i{position:absolute;top:0;bottom:0;width:1px;background:rgba(244,238,227,.55)}
+.tr-head{position:absolute;top:-6px;bottom:-6px;left:0;width:2px;margin-left:-1px;background:var(--gold-l);box-shadow:0 0 14px rgba(234,210,160,.9);pointer-events:none;z-index:3}
+.tr-loupe{position:absolute;bottom:calc(100% + 14px);left:0;z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;opacity:0;translate:-50% 8px;transition:opacity .25s,translate .35s var(--ease)}
+.tr-strip.peek .tr-loupe{opacity:1;translate:-50% 0}
+.tr-loupe-img{width:192px;height:108px;border-radius:10px;background:#000 url('assets/trailer/strip.webp') 0 0/1920px 648px no-repeat;box-shadow:0 0 0 1px rgba(234,210,160,.5),0 24px 60px rgba(0,0,0,.7)}
+.tr-loupe-t{padding:6px 10px;border-radius:999px;background:rgba(7,8,7,.8);font:500 10px/1 var(--font-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-l);white-space:nowrap}
+
+/* the six crafts: chapter keys that light up as the film reaches them */
+.tr-keys{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;margin-top:18px;border-radius:14px;overflow:hidden;background:var(--line)}
+.tr-keys button{position:relative;width:100%;height:100%;display:flex;flex-direction:column;gap:6px;text-align:left;padding:18px 18px 22px;border:0;cursor:pointer;background:var(--bg-2);transition:background-color .5s}
+.tr-keys button:hover{background:var(--bg-3)}
+.tr-keys .n{font:500 10px/1 var(--font-mono);letter-spacing:.2em;color:var(--muted-soft);transition:color .4s}
+.tr-keys b{font:600 clamp(13px,1.05vw,16px)/1.2 'Cinzel',var(--serif);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .4s}
+.tr-keys .s{font-size:12px;line-height:1.45;color:var(--muted-soft)}
+.tr-keys .bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(244,238,227,.06)}
+.tr-keys .bar i{display:block;height:100%;width:0;background:var(--gold-grad)}
+.tr-keys button.on{background:linear-gradient(180deg,rgba(201,166,107,.14),rgba(201,166,107,.03)),var(--bg-2)}
+.tr-keys button.on .n,.tr-keys button.on b{color:var(--gold-l)}
+.tr-keys button.done .bar i{width:100%;opacity:.45}
+
+.tr-acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(28px,3.5vw,48px)}
+.tr-meta{font:500 10px/1 var(--font-mono);letter-spacing:.14em;color:var(--gold-l);opacity:.8}
+.btn-line:hover .tr-meta{color:#120d05}
+.tr-acts [hidden]{display:none}
+
+@media (max-width:1000px){
+  .tr-top{grid-template-columns:1fr}
+  .tr-top .lede{justify-self:start}
+  .tr-keys{grid-template-columns:repeat(3,1fr)}
+}
+/* phones: the screen runs edge to edge, the crafts become a swipeable rail */
+@media (max-width:720px){
+  .tr .wrap{width:100%}
+  .tr-top,.tr-acts{padding-inline:16px}
+  .tr-screen{border-radius:0;box-shadow:none}
+  .tr-bar{padding-inline:16px;margin-top:12px;font-size:9px;letter-spacing:.14em}
+  .tr-strip{margin:12px 16px 0;height:58px}
+  .tr-loupe-img{width:160px;height:90px;background-size:1600px 540px}
+  .tr-keys{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;margin-top:14px;background:none;border-radius:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tr-keys::-webkit-scrollbar{display:none}
+  .tr-keys li{flex:0 0 46%;scroll-snap-align:start;scroll-margin-left:16px}
+  .tr-keys button{border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);padding:16px 14px 18px;min-height:112px}
+  .tr-keys .bar{left:12px;right:12px;bottom:8px;border-radius:2px;overflow:hidden}
+  .tr-ask{left:10px;right:10px;bottom:10px;max-width:none;padding:12px 14px;gap:4px;border-radius:12px}
+  .tr-ask-s{display:none}
+  .tr-ask-n{font-size:20px}
+  .tr-ask-a{margin-top:4px;gap:8px}
+  .tr-ask .btn-sm,.tr-end .btn-sm{min-height:38px;padding:0 14px;font-size:10px}
+  .tr-end{gap:6px}
+  .tr-end .kicker{font-size:9px}
+  .tr-ctl{opacity:1;right:10px;bottom:auto;top:10px}
+  .tr-ctl button{height:30px;padding:0 10px;font-size:9px}
+  .tr.ask-open .tr-ctl{display:none}
+  .tr-acts .btn{flex:1 1 100%}
+}
+.tr.held .tr-roll-t,.tr.held .tr-roll-s{display:none}
+.tr.ask-open .tr-roll{display:none}
 </style>
 </head>
 <body>
@@ -1117,6 +1243,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
       <span class="logo-fb">Above All Media</span>
     </a>
     <nav class="primary" id="site-nav" aria-label="Primary navigation">
+      <a href="#trailer" data-sec="trailer">Trailer</a>
       <a href="#capabilities" data-sec="capabilities">Services</a>
       <a href="#work" data-sec="work">Work</a>
       <a href="#estates" data-sec="estates">Estates</a>
@@ -1134,13 +1261,14 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation">
   <a href="#top" style="--i:0">Home</a>
-  <a href="#capabilities" style="--i:1">Services</a>
-  <a href="#work" style="--i:2">Work</a>
-  <a href="#estates" style="--i:3">Estates</a>
-  <a href="#golf" style="--i:4">Golf</a>
-  <a href="#process" style="--i:5">Process</a>
-  <a href="#about" style="--i:6">About</a>
-  <a href="#contact" style="--i:7">Begin a Project</a>
+  <a href="#trailer" style="--i:1">Trailer</a>
+  <a href="#capabilities" style="--i:2">Services</a>
+  <a href="#work" style="--i:3">Work</a>
+  <a href="#estates" style="--i:4">Estates</a>
+  <a href="#golf" style="--i:5">Golf</a>
+  <a href="#process" style="--i:6">Process</a>
+  <a href="#about" style="--i:7">About</a>
+  <a href="#contact" style="--i:8">Begin a Project</a>
   <div class="mm-foot">(803) 920-5349 &middot; Hilton Head Island, SC</div>
 </nav>
 
@@ -1216,7 +1344,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
           <span>Tell us what you&rsquo;re building. We&rsquo;ll come back with a creative plan and a call time that suits you.</span>
           <span class="go">Start your project &rarr;</span>
         </a>
-        <a class="sc-path" href="#capabilities">
+        <a class="sc-path" href="#trailer">
           <span class="k">The portfolio</span>
           <b>Continue the Tour</b>
           <span>See the films, flights and campaigns that put Hilton Head brands above the rest.</span>
@@ -1224,6 +1352,79 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         </a>
       </div>
       <button class="sc-replay" id="sc-replay" type="button">&#8635; Watch the swing again</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- 2b. THE TRAILER: the 30-second pitch film as an interactive screening room -->
+<section id="trailer" class="tr" aria-labelledby="tr-title">
+  <canvas class="tr-amb" id="tr-amb" width="32" height="18" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="tr-top">
+      <div>
+        <span class="kicker">The trailer &middot; 0:30</span>
+        <h2 id="tr-title" data-split>Six crafts. <em>Thirty seconds.</em></h2>
+      </div>
+      <p class="lede rv">Everything we make, cut into one film. Tap the screen to roll it with sound, drag the film strip to scrub, or jump straight to the craft you came for.</p>
+    </div>
+
+    <div class="tr-stage rv">
+      <div class="tr-screen" id="tr-screen">
+        <video id="tr-video" playsinline muted preload="none" poster="assets/trailer/poster.webp" data-src="assets/trailer/above-all-media-30s-trailer.mp4" data-src-m="assets/trailer/trailer-720.mp4" data-poster-m="assets/trailer/poster-m.webp" aria-label="Above All Media, 30-second trailer"></video>
+        <div class="tr-veil" aria-hidden="true"></div>
+        <div class="tr-iris" id="tr-iris" aria-hidden="true"></div>
+        <button class="tr-roll" id="tr-roll" type="button" data-cursor="Roll" aria-label="Play the 30-second trailer with sound">
+          <span class="tr-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/><circle class="tr-ring-run" cx="60" cy="60" r="56"/></svg><span class="tr-tri"></span></span>
+          <span class="tr-roll-t">Roll the trailer</span>
+          <span class="tr-roll-s">With sound &middot; 30 seconds</span>
+        </button>
+        <div class="tr-ask" id="tr-ask" hidden>
+          <span class="tr-ask-k">Paused on</span>
+          <b class="tr-ask-n" id="tr-ask-n">Drone</b>
+          <span class="tr-ask-s" id="tr-ask-s">FAA Part 107 certified aerial</span>
+          <div class="tr-ask-a">
+            <a class="btn btn-gold btn-sm" id="tr-ask-book" href="#contact" data-service="Drone / Aerial">Book this <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <button class="btn btn-line btn-sm" id="tr-ask-go" type="button">Keep watching</button>
+          </div>
+        </div>
+        <div class="tr-end" id="tr-end" hidden>
+          <span class="kicker">That was thirty seconds</span>
+          <b>Yours is <em>next.</em></b>
+          <div class="tr-ask-a">
+            <a class="btn btn-gold btn-sm" href="#contact" data-service="Full Brand Content Package">Begin a project <span class="arrow" aria-hidden="true">&rarr;</span></a>
+            <button class="btn btn-line btn-sm" id="tr-again" type="button">&#8635; Watch again</button>
+          </div>
+        </div>
+        <div class="tr-ctl">
+          <button type="button" id="tr-snd" aria-pressed="false" hidden>Sound off</button>
+          <button type="button" id="tr-full" aria-label="Watch full screen">Full screen</button>
+        </div>
+      </div>
+
+      <div class="tr-bar" aria-hidden="true"><span class="tr-rec"><b></b><span id="tr-chap">// Hilton Head Island</span></span><span class="tr-tc"><span id="tr-tc">00:00:00</span><span class="tr-of"> / 00:30:00</span></span></div>
+      <div class="tr-strip" id="tr-strip" role="slider" tabindex="0" aria-label="Scrub the trailer" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" aria-valuetext="0 seconds, opening" data-cursor="Drag">
+        <canvas id="tr-frames" aria-hidden="true"></canvas>
+        <span class="tr-marks" id="tr-marks" aria-hidden="true"></span>
+        <span class="tr-played" id="tr-played" aria-hidden="true"></span>
+        <span class="tr-head" id="tr-head" aria-hidden="true"></span>
+        <span class="tr-loupe" id="tr-loupe" aria-hidden="true"><span class="tr-loupe-img" id="tr-loupe-img"></span><span class="tr-loupe-t" id="tr-loupe-t">00:00 &middot; Opening</span></span>
+      </div>
+
+      <ol class="tr-keys" id="tr-keys">
+        <li><button type="button" data-ch="1"><span class="n">01</span><b>Cinematic</b><span class="s">Films &middot; commercials &middot; brand stories</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-ch="2"><span class="n">02</span><b>Drone</b><span class="s">FAA Part 107 certified aerial</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-ch="3"><span class="n">03</span><b>Photography</b><span class="s">Listings &middot; resorts &middot; editorial</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-ch="4"><span class="n">04</span><b>Luxury Estates</b><span class="s">Real estate film, photo &amp; aerial</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-ch="5"><span class="n">05</span><b>3D Golf Courses</b><span class="s">Digital twin models &middot; flythroughs</span><span class="bar"><i></i></span></button></li>
+        <li><button type="button" data-ch="6"><span class="n">06</span><b>3D Home Builds</b><span class="s">New builds &middot; renovations</span><span class="bar"><i></i></span></button></li>
+      </ol>
+    </div>
+
+    <div class="tr-acts rv">
+      <a class="btn btn-gold" href="#contact" data-service="Full Brand Content Package">Make me one <span class="arrow" aria-hidden="true">&rarr;</span></a>
+      <a class="btn btn-line" id="tr-save" href="assets/trailer/above-all-media-30s-trailer.mp4" download="Above-All-Media-Trailer.mp4" type="video/mp4">Save the film <span class="tr-meta">MP4 &middot; 17 MB</span></a>
+      <button class="btn btn-line" id="tr-share" type="button" hidden>Send it to someone</button>
     </div>
   </div>
 </section>
@@ -1804,6 +2005,7 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
 <script src="assets/js/logo-motion.js" defer></script>
 <script src="assets/js/motion-gsap.js" defer></script>
+<script src="assets/js/trailer.js" defer></script>
 <script>
 /* Above All Media v5 — motion engine. One rAF loop; every effect degrades to a calm, complete page. */
 (function () {
