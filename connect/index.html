@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Google Tag Manager (container ID is set in /assets/js/tracking.js) -->
+<script src="/assets/js/tracking.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chandler Pirie · Above All Media</title>
 <meta name="description" content="Chandler Pirie, Founder & Creative Director of Above All Media. Luxury media and marketing on Hilton Head Island, SC. Save the contact, text, email, follow, or start a project.">
@@ -231,6 +233,8 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
   <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3" stroke-linecap="round"/></symbol>
@@ -501,7 +505,7 @@ dialog.show[open] .big{animation:pop .7s var(--ease)}
     btn.disabled = true; lbl.textContent = 'Sending…';
     var note = f.note.value.trim(), msg = 'Card exchange from aboveallmediasc.com/connect' + (note ? '\n\n' + note : '');
     var qs = new URLSearchParams({ fullname: name, company: f.company.value.trim(), email: email, phone: phone, service_type: 'Card exchange', budget: '', message: msg, _honey: '', slot: '', src: 'connect-card', page: location.href.split('#')[0], _t: String(Date.now() - opened) });
-    function ok() { xd.classList.add('sent'); }
+    function ok() { xd.classList.add('sent'); try { (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', lead_form: 'card_exchange', service_type: 'Card exchange', call_booked: false }); } catch (e) {} }
     function viaEmail() {
       return fetch('https://formsubmit.co/ajax/aboveallcinematics@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ _subject: 'New card exchange: ' + name, name: name, email: email, phone: phone, company: f.company.value.trim(), note: note, lead_source: 'connect-card' }) })
