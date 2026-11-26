@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Above All Media · Flight Menu</title>
+<meta name="description" content="Aerial photography, community films, social reels and interactive 3D for apartment communities. Packages, pricing and a live quote builder from Above All Media.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://aboveallmediasc.com/menu/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yardley Flats, seen from above · Above All Media">
+<meta property="og:description" content="Your front row seat to Christmas. The Above All Media flight menu: packages, pricing and a live quote builder.">
+<meta property="og:url" content="https://aboveallmediasc.com/menu/">
+<meta property="og:image" content="https://aboveallmediasc.com/menu/og-menu.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07080a">
+<link rel="icon" href="/assets/lux/icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/lux/icon-180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0}
+
+/* Layout: a flight deck. 3D hero scene with HUD, then reels in perspective, holographic package cards, a live quote console that follows you. Single dark world by design. */
+:root{
+  --ink:#07080a;          /* night sky */
+  --deck:#0d0f13;         /* panels */
+  --deck-2:#14171d;
+  --line:rgba(214,178,106,.18);
+  --line-2:rgba(214,178,106,.36);
+  --gold:#d6b26a;
+  --gold-l:#f1dca6;
+  --gold-d:#9c7c3e;
+  --fg:#efe9dc;
+  --muted:#a29a8a;
+  --dim:#6e685d;
+  --cyan:#8fd6e8;         /* HUD telemetry only */
+  --ok:#9fd8a8;
+  --f-display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:14px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:50;background:var(--ink)}
+a{color:var(--gold-l)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(34px,5.4vw,62px)}
+h2 em,h1 em{font-style:italic;color:var(--gold-l)}
+.lede{color:var(--muted);max-width:60ch;font-size:16px}
+section{padding-block:clamp(64px,9vw,120px);position:relative}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(32px,5vw,56px)}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:linear-gradient(var(--ink),rgba(7,8,10,.72));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.bar img{height:30px;width:auto}
+.bar nav{display:flex;gap:22px;align-items:center}
+.bar nav a{color:var(--muted);text-decoration:none;font-size:13px}
+.bar nav a:hover{color:var(--fg)}
+.bar .cta{color:var(--ink);background:var(--gold);padding:8px 14px;border-radius:999px;font-weight:600}
+.bar .cta:hover{color:var(--ink);background:var(--gold-l)}
+@media (max-width:720px){.bar nav a:not(.cta){display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(92vh,880px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(120% 80% at 70% 30%,#1a1710 0%,var(--ink) 60%)}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage{position:absolute;inset:0;overflow:hidden;transform-origin:50% 40%;will-change:transform}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease,transform 1.4s ease;transform:scale(1.06)}
+.stage video.on{opacity:1;transform:scale(1)}
+.scan{position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(7,8,10,.7))}
+.views{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right,0px));bottom:28px;display:flex;gap:6px}
+.views i{width:26px;height:2px;background:rgba(239,233,220,.25);border-radius:2px;overflow:hidden;position:relative}
+.views i.on{background:var(--gold)}
+.bug{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right,0px));bottom:44px;height:38px;width:auto;opacity:.9;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))}
+@media (max-width:720px){.bug{height:26px;bottom:auto;top:22px}}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,8,10,.35) 0%,rgba(7,8,10,0) 28%,rgba(7,8,10,.2) 50%,rgba(7,8,10,.9) 92%),linear-gradient(90deg,rgba(7,8,10,.55),transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-block:110px clamp(40px,7vw,80px)}
+.hero h1{font-size:clamp(46px,9vw,118px);max-width:12ch}
+.hero .lede{margin-top:18px;font-size:clamp(15px,1.6vw,18px)}
+.prepared{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(13,15,19,.6)}
+.prepared i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--gold);cursor:pointer;font-family:var(--f-body);transition:transform .2s,background .2s,color .2s}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-line{background:transparent;color:var(--gold-l)}
+.btn-line:hover{background:rgba(214,178,106,.1)}
+.btn:active{transform:scale(.97)}
+.hud{position:absolute;z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;line-height:1.9;pointer-events:none}
+.hud b{color:var(--fg);font-weight:500}
+.hud.tl{top:22px;left:max(16px,env(safe-area-inset-left,0px))}
+.hud.tr{top:22px;right:max(16px,env(safe-area-inset-right,0px));text-align:right}
+.reticle{position:absolute;z-index:2;left:69%;top:46%;width:120px;height:120px;transform:translate(-50%,-50%);pointer-events:none;opacity:.55}
+.reticle::before,.reticle::after{content:"";position:absolute;inset:0;border:1px solid var(--cyan);border-radius:50%;opacity:.4}
+.reticle::after{inset:38%;border-radius:2px;opacity:.8}
+@media (max-width:720px){.reticle{display:none}.hud.tr{display:none}}
+
+
+/* ---------- made for you ---------- */
+.made{padding-block:clamp(56px,8vw,104px);border-bottom:1px solid var(--line);background:radial-gradient(90% 70% at 50% 0%,#17130b,var(--ink) 70%)}
+.made-grid{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr) minmax(0,300px);gap:clamp(20px,4vw,56px);align-items:center;perspective:1600px}
+.made .phone{width:100%}
+.made .phone.l{transform:rotateY(14deg)}
+.made .phone.r{transform:rotateY(-14deg)}
+.made .phone:hover{transform:rotateY(0) translateZ(20px)}
+.made-copy{display:grid;gap:18px;text-align:center;justify-items:center;min-width:0}
+.made-copy h2{font-size:clamp(34px,4.6vw,58px)}
+.made-copy .heart{font-family:var(--f-display);font-style:italic;font-size:clamp(19px,2vw,23px);line-height:1.45;color:#e6dcc6;max-width:34ch;margin:0}
+.made-copy .lede{margin:0;max-width:46ch}
+.reasons{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px;text-align:left;max-width:520px;width:100%}
+.reasons li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(13,15,19,.7);font-size:14px;color:var(--muted)}
+.reasons li b{color:var(--fg);font-weight:600}
+.reasons li span.n{font-family:var(--f-mono);font-size:11px;color:var(--gold);padding-top:3px}
+.made .tap{color:var(--dim);font-size:12px}
+@media (max-width:900px){
+  .made-grid{grid-template-columns:1fr 1fr}
+  .made-copy{grid-column:1/-1;grid-row:2}
+  .made .phone.l,.made .phone.r{transform:none}
+}
+
+
+.film{margin-top:clamp(48px,7vw,88px);display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(20px,3.5vw,44px);align-items:center}
+.film-frame{position:relative;border-radius:18px;padding:1px;background:linear-gradient(150deg,var(--gold),rgba(214,178,106,.08) 45%,var(--line-2));box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 80px -30px rgba(214,178,106,.35)}
+.film-frame video{display:block;width:100%;aspect-ratio:16/9;border-radius:17px;background:#000;object-fit:cover}
+.film-frame .rec{position:absolute;top:14px;left:16px;display:flex;gap:8px;align-items:center;color:var(--fg);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(7,8,10,.55);padding:5px 9px;border-radius:6px;pointer-events:none}
+.film-frame .rec i{width:7px;height:7px;border-radius:50%;background:#e5484d;animation:pulse 1.6s infinite}
+.film-copy{display:grid;gap:14px;min-width:0}
+.film-copy h3{font-size:clamp(30px,3.4vw,44px)}
+.film-copy h3 em{font-style:italic;color:var(--gold-l)}
+.film-copy p{margin:0;color:var(--muted)}
+.film-copy .meta{display:flex;flex-wrap:wrap;gap:8px}
+.film-copy .meta span{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-2);border-radius:999px;padding:5px 10px}
+@media (max-width:900px){.film{grid-template-columns:1fr}}
+
+/* ---------- footage backdrops ---------- */
+.vbg{position:relative;isolation:isolate;overflow:hidden}
+.vbg > .bgv{position:absolute;inset:-8% 0;z-index:-1;pointer-events:none}
+.vbg > .bgv video{width:100%;height:100%;object-fit:cover;opacity:.3;filter:saturate(1.15)}
+.vbg > .bgv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--ink) 0%,rgba(7,8,10,.55) 18%,rgba(7,8,10,.62) 70%,var(--ink) 100%)}
+.mk{height:22px;width:auto;opacity:.95;vertical-align:middle}
+.sec-head .brandline{display:flex;align-items:center;gap:12px}
+.tier .img .wm{position:absolute;right:12px;top:12px;height:20px;width:auto;z-index:2;opacity:.92;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+.film-frame .fbug{position:absolute;top:12px;right:14px;height:24px;width:auto;opacity:.9;pointer-events:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+.console .chead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.console .chead img{height:22px;width:auto}
+.made-copy .mklogo{height:34px;width:auto}
+
+/* ---------- strip ---------- */
+.strip{border-bottom:1px solid var(--line);background:var(--deck)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.strip div{padding:22px 18px;border-left:1px solid var(--line)}
+.strip div:first-child{border-left:0}
+.strip strong{display:block;font-family:var(--f-display);font-size:26px;font-weight:500;color:var(--gold-l)}
+.strip span{color:var(--muted);font-size:13px}
+@media (max-width:760px){.strip .wrap{grid-template-columns:1fr 1fr}.strip div:nth-child(3){border-left:0}.strip div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* ---------- reels ---------- */
+.reels{perspective:1600px;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px);align-items:center}
+.phone{position:relative;aspect-ratio:9/16;max-width:100%;border-radius:26px;padding:7px;background:linear-gradient(150deg,#2a2519,#0d0e11 40%,#1f1b13);border:1px solid var(--line-2);box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.03) inset;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.reels .phone:nth-child(1){transform:rotateY(22deg) translateZ(-40px)}
+.reels .phone:nth-child(2){transform:rotateY(8deg)}
+.reels .phone:nth-child(3){transform:rotateY(-8deg)}
+.reels .phone:nth-child(4){transform:rotateY(-22deg) translateZ(-40px)}
+.reels .phone:hover{transform:rotateY(0) translateZ(30px) !important}
+.screen{position:relative;width:100%;height:100%;border-radius:20px;overflow:hidden;background:#000}
+.screen video,.screen img{width:100%;height:100%;object-fit:cover;display:block}
+.tag{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:space-between;gap:8px;align-items:flex-end;z-index:2}
+.tag .mono{font-size:9.5px;color:var(--fg);background:rgba(7,8,10,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:5px 8px;border-radius:6px;border:1px solid var(--line)}
+.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:18px;background:repeating-linear-gradient(0deg,rgba(214,178,106,.05) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(214,178,106,.05) 0 1px,transparent 1px 22px),radial-gradient(circle at 50% 40%,#1b1810,#07080a 70%)}
+.slot img{width:62%;height:auto;object-fit:contain;opacity:.9;filter:drop-shadow(0 0 18px rgba(214,178,106,.25))}
+.slot p{margin:0;font-family:var(--f-display);font-size:20px;line-height:1.15;color:var(--fg)}
+.slot small{color:var(--muted);font-size:12px}
+.slot .ring{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);border-top-color:var(--gold);animation:spin 2.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.reel-note{margin-top:22px;color:var(--dim);font-size:12.5px}
+@media (max-width:860px){.reels{grid-template-columns:repeat(2,1fr)}.reels .phone{transform:none !important}}
+
+/* ---------- packages ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1400px}
+.tier{position:relative;border-radius:var(--r);padding:1px;background:linear-gradient(160deg,var(--line-2),rgba(214,178,106,.04) 40%,var(--line));transform-style:preserve-3d;transition:transform .25s ease-out,box-shadow .3s;cursor:pointer;text-align:left;border:0;color:inherit;font:inherit;width:100%}
+.tier .in{position:relative;height:100%;border-radius:calc(var(--r) - 1px);background:var(--deck);overflow:hidden;display:flex;flex-direction:column}
+.tier .img{height:190px;background-size:cover;background-position:center;position:relative}
+.tier .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,var(--deck))}
+.tier .body{padding:6px 22px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tier h3{font-size:34px}
+.tier .price{font-family:var(--f-display);font-size:48px;line-height:1;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums}
+.tier .price small{font-family:var(--f-body);font-size:13px;color:var(--muted);margin-left:6px}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;color:#d8d1c2}
+.tier li{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start}
+.tier li::before{content:"";width:6px;height:6px;margin-top:8px;transform:rotate(45deg);background:var(--gold)}
+.tier .for{color:var(--muted);font-size:13px}
+.tier .pick{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line)}
+.tier .pick span{font-weight:600;font-size:13px;color:var(--gold)}
+.tier .dot{width:18px;height:18px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center}
+.tier[aria-pressed="true"]{background:linear-gradient(160deg,var(--gold-l),var(--gold-d) 50%,var(--gold));box-shadow:0 30px 80px -30px rgba(214,178,106,.45)}
+.tier[aria-pressed="true"] .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.tier[aria-pressed="true"] .pick span::after{content:" · selected"}
+.glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(400px circle at var(--gx,50%) var(--gy,0%),rgba(241,220,166,.14),transparent 45%);mix-blend-mode:screen;opacity:0;transition:opacity .3s}
+.tier:hover .glare{opacity:1}
+.flag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(7,8,10,.7);border:1px solid var(--line-2);color:var(--gold-l);padding:5px 10px;border-radius:999px}
+@media (max-width:900px){.tiers{grid-template-columns:1fr}}
+
+/* ---------- monthly ---------- */
+.monthly{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.mo{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:center;padding:22px;border-radius:var(--r);border:1px solid var(--line);background:linear-gradient(120deg,var(--deck),var(--deck-2));cursor:pointer;text-align:left;color:inherit;font:inherit;width:100%;transition:border-color .2s,background .2s}
+.mo:hover{border-color:var(--line-2)}
+.mo[aria-pressed="true"]{border-color:var(--gold);background:linear-gradient(120deg,#1a160d,var(--deck-2))}
+.mo h3{font-size:28px}
+.mo .p{font-family:var(--f-display);font-size:34px;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums;text-align:right}
+.mo .p small{font-family:var(--f-body);font-size:12px;color:var(--muted)}
+.mo p{grid-column:1/-1;margin:0;color:var(--muted);font-size:14px}
+@media (max-width:760px){.monthly{grid-template-columns:1fr}}
+
+/* ---------- builder ---------- */
+.builder{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
+.groups{display:grid;gap:26px;min-width:0}
+.group h3{font-size:24px;display:flex;align-items:baseline;gap:12px}
+.group h3 .mono{color:var(--dim);font-size:10px}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.item{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--deck);cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .2s,background .2s,transform .15s}
+.item:hover{border-color:var(--line-2)}
+.item:active{transform:scale(.99)}
+.item .box{width:18px;height:18px;margin-top:2px;border-radius:5px;border:1px solid var(--gold-d);display:grid;place-items:center}
+.item b{display:block;font-weight:600;font-size:14px}
+.item small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45;margin-top:2px}
+.item .amt{font-family:var(--f-mono);font-size:13px;color:var(--gold-l);white-space:nowrap;font-variant-numeric:tabular-nums}
+.item[aria-pressed="true"]{border-color:var(--gold);background:#16130c}
+.item[aria-pressed="true"] .box{background:var(--gold)}
+.item[aria-pressed="true"] .box::after{content:"";width:8px;height:4px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+.item.inc{cursor:default;opacity:.62}
+.item.inc .amt{color:var(--ok)}
+.item.inc .box{border-color:var(--ok);background:transparent}
+@media (max-width:640px){.items{grid-template-columns:1fr}}
+
+.console{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);border-radius:18px;padding:1px;background:linear-gradient(170deg,var(--gold),rgba(214,178,106,.08) 45%,var(--line-2))}
+.console .in{border-radius:17px;background:radial-gradient(120% 60% at 50% 0%,#1b170e,var(--deck) 60%);padding:22px;display:grid;gap:16px}
+.console .mono{color:var(--cyan);font-size:10px}
+.lines{display:grid;gap:7px;font-size:13.5px;max-height:240px;overflow:auto;padding-right:4px}
+.lines div{display:flex;justify-content:space-between;gap:12px}
+.lines div span:last-child{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.lines .empty{color:var(--dim)}
+.total{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px}
+.total .big{font-family:var(--f-display);font-size:56px;line-height:1;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums}
+.total .sub{color:var(--muted);font-size:13px}
+.ctl{display:grid;gap:8px}
+.ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ctl label b{color:var(--fg);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.toggle{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);cursor:pointer}
+.toggle input{accent-color:var(--gold);width:16px;height:16px}
+.console .btn{justify-content:center}
+.copied{font-size:12px;color:var(--ok);min-height:1em;text-align:center}
+.contact-lines{display:grid;gap:4px;font-size:13px;color:var(--muted);text-align:center}
+.contact-lines span{user-select:all;color:var(--fg)}
+@media (max-width:980px){.builder{grid-template-columns:1fr}.console{position:relative;top:0}}
+
+/* ---------- 3d / why ---------- */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.why div{background:var(--ink);padding:26px 24px;display:grid;gap:8px;align-content:start}
+.why h3{font-size:26px}
+.why p{margin:0;color:var(--muted);font-size:14px}
+.why .mono{color:var(--gold);font-size:10px}
+@media (max-width:820px){.why{grid-template-columns:1fr}}
+
+.terms{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 40px;color:var(--muted);font-size:13.5px;margin-top:28px}
+.terms p{margin:0;padding-left:16px;border-left:1px solid var(--line-2)}
+@media (max-width:720px){.terms{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:48px 64px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+footer img{height:44px;width:auto}
+footer .c{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+footer .c span{color:var(--fg);user-select:all}
+
+.rv{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.pre{opacity:.001;transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}.js .rv.pre{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="wrap">
+    <a href="/" aria-label="Above All Media home"><img src="m/logo.webp" alt="Above All Media" width="1036" height="426"></a>
+    <nav>
+      <a href="#reels">Reels</a>
+      <a href="#packages">Packages</a>
+      <a href="#build">Build a quote</a>
+      <a class="cta" href="#build">Get my quote</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="stage" id="stage" aria-hidden="true">
+    <video class="cut on" data-i="0" src="m/title-1.mp4" poster="m/title-1.webp" muted playsinline preload="auto"></video>
+    <video class="cut" data-i="1" src="m/title-2.mp4" poster="m/title-2.webp" muted playsinline preload="metadata"></video>
+    <video class="cut" data-i="2" src="m/title-3.mp4" poster="m/title-3.webp" muted playsinline preload="metadata"></video>
+  </div>
+  <div class="scan" aria-hidden="true"></div>
+  <div class="hud tl" aria-hidden="true">
+    <div>ALT <b id="alt">400</b> FT AGL</div>
+    <div>CAM <b>NIGHT · 4K</b></div>
+    <div>VIEW <b id="mode">01 / 03 · NAME + STADIUM</b></div>
+  </div>
+  <div class="hud tr" aria-hidden="true">
+    <div>TARGET <b>YARDLEY FLATS</b></div>
+    <div>SITE <b>COVENANT HEALTH PARK</b></div>
+    <div>MARKET <b>KNOXVILLE · TN</b></div>
+  </div>
+  <div class="views" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+  <img class="bug" src="m/logo.webp" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="prepared mono"><i></i>Prepared for Yardley Flats · Knoxville</div>
+    <h1>Yardley Flats, <em>seen from above.</em></h1>
+    <p class="lede" style="font-family:var(--f-display);font-style:italic;font-size:clamp(20px,2.2vw,26px);line-height:1.4;color:#efe4cc;max-width:34ch">Luxury apartments, a rooftop pool, and right outside your window, the Smokies Winter Wonderland. Yardley Flats sits steps from Covenant Health Park. This is your front row seat to Christmas.</p>
+    <p class="lede" style="margin-top:10px">Shot by Above All Media this season. Below is the flight menu: aerial photography, community films, social reels and interactive 3D. Pick a package and the quote builds itself.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#packages">See packages</a>
+      <a class="btn btn-line" href="#made">See Yardley on film</a>
+    </div>
+  </div>
+</div>
+
+
+<section class="made" id="made">
+  <div class="wrap">
+    <div class="made-grid">
+      <div class="phone l"><div class="screen">
+        <video src="m/yardley-1.mp4" poster="m/yardley-1.webp" muted loop playsinline autoplay preload="metadata"></video>
+      </div></div>
+      <div class="made-copy rv">
+        <img class="mklogo" src="m/logo.webp" alt="Above All Media">
+        <span class="kicker">Made for Yardley Flats</span>
+        <h2>We already filmed your home. <em>Here's how it feels.</em></h2>
+        <p class="heart">Somebody signs a lease this winter because of a moment like this. The tree lit up below the balcony. A ballgame they can hear from the couch. The first night they bring someone home and say, "This is where I live."</p>
+        <p class="lede">People don't rent square footage. They rent the life they can picture. These two reels were shot at Yardley Flats this season, and they let a renter picture it before they ever book a tour.</p>
+        <ul class="reasons">
+          <li><span class="n">01</span><span><b>Your view is the amenity.</b> A stadium, the lights and downtown at the door. Photos from the sidewalk can't show that. A drone can.</span></li>
+          <li><span class="n">02</span><span><b>Video gives the tour first.</b> A renter who has already seen the rooftop pool and the lights from above arrives ready to apply.</span></li>
+          <li><span class="n">03</span><span><b>One shoot keeps working.</b> The same footage feeds your website, listings, ads and every social channel for months.</span></li>
+          <li><span class="n">04</span><span><b>You've seen the work first.</b> No guessing what you'll get. It's playing right here.</span></li>
+        </ul>
+        <div class="hero-ctas" style="justify-content:center;margin-top:6px">
+          <a class="btn btn-gold" href="#packages">Make it a campaign</a>
+          <a class="btn btn-line" href="#build">Build a quote</a>
+        </div>
+        <span class="tap">Tap a reel for sound.</span>
+      </div>
+      <div class="phone r"><div class="screen">
+        <video src="m/yardley-2.mp4" poster="m/yardley-2.webp" muted loop playsinline autoplay preload="metadata"></video>
+      </div></div>
+    </div>
+    <div class="film rv">
+      <div class="film-frame">
+        <video src="m/smokies.mp4" poster="m/smokies.webp" muted loop playsinline autoplay controls preload="metadata"></video>
+        <span class="rec"><i></i>Commercial · 60 sec</span>
+        <img class="fbug" src="m/logo.webp" alt="">
+      </div>
+      <div class="film-copy">
+        <span class="kicker">The commercial · Covenant Health Park</span>
+        <h3>Your window to the Smokies Winter Wonderland. <em>Your front row seat to Christmas.</em></h3>
+        <p>Yardley Flats sits steps from Covenant Health Park. This is a commercial Above All Media made for the stadium's holiday light show, and the whole building of Yardley Flats is part of the story, lit up over the field all season long. Luxury apartments with a view people save for their next apartment search.</p>
+        <p>That's the kind of film we'd build for you: the neighborhood, the moments, and your home at the center of them.</p>
+        <div class="meta"><span>Night aerials</span><span>Holiday campaign</span><span>Knoxville</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="strip">
+  <div class="wrap">
+    <div><strong>5 days</strong><span>standard delivery, 72 hr rush</span></div>
+    <div><strong>4K</strong><span>every film, plus vertical cuts</span></div>
+    <div><strong>Licensed</strong><span>drone pilot, airspace handled</span></div>
+    <div><strong>1 contact</strong><span>Chandler shoots, edits and answers</span></div>
+  </div>
+</div>
+
+<section id="reels">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">01 · The reels</span></span>
+      <h2>Footage first. <em>Then the numbers.</em></h2>
+      <p class="lede">Real flights from the Above All Media library, cut the way your residents scroll. Tap a screen to play it with sound.</p>
+    </div>
+    <div class="reels rv">
+      <div class="phone"><div class="screen">
+        <video src="m/reel-estate.mp4" poster="m/reel-estate.webp" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Oceanfront estate · listing film</span></div>
+      </div></div>
+      <div class="phone"><div class="screen">
+        <video src="m/reel-harbour.mp4" poster="m/reel-harbour.webp" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Harbour Town · flight</span></div>
+      </div></div>
+      <div class="phone"><div class="screen">
+        <video src="m/reel-golf.mp4" poster="m/reel-golf.webp" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Oceanfront course · flyover</span></div>
+      </div></div>
+      <div class="phone"><div class="screen">
+        <video src="m/reel-hhi.mp4" poster="m/reel-hhi.webp" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Hilton Head · island reel</span></div>
+      </div></div>
+    </div>
+    <p class="reel-note">All four are Above All Media work from Hilton Head Island. Your community gets the same treatment, cut vertical and branded. More at <a href="https://aboveallmediasc.com" target="_blank" rel="noopener">aboveallmediasc.com</a>.</p>
+  </div>
+</section>
+
+<section id="packages" class="vbg">
+  <div class="bgv" data-par="0.12"><video src="m/bg-stadium.mp4" poster="m/bg-stadium.webp" muted loop playsinline autoplay preload="metadata"></video></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">02 · Packages</span></span>
+      <h2>Three altitudes. <em>Pick one to start.</em></h2>
+      <p class="lede">Each package is a single shoot day at your community. Choosing one adds it to your quote below, and anything it already covers is marked included.</p>
+    </div>
+    <div class="tiers" id="tiers">
+      <button class="tier rv" data-tier="flyover" aria-pressed="false">
+        <div class="in"><div class="glare"></div>
+          <div class="img" style="background-image:url(m/yf-street.webp)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier I · 200 ft</span>
+            <h3>Flyover</h3>
+            <div class="price">$485<small>one shoot</small></div>
+            <p class="for">The aerial essentials for listings, Google and your website hero.</p>
+            <ul>
+              <li>20 edited aerial photos of the property and surroundings</li>
+              <li>45 to 60 second 4K aerial highlight film</li>
+              <li>1 vertical reel for Instagram, TikTok and Shorts</li>
+              <li>Full marketing license, no per-use fees</li>
+            </ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+      <button class="tier rv" data-tier="showcase" aria-pressed="false">
+        <div class="in"><div class="glare"></div>
+          <span class="flag mono">Built for leasing teams</span>
+          <div class="img" style="background-image:url(m/yf-sign.webp)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier II · 400 ft</span>
+            <h3>Community Showcase</h3>
+            <div class="price">$1,365<small>one shoot</small></div>
+            <p class="for">Everything a leasing site, ILS listings and social need for the year.</p>
+            <ul>
+              <li>30 aerial photos and 40 ground photos: pool, clubhouse, fitness, model unit</li>
+              <li>Twilight aerial session with the lights on</li>
+              <li>90 second cinematic community film in 4K</li>
+              <li>3 vertical reels and a neighborhood b-roll pack</li>
+            </ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+      <button class="tier rv" data-tier="signature" aria-pressed="false">
+        <div class="in"><div class="glare"></div>
+          <div class="img" style="background-image:url(m/yf-top.webp)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier III · Above all</span>
+            <h3>Signature Launch</h3>
+            <div class="price">$3,395<small>one campaign</small></div>
+            <p class="for">A launch or rebrand campaign with an interactive 3D centerpiece.</p>
+            <ul>
+              <li>Everything in Community Showcase</li>
+              <li>Lifestyle film with residents or talent, and a neighborhood film</li>
+              <li>Interactive 3D community map from drone capture</li>
+              <li>6 vertical reels and 2 floor plan video tours</li>
+              <li>Return flight in 90 days for a seasonal refresh</li>
+            </ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <div class="monthly">
+      <button class="mo rv" data-monthly="leasing" aria-pressed="false">
+        <h3>Always Leasing</h3><div class="p">$625<small> /mo</small></div>
+        <p>Fresh content every month: 2 reels, 15 photos and a quarterly aerial refresh. Three month minimum.</p>
+      </button>
+      <button class="mo rv" data-monthly="orbit" aria-pressed="false">
+        <h3>Full Orbit</h3><div class="p">$1,295<small> /mo</small></div>
+        <p>4 reels, 30 photos, a monthly flight, one resident event covered and captions ready to post. Three month minimum.</p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="build" class="vbg">
+  <div class="bgv" data-par="0.12"><video src="m/bg-tree.mp4" poster="m/bg-tree.webp" muted loop playsinline autoplay preload="metadata"></video></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">03 · Build a quote</span></span>
+      <h2>Add only <em>what you need.</em></h2>
+      <p class="lede">Everything here can be booked on its own or added to a package. Prices are per community.</p>
+    </div>
+    <div class="builder">
+      <div class="groups" id="groups"></div>
+      <aside class="console" aria-live="polite">
+        <div class="in">
+          <div class="chead"><span class="mono">Flight plan · live quote</span><img src="m/logo.webp" alt="Above All Media"></div>
+          <div class="lines" id="lines"></div>
+          <div class="ctl">
+            <label for="props">Communities in your portfolio <b id="propsOut">1</b></label>
+            <input type="range" id="props" min="1" max="10" value="1">
+          </div>
+          <label class="toggle" for="rush"><input type="checkbox" id="rush"> Rush delivery in 72 hours (+25%)</label>
+          <div class="total">
+            <span class="mono" style="color:var(--muted)">One-time investment</span>
+            <div class="big" id="total">$0</div>
+            <div class="sub" id="sub">Pick a package or a service to start.</div>
+            <div class="sub" id="monthlyOut"></div>
+          </div>
+          <button class="btn btn-gold" id="copy" type="button">Copy this quote</button>
+          <div class="copied" id="copied" role="status"></div>
+          <div class="contact-lines">
+            <div>Send it to Chandler</div>
+            <a href="mailto:chandler@aboveallmediasc.com">chandler@aboveallmediasc.com</a>
+            <a href="tel:+18039205349">(803) 920-5349</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="vbg">
+  <div class="bgv" data-par="0.12"><video src="m/bg-sign.mp4" poster="m/bg-sign.webp" muted loop playsinline autoplay preload="metadata"></video></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">04 · Why it works</span></span>
+      <h2>Built backward <em>from a signed lease.</em></h2>
+    </div>
+    <div class="why rv">
+      <div><span class="mono">Goal first</span><h3>Planned around tours</h3><p>We start from what you need more of, whether that's tours, applications or renewals, and plan every shot toward it.</p></div>
+      <div><span class="mono">Interactive 3D</span><h3>Something nobody else hands you</h3><p>We build explorable 3D experiences from drone capture. Renters can spin the property, find the pool and see the view before they visit.</p></div>
+      <div><span class="mono">One contact</span><h3>The pilot is the editor</h3><p>Chandler flies, shoots, edits and answers the phone. You won't be passed around an agency.</p></div>
+    </div>
+    <div class="terms">
+      <p>Half reserves the shoot date and half is due on delivery.</p>
+      <p>Weather reschedules are free. We fly when the light is right.</p>
+      <p>Controlled airspace authorization is handled by us before the shoot.</p>
+      <p>Each additional community in the same portfolio is 10% off. Three or more is 15% off.</p>
+      <p>Raw footage library available on request. Talent, permits and travel outside Knoxville or the Lowcountry are quoted separately.</p>
+      <p>Prices are 2026 rates and are confirmed in a written proposal before booking.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="m/logo.webp" alt="Above All Media" width="1036" height="426">
+    <div class="c">
+      <div>Chandler Pirie · Founder and pilot</div>
+      <span>chandler@aboveallmediasc.com</span>
+      <span>(803) 920-5349</span>
+      <a href="https://aboveallmediasc.com" target="_blank" rel="noopener">aboveallmediasc.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+
+/* ---------------- pricing data ---------------- */
+const TIERS = {
+  flyover:   {name:'Flyover package', price:485, inc:['aer20','hilite','reel1']},
+  showcase:  {name:'Community Showcase', price:1365, inc:['aer20','hilite','reel1','twilight','amen','model','film90','reel3','broll']},
+  signature: {name:'Signature Launch', price:3395, inc:['aer20','hilite','reel1','twilight','amen','model','film90','reel3','broll','life','hood','map3d','floor','refresh']}
+};
+const MONTHLY = {
+  leasing:{name:'Always Leasing', price:625},
+  orbit:{name:'Full Orbit', price:1295}
+};
+const GROUPS = [
+  {title:'Aerial', code:'AIR', items:[
+    {id:'aer20', n:'Aerial photo set', d:'20 edited drone photos of the property, entrances and skyline context', p:275},
+    {id:'hilite', n:'Aerial highlight film', d:'45 to 60 seconds of graded 4K flight footage set to music', p:315},
+    {id:'twilight', n:'Twilight aerial session', d:'Blue-hour flight with the building lit, stills and clips', p:245},
+    {id:'refresh', n:'Seasonal refresh flight', d:'Return flight for new seasons, landscaping or construction', p:205},
+    {id:'progress', n:'Construction progress', d:'Same-angle flight each month for renovations or new phases', p:260, unit:'/mo'},
+    {id:'clips', n:'B-roll clip library', d:'15 graded 4K aerial clips for your team and agencies to reuse', p:300}
+  ]},
+  {title:'Photography', code:'PHO', items:[
+    {id:'amen', n:'Amenity photography', d:'25 photos: pool, clubhouse, fitness, courtyards, dog park', p:300},
+    {id:'model', n:'Model unit photography', d:'15 to 20 photos per floor plan, styled and HDR edited', p:160, unit:' each'},
+    {id:'lifestyle', n:'Lifestyle photo session', d:'Residents or models using the amenities, 30 edited photos', p:455},
+    {id:'team', n:'Leasing team headshots', d:'On site, up to 8 people, consistent background', p:175}
+  ]},
+  {title:'Film', code:'FLM', items:[
+    {id:'film90', n:'Cinematic community film', d:'90 seconds, 4K, ground and air, licensed music', p:1015},
+    {id:'life', n:'Lifestyle film with talent', d:'60 to 90 seconds of residents living there, casting coordinated', p:1155},
+    {id:'hood', n:'Neighborhood film', d:'What is a short walk or drive away: dining, parks, downtown', p:595},
+    {id:'floor', n:'Floor plan video tour', d:'Smooth gimbal walkthrough of one unit with on-screen specs', p:190, unit:' each'},
+    {id:'host', n:'Hosted leasing tour', d:'Your leasing agent on a mic giving the tour, 2 to 3 minutes', p:455}
+  ]},
+  {title:'Social', code:'SOC', items:[
+    {id:'reel1', n:'Vertical reel', d:'30 to 45 seconds with captions, built for Reels, TikTok and Shorts', p:175},
+    {id:'reel3', n:'Reel pack of 3', d:'Three vertical reels from one shoot, each with its own hook', p:455},
+    {id:'broll', n:'Neighborhood b-roll pack', d:'Short clips of the area for stories and ads', p:210},
+    {id:'event', n:'Resident event coverage', d:'Up to 2 hours, recap reel and 40 photos', p:330},
+    {id:'ads', n:'Ad-ready cut set', d:'Your film cut to 6, 15 and 30 second versions in 3 aspect ratios', p:275}
+  ]},
+  {title:'3D and interactive', code:'3D', items:[
+    {id:'map3d', n:'Interactive 3D community map', d:'Explorable model from drone capture. Tap buildings, amenities and views', p:1750},
+    {id:'tour3d', n:'3D unit tour', d:'Walk-through 3D tour of a unit for your website and listings', p:225, unit:' each'},
+    {id:'site3d', n:'3D website feature', d:'Your 3D map built into a page on your site, mobile ready', p:840}
+  ]}
+];
+const ALL = {}; GROUPS.forEach(g=>g.items.forEach(i=>ALL[i.id]=i));
+const state = {tier:null, monthly:null, add:new Set(), props:1, rush:false};
+
+/* ---------------- build item grid ---------------- */
+const groupsEl = document.getElementById('groups');
+GROUPS.forEach(g=>{
+  const wrap = document.createElement('div'); wrap.className='group rv';
+  wrap.innerHTML = `<h3>${g.title} <span class="mono">${g.code}</span></h3><div class="items"></div>`;
+  const box = wrap.querySelector('.items');
+  g.items.forEach(it=>{
+    const b = document.createElement('button');
+    b.type='button'; b.className='item'; b.dataset.id=it.id; b.setAttribute('aria-pressed','false');
+    b.innerHTML = `<i class="box" aria-hidden="true"></i><span><b>${it.n}</b><small>${it.d}</small></span><span class="amt">${fmt(it.p)}${it.unit||''}</span>`;
+    b.addEventListener('click',()=>{
+      if(b.classList.contains('inc')) return;
+      state.add.has(it.id) ? state.add.delete(it.id) : state.add.add(it.id);
+      render();
+    });
+    box.appendChild(b);
+  });
+  groupsEl.appendChild(wrap);
+});
+
+document.querySelectorAll('[data-tier]').forEach(b=>b.addEventListener('click',()=>{
+  state.tier = state.tier===b.dataset.tier ? null : b.dataset.tier;
+  if(state.tier){ TIERS[state.tier].inc.forEach(id=>state.add.delete(id)); }
+  render();
+}));
+document.querySelectorAll('[data-monthly]').forEach(b=>b.addEventListener('click',()=>{
+  state.monthly = state.monthly===b.dataset.monthly ? null : b.dataset.monthly; render();
+}));
+const propsEl=document.getElementById('props'), rushEl=document.getElementById('rush');
+propsEl.addEventListener('input',()=>{state.props=+propsEl.value;render();});
+rushEl.addEventListener('change',()=>{state.rush=rushEl.checked;render();});
+
+function quote(){
+  const inc = state.tier ? new Set(TIERS[state.tier].inc) : new Set();
+  const lines=[]; let one=0;
+  if(state.tier){ lines.push([TIERS[state.tier].name, TIERS[state.tier].price]); one+=TIERS[state.tier].price; }
+  state.add.forEach(id=>{ if(inc.has(id)) return; const it=ALL[id]; if(it.unit==='/mo') return; lines.push([it.n, it.p]); one+=it.p; });
+  let monthly=0; const mlines=[];
+  if(state.monthly){ monthly+=MONTHLY[state.monthly].price; mlines.push([MONTHLY[state.monthly].name+' (monthly)', MONTHLY[state.monthly].price]); }
+  state.add.forEach(id=>{ const it=ALL[id]; if(it.unit==='/mo'){ monthly+=it.p; mlines.push([it.n+' (monthly)', it.p]); } });
+  if(state.rush && one) { lines.push(['Rush delivery (+25%)', one*.25]); one*=1.25; }
+  const n=state.props, disc = n>=3?.15:(n===2?.10:0);
+  const portfolio = n>1 ? one + one*(1-disc)*(n-1) : one;
+  const portfolioMo = n>1 ? monthly + monthly*(1-disc)*(n-1) : monthly;
+  return {inc, lines, mlines, one, monthly, n, disc, portfolio, portfolioMo};
+}
+
+function render(){
+  const q = quote();
+  document.querySelectorAll('[data-tier]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.tier===state.tier)));
+  document.querySelectorAll('[data-monthly]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.monthly===state.monthly)));
+  document.querySelectorAll('.item').forEach(b=>{
+    const id=b.dataset.id, it=ALL[id], inc=q.inc.has(id);
+    b.classList.toggle('inc',inc);
+    b.setAttribute('aria-pressed', String(inc || state.add.has(id)));
+    b.querySelector('.amt').textContent = inc ? 'Included' : fmt(it.p)+(it.unit||'');
+  });
+  const L=document.getElementById('lines');
+  const all=[...q.lines.map(l=>[l[0],fmt(l[1])]), ...q.mlines.map(l=>[l[0],fmt(l[1])+'/mo'])];
+  L.innerHTML = all.length ? all.map(l=>`<div><span>${l[0]}</span><span>${l[1]}</span></div>`).join('') : '<div class="empty">Nothing selected yet.</div>';
+  document.getElementById('propsOut').textContent = q.n + (q.n>1 ? ` · ${q.disc*100}% off each extra` : '');
+  const T=document.getElementById('total'), S=document.getElementById('sub'), M=document.getElementById('monthlyOut');
+  tween(T, q.n>1 ? q.portfolio : q.one);
+  if(!q.one && !q.monthly) S.textContent='Pick a package or a service to start.';
+  else if(q.n>1) S.textContent=`${fmt(q.one)} for the first community, ${fmt(q.one*(1-q.disc))} for each of the other ${q.n-1}.`;
+  else S.textContent = q.one ? `${fmt(q.one/2)} reserves the date, ${fmt(q.one/2)} on delivery.` : '';
+  M.textContent = q.monthly ? `Plus ${fmt(q.n>1?q.portfolioMo:q.monthly)} per month${q.n>1?' across the portfolio':''}.` : '';
+}
+let tv=0, traf;
+function tween(el,to){
+  if(reduce){ tv=to; el.textContent=fmt(to); return; }
+  const from=tv, t0=performance.now(); cancelAnimationFrame(traf);
+  const step=t=>{ const k=Math.min(1,(t-t0)/600), e=1-Math.pow(1-k,3); tv=from+(to-from)*e; el.textContent=fmt(tv); if(k<1) traf=requestAnimationFrame(step); };
+  traf=requestAnimationFrame(step);
+}
+
+document.getElementById('copy').addEventListener('click',()=>{
+  const q=quote(), out=document.getElementById('copied');
+  if(!q.lines.length && !q.mlines.length){ out.textContent='Pick at least one item first.'; return; }
+  let t='Above All Media quote for Yardley Flats\n\n';
+  q.lines.forEach(l=>t+=`${l[0]}: ${fmt(l[1])}\n`);
+  q.mlines.forEach(l=>t+=`${l[0]}: ${fmt(l[1])}/mo\n`);
+  t+=`\nOne-time: ${fmt(q.one)} per community`;
+  if(q.n>1) t+=`\nPortfolio of ${q.n} communities (${q.disc*100}% off each extra): ${fmt(q.portfolio)}`;
+  if(q.monthly) t+=`\nMonthly: ${fmt(q.n>1?q.portfolioMo:q.monthly)}`;
+  t+='\n\nChandler Pirie · chandler@aboveallmediasc.com · (803) 920-5349';
+  const done=()=>{out.textContent='Copied. Paste it into an email to Chandler.';};
+  const fail=()=>{ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');done();}catch(e){out.textContent='Copy blocked here. Select the lines above instead.';} ta.remove(); };
+  try{ navigator.clipboard.writeText(t).then(done,fail); }catch(e){ fail(); }
+});
+
+/* ---------------- tilt cards ---------------- */
+if(!reduce && matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.tier').forEach(c=>{
+    c.addEventListener('pointermove',e=>{
+      const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      c.style.transform=`rotateX(${(.5-y)*10}deg) rotateY(${(x-.5)*12}deg) translateZ(10px)`;
+      c.style.setProperty('--gx',x*100+'%'); c.style.setProperty('--gy',y*100+'%');
+    });
+    c.addEventListener('pointerleave',()=>{c.style.transform='';});
+  });
+}
+
+/* ---------------- reels: tap for sound ---------------- */
+document.querySelectorAll('.screen video').forEach(v=>{
+  v.parentElement.addEventListener('click',()=>{
+    const wasMuted=v.muted;
+    document.querySelectorAll('.screen video').forEach(o=>o.muted=true);
+    v.muted=!wasMuted; v.play().catch(()=>{});
+  });
+  if(reduce){ v.removeAttribute('autoplay'); v.pause(); }
+});
+
+/* ---------------- reveal ---------------- */
+const rvs=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window && !reduce){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target);} }),{rootMargin:'0px 0px -8% 0px'});
+  rvs.forEach(el=>{ const r=el.getBoundingClientRect(); if(r.top>innerHeight){ el.classList.add('pre'); io.observe(el);} });
+}
+
+render();
+
+/* ---------------- title sequence: 3 views, each ping-pong x3 ---------------- */
+(function(){
+  const vids=[...document.querySelectorAll('#stage video')];
+  const dots=[...document.querySelectorAll('.views i')];
+  const modeEl=document.getElementById('mode'), altEl=document.getElementById('alt');
+  const NAMES=['01 / 03 · NAME + STADIUM','02 / 03 · STREET SIDE','03 / 03 · TOP DOWN'];
+  const ALTS=[310,240,400];
+  let cur=0, plays=0;
+  function show(i){
+    vids.forEach((v,k)=>{ v.classList.toggle('on',k===i); if(k!==i){ setTimeout(()=>{ if(!v.classList.contains('on')) v.pause(); },1500);} });
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    modeEl.textContent=NAMES[i]; altEl.textContent=ALTS[i];
+    const v=vids[i]; v.currentTime=0; v.play().catch(()=>{});
+    const n=vids[(i+1)%vids.length]; if(n.preload!=='auto'){ n.preload='auto'; n.load(); }
+  }
+  vids.forEach((v,k)=>v.addEventListener('ended',()=>{
+    if(k!==cur) return;
+    plays++;
+    if(plays>=3){ plays=0; cur=(cur+1)%vids.length; show(cur); }
+    else { v.currentTime=0; v.play().catch(()=>{}); }
+  }));
+  if(reduce){ return; }
+  show(0);
+  // scroll-driven depth: the title tilts back and the footage pushes in
+  const stage=document.getElementById('stage'), bgs=[...document.querySelectorAll('.bgv')];
+  let ticking=false;
+  function onScroll(){
+    const y=scrollY, h=innerHeight, k=Math.min(1,y/h);
+    stage.style.transform=`perspective(1200px) rotateX(${k*8}deg) scale(${1+k*.12}) translateY(${k*-30}px)`;
+    vids[cur].style.filter=`brightness(${1-k*.35})`;
+    bgs.forEach(b=>{ const r=b.parentElement.getBoundingClientRect(); const c=(r.top+r.height/2-h/2); b.style.transform=`translateY(${c*-+b.dataset.par}px)`; });
+    ticking=false;
+  }
+  addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(onScroll);} },{passive:true});
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
