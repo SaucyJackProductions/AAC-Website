@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Above All Media · Woodcreek Flight Menu</title>
+<meta name="description" content="Above All Media's media takeover pitch for The Woodcreek Club: drone footage, audit, pixel setup, a playable 3D 15th and a live golf and social media quote builder.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://aboveallmediasc.com/pitch2/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Woodcreek, seen from above · Above All Media">
+<meta property="og:description" content="The media takeover pitch for The Woodcreek Club, with a live quote builder.">
+<meta property="og:url" content="https://aboveallmediasc.com/pitch2/">
+<meta property="og:image" content="https://aboveallmediasc.com/pitch2/thumb.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: the Above All flight deck, golf edition. Drone footage hero with HUD, then the audit, a playable 3D 15th, a real-shot gallery, packages and a live quote console. One dark world by design. */
+:root{
+  --ink:#07080a; --deck:#0d0f13; --deck-2:#14171d;
+  --line:rgba(214,178,106,.18); --line-2:rgba(214,178,106,.36);
+  --gold:#d6b26a; --gold-l:#f1dca6; --gold-d:#9c7c3e;
+  --fg:#efe9dc; --muted:#a29a8a; --dim:#6e685d;
+  --cyan:#8fd6e8; --ok:#9fd8a8; --bad:#ef7d68; --warn:#e8a14b; --turf:#7fc48f;
+  --f-display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:14px; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:50;background:var(--ink)}
+a{color:var(--gold-l)}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+img{max-width:100%}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(34px,5.4vw,62px)}
+h2 em,h1 em,h3 em{font-style:italic;color:var(--gold-l)}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch;font-size:16px}
+section{padding-block:clamp(64px,9vw,120px);position:relative}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(32px,5vw,56px)}
+.brandline{display:flex;align-items:center;gap:12px}
+.mk{height:22px;width:auto;opacity:.95}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--gold);cursor:pointer;font-family:var(--f-body);transition:transform .2s,background .2s,color .2s}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-line{background:transparent;color:var(--gold-l)}
+.btn-line:hover{background:rgba(214,178,106,.1)}
+.btn:active{transform:scale(.97)}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:linear-gradient(var(--ink),rgba(7,8,10,.72));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.bar .brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.bar .brand img{height:30px;width:auto}
+.bar .brand span{color:var(--muted);font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.bar nav{display:flex;gap:20px;align-items:center}
+.bar nav a{color:var(--muted);text-decoration:none;font-size:13px}
+.bar nav a:hover{color:var(--fg)}
+.bar .cta{color:var(--ink);background:var(--gold);padding:8px 14px;border-radius:999px;font-weight:700;white-space:nowrap}
+.bar .cta:hover{color:var(--ink);background:var(--gold-l)}
+@media (max-width:900px){.bar nav a:not(.cta){display:none}}
+@media (max-width:520px){.bar .brand span{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(94vh,900px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line);background:#0b0d0a url(m/hero.jpg) center/cover}
+.stage{position:absolute;inset:0;overflow:hidden;transform-origin:50% 40%;will-change:transform}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scan{position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px),radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(7,8,10,.7))}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,8,10,.45) 0%,rgba(7,8,10,0) 26%,rgba(7,8,10,.18) 48%,rgba(7,8,10,.93) 92%),linear-gradient(90deg,rgba(7,8,10,.6),transparent 62%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-block:120px clamp(40px,7vw,80px)}
+.hero h1{font-size:clamp(46px,9vw,118px);max-width:12ch}
+.hero .say{font-family:var(--f-display);font-style:italic;font-size:clamp(20px,2.2vw,26px);line-height:1.4;color:#efe4cc;max-width:36ch;margin-top:18px}
+.hero .lede{margin-top:12px}
+.prepared{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;background:rgba(13,15,19,.6)}
+.prepared i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hud{position:absolute;z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;line-height:1.9;pointer-events:none}
+.hud b{color:var(--fg);font-weight:500}
+.hud.ul{top:22px;left:max(16px,env(safe-area-inset-left,0px))}
+.hud.ur{top:22px;right:max(16px,env(safe-area-inset-right,0px));text-align:right}
+.reticle{position:absolute;z-index:2;left:68%;top:44%;width:120px;height:120px;transform:translate(-50%,-50%);pointer-events:none;opacity:.5}
+.reticle::before,.reticle::after{content:"";position:absolute;inset:0;border:1px solid var(--cyan);border-radius:50%;opacity:.4}
+.reticle::after{inset:38%;border-radius:2px;opacity:.8}
+.credit{position:absolute;z-index:3;right:max(16px,env(safe-area-inset-right,0px));bottom:22px;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:rgba(7,8,10,.55);padding:5px 9px;border-radius:6px;border:1px solid var(--line)}
+@media (max-width:720px){.reticle,.hud.ur{display:none}.credit{bottom:14px;font-size:9px}.prepared{font-size:9.5px;letter-spacing:.1em;padding:6px 11px}}
+
+/* ---------- countdown strip ---------- */
+.strip{border-bottom:1px solid var(--line);background:var(--deck)}
+.strip .wrap{display:grid;grid-template-columns:1.4fr repeat(3,1fr)}
+.strip div{padding:22px 18px;border-left:1px solid var(--line);min-width:0}
+.strip div:first-child{border-left:0;padding-left:0}
+.strip strong{display:block;font-family:var(--f-display);font-size:28px;font-weight:500;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums;line-height:1.1}
+.strip span{color:var(--muted);font-size:13px}
+@media (max-width:820px){.strip .wrap{grid-template-columns:1fr 1fr}.strip div:first-child{grid-column:1/-1;padding-left:0;border-bottom:1px solid var(--line)}.strip div:nth-child(2){border-left:0;padding-left:0}.strip div:nth-child(4){border-left:0;padding-left:0;border-top:1px solid var(--line)}}
+
+/* ---------- made for ---------- */
+.made{border-bottom:1px solid var(--line);background:radial-gradient(90% 70% at 50% 0%,#17130b,var(--ink) 70%)}
+.made-grid{display:grid;grid-template-columns:minmax(0,290px) minmax(0,1fr) minmax(0,290px);gap:clamp(20px,4vw,56px);align-items:center;perspective:1600px}
+.phone{position:relative;aspect-ratio:9/16;width:100%;border-radius:26px;padding:7px;background:linear-gradient(150deg,#2a2519,#0d0e11 40%,#1f1b13);border:1px solid var(--line-2);box-shadow:0 40px 80px -30px rgba(0,0,0,.9);transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.made .phone.l{transform:rotateY(14deg)}
+.made .phone.r{transform:rotateY(-14deg)}
+.made .phone:hover{transform:rotateY(0) translateZ(20px)}
+.screen{position:relative;width:100%;height:100%;border-radius:20px;overflow:hidden;background:#000;cursor:pointer}
+.screen video,.screen img{width:100%;height:100%;object-fit:cover;display:block}
+.tag{position:absolute;left:10px;right:10px;bottom:10px;z-index:2}
+.tag .mono{display:inline-block;font-size:9.5px;color:var(--fg);background:rgba(7,8,10,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:5px 8px;border-radius:6px;border:1px solid var(--line)}
+.made-copy{display:grid;gap:18px;text-align:center;justify-items:center;min-width:0}
+.made-copy h2{font-size:clamp(34px,4.6vw,58px)}
+.heart{font-family:var(--f-display);font-style:italic;font-size:clamp(19px,2vw,23px);line-height:1.45;color:#e6dcc6;max-width:36ch}
+.reasons{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px;text-align:left;max-width:540px;width:100%}
+.reasons li{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(13,15,19,.7);font-size:14px;color:var(--muted)}
+.reasons li b{color:var(--fg);font-weight:600}
+.reasons .n{font-family:var(--f-mono);font-size:11px;color:var(--gold);padding-top:3px}
+.tap{color:var(--dim);font-size:12px}
+@media (max-width:900px){.made-grid{grid-template-columns:1fr 1fr}.made-copy{grid-column:1/-1;grid-row:2}.made .phone.l,.made .phone.r{transform:none}}
+.film{margin-top:clamp(48px,7vw,88px);display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(20px,3.5vw,44px);align-items:center}
+.film-frame{position:relative;border-radius:18px;padding:1px;background:linear-gradient(150deg,var(--gold),rgba(214,178,106,.08) 45%,var(--line-2));box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 80px -30px rgba(214,178,106,.35)}
+.film-frame video{display:block;width:100%;aspect-ratio:16/9;border-radius:17px;background:#000;object-fit:cover}
+.rec{position:absolute;top:14px;left:16px;display:flex;gap:8px;align-items:center;color:var(--fg);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(7,8,10,.55);padding:5px 9px;border-radius:6px;pointer-events:none}
+.rec i{width:7px;height:7px;border-radius:50%;background:#e5484d;animation:pulse 1.6s infinite}
+.film-copy{display:grid;gap:14px;min-width:0}
+.film-copy h3{font-size:clamp(30px,3.4vw,44px)}
+.film-copy p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-2);border-radius:999px;padding:5px 10px}
+@media (max-width:900px){.film{grid-template-columns:1fr}}
+
+/* ---------- audit ---------- */
+.overall{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.overall .g{font-family:var(--f-display);font-size:clamp(110px,15vw,180px);line-height:.78;color:var(--bad);font-weight:500}
+.overall p{max-width:46ch;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:36px}
+.gc{position:relative;text-align:left;border:1px solid var(--line);background:linear-gradient(170deg,var(--deck-2),var(--deck));border-radius:var(--r);padding:18px 18px 16px;color:var(--fg);cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:200px;transition:transform .2s,border-color .2s;font:inherit}
+.gc:hover{transform:translateY(-3px);border-color:var(--line-2)}
+.gc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.gc .gr{font-family:var(--f-display);font-size:58px;line-height:.8;font-weight:500}
+.gc .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.gc .gw{font-size:14px;color:#d8d1c2}
+.gc .fix{display:none;font-size:14px;color:var(--fg);border-top:1px dashed var(--line-2);padding-top:10px}
+.gc .fix b{color:var(--gold)}
+.gc.open{border-color:var(--gold)}
+.gc.open .fix{display:block}
+.gc .tog{margin-top:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+.gr.F,.gr.D{color:var(--bad)} .gr.C{color:var(--warn)} .gr.B{color:var(--turf)}
+.src{font-size:11.5px;color:var(--dim);margin-top:18px;font-family:var(--f-mono)}
+
+/* ---------- funnel ---------- */
+.seg-toggle{display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:4px;background:var(--deck)}
+.seg-toggle button{border:0;background:transparent;color:var(--muted);padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px}
+.seg-toggle button.on{background:var(--gold);color:var(--ink)}
+.flow{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin-top:26px}
+.node{flex:1 1 170px;min-width:0;border:1px solid var(--line);border-radius:var(--r);padding:16px;background:var(--deck);animation:pop .45s both;animation-delay:calc(var(--i)*90ms)}
+.node .n{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.node h3{font-family:var(--f-body);font-size:16px;font-weight:700;margin-top:6px;line-height:1.3}
+.node p{font-size:13px;color:var(--muted);margin-top:4px}
+.node.bad{border-color:rgba(239,125,104,.5)} .node.bad h3{color:#ffab9a}
+.node.good{border-color:rgba(159,216,168,.5)} .node.good h3{color:var(--ok)}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- pixel ---------- */
+.pix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:22px}
+@media (max-width:860px){.pix{grid-template-columns:1fr}}
+.evlist{display:flex;flex-direction:column;gap:8px}
+.ev{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);background:var(--deck);color:var(--fg);padding:12px 14px;border-radius:12px;cursor:pointer;font:inherit}
+.ev:hover{border-color:var(--line-2)}
+.ev.on{border-color:var(--gold);background:#16130c}
+.ev .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex:none;box-shadow:0 0 0 4px rgba(214,178,106,.15)}
+.ev b{font-size:14.5px;font-weight:600}
+.ev small{display:block;color:var(--muted);font-size:12.5px}
+.ev .act{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;color:var(--cyan);white-space:nowrap}
+.panel{border-radius:18px;padding:1px;background:linear-gradient(170deg,var(--gold),rgba(214,178,106,.08) 45%,var(--line-2));min-width:0}
+.panel .in{border-radius:17px;background:radial-gradient(120% 60% at 50% 0%,#1b170e,var(--deck) 60%);padding:20px}
+.pulse{position:relative;height:46px;margin-top:14px;border-radius:10px;background:rgba(255,255,255,.03);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.pulse i{position:absolute;top:50%;left:0;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.pulse span{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:10px;color:var(--muted);letter-spacing:.08em}
+.fires{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:14px}
+.fire{border-radius:10px;padding:10px 12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.fire .who{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fire .what{font-family:var(--f-mono);font-size:12.5px;color:var(--gold-l);margin-top:3px;word-break:break-word}
+.code{margin-top:14px;background:#050607;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;overflow-x:auto;font-family:var(--f-mono);font-size:12px;line-height:1.65;color:#d9d3c4;white-space:pre}
+.code .c{color:#6e685d}.code .s{color:var(--gold)}
+.unlock{margin-top:14px;font-size:14px;color:#d8d1c2}
+.unlock b{color:var(--gold-l)}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:32px}
+.step{background:var(--ink);padding:20px 20px 22px}
+.step::before{counter-increment:s;content:"STEP 0" counter(s);font-family:var(--f-mono);font-size:10px;letter-spacing:.16em;color:var(--gold)}
+.step h3{font-size:24px;margin-top:6px}
+.step p{font-size:14px;color:var(--muted);margin-top:6px}
+
+/* ---------- 3D hole ---------- */
+.holebox{position:relative;height:clamp(480px,74vh,780px);border-radius:20px;overflow:hidden;border:1px solid var(--line-2);background:radial-gradient(120% 80% at 50% 0%,#1d3a33 0%,#0a1712 60%,var(--ink) 100%);box-shadow:0 50px 100px -50px rgba(0,0,0,.95)}
+#course{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+#course:active{cursor:grabbing}
+.holebox .scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,10,.35),transparent 24%,transparent 62%,rgba(7,8,10,.85))}
+.holebox .hud.ul{top:16px;left:16px}
+.yard{position:absolute;right:16px;top:16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-align:right;background:rgba(7,8,10,.7);border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.7;color:var(--fg)}
+.yard b{color:var(--gold)}
+.camrow{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:8px}
+.camrow button{border:1px solid var(--line-2);background:rgba(7,8,10,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--fg);font-size:13px;font-weight:600;padding:10px 15px;border-radius:999px;cursor:pointer}
+.camrow button.on{background:var(--fg);color:var(--ink)}
+.camrow button.hit{background:var(--gold);color:var(--ink);border-color:var(--gold);font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.shot{position:absolute;top:70px;left:50%;transform:translate(-50%,-6px);opacity:0;transition:.35s;background:rgba(7,8,10,.85);border:1px solid var(--gold);padding:10px 18px;border-radius:12px;text-align:center;pointer-events:none;max-width:90%}
+.shot.on{opacity:1;transform:translate(-50%,0)}
+.shot b{display:block;font-family:var(--f-display);font-size:34px;line-height:1;color:var(--gold-l);font-weight:500}
+.shot span{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.yard{display:none}.holebox .hud.ul{display:none}}
+.proof{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:28px}
+@media (max-width:860px){.proof{grid-template-columns:1fr}}
+.feat{display:grid;gap:10px}
+.feat div{display:grid;grid-template-columns:14px 1fr;gap:10px;font-size:14.5px;color:#d8d1c2}
+.feat div::before{content:"";width:6px;height:6px;margin-top:9px;transform:rotate(45deg);background:var(--gold)}
+
+/* ---------- gallery ---------- */
+.gal{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,520px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--gold-d) transparent}
+.gal button{scroll-snap-align:start;position:relative;border:0;padding:0;border-radius:var(--r);overflow:hidden;cursor:zoom-in;background:#000;aspect-ratio:16/9}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gal button:hover img{transform:scale(1.05)}
+.gal .cap{position:absolute;left:10px;bottom:10px;right:10px;text-align:left;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.gal .cap span{background:rgba(7,8,10,.62);padding:5px 8px;border-radius:6px;border:1px solid var(--line)}
+.galnav{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:10px;flex-wrap:wrap}
+.galnav .arrows{display:flex;gap:8px}
+.galnav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--deck);color:var(--gold-l);font-size:18px;cursor:pointer}
+.lb{position:fixed;inset:0;z-index:80;background:rgba(5,6,7,.96);display:none;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.lb.on{display:flex}
+.lb figure{margin:0;display:grid;gap:12px;max-width:1400px;width:100%}
+.lb img{width:100%;max-height:78vh;object-fit:contain;border-radius:10px}
+.lb figcaption{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:14px;flex-wrap:wrap}
+.lb figcaption b{color:var(--fg);font-weight:600}
+.lb .x,.lb .pv,.lb .nx{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid var(--line-2);background:rgba(13,15,19,.8);color:var(--fg);font-size:20px;cursor:pointer}
+.lb .x{top:max(16px,env(safe-area-inset-top,0px));right:16px}
+.lb .pv{left:16px;top:50%;transform:translateY(-50%)}
+.lb .nx{right:16px;top:50%;transform:translateY(-50%)}
+@media (max-width:640px){.lb .pv,.lb .nx{top:auto;bottom:max(16px,env(safe-area-inset-bottom,0px));transform:none}}
+
+/* ---------- reels ---------- */
+.reels{perspective:1600px;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px);align-items:center}
+.reels .phone:nth-child(1){transform:rotateY(22deg) translateZ(-40px)}
+.reels .phone:nth-child(2){transform:rotateY(8deg)}
+.reels .phone:nth-child(3){transform:rotateY(-8deg)}
+.reels .phone:nth-child(4){transform:rotateY(-22deg) translateZ(-40px)}
+.reels .phone:hover{transform:rotateY(0) translateZ(30px)!important}
+.kb img{animation:kb 16s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.05) translateX(-4%)}to{transform:scale(1.18) translateX(4%)}}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:40px}
+.day{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--deck);min-height:100px}
+.day b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;color:var(--gold)}
+.day p{font-size:13px;color:#d8d1c2;margin-top:4px}
+@media (max-width:860px){.reels{grid-template-columns:repeat(2,1fr)}.reels .phone{transform:none!important}.week{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- packages ---------- */
+.vbg{position:relative;isolation:isolate;overflow:hidden}
+.vbg > .bgi{position:absolute;inset:-8% 0;z-index:-1;pointer-events:none;background-size:cover;background-position:center;opacity:.22;filter:saturate(1.1)}
+.vbg > .bgi::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--ink) 0%,rgba(7,8,10,.5) 18%,rgba(7,8,10,.6) 70%,var(--ink) 100%)}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1400px}
+.tier{position:relative;border-radius:var(--r);padding:1px;background:linear-gradient(160deg,var(--line-2),rgba(214,178,106,.04) 40%,var(--line));transform-style:preserve-3d;transition:transform .25s ease-out,box-shadow .3s;cursor:pointer;text-align:left;border:0;color:inherit;font:inherit;width:100%}
+.tier .in{position:relative;height:100%;border-radius:calc(var(--r) - 1px);background:var(--deck);overflow:hidden;display:flex;flex-direction:column}
+.tier .img{height:190px;background-size:cover;background-position:center;position:relative}
+.tier .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,var(--deck))}
+.tier .wm{position:absolute;right:12px;top:12px;height:20px;width:auto;z-index:2;opacity:.92;filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+.tier .body{padding:6px 22px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tier h3{font-size:36px}
+.tier .price{font-family:var(--f-display);font-size:50px;line-height:1;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums}
+.tier .price small{font-family:var(--f-body);font-size:13px;color:var(--muted);margin-left:6px}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;color:#d8d1c2}
+.tier li{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start}
+.tier li::before{content:"";width:6px;height:6px;margin-top:8px;transform:rotate(45deg);background:var(--gold)}
+.tier .for{color:var(--muted);font-size:13px}
+.tier .pick{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line)}
+.tier .pick span{font-weight:600;font-size:13px;color:var(--gold)}
+.tier .dot{width:18px;height:18px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center}
+.tier[aria-pressed="true"]{background:linear-gradient(160deg,var(--gold-l),var(--gold-d) 50%,var(--gold));box-shadow:0 30px 80px -30px rgba(214,178,106,.45)}
+.tier[aria-pressed="true"] .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.tier[aria-pressed="true"] .pick span::after{content:" · selected"}
+.glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(400px circle at var(--gx,50%) var(--gy,0%),rgba(241,220,166,.14),transparent 45%);mix-blend-mode:screen;opacity:0;transition:opacity .3s}
+.tier:hover .glare{opacity:1}
+.flag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(7,8,10,.7);border:1px solid var(--line-2);color:var(--gold-l);padding:5px 10px;border-radius:999px}
+@media (max-width:900px){.tiers{grid-template-columns:1fr}}
+
+/* ---------- builder ---------- */
+.builder{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:28px;align-items:start}
+.groups{display:grid;gap:28px;min-width:0}
+.group h3{font-size:26px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.group h3 .mono{color:var(--dim);font-size:10px}
+.group > p{color:var(--muted);font-size:13.5px;margin-top:4px}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.item{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--deck);cursor:pointer;text-align:left;color:inherit;font:inherit;transition:border-color .2s,background .2s,transform .15s}
+.item:hover{border-color:var(--line-2)}
+.item:active{transform:scale(.99)}
+.item .box{width:18px;height:18px;margin-top:2px;border-radius:5px;border:1px solid var(--gold-d);display:grid;place-items:center}
+.item b{display:block;font-weight:600;font-size:14px}
+.item small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45;margin-top:2px}
+.item .amt{font-family:var(--f-mono);font-size:12.5px;color:var(--gold-l);white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.item .amt i{display:block;font-style:normal;color:var(--dim);font-size:10.5px}
+.item .core{display:inline-block;margin-left:6px;font-family:var(--f-mono);font-size:9px;letter-spacing:.12em;color:var(--cyan);border:1px solid rgba(143,214,232,.35);border-radius:4px;padding:1px 4px;vertical-align:2px}
+.item[aria-pressed="true"]{border-color:var(--gold);background:#16130c}
+.item[aria-pressed="true"] .box{background:var(--gold)}
+.item[aria-pressed="true"] .box::after{content:"";width:8px;height:4px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(-45deg) translate(1px,-1px)}
+@media (max-width:640px){.items{grid-template-columns:1fr}}
+.console{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);border-radius:18px;padding:1px;background:linear-gradient(170deg,var(--gold),rgba(214,178,106,.08) 45%,var(--line-2))}
+.console .in{border-radius:17px;background:radial-gradient(120% 60% at 50% 0%,#1b170e,var(--deck) 60%);padding:22px;display:grid;gap:16px}
+.console .chead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.console .chead .mono{color:var(--cyan);font-size:10px}
+.console .chead img{height:22px;width:auto}
+.lines{display:grid;gap:7px;font-size:13.5px;max-height:250px;overflow:auto;padding-right:4px}
+.lines div{display:flex;justify-content:space-between;gap:12px}
+.lines div span:last-child{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.lines .cr span:last-child{color:var(--ok)}
+.lines .empty{color:var(--dim)}
+.totals{border-top:1px solid var(--line);padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.totals .mono{color:var(--muted);font-size:10px}
+.totals .big{font-family:var(--f-display);font-size:46px;line-height:1;color:var(--gold-l);font-variant-numeric:lining-nums tabular-nums}
+.totals .yr{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);padding-top:10px;gap:10px}
+.totals .yr b{font-family:var(--f-display);font-size:30px;font-weight:500;color:var(--fg);font-variant-numeric:lining-nums tabular-nums}
+.note{color:var(--muted);font-size:12.5px}
+.note.good{color:var(--ok)}
+.copied{font-size:12px;color:var(--ok);min-height:1em;text-align:center}
+.contact-lines{display:grid;gap:4px;font-size:13px;color:var(--muted);text-align:center}
+.contact-lines a{color:var(--fg);text-decoration:none}
+@media (max-width:980px){.builder{grid-template-columns:1fr}.console{position:relative;top:0}}
+.mbar{display:none}
+@media (max-width:980px){
+  .mbar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:45;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-radius:16px;border:1px solid var(--gold);background:rgba(13,15,19,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(140%);transition:transform .35s}
+  .mbar.on{transform:none}
+  .mbar div{display:grid;line-height:1.2}
+  .mbar small{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+  .mbar b{font-family:var(--f-display);font-size:22px;color:var(--gold-l);font-weight:500}
+  .mbar a{padding:10px 14px;font-size:13px}
+}
+
+/* ---------- app ---------- */
+.appwrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:40px;align-items:start}
+@media (max-width:860px){.appwrap{grid-template-columns:1fr}.app-phone{margin:0 auto}}
+.app-phone{width:100%;max-width:330px;border-radius:44px;padding:11px;background:linear-gradient(150deg,#2a2519,#0d0e11 40%,#1f1b13);border:1px solid var(--line-2);box-shadow:0 40px 80px -30px rgba(0,0,0,.9)}
+.app-screen{border-radius:34px;background:linear-gradient(180deg,#14130f,#0a0b0c);padding:18px 16px 16px;min-height:590px;display:flex;flex-direction:column;gap:12px}
+.notch{width:110px;height:24px;background:#000;border-radius:0 0 16px 16px;margin:-18px auto 0}
+.apphead{display:flex;justify-content:space-between;align-items:center}
+.apphead b{font-family:var(--f-display);font-size:28px;font-weight:500}
+.apphead span{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.holecard{border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.035);text-align:center}
+.holecard .hn{font-family:var(--f-display);font-size:58px;line-height:.9;color:var(--gold-l)}
+.holecard .meta{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.stepper{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}
+.stepper button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line-2);background:var(--deck-2);color:var(--fg);font-size:22px;cursor:pointer}
+.stepper .sc{font-family:var(--f-display);font-size:64px;line-height:1;min-width:64px}
+.rel{font-family:var(--f-mono);font-size:12px;margin-top:4px;color:var(--gold)}
+.navh{display:flex;gap:8px}
+.navh button{flex:1;border:1px solid var(--line-2);background:transparent;color:var(--fg);padding:10px;border-radius:12px;cursor:pointer;font-weight:700;font-size:13px}
+.navh button:last-child{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.cstrip{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px}
+.cstrip i{font-style:normal;font-family:var(--f-mono);font-size:11px;text-align:center;padding:5px 0;border-radius:6px;background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer}
+.cstrip i.cur{outline:1px solid var(--gold);color:var(--fg)}
+.cstrip i.u{background:rgba(159,216,168,.22);color:#d9f2de}.cstrip i.o{background:rgba(239,125,104,.2);color:#ffd5cb}.cstrip i.e{background:rgba(255,255,255,.12);color:var(--fg)}
+.tot{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:12.5px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+.tot b{color:var(--gold-l)}
+.appfeat{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:28px}
+.af{background:var(--ink);padding:18px 18px 20px}
+.af h3{font-size:22px}
+.af p{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:linear-gradient(90deg,var(--line),var(--gold))}
+@media (max-width:760px){.tl{grid-template-columns:1fr}.tl::before{display:none}}
+.tm{position:relative;padding-top:32px}
+.tm::before{content:"";position:absolute;top:2px;left:0;width:16px;height:16px;border-radius:50%;background:var(--ink);border:1px solid var(--gold)}
+.tm.big::before{background:var(--gold);box-shadow:0 0 16px var(--gold)}
+.tm b{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--gold)}
+.tm p{font-size:14px;color:#d8d1c2;margin-top:4px}
+
+/* ---------- why ---------- */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.why div{background:var(--ink);padding:26px 24px;display:grid;gap:8px;align-content:start}
+.why h3{font-size:26px}
+.why p{color:var(--muted);font-size:14px}
+.why .mono{color:var(--gold);font-size:10px}
+@media (max-width:820px){.why{grid-template-columns:1fr}}
+.terms{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 40px;color:var(--muted);font-size:13.5px;margin-top:28px}
+.terms p{padding-left:16px;border-left:1px solid var(--line-2)}
+@media (max-width:720px){.terms{grid-template-columns:1fr}}
+
+/* ---------- close ---------- */
+.close{text-align:center;background:radial-gradient(90% 80% at 50% 100%,#1b170e,var(--ink) 70%);border-top:1px solid var(--line)}
+.close h2{font-size:clamp(44px,8vw,104px)}
+.close .lede{margin:18px auto 0}
+.close .ctas{justify-content:center}
+footer{border-top:1px solid var(--line);padding-block:44px calc(64px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+footer img{height:44px;width:auto}
+footer .c{display:grid;gap:4px;font-size:14px;color:var(--muted)}
+footer .c a{color:var(--fg);text-decoration:none}
+footer .fine{flex-basis:100%;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim);line-height:1.7}
+
+.rv{transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.pre{opacity:.001;transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.js .rv.pre{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="m/logo.webp" alt="Above All Media" width="1036" height="426"><span>× The Woodcreek Club</span></a>
+    <nav aria-label="Pitch sections">
+      <a href="#audit">Audit</a>
+      <a href="#pixel">Tracking</a>
+      <a href="#hole">The 15th</a>
+      <a href="#gallery">Real shots</a>
+      <a href="#packages">Packages</a>
+      <a href="#menu">Flight menu</a>
+      <a class="cta" href="#menu">Build my quote</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="stage" id="stage" aria-hidden="true">
+    <video id="heroV" src="m/hero.mp4" poster="m/hero.jpg" muted loop playsinline autoplay preload="auto"></video>
+  </div>
+  <div class="scan" aria-hidden="true"></div>
+  <div class="reticle" aria-hidden="true"></div>
+  <div class="hud ul" aria-hidden="true">
+    <div>ALT <b id="alt">280</b> FT AGL</div>
+    <div>CAM <b>4K · GOLDEN HOUR</b></div>
+    <div>PILOT <b>FAA PART 107</b></div>
+  </div>
+  <div class="hud ur" aria-hidden="true">
+    <div>TARGET <b>THE WOODCREEK CLUB</b></div>
+    <div>COURSE <b>TOM FAZIO · 1997</b></div>
+    <div>MARKET <b>ELGIN · COLUMBIA SC</b></div>
+  </div>
+  <span class="credit">Our footage · Palmetto Dunes, Hilton Head</span>
+  <div class="wrap">
+    <div class="prepared mono"><i></i>Prepared for The Woodcreek Club · Elgin, SC</div>
+    <h1>Woodcreek, <em>seen from above.</em></h1>
+    <p class="say">A Tom Fazio course, an island green on the 15th, and a Korn Ferry Tour event in May. It deserves to be seen like this.</p>
+    <p class="lede">This is Above All Media's own drone work on a championship course. Below: where Woodcreek's media stands, a playable 3D 15th, and the golf and social media flight menu with live pricing.</p>
+    <div class="ctas">
+      <a class="btn btn-gold" href="#menu">See the flight menu</a>
+      <a class="btn btn-line" href="#hole">Play the 15th in 3D</a>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <div><strong id="days">—</strong><span>until the Colonial Life Charity Classic, May 20–23, 2027</span></div>
+    <div><strong>4K</strong><span>every flight, plus vertical cuts</span></div>
+    <div><strong>Month to month</strong><span>no long contract</span></div>
+    <div><strong>1 contact</strong><span>Chandler flies, edits and answers</span></div>
+  </div>
+</div>
+
+<main>
+<section class="made" id="made">
+  <div class="wrap">
+    <div class="made-grid">
+      <div class="phone l"><div class="screen">
+        <video src="m/reel-golf.mp4" poster="m/reel-golf.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Oceanfront course · reel</span></div>
+      </div></div>
+      <div class="made-copy rv">
+        <img src="m/logo.webp" alt="Above All Media" style="height:34px;width:auto">
+        <span class="kicker">Made for Woodcreek</span>
+        <h2>We already fly courses like yours. <em>Here's how it feels.</em></h2>
+        <p class="heart">Someone joins a club because of a moment like this. The ball hanging over the water on the 15th. Sunset on the clubhouse. The first time they bring a friend and say, "This is my course."</p>
+        <p class="lede">Golfers don't join for a tee sheet. They join for the life they can picture. These reels are ours, shot on a championship course on Hilton Head, and they let a future member picture it before they ever call.</p>
+        <ul class="reasons">
+          <li><span class="n">01</span><span><b>The course is the product.</b> A Fazio layout and an island green. Photos from the cart path can't sell that. A drone can.</span></li>
+          <li><span class="n">02</span><span><b>Video gives the tour first.</b> A prospect who has already seen the 15th from above shows up ready to join.</span></li>
+          <li><span class="n">03</span><span><b>One shoot keeps working.</b> The same footage feeds the website, Google, ads, every social channel and tournament week.</span></li>
+          <li><span class="n">04</span><span><b>You've seen the work first.</b> No guessing what Woodcreek gets. It's playing right here.</span></li>
+        </ul>
+        <span class="tap">Tap a reel for sound.</span>
+      </div>
+      <div class="phone r"><div class="screen">
+        <video src="m/golfball.mp4" poster="m/golfball.jpg" muted loop playsinline autoplay preload="metadata"></video>
+        <div class="tag"><span class="mono">Brand spot · golf</span></div>
+      </div></div>
+    </div>
+    <div class="film rv">
+      <div class="film-frame">
+        <video src="m/flyover.mp4" poster="m/flyover.jpg" muted playsinline controls preload="none"></video>
+        <span class="rec"><i></i>Hole flyover · 90 sec</span>
+      </div>
+      <div class="film-copy">
+        <span class="kicker">The flyover · Palmetto Dunes, Hole 10</span>
+        <h3>See the course. <em>Before you play it.</em></h3>
+        <p>A full tee-to-green flyover we shot and cut on Robert Trent Jones Oceanfront: yardage, the line, every bunker and the green, set to music with titles. Press play for sound.</p>
+        <p>Woodcreek gets this for all 18 holes, starting with the island 15th over Tucker Lake.</p>
+        <div class="chips"><span>4K aerial</span><span>Hole-by-hole</span><span>Titles + yardage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">01 · The audit</span></span>
+      <h2>Where Woodcreek's media <em>stands today.</em></h2>
+      <div class="overall">
+        <div class="g" aria-label="Overall grade C minus">C−</div>
+        <p>A Tom Fazio course that hosts a Korn Ferry Tour event, marketed like a neighborhood club. Tap any card to see the weak point and the exact fix.</p>
+      </div>
+    </div>
+    <div class="cards rv" id="cards"></div>
+    <p class="src">Graded from public data on Nov 24, 2026: woodcreekclub.com, Instagram, Facebook and live Google results.</p>
+  </div>
+</section>
+
+<section id="leak" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">02 · The leak</span></span>
+      <h2>How a future member finds you, <em>today and with us.</em></h2>
+      <p class="lede">Today a curious golfer hits dead ends, and nothing is tracked, so nobody knows how many were lost.</p>
+      <div><div class="seg-toggle" role="tablist">
+        <button class="on" data-flow="now" role="tab" aria-selected="true">Today</button>
+        <button data-flow="us" role="tab" aria-selected="false">With Above All Media</button>
+      </div></div>
+    </div>
+    <div class="flow" id="flow"></div>
+  </div>
+</section>
+
+<section id="pixel" class="vbg">
+  <div class="bgi" style="background-image:url(g/s19.jpg)"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">03 · Pixel and tracking</span></span>
+      <h2>Setting up the pixel, <em>explained.</em></h2>
+      <p class="lede">Before a dollar goes to ads, we install tracking so every visit, inquiry, call and tour is counted. Pick something a visitor does to see what fires and what it unlocks.</p>
+    </div>
+    <div class="pix rv">
+      <div class="evlist" id="evlist"></div>
+      <div class="panel"><div class="in" id="evpanel" aria-live="polite"></div></div>
+    </div>
+    <div class="steps rv">
+      <div class="step"><h3>Ownership first</h3><p>Meta Business Manager, ad account, Google Ads and GA4 created in the club's name. Woodcreek owns the data if we ever part ways.</p></div>
+      <div class="step"><h3>Pixel + Conversions API</h3><p>Meta Pixel in the browser plus server-side Conversions API through Google Tag Manager, with matching event IDs so nothing double counts.</p></div>
+      <div class="step"><h3>Verify and rank</h3><p>Verify woodcreekclub.com in Meta, rank events (Lead, Schedule, Contact) and turn on Google enhanced conversions.</p></div>
+      <div class="step"><h3>Consent and privacy</h3><p>Cookie banner, updated privacy policy, and member lists uploaded only in hashed form.</p></div>
+      <div class="step"><h3>Audiences</h3><p>Site visitors, membership-page viewers and tournament fans for retargeting. Current members excluded. Lookalikes built from the best leads.</p></div>
+      <div class="step"><h3>One dashboard</h3><p>Leads, tours, cost per lead and new members in a monthly report the GM can read in two minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="hole">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">04 · Interactive 3D</span></span>
+      <h2>Play the 15th <em>before you get there.</em></h2>
+      <p class="lede">A concept model of an island-green par 3 over the water. Drag to look around, switch cameras, then hit the shot. The real build uses our drone survey of every Woodcreek hole.</p>
+    </div>
+    <div class="holebox rv">
+      <canvas id="course" aria-label="3D concept model of an island-green par 3 at dusk. Drag to look around."></canvas>
+      <div class="scrim"></div>
+      <div class="hud ul" aria-hidden="true"><div>MODE <b>CONCEPT RENDER</b></div><div>LIGHT <b>DUSK</b></div></div>
+      <div class="yard" aria-hidden="true">HOLE <b>15</b> · PAR <b>3</b><br>TUCKER LAKE<br>DRAG TO LOOK</div>
+      <div class="shot" id="shot" aria-live="polite"><b id="shotT">Pure.</b><span id="shotS"></span></div>
+      <div class="camrow" role="group" aria-label="Camera and shot controls">
+        <button data-cam="tee" class="on">Tee view</button>
+        <button data-cam="drone">Drone</button>
+        <button data-cam="green">Green</button>
+        <button data-cam="bunker">Bunker</button>
+        <button class="hit" id="hit">Hit the shot</button>
+      </div>
+    </div>
+    <div class="proof rv">
+      <div class="film-copy">
+        <span class="kicker">Already built by Above All Media</span>
+        <h3>Sky Caddy · <em>Hole 10, Palmetto Dunes</em></h3>
+        <p>Our oceanfront hole on Hilton Head: drone flyover, tee-by-tee yardages, a full bag, shot-by-shot play and caddie strategy. Woodcreek gets the same for all 18 holes.</p>
+        <div class="ctas" style="margin-top:6px">
+          <a class="btn btn-gold" href="https://claude.ai/artifact/FcFBD32wN4C5dXznrHeowy" target="_blank" rel="noopener">Play Hole 10 now ↗</a>
+        </div>
+      </div>
+      <div class="feat">
+        <div>Pick a tee and see real yardages to every hazard</div>
+        <div>Choose a club, swing, and watch the ball flight</div>
+        <div>Caddie mode shows the safe, smart and hero lines</div>
+        <div>Drone flyover of each hole built in</div>
+        <div>Sponsor slots on every hole for tournament partners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">05 · Real shots</span></span>
+      <h2>Not stock. <em>Our own flights.</em></h2>
+      <p class="lede">Every frame below was shot by Above All Media on one championship hole, sunrise to sunset. Tap any shot to see it full screen. This is the library Woodcreek gets for all 18.</p>
+    </div>
+    <div class="gal rv" id="gal"></div>
+    <div class="galnav"><span class="mono" style="color:var(--dim)">Palmetto Dunes · Hole 10 · Hilton Head Island</span><div class="arrows"><button type="button" id="galPrev" aria-label="Previous shots">←</button><button type="button" id="galNext" aria-label="Next shots">→</button></div></div>
+  </div>
+</section>
+
+<section id="social" class="vbg" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">06 · Social media takeover</span></span>
+      <h2>Footage first. <em>Then the feed.</em></h2>
+      <p class="lede">We run Instagram, Facebook, TikTok, YouTube and LinkedIn for the club, cut the way golfers scroll. Tap a screen to play it with sound.</p>
+    </div>
+    <div class="reels rv">
+      <div class="phone"><div class="screen"><video src="m/reel-golf.mp4" poster="m/reel-golf.jpg" muted loop playsinline preload="metadata" data-lazy></video><div class="tag"><span class="mono">Hole flyover · Reels</span></div></div></div>
+      <div class="phone"><div class="screen kb"><img src="g/s15.jpg" alt="Sunrise over an oceanfront green with sculpted bunkers" loading="lazy"><div class="tag"><span class="mono">Sunrise post · Instagram</span></div></div></div>
+      <div class="phone"><div class="screen"><video src="m/golfball.mp4" poster="m/golfball.jpg" muted loop playsinline preload="metadata" data-lazy></video><div class="tag"><span class="mono">Brand spot · TikTok</span></div></div></div>
+      <div class="phone"><div class="screen kb"><img src="g/s12.jpg" alt="Flag on the green at sunset" loading="lazy"><div class="tag"><span class="mono">Flag at sunset · Stories</span></div></div></div>
+    </div>
+    <div class="week rv" id="week"></div>
+  </div>
+</section>
+
+<section id="packages" class="vbg">
+  <div class="bgi" style="background-image:url(g/s05.jpg)"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">07 · Packages</span></span>
+      <h2>Three altitudes. <em>Month to month.</em></h2>
+      <p class="lede">Pick a plan to run Woodcreek's media every month. No long contract, cancel any time. Ad spend is paid to Google and Meta directly. Your pick drops into the quote below.</p>
+    </div>
+    <div class="tiers" id="tiers">
+      <button class="tier rv" data-tier="birdie" aria-pressed="false">
+        <div class="in"><div class="glare"></div>
+          <div class="img" style="background-image:url(g/s07.jpg)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier I · 200 ft</span>
+            <h3>Birdie</h3>
+            <div class="price">$1,750<small>per month</small></div>
+            <p class="for">Social media handled and Google profile cared for.</p>
+            <ul><li>Instagram, Facebook and LinkedIn managed</li><li>12 posts a month plus stories</li><li>Google Business Profile care</li><li>Quarterly drone shoot</li><li>Monthly report</li></ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+      <button class="tier rv" data-tier="eagle" aria-pressed="true">
+        <div class="in"><div class="glare"></div>
+          <span class="flag mono">Recommended</span>
+          <div class="img" style="background-image:url(g/s17.jpg)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier II · 400 ft</span>
+            <h3>Eagle</h3>
+            <div class="price">$3,250<small>per month</small></div>
+            <p class="for">Closes the biggest gaps: no ads, no lead capture, no video channels.</p>
+            <ul><li>Everything in Birdie</li><li>TikTok and YouTube launched</li><li>20 posts a month, monthly content day</li><li>Google Ads, SEO and pixel setup</li><li>Lead follow-up in a CRM</li></ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+      <button class="tier rv" data-tier="albatross" aria-pressed="false">
+        <div class="in"><div class="glare"></div>
+          <div class="img" style="background-image:url(g/s20.jpg)"><img class="wm" src="m/logo.webp" alt=""></div>
+          <div class="body">
+            <span class="mono" style="color:var(--gold)">Tier III · Above all</span>
+            <h3>Albatross</h3>
+            <div class="price">$4,900<small>per month</small></div>
+            <p class="for">A full media department for the tournament year.</p>
+            <ul><li>Everything in Eagle</li><li>Weekly on-site content</li><li>Meta and YouTube paid campaigns</li><li>Tournament week coverage</li><li>App content and push campaigns</li></ul>
+            <div class="pick"><span>Add to quote</span><i class="dot"></i></div>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="vbg">
+  <div class="bgi" style="background-image:url(g/s18.jpg)"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">08 · The flight menu · golf edition</span></span>
+      <h2>Add only <em>what Woodcreek needs.</em></h2>
+      <p class="lede">The Above All Media menu, trimmed to golf course filming, media marketing and social media. Everything can be booked on its own or added to a plan. The quote updates as you tap.</p>
+    </div>
+    <div class="builder">
+      <div class="groups" id="groups"></div>
+      <aside class="console" aria-live="polite">
+        <div class="in">
+          <div class="chead"><span class="mono">Flight plan · live quote</span><img src="m/logo.webp" alt="Above All Media"></div>
+          <div class="lines" id="lines"></div>
+          <div class="totals">
+            <div><span class="mono">Monthly</span><div class="big" id="tMo">$0</div></div>
+            <div><span class="mono">One-time</span><div class="big" id="tOne">$0</div></div>
+            <div class="yr"><span class="mono">First 12 months</span><b id="tYr">$0</b></div>
+          </div>
+          <p class="note" id="note"></p>
+          <button class="btn btn-gold" id="copy" type="button">Copy this quote</button>
+          <div class="copied" id="copied" role="status"></div>
+          <div class="contact-lines">
+            <div>Send it to Chandler</div>
+            <a href="mailto:chandler@aboveallmediasc.com">chandler@aboveallmediasc.com</a>
+            <a href="tel:+18039205349">(803) 920-5349</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="app" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">09 · Members' app</span></span>
+      <h2>A scorecard <em>in every pocket.</em></h2>
+    </div>
+    <div class="appwrap">
+      <div class="rv">
+        <p class="lede">Try the scorecard. Members log every round, see their stats and play the 3D holes, in an app with Woodcreek's name on it. Pars shown are placeholders until we load the official card.</p>
+        <div class="appfeat">
+          <div class="af"><h3>Digital scorecard</h3><p>Hole-by-hole scores, putts, fairways and greens, with live leaderboards.</p></div>
+          <div class="af"><h3>Round history</h3><p>Every round saved with trends, best holes and handicap sync.</p></div>
+          <div class="af"><h3>3D course + GPS</h3><p>Play the hole before you tee off, distances to the pin on course.</p></div>
+          <div class="af"><h3>Book and order</h3><p>Tee times, dinner and event sign-ups without an email chain.</p></div>
+          <div class="af"><h3>Push alerts</h3><p>Weather delays, Charity Classic news and chef specials.</p></div>
+          <div class="af"><h3>Owned by the club</h3><p>In the App Store as Woodcreek, not a third-party brand.</p></div>
+        </div>
+      </div>
+      <div class="app-phone rv" aria-label="Interactive sample of the members' app scorecard">
+        <div class="app-screen">
+          <div class="notch"></div>
+          <div class="apphead"><b>Woodcreek</b><span>Sample round</span></div>
+          <div class="holecard">
+            <div class="meta">HOLE</div>
+            <div class="hn" id="hn">1</div>
+            <div class="meta" id="hpar">PAR 4 · SAMPLE</div>
+            <div class="stepper">
+              <button id="minus" aria-label="One fewer stroke">−</button>
+              <div class="sc" id="sc">4</div>
+              <button id="plus" aria-label="One more stroke">+</button>
+            </div>
+            <div class="rel" id="rel">Par</div>
+          </div>
+          <div class="navh"><button id="prevH">Previous</button><button id="nextH">Save &amp; next</button></div>
+          <div class="cstrip" id="strip1"></div>
+          <div class="cstrip" id="strip2"></div>
+          <div class="tot"><span>OUT <b id="out">0</b></span><span>IN <b id="in">0</b></span><span>TOTAL <b id="tot">0</b></span></div>
+          <div class="tot" style="border:0;padding-top:0"><span>TO PAR <b id="tp">E</b></span><span>HOLES <b id="hp">0/18</b></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline" class="vbg">
+  <div class="bgi" style="background-image:url(g/s01.jpg)"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">10 · Road to the Classic</span></span>
+      <h2>Kickoff in December. <em>Tour-ready by May 20.</em></h2>
+      <p class="lede">The tournament is the deadline. Every month of delay is content Woodcreek won't have ready for tournament week.</p>
+    </div>
+    <div class="tl rv">
+      <div class="tm"><b>DEC 2026</b><p>Sign-off, account ownership, pixel and tracking live, Google profile fixed, 3D pilot of the 15th.</p></div>
+      <div class="tm"><b>JAN 2027</b><p>Winter shoot, membership landing page and form, Google Ads on, TikTok and YouTube launched.</p></div>
+      <div class="tm"><b>FEB–MAR</b><p>Commercials filmed, spring aerials, 3D holes 1–9, app beta with 25 members.</p></div>
+      <div class="tm"><b>APRIL</b><p>3D holes 10–18, app launch, tournament promo campaign and sponsor packs.</p></div>
+      <div class="tm big"><b>MAY 20–23</b><p>Colonial Life Charity Classic: live coverage, daily highlight reels, retargeting every fan who visits.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="brandline"><img class="mk" src="m/logo.webp" alt=""><span class="kicker">11 · Why it works</span></span>
+      <h2>Built backward <em>from a new member.</em></h2>
+    </div>
+    <div class="why rv">
+      <div><span class="mono">Goal first</span><h3>Planned around tours</h3><p>We start from what the club needs more of, whether that's inquiries, tours or event bookings, and plan every shot toward it.</p></div>
+      <div><span class="mono">Interactive 3D</span><h3>Nobody in the Midlands has it</h3><p>We build playable 3D holes from drone capture. A prospect can play the 15th on a phone before they ever visit.</p></div>
+      <div><span class="mono">One contact</span><h3>The pilot is the editor</h3><p>Chandler flies, shoots, edits and answers the phone. You won't be passed around an agency.</p></div>
+    </div>
+    <div class="terms rv">
+      <p>Monthly plans are month to month. Cancel with 30 days' notice.</p>
+      <p>One-time builds are paid in three milestones: kickoff, mid-production and launch.</p>
+      <p>Bundle the four core builds with Eagle or Albatross for 15% off them.</p>
+      <p>The $2,250 pilot of the 15th is credited in full toward the 18-hole 3D course.</p>
+      <p>Weather reschedules are free. Airspace authorization is handled by us.</p>
+      <p>Prices are proposals for 2027 and are confirmed in a written proposal before booking.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <span class="kicker">Next step · one hole, low risk</span>
+    <h2 style="margin-top:16px">Let's fly <em>the 15th first.</em></h2>
+    <p class="lede">We film the island green in 4K and build it as a playable 3D hole for $2,250, credited in full if Woodcreek goes ahead. Start in December to be ready for May.</p>
+    <div class="ctas">
+      <a class="btn btn-gold" href="mailto:chandler@aboveallmediasc.com?subject=Woodcreek%2015th-hole%20pilot">Book the pilot</a>
+      <a class="btn btn-line" href="tel:+18039205349">Call (803) 920-5349</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="m/logo.webp" alt="Above All Media" width="1036" height="426">
+    <div class="c">
+      <div>Chandler Pirie · Founder and pilot</div>
+      <a href="mailto:chandler@aboveallmediasc.com">chandler@aboveallmediasc.com</a>
+      <a href="tel:+18039205349">(803) 920-5349</a>
+      <a href="https://aboveallmediasc.com" target="_blank" rel="noopener">aboveallmediasc.com</a>
+    </div>
+    <p class="fine">Prepared for The Woodcreek Club, 301 Club Ridge Rd, Elgin SC. Audit data as of Nov 24, 2026. All footage and photos are Above All Media's own work at Palmetto Dunes, Hilton Head Island, not Woodcreek. The 3D hole is a concept render, not a survey of the actual 15th. Prices are proposals.</p>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" aria-hidden="true"><div><small>Your quote</small><b id="mbTot">$0/mo</b></div><a class="btn btn-gold" href="#menu">View quote</a></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbX" aria-label="Close">✕</button>
+  <button class="pv" id="lbP" aria-label="Previous photo">←</button>
+  <figure><img id="lbImg" alt=""><figcaption><b id="lbCap"></b><span id="lbN"></span></figcaption></figure>
+  <button class="nx" id="lbN2" aria-label="Next photo">→</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- countdown ---------- */
+(function(){const d=Math.ceil((new Date(2027,4,20)-new Date())/864e5);$('#days').textContent=d>0?d+' days':'Tournament week';})();
+
+/* ---------- audit ---------- */
+const grades=[
+ ['Website design','C+','Clean custom WordPress build, but almost no course photography and an empty benefits block.','Hero film of the course, real photos on every page, one brand name everywhere.'],
+ ['Membership flow','D','Every button opens an email. No inquiry form, no pricing guide, no tour booking.','Membership landing page, 60-second inquiry form, instant follow-up in a CRM.'],
+ ['On-site SEO','D+','No meta descriptions, duplicated titles, two brand names ("The Woodcreek Club" and "Woodcreek Golf Club").','Titles and descriptions on every page, hole-by-hole pages, event schema.'],
+ ['Photo and video','D','No course video on the site. One drone reel on Instagram.','4K flyovers of all 18 holes, seasonal shoots, four commercials.'],
+ ['Instagram','C−','912 followers. Busy at tournament time, then quiet. The old @woodcreekgolfclub is still online.','Three posts a week plus daily stories. Retire the old account.'],
+ ['Facebook','C−','About 1K followers, 0 reviews, and the website link points to another domain.','Fix links, turn on reviews, ask happy members, run event posts.'],
+ ['YouTube and TikTok','F','No official channels found. The top YouTube result is a realtor’s neighborhood tour.','Launch both: hole flyovers, member stories, tournament highlights.'],
+ ['Google profile','B','4.7 stars from 107 reviews, but filed as "Columbia" and missing from the map for membership searches.','Correct category and town, add membership and dining, weekly posts.'],
+ ['Paid ads and tracking','F','No Google or Meta ads seen and no visible conversion tracking.','Pixel + Conversions API, GA4, Google Ads on membership searches.']
+];
+$('#cards').innerHTML=grades.map(g=>`<button class="gc" aria-expanded="false"><div class="top"><span class="k">${esc(g[0])}</span><span class="gr ${g[1][0]}">${esc(g[1])}</span></div><p class="gw">${esc(g[2])}</p><p class="fix"><b>Our fix:</b> ${esc(g[3])}</p><span class="tog">Show the fix +</span></button>`).join('');
+$$('.gc').forEach(c=>c.addEventListener('click',()=>{const o=c.classList.toggle('open');c.setAttribute('aria-expanded',o);c.querySelector('.tog').textContent=o?'Hide the fix −':'Show the fix +';}));
+
+/* ---------- funnel ---------- */
+const flows={
+ now:[['bad','Search','"golf membership columbia sc"','Map shows Solina, Forest Lake and WildeWood. Woodcreek isn’t there.'],
+      ['bad','Website','Finds the club anyway','No video of the course, no prices, no form.'],
+      ['bad','Email link','Taps "Email Woodcreek"','Opens a mail app. Many people stop here.'],
+      ['bad','Waiting','No follow-up system','A reply depends on someone checking the inbox.'],
+      ['bad','Result','Unknown','No tracking, so lost prospects are never counted.']],
+ us:[['good','Search + ads','On the map and in ads','Fixed Google profile plus search ads on membership terms.'],
+     ['good','Landing page','Hero film, 3D hole, pricing guide','Built to turn a visit into an inquiry.'],
+     ['good','60-second form','Name, phone, interest','Pixel fires Lead. Google Ads counts a conversion.'],
+     ['good','Instant follow-up','Text and email in minutes','Membership director gets an alert. Tour booked online.'],
+     ['good','Tour to member','Tracked end to end','Monthly report shows cost per lead and per new member.']]
+};
+function drawFlow(k){$('#flow').innerHTML=flows[k].map((n,i)=>`<div class="node ${n[0]}" style="--i:${i}"><div class="n">${String(i+1).padStart(2,'0')} · ${esc(n[1])}</div><h3>${esc(n[2])}</h3><p>${esc(n[3])}</p></div>`).join('');}
+$$('[data-flow]').forEach(b=>b.addEventListener('click',()=>{$$('[data-flow]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});drawFlow(b.dataset.flow);}));
+drawFlow('now');
+
+/* ---------- pixel ---------- */
+const S=s=>`<span class="s">${s}</span>`, C=s=>`<span class="c">${s}</span>`;
+const events=[
+ {k:'Visits any page',d:'Every visitor, every page',meta:'PageView',ga:'page_view',ads:'—',crm:'—',
+  code:`${C('// Base code on every page, via Google Tag Manager')}\nfbq(${S("'init'")}, ${S("'WOODCREEK_PIXEL_ID'")});\nfbq(${S("'track'")}, ${S("'PageView'")});\ngtag(${S("'config'")}, ${S("'G-XXXXXXX'")});`,
+  u:'Builds the <b>"all visitors, 180 days"</b> audience, so anyone who looked at Woodcreek sees the course film again on Instagram and YouTube.'},
+ {k:'Views membership page',d:'Real buying interest',meta:'ViewContent',ga:'view_membership',ads:'Audience signal',crm:'—',
+  code:`fbq(${S("'track'")}, ${S("'ViewContent'")}, {\n  content_name: ${S("'Golf Membership'")}\n});\ngtag(${S("'event'")}, ${S("'view_membership'")});`,
+  u:'The warmest audience. They get the <b>tournament spot</b> and a tour invite, not generic brand ads.'},
+ {k:'Submits inquiry form',d:'The main conversion',meta:'Lead + CAPI',ga:'generate_lead',ads:'Membership Inquiry',crm:'New lead, alert sent',
+  code:`${C('// Browser and server send the same event_id, so it counts once')}\nfbq(${S("'track'")}, ${S("'Lead'")}, {}, {eventID: id});\ngtag(${S("'event'")}, ${S("'generate_lead'")});\ngtag(${S("'event'")}, ${S("'conversion'")}, {send_to: ${S("'AW-XXX/inquiry'")}});`,
+  u:'Google and Meta learn <b>who actually inquires</b> and find more people like them. This is where cost per lead comes from.'},
+ {k:'Books a tour',d:'Highest-value action',meta:'Schedule',ga:'schedule_tour',ads:'Tour Booked',crm:'Tour on calendar',
+  code:`fbq(${S("'track'")}, ${S("'Schedule'")}, {}, {eventID: id});\ngtag(${S("'event'")}, ${S("'schedule_tour'")});`,
+  u:'Ads are optimized for <b>tours, not clicks</b>, so budget goes to people who show up at the club.'},
+ {k:'Taps to call',d:'Phone leads count too',meta:'Contact',ga:'click_to_call',ads:'Call conversion',crm:'Call logged',
+  code:`${C('// A tracking number swaps in for ad visitors')}\nfbq(${S("'track'")}, ${S("'Contact'")});\ngtag(${S("'event'")}, ${S("'click_to_call'")});`,
+  u:'Calls to <b>803-239-0286</b> from ads get counted, so phone-first prospects aren’t invisible in the report.'},
+ {k:'Registers for an event',d:'Dinners, clinics, the Classic',meta:'CompleteRegistration',ga:'sign_up',ads:'Event signup',crm:'Guest list',
+  code:`fbq(${S("'track'")}, ${S("'CompleteRegistration'")}, {\n  content_name: ${S("'Charity Classic volunteer'")}\n});`,
+  u:'Event guests and tournament volunteers become a <b>warm membership audience</b> for the months after.'}
+];
+function drawEv(i){
+ const e=events[i];
+ $$('.ev').forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i)});
+ $('#evpanel').innerHTML=`<span class="kicker">When a visitor ${esc(e.k.toLowerCase())}</span>
+  <div class="pulse" aria-hidden="true"><i id="pdot"></i><span style="left:6%">Woodcreek site</span><span style="left:42%">Tag Manager</span><span style="right:5%">Meta · Google · CRM</span></div>
+  <div class="fires"><div class="fire"><div class="who">Meta Pixel</div><div class="what">${esc(e.meta)}</div></div><div class="fire"><div class="who">GA4</div><div class="what">${esc(e.ga)}</div></div><div class="fire"><div class="who">Google Ads</div><div class="what">${esc(e.ads)}</div></div><div class="fire"><div class="who">CRM</div><div class="what">${esc(e.crm)}</div></div></div>
+  <div class="code">${e.code}</div><p class="unlock">${e.u}</p>`;
+ const d=$('#pdot'); if(d&&d.animate&&!reduce) d.animate([{left:'0%'},{left:'calc(100% - 10px)'}],{duration:1400,easing:'ease-in-out',fill:'forwards'});
+}
+$('#evlist').innerHTML=events.map(e=>`<button class="ev" aria-pressed="false"><span class="dot"></span><span><b>${esc(e.k)}</b><small>${esc(e.d)}</small></span><span class="act">${esc(e.meta.split(' ')[0])}</span></button>`).join('');
+$$('.ev').forEach((b,i)=>b.addEventListener('click',()=>drawEv(i)));
+drawEv(2);
+
+/* ---------- gallery + lightbox ---------- */
+const shots=[["04","Tee to green, straight at the Atlantic"],["08","The green complex from the fairway"],["15","Sunrise over the green"],["06","Beyond the green, looking back up the hole"],["12","The flag at sunset"],["18","The whole hole along the coast"],["19","Between marsh and lagoon"],["03","The fairway, marsh and lagoon"],["05","Sunrise down the landing area"],["07","Halfway home, ocean ahead"],["02","Back down the fairway toward the tee"],["11","Bunker contours short of the green"],["17","Bird's-eye: green to beach"],["14","The green, close"],["13","On the green"],["10","Fairway level, looking back"],["01","Sunset, looking back at the tee"],["20","Sunset over the course"]];
+$('#gal').innerHTML=shots.map((s,i)=>`<button type="button" data-i="${i}" aria-label="Open photo: ${esc(s[1])}"><img src="g/s${s[0]}.jpg" alt="${esc(s[1])}" loading="lazy"><span class="cap"><span>${String(i+1).padStart(2,'0')} · ${esc(s[1])}</span></span></button>`).join('');
+const gal=$('#gal'); const step=()=>gal.querySelector('button').getBoundingClientRect().width+14;
+$('#galPrev').onclick=()=>gal.scrollBy({left:-step(),behavior:reduce?'auto':'smooth'});
+$('#galNext').onclick=()=>gal.scrollBy({left:step(),behavior:reduce?'auto':'smooth'});
+const lb=$('#lb'); let li=0, lastFocus=null;
+function lbShow(i){li=(i+shots.length)%shots.length;$('#lbImg').src='g/'+shots[li][0]+'.jpg';$('#lbImg').alt=shots[li][1];$('#lbCap').textContent=shots[li][1];$('#lbN').textContent=(li+1)+' / '+shots.length+' · Palmetto Dunes';}
+function lbOpen(i){lastFocus=document.activeElement;lbShow(i);lb.classList.add('on');document.body.style.overflow='hidden';$('#lbX').focus();}
+function lbClose(){lb.classList.remove('on');document.body.style.overflow='';lastFocus&&lastFocus.focus();}
+gal.addEventListener('click',e=>{const b=e.target.closest('button');if(b)lbOpen(+b.dataset.i);});
+$('#lbX').onclick=lbClose;$('#lbP').onclick=()=>lbShow(li-1);$('#lbN2').onclick=()=>lbShow(li+1);
+lb.addEventListener('click',e=>{if(e.target===lb)lbClose();});
+addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lbClose();if(e.key==='ArrowLeft')lbShow(li-1);if(e.key==='ArrowRight')lbShow(li+1);});
+let tx=null;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)lbShow(li+(dx<0?1:-1));tx=null;});
+
+/* ---------- social week ---------- */
+const week=[['MON','Hole of the week: 4K flyover reel'],['TUE','Pro shop and lesson tips'],['WED','Member or staff spotlight'],['THU','Chef’s dinner special'],['FRI','Weekend events and tee times'],['SAT','Live stories from the course'],['SUN','Weekly recap and a review ask']];
+$('#week').innerHTML=week.map(d=>`<div class="day"><b>${d[0]}</b><p>${esc(d[1])}</p></div>`).join('');
+
+/* ---------- flight menu: golf edition ---------- */
+const TIERS={birdie:{name:'Birdie plan',p:1750},eagle:{name:'Eagle plan',p:3250},albatross:{name:'Albatross plan',p:4900}};
+const GROUPS=[
+ {title:'Aerial filming',code:'AIR',items:[
+  {id:'lib',n:'4K course film library',d:'Flyovers of all 18 holes, stills, clubhouse and grounds',p:6000,core:1},
+  {id:'aer20',n:'Aerial photo set',d:'20 edited drone photos of holes, clubhouse and Tucker Lake',p:275},
+  {id:'hilite',n:'Aerial highlight film',d:'45 to 60 seconds of graded 4K flight footage set to music',p:315},
+  {id:'twilight',n:'Golden hour session',d:'Sunset flight over the island green, stills and clips',p:245},
+  {id:'refresh',n:'Seasonal refresh flight',d:'Return flight for spring color, fall or course work',p:205},
+  {id:'clips',n:'B-roll clip library',d:'15 graded 4K aerial clips for the club and partners to reuse',p:300}
+ ]},
+ {title:'Film and commercials',code:'FLM',items:[
+  {id:'comm',n:'Commercial package',d:'Four spots, each in three formats for TV, YouTube and social',p:9000,core:1},
+  {id:'film90',n:'Cinematic club film',d:'90 seconds, 4K, ground and air, licensed music',p:1015},
+  {id:'life',n:'Lifestyle film with members',d:'60 to 90 seconds of members living the club, casting coordinated',p:1155},
+  {id:'adcuts',n:'Ad-ready cut set',d:'Your film cut to 6, 15 and 30 seconds in 3 aspect ratios',p:275},
+  {id:'wed',n:'Weddings and events kit',d:'Venue film, photo set and inquiry landing page',p:2250},
+  {id:'realty',n:'Woodcreek Farms real estate film',d:'Lifestyle film co-funded by local realtors',p:1750,unit:'each'}
+ ]},
+ {title:'Social media',code:'SOC',items:[
+  {id:'reel1',n:'Vertical reel',d:'30 to 45 seconds with captions, for Reels, TikTok and Shorts',p:175},
+  {id:'reel3',n:'Reel pack of 3',d:'Three vertical reels from one shoot, each with its own hook',p:455},
+  {id:'event',n:'Member event coverage',d:'Member-Guest, holiday parties and clinics: photos and a recap reel',p:475,unit:'each'},
+  {id:'sponsor',n:'Sponsor content pack',d:'Branded reels the club resells to Charity Classic sponsors',p:1250,unit:'per sponsor'},
+  {id:'shop',n:'Pro shop product shoot',d:'Merch photos and reels for the shop and socials',p:600,unit:'per quarter'},
+  {id:'crm',n:'Email and CRM automation',d:'Monthly newsletter plus lead nurture sequences',p:450,mo:1}
+ ]},
+ {title:'Marketing and ads',code:'ADS',items:[
+  {id:'funnel',n:'Membership website funnel',d:'Landing pages, 60-second form, tracking and CRM hookup',p:4750,core:1},
+  {id:'tour360',n:'Google 360° virtual tour',d:'Clubhouse, pool and courts on Google Maps and the site',p:1400},
+  {id:'live',n:'Charity Classic live production',d:'Livestream plus daily highlight reels during tournament week',p:6250,unit:'per event'}
+ ]},
+ {title:'3D and app',code:'3D',items:[
+  {id:'pilot',n:'3D pilot: the island 15th',d:'One playable hole, credited in full toward the 18-hole course',p:2250},
+  {id:'course',n:'Playable 3D course, 18 holes',d:'Web, mobile and simulator ready, from our drone survey',p:24000,core:1},
+  {id:'sim',n:'Simulator course export',d:'The 3D course on members’ home and club simulators',p:3000},
+  {id:'site3d',n:'3D website feature',d:'The 3D course built into a page on woodcreekclub.com',p:840},
+  {id:'app',n:'Woodcreek members’ app',d:'iOS and Android scorecard and round tracking, plus $600/mo hosting',p:17500,host:600},
+  {id:'lessons',n:'Lesson video library',d:'Pro-led instruction series inside the members’ app',p:2750}
+ ]}
+];
+const ALL={}; GROUPS.forEach(g=>g.items.forEach(i=>ALL[i.id]=i));
+const CORE=['lib','comm','funnel','course'];
+const state={tier:'eagle',add:new Set(['pilot'])};
+
+$('#groups').innerHTML=GROUPS.map(g=>`<div class="group rv"><h3>${g.title} <span class="mono">${g.code}</span></h3><div class="items">${g.items.map(it=>`<button type="button" class="item" data-id="${it.id}" aria-pressed="false"><i class="box" aria-hidden="true"></i><span><b>${esc(it.n)}${it.core?'<span class="core">CORE</span>':''}</b><small>${esc(it.d)}</small></span><span class="amt">${fmt(it.p)}${it.mo?'/mo':''}${it.unit?`<i>${it.unit}</i>`:''}${it.host?`<i>+ ${fmt(it.host)}/mo</i>`:''}</span></button>`).join('')}</div></div>`).join('');
+$$('.item').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.id;state.add.has(id)?state.add.delete(id):state.add.add(id);render();}));
+$$('[data-tier]').forEach(b=>b.addEventListener('click',()=>{state.tier=state.tier===b.dataset.tier?null:b.dataset.tier;render();}));
+
+function quote(){
+ const L=[]; let one=0, mo=0;
+ if(state.tier){L.push([TIERS[state.tier].name,fmt(TIERS[state.tier].p)+'/mo']);mo+=TIERS[state.tier].p;}
+ const coreAll=CORE.every(id=>state.add.has(id)), disc=coreAll&&(state.tier==='eagle'||state.tier==='albatross');
+ GROUPS.forEach(g=>g.items.forEach(it=>{
+  if(!state.add.has(it.id))return;
+  if(it.mo){mo+=it.p;L.push([it.n,fmt(it.p)+'/mo']);return;}
+  let p=it.p; if(disc&&it.core)p*=.85;
+  one+=p; L.push([it.n+(disc&&it.core?' (15% off)':''),fmt(p)]);
+  if(it.host){mo+=it.host;L.push(['App hosting and support',fmt(it.host)+'/mo']);}
+ }));
+ const credit=state.add.has('pilot')&&state.add.has('course');
+ if(credit){one-=2250;L.push(['Pilot credited to 3D course','−$2,250','cr']);}
+ return {L,one,mo,disc,coreAll,credit};
+}
+let tvs={tMo:0,tOne:0,tYr:0};
+function tween(id,to){const el=$('#'+id);if(reduce){tvs[id]=to;el.textContent=fmt(to);return;}const from=tvs[id],t0=performance.now();const s=t=>{const k=Math.min(1,(t-t0)/600),e=1-Math.pow(1-k,3);tvs[id]=from+(to-from)*e;el.textContent=fmt(tvs[id]);if(k<1)requestAnimationFrame(s);};requestAnimationFrame(s);}
+function render(){
+ const q=quote();
+ $$('[data-tier]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.tier===state.tier)));
+ $$('.item').forEach(b=>b.setAttribute('aria-pressed',String(state.add.has(b.dataset.id))));
+ $('#lines').innerHTML=q.L.length?q.L.map(l=>`<div class="${l[2]||''}"><span>${esc(l[0])}</span><span>${l[1]}</span></div>`).join(''):'<div class="empty">Nothing selected yet. Pick a plan or a service.</div>';
+ tween('tMo',q.mo);tween('tOne',q.one);tween('tYr',q.mo*12+q.one);
+ const n=$('#note');
+ if(q.disc){n.className='note good';n.textContent='15% bundle discount applied to the four core builds.';}
+ else if(q.coreAll){n.className='note';n.textContent='Choose Eagle or Albatross to take 15% off the four core builds.';}
+ else {const left=CORE.filter(id=>!state.add.has(id)).length;n.className='note';n.textContent=`Add all four CORE builds with Eagle or Albatross for 15% off them (${left} to go).`+(state.add.has('pilot')&&!q.credit?' The pilot is credited if you add the 18-hole course.':'');}
+ $('#mbTot').textContent=fmt(q.mo)+'/mo'+(q.one?' + '+fmt(q.one):'');
+}
+render();
+$('#copy').addEventListener('click',()=>{
+ const q=quote(), out=$('#copied');
+ if(!q.L.length){out.textContent='Pick at least one item first.';return;}
+ let t='Above All Media quote for The Woodcreek Club\n\n'+q.L.map(l=>`${l[0]}: ${l[1]}`).join('\n');
+ t+=`\n\nMonthly: ${fmt(q.mo)} (month to month)\nOne-time: ${fmt(q.one)}\nFirst 12 months: ${fmt(q.mo*12+q.one)}\n\nChandler Pirie · chandler@aboveallmediasc.com · (803) 920-5349`;
+ const done=()=>{out.textContent='Copied. Paste it into an email or text to Chandler.';};
+ const fail=()=>{const ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){out.textContent='Copy blocked here. Select the lines above instead.';}ta.remove();};
+ try{navigator.clipboard.writeText(t).then(done,fail);}catch(e){fail();}
+});
+// mobile quote bar: visible between packages and the console
+(function(){const mb=$('#mbar'),pk=$('#packages'),con=$('.console');if(!('IntersectionObserver' in window))return;let inPk=false,conVis=false;
+ const upd=()=>mb.classList.toggle('on',inPk&&!conVis);
+ new IntersectionObserver(es=>es.forEach(e=>{inPk=e.isIntersecting||e.boundingClientRect.top<0&&$('#menu').getBoundingClientRect().bottom>0;upd();})).observe(pk);
+ new IntersectionObserver(es=>es.forEach(e=>{conVis=e.isIntersecting;upd();})).observe(con);
+ addEventListener('scroll',()=>{const r=pk.getBoundingClientRect(),m=$('#menu').getBoundingClientRect();inPk=r.top<innerHeight&&m.bottom>innerHeight*.5;upd();},{passive:true});
+})();
+
+/* ---------- tilt cards ---------- */
+if(!reduce&&matchMedia('(hover:hover)').matches){
+ $$('.tier').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.transform=`rotateX(${(.5-y)*10}deg) rotateY(${(x-.5)*12}deg) translateZ(10px)`;c.style.setProperty('--gx',x*100+'%');c.style.setProperty('--gy',y*100+'%');});
+  c.addEventListener('pointerleave',()=>{c.style.transform='';});
+ });
+}
+
+/* ---------- reels: lazy play, tap for sound ---------- */
+const vids=$$('.screen video');
+vids.forEach(v=>{
+ v.parentElement.addEventListener('click',()=>{const was=v.muted;vids.forEach(o=>o.muted=true);v.muted=!was;v.play().catch(()=>{});});
+ if(reduce){v.removeAttribute('autoplay');v.pause();}
+});
+if('IntersectionObserver' in window&&!reduce){
+ const vo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.isIntersecting)v.play().catch(()=>{});else v.pause();}),{threshold:.25});
+ vids.forEach(v=>vo.observe(v));
+}
+
+/* ---------- app scorecard ---------- */
+const pars=[4,5,3,4,4,3,4,5,4,4,4,3,5,4,3,4,4,5];
+const scores=new Array(18).fill(null); let cur=0, draft=pars[0];
+const rel=n=>n===0?'E':(n>0?'+'+n:String(n));
+const relName=d=>({'-3':'Albatross','-2':'Eagle','-1':'Birdie','0':'Par','1':'Bogey','2':'Double bogey'})[d]||(d>0?'+'+d:String(d));
+function drawApp(){
+ $('#hn').textContent=cur+1;$('#hpar').textContent='PAR '+pars[cur]+' · SAMPLE';$('#sc').textContent=draft;$('#rel').textContent=relName(draft-pars[cur]);
+ const cell=i=>{const s=scores[i];let c='';if(s!=null)c=s<pars[i]?'u':s>pars[i]?'o':'e';return `<i class="${c}${i===cur?' cur':''}" data-h="${i}">${s==null?i+1:s}</i>`};
+ $('#strip1').innerHTML=[...Array(9).keys()].map(cell).join('');$('#strip2').innerHTML=[...Array(9).keys()].map(i=>cell(i+9)).join('');
+ const sum=(a,b)=>scores.slice(a,b).reduce((t,v)=>t+(v||0),0);
+ $('#out').textContent=sum(0,9);$('#in').textContent=sum(9,18);$('#tot').textContent=sum(0,18);
+ $('#tp').textContent=rel(scores.map((s,i)=>s==null?0:s-pars[i]).reduce((a,b)=>a+b,0));$('#hp').textContent=scores.filter(s=>s!=null).length+'/18';
+ $$('.cstrip i').forEach(el=>el.addEventListener('click',()=>{cur=+el.dataset.h;draft=scores[cur]??pars[cur];drawApp();}));
+}
+$('#plus').onclick=()=>{draft=Math.min(12,draft+1);drawApp();};
+$('#minus').onclick=()=>{draft=Math.max(1,draft-1);drawApp();};
+$('#nextH').onclick=()=>{scores[cur]=draft;if(cur<17)cur++;draft=scores[cur]??pars[cur];drawApp();};
+$('#prevH').onclick=()=>{if(cur>0)cur--;draft=scores[cur]??pars[cur];drawApp();};
+[4,5,2,5,4,3,4,6,4].forEach((s,i)=>scores[i]=s);cur=9;draft=pars[9];drawApp();
+
+/* ---------- reveal ---------- */
+const rvs=$$('.rv');
+if('IntersectionObserver' in window&&!reduce){
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}}),{rootMargin:'0px 0px -8% 0px'});
+ rvs.forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('pre');io.observe(el);}});
+}
+
+/* ---------- hero: scroll depth + altitude ---------- */
+(function(){
+ const hv=$('#heroV'); if(reduce){hv.removeAttribute('autoplay');hv.pause();return;}
+ hv.play().catch(()=>{});
+ const stage=$('#stage'), alt=$('#alt'), bgs=$$('.bgi'); let tick=false;
+ function on(){const y=scrollY,h=innerHeight,k=Math.min(1,y/h);
+  stage.style.transform=`perspective(1200px) rotateX(${k*8}deg) scale(${1+k*.12}) translateY(${k*-30}px)`;
+  hv.style.filter=`brightness(${1-k*.35})`;
+  alt.textContent=Math.round(280+k*120);
+  if(k>=1)hv.pause();else if(hv.paused)hv.play().catch(()=>{});
+  bgs.forEach(b=>{const r=b.parentElement.getBoundingClientRect();const c=r.top+r.height/2-h/2;b.style.transform=`translateY(${c*-.1}px)`;});
+  tick=false;}
+ addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(on);}},{passive:true});on();
+})();
+
+/* ---------- 3D hole visibility ---------- */
+window.__see3d=false;
+if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{window.__see3d=e.isIntersecting;}),{rootMargin:'100px'}).observe($('#course'));}else window.__see3d=true;
+})();
+</script>
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+/* ---------- 3D COURSE (v2: contoured island green) ---------- */
+const cv=$('#course');
+if(!window.THREE){cv.style.background='radial-gradient(80% 60% at 60% 40%,#2a5d45,#0a1712)';return;}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:false,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=0.9;
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#1a3530'); scene.fog=new THREE.Fog('#3a3a40',200,560);
+const cam=new THREE.PerspectiveCamera(42,1,0.3,1400);
+const S=THREE.MathUtils.smoothstep, L=THREE.MathUtils.lerp;
+
+// dusk sky dome
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(650,32,16),new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,fog:false,
+ vertexShader:'varying vec3 p;void main(){p=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
+ fragmentShader:'varying vec3 p;void main(){float h=clamp(p.y,0.0,1.0);vec3 low=vec3(0.98,0.60,0.30);vec3 mid=vec3(0.42,0.32,0.40);vec3 top=vec3(0.07,0.12,0.18);vec3 c=mix(low,mid,smoothstep(0.0,0.16,h));c=mix(c,top,smoothstep(0.14,0.6,h));float s=pow(max(dot(normalize(p),normalize(vec3(-0.78,0.12,-0.6))),0.0),900.0);c+=vec3(1.0,0.85,0.6)*s*1.2+vec3(1.0,0.6,0.3)*pow(max(dot(normalize(p),normalize(vec3(-0.78,0.12,-0.6))),0.0),30.0)*0.12;gl_FragColor=vec4(c,1.0);}'})));
+
+// light: low dusk sun behind-left of the green rakes across the slopes so every contour shows
+scene.add(new THREE.HemisphereLight(0xcfe0ff,0x2a3320,0.36));
+const GX=-8, GZ=-70, LAKE=58, ISL=17;
+const sun=new THREE.DirectionalLight(0xffc488,1.9); sun.position.set(GX-150,48,GZ-110); sun.target.position.set(GX,0,GZ+10);
+sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); sun.shadow.bias=-0.0004; sun.shadow.normalBias=0.4;
+Object.assign(sun.shadow.camera,{left:-110,right:110,top:110,bottom:-110,near:20,far:420}); scene.add(sun,sun.target);
+const fill=new THREE.DirectionalLight(0x8fb4ff,0.25); fill.position.set(120,60,160); scene.add(fill);
+
+// procedural grass grain (multiplied into vertex colours)
+function grainTex(rep,str){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');const im=g.createImageData(256,256);
+ for(let i=0;i<256*256;i++){const v=255-Math.random()*str-(i%256%3===0?str*0.25:0);im.data[i*4]=im.data[i*4+1]=im.data[i*4+2]=v;im.data[i*4+3]=255;}
+ g.putImageData(im,0,0);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rep,rep);t.encoding=THREE.sRGBEncoding;t.anisotropy=8;return t;}
+
+// organic bunker shape: <1 inside the sand, wobbly kidney edge
+function bunkD(x,z,b){const dx=x-b.x,dz=z-b.z,c=Math.cos(b.a),s=Math.sin(b.a);const u=(dx*c-dz*s)/b.rx,v=(dx*s+dz*c)/b.rz;const th=Math.atan2(v,u);
+ const rr=1+0.17*Math.sin(3*th+b.p)+0.08*Math.sin(5*th+1.7*b.p)+(b.k||0)*Math.cos(2*th);return {d:Math.hypot(u,v)/rr,u,v};}
+function bunkH(x,z,b,toward){const q=bunkD(x,z,b);let dh=0;
+ if(q.d<1){const k=1-q.d*q.d;dh-=b.depth*Math.pow(k,0.75); // bowl
+   // flashed face: sand climbs up the side that faces the golfer's target
+   const f=Math.max(0,(q.u*toward[0]+q.v*toward[1]))/Math.max(0.001,q.d);dh+=b.depth*0.55*f*S(q.d,0.35,1);
+   dh+=Math.sin((q.u*0.8+q.v*0.6)*28)*0.012; } // rake lines
+ else if(q.d<1.32){dh+=b.lip*(1-S(q.d,1.0,1.32))*S(q.d,0.98,1.06);} // turf lip
+ return {dh,d:q.d,u:q.u,v:q.v};}
+
+// ---- mainland ----
+const mainB=[{x:34,z:6,rx:9,rz:5,a:0.5,p:0.7,depth:1.4,lip:0.6},{x:-36,z:24,rx:7,rz:4.2,a:-0.4,p:2.1,depth:1.2,lip:0.5},{x:22,z:-6,rx:4.5,rz:3,a:0.9,p:4,depth:1.0,lip:0.4}];
+const noise=(x,z)=>Math.sin(x*0.031)*Math.cos(z*0.027)*4+Math.sin(x*0.07+z*0.05)*1.6+Math.cos(z*0.013)*3+Math.sin(x*0.19+z*0.23)*0.35;
+function height(x,z){
+ const dl=Math.hypot(x-GX,z-GZ); let h=noise(x,z)+4;
+ if(dl<LAKE+22){const t=Math.max(0,(dl-LAKE)/22);h=L(-3.4,h,t*t*(3-2*t));}
+ const teeD=Math.hypot(x,(z-70)*0.8); if(teeD<14) h=L(5.2,h,Math.max(0,(teeD-9)/5));
+ for(const b of mainB){h+=bunkH(x,z,b,[0,1]).dh;}
+ return h;}
+const SZ=520, SEG=260;
+const tg=new THREE.PlaneGeometry(SZ,SZ,SEG,SEG); tg.rotateX(-Math.PI/2);
+const pos=tg.attributes.position, cols=[];
+const rough=new THREE.Color('#285a28'), fair=new THREE.Color('#4f9a43'), mud=new THREE.Color('#4b4630'), apron=new THREE.Color('#3f7a3a'), sand=new THREE.Color('#d6b36c'), edge=new THREE.Color('#4e5f32');
+for(let i=0;i<pos.count;i++){
+ const x=pos.getX(i), z=pos.getZ(i); const y=height(x,z); pos.setY(i,y);
+ const dl=Math.hypot(x-GX,z-GZ); const c=rough.clone(); c.offsetHSL(0,0,(Math.sin(x*0.9)*Math.cos(z*0.7))*0.025+(Math.sin(x*0.05+z*0.08))*0.02);
+ if(z>45&&z<95&&Math.abs(x)<22){c.copy(fair).offsetHSL(0,0,Math.floor(z/6)%2?0.035:-0.01);} // mown tee approach
+ if(dl<LAKE+14&&dl>=LAKE+5) c.lerp(apron,0.6);
+ if(dl<LAKE+5) c.lerp(mud,S(LAKE+5-dl,0,6));
+ for(const b of mainB){const q=bunkD(x,z,b);if(q.d<0.97){c.copy(sand).offsetHSL(0,0,(Math.random()-0.5)*0.03-(1-q.d)*0.05);}else if(q.d<1.08)c.lerp(edge,0.7);}
+ cols.push(c.r,c.g,c.b);}
+tg.setAttribute('color',new THREE.Float32BufferAttribute(cols,3)); tg.computeVertexNormals();
+const ground=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.93,map:grainTex(90,38)})); ground.receiveShadow=true; scene.add(ground);
+
+// ---- island green: its own high-res surface so slopes and bunkers read up close ----
+const islB=[{x:9.5,z:7,rx:5.8,rz:3.4,a:0.55,p:0.4,depth:1.6,lip:0.6,k:0.14},{x:-9.5,z:-7.5,rx:2.9,rz:2.5,a:0.2,p:2.6,depth:1.3,lip:0.45}];
+function islandH(lx,lz){
+ const r=Math.hypot(lx,lz); if(r>ISL+0.7) return -2.6;
+ let h=1.95-0.03*lz                       // back-to-front tilt toward the tee
+  +0.30*Math.sin(lx*0.21+0.6)*Math.cos(lz*0.17)   // rolling swale
+  +0.24*S(lx*0.55-lz*0.65,-1.5,2.2)               // a back-left tier
+  +0.06*Math.sin(lx*0.9)*Math.sin(lz*0.8);        // subtle breaks
+ h-=0.45*S(r,ISL-1.2,ISL+0.4);                     // roll-off to the timber wall
+ for(const b of islB){const towardGreen=[-b.x,-b.z];const n=Math.hypot(...towardGreen);h+=bunkH(lx,lz,{...b,x:b.x,z:b.z},[towardGreen[0]/n,towardGreen[1]/n]).dh;}
+ return h;}
+const IS=2*(ISL+1.5), ig=new THREE.PlaneGeometry(IS,IS,320,320); ig.rotateX(-Math.PI/2);
+const ip=ig.attributes.position, icol=[];
+const gGreen=new THREE.Color('#4fa94f'), gCollar=new THREE.Color('#3f8c3d'), gRough=new THREE.Color('#336e30');
+for(let i=0;i<ip.count;i++){
+ const lx=ip.getX(i), lz=ip.getZ(i), r=Math.hypot(lx,lz); ip.setY(i,islandH(lx,lz));
+ const c=gRough.clone();
+ if(r<ISL-2.8){c.copy(gGreen).offsetHSL(0,0,((Math.floor((lx+40)/2.4)+Math.floor((lz+40)/2.4))%2?0.028:-0.012));}
+ else if(r<ISL-1.3) c.copy(gCollar);
+ let inSand=false;
+ for(const b of islB){const q=bunkD(lx,lz,b);
+  if(q.d<1.4&&r<ISL-2.8) c.lerp(gCollar,0.8*(1-S(q.d,1.15,1.4)));          // collar ring of longer grass round the bunker
+  c.lerp(edge,0.75*S(q.d,0.86,0.97)*(1-S(q.d,1.0,1.13)));                    // shadowed turf lip
+  const sf=1-S(q.d,0.9,0.99); if(sf>0){inSand=true;const sc2=sand.clone().offsetHSL(0,0.02,(Math.random()-0.5)*0.045+Math.sin((q.u*0.8+q.v*0.6)*28)*0.02-(1-q.d)*0.07);c.lerp(sc2,sf);} }
+ icol.push(c.r,c.g,c.b);}
+ig.setAttribute('color',new THREE.Float32BufferAttribute(icol,3)); ig.computeVertexNormals();
+const island=new THREE.Mesh(ig,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.85,map:grainTex(14,26)}));
+island.position.set(GX,0,GZ); island.receiveShadow=true; island.castShadow=true; scene.add(island);
+const toW=(lx,lz)=>new THREE.Vector3(GX+lx,islandH(lx,lz),GZ+lz);
+// timber bulkhead with plank seams
+const wallTex=(()=>{const c=document.createElement('canvas');c.width=512;c.height=64;const g=c.getContext('2d');g.fillStyle='#5a4128';g.fillRect(0,0,512,64);
+ for(let x=0;x<512;x+=9){g.fillStyle=`rgba(0,0,0,${0.18+Math.random()*0.2})`;g.fillRect(x,0,1.5,64);g.fillStyle=`rgba(255,220,170,${Math.random()*0.08})`;g.fillRect(x+2,0,6,64);}
+ g.fillStyle='rgba(0,0,0,.35)';g.fillRect(0,0,512,6);const t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;t.repeat.set(8,1);t.encoding=THREE.sRGBEncoding;return t;})();
+const wall=new THREE.Mesh(new THREE.CylinderGeometry(ISL+0.7,ISL+0.9,3.4,128,1,true),new THREE.MeshStandardMaterial({map:wallTex,roughness:0.9,side:THREE.DoubleSide}));
+wall.position.set(GX,-0.3,GZ); wall.castShadow=true; scene.add(wall);
+
+// ---- water: animated ripples, fresnel sky reflection and a sun glitter path ----
+const waterMat=new THREE.ShaderMaterial({uniforms:{t:{value:0}},fog:false,
+ vertexShader:'varying vec3 wp;void main(){vec4 w=modelMatrix*vec4(position,1.0);wp=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}',
+ fragmentShader:`uniform float t;varying vec3 wp;
+ vec2 g(vec2 p,vec2 d,float f,float sp,float a){float c=cos(dot(p,d)*f+t*sp);return d*(a*f*c);}
+ void main(){vec2 p=wp.xz;
+  vec2 q=g(p,normalize(vec2(0.8,0.6)),0.21,1.1,0.05)+g(p,normalize(vec2(-0.43,0.9)),0.33,1.5,0.032)+g(p,normalize(vec2(0.97,-0.25)),0.57,2.1,0.018)
+        +g(p,normalize(vec2(-0.71,-0.7)),0.93,2.7,0.01)+g(p,normalize(vec2(0.18,0.98)),1.7,3.6,0.005)+g(p,normalize(vec2(-0.9,0.3)),2.9,4.4,0.0028);
+  vec3 n=normalize(vec3(-q.x,1.0,-q.y));
+  vec3 v=normalize(cameraPosition-wp); vec3 r=reflect(-v,n);
+  float fr=0.04+0.96*pow(1.0-max(dot(n,v),0.0),5.0);
+  vec3 sky=mix(vec3(0.95,0.6,0.34),vec3(0.36,0.3,0.42),smoothstep(0.0,0.3,r.y)); sky=mix(sky,vec3(0.07,0.12,0.18),smoothstep(0.25,0.8,r.y));
+  vec3 deep=vec3(0.03,0.095,0.11);
+  vec3 sd=normalize(vec3(-0.78,0.26,-0.57)); float k=max(dot(r,sd),0.0); float sp=pow(k,600.0)*2.2+pow(k,40.0)*0.12;
+  vec3 c=mix(deep,sky,clamp(0.08+fr*0.9,0.0,0.7))+vec3(1.0,0.82,0.55)*sp;
+  gl_FragColor=vec4(c,1.0);}`});
+const water=new THREE.Mesh(new THREE.CircleGeometry(LAKE+10,128),waterMat); water.rotation.x=-Math.PI/2; water.position.set(GX,-0.35,GZ); scene.add(water);
+
+// ---- pin, flag, cup ----
+const PINL=[-3,-2.5]; const PIN=toW(PINL[0],PINL[1]);
+const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.07,7,8),new THREE.MeshStandardMaterial({color:0xf4f2ea})); pole.position.set(PIN.x,PIN.y+3.5,PIN.z); pole.castShadow=true; scene.add(pole);
+const fg=new THREE.PlaneGeometry(2.6,1.7,14,4);
+const flag=new THREE.Mesh(fg,new THREE.MeshStandardMaterial({color:0xe2553f,side:THREE.DoubleSide,roughness:0.55})); flag.position.set(PIN.x+1.3,PIN.y+6.1,PIN.z); flag.castShadow=true; scene.add(flag);
+const fbase=fg.attributes.position.array.slice();
+const cup=new THREE.Mesh(new THREE.CircleGeometry(0.32,20),new THREE.MeshBasicMaterial({color:0x080b09})); cup.rotation.x=-Math.PI/2; cup.position.set(PIN.x,PIN.y+0.03,PIN.z); scene.add(cup);
+
+// ---- tee ----
+const tee=new THREE.Mesh(new THREE.BoxGeometry(18,0.6,12),new THREE.MeshStandardMaterial({color:0x5fae58,roughness:0.8,map:grainTex(6,30)})); tee.position.set(0,5,70); tee.receiveShadow=true; scene.add(tee);
+[-5,5].forEach(x=>{const m=new THREE.Mesh(new THREE.SphereGeometry(0.42,12,8),new THREE.MeshStandardMaterial({color:0xe3be62,emissive:0x2a1e00}));m.position.set(x,5.6,66);m.castShadow=true;scene.add(m);});
+
+// ---- trees: two-tier pines and round oaks with colour variation ----
+const pineA=new THREE.ConeGeometry(3.4,9,8); pineA.translate(0,6,0);
+const pineB=new THREE.ConeGeometry(2.4,7,8); pineB.translate(0,11,0);
+const oakG=new THREE.IcosahedronGeometry(4.3,1); oakG.translate(0,7.2,0);
+const trunkG=new THREE.CylinderGeometry(0.35,0.6,5,6); trunkG.translate(0,2.5,0);
+const N1=460,N2=200;
+const mk=(g,col,n)=>{const m=new THREE.InstancedMesh(g,new THREE.MeshStandardMaterial({color:col,roughness:1,flatShading:true}),n);m.castShadow=true;return m;};
+const pA=mk(pineA,0xffffff,N1), pB=mk(pineB,0xffffff,N1), oaks=mk(oakG,0xffffff,N2), trunks=mk(trunkG,0x3b2b1d,N1+N2);
+let pi=0,oi=0,ti=0; const m4=new THREE.Matrix4(), q=new THREE.Quaternion(), sc=new THREE.Vector3(), p3=new THREE.Vector3(), tc=new THREE.Color();
+let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+for(let k=0;k<2400&&(pi<N1||oi<N2);k++){
+ const x=(rnd()-0.5)*SZ*0.92, z=(rnd()-0.5)*SZ*0.92;
+ if(Math.hypot(x-GX,z-GZ)<LAKE+18) continue;
+ if(Math.abs(x)<34&&z>20&&z<130) continue;
+ if(Math.abs(x-GX*0.5)<30&&z<90&&z>GZ) continue;
+ if(mainB.some(b=>bunkD(x,z,b).d<2.2)) continue;
+ const y=height(x,z), s=0.7+rnd()*0.8; p3.set(x,y,z); sc.set(s,s*(0.85+rnd()*0.45),s); q.setFromAxisAngle(new THREE.Vector3(0,1,0),rnd()*6.28); m4.compose(p3,q,sc);
+ if(rnd()<0.7&&pi<N1){pA.setMatrixAt(pi,m4);pB.setMatrixAt(pi,m4);tc.setHSL(0.36+rnd()*0.04,0.32+rnd()*0.12,0.15+rnd()*0.06);pA.setColorAt(pi,tc);tc.offsetHSL(0,0,0.03);pB.setColorAt(pi,tc);pi++;}
+ else if(oi<N2){oaks.setMatrixAt(oi,m4);tc.setHSL(0.27+rnd()*0.06,0.34+rnd()*0.1,0.19+rnd()*0.07);oaks.setColorAt(oi,tc);oi++;} else continue;
+ trunks.setMatrixAt(ti++,m4);}
+pA.count=pB.count=pi; oaks.count=oi; trunks.count=ti; scene.add(pA,pB,oaks,trunks);
+
+// ---- ball + tracer ----
+const ball=new THREE.Mesh(new THREE.SphereGeometry(0.5,20,14),new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.35,emissive:0x222222}));
+ball.castShadow=true; ball.position.set(0,6,67); scene.add(ball);
+const trGeo=new THREE.BufferGeometry(); const trPts=new Float32Array(3*120); trGeo.setAttribute('position',new THREE.BufferAttribute(trPts,3)); trGeo.setDrawRange(0,0);
+scene.add(new THREE.Line(trGeo,new THREE.LineBasicMaterial({color:0xffd24a,transparent:true,opacity:0.95})));
+
+// ---- cameras ----
+const BK=islB[0], BKW=toW(BK.x,BK.z);
+const cams={
+ tee:{p:new THREE.Vector3(16,26,108),t:new THREE.Vector3(GX-34,0,GZ+6)},
+ drone:{p:new THREE.Vector3(GX+70,95,GZ+80),t:new THREE.Vector3(GX-12,0,GZ+6)},
+ green:{p:new THREE.Vector3(GX+15,6.2,GZ+16),t:new THREE.Vector3(GX-2,2,GZ-1)},
+ bunker:{p:new THREE.Vector3(BKW.x+5.5,BKW.y+3.6,BKW.z+6.5),t:new THREE.Vector3(BKW.x-1.5,BKW.y+0.2,BKW.z-1.2)}
+};
+let camKey='tee', yaw=0, tgtYaw=0;
+const camP=cams.tee.p.clone(), camT=cams.tee.t.clone();
+function setCam(k){camKey=k;tgtYaw=0;$$('[data-cam]').forEach(b=>b.classList.toggle('on',b.dataset.cam===k));}
+$$('[data-cam]').forEach(b=>b.addEventListener('click',()=>setCam(b.dataset.cam)));
+let drag=null;
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y0:tgtYaw};});
+addEventListener('pointerup',()=>drag=null);
+addEventListener('pointermove',e=>{if(!drag)return;tgtYaw=Math.max(-1.4,Math.min(1.4,drag.y0+(e.clientX-drag.x)*0.006));});
+
+// ---- shot ----
+let flight=null;
+function showShot(t,s){$('#shotT').textContent=t;$('#shotS').textContent=s;$('#shot').classList.add('on');clearTimeout(showShot.h);showShot.h=setTimeout(()=>$('#shot').classList.remove('on'),3400);}
+$('#hit').addEventListener('click',()=>{
+ if(flight) return;
+ const r=rnd(), ang=rnd()*6.28; let land;
+ if(r<0.55){const d=1.5+rnd()*8;const lx=PINL[0]+Math.cos(ang)*d, lz=PINL[1]+Math.sin(ang)*d;land=toW(lx,lz);land.y+=0.5;}
+ else if(r<0.75){land=toW(BK.x+(rnd()-0.5)*3,BK.z+(rnd()-0.5)*1.6);land.y+=0.45;}
+ else {const d=ISL+4+rnd()*14;land=new THREE.Vector3(GX+Math.cos(ang)*d,-0.3,GZ+Math.sin(ang)*d);}
+ flight={t:0,from:new THREE.Vector3(0,5.9,67),to:land,apex:30+rnd()*10,res:r}; trPts.fill(0);
+ trGeo.setDrawRange(0,0); if(camKey!=='drone') setCam('tee');
+});
+function endShot(f){
+ const dPin=Math.hypot(f.to.x-PIN.x,f.to.z-PIN.z);
+ if(f.res<0.55){const ft=Math.round(dPin*3.28);showShot(ft<8?'Birdie look.':'Safe on the island.',ft+' ft from the pin · read the slope back-to-front');}
+ else if(f.res<0.75){showShot('In the sand.','Front-right bunker, steep face · tap Bunker to see the lie');}
+ else showShot('Splash.','Tucker Lake wins · head to the drop zone');
+}
+
+function resize(){const w=cv.clientWidth,h=cv.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.fov=w<640?58:42;cam.updateProjectionMatrix();}
+addEventListener('resize',resize); resize();
+
+const clock=new THREE.Clock(); let t0=0;
+function frame(){
+ if(!window.__see3d){clock.getDelta();requestAnimationFrame(frame);return;}
+ const dt=Math.min(clock.getDelta(),0.05); t0+=dt;
+ yaw+=(tgtYaw-yaw)*0.08;
+ const c=cams[camKey]; const drift=reduce?0:Math.sin(t0*0.12)*0.07;
+ const off=c.p.clone().sub(c.t); off.applyAxisAngle(new THREE.Vector3(0,1,0),yaw+drift);
+ const ea=1-Math.exp(-dt*2.2); camP.lerp(c.t.clone().add(off),ea); camT.lerp(c.t,Math.min(1,ea*1.2));
+ if(flight){
+  flight.t+=dt/2.4; const k=Math.min(flight.t,1);
+  const p=flight.from.clone().lerp(flight.to,k); p.y+=Math.sin(Math.PI*k)*flight.apex; ball.position.copy(p);
+  const idx=Math.floor(k*119); for(let j=0;j<=idx;j++){ if(trPts[j*3]===0&&trPts[j*3+2]===0){trPts[j*3]=p.x;trPts[j*3+1]=p.y;trPts[j*3+2]=p.z;} }
+  trGeo.attributes.position.needsUpdate=true; trGeo.setDrawRange(0,idx+1);
+  if(camKey==='tee') camT.lerp(p,0.06);
+  if(k>=1){endShot(flight);flight=null;setTimeout(()=>{if(!flight){ball.position.set(0,6,67);trGeo.setDrawRange(0,0);trPts.fill(0);}},3800);}
+ }
+ cam.position.copy(camP); cam.lookAt(camT);
+ const a=fg.attributes.position.array;
+ for(let i=0;i<a.length;i+=3){const x=fbase[i]+1.3;a[i+2]=fbase[i+2]+Math.sin(x*2.2-t0*5)*0.18*x/2.6;}
+ fg.attributes.position.needsUpdate=true;
+ waterMat.uniforms.t.value=reduce?0:t0;
+ renderer.render(scene,cam);
+ requestAnimationFrame(frame);
+}
+camP.copy(cams.tee.p); camT.copy(cams.tee.t);
+frame();
+
+})();
+</script>
+
+</body>
+</html>
