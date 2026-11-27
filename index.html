@@ -10,6 +10,8 @@
   save-data and no-JS all get a calm, complete page. No fabricated stats, client counts, or testimonials.
 -->
 <meta charset="UTF-8" />
+<!-- Google Tag Manager (container ID is set in /assets/js/tracking.js) -->
+<script src="/assets/js/tracking.js" async></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Above All Media | Drone &amp; Cinematic Video, Hilton Head Island</title>
 <meta name="description" content="Premium drone and cinematic video for Hilton Head real estate, hospitality and coastal brands, built to bring in more calls, bookings and higher-paying clients.">
@@ -1097,6 +1099,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <a class="skip" href="#main">Skip to content</a>
 <div class="loader" id="loader" aria-hidden="true">
   <div class="ld-in">
@@ -2469,6 +2473,8 @@ html.iq-open .sticky-mobile-cta,body.nav-open .sticky-mobile-cta{opacity:0;visib
         } else {
           html = '<strong>Request received.</strong> We’ll review it and be in touch soon. Need the fastest path? Call (803) 920-5349.';
         }
+        /* Tracking: GTM "generate_lead" (Google Ads / GA4 conversion, Meta Lead, TikTok SubmitForm). No personal details. */
+        try { (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', lead_form: 'site_inquiry', service_type: (form.elements.service_type && form.elements.service_type.value) || '', call_booked: !!info.booked }); } catch (e) {}
         form.reset(); clearPick(); reset();
         form.classList.remove('was-tried'); form.classList.add('is-done');
         say('ok', html + '<br><button type="button" class="again">Send another request</button>');
